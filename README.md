@@ -1,4 +1,4 @@
-[English version below](TUDaTeX-–-LaTeX-templates-using-Corporate-Design-of-TU-Darmstadt)
+[English version below](#tudatex--latex-templates-using-corporate-design-of-tu-darmstadt)
 
 # TUDaTeX – Corporate Design LaTeX-Templates der TU Darmstadt
 
