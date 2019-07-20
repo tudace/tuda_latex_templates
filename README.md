@@ -5,6 +5,8 @@
 Das TUDaTeX-Bundle ist die Umsetzung des Corporate Designs der TU Darmstadt in LaTeX.
 Es liefert neben den Klassen, Paket und Konfigurationsdateien auch Anwenderdokumentation in Form von Templatedateien für verschiedene Dokumententypen.
 
+Das Gesamtpaket wurde in Teilen inspiriert von Clemens von Loewenichs and Joe Werners TUD-Design Paket.
+
 Derzeit existieren diese Templates nur in Deutscher Sprache.
  
 ## Verwendungshinweis
