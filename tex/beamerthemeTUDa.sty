@@ -1,0 +1,36 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeTUDa}
+ [\filedate\space\fileversion\space beamer theme using the Corporate Design of TU Darmstadt]
+
+\RequirePackage{expl3}
+\RequirePackage{l3keys2e}
+
+\mode<presentation>
+
+\ExplSyntaxOn
+
+\keys_define:nn {TUDa/beamer} {
+	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
+	colortitle .code:n = \tl_show:n {true}\PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+	colorbacktitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+	colorframetitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+	colorback .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+	logo .code:n = \tl_show:n {#1}\PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa}
+}
+
+\ProcessKeysOptions{TUDa/beamer}
+
+\ExplSyntaxOff
+
+\usefonttheme{TUDa}
+\usecolortheme{TUDa}
+\useoutertheme{TUDa}
+\useinnertheme{TUDa}
+%
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+
+\mode<all>
+
+\endinput

@@ -1,0 +1,270 @@
+\documentclass[
+	ngerman,
+	ruledheaders=section,%Ebene bis zu der die Überschriften mit Linien abgetrennt werden, vgl. DEMO-TUDaPub
+	class=report,% Basisdokumentenklasse. Wählt die Korrespondierende KOMA-Script Klasse
+	thesis={type=bachelor},% Dokumententyp Thesis, für Dissertationen siehe die Demo-Datei DEMO-TUDaPhd
+	accentcolor=9c,% Auswahl der Akzentfarbe
+	custommargins=true,% Ränder werden mithilfe von typearea automatisch berechnet
+	marginpar=false,% Kopfzeile und Fußzeile erstrecken sich nicht über die Randnotizspalte
+	%BCOR=5mm,%Bindekorrektur, falls notwendig
+	parskip=half-,%Absatzkennzeichnung durch Abstand vgl. KOMA-Sript
+	fontsize=11pt,%Basisschriftgröße laut Corporate Design ist mit 9pt häufig zu klein
+%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
+]{tudapub}
+
+
+% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
+\fi
+
+%%%%%%%%%%%%%%%%%%%
+%Sprachanpassung & Verbesserte Trennregeln
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english, main=ngerman]{babel}
+\usepackage[autostyle]{csquotes}% Anführungszeichen vereinfacht
+\usepackage{microtype}
+
+
+%%%%%%%%%%%%%%%%%%%
+%Literaturverzeichnis
+%%%%%%%%%%%%%%%%%%%
+\usepackage{biblatex}   % Literaturverzeichnis
+\bibliography{DEMO-TUDaBibliography}
+
+
+%%%%%%%%%%%%%%%%%%%
+%Tabellen
+%%%%%%%%%%%%%%%%%%%
+%\usepackage{array}     % Basispaket für Tabellenkonfiguration, wird von den folgenden automatisch geladen
+\usepackage{tabularx}   % Tabellen, die sich automatisch der Breite anpassen
+%\usepackage{longtable} % Mehrseitige Tabellen
+%\usepackage{xltabular} % Mehrseitige Tabellen mit anpassarer Breite
+\usepackage{booktabs}   % Verbesserte Möglichkeiten für Tabellenlayout über horizontale Linien
+
+%%%%%%%%%%%%%%%%%%%
+%Paketvorschläge Mathematik
+%%%%%%%%%%%%%%%%%%%
+%\usepackage{mathtools} % erweiterte Fassung von amsmath
+%\usepackage{amssymb}   % erweiterter Zeichensatz
+%\usepackage{siunitx}   % Einheiten
+
+
+
+%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+\def\TUDaTeX{TUDa\TeX}
+\let\file\texttt
+\let\code\texttt
+
+\usepackage{pifont}% Zapf-Dingbats Symbole
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+
+
+\begin{document}
+
+\Metadata{
+	title=LaTeX im Corporate Design der TU Darmstadt,
+	author=Marei Peischl
+}
+
+\title{\LaTeX{} im Corporate Design der TU Darmstadt}
+\subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
+\author[M. Peischl]{Marei Peischl}%optionales Argument ist die Signatur, 
+\birthplace{Geburtsort}%Geburtsort, bei Dissertationen zwingend notwendig
+\reviewer{Gutachter 1 \and Gutachter 2 \and noch einer \and falls das immernoch nicht reicht}%Gutachter
+
+%Diese Felder erden untereinander auf der Titelseite platziert. 
+%\department ist eine notwendige Angabe, siehe auch dem Abschnitt `Abweichung von den Vorgaben für die Titelseite'
+\department{ce} % Das Kürzel wird automatisch ersetzt und als Studienfach gewählt, siehe Liste der Kürzel im Dokument.
+\institute{Institut}
+\group{Arbeitsgruppe}
+
+\submissiondate{\today}
+\examdate{\today}
+
+%	\tuprints{urn=1234,printid=12345}
+%	\dedication{Für alle, die \TeX{} nutzen.}
+
+\maketitle
+
+\affidavit
+
+\tableofcontents
+
+
+\chapter{Über diese Datei}
+Die Datei \file{DEMO-TUDaThesis.tex} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
+Sie ist Teil des \TUDaTeX-Bundles und basiert in Teilen auf dem tuddesign-Paket von C.~v.~Loewenich und J.~Werner.
+
+Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen. In diesem Dokument werden überwiegend die speziell auf Abschlussarbeiten ausgelegten Möglichkeiten beschrieben.
+
+Es ist voreingestellt, dass eine PDF/A-Datei erzeugt wird. Die beste Kompatibilität hierfür bietet Lua\LaTeX. Bei anderen Compilern kann dies entsprechend der Informationen in DEMO-TUDaPub zu Problemen führen. In diesem Fall sollte entweder der Compiler gewechselt oder \code{pdfa=false} aktiviert werden.
+
+Für weitere Informationen kann ein Blick in die zur Dokumentenklasse gehörigen Dokumentation (tudapub.pdf) hilfreich sein. Sie wird zusammen mit den Quelldateien verteilt.
+
+\minisec{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}
+Zwar basieren alle drei DEMO-Dateien auf der Klasse \code{tudapub}, allerdings sind die Basiseinstelungen dem Dokumententyp angepasst.
+Für Erläuterungen zu den TUDaPub spezifischen Optionen, sei auf die Datei DEMO-TUDaPub verwiesen.
+Da die Basisklasse für beide identisch ist, kann jede Option abgeändert werden. Die Folgende Liste zeigt lediglich die gezeigten Features bei Standardeinstellungen.
+
+\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}*3{>{\centering\arraybackslash}X}@{}}
+\toprule
+Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub\\
+\midrule
+twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
+Kolophon&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+Widmung&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+Schriftgröße&11pt&11pt&9pt\\\midrule
+ruledheaders&section&chapter&all\\\midrule
+Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
+thesis&\ttfamily type=bachelor&\ttfamily type=dr,
+	dr=rernat
+&\FeatureFalse\\\midrule
+marginpar&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
+Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
+abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
+custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse\\
+\bottomrule
+\end{tabularx}
+
+
+\chapter{Verwendung}
+Die Klasse kann wie für Dokumentenklassen üblich eingebunden werden
+\begin{verbatim}
+\documentclass[thesis]{tudapub}
+\end{verbatim}
+Die Option \code{thesis} wechselt hierbei in den Modus, der spezielle Features für Abschlussarbeiten freischaltet, die in diesem Dokument beschrieben werden.
+
+Darüber hinaus lässt sich die Klasse verwenden wie die Standard-KOMA-Script-Klasse, auf der sie basiert. 
+Voreingstellt ist hierbei \code{scrreprt}.
+
+Allgemein bietet \KOMAScript{} viele Möglichkeiten  zu Anpassungen. Wie in der tudapub-Demo-Datei beschrieben, können hier jedoch nicht alle erläutert werden, ein Blick in die offizielle Dokumentation ist daher häufig hilfreich \cite{scrguide}.
+
+
+
+\section{Übergabe der Titelinformationen}
+
+Die Titelinformationen werden analog zur klassichen Titelerzeugung mit \verb+\maketitle+ übergeben. Allerdings wurden die Felder um ein paar speziellere Daten erweitert. Sofern nicht anders angegeben, verfügen alle Makros über ein Notwendiges Argument für die Datenübergabe, z.\,B. 
+\begin{verbatim}
+\title{\LaTeX{} im Corporate Design der TU Darmstadt}
+\end{verbatim}
+Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss. 
+
+\begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
+	\item[title] Titel, wird in sehr großer schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt, als für andere Publikationen.
+	\item[subtitle] Untertitel. Dieses Feld kann alternativ für eine Übersetzung genutzt werden.
+	\item[author] Der Autor/dir Autoren. Mehere Autoren werden durch \verb+\and+ getrennt.
+	\item[birthplace] Geburtsort. Angabe ist bei Dissertationen notwendig.
+	\item[reviewer] Gutachter. Mehrere Gutachter werden, wie Autoren durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
+	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden Folgenden werden unterhalb des Logos auf der Titelseite platziert.
+	\item[department] Fach-/Studienbereich allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
+	\item[group] Arbeitsgruppe.
+	\item[submissiondate] Datum der Einreichtung
+	\item[examdate] Datum der Disputation
+	\item[date] Beliebiges Datum. Wird über \verb|datename| bezeichnet.
+	\item[tuprints] \label{page:tuprints}Übergabe der Daten, sofern das dokument über tuprints Veröffentlicht werden soll.
+	\begin{verbatim}
+	\tuprints{urn=1234, printid=12345}
+	\end{verbatim}
+	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
+	
+	\item[titleimage] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Als Maße können hier die Längen \verb+\layerwidth+ und \verb+\layerheight+ verwendet werden. Sie passen sich dem Verfügbaren Platz an. Für ein Beispiel sei auf die TUDapub-Dokumentation verwiesen.
+\end{description}
+
+\section{Weitere Macros}
+
+Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
+In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
+
+\section{Layout-Optionen mit Verstoß gegen das Corporate Design}
+Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
+Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde.
+
+Auch ist das Standard-Layout der Kolumnentitel wenig Vorteilhaft, da die Kolumnentitel damit local größer sein können als die eigentliche Überschrift.
+
+Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des typearea-Paketes optimiert. 
+
+Wenn die option \code{marginpar=true} gesetzt bleibt, ragen die Kopf- und Fußzeile über die Marginalspalte hinaus. Aus ästhetischen Gründen wird daher empfohlen in diesem Fall die Kopf- und Fußzeile  mit \code{marginpar=false}  auf den Textbereich zu beschränken.
+
+
+Darüber hinaus kann über 
+\begin{verbatim}
+\pagestyle{TUDa.headings}
+\end{verbatim}
+ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht.
+
+
+\section{Spezielle Optionen für Abschlussarbeiten}
+Die Klasse unterstützt alle Optionen der \file{tudapub}-Klasse. Darüber hinaus besteht über Wertzuweisung der Option \code{thesis} die Möglichkeit spezielle Einstellungen zu wählen.
+Es ist prinzipiell möglich die Optionen auch direkt als Optionen zur \file{tudapub}-Klasse zu übergeben, allerdings ist dies aufgrund der schlechteren Übersicht nicht zu empfehlen.
+
+Für dieses Dokument wurden beispielsweise die Optionen als 
+\begin{verbatim}
+thesis={type=drfinal,dr=phil}
+\end{verbatim}
+übergeben.
+
+Im folgenden findet sich die Bedeutung der einzelnen Optionen:
+\begin{description}
+	\item[type=<Wert>] Auswahl des Typus. Dieser wird auf die Titelseite gesetzt und wählt zudem aus welche Informationen für die Titelseite zwingend übergeben werden müssen.
+	Es stehen die folgenden Werte zur Verfügung:
+	\begin{itemize}
+		\item \code{sta}: Studienarbeit
+		\item \code{diplom}: Diplomarbeit
+		\item \code{bachelor}: Bachelorarbeit
+		\item \code{master}: Masterarbeit
+		\item \code{pp}: Project-Proposal
+		\item \code{dr}: vorgelegte Dissertation
+		\item \code{drfinal}: genehmighte Dissertation
+	\end{itemize}
+	Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht	
+	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
+	\begin{quote}
+		Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
+	\end{quote}
+	Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden. 
+	\begin{verbatim}
+	\drtext{Zur Erlangung des Grades \ldots}
+	\end{verbatim}
+	\item[department=<Kürzel>] Die Fachbereiche sind fest als Textbausteine in Deutscher sowie Englischer Sprache hinterlegt. Diese Option ermöglicht die Auswahl als Dokumentenklassenoption. Aus Kompatibilitätsgründen kann jedoch auch das Makro \code{department}-Makro hierfür genutzt werden. Zur Verfügung stehen:\par
+	\begin{tabular}{@{}l@{${}\to{}$}l@{}}
+		arch  & Architektur\\
+		bauing& Bau- und Umweltingenieurwissenschaften\\
+		bio   &Biologie\\
+		chem  &Chemie\\
+		etit  &Elektrotechnik und Informationstechnik\\
+		gugw  &Gesellschafts- und Geschichtswissenschaften\\
+		humanw&Humanwissenschaften\\
+		inf   &Informatik\\
+		mb    &Maschinenbau\\
+		matgeo&Material- und Geowissenschaften\\
+		math  &Mathematik\\
+		phys  &Physik\\
+		wi    &Rechts- und Wirtschaftswissenschaften
+	\end{tabular}
+	
+	Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche.
+	Falls das Kürzel nicht als Fachbereich hinterlegt ist, wird automatisch auf die Studienbereiche geprüft. Die Studienbereiche haben die folgenden Kürzel:
+	
+	\begin{tabular}{@{}l@{${}\to{}$}l@{}}
+		ce&Computational Engineering\\
+		ese&Energy Science and Engineering\\
+		ist&Information Systems Engineering\\
+		mech&Mechanik\\
+		metro&Mechatronik
+	\end{tabular}
+	
+	Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
+	
+	\item[ignore-missing-data] Diese Option ist ein Schalter, der es ermöglicht die Fehlermeldung über nicht übergebene Titeldaten auszuschalten. In diesem Fall wird lediglich eine Warnung erzeugt, falls die angegeben Daten nicht mit den Anforderungen übereinstimmen.
+\end{description}
+
+\minisec{Abweichung von den Vorgaben für die Titelseite}
+Da es möglich sein kann von dieser Vorgabe abzuweichen existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weiter Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub.
+		
+\printbibliography
+	
+\end{document}

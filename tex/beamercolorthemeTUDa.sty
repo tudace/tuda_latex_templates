@@ -1,0 +1,84 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeTUDa}
+[\filedate\space\fileversion]
+
+\RequirePackage{l3keys2e}
+\ExplSyntaxOn
+\keys_define:nn {TUDa/beamercolor} {
+	colortitle .bool_gset:N = \g_TUDa@beamer_colortitle_bool,
+	colortitle .default:n = true,
+	colortitle .initial:n = true,
+	colorbacktitle .meta:n = {colortitle=#1},
+	colorframetitle .bool_gset:N = \g_TUDa@beamer_colorframetitle_bool,
+	colorframetitle .default:n = true,
+	colorframetitle .initial:n = false,
+	colorback .meta:n = {colorframetitle=#1}
+}
+
+\ProcessKeysOptions{TUDa/beamercolor}
+
+\ExplSyntaxOff
+\RequirePackage[RGB]{tudacolors}
+
+\mode<all>
+
+\setbeamercolor*{smallrule}{bg=black}
+\setbeamercolor*{identbar}{bg=identbarcolor}
+
+\ExplSyntaxOn
+\bool_if:NTF \g_TUDa@beamer_colortitle_bool {
+	\setbeamercolor*{title}{fg=textonaccentcolor,bg=accentcolor}
+}{
+	\setbeamercolor*{title}{fg=black,bg=white}
+}
+
+\bool_if:NTF \g_TUDa@beamer_colorframetitle_bool {
+	\setbeamercolor*{frametitle}{fg=textonaccentcolor,bg=accentcolor}	
+} {
+	\setbeamercolor*{frametitle}{fg=black,bg=white}
+}
+\ExplSyntaxOff
+
+\setbeamercolor*{frametitlecover}{bg=white}
+
+\setbeamercolor*{author in head/foot}{fg=black, bg=white}
+\setbeamercolor*{date in head/foot}{fg=black, bg=white}
+
+\setbeamercolor*{normal text}{bg=white,fg=black}
+\setbeamercolor*{background canvas}{bg=white}
+
+\setbeamercolor*{section in toc}{fg=black,bg=white}
+
+
+\setbeamercolor*{alerted text}{fg=textaccentcolor}
+\setbeamercolor{structure}{fg=textaccentcolor}
+
+\setbeamercolor*{palette primary}{fg=textaccentcolor}
+\setbeamercolor*{palette secondary}{fg=textaccentcolor}
+\setbeamercolor*{palette tertiary}{fg=textaccentcolor}
+\setbeamercolor*{palette quaternary}{fg=black}
+
+\setbeamercolor{bibliography item}{parent=item}
+\setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry title}{use=normal text,fg=normal text.fg}
+\setbeamercolor{bibliography entry location}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry note}{use=structure,fg=normal text.fg}
+
+\setbeamercolor{titlelike}{fg=textaccentcolor,bg=white}
+
+\setbeamercolor*{block title}{fg=textonaccentcolor,bg=accentcolor}
+\setbeamercolor*{block body}{fg=black,bg=black!15}
+
+\setbeamercolor*{block title alerted}{fg=TUDa-9b,bg=black!15}
+\setbeamercolor*{block body alerted}{use=normal text, bg=white}
+\setbeamercolor*{block frame alerted}{bg=TUDa-9b}
+
+\setbeamercolor*{block title example}{fg=TUDa-4d,bg=black!15}
+\setbeamercolor*{block body example}{use=normal text, bg=white}
+\setbeamercolor*{block frame example}{bg=TUDa-4d}
+
+
+\mode
+<all>
+
+\endinput

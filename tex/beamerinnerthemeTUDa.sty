@@ -1,0 +1,184 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeTUDa}
+ [\filedate\space\fileversion]
+
+\mode<presentation>
+%TODO wihtout outertheme
+
+\RequirePackage{trimclip}
+
+\ExplSyntaxOn
+
+
+\box_new:N \l_TUDa_titlegraphic_box
+
+
+\RenewDocumentCommand{\titlegraphic}{sm}{
+	\IfBooleanTF{#1}{
+		\def\inserttitlegraphic{
+			\hbox_set:Nn \l_TUDa_titlegraphic_box {\raisebox{\depth}{#2}}
+			\box_resize_to_wd:Nn \l_TUDa_titlegraphic_box {\width}
+			\dim_compare:nTF {\box_ht:N \l_TUDa_titlegraphic_box - \l_TUDa_titlegraphic_ht_dim > \c_zero_dim}
+			{
+				\dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l_TUDa_titlegraphic_box - .5\l_TUDa_titlegraphic_ht_dim}
+				\clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l_TUDa_titlegraphic_box}
+			}{
+				\box_resize_to_ht:Nn \l_TUDa_titlegraphic_box {\l_TUDa_titlegraphic_ht_dim}
+				\dim_set:Nn \l_tmpa_dim {(\box_wd:N \l_TUDa_titlegraphic_box - \width) / 2}
+				\clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l_TUDa_titlegraphic_box}
+			}
+		}
+	}{
+		\def\inserttitlegraphic{#2}
+	}
+}
+
+
+\box_new:N \l_TUDa_titlehead_box
+
+\dim_new:N \l_TUDa_titlegraphic_ht_dim
+\dim_new:N \l_TUDa_titlegraphic_wd_dim
+
+\defbeamertemplate*{title~ page}{TUDa}[1][]
+{	
+	\nointerlineskip
+	\vspace{\dim_eval:n {-\c_TUDa_largerule_dim}}
+	\hbox_set:Nn \l_TUDa_titlehead_box {
+	\begin{beamercolorbox}[
+		wd=\TUDa@beamer@linewidth,
+%		sep=.5\ht\TUDa@logobox,
+		sep=\TUDa@beamer@logosep,
+	]{title}
+	\raggedright
+%	\hspace*{\fill}\smash{\raisebox{-\height}{\usebox\TUDa@logobox}}
+	\usebeamerfont{title}
+	\skip_horizontal:n {1ex}
+	\strut\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-2ex\relax}{
+		\inserttitle
+		\par
+	}
+%\hfill%
+	\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\usebox\TUDa@logobox}
+%	\smash{\raisebox{-\height}{\usebox\TUDa@logobox}}
+	\ifx\insertsubtitle\@empty
+	\else
+	\par\vspace{\c_TUDa_largerule_dim}
+	\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-2ex\relax}{
+		\usebeamerfont{subtitle}\insertsubtitle
+	}
+%	\skip_vertical:n {-.25\ht\TUDa@logobox}
+	\fi
+	\end{beamercolorbox}
+	}
+	\box_use:N \l_TUDa_titlehead_box
+\nointerlineskip\begin{beamercolorbox}[wd=\linewidth,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+	\end{beamercolorbox}
+	\dim_set:Nn \l_TUDa_titlegraphic_ht_dim {\textheight-\box_ht:N\l_TUDa_titlehead_box
+	+\c_TUDa_largerule_dim-.5\c_TUDa_rulesep_dim-\c_TUDa_smallrule_dim}
+	\let\height\l_TUDa_titlegraphic_ht_dim
+	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\linewidth}
+	\let\width\l_TUDa_titlegraphic_wd_dim
+	\nointerlineskip
+	\begin{beamercolorbox}[wd=\width,
+		ht=\l_TUDa_titlegraphic_ht_dim,
+		dp=\z@,
+		]{titlegraphic}
+	\inserttitlegraphic
+	\end{beamercolorbox}
+}
+
+
+\ExplSyntaxOff
+% Blocks
+
+
+\defbeamertemplate*{block begin}{TUDa}
+{
+	\par\vskip\medskipamount%
+	\begin{beamercolorbox}[sep=.5pt]{block title}%TODO
+	\ifx\insertblocktitle\@empty
+	\else
+	\begin{beamercolorbox}[colsep=.75ex, wd=\dimexpr\linewidth-1pt\relax]{block title}
+		\usebeamerfont*{block title}\insertblocktitle%
+	\end{beamercolorbox}%
+	\ifbeamercolorempty[bg]{block title}
+	{}
+	{\ifbeamercolorempty[bg]{block body}{}{\par\nointerlineskip\vskip-0.5pt}}%
+	\leavevmode
+	\fi
+	\begin{beamercolorbox}[colsep=.75ex,vmode, wd=\dimexpr\linewidth-1pt\relax]{block body}%
+		\usebeamerfont{block body}%
+		\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+	}
+
+\defbeamertemplate*{block end}{TUDa}  
+	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
+
+\defbeamertemplate*{block alerted begin}{TUDa}
+{
+	\par\vskip\medskipamount%
+	\begin{beamercolorbox}[sep=1.5pt]{block frame alerted}
+	\ifx\insertblocktitle\@empty
+	\else
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block title alerted}
+		\usebeamerfont*{block title alerted}\insertblocktitle%
+	\end{beamercolorbox}%
+	\vskip1.5pt\par\nointerlineskip
+	\fi
+	\leavevmode
+	\usebeamerfont{block body alerted}%
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block body alerted}%
+	}
+	
+\defbeamertemplate*{block alerted end}{TUDa}
+	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
+
+
+\defbeamertemplate*{block example begin}{TUDa}
+{
+	\par\vskip\medskipamount%
+	\begin{beamercolorbox}[sep=1.5pt]{block frame example}
+	\ifx\insertblocktitle\@empty
+	\else
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block title example}
+		\usebeamerfont*{block title example}\insertblocktitle%
+	\end{beamercolorbox}%
+\vskip1.5pt\par\nointerlineskip
+	\fi
+	\leavevmode
+	\usebeamerfont{block body example}%
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block body example}%
+	}
+\defbeamertemplate*{block example end}{TUDa}
+	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
+
+%Itemize Items
+\defbeamertemplate*{itemize item}{TUDa}{\usebeamerfont*{itemize item}\raise1.25pt\hbox{\donotcoloroutermaths$\bullet$}}
+\defbeamertemplate*{itemize subitem}{TUDa}{\usebeamerfont*{itemize item}\raise1.5pt\hbox{\tiny\donotcoloroutermaths$\bullet$}}
+\defbeamertemplate*{itemize subsubitem}{TUDa}{\usebeamerfont*{itemize subitem}\hbox{--}}
+
+%List spacing
+\setlength\labelwidth{.75em}
+\setlength\leftmargini{\dimexpr\labelwidth+\labelsep}
+\setlength\leftmarginii{\dimexpr\labelwidth+\labelsep}
+\setlength\leftmarginiii{\dimexpr\labelwidth+\labelsep}
+
+\def\@listi{\leftmargin\leftmargini
+	\topsep \z@ \@plus2\p@ \@minus2.5\p@
+	\parsep 0\p@
+	\itemsep3\p@ \@plus2\p@ \@minus3\p@}
+\let\@listI\@listi
+\def\@listii{\leftmargin\leftmarginii
+	\topsep    \z@ \@plus1\p@ \@minus2\p@
+	\parsep    0\p@   \@plus\p@
+	\itemsep   \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+	\topsep    \z@ \@plus1\p@ \@minus2\p@
+	\parsep    0\p@   \@plus\p@
+	\itemsep   \parsep}
+
+
+\mode<all>
+
+\endinput
+

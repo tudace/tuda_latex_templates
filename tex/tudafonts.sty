@@ -1,0 +1,53 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudafonts}
+ [\filedate\space\fileversion\space 
+   font loading for TUDaTeX, TU Darmstadt's Corporate Design]
+   
+\RequirePackage{iftex}
+\RequirePackage{anyfontsize}
+
+\ifPDFTeX
+	%Declare Euro Symbol
+	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
+	\RequirePackage[utf8]{inputenc}
+	\fi
+	\RequirePackage{eurosym}
+	\DeclareUnicodeCharacter{20AC}{\euro}
+	\RequirePackage{XCharter}
+\else
+	\RequirePackage{fontspec}
+	\setmainfont{XCharter}
+\fi
+
+\RequirePackage{roboto}
+
+\IfFileExists{roboto-mono.sty}{
+	\RequirePackage{roboto-mono}
+}{
+	\PackageWarningNoLine{tudafonts}{
+	The font package roboto-mono.sty could not be found. Probably your TeX-distribution is outdated.\MessageBreak
+	For correct font setup either install it manually or update you distribution}
+}
+
+\ifPDFTeX
+	\RequirePackage[T1]{fontenc}
+\fi
+
+\let\accentfont\robotoslab
+\DeclareTextFontCommand{\textaccent}{\accentfont}
+
+%adjust LaTeX kerning to font
+\DeclareRobustCommand{\LaTeX}{%
+{L\setbox\z@\hbox{\check@mathfonts \fontsize\sf@size\z@
+ \math@fontsfalse\selectfont A}\kern-.57\wd\z@
+ \sbox\tw@ T\vbox to \ht\tw@{\copy\z@ \vss}\kern-.2\wd\z@}%
+{%
+ \ifdim\fontdimen1\font=\z@ \else \count\z@=\fontdimen5\font
+ \multiply\count\z@ by 64\relax\divide\count\z@ by\p@
+ \count\tw@=\fontdimen1\font \multiply\count\tw@ by\count\z@
+ \divide\count\tw@ by 64\relax\divide\count\tw@ by\tw@
+ \kern-\the\count\tw@ sp\relax\fi}%
+\TeX}
+
+%%-----------------------------------------------------
+\endinput

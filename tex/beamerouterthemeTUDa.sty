@@ -1,0 +1,201 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeTUDa}
+ [\filedate\space\fileversion]
+
+\RequirePackage{l3keys2e}
+
+\ExplSyntaxOn
+\keys_define:nn {TUDa/beamer/outer} {
+	logo .bool_gset:N = \g_TUDa_headlinelogo_bool,
+	logo .default:n =true,
+	logo .initial:n =true,
+	logofile .tl_gset:N = \g_TUDa_logofile_tl,
+	logofile .initial:n = tuda_logo,
+}
+
+
+\ProcessKeysOptions{TUDa/beamer/outer}
+
+
+\mode<presentation>
+
+
+\RequirePackage{graphicx}
+\RequirePackage[paper=slide]{tudarules}
+
+\newlength{\TUDa@beamer@sep}
+\setlength{\TUDa@beamer@sep}{1em}
+
+\setbeamersize{text~margin~left=\TUDa@beamer@sep,text~margin~right=\TUDa@beamer@sep}
+
+\newlength{\TUDa@beamer@linewidth}
+\setlength{\TUDa@beamer@linewidth}{\dimexpr\paperwidth-2\TUDa@beamer@sep\relax}
+
+%Logo
+
+\newsavebox{\TUDa@logobox}
+\sbox{\TUDa@logobox}{%
+	\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}%
+}
+
+\newlength{\TUDa@beamer@logosep}
+\setlength{\TUDa@beamer@logosep}{2mm}
+
+\ExplSyntaxOff
+
+%\RequirePackage[paper=slide]{tudarules}
+
+\ExplSyntaxOn
+\TUDa@makeheadrule[color=identbarcolor,width=\TUDa@beamer@linewidth]{TUDa@beamer@headrule}
+\TUDa@makefootrule[width=\TUDa@beamer@linewidth]{TUDa@beamer@rule}
+
+\newlength{\TUDa@beamer@headheight}
+\setlength{\TUDa@beamer@headheight}{
+\dim_eval:n {
+	\ht\TUDa@logobox+
+	\dp\TUDa@logobox +
+	2\TUDa@beamer@logosep+
+	\box_ht:N \TUDa@beamer@rule_box +
+	\box_dp:N \TUDa@beamer@rule_box
+}}
+
+
+\ExplSyntaxOff
+
+
+\def\tudrule{\TUDa@beamer@rule}
+
+
+\newcommand\insertsmalllogo{\setbeamertemplate{logo}[small]\usebeamertemplate{logo}}
+
+
+\defbeamertemplate*{sidebar left}{TUD theme}{}
+\defbeamertemplate*{sidebar right}{TUD theme}{}
+
+
+\ExplSyntaxOn
+
+\bool_if_exist:NF \l_TUDa_tmpa_bool {\bool_new:N \l_TUDa_tmpa_bool}
+
+\defbeamertemplate*{footline}{TUDa theme}
+{
+	\begin{beamercolorbox}[leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,wd=\TUDa@beamer@linewidth,
+		ht=\csname c_TUDa_smallrule_dim\endcsname,dp=1mm]{footline}
+	\TUDa@beamer@rule
+	\end{beamercolorbox}
+  	\begin{beamercolorbox}[
+  	leftskip=\TUDa@beamer@sep,
+  	rightskip=\TUDa@beamer@sep, ht=2.75mm,dp=2.75mm]{footline}
+	\usebeamerfont{author~ in~ head/foot}%
+	\bool_set_false:N \l_TUDa_tmpa_bool 
+	\clist_map_variable:nNn {date, department, institute, author} \l_tmpa_tl {
+		\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
+			\bool_if:NTF \l_TUDa_tmpa_bool {~|~}
+			{\bool_set_true:N \l_TUDa_tmpa_bool}
+			\use:c {insertshort\l_tmpa_tl}
+		}
+	}
+	\bool_if:NT \l_TUDa_tmpa_bool {~|~}
+	\insertframenumber
+	\hfill\raisebox{\dimexpr-.5\height+\dp\strutbox\relax}{\insertlogo}
+    \end{beamercolorbox}
+}
+
+
+
+\RenewDocumentCommand{\logo}{sm}{
+	\IfBooleanTF{#1}{
+	\setbeamertemplate{logo}{\resizebox{!}{.06\beamer@paperheight}{\mbox{#2}}}%TODO change with aspectratio
+	}{
+	\setbeamertemplate{logo}{#2}
+	}
+}
+
+\defbeamertemplate{headline}{TUDa theme.logo} {%
+%	\vspace{.75\TUDa@beamer@sep}
+	\begin{beamercolorbox}[
+		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,wd=\TUDa@beamer@linewidth,ht=.75\TUDa@beamer@sep,dp=\box_dp:N \TUDa@beamer@headrule_box]{headline}
+		\TUDa@beamer@headrule
+	\end{beamercolorbox}
+}
+
+\ExplSyntaxOff
+
+\defbeamertemplate{frametitle}{TUDa theme.logo}{%
+\nointerlineskip%
+\begin{beamercolorbox}[
+	sep=\TUDa@beamer@logosep,wd=\dimexpr\TUDa@beamer@linewidth\relax,
+	rightskip=-\TUDa@beamer@logosep,
+%	leftskip=-\TUDa@beamer@logosep
+	]{frametitle}
+	\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-1em\relax\relax}{%
+		\usebeamerfont{frametitle}\insertframetitle
+		\ifx\insertframesubtitle\@empty
+		\else
+		\par
+		\usebeamercolor[fg]{framesubtitle}
+		\usebeamerfont{framesubtitle}
+		\insertframesubtitle
+		\fi
+	}
+	\hfill%
+	\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\usebox\TUDa@logobox}
+\end{beamercolorbox}
+\nointerlineskip
+\color{black}\TUDa@beamer@rule
+}
+
+\defbeamertemplate*{headline}{TUDa theme.nologo}
+{%
+	\vspace{.75\TUDa@beamer@sep}
+	\begin{beamercolorbox}[
+		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,wd=\TUDa@beamer@linewidth]{headline}
+		\TUDa@beamer@headrule
+	\end{beamercolorbox}
+}
+\defbeamertemplate*{frametitle}{TUDa theme.nologo}{%
+	\nointerlineskip%
+\begin{beamercolorbox}[
+	sep=\TUDa@beamer@logosep,wd=\dimexpr\TUDa@beamer@linewidth\relax,
+	]{frametitle}
+	\parbox[t]{\linewidth}{%
+		\usebeamerfont{frametitle}\insertframetitle
+		\ifx\insertframesubtitle\@empty
+		\else
+		\par
+		\usebeamercolor[fg]{framesubtitle}
+		\usebeamerfont{framesubtitle}
+		\insertframesubtitle
+		\fi
+	}%
+%	Rule vor voffset similar to logo
+	\rule[\dimexpr-\ht\TUDa@logobox+\ht\strutbox\relax]{0pt}{\dimexpr\ht\TUDa@logobox+\dp\TUDa@logobox\relax}
+\end{beamercolorbox}
+	\nointerlineskip
+\TUDa@beamer@rule
+}
+
+\ExplSyntaxOn
+\cs_new:Nn \TUDa_setup_frame: {
+	\bool_if:NTF \g_TUDa_headlinelogo_bool {
+		\setbeamertemplate{frametitle}[TUDa~ theme.logo]
+		\setbeamertemplate{headline}[TUDa~ theme.logo]
+	}{
+		\setbeamertemplate{frametitle}[TUDa~ theme.nologo]
+		\setbeamertemplate{headline}[TUDa~ theme.nologo]
+	}
+}
+\TUDa_setup_frame:
+
+\newcommand*{\setupTUDaFrame}[1]{
+	\keys_set:nn {TUDa/beamer/outer} {#1}
+	\TUDa_setup_frame:
+}
+
+\ExplSyntaxOff
+
+
+\mode
+<all>
+
+\endinput

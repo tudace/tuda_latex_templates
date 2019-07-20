@@ -1,0 +1,99 @@
+\documentclass[
+	ngerman,%globale Übergabe der Hauptsprache
+	aspectratio=169,%Beamer eigene Option zum Umschalten des Formates
+	color={accentcolor=2d},
+	logo=false,%Kein Logo auf Folgeseiten
+	colorframetitle=true,%Akzentfarbe auch im Frametitle
+%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
+	]{tudabeamer}
+\usepackage[main=ngerman]{babel}
+
+% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
+\fi
+
+
+%Makros für Formatierungen der Doku
+%Im Allgemeinen nicht notwendig!
+\let\code\texttt
+
+\begin{document}
+
+\title{LaTeX-Beamer im Corporate Design der TU Darmstadt}
+\subtitle{Version 1.0}
+\author[M. Peischl]{Marei Peischl \and der \TeX-Löwe}
+\department{\TeX/\LaTeX}
+\institute{pei\TeX}
+
+%Fremdlogo
+%Logo macro mit sternchen skaliert automatisch, sodass das logo in die Fußzeile passt
+\logo*{\includegraphics{example-image-16x9}}
+
+% Da das Bild frei wählbar nach Breite und/oder Höhe skaliert werden kann, werden \width/\height entsprechend gesetzt. So kann die Fläche optimal gefüllt werden.
+%Sternchenversion skaliert automatisch und beschneidet das Bild, um die Fläche zu füllen.
+\titlegraphic*{\includegraphics{example-image}}
+
+
+\date{15. Mai 2019}
+
+\maketitle
+
+
+\section{Dokumentation}
+\begin{frame}{Die Dokumentenklasse tudabeamer}
+\begin{itemize}
+	\item Verwendung wie beamer
+	\item keine besondere Syntax notwendig
+	\item Klassenoption accentcolor wählt Akzentfarbe
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Zusätzliche Features der Titelfolie}
+\begin{itemize}
+	\item \code{\textbackslash{}logo} wählt Fremdlogo für Fußzeile
+	\item \code{\textbackslash{}titlegraphic} Ersetzt den unteren Teil der Titelfolie. Zusätzlich existiert \code{\textbackslash{}titlegraphic*{Inhalt}}.
+	In diesem Fall wird der Inhalt in eine Box gesetzt, die so skaliert wird, dass Sie den Bereich des Titelbildes überdeckt und entsprechend mittig ausgeschnitten.
+\end{itemize}
+\end{frame}
+
+\setupTUDaFrame{logo=true}
+\begin{frame}[fragile]{Logo im Frametitle}
+Das Logo innerhalb des Frametitle kann mit der Klassenoption \code{logo=false} ausgeschalten werden.
+
+Soll das Logo später für ein Folie oder einen Bereich wieder aktiviert werden, steht das Makro
+\begin{verbatim}
+\setupTUDaFrame{logo=true}
+\end{verbatim}
+Zur Verfügung. Dort kann die globale Einstellung lokal überschrieben werden.
+\end{frame}
+
+\begin{frame}{Frame mit Untertitel}
+\framesubtitle{Untertitel}
+Ein Beispiel.
+\end{frame}
+
+\begin{frame}{Blöcke}
+\begin{block}{Standardblock mit Titel}
+	Blockinhalt
+\end{block}
+\begin{block}{}
+	Ohne Titel
+\end{block}
+\end{frame}
+
+\begin{frame}{Spezielle Blöcke}
+\begin{exampleblock}{Exampleblock}
+	Blockinhalt
+\end{exampleblock}
+\begin{alertblock}{Alertblock}
+	Blockinhalt
+\end{alertblock}
+\begin{example}[Für die example-Umgebung]
+	Inhalt
+\end{example}
+\end{frame}
+
+\end{document}
+

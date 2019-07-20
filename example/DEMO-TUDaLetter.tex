@@ -1,0 +1,67 @@
+\documentclass[
+	ngerman,
+%	logo=false,%Schaltet das Logo für Folgeseiten ab
+	accentcolor=9c,%Akzentfarbe nach Tabelle aus den Corporate Design Richtlinien
+	premium=true,%Aktiviert die Färbung der Identitätsleiste
+%	firstpagenumber=false,%Deaktiviert die Anzeige der Seitenzahl auf Seite 1
+%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
+]{tudaletter}
+
+% Der folgende Block ist nur für die Kompatibilität mit pdfTeX Versionen vor April 2018 notwendig
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{babel}%Paket für Sprachanpassung
+\usepackage[babel]{csquotes}%Vereinfachte Handhabung von Anführungszeichen
+
+\LoadLetterOption{TuDa_Demo}%Laden der Datei TUDa_Demo.lco mit hinterlegten Adressdaten
+
+\begin{document}
+	
+\begin{letter}{%
+    Technische Universität Darmstadt\\%
+    Referat Kommunikation\\%
+    Karolinenplatz 5\\%
+    64289 Darmstadt}
+
+\setkomavar{subject}{\LaTeX-Brieftemplate der TU Darmstadt}
+%\setkomavar{date}{20.02.2019}%Falls kein Datum angegeben, wird \today verwendet
+\setkomavar{yourmail}{dd.mm.yyyy}
+\setkomavar{myref}{Demo-xx}
+\setkomavar{frombank}{IBAN: 1234 5678 9123 4567 89}
+
+\opening{Sehr geehrte Damen und Herren,}
+Dieses Template dient der Verwendungsdokumentation der tudaletter-Klasse.
+
+Die wichtigsten Optionen sind direkt im Quellcode zu dieser Datei hinterlegt und entsprechend Kommentiert. Andere Optionen stellen nicht zwangsweise eine Konformität zu den Corporate Design Richtlinien dar. Layoutänderungen jeglicher Art solten daher vermieden werden.
+
+Zusätzliche Optionen sind im Folgenden aufgelistet:\\
+\parbox{\linewidth}{
+\begin{description}
+	\item[premium=true/false] Aktiviert/deaktiviert Farbige Hervorhebungen. Voreinstellung ist false.
+	\item[firstpagenumber=true/false] Aktiviert/deaktiviert die Angabe der Seitenzahl auf der ersten Seite. Voreinstellung ist true.
+	\item[raggedright=true/false] Brieftext linksbündig. Voreinstellung ist false. Dies entspricht Blocksatz.
+	\item[logo=true/false] Logo auf Folgeseiten aktiviert/deaktiviert. Voreinstellung ist true.
+\end{description}
+}
+
+Für Wiederverwendung der Absenderadresse wurde die Datei \enquote{TUDa\_Demo.lco} angelegt. Sie wird wie bei \KOMAScript{} üblich über
+geladen. Sämtliche dort gesetzten Werte können innerhalb der Briefdatei überschrieben werden.
+
+Die Adressdatei wird üblicherweise lokal im System installiert, um sie nicht immer mit allen anderen Dateien kopieren zu müssen. Falls Sie dies dürchführen möchten, findet sich eine entsprechende Erklärung am Ende der TUDa\_""Demo.lco-Datei
+
+Eine Besonderheit der Klasse tudaletter, stellt der Unterschied in der Zeilenlänge zwischen der ersten und den folgenden Seiten dar. Da \LaTeX{} grundsätzlich keine Änderung der Zeilenlänge innerhalb eines Absatzes unterstützt ist hier eine komplexe Implementierung nötig. In einigen speziellen Fällen, kann dieser Mechanismus Fehlschlagen. Eine Sammlung an Soderfällen ist bereits implementiert, sollten Sie jedoch auf weiter stoßen, werden wir uns um eine Erweiterung der Implementierung bemühen.
+
+Der einfachste Fall um solche Schwierigkeiten zu beheben ist in diesem Beispiel mithilfe der parbox um die Auflistung gezeigt.
+
+\closing{Herzliche Grüße}
+
+\encl{Quelldateien zu diesem Dokument:\\
+	\texttt{DEMO-TUDaLetter.tex} (Brieftext),\\
+	\texttt{TUDa\_Demo.lco} (Adressdaten)}
+	
+\end{letter}
+
+\end{document}

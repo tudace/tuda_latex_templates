@@ -1,0 +1,66 @@
+\documentclass[
+	paper=a0,
+	ngerman,
+	accentcolor=9c,
+	logo=body,% Logo unterhalb der Identitätsleise
+	footer=true,
+%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
+	]{tudaposter}
+
+\usepackage[english, main=ngerman]{babel}
+\usepackage[babel]{csquotes}
+
+
+%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+\def\TUDaTeX{TUDa\TeX\xspace}
+\let\file\texttt
+\let\code\texttt
+
+\usepackage{multicol}
+
+\begin{document}
+
+\title{\LaTeX{} im Corporate Design der TU~Darmstadt}
+\subtitle{Die Dokumentenklasse tudaposter}
+\author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and der \TeX-Löwe}
+
+\titlegraphic{\color{red!20}\rule{\contentwidth}{.5\contentheight}}
+
+\addTitleBox{test}
+\addTitleBox{jaodsijf}
+\footerqrcode{https://peitex.de}
+\footer{Inhalt der Fußzeile}%Falls aktiviert
+
+
+\maketitle
+
+\section*{Grundlengende Informationen}
+Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und Nicht-wissenschaftlichen-Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa\TeX-Bundles.
+
+\begin{multicols}{2}
+\subsection*{Verwendung}
+Im wesentlichen entspricht Ihre Verwendung der Klasse tudapub, da die Titel ähnlich aufgebaut sind. Unterhalb des Titels, kann der Anwender normalen Fließtext schreiben oder wie bei Standard-\LaTeX{} formatieren.
+
+Die tudaposter-Klasse basiert wie auch tudapub auf \KOMAScript{} und beitet daher mehr Mechanismen als für Poster grunsätzlich notwendig sind.
+
+Im Unterschied zur tudasciposter-Klasse, die auf tikzposter basiert, ermöglicht tudaposter es wie gewohnt Fließtext zu schreiben, um ergänzende Informationen einfach zu platzieren.
+
+\subsection*{Titelei}
+Die Titelerzeugung funktioniert wie bei Standard-\LaTeX{} über den maketitle-Mechanismus. Neben der Makros title, subtitle und author stehen noch 
+titlegraphic, addTitleBox, footerqrcode und footer zur Verfügung. Bis auf footerqrcode wird lediglich der Inhalt entsprechend platziert. Ein Beispiel für die Verwendung ist der Datei DEMO-TUDaPoster.tex gezeigt.
+
+\subsection*{Längenangaben}
+Innerhalb des Posterinhaltes (Dazu zählt auch die titlegraphic) sind zwei Längenmaße vordefiniert.
+\texttt{\textbackslash{}contentwidth} und \texttt{\textbackslash{}contentheight}. Die Höhe entspricht dabei dem Abstand zwischen Titelblock und Fußzeile/Trennlinie.
+
+\subsection*{Dokumentenklassenoptionen}
+\begin{description}
+	\item[paper=<Papierformat>] Papierformat. Voreingestellt ist a0. Unterstützt werden Formate von A0 bis A4. 
+	\item[fontsize=<Schriftgröße/auto>] Basischriftgröße. Die anderen Größen werden entsprechend skaliert. Für die unterstützte Papierformate sind entsprechende Skalierungsschritte hinterlegt diese Voreinstellung entspricht dem Wert auto.
+	\item[logo=head/body] Das Logo wird in der Idenditätsleiste (head) oder innerhalb des Dokumenteninhalts, ggf. überlappend mit dem Bild gesetzt.
+	\item[accentcolor=<Farbkürzel>] Akzentfarbe nach den Corporate Design Richtlinien
+	\item[footer=true/false] Aktivierung/Deaktivierung der Fußzeile. Voreinstellung ist false.
+\end{description}
+\end{multicols}
+
+\end{document}
