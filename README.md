@@ -1,8 +1,8 @@
-[English version below](#tudatex--latex-templates-using-corporate-design-of-tu-darmstadt)
+[English version below](#tuda-ci--latex-templates-using-corporate-design-of-tu-darmstadt)
 
-# TUDaTeX – Corporate Design LaTeX-Templates der TU Darmstadt
+# TUDa-CI – Corporate Design LaTeX-Templates der TU Darmstadt
 
-Das TUDaTeX-Bundle ist die Umsetzung des Corporate Designs der TU Darmstadt in LaTeX.
+Das TUDa-CI-Bundle ist die Umsetzung des Corporate Designs der TU Darmstadt in LaTeX.
 Es liefert neben den Klassen, Paket und Konfigurationsdateien auch Anwenderdokumentation in Form von Templatedateien für verschiedene Dokumententypen.
 
 Das Gesamtpaket wurde in Teilen inspiriert von Clemens von Loewenichs and Joe Werners TUD-Design Paket.
@@ -74,9 +74,9 @@ Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudalet
 
 
 
-# TUDaTeX – LaTeX templates using Corporate Design of TU Darmstadt
+# TUDa-CI – LaTeX templates using Corporate Design of TU Darmstadt
 
-The TUDaTeX-Bundle provides a possibility to use the Corporate Design of TU Darmstadt in LaTeX.
+The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt in LaTeX.
 Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation, which currently are only available in German.
 
 If you are not a German speaker and require some help using these files, please feel free to contact the maintainers.

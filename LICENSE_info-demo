@@ -1,6 +1,6 @@
 %% This is file `<FILENAME>' version 1.00 (2019/07/20),
 %% it is part of
-%% TUDaTeX -- Corporate Design for TU Darmstadt
+%% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
 %%  Copyright (C) 2018--2019 by Marei Peischl <marei@peitex.de>
@@ -17,7 +17,7 @@
 %% This work has the LPPL maintenance status `maintained'.
 %%
 %% The Current Maintainers of this work are
-%%   Marei Peischl <tudatex@peitex.de>
+%%   Marei Peischl <tuda-ci@peitex.de>
 %%   Markus Lazanowski <latex@ce.tu-darmstadt.de>
 %%
 %% The development respository can be found at

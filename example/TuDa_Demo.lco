@@ -2,13 +2,13 @@
 %%  This is file `TuDa_Demo.lco' version 1.0 (2019/04/26),
 %%  Demo for a LetterClassOption File to globally save own address data
 %%	it is part of
-%%  TUDaTeX -- Corporate Design for TU Darmstadt
+%%  TUDa -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
 %%  Copyright (C) 2018--2019 by Marei Peischl <kontakt@peitex.de>
 %%
 %%  ============================================================================
-\ProvidesFile{TuDa_Demo.lco}[2019/04/26]
+\ProvidesFile{TuDa_Demo.lco}[\fileversion\space\filedate]
 
 
 %Institut

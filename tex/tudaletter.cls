@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplPackage{tudaletter}
-	{\filedate}{\fileversion}{Letters for TUDaTeX, Corporate Design of TU Darmstadt}
+	{\filedate}{\fileversion}{Letters for TUDa-CI, Corporate Design of TU Darmstadt}
 
 \RequirePackage{l3keys2e}
 
@@ -421,7 +421,7 @@
 	You~ used~ the~ #1~ metadata~ entry.\\
 	I~ don't~ know~ how~ to~ handle~ that.\\
 	It~ will~ be~ ignored.
-} {See~ TUDaTeX~ or~ pdfx~ documentation~ for~ details.}
+} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
 \fi:
 
 

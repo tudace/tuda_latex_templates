@@ -1,5 +1,5 @@
 \ProvidesFile{tudacolors.def}
-[\filedate\space\fileversion\space Color definitions for TUDaTeX]
+[\filedate\space\fileversion\space Color definitions for tuda-ci]
 
 \definecolor{TUDa-0d}{cmyk/RGB/HTML}{0,0,0,.8/83,83,83/535353}
 \definecolor{TUDa-0c}{cmyk/RGB/HTML}{0,0,0,.6/137,137,137/898989}

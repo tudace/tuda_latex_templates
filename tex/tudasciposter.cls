@@ -210,7 +210,7 @@
 			^^J
 			\exp_not:N \Author{\tl_to_str:V \g_TUDa@xmp_author}
 			^^J
-			\exp_not:N \Creator{LaTeX~ using~ the~ TUDaTeX~ Bundle}
+			\exp_not:N \Creator{LaTeX~ using~ the~ TUDa-CI~ Bundle}
 		}
 	}{
 		\begingroup
@@ -245,7 +245,7 @@
 	You~ used~ the~ #1~ metadata~ entry.\\
 	I~ don't~ know~ how~ to~ handle~ that.\\
 	It~ will~ be~ ignored.
-} {See~ TUDaTeX~ or~ pdfx~ documentation~ for~ details.}
+} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
 \else:
 \msg_new:nnn {tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
 \msg_info:nn {tudapub} {no-pdfa}

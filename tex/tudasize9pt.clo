@@ -1,6 +1,6 @@
 %%  This is file `tudasize9pt.clo' version 1.0 (2018/12/12),
 %%  it is part of
-%%  TUDaTeX -- Corporate Design for TU Darmstadt
+%%  TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
 %%  Copyright (c) 2018 by Marei Peischl <marei@peitex.de>
@@ -38,7 +38,7 @@
 %%
 \ProvidesFile{%
   tudasize9pt.clo%
-}[TUDaTeX \space font size class option %
+}[TUDa-CI \space font size class option %
   (9pt)%
 ]
 \def\normalsize{%

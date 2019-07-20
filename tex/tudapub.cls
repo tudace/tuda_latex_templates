@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplClass{tudapub}
-	{\filedate}{\fileversion}{Publications using TU Darmstadt's Coporate Desing (TUDaTeX)}
+	{\filedate}{\fileversion}{Publications using TU Darmstadt's Coporate Desing (TUDa-CI)}
 
 \RequirePackage{l3keys2e}
 \RequirePackage{URspecialopts}
@@ -470,7 +470,7 @@
 	\input{tudathesis.cfg}
 } {
 
-\msg_new:nnnn {TUDa/pub} {only-thesis} {You~tried~to~use~\use:c { #1}.~This~macro~is~only~available~for~publications~of~type~thesis}{See~tudatex~documentation~for~further~information}
+\msg_new:nnnn {TUDa/pub} {only-thesis} {You~tried~to~use~\use:c { #1}.~This~macro~is~only~available~for~publications~of~type~thesis}{See~tuda-ci~documentation~for~further~information}
 
 \clist_map_inline:nn {birthplace, group, examdate, submissiondate, tuprints, urn, reviewer} {
 	\expandafter\newcommand\csname #1\endcsname[2][]{
@@ -889,7 +889,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		\tl_gset:Nf \g_TUDa@xmp_author_tl {\@author}
 		\prop_gput_if_new:Nnx \g_TUDa_MetaData_prop {author} {\tl_to_str:V \g_TUDa@xmp_author_tl}
 		\prop_gput_if_new:Nnn \g_TUDa_MetaData_prop {publisher}{TU~Darmstadt}
-		\prop_gput_if_new:Nnn \g_TUDa_MetaData_prop {creator}{LaTeX~using~TUDaTeX}
+		\prop_gput_if_new:Nnn \g_TUDa_MetaData_prop {creator}{LaTeX~using~TUDa-CI}
 		\use:c {pdfx@localcommands}%should be held inside group
 		\prop_map_function:NN \g_TUDa_MetaData_prop  \TUDa_write_xmp_line:nn
 	\endgroup
@@ -923,7 +923,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	You~ used~ the~ #1~ metadata~ entry.\\
 	I~ don't~ know~ how~ to~ handle~ that.\\
 	It~ will~ be~ ignored.
-	} {See~ TUDaTeX~ or~ pdfx~ documentation~ for~ details.}
+	} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
 \else:
 	\msg_new:nnn {tudaPub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
 	\msg_info:nn {tudaPub} {no-pdfa}

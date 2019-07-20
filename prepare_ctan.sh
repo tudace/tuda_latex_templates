@@ -1,22 +1,22 @@
 #!/bin/bash
 
-rm -f tudatex.zip
-mkdir -p tudatex
-rm -rf tudatex/*
+rm -f tuda-ci.zip
+mkdir -p tuda-ci
+rm -rf tuda-ci/*
 
-mkdir -p tudatex/doc
+mkdir -p tuda-ci/doc
 cd example
 latexmk --lualatex
-mv DEMO-*.pdf ../tudatex/doc
+mv DEMO-*.pdf ../tuda-ci/doc
 cd ..
 
-cp -r tex tudatex/.
+cp -r tex tuda-ci/.
 
-mkdir -p tudatex/example
-cp example/*.tex tudatex/example/.
-cp example/*.lco tudatex/example/.
-cp example/*.bib tudatex/example/.
+mkdir -p tuda-ci/example
+cp example/*.tex tuda-ci/example/.
+cp example/*.lco tuda-ci/example/.
+cp example/*.bib tuda-ci/example/.
 
-cp README.md tudatex/.
+cp README.md tuda-ci/.
 
-zip -ll -y -r tudatex.zip tudatex
+zip -ll -y -r tuda-ci.zip tuda-ci
