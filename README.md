@@ -13,10 +13,16 @@ Dies ist mit aktuellen LaTeX-Paketen und dem Compiler LuaLaTeX deutlich konseque
 Aus diesem Grund wird empfohlen die verwendete Distribution vorab zu aktualisieren und LuaLaTeX zu verwenden.
 Weitere Hinweise finden sich in den Beispieldateien dokumentiert.
 
+## Installation
+Für die Verwendung der Klassen und Pakete muss entweder der gesamte Inhalt des tex-Verzeichnisses im Arbeitsverzeichnis liegen oder in der TeX-Distribution installiert werden. Dies ist entweder über die Paketverwaltung der Distribution möglich oder das Paket kann manuell mithilde der Release Informationen im GitHub Repository installiert werden.
+
 ### Logos & verwendete Bilddateien
 Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitgliedern der TU Darmstadt über das interene Netzwerk heruntergeladen werden. 
 
 https://download.hrz.tu-darmstadt.de/protected/CE/TUDa_LaTeX/tuda_logo.pdf
+Für die Permanente Installation der Logodateien findet sich unter 
+https://www.ce.tu-darmstadt.de/ce/latex_tuda/index.de.jsp
+ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
 
