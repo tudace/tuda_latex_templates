@@ -51,7 +51,7 @@ Wissenschaftliche Artikel | DEMO-TUDaPub.tex, verwendet auch DEMO-TUDaBibliograp
 Abschlussarbeiten | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, verwendet auch DEMO-TUDaBibliography.bib | tudapub.cls mit tudathesis.cfg
 Wissenschaftliche Poster | DEMO-TUDaSciPoster.tex | tudasciposter.cls
 Veranstaltungsankündigungen | DEMO-TUDaPoster.tex | tudaposter.cls
-Präsentationen | DEMO-TUDaBeamer.tex | tudaposter.cls
+Präsentationen | DEMO-TUDaBeamer.tex | tudabeamer.cls
 Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudaletter.cls mit tudalettersize10pt.clo
 
 ## Liste aller enthaltenen Dateien:
