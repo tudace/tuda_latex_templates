@@ -4,7 +4,7 @@
 
 \RequirePackage{l3keys2e}
 
-\prop_new:N \g_TUDa_clsopts_prop 
+\prop_new:N \g_TUDa_clsopts_prop
 \tl_new:N \g_TUDa_boxstyle_tl
 \int_new:N \g_TUDa_paper_int
 
@@ -82,7 +82,7 @@
 
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
-	\tl_if_empty:nTF {#2} 
+	\tl_if_empty:nTF {#2}
 	{\exp_args:NnV\PassOptionsToClass{#1}\l_tmpa_tl}
 	{\clist_map_inline:nn {#2} {\PassOptionsToClass{#1=##1}{scrartcl}}}
 }
@@ -294,7 +294,7 @@
 
 
 
-%Language dependend configuration
+%Language dependent configuration
 \AtBeginDocument{
 	\@ifpackageloaded{babel}{
 		\addto\extrasngerman{\def\authorandname{und}}
@@ -437,7 +437,7 @@
 	}
 	\dim_gset:Nn \g_TUDa_titleblock_dim {
 		\dim_max:nn
-		{\dim_max:nn 
+		{\dim_max:nn
 			{2\c_TUDa_logoheight_dim}
 			{\box_ht:N \g_TUDa_titlegraphic_box +\box_dp:N \g_TUDa_titlegraphic_box+1.8\c_TUDa_logoheight_dim}
 		}
@@ -484,12 +484,13 @@
 	TUDa-colored/.style =
 	{
 		TUDa,
-		left=.5\c_TUDa_rulesep_dim, 
-		right=.5\c_TUDa_rulesep_dim, 
+		left=.5\c_TUDa_rulesep_dim,
+		right=.5\c_TUDa_rulesep_dim,
 		colbacktitle=blocktitlebgcolor,
 		coltitle=blocktitlefgcolor,
 		colback=blockbodybgcolor,
 		coltext=blockbodyfgcolor,
+		fonttitle=\usekomafont{disposition}\usekomafont{section}\color{blocktitlefgcolor},
 		titlerule=\z@,
 	},
 	TUDa-colored-inner/.style =
@@ -499,7 +500,7 @@
 		coltitle=innerblocktitlefgcolor,
 		colback=innerblockbodybgcolor,
 		coltext=innerblockbodyfgcolor,
-		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}
+		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}\color{innerblocktitlefgcolor}
 	},
 	TUDa-boxed/.style =
 	{
@@ -514,7 +515,7 @@
 		titlerule=\z@,
 		arc=1ex,
 		auto~outer~arc,
-		fonttitle=\usekomafont{disposition}\usekomafont{section},
+		fonttitle=\usekomafont{disposition}\usekomafont{section}\color{blocktitlefgcolor},
 		before~title={\strut},
 		parbox=false,
 	},
@@ -526,7 +527,7 @@
 		colback=innerblockbodybgcolor,
 		coltext=innerblockbodyfgcolor,
 		sharp~corners,
-		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}
+		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}\color{innerblocktitlefgcolor}
 	},
 }
 
