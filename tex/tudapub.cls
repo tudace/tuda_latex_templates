@@ -478,7 +478,7 @@
 	}
 }
 \newcommand*{\TUDa@title@footnote}[2][1]{
-\@fnsymbol{#1}#2
+\textsuperscript{\@fnsymbol{#1}}#2
 }
 
 
