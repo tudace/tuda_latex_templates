@@ -116,6 +116,8 @@
 \setkomafont{author}{\bfseries}
 \setkomafont{captionlabel}{\bfseries}
 
+\setkomafont{disposition}{\sffamily\bfseries}
+
 % end of font adjustments
 
 \RequirePackage[mode=tikz]{tudarules}
@@ -490,7 +492,7 @@
 		coltitle=blocktitlefgcolor,
 		colback=blockbodybgcolor,
 		coltext=blockbodyfgcolor,
-		fonttitle=\usekomafont{disposition}\usekomafont{section}\color{blocktitlefgcolor},
+		fonttitle=\usekomafont{disposition}\usekomafont{section},
 		titlerule=\z@,
 	},
 	TUDa-colored-inner/.style =
@@ -500,7 +502,7 @@
 		coltitle=innerblocktitlefgcolor,
 		colback=innerblockbodybgcolor,
 		coltext=innerblockbodyfgcolor,
-		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}\color{innerblocktitlefgcolor}
+		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}
 	},
 	TUDa-boxed/.style =
 	{
@@ -515,7 +517,7 @@
 		titlerule=\z@,
 		arc=1ex,
 		auto~outer~arc,
-		fonttitle=\usekomafont{disposition}\usekomafont{section}\color{blocktitlefgcolor},
+		fonttitle=\usekomafont{disposition}\usekomafont{section},
 		before~title={\strut},
 		parbox=false,
 	},
@@ -527,7 +529,7 @@
 		colback=innerblockbodybgcolor,
 		coltext=innerblockbodyfgcolor,
 		sharp~corners,
-		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}\color{innerblocktitlefgcolor}
+		fonttitle=\usekomafont{disposition}\usekomafont{subsubsection}
 	},
 }
 
