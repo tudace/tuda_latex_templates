@@ -157,8 +157,8 @@
 		\parbox{\linewidth}{
 		\rule[5\g_TUDa_titlerule_dim]{\linewidth}{\g_TUDa_titlerule_dim}\par\nointerlineskip
 		\@hangfrom{%
-		\hskip #2#3}{#4\par}\nointerlineskip
-		\vspace{\TUDa_titlerule_sep:}
+			\hskip #2#3}{#4\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
+		\skip_vertical:n {\TUDa_titlerule_sep: -\dp\strutbox}
 		\smash{\rule{\linewidth}{\g_TUDa_titlerule_dim}}}
 		}{
 		\@hangfrom{\hskip #2#3}{#4}
@@ -170,8 +170,8 @@
 	\parbox{\linewidth}{
 		\rule[5\g_TUDa_titlerule_dim]{\linewidth}{\g_TUDa_titlerule_dim}\par\nointerlineskip
 		\@hangfrom{%
-			\hskip #2#3}{#4\par}\nointerlineskip
-		\vspace{\TUDa_titlerule_sep:}
+			\hskip #2#3}{#4\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
+			\skip_vertical:n {\TUDa_titlerule_sep: -\dp\strutbox}
 		\smash{\rule{\linewidth}{\g_TUDa_titlerule_dim}}
 	}}
 }
