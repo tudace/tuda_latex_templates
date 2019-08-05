@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/07/20 v1.00
+ tuda-ci 2019/08/05 v1.01
 
 ***************************************************************************
 
@@ -109,4 +109,5 @@ letter | DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  | tudaletter.cls a
 
 # Version History 
 
- * v1.0 First official version - published on 2019-07-20
+ * v1.00 First official version - published on 2019-07-20
+ * v1.01 (2019-08-05) Smaller Layout Fixes and documentation enhancements 
