@@ -358,6 +358,7 @@
 \newpairofpagestyles[scrheadings]{TUDa.headings}{
 	\KOMAoptions{headsepline, headlines=1.25, footlines=1.25}
 	\setkomafont{pagehead}{}
+	\chead{}
 	\ohead{\headmark}
 }
 
