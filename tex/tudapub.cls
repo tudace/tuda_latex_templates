@@ -28,6 +28,9 @@
 	The~KOMA-Script~option~titlepage~is~forced~to~"firstiscover".
 }
 
+\bool_new:N \g_TUDa_geometry_bool
+\bool_new:N \g_TUDa_custommargins_bool
+
 \keys_define:nn {TUDa/pub} {
 	%twoside -> geometry + class
 	class .choice:,
@@ -45,7 +48,19 @@
 	marginpar .tl_gset:N = \g_TUDa_marginpar_tl,
 	marginpar .default:n = auto,
 	marginpar .initial:n = auto,
-	custommargins .bool_gset:N = \g_TUDa_custommargins_bool,
+	custommargins .choice:,
+	custommargins / true .code:n ={
+		\bool_gset_true:N \g_TUDa_custommargins_bool
+		\bool_gset_false:N \g_TUDa_geometry_bool
+	},
+	custommargins / false .code:n ={
+		\bool_gset_false:N \g_TUDa_custommargins_bool
+		\bool_gset_true:N \g_TUDa_geometry_bool
+	},
+	custommargins / geometry .code:n = {
+		\bool_gset_true:N \g_TUDa_custommargins_bool
+		\bool_gset_true:N \g_TUDa_geometry_bool
+	},
 	custommargins .initial:n = false,
 	custommargins .default:n = true,
 	fontsize .code:n = \prop_gput:Nnn \g_TUDa_clsopts_prop {fontsize} {#1},
@@ -280,11 +295,10 @@
 
 %%%%%Anfang Randeinstellungen Geometry
 
-\bool_if:NTF  \g_TUDa_custommargins_bool {
-	\KOMAoptions{headinclude, footinclude}
-	\let\TUDa_disable_marginpar:\relax
-	\let\TUDa_restore_typearea:\relax
-}{
+%Has to be loaded here due to headwidth options
+\usepackage[draft=false]{scrlayer-scrpage}
+
+\bool_if:NTF  \g_TUDa_geometry_bool {
 	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot,includemp, nomarginpar, headheight=\g_TUDa_headheight_dim
 	]{geometry}
 
@@ -293,20 +307,45 @@
 	\geometry{includemp, marginpar=\g_TUDa_marginpar_dim, marginparsep=\g_TUDa_columnSep_dim}
 	\KOMAoptions{mpinclude}
 	\savegeometry{TUDa@marginpar}
+
 	\bool_if:NTF  \g_TUDa_marginpar_bool {
 		\loadgeometry{TUDa@marginpar}
-		\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@marginpar}
 	}  {
 		\loadgeometry{TUDa@nomarginpar}
-		\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@nomarginpar}
 	}
 
+	\bool_if:NTF \g_TUDa_custommargins_bool {
+		\AtBeginDocument{\savegeometry{TUDa@default}} 
+		\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@default}
+	}{
+		\bool_if:NTF  \g_TUDa_marginpar_bool {
+			\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@marginpar}
+		}  {
+			\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@nomarginpar}
+		}
+	}
 
 	\dim_gset:Nn \g_TUDa_headwidth_dim 			  {\paperwidth-\g_TUDa_innerMargin_dim-\g_TUDa_outerMargin_dim-\Gm@bindingoffset}
 	
 	\cs_set:Nn \TUDa_disable_marginpar: {\loadgeometry{TUDa@nomarginpar}}
 	\cs_set:Nn \TUDa_restore_typearea: {\loadgeometry{\c_TUDa_default_geometry_tl}}
 
+}{
+\bool_if:NTF \g_TUDa_geometry_bool {
+	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot,includemp, nomarginpar, headheight=\g_TUDa_headheight_dim
+	]{geometry}
+	
+	
+	\savegeometry{TUDa@nomarginpar}
+	\cs_set:Nn \TUDa_disable_marginpar: {\loadgeometry{TUDa@nomarginpar}}
+}{
+	\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}
+	\let\TUDa_disable_marginpar:\relax
+	\def\TUDa_restore_typearea:{
+		\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}\recalctypearea
+	}
+}
+%maybe enforce marginar?=false in that case 
 }
 
 
@@ -314,7 +353,7 @@
 %%%%%%%%
 %Ende Randeinstellungen klassisch
 
-\usepackage[draft=false]{scrlayer-scrpage}
+
 
 
 \newcommand*{\institution}[1]{
@@ -363,8 +402,7 @@
 }
 
 \newpairofpagestyles{TUDa}{
-	\KOMAoptions{
-		plainfootsepline}
+	\KOMAoptions{plainfootsepline}
 	
 	\bool_if:NTF \g_TUDa_marginpar_bool 
 		{
@@ -391,10 +429,17 @@
 	\fi
 	\ModifyLayer[
 		background,
-		contents={\smash{\TUDa@headline}}
+		mode=picture,
+		contents={
+			\dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
+				\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
+			}
+			\smash{\TUDa@headline}
+		}
 	]{TUDa.head.above.line}	
 	\ModifyLayer[
 		background,
+		mode=picture,
 		contents={\smash{\TUDa@headline}}
 	]{plain.TUDa.head.above.line}
 	\bool_if:NT \g_TUDa_headline_bool {
@@ -805,7 +850,6 @@
 contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 ]{title.TUDa.background}
 
-
 \DeclareNewLayer[
 	mode=picture,
 	align=tl,
@@ -813,11 +857,16 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	voffset=\coverpagetopmargin,
 	width=\paperwidth-\coverpageleftmargin-\coverpagerightmargin,
 	contents={
-		\box_if_exist:NF \TUDa@title_headline_box
-		{\TUDa@makeheadrule[color=identbarcolor, width=\layerwidth]{TUDa@title_headline}}
+%		\box_if_exist:NF \TUDa@title_headline_box
+%		{}
+		\dim_compare:nF {\box_wd:N \TUDa@title_headline_box=\layerwidth} {
+			\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@title_headline}
+		}
 		\putUL{\TUDa@title_headline}
 	}
 ]{title.TUDa.rule}
+
+\TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@title_headline}
 
 \cs_new:Nn \TUDa_Setup_Title_box: {
 	\hbox_gset:Nn \g_TUDa_title_info_box

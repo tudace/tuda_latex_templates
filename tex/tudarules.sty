@@ -57,7 +57,7 @@
 	mode / TikZ  .code:n = \bool_gset_true:N \g_TUDa_rule_TikZmode_bool,
 }
 
-\NewDocumentCommand{\TUDa@makeheadrule}{om}{
+\NewDocumentCommand{\TUDa@makeheadrule}{som}{
 	\keys_set:nn {TUDa/rules} {
 		%TODO maybe package options for default
 		width=\textwidth,
@@ -66,17 +66,17 @@
 		mode= \g_TUDarules_default_mode_tl,
 		color=  \g_TUDarules_default_color_tl
 	}
-	\IfNoValueF {#1} {\keys_set:nn {TUDa/rules}{#1}}
-	\box_new:c {#2_box}
+	\IfNoValueF {#2} {\keys_set:nn {TUDa/rules}{#2}}
+	\box_if_exist:cF {#3_box} {\box_new:c {#3_box}}
 	\bool_if:NTF \g_TUDa_rule_TikZmode_bool {
-		\hbox_gset:cn {#2_box} {
+		\hbox_gset:cn {#3_box} {
 			\begin{tikzpicture}
 				\fill[\l_TUDa_headrule_color_tl](0,\c_TUDa_rulesep_dim)rectangle++(\l_TUDa_headrule_width_dim,\c_TUDa_largerule_dim);
 				\fill(0,0)rectangle(\l_TUDa_headrule_width_dim,-\c_TUDa_smallrule_dim);
 			\end{tikzpicture}
 		}
 	}{
-		\hbox_gset:cn {#2_box} {
+		\hbox_gset:cn {#3_box} {
 			\parbox[t]{\l_TUDa_headrule_width_dim}{
 				\setlength{\baselineskip}{\z@}		
 				\null\par\nointerlineskip
@@ -86,7 +86,8 @@
 			}
 		}
 	}
-	\cs_new:cpn {#2} {\box_use:c {#2_box}}
+	\IfBooleanTF {#1}
+		\cs_set:cpn \cs_new:cpn {#3} {\box_use:c {#3_box}}
 }
 
 \NewDocumentCommand{\TUDa@makefootrule}{om}{
