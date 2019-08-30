@@ -29,6 +29,11 @@ Dies ist mit aktuellen LaTeX-Paketen und dem Compiler LuaLaTeX deutlich konseque
 Aus diesem Grund wird empfohlen, die verwendete Distribution vorab zu aktualisieren und LuaLaTeX zu verwenden.
 Weitere Hinweise finden sich in den Beispieldateien dokumentiert.
 
+## Abhängigkeiten
+Das Bundle verwendet Pakete der Standard-LaTeX-Distributionen. Bei der Verwendung von paketierten Versionen über die Linux-Paketverwaltung kann dies ggf. zu Schwierigkeiten führen.
+
+In den häufigsten Fällen fehlt ein Teilpaket mit dem Namen URspecialopts.sty. Dieses Paket wird für die Optionsdurchreichung genutzt und ist Teil des urcls-Bundle: https://ctan.org/pkg/urcls
+
 ## Installation
 Für die Verwendung der Klassen und Pakete muss entweder der gesamte Inhalt des tex-Verzeichnisses im Arbeitsverzeichnis liegen oder in der TeX-Distribution installiert werden. Dies ist entweder über die Paketverwaltung der Distribution möglich oder das Paket kann manuell mithilfe der Release Informationen im GitHub Repository installiert werden.
 
