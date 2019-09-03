@@ -360,8 +360,8 @@
 	\def\TUDa@institution{#1}
 }
 
-\gdef\datename{Datum}
-\gdef\dateseparator{:~}
+\gdef\TUDa@datename{Datum}
+\gdef\TUDa@dateseparator{:~}
 
 
 
