@@ -885,9 +885,9 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \if_bool:N \g_TUDa@pdfa_bool
 
 	\msg_new:nnn {TUDaPub} {prefer-lualatex} {
-	You use pdfa-mode in #1.
-	This can lead to incompatiblities especially with older compiler versions.
-	You should prefer compiling using lualatex.
+	You~use~pdfa-mode~in~#1.\\
+	This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
+	You~should~prefer~using~lualatex.
 	}
 
 
