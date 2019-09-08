@@ -760,7 +760,7 @@
 	%paper=a5
 	{6} {
 		\cs_set:Nn \TUDa_title_fontsize: {{22pt}{28pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{11pt}{12pt}}
+		\cs_set:Nn \TUDa_titleinfo_fontsize: {{10pt}{11.5pt}}
 		\cs_set:Nn \TUDa_titlethanks_fontsize: {{10pt}{11.5pt}}
 	}
 	%paper=a6
