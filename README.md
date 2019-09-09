@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/08/05 v1.01
+ tuda-ci 2019/08/05 v1.10
 
 ***************************************************************************
 
@@ -115,4 +115,9 @@ letter | DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  | tudaletter.cls a
 # Version History 
 
  * v1.00 First official version - published on 2019-07-20
- * v1.01 (2019-08-05) Smaller Layout Fixes and documentation enhancements 
+ * v1.01 (2019-08-05) Smaller Layout Fixes and documentation enhancements
+ * v1.10 (2019-09-09) Layout Corrections + Bugfixes
+   - Corrections and Changes concerning the Margin definitions
+   - Fix compatibility issue with datetime package
+   - improve implementation of the headline option
+   - add information on package dependencies
