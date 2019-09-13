@@ -1,11 +1,33 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerfontthemeTUDa}
  [\filedate\space\fileversion]    
+ 
+\RequirePackage{l3keys2e}
 
+\ExplSyntaxOn
+\keys_define:nn {TUDa/beamer/fonts} {
+	serif .bool_gset:N = \g_TUDa_serif_bool,
+	serif .default:n = true,
+	serif .initial:n = false,
+	sans-serif .bool_gset_inverse:N = \g_TUDa_serif_bool,
+	sans-serif .default:n = true,
+}
+
+\ProcessKeysOptions{TUDa/beamer/fonts}
+
+\ExplSyntaxOff
+ 
 \mode<presentation>
 
 \RequirePackage{tudafonts}
-\renewcommand*{\familydefault}{\sfdefault}
+
+\ExplSyntaxOn
+\bool_show:N \g_TUDa_serif_bool 
+
+\bool_if:NTF \g_TUDa_serif_bool 
+	{\usefonttheme{serif}}
+	{\renewcommand*{\familydefault}{\sfdefault}}
+\ExplSyntaxOff
 
 \setbeamerfont{title}{size=\large,series=\bfseries}
 \setbeamerfont{subtitle}{size=\normalsize,series=\bfseries}
