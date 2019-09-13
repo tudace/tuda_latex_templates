@@ -2,10 +2,10 @@
 \ProvidesPackage{beamerfontthemeTUDa}
  [\filedate\space\fileversion]    
 
+\mode<presentation>
+
 \RequirePackage{tudafonts}
 \renewcommand*{\familydefault}{\sfdefault}
-
-\mode<presentation>{\beamer@suppressreplacementstrue}
 
 \setbeamerfont{title}{size=\large,series=\bfseries}
 \setbeamerfont{subtitle}{size=\normalsize,series=\bfseries}
@@ -13,5 +13,7 @@
 
 \setbeamerfont{frametitle}{size=\large,series=\bfseries}
 \setbeamerfont{author in head/foot}{size=\tiny}
+
+\mode<all>
 
 \endinput
