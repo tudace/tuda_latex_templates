@@ -307,11 +307,10 @@
 	\geometry{includemp, marginpar=\g_TUDa_marginpar_dim, marginparsep=\g_TUDa_columnSep_dim}
 	\KOMAoptions{mpinclude}
 	\savegeometry{TUDa@marginpar}
-
 	\bool_if:NTF  \g_TUDa_marginpar_bool {
-		\loadgeometry{TUDa@marginpar}
+		\AtBeginDocument{\loadgeometry{TUDa@marginpar}}
 	}  {
-		\loadgeometry{TUDa@nomarginpar}
+		\AtBeginDocument{\loadgeometry{TUDa@nomarginpar}}
 	}
 
 	\bool_if:NTF \g_TUDa_custommargins_bool {
@@ -390,8 +389,10 @@
 
 %Adjust headheight
 \AtBeginDocument{
-\KOMAoptions{headlines=1.5}
-\recalctypearea
+\KOMAoptions{headlines=1.5, headwidth=text}
+\box_if_exist:NF \TUDa@headline_box {
+	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
+}
 }
 
 \newpairofpagestyles[scrheadings]{TUDa.headings}{
@@ -418,9 +419,8 @@
 		}
 
 \setkomafont{pagehead}{\Large\bfseries}
-\box_if_exist:NF \TUDa@headline_box {
-	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
-}
+
+
 	\if@twocolumn
 	\edef\sls@evenheadshift{\dim_eval:n {-\marginparwidth-\marginparsep\relax}}
 	\let\sls@oddheadshift\sls@evenheadshift
