@@ -6,20 +6,25 @@
 \RequirePackage{URspecialopts}
 
 \Define@specialopt@Module[TUDa/beamer]
+\PassOptionsToClass{10pt}{beamer}
 
 \Module@DefineSpecialPassKey[TUDa/beamer]{color}<tudacolors>
 
 \ExplSyntaxOn
 \keys_define:nn {TUDa/beamer} {
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-	colortitle .code:n = \tl_show:n {true}\PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+	colortitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
 	colorbacktitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
 	colorframetitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
 	colorback .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
-	logo .code:n = \tl_show:n {#1}\PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa},
+	logo .code:n = \PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa},
 	pdfa .bool_gset:N = \g_TUDa@pdfa_bool,
 	pdfa .initial:n = false,
 	logofile .code:n = \PassOptionsToPackage{logofile=#1}{beamerouterthemeTUDa},
+	serif .code:n = \PassOptionsToPackage{serif=#1}{beamerfontthemeTUDa},
+	serif .default:n = true,
+	sans-serif .code:n = \PassOptionsToPackage{sans-serif=#1}{beamerfontthemeTUDa},
+	sans-serif .default:n = true,
 }
 
 
@@ -54,7 +59,6 @@
 \ExplSyntaxOff
 
 % Load the latex-beamer class
-\PassOptionsToClass{10pt}{beamer}
 \LoadClass{beamer}
 
 \ExplSyntaxOn
