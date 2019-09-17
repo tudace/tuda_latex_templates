@@ -299,22 +299,26 @@
 \usepackage[draft=false]{scrlayer-scrpage}
 
 \bool_if:NTF  \g_TUDa_geometry_bool {
-	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot,includemp, nomarginpar, headheight=\g_TUDa_headheight_dim
-	]{geometry}
-
-
+	\RequirePackage{geometry}
+	\geometry{
+		top=\g_TUDa_topMargin_dim,
+		inner=\g_TUDa_innerMargin_dim,
+		outer=\dim_eval:n {\g_TUDa_outerMargin_dim},
+		bottom=\g_TUDa_bottomMargin_dim,
+		columnsep= \g_TUDa_columnSep_dim,
+		includehead,
+		includefoot,
+		includemp,
+		nomarginpar,
+		headheight=\g_TUDa_headheight_dim
+	}
 	\savegeometry{TUDa@nomarginpar}
 	\geometry{includemp, marginpar=\g_TUDa_marginpar_dim, marginparsep=\g_TUDa_columnSep_dim}
 	\KOMAoptions{mpinclude}
 	\savegeometry{TUDa@marginpar}
-	\bool_if:NTF  \g_TUDa_marginpar_bool {
-		\AtBeginDocument{\loadgeometry{TUDa@marginpar}}
-	}  {
-		\AtBeginDocument{\loadgeometry{TUDa@nomarginpar}}
-	}
 
 	\bool_if:NTF \g_TUDa_custommargins_bool {
-		\AtBeginDocument{\savegeometry{TUDa@default}} 
+		\AtBeginDocument{\savegeometry{TUDa@default}}
 		\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@default}
 	}{
 		\bool_if:NTF  \g_TUDa_marginpar_bool {
@@ -322,6 +326,7 @@
 		}  {
 			\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@nomarginpar}
 		}
+		\AtBeginDocument{\loadgeometry{\c_TUDa_default_geometry_tl}}
 	}
 
 	\dim_gset:Nn \g_TUDa_headwidth_dim 			  {\paperwidth-\g_TUDa_innerMargin_dim-\g_TUDa_outerMargin_dim-\Gm@bindingoffset}
@@ -389,7 +394,19 @@
 
 %Adjust headheight
 \AtBeginDocument{
-\KOMAoptions{headlines=1.5, headwidth=text}
+\KOMAoptions{headlines=1.5}
+\bool_if:NTF \g_TUDa_marginpar_bool
+	{
+		\KOMAoptions {
+			headwidth=textwithmarginpar,
+			footwidth=textwithmarginpar
+		}
+	}{
+		\KOMAoptions {
+			headwidth=text,
+			footwidth=text
+		}
+	}
 \box_if_exist:NF \TUDa@headline_box {
 	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
 }
