@@ -13,6 +13,7 @@
 \prop_new:N \g_TUDa_clsopts_prop
 \prop_new:N \g_TUDa_unknown_clsopts_prop 
 \prop_gput:Nnn \g_TUDa_clsopts_prop {captions} {nooneline}
+\prop_gput:Nnn \g_TUDa_clsopts_prop {parskip} {half+}
 
 \int_new:N \g_TUDa_ruledheaders_int
 \int_new:N \g_TUDa_paper_int
