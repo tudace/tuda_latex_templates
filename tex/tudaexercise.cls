@@ -96,10 +96,17 @@
 \parbox{\linewidth}{
 	\rule[5\g_TUDa_titlerule_dim]{\linewidth}{\g_TUDa_titlerule_dim}\par\nointerlineskip
 	\@hangfrom{%
-		\hskip #2#3}{#4\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
+		\hskip #2#3}{
+		\tl_if_eq:nnT {#1} {task} {
+			\exp_args:No \tl_if_empty:nF {#4}
+				{:~}
+		}
+		#4\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
 		\skip_vertical:n {\TUDa_titlerule_sep: -\dp\strutbox}
 	\smash{\rule{\linewidth}{\g_TUDa_titlerule_dim}}
 }}
+
+
 	
 
 \usepackage{tudarules}
