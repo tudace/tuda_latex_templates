@@ -297,11 +297,11 @@
 	\KOMAoptions{headinclude, headheight=\l_tmpa_dim}%2\l_tmpa_dim}
         \setlength{\headheight}{\l_tmpa_dim}
 	\clist_map_inline:nn {odd, even, oneside} {
-	\ModifyLayer[contents={\box_use:c {g_TUDa_ex_headline_##1_box}}]{TUDa.head.##1}
+	\ModifyLayer[contents={\box_use:c {g_TUDa_ex_headline_##1_box}}]{TUDa.ex.head.##1}
 	}
 }
 
-\newpairofpagestyles{TUDa}{
+\newpairofpagestyles{TUDa.ex}{
 	\KOMAoptions{plainfootsepline}
 		\KOMAoptions {
 			headwidth=text,
@@ -321,7 +321,7 @@
 			\box_use:N \TUDa@headline_box
 		},
 		addvoffset=-\box_dp:N \TUDa@headline_box
-	]{TUDa.head.above.line}	
+	]{TUDa.ex.head.above.line}	
 	\ModifyLayer[
         background,
 %       mode=picture,
@@ -331,16 +331,13 @@
           }
           \box_use:N \TUDa@headline_box
         },
-  %      addvoffset=\dim_eval:n {-\box_dp:N \TUDa@headline_box},%\c_TUD_alargerule_dim-\c_TUDa_rulesep_dim-.5\c_TUDa_smallrule_dim},
-        % addvoffset=-\box_dp:N \TUDa@headline_box
-%        {1.25\baselineskip +\c_TUDa_largerule_dim +\c_TUDa_rulesep_dim +\c_TUDa_smallrule_dim}
-	]{plain.TUDa.head.above.line}
+	]{plain.TUDa.ex.head.above.line}
 	\lehead{headmark}%TODO
 	\lohead{headmark}%TODO
 	\ofoot[\pagemark]{\pagemark}
 }
 
-\pagestyle{TUDa}
+\pagestyle{TUDa.ex}
 
 %Titelseite
 \tl_new:N  \g_TUDa_titleimage_code_tl
@@ -350,7 +347,7 @@
 \box_new:N  \g_TUDa_title_box 
 \skip_new:N \g_TUDa_title_fill_skip
 
-\renewcommand{\titlepagestyle}{title.TUDa}
+\renewcommand{\titlepagestyle}{plain.TUDa.ex}
 
 
 \seq_new:N \g_TUDa_author_seq
@@ -392,6 +389,8 @@
 \newcommand*{\TUDa@title@footnote}[2][1]{
 \textsuperscript{\@fnsymbol{#1}}#2
 }
+
+\renewcommand*{\titlepagestyle}{plain.TUDa.ex}
 
 \renewcommand*{\@maketitle}{%
 	\global\@topnum=\z@
@@ -517,10 +516,6 @@
 		\cs_set:Nn \TUDa_titlethanks_fontsize: {{9pt}{10pt}}
 	}
 }
-
-\DeclareNewLayer[textarea,background,mode=picture,
-contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
-]{title.TUDa.background}
 
 \TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@title_headline}
 
