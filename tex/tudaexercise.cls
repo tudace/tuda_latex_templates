@@ -258,42 +258,6 @@
 
 \KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}
 \KOMAoptions{headsepline=.5\c_TUDa_smallrule_dim}
-
-
-\keys_define:nn {TUDa/exercise/headline} {
-  headline .code:n = {
-    \if@twoside
-    \keys_set:nn  {TUDa/exercise/headline} {odd=#1,even=#1}
-    \else
-    \keys_set:nn {TUDa/exercise/headline} {oneside=#1}
-    \fi
-  },
-}
-
-
-\clist_map_inline:nn {odd, even, oneside} {
-  \tl_new:c {g_TUDa_ex_headline_#1_tl}
-  \keys_define:nn {TUDa/exercise/headline} {
-    #1 .choice:,
-    #1 / title-name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\use:c {TUDa_ex_headline_title-name-id_setup:}},
-    #1 / unknown .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {##1}
-  }
-}
-
-\cs_new:Nn \TUDa_ex_makeheadline_box:Nn  {
-  \hbox_gset:cn {g_TUDa_ex_headline_#1_box} {
-    \parbox[b]{\textwidth}{ 
-      #2
-      \par\vspace{0pt}
-    }
-  }
-}
-
-\cs_set:cn {TUDa_ex_headline_title-name-id_setup:} {
-  \g_TUDa_shorttitle_tl\par
-  \smallskip
-  NAME \hfill ID 
-}
   
 \box_new:N \g_TUDa_ex_headline_odd_box
 \box_new:N \g_TUDa_ex_headline_even_box
@@ -498,6 +462,16 @@
 		\rule{\linewidth}{\g_TUDa_titlerule_dim}
 	}
 	\par
+        \bool_if:NT  \g_TUDa_headontitle_bool {
+          \if@twoside
+          \box_use:N \g_TUDa_ex_headline_odd_box
+          \else
+          \box_use:N \g_TUDa_ex_headline_oneside_box
+          \fi
+          \par
+          \rule{\linewidth}{\g_TUDa_titlerule_dim}
+          \par
+        }
 	\endgroup
 	\vskip 2em
         \ConfigureHeadline{}
@@ -595,6 +569,23 @@
 \providecaptionname{english, american, british}{\taskname}{Solution}
 \newcommand*{\solutionsep}{:~}
 
+\providecaptionname{ngerman, german}{\StudentNamename}{Nachname,~Vorname}
+\providecaptionname{english, american, british}{\StudentNamename}{Last Name,~ First Name}
+\newcommand*{\StudentNamesep}{:~}
+
+\providecommand{\StudentIDname}{Matrikelnummer}
+\providecaptionname{ngerman, german}{\StudentIDname}{Matrikelnummer}
+\providecaptionname{english, american, british}{\StudentIDname}{Enrollment ID}
+\newcommand*{\StudentIDsep}{:~}
+
+%Has to be initialized after captionnames have been defined
+ \AtBeginDocument{
+  \TUDa_update_headline_boxes:
+  \TUDa_ex_adjust_headheight:
+  \global\let\ConfigureHeadline\TUDa_ConfigureHeadline:n
+}
+
+
 
 %task environment
 %TODO: discussion: allow sectioning 
@@ -619,11 +610,29 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsection@numwidth {2.3em},%
 	\@task{#2}
 }{}
 
-\keys_define:nn {TUDa/exercise} {
-	solution .bool_set:N = \l_TUDa_ex_solution_bool,
-	solution .initial:n = false,
-	solution .default:n = true,
-}
+
+% subtasks
+\DeclareSectionCommand[%
+style=section,%
+level=2,%
+indent=\z@,%
+beforeskip=\cs_if_exist_use:NF \scr@subsubsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
+afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
+tocstyle=subsection,%
+tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
+tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
+]{subtask}
+
+\renewcommand*{\thesubtask}{\alph{subtask})}
+\renewcommand*{\subtaskformat}{\thetask{}\thesubtask\enskip}
+\setkomafont{subtask}{\mdseries\normalsize}
+
+\let\@subtask\subtask
+\cs_undefine:N \subtask
+
+\NewDocumentEnvironment{subtask}{o}{
+	\@subtask{#1}
+      }{}
 
 %Solution mechanism
 
@@ -640,17 +649,37 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 
 \RequirePackage{environ}
 \NewEnviron{solution}{
-	\if_bool:N \l_TUDa_ex_solution_bool
-	\TUDa_ex_solutionheader:
-	\BODY\par
-	\fi:
-	}
+  \if_bool:N \l_TUDa_ex_solution_bool
+  \TUDa_ex_solutionheader:
+  \BODY\par
+  \fi:
+}
 
 \setkomafont{@solution}{\normalfont}
 
 \cs_new:Nn \TUDa_ex_solutionheader: {
-	\@solution*{\solutionname\solutionsep}
+  \@solution*{\solutionname\solutionsep}
 }
 
+\box_new:N \g_TUDa_NumberForm_box
+\hbox_gset:Nn \g_TUDa_NumberForm_box {
+  \rule{\fboxrule}{1ex}
+  \rule{1em}{\fboxrule}
+  \rule{\fboxrule}{1ex}
+  \,
+}
+
+\newcommand*\TUDa@StudentID[1][7]{
+  \StudentIDname\StudentIDsep\prg_replicate:nn {#1} {\box_use:N \g_TUDa_NumberForm_box}
+}
+\let\StudentID\TUDa@StudentID
+
+\newcommand*\TUDa@StudentName{
+  \StudentNamename\StudentNamesep\hrulefill\qquad
+}
+\let\StudentName\TUDa@StudentName
+
+\let\ShortTitle\g_TUDa_shorttitle_tl
+
 \endinput
-%End of class tudapub.cls
+%End of class tudaexercise.cls
