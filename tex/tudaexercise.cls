@@ -13,7 +13,7 @@
 \prop_new:N \g_TUDa_clsopts_prop
 \prop_new:N \g_TUDa_unknown_clsopts_prop 
 \prop_gput:Nnn \g_TUDa_clsopts_prop {captions} {nooneline}
-\prop_gput:Nnn \g_TUDa_clsopts_prop {parskip} {half+}
+\prop_gput:Nnn \g_TUDa_clsopts_prop {parskip} {half-}
 
 \int_new:N \g_TUDa_ruledheaders_int
 \int_new:N \g_TUDa_paper_int
@@ -28,12 +28,48 @@
 \bool_new:N \g_TUDa_geometry_bool
 \bool_new:N \g_TUDa_custommargins_bool
 
+
+\keys_define:nn {TUDa/exercise} {
+	solution .bool_set:N = \l_TUDa_ex_solution_bool,
+	solution .initial:n = false,
+	solution .default:n = true,
+}
+
+\keys_define:nn {TUDa/exercise/headline} {
+  headline .code:n = {
+    \if@twoside
+    \keys_set:nn  {TUDa/exercise/headline} {odd=#1,even=#1}
+    \else
+    \keys_set:nn {TUDa/exercise/headline} {oneside=#1}
+    \fi
+  },
+}
+
+\clist_map_inline:nn {odd, even, oneside} {
+  \tl_new:c {g_TUDa_ex_headline_#1_tl}
+  \keys_define:nn {TUDa/exercise/headline} {
+    #1 .choice:,
+    #1 / title-name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
+      \g_TUDa_shorttitle_tl\par
+      \smallskip
+      \StudentName\StudentID},
+    #1 / title-name .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
+      \g_TUDa_shorttitle_tl\par
+      \smallskip
+      \StudentName},
+    #1 / title .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\g_TUDa_shorttitle_tl},
+    #1 / name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\StudentName\StudentID},
+    #1 / name .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\StudentName},
+    #1 / unknown .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {##1}
+  }
+}
+
 \keys_define:nn {TUDa/pub} {
 	color .meta:n = {accentcolor=#1},
 	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
 	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
 	identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
-	color .initial:n = black!50,
+	color .initial:n = 0b,
 	custommargins .choice:,
 	custommargins / true .code:n ={
 		\bool_gset_true:N \g_TUDa_custommargins_bool
@@ -67,6 +103,10 @@
 	paper .initial:n = a4,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
+        solution .meta:nn = {TUDa/exercise}{solution},
+        headontitle .bool_gset:N = \g_TUDa_headontitle_bool,
+        headontitle .initial:n = false,
+        headontitle .default:n =true,
 }
 
 \ProcessKeysOptions{TUDa/pub}
@@ -259,21 +299,27 @@
 \box_new:N \g_TUDa_ex_headline_even_box
 \box_new:N \g_TUDa_ex_headline_oneside_box
 
-\newcommand*{\ConfigureHeadline}[1]{
+\cs_new:Nn \TUDa_preamble_ConfigureHeadline:n {
   \tl_if_empty:nF {#1} {\keys_set:nn {TUDa/exercise/headline} {#1}}
-   \TUDa_update_headline_boxes:
-  \TUDa_ex_adjust_headheight:
-  % \lehead{\}%TODO
-  %	\lohead{headmark}%TODO  
 }
+
+\cs_new:Nn \TUDa_ConfigureHeadline:n {
+  \TUDa_preamble_ConfigureHeadline:n {#1}
+  \TUDa_update_headline_boxes:
+  \TUDa_ex_adjust_headheight:
+}
+
+\let\ConfigureHeadline\TUDa_preamble_ConfigureHeadline:n
+
 
 \cs_new:Nn \TUDa_update_headline_boxes: {
   \clist_map_inline:nn {even, odd, oneside}
   {
     \hbox_gset:cn {g_TUDa_ex_headline_##1_box} {
-      \parbox[b]{\textwidth}{ 
-        \leavevmode\tl_use:c {g_TUDa_ex_headline_##1_tl}
-        \par\vspace{0pt}
+      \parbox[b]{\textwidth}{
+        \raggedright\leavevmode\strut
+        \tl_use:c {g_TUDa_ex_headline_##1_tl}
+        \strut\par\vspace{0pt}
       }
     }
   }
@@ -294,7 +340,9 @@
 	}
 	\fi
         \dim_add:Nn \l_tmpa_dim {\box_dp:N \TUDa@headline_box}
-	\KOMAoptions{headinclude, headheight=\l_tmpa_dim}%2\l_tmpa_dim}
+        % \dim_add:Nn \l_tmpa_dim {\sls@headabove@linethickness}
+        % \dim_add:Nn \l_tmpa_dim {\sls@headbelow@linethickness}
+	\KOMAoptions{headinclude, headheight=\l_tmpa_dim}
         \setlength{\headheight}{\l_tmpa_dim}
 	\clist_map_inline:nn {odd, even, oneside} {
 	\ModifyLayer[contents={\box_use:c {g_TUDa_ex_headline_##1_box}}]{TUDa.ex.head.##1}
@@ -535,7 +583,7 @@
 \usepackage{hyperref}
 \hypersetup{hidelinks, unicode}
 
-\providecaptionname{ngerman, german}{\sheetname}{Blatt}
+\providecaptionname{ngerman, german}{\sheetname}{Übungsblatt}
 \providecaptionname{english, american, british}{\sheetname}{Sheet}
 \newcommand*{\sheetsep}{~}
 
