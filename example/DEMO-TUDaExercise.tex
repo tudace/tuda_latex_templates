@@ -13,18 +13,115 @@
 \let\code\texttt
 \let\pck\textsf
 \let\cls\textsf
+\let\tbs\textbackslash
 
-\usepackage{hologo}
+\ConfigureHeadline{
+	headline={title-name-id}
+}
 
+%compatbilitx
+\let\unit\relax
 
 \begin{document}
 	
-\title{Übung zur Vorlesung\\\enquote{Physik für ET/IT und IKT}}
-\author{Dozent}
+\title[Übung TUDaExercise]{Übung zur Benutzung der TUDaExercise-Klasse}
+\author{Marei Peischl}
 \term{Sommersemester 2042}
 \sheetnumber{5}
 
 \maketitle
+
+\begin{task}{Eine Aufgabe erstellen}
+Aufgaben werden bei \cls{tudaexercise.cls} durch die Umgebung \code{task} definiert. Das Notwendige Argument übernimmt dabei eine Überschrift. Es kann leer bleiben.
+
+\begin{verbatim}
+	\begin{task}[<Optionen>]{Überschrift}
+		Text der Aufgabe
+	\end{task}
+\end{verbatim}
+
+Querverweise zwischen den Aufgaben sind wie üblich mit \code{\tbs{}label} und \code{\tbs{}ref} möglich.
+
+Neben der Umgebungsstruktur, die zur besseren Übersichtlichkeit zu empfehlen ist, verfügt tudaexercise auch über die Möglichkeit eine Aufgabe nur mit \code{\tbs{}task} einzuleiten.
+
+\begin{verbatim}
+\task{Überschrift der Aufgabe}
+\end{verbatim}
+
+In diesem Dokument wird lediglich die empfohlene Variante unter Nutzung der Umgebung gezeigt.
+
+Falls die Makro-Version benutzt und damit Optionen gesetzt werden, ist zu beachten, dass diese nicht automatisch wieder beendet werden kann, da ja das Ende der Umgebung fehlt. Dies ist der Hauptgrund für die Empfehlung der Umgebung.
+\end{task}
+
+\begin{task}{Kopfzeilenanpassungen}
+Der Mechanismus für die Kopfzeilen wurde angepasst, sodass sein Inhalt frei wählbar ist.
+
+\begin{verbatim}
+\ConfigureHeadline{
+   headline={Inhalt der Kopfzeile}
+}
+\end{verbatim}
+
+Es existiert nun eine Unterscheidung zwischen linken und rechten Seiten, sofern \code{twoside=true}.
+
+\begin{verbatim}
+\ConfigureHeadline{
+   even={Inhalt der Kopfzeile für linke Seiten},
+   odd={Inhalt der Kopfzeile für rechte Seiten},
+   oneside={Inhalt der Kopfzeile im einseitigen Modus}
+}
+\end{verbatim}
+
+Einstellungen, die gleiche Felder betreffen überschreiben sich gegenseitig.
+
+\begin{subtask}[Freie Inhalte]
+Die Inhalte sind frei wählbar und werden automatisch in einer Box mit der gleichen Breite, wie der Text gesetzt. Der Inhalt wird linksbündig platziert. Es ist möglich Grafiken oder Tabellen innerhalb dieser Box zu platzieren.
+\end{subtask}
+
+\begin{subtask}[Vorgefertigte Elemente]
+Für die Kopfzeilen existieren  einige vorgefertigte Elemente, die dort platziert werden können.
+\begin{verbatim}
+	\ShortTitle
+	\StudentID
+	\StudentName
+\end{verbatim}
+Darüber hinaus kann auch jeglicher \LaTeX-Content dort eingefügt werden.
+
+Zusätzlich sind einige Werte vorbelegt und platzieren die Einträge nach dem selbsterklärenden Namensschema:
+\code{title-name-id}, \code{title-name}, \code{title}, \code{name-id}, \code{name}
+\end{subtask}
+
+\begin{subtask}[Kopfzeile auch auf der Titelseite]
+Da die Kopfzeile häufig für die Angabe von Studentendaten genutzt wird, ist es mit der Klassenoption \code{headtotitle} auch möglich die Kopfzeile ebenfalls auf der Titelseite einzufügen.
+\end{subtask}
+\end{task}
+
+
+\begin{task}[solution=true]{Lösungen}
+tudaexercise verfügt über einen Mechanismus um Lösungsvorschläge innerhalb der Dateien mit zu verwalten. Hierfür existiert die Umgebung \code{solution}.
+
+Die Ausgabe der Lösungen wird entweder global
+\begin{verbatim}
+\documentclass[...,
+   solution=true,
+]{tudaexercise}
+\end{verbatim}
+oder lokal für einzelne Aufgaben konfiguriert:
+
+\begin{verbatim}
+\begin{task}[solution=true]{Überschrift}
+Aufgabentext
+   \begin{solution}
+   Lösungstext
+   \end{solution}
+\end{task}
+\end{verbatim}
+Die Voreinstellung ist \code{solution=false}.
+\begin{solution}
+Beispiel für einen Lösungsvorschlag
+\end{solution}
+
+\end{task}
 
 
 \end{document}
