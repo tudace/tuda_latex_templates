@@ -237,6 +237,24 @@ Auf Wunsch wurden diese Makros auch bei \cls{scrartcl} und \cls{scrreprt} als Ba
 Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet. 
 
 
+\subsection{Mathematikschriften}
+Da es keine Compiler-unanbhängige, universelle Mathematikschrift gibt und die Corporate Design Richtlinien auch keinerlei Empfehlung berücksichtigen, wurden hierfür einige mögliche Varianten diskutiert. Die Voreinstallung entspricht immer dem Standard der Installation. Es werden keine spezifischen Einstellungen geladen.
+
+Die Diskussion hierzu findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/19}
+
+Im Folgenden werden ein paar Beispielkonfigurationen gezeigt. Grundsätzlich ist die Mathematikschriftart jedoch -- abgesehen durch Einschränkungen des Compilers -- frei wählbar.
+
+Bei Auswahl und Verwendung ist häufig der \enquote{\TeX{} Font Catalogue hilfreich}: \url{https://tug.org/FontCatalogue/mathfonts.html}
+
+\subsection{\hologo{pdfLaTeX}}
+Hier existiert eine Variante, die die Buchstaben der Basischriftart \enquote{Charter} mit Mathematiksymbolen aus unterschiedlichen Zeichensätzen möglichst passend kombiniert.
+
+\begin{verbatim}
+\usepackage[charter]{mathdesign}
+\end{verbatim}
+
+Es gibt ähnliche Ansätze für ein paar weitere Kombinationen. Einige Beispiele finden sich in der XCharter Dokumentation. \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
+
 
 \section{Standard-KOMA-Script}
 \label{KOMA}
