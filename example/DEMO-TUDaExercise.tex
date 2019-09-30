@@ -123,5 +123,12 @@ Beispiel für einen Lösungsvorschlag
 
 \end{task}
 
+\begin{task}{Kompatibilitätsmodus}
+Die Klasse \cls{tudaexercise} verfügt über einen Kompatibilitätsmodus, um den Umstieg von zuvor existierenden Templates, wie TUDexercise zu erleichtern.
+Um den Kompatibilitätsmodus zu aktivieren, existiert die Option \code{compat=true}.
 
+Damit können Strukturen wie \code{examheader}, \code{examheaderdefault} und die Erzeugung von Aufgaben mitilfe von \code{\tbs{}subsection} wie gewohnt verwendet werden. Da einige dieser Mechanismen jedoch der Philosophie der semantischen Auszeichnung widersprechen wird ihre Verwendung hier nicht genauer erklärt. Nutzer, denen diese Mechanismen nicht vertraut sind, wird empfohlen die durch TUDaExercise zur Verfügung gestellten Varianten zu nutzen.
+
+Beim zugehörigen Release im Development Repository findet sich auch eine Beispieldatei, die die alten Mechanismen verwendet und spezielle Hinweise für Umsteiger enthält. %TODO link einfügen.
+\end{task}
 \end{document}
