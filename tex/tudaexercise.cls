@@ -55,7 +55,6 @@
     #1 .choice:,
     #1 / title-name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
       \g_TUDa_shorttitle_tl\par
-      \smallskip
       \StudentName\StudentID},
     #1 / title-name .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
       \g_TUDa_shorttitle_tl\par
