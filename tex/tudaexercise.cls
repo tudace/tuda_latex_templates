@@ -30,9 +30,13 @@
 
 
 \keys_define:nn {TUDa/exercise} {
-	solution .bool_set:N = \l_TUDa_ex_solution_bool,
-	solution .initial:n = false,
-	solution .default:n = true,
+  solution .bool_set:N = \l_TUDa_ex_solution_bool,
+  solution .initial:n = false,
+  solution .default:n = true,
+  compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
+  compatilibity .meta:n = {compat=#1},
+  compatibility .default:n = true,
+  compat .initial:n = false,
 }
 
 \keys_define:nn {TUDa/exercise/headline} {
@@ -103,7 +107,10 @@
 	paper .initial:n = a4,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-        solution .meta:nn = {TUDa/exercise}{solution},
+        solution .meta:nn = {TUDa/exercise}{solution=#1},
+        compat .meta:nn = {TUDa/exercise}{compat=#1},
+        compatibility .meta:nn = {TUDa/exercise}{compat=#1},
+        compatibility .default:n = true,
         headontitle .bool_gset:N = \g_TUDa_headontitle_bool,
         headontitle .initial:n = false,
         headontitle .default:n =true,
@@ -249,7 +256,8 @@
 
 \cs_new:Nn \TUDa_titlerule_sep: {\the\dp\strutbox}
 
-\usepackage{tudacolors}
+\RequirePackage{tudacolors}
+\RequirePackage{environ}
 
 %TODO: mode -> light head. 
 
@@ -276,14 +284,35 @@
 \let\ConfigureHeadline\TUDa_preamble_ConfigureHeadline:n
 
 
+
+\bool_if:NT \g_TUDa_ex_compatibility_bool {
+
+\cs_new:Npn \TUDa_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_TUDa_ex_headline_oneside_tl {#1} }
+
+\NewEnviron{examheader}{
+  \tl_gset:No \g_TUDa_ex_headline_oneside_tl {\BODY}
+  \tl_gset:No \g_TUDa_ex_headline_odd_tl {\BODY}
+  \tl_gset:No \g_TUDa_ex_headline_even_tl {\BODY}
+  \TUDa_ConfigureHeadline:n {}
+}
+
+  \newcommand*{\examheaderdefault}{\par\StudentName\StudentID}
+}
+
+
 \cs_new:Nn \TUDa_update_headline_boxes: {
   \clist_map_inline:nn {even, odd, oneside}
   {
-    \hbox_gset:cn {g_TUDa_ex_headline_##1_box} {
-      \parbox[b]{\textwidth}{
-        \raggedright\leavevmode\strut
-        \tl_use:c {g_TUDa_ex_headline_##1_tl}
-        \strut\par\vspace{0pt}
+    \tl_if_empty:cF {g_TUDa_ex_headline_##1_tl} {
+      \vbox_gset:cn {g_TUDa_ex_headline_##1_box} {
+          \begin{minipage}[b]{\textwidth}
+          \usekomafont{pagehead}
+         \raggedright
+          \leavevmode\rule{\z@}{\dimexpr\ht\strutbox+\c_TUDa_rulesep_dim}
+          \ignorespaces
+          \use:c {g_TUDa_ex_headline_##1_tl}\ignorespaces\strut
+          \par\vspace{\z@}
+        \end{minipage}
       }
     }
   }
@@ -304,12 +333,10 @@
 	}
 	\fi
         \dim_add:Nn \l_tmpa_dim {\box_dp:N \TUDa@headline_box}
-        % \dim_add:Nn \l_tmpa_dim {\sls@headabove@linethickness}
-        % \dim_add:Nn \l_tmpa_dim {\sls@headbelow@linethickness}
 	\KOMAoptions{headinclude, headheight=\l_tmpa_dim}
-        \setlength{\headheight}{\l_tmpa_dim}
+        \global\setlength{\headheight}{\l_tmpa_dim}
 	\clist_map_inline:nn {odd, even, oneside} {
-	\ModifyLayer[contents={\box_use:c {g_TUDa_ex_headline_##1_box}}]{TUDa.ex.head.##1}
+	\ModifyLayer[contents={\raisebox{\c_TUDa_rulesep_dim}[0pt][0pt]{\box_use:c {g_TUDa_ex_headline_##1_box}}}]{TUDa.ex.head.##1}
 	}
 }
 
@@ -391,13 +418,20 @@
       
 \RenewDocumentCommand{\title}{om}{
   \IfNoValueTF{#1}{
-    \tl_gset:Nn \g_TUDa_shorttitle_tl {#2}
+    \tl_gset:Nn  \g_TUDa_shorttitle_tl {#2}
   }{
-    \tl_gset:Nn \g_TUDa_shorttitle_tl{#1}
+    \tl_gset:Nn \g_TUDa_shorttitle_tl {#1}
   }
   \def\@title{#2}
 }
-      
+
+% Define \subsubtitle for compatibility
+  \newcommand*{\subsubtitle}[1]{
+    \def\@subsubtitle{#1}
+  }
+  \subsubtitle{}
+
+
 \newcommand*{\TUDa@title@footnote}[2][1]{
 \textsuperscript{\@fnsymbol{#1}}#2
 }
@@ -405,77 +439,87 @@
 \renewcommand*{\titlepagestyle}{plain.TUDa.ex}
 
 \renewcommand*{\@maketitle}{%
-	\global\@topnum=\z@
-	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
-       \vspace*{-\dim_eval:n {
-           \headheight
-          +\headsep
-          +\topskip
-          -\dp\strutbox
-        }}
-       \nointerlineskip
-       \raisebox{\dim_eval:n {
-           -.5\c_TUDa_logoheight_dim
-         }}[0pt][.5\c_TUDa_logoheight_dim]{
-         \color{identbarcolor}\rule{\linewidth}{.5\c_TUDa_logoheight_dim}
+  \global\@topnum=\z@
+  \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+  \vspace*{-\dim_eval:n {
+      \headheight
+      +\headsep
+      +\topskip
+      -\dp\strutbox
+    }}
+  \par
+  \nointerlineskip
+  \raisebox{\dim_eval:n {
+      -.5\c_TUDa_logoheight_dim
+    }}[0pt][.5\c_TUDa_logoheight_dim]{
+    \color{identbarcolor}\rule{\linewidth}{.5\c_TUDa_logoheight_dim}
 
-       }
-        \par\nointerlineskip
-	\begingroup
-	\setlength{\fboxsep}{\z@}
-	\colorbox{identbarcolor}{\parbox[t]{\linewidth}{
-	\raisebox{-\height}{%
-		\begin{minipage}[t]{.75\linewidth}
-		\begin{addmargin}{3mm}
-			\raggedright
-			\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
-			\leavevmode\usekomafont{title}%
-			{\usekomafont{title}{\huge \@title \par}}%
-			\vskip .5em
-			{\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
-			\vskip .5em
-			{\ifx\@author\@empty\else\usekomafont{author}\@author\par\fi}%
-			\vskip 1em
-		\end{addmargin}
-		\end{minipage}%
-		}\hfill\raisebox{-\height}[0pt][1.5\c_TUDa_logoheight_dim]{\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}}
-	\par\medskip
-	}}
-	\par
-	\nointerlineskip
-	\rule{\linewidth}{\g_TUDa_titlerule_dim}
-	\exp_args:Nf \tl_if_empty:nF {\g_TUDa_ex_sheetnum_tl\@date\g_TUDa_ex_term_tl}{
-		\par\nointerlineskip
-		\colorbox{identbarcolor}{
-		\parbox{\linewidth}{
-		\begin{minipage}{\linewidth}
-		\begin{addmargin}{3mm}
-			\null\par
-			\def\TUDa@nextsep{}
-			\tl_if_empty:NF \g_TUDa_ex_term_tl {\g_TUDa_ex_term_tl\def\TUDa@nextsep{\\}}
-			\tl_if_empty:NF \@date {\TUDa@nextsep\@date\def\TUDa@nextsep{\\}}
-			\tl_if_empty:NF \g_TUDa_ex_sheetnum_tl {\TUDa@nextsep\sheetname\sheetsep\g_TUDa_ex_sheetnum_tl}
-		\end{addmargin}
-	\end{minipage}
-		\vspace*{\dp\strutbox}
-		}}\par\nointerlineskip
-		\rule{\linewidth}{\g_TUDa_titlerule_dim}
-	}
-	\par
-        \bool_if:NT  \g_TUDa_headontitle_bool {
-          \if@twoside
-          \box_use:N \g_TUDa_ex_headline_odd_box
-          \else
-          \box_use:N \g_TUDa_ex_headline_oneside_box
-          \fi
-          \par
-          \rule{\linewidth}{\g_TUDa_titlerule_dim}
-          \par
-        }
-	\endgroup
-	\vskip 2em
-        \ConfigureHeadline{}
-      }%
+  }
+  \par\nointerlineskip
+  \begingroup
+  \setlength{\fboxsep}{\z@}
+  \colorbox{identbarcolor}{\parbox[t]{\linewidth}{
+      \raisebox{-\height}{%
+        \begin{minipage}[t]{.75\linewidth}
+          \begin{addmargin}{3mm}
+            \raggedright
+            \tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
+            \leavevmode\usekomafont{title}%
+            {\usekomafont{title}{\huge \@title \par}}%
+            \vskip 1em
+            \bool_if:NF \g_TUDa_ex_compatibility_bool
+            {
+              {\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
+              \gdef\@subtitle{}
+              \vskip .5em
+            }
+            {\ifx\@author\@empty\else\usekomafont{author}\@author\par\fi}%
+            \vskip .5em
+          \end{addmargin}
+        \end{minipage}%
+      }\hfill\raisebox{-\height}[0pt][1.5\c_TUDa_logoheight_dim]{\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}}
+      \par\medskip
+    }}
+  \par
+  \nointerlineskip
+  \rule{\linewidth}{\g_TUDa_titlerule_dim}
+    % subtitle fields if not compat
+  \exp_args:Nf \tl_if_empty:nF {\g_TUDa_ex_sheetnum_tl\@date\g_TUDa_ex_term_tl\use:c {@subsubtitle}\@subtitle}{
+    \par\nointerlineskip
+    \colorbox{identbarcolor}{
+      \parbox{\linewidth}{
+        \begin{minipage}{\linewidth}
+          \begin{addmargin}{3mm}
+            \null\par
+            \def\TUDa@nextsep{}
+            \clist_map_inline:nn {@subtitle, @subsubtitle, g_TUDa_ex_term_tl, @date} {
+              \tl_if_empty:cF {##1} {\TUDa@nextsep\use:c {##1}\def\TUDa@nextsep{\\}}
+            }
+            % \tl_if_empty:NF \@subtitle {}
+            % \tl_if_empty:NF \g_TUDa_ex_term_tl {\TUDa@nextsep\g_TUDa_ex_term_tl\def\TUDa@nextsep{\\}}
+            % \tl_if_empty:NF \@date {\TUDa@nextsep\@date\def\TUDa@nextsep{\\}}
+            \tl_if_empty:NF \g_TUDa_ex_sheetnum_tl {\TUDa@nextsep\sheetname\sheetsep\g_TUDa_ex_sheetnum_tl}
+          \end{addmargin}
+        \end{minipage}
+        \vspace*{\dp\strutbox}
+      }}\par\nointerlineskip
+    \rule{\linewidth}{\g_TUDa_titlerule_dim}
+  }
+  \par
+  \bool_if:NT  \g_TUDa_headontitle_bool {
+    \if@twoside
+    \box_use:N \g_TUDa_ex_headline_odd_box
+    \else
+    \box_use:N \g_TUDa_ex_headline_oneside_box
+    \fi
+    \par
+    \rule{\linewidth}{\g_TUDa_titlerule_dim}
+    \par
+  }
+  \endgroup
+  \vskip 2em
+  \ConfigureHeadline{}
+}%
 
 \setkomafont{subtitle}{\bfseries}
 \setkomafont{author}{}
@@ -600,6 +644,7 @@ tocindent=\cs_if_exist_use:NF \scr@tso@subsection@indent {1.5em},%
 tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsection@numwidth {2.3em},%
 ]{task}
 
+\renewcommand*{\thetask}{\g_TUDa_ex_sheetnum_tl\tl_if_empty:NF \g_TUDa_ex_sheetnum_tl{.}\arabic{task}}
 \renewcommand*{\taskformat}{\taskname\tasksep\thetask{}}
 
 \let\@task\task
@@ -647,7 +692,6 @@ tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
 tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 ]{@solution}
 
-\RequirePackage{environ}
 \NewEnviron{solution}{
   \if_bool:N \l_TUDa_ex_solution_bool
   \TUDa_ex_solutionheader:
@@ -680,6 +724,17 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 \let\StudentName\TUDa@StudentName
 
 \let\ShortTitle\g_TUDa_shorttitle_tl
+
+% Compatibility Features
+
+\bool_if:NT \g_TUDa_ex_compatibility_bool {
+  \cs_set_eq:NN \c@subsection \c@task
+  \cs_set_eq:NN \subsection \task
+  \cs_set_eq:NN \c@subsubsection \c@subtask
+  \cs_set_eq:NN \subsubsection \subtask
+  \cs_set_eq:NN \thetask \thesubsection
+  \cs_set_eq:NN \thesubtask \thesubsection
+}
 
 \endinput
 %End of class tudaexercise.cls
