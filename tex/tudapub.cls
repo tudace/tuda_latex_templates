@@ -126,8 +126,11 @@
 \ProcessKeysOptions{TUDa/pub}
 
 
-
-\bool_if:NT  \g_TUDa@pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
+%Option adjustments required for valid PDF/A
+\bool_if:NT  \g_TUDa@pdfa_bool {
+  \PassOptionsToPackage{RGB}{xcolor}
+  \PassOptionsToPackage{T1}{tudafonts}
+}
 
 \prop_gput:Nnx \g_TUDa_clsopts_prop {twocolumn} {\bool_if:NTF \g_TUDa_twocolumn_bool {true} {false}}
 
@@ -908,7 +911,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	}
 
 
-	\PassOptionsToPackage{a-1b}{pdfx}
+	\PassOptionsToPackage{a-2b}{pdfx}
 	\RequirePackage{pdfx}
 	
 	\sys_if_engine_pdftex:T {
