@@ -71,6 +71,7 @@
 	color .meta:n = {accentcolor=#1},
 	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
 	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
+	textonaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
 	identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
 	color .initial:n = 0b,
 	custommargins .choice:,
@@ -113,6 +114,9 @@
         headontitle .bool_gset:N = \g_TUDa_headontitle_bool,
         headontitle .initial:n = false,
         headontitle .default:n =true,
+        colorback .bool_gset:N  = \g_TUDa_colorback_bool,
+        colorback .default:n = true,
+        colorback .initial:n  = true,
 }
 
 \ProcessKeysOptions{TUDa/pub}
@@ -451,17 +455,18 @@
   \raisebox{\dim_eval:n {
       -.5\c_TUDa_logoheight_dim
     }}[0pt][.5\c_TUDa_logoheight_dim]{
-    \color{identbarcolor}\rule{\linewidth}{.5\c_TUDa_logoheight_dim}
+    \bool_if:NT \g_TUDa_colorback_bool {\color{accentcolor}\rule{\linewidth}{.5\c_TUDa_logoheight_dim}}
 
   }
   \par\nointerlineskip
   \begingroup
   \setlength{\fboxsep}{\z@}
-  \colorbox{identbarcolor}{\parbox[t]{\linewidth}{
+  \bool_if:NT \g_TUDa_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\linewidth}{
       \raisebox{-\height}{%
-        \begin{minipage}[t]{.75\linewidth}
-          \begin{addmargin}{3mm}
+        \begin{minipage}[t]{\dimexpr\linewidth-2.2\c_TUDa_logoheight_dim-1ex}
+          \bool_if:NT \g_TUDa_colorback_bool  {\begin{addmargin}{3mm}}
             \raggedright
+            \bool_if:NT \g_TUDa_colorback_bool {\color{textonaccentcolor}}
             \tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
             \leavevmode\usekomafont{title}%
             {\usekomafont{title}{\huge \@title \par}}%
@@ -474,9 +479,12 @@
             }
             {\ifx\@author\@empty\else\usekomafont{author}\@author\par\fi}%
             \vskip .5em
-          \end{addmargin}
-        \end{minipage}%
-      }\hfill\raisebox{-\height}[0pt][1.5\c_TUDa_logoheight_dim]{\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}}
+          \bool_if:NTF \g_TUDa_colorback_bool {\end{addmargin}} {\par}
+        \end{minipage}}
+		\hfill\raisebox{\dim_eval:n {\bool_if:NTF \g_TUDa_colorback_bool
+				{-\height}
+				{-.9\c_TUDa_logoheight_dim}
+			}}[0pt][\dim_eval:n {\bool_if:NTF \g_TUDa_colorback_bool {1.5}{1.3}\c_TUDa_logoheight_dim}]{\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}}
       \par\medskip
     }}
   \par
@@ -485,10 +493,13 @@
     % subtitle fields if not compat
   \exp_args:Nf \tl_if_empty:nF {\g_TUDa_ex_sheetnum_tl\@date\g_TUDa_ex_term_tl\use:c {@subsubtitle}\@subtitle}{
     \par\nointerlineskip
-    \colorbox{identbarcolor}{
+    \bool_if:NT \g_TUDa_colorback_bool {\colorbox{accentcolor}}{
       \parbox{\linewidth}{
         \begin{minipage}{\linewidth}
-          \begin{addmargin}{3mm}
+			\bool_if:NT \g_TUDa_colorback_bool {
+				\color{textonaccentcolor}
+				\begin{addmargin}{3mm}
+			}
             \null\par
             \def\TUDa@nextsep{}
             \clist_map_inline:nn {@subtitle, @subsubtitle, g_TUDa_ex_term_tl, @date} {
@@ -498,7 +509,7 @@
             % \tl_if_empty:NF \g_TUDa_ex_term_tl {\TUDa@nextsep\g_TUDa_ex_term_tl\def\TUDa@nextsep{\\}}
             % \tl_if_empty:NF \@date {\TUDa@nextsep\@date\def\TUDa@nextsep{\\}}
             \tl_if_empty:NF \g_TUDa_ex_sheetnum_tl {\TUDa@nextsep\sheetname\sheetsep\g_TUDa_ex_sheetnum_tl}
-          \end{addmargin}
+          \bool_if:NT \g_TUDa_colorback_bool {\end{addmargin}}
         \end{minipage}
         \vspace*{\dp\strutbox}
       }}\par\nointerlineskip
