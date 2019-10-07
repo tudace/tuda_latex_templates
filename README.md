@@ -58,6 +58,7 @@ Wissenschaftliche Poster | DEMO-TUDaSciPoster.tex | tudasciposter.cls
 Veranstaltungsankündigungen | DEMO-TUDaPoster.tex | tudaposter.cls
 Präsentationen | DEMO-TUDaBeamer.tex | tudabeamer.cls
 Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudaletter.cls mit tudalettersize10pt.clo
+Übungsblätter | DEMO-TUDaExercise.tex | tudaexercise.cls
 
 ## Liste aller enthaltenen Dateien:
 
@@ -65,6 +66,7 @@ Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudalet
 * demo/
   - DEMO-TUDaBeamer.tex
   - DEMO-TUDaBibliography.bib
+  - DEMO-TUDaExercise.tex
   - DEMO-TUDaLetter.tex
   - DEMO-TUDaPhD.tex
   - DEMO-TUDaPoster.tex
@@ -82,6 +84,7 @@ Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudalet
   - tudacolors.cfg
   - tudacolors.def
   - tudacolors.sty
+  - tudaexercise.cls
   - tudafonts.sty
   - tudaletter.cls
   - tudalettersize10pt.clo
@@ -111,6 +114,7 @@ scientific poster | DEMO-TUDaSciPoster.tex | tudasciposter.cls
 announcement poster | DEMO-TUDaPoster.tex | tudaposter.cls
 presentation | DEMO-TUDaBeamer.tex | tudaposter.cls
 letter | DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  | tudaletter.cls and tudalettersize10pt.clo
+exercise sheets/exams | DEMO-TUDaExercise.tex | tudaexercise.cls
 
 # Version History 
 
@@ -122,3 +126,7 @@ letter | DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  | tudaletter.cls a
    - Improved implementation of the headline option
    - Add information on package dependencies
  * v1.11 (2019-09-25) bugfixes + smaller adjustments to simplify usage
+ * v1.20 (2019-10-xx) Enhancements for exercise sheets/exams and pdfa-mode
+   - Switch pdfa-mode to PDF/A-2b and enforce Type1 for valid documents
+   - add tudaexercise.cls and corresponding demo file
+   - documentation enhancements
