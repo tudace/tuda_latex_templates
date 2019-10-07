@@ -96,5 +96,19 @@ Ein Beispiel.
 \end{example}
 \end{frame}
 
+
+\begin{frame}[fragile]{Anpassungen der Mathematikschriftarten}
+	Es gibt keine fest Vorgabe zur Verwendung einer Mathematikschrift.
+	
+	In der Diskussion (\url{https://github.com/tudace/tuda_latex_templates/issues/30}) hat sich folgendes als hinreiche Lösung herausgestellt. Jedoch funktioniert diese Lösung nicht in pdflatex!
+	\begin{verbatim}
+	\usepackage{unicode-math}
+	\setmathfont{Fira Math}
+	\setmathfont[range=up]{Roboto}
+	\setmathfont[range=it]{Roboto-Italic}
+	\setmathfont[range=\int]{Fira Math}
+	\end{verbatim}
+	Allgemein kann jedoch die Mathematikschriftart wie	auch sonst durch Pakete angepasst werden.
+\end{frame}
 \end{document}
 

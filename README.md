@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/08/05 v1.10
+ tuda-ci 2019/09/25 v1.11
 
 ***************************************************************************
 
@@ -121,3 +121,4 @@ letter | DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  | tudaletter.cls a
    - Fix compatibility issue with datetime package
    - Improved implementation of the headline option
    - Add information on package dependencies
+ * v1.11 (2019-09-25) bugfixes + smaller adjustments to simplify usage

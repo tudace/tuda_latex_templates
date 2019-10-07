@@ -64,7 +64,7 @@
 \ExplSyntaxOn
 \bool_if:NT \g_TUDa@pdfa_bool {
 	\UnPreventPackageFromLoading{hyperref}
-	\PassOptionsToPackage{a-1b}{pdfx}
+	\PassOptionsToPackage{a-2b}{pdfx}
 	\RequirePackage{pdfx}
 }
 \ExplSyntaxOff

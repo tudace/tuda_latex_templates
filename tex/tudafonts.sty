@@ -2,25 +2,35 @@
 \ProvidesPackage{tudafonts}
  [\filedate\space\fileversion\space 
    font loading for TUDa-CI, TU Darmstadt's Corporate Design]
+
+\expandafter\newif\csname if@TUDa@T1\endcsname
    
+\DeclareOption{T1}{\csname @TUDa@T1true\endcsname}
+\ProcessOptions\relax
+
 \RequirePackage{iftex}
 \RequirePackage{anyfontsize}
 
 \ifPDFTeX
+        \csname @TUDa@T1true\endcsname
 	%Declare Euro Symbol
 	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
 	\RequirePackage[utf8]{inputenc}
 	\fi
 	\RequirePackage{eurosym}
 	\DeclareUnicodeCharacter{20AC}{\euro}
-	\RequirePackage{XCharter}
+\fi
+
+\csname if@TUDa@T1\endcsname
+        \RequirePackage{XCharter}%activates T1
+        \PassOptionsToPackage{type1}{roboto}
+        \PassOptionsToPackage{type1}{roboto-mono}
 \else
 	\RequirePackage{fontspec}
 	\setmainfont{XCharter}
 \fi
 
 \RequirePackage{roboto}
-
 \IfFileExists{roboto-mono.sty}{
 	\RequirePackage{roboto-mono}
 }{
@@ -29,7 +39,8 @@
 	For correct font setup either install it manually or update you distribution}
 }
 
-\ifPDFTeX
+
+\csname if@TUDa@T1\endcsname
 	\RequirePackage[T1]{fontenc}
 \fi
 

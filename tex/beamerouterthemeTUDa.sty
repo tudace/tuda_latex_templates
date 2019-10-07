@@ -79,7 +79,7 @@
 
 \defbeamertemplate*{footline}{TUDa theme}
 {
-	\begin{beamercolorbox}[leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,wd=\TUDa@beamer@linewidth,
+	\begin{beamercolorbox}[leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,
 		ht=\csname c_TUDa_smallrule_dim\endcsname,dp=1mm]{footline}
 	\TUDa@beamer@rule
 	\end{beamercolorbox}
@@ -114,7 +114,8 @@
 \defbeamertemplate{headline}{TUDa theme.logo} {%
 %	\vspace{.75\TUDa@beamer@sep}
 	\begin{beamercolorbox}[
-		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,wd=\TUDa@beamer@linewidth,ht=.75\TUDa@beamer@sep,dp=\box_dp:N \TUDa@beamer@headrule_box]{headline}
+		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,%wd=\TUDa@beamer@linewidth,
+		ht=.75\TUDa@beamer@sep,dp=\box_dp:N \TUDa@beamer@headrule_box]{headline}
 		\TUDa@beamer@headrule
 	\end{beamercolorbox}
 }
@@ -124,7 +125,7 @@
 \defbeamertemplate{frametitle}{TUDa theme.logo}{%
 \nointerlineskip%
 \begin{beamercolorbox}[
-	sep=\TUDa@beamer@logosep,wd=\dimexpr\TUDa@beamer@linewidth\relax,
+	sep=\TUDa@beamer@logosep,%wd=\dimexpr\TUDa@beamer@linewidth\relax,
 	rightskip=-\TUDa@beamer@logosep,
 %	leftskip=-\TUDa@beamer@logosep
 	]{frametitle}
@@ -149,17 +150,18 @@
 {%
 	\vspace{.75\TUDa@beamer@sep}
 	\begin{beamercolorbox}[
-		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,wd=\TUDa@beamer@linewidth]{headline}
+		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep]{headline}
 		\TUDa@beamer@headrule
 	\end{beamercolorbox}
 }
 \defbeamertemplate*{frametitle}{TUDa theme.nologo}{%
 	\nointerlineskip%
 \begin{beamercolorbox}[
-	sep=\TUDa@beamer@logosep,wd=\dimexpr\TUDa@beamer@linewidth\relax,
+	sep=\TUDa@beamer@logosep,
 	]{frametitle}
-	\parbox[t]{\linewidth}{%
-		\usebeamerfont{frametitle}\insertframetitle
+	\parbox[t]{\dimexpr\TUDa@beamer@linewidth-2\TUDa@beamer@logosep}{%
+		\usebeamerfont{frametitle}
+		\insertframetitle
 		\ifx\insertframesubtitle\@empty
 		\else
 		\par
@@ -168,7 +170,7 @@
 		\insertframesubtitle
 		\fi
 	}%
-%	Rule vor voffset similar to logo
+%	Rule for voffset similar to logo
 	\rule[\dimexpr-\ht\TUDa@logobox+\ht\strutbox\relax]{0pt}{\dimexpr\ht\TUDa@logobox+\dp\TUDa@logobox\relax}
 \end{beamercolorbox}
 	\nointerlineskip

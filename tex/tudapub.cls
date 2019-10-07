@@ -126,8 +126,11 @@
 \ProcessKeysOptions{TUDa/pub}
 
 
-
-\bool_if:NT  \g_TUDa@pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
+%Option adjustments required for valid PDF/A
+\bool_if:NT  \g_TUDa@pdfa_bool {
+  \PassOptionsToPackage{RGB}{xcolor}
+  \PassOptionsToPackage{T1}{tudafonts}
+}
 
 \prop_gput:Nnx \g_TUDa_clsopts_prop {twocolumn} {\bool_if:NTF \g_TUDa_twocolumn_bool {true} {false}}
 
@@ -299,23 +302,26 @@
 \usepackage[draft=false]{scrlayer-scrpage}
 
 \bool_if:NTF  \g_TUDa_geometry_bool {
-	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot,includemp, nomarginpar, headheight=\g_TUDa_headheight_dim
-	]{geometry}
-
-
+	\RequirePackage{geometry}
+	\geometry{
+		top=\g_TUDa_topMargin_dim,
+		inner=\g_TUDa_innerMargin_dim,
+		outer=\dim_eval:n {\g_TUDa_outerMargin_dim},
+		bottom=\g_TUDa_bottomMargin_dim,
+		columnsep= \g_TUDa_columnSep_dim,
+		includehead,
+		includefoot,
+		includemp,
+		nomarginpar,
+		headheight=\g_TUDa_headheight_dim
+	}
 	\savegeometry{TUDa@nomarginpar}
 	\geometry{includemp, marginpar=\g_TUDa_marginpar_dim, marginparsep=\g_TUDa_columnSep_dim}
 	\KOMAoptions{mpinclude}
 	\savegeometry{TUDa@marginpar}
 
-	\bool_if:NTF  \g_TUDa_marginpar_bool {
-		\loadgeometry{TUDa@marginpar}
-	}  {
-		\loadgeometry{TUDa@nomarginpar}
-	}
-
 	\bool_if:NTF \g_TUDa_custommargins_bool {
-		\AtBeginDocument{\savegeometry{TUDa@default}} 
+		\AtBeginDocument{\savegeometry{TUDa@default}}
 		\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@default}
 	}{
 		\bool_if:NTF  \g_TUDa_marginpar_bool {
@@ -323,6 +329,7 @@
 		}  {
 			\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@nomarginpar}
 		}
+		\AtBeginDocument{\loadgeometry{\c_TUDa_default_geometry_tl}}
 	}
 
 	\dim_gset:Nn \g_TUDa_headwidth_dim 			  {\paperwidth-\g_TUDa_innerMargin_dim-\g_TUDa_outerMargin_dim-\Gm@bindingoffset}
@@ -391,7 +398,21 @@
 %Adjust headheight
 \AtBeginDocument{
 \KOMAoptions{headlines=1.5}
-\recalctypearea
+\bool_if:NTF \g_TUDa_marginpar_bool
+	{
+		\KOMAoptions {
+			headwidth=textwithmarginpar,
+			footwidth=textwithmarginpar
+		}
+	}{
+		\KOMAoptions {
+			headwidth=text,
+			footwidth=text
+		}
+	}
+\box_if_exist:NF \TUDa@headline_box {
+	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
+}
 }
 
 \newpairofpagestyles[scrheadings]{TUDa.headings}{
@@ -418,9 +439,8 @@
 		}
 
 \setkomafont{pagehead}{\Large\bfseries}
-\box_if_exist:NF \TUDa@headline_box {
-	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
-}
+
+
 	\if@twocolumn
 	\edef\sls@evenheadshift{\dim_eval:n {-\marginparwidth-\marginparsep\relax}}
 	\let\sls@oddheadshift\sls@evenheadshift
@@ -891,7 +911,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	}
 
 
-	\PassOptionsToPackage{a-1b}{pdfx}
+	\PassOptionsToPackage{a-2b}{pdfx}
 	\RequirePackage{pdfx}
 	
 	\sys_if_engine_pdftex:T {

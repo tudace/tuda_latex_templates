@@ -80,10 +80,8 @@
 	\let\width\l_TUDa_titlegraphic_wd_dim
 	\nointerlineskip
 	\begin{beamercolorbox}[wd=\width,
-		ht=\l_TUDa_titlegraphic_ht_dim,
-		dp=\z@,
 		]{titlegraphic}
-	\inserttitlegraphic
+	\raisebox{-\c_TUDa_largerule_dim}[\dim_eval:n {\height-\c_TUDa_largerule_dim}][0pt]{\inserttitlegraphic}
 	\end{beamercolorbox}
 }
 

@@ -184,7 +184,7 @@
 %%%%%%%%%%%%%%%%%%%
 %PDFA
 \if_bool:N \g_TUDa@pdfa_bool
-\PassOptionsToPackage{a-1b}{pdfx}
+\PassOptionsToPackage{a-2b}{pdfx}
 \RequirePackage{pdfx}
 %%hyperref
 \hypersetup{hidelinks, unicode, hyperfootnotes=false}

@@ -159,8 +159,10 @@
 	voffset=\paperheight-\g_TUDa_margin_dim,
 	mode=picture,
 	contents={%
+		\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {
  		\raisebox{\depth}{\qrcode[height=\dim_eval:n {\g_TUDa_qrcode_dim-2\fboxsep}]{\g_TUDa_poster_qrcode_tl}}
- 	}
+ 		}
+	}
  	]{TUDa.poster.qrcode}
 
 
