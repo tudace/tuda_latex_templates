@@ -31,6 +31,23 @@
 
 \maketitle
 
+\begin{task}{Titelei}
+Im Gegensatz zu den ganzen Titelseiten bei TUDaPub benötigt TUDaExercise eine platzsparende Möglichkeit für die Titelerzeugung. Daher verfügt TUDaexercise nur über einen Titelkopf. Für die Übergabe der Daten werden die folgenden Makros ausgewertet:
+\begin{verbatim}
+\title[Kurztitel für die Kopfzeile]{Titel}
+\subtitle{Untertitel}
+\author{Autor*in/Dozent*in}
+\term{Semester}
+\date{Datum}
+\sheetnumber{Nummer des Übungsblatts}
+\end{verbatim}
+Mit Ausnahme des Titels können alle Felder auch leer bleiben . Sofern keine Blattnummer übergeben wird, werden die Übungsaufgaben beginnend mit 1, fortlaufend nummeriert.
+\end{task}
+
+\begin{task}{Farbgebung}
+	Die Farbgebung nutzt die selben Mechanismen wie die übrigen Klassen des TUDa-CI-Bundles. Die Optionen \code{color}, \code{accentcolor}, \code{textaccentcolor}, \code{identbarcolor} funktionieren wie gewohnt (vgl. TUDaPub). Darüber hinaus ist es auch hier möglich den farbigen Titelblock zu deaktivieren. Die Option \code{colorback=false} ermöglicht es für Versionen zum Ausdrucken die Tonersparende Variante einzustellen.
+\end{task}
+
 \begin{task}{Eine Aufgabe erstellen}
 Aufgaben werden bei \cls{tudaexercise.cls} durch die Umgebung \code{task} definiert. Das Notwendige Argument übernimmt dabei eine Überschrift. Es kann leer bleiben.
 
