@@ -1,0 +1,151 @@
+\documentclass[
+	ngerman,
+	]{tudaexercise}
+	
+\usepackage[english, main=ngerman]{babel}
+\usepackage[babel]{csquotes}
+
+\usepackage{biblatex}
+\bibliography{DEMO-TUDaBibliography}
+
+%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+\let\file\texttt
+\let\code\texttt
+\let\pck\textsf
+\let\cls\textsf
+\let\tbs\textbackslash
+
+\ConfigureHeadline{
+	headline={title-name-id}
+}
+
+%compatbilitx
+\let\unit\relax
+
+\begin{document}
+	
+\title[Übung TUDaExercise]{Übung zur Benutzung der TUDaExercise-Klasse}
+\author{Marei Peischl}
+\term{Sommersemester 2042}
+\sheetnumber{5}
+
+\maketitle
+
+\begin{task}{Titelei}
+Im Gegensatz zu den ganzen Titelseiten bei TUDaPub benötigt TUDaExercise eine platzsparende Möglichkeit für die Titelerzeugung. Daher verfügt TUDaexercise nur über einen Titelkopf. Für die Übergabe der Daten werden die folgenden Makros ausgewertet:
+\begin{verbatim}
+\title[Kurztitel für die Kopfzeile]{Titel}
+\subtitle{Untertitel}
+\author{Autor*in/Dozent*in}
+\term{Semester}
+\date{Datum}
+\sheetnumber{Nummer des Übungsblatts}
+\end{verbatim}
+Mit Ausnahme des Titels können alle Felder auch leer bleiben . Sofern keine Blattnummer übergeben wird, werden die Übungsaufgaben beginnend mit 1, fortlaufend nummeriert.
+\end{task}
+
+\begin{task}{Farbgebung}
+	Die Farbgebung nutzt die selben Mechanismen wie die übrigen Klassen des TUDa-CI-Bundles. Die Optionen \code{color}, \code{accentcolor}, \code{textaccentcolor}, \code{identbarcolor} funktionieren wie gewohnt (vgl. TUDaPub). Darüber hinaus ist es auch hier möglich den farbigen Titelblock zu deaktivieren. Die Option \code{colorback=false} ermöglicht es für Versionen zum Ausdrucken die Tonersparende Variante einzustellen.
+\end{task}
+
+\begin{task}{Eine Aufgabe erstellen}
+Aufgaben werden bei \cls{tudaexercise.cls} durch die Umgebung \code{task} definiert. Das Notwendige Argument übernimmt dabei eine Überschrift. Es kann leer bleiben.
+
+\begin{verbatim}
+	\begin{task}[<Optionen>]{Überschrift}
+		Text der Aufgabe
+	\end{task}
+\end{verbatim}
+
+Querverweise zwischen den Aufgaben sind wie üblich mit \code{\tbs{}label} und \code{\tbs{}ref} möglich.
+
+Neben der Umgebungsstruktur, die zur besseren Übersichtlichkeit zu empfehlen ist, verfügt tudaexercise auch über die Möglichkeit eine Aufgabe nur mit \code{\tbs{}task} einzuleiten.
+
+\begin{verbatim}
+\task{Überschrift der Aufgabe}
+\end{verbatim}
+
+In diesem Dokument wird lediglich die empfohlene Variante unter Nutzung der Umgebung gezeigt.
+
+Falls die Makro-Version benutzt und damit Optionen gesetzt werden, ist zu beachten, dass diese nicht automatisch wieder beendet werden kann, da ja das Ende der Umgebung fehlt. Dies ist der Hauptgrund für die Empfehlung der Umgebung.
+\end{task}
+
+\begin{task}{Kopfzeilenanpassungen}
+Der Mechanismus für die Kopfzeilen wurde angepasst, sodass sein Inhalt frei wählbar ist.
+
+\begin{verbatim}
+\ConfigureHeadline{
+   headline={Inhalt der Kopfzeile}
+}
+\end{verbatim}
+
+Es existiert nun eine Unterscheidung zwischen linken und rechten Seiten, sofern \code{twoside=true}.
+
+\begin{verbatim}
+\ConfigureHeadline{
+   even={Inhalt der Kopfzeile für linke Seiten},
+   odd={Inhalt der Kopfzeile für rechte Seiten},
+   oneside={Inhalt der Kopfzeile im einseitigen Modus}
+}
+\end{verbatim}
+
+Einstellungen, die gleiche Felder betreffen überschreiben sich gegenseitig.
+
+\begin{subtask}[Freie Inhalte]
+Die Inhalte sind frei wählbar und werden automatisch in einer Box mit der gleichen Breite, wie der Text gesetzt. Der Inhalt wird linksbündig platziert. Es ist möglich Grafiken oder Tabellen innerhalb dieser Box zu platzieren.
+\end{subtask}
+
+\begin{subtask}[Vorgefertigte Elemente]
+Für die Kopfzeilen existieren  einige vorgefertigte Elemente, die dort platziert werden können.
+\begin{verbatim}
+	\ShortTitle
+	\StudentID
+	\StudentName
+\end{verbatim}
+Darüber hinaus kann auch jeglicher \LaTeX-Content dort eingefügt werden.
+
+Zusätzlich sind einige Werte vorbelegt und platzieren die Einträge nach dem selbsterklärenden Namensschema:
+\code{title-name-id}, \code{title-name}, \code{title}, \code{name-id}, \code{name}
+\end{subtask}
+
+\begin{subtask}[Kopfzeile auch auf der Titelseite]
+Da die Kopfzeile häufig für die Angabe von Studentendaten genutzt wird, ist es mit der Klassenoption \code{headtotitle} auch möglich die Kopfzeile ebenfalls auf der Titelseite einzufügen.
+\end{subtask}
+\end{task}
+
+
+\begin{task}[solution=true]{Lösungen}
+tudaexercise verfügt über einen Mechanismus um Lösungsvorschläge innerhalb der Dateien mit zu verwalten. Hierfür existiert die Umgebung \code{solution}.
+
+Die Ausgabe der Lösungen wird entweder global
+\begin{verbatim}
+\documentclass[...,
+   solution=true,
+]{tudaexercise}
+\end{verbatim}
+oder lokal für einzelne Aufgaben konfiguriert:
+
+\begin{verbatim}
+\begin{task}[solution=true]{Überschrift}
+Aufgabentext
+   \begin{solution}
+   Lösungstext
+   \end{solution}
+\end{task}
+\end{verbatim}
+Die Voreinstellung ist \code{solution=false}.
+\begin{solution}
+Beispiel für einen Lösungsvorschlag
+\end{solution}
+
+\end{task}
+
+\begin{task}{Kompatibilitätsmodus}
+Die Klasse \cls{tudaexercise} verfügt über einen Kompatibilitätsmodus, um den Umstieg von zuvor existierenden Templates, wie TUDexercise zu erleichtern.
+Um den Kompatibilitätsmodus zu aktivieren, existiert die Option \code{compat=true}.
+
+Damit können Strukturen wie \code{examheader}, \code{examheaderdefault} und die Erzeugung von Aufgaben mitilfe von \code{\tbs{}subsection} wie gewohnt verwendet werden. Da einige dieser Mechanismen jedoch der Philosophie der semantischen Auszeichnung widersprechen wird ihre Verwendung hier nicht genauer erklärt. Nutzer, denen diese Mechanismen nicht vertraut sind, wird empfohlen die durch TUDaExercise zur Verfügung gestellten Varianten zu nutzen.
+
+Beim zugehörigen Release im Development Repository findet sich auch eine Beispieldatei, die die alten Mechanismen verwendet und spezielle Hinweise für Umsteiger enthält. %TODO link einfügen.
+\end{task}
+\end{document}
