@@ -532,152 +532,6 @@
 	You~should~probably~switch~to~logo=bottom~or~reduce~the~number/size~of~InfoBoxes.
 }
 
-\exp_args:NV \tl_if_eq:nnTF {\g_TUDa_pubType_tl}  {thesis} {
-	\input{tudathesis.cfg}
-} {
-
-\msg_new:nnnn {TUDa/pub} {only-thesis} {You~tried~to~use~\use:c { #1}.~This~macro~is~only~available~for~publications~of~type~thesis}{See~tuda-ci~documentation~for~further~information}
-
-\clist_map_inline:nn {birthplace, group, examdate, submissiondate, tuprints, urn, reviewer} {
-	\expandafter\newcommand\csname #1\endcsname[2][]{
-		\msg_error:nnn {TUDa/pub} {only-thesis} {#1}
-	}
-}
-\newcommand*{\TUDa@title@footnote}[2][1]{
-\textsuperscript{\@fnsymbol{#1}}#2
-}
-
-
-
-
-\renewcommand*{\maketitle}[1][1]{
-	\def\and{,~ }
-	\cs_if_exist_use:N \TUDa_pass_TitleData:
-	\TUDa_disable_marginpar:
-	\cleardoublepage
-	\begin{titlepage}
-		\setcounter{page}{%
-			#1%
-		}%
-		\def\thefootnote{\fnsymbol{footnote}}
-		\if@titlepageiscoverpage
-		\edef\titlepage@restore{%
-			\noexpand\endgroup
-			\noexpand\global\noexpand\@colht\the\@colht
-			\noexpand\global\noexpand\@colroom\the\@colroom
-			\noexpand\global\vsize\the\vsize
-			\noexpand\global\noexpand\@titlepageiscoverpagefalse
-			\noexpand\let\noexpand\titlepage@restore\noexpand\relax
-		}%
-		\begingroup
-		\topmargin=\dimexpr \coverpagetopmargin-1in\relax
-		\oddsidemargin=\dimexpr \coverpageleftmargin-1in\relax
-		\evensidemargin=\dimexpr \coverpageleftmargin-1in\relax
-		\textwidth=\dimexpr
-		\paperwidth-\coverpageleftmargin-\coverpagerightmargin\relax
-		\textheight=\dimexpr
-		\paperheight-\coverpagetopmargin-\coverpagebottommargin\relax
-		\headheight=0pt
-		\headsep=0pt
-		\footskip=\baselineskip
-		\@colht=\textheight
-		\@colroom=\textheight
-		\vsize=\textheight
-		\columnwidth=\textwidth
-		\hsize=\columnwidth
-		\linewidth=\hsize
-		\else
-		\let\titlepage@restore\relax
-		\fi
-		\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
-		\hbox_gset:Nn \g_TUDa_title_box {
-			\parbox[t]{\linewidth}{
-				\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
-					\begin{addmargin}{3mm}
-						\raggedright
-						\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
-						\leavevmode\usekomafont{title}%
-						\expandafter\fontsize\TUDa_title_fontsize:
-						\selectfont
-						\@title\strut\par
-						\vskip0pt
-					\end{addmargin}
-				\end{minipage}%
-				\par\nointerlineskip
-				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par
-				\begin{addmargin}{3mm}
-					\expandafter\fontsize\TUDa_titleinfo_fontsize:
-					\selectfont
-					{\ifx\@subtitle\@empty\else\usekomafont{subtitle}{\@subtitle\par}\fi}%
-					{\ifx\@subject\@empty\else\usekomafont{subject}{\@subject\par}\fi}
-					{%
-						\usekomafont{author}
-						\lineskip 0.75em
-						\@author
-						\par
-					}%
-					{\usekomafont{date}{\@date\par}}%
-					{\usekomafont{publishers}{\@publishers \par}}%
-				\end{addmargin}
-			\tl_if_empty:NF \@thanks {
-			\expandafter\fontsize\TUDa_titlethanks_fontsize:\selectfont\par
-			\rule{\linewidth}{\g_TUDa_titlerule_dim}\par
-			\begin{addmargin}{3mm}
-				\let\footnotetext\TUDa@title@footnote
-				\@thanks
-			\end{addmargin}
-				\par\vspace{-\dp\strutbox}
-				\let\@thanks\@empty
-			}
-			\rule{\linewidth}{\g_TUDa_titlerule_dim}\par}
-		
-		}
-			
-		\TUDa_adjust_titlepage_style:
-		
-
-		\nointerlineskip\box_use:N \g_TUDa_title_box
-		\par
-		\vfill\null
-		\if@twoside
-		\@tempswatrue
-		\expandafter\ifnum \@nameuse{scr@v@3.12}>\scr@compatibility\relax
-		\else
-		\ifx\@uppertitleback\@empty\ifx\@lowertitleback\@empty
-		\@tempswafalse
-		\fi\fi
-		\fi
-		\if@tempswa
-		\next@tpage
-		\begin{minipage}[t]{\textwidth}
-			\@uppertitleback
-		\end{minipage}\par
-		\vfill
-		\begin{minipage}[b]{\textwidth}
-			\@lowertitleback
-		\end{minipage}\par
-		\@thanks\let\@thanks\@empty
-		\fi
-		\fi
-		\ifx\@dedication\@empty
-		\else
-		\next@tdpage\null\vfill
-		{\centering\usekomafont{dedication}{\@dedication \par}}%
-		\vskip \z@ \@plus3fill
-		\@thanks\let\@thanks\@empty
-		\cleardoubleemptypage
-		\fi
-		\ifx\titlepage@restore\relax\else\clearpage\titlepage@restore\fi
-	\end{titlepage}
-	\setcounter{footnote}{0}%
-	\global\let\and\relax
-	\cleardoublepage
-	\TUDa_restore_typearea:
-	\aftergroup\TUDa_restore_typearea:
-}
-
-
-}
 
 \cs_set:Nn 	\TUDa_adjust_titlepage_style: {
 	\dim_set:Nn \l_tmpa_dim {\fp_to_dim:n {\expandafter \use_ii:nn\TUDa_title_fontsize: *2.8}}
@@ -1004,6 +858,153 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \fi:
 
 \RequirePackage[utf8]{luainputenc}
+
+\exp_args:NV \tl_if_eq:nnTF {\g_TUDa_pubType_tl}  {thesis} {
+	\input{tudathesis.cfg}
+} {
+
+\msg_new:nnnn {TUDa/pub} {only-thesis} {You~tried~to~use~\use:c { #1}.~This~macro~is~only~available~for~publications~of~type~thesis}{See~tuda-ci~documentation~for~further~information}
+
+\clist_map_inline:nn {birthplace, group, examdate, submissiondate, tuprints, urn, reviewer} {
+	\expandafter\newcommand\csname #1\endcsname[2][]{
+		\msg_error:nnn {TUDa/pub} {only-thesis} {#1}
+	}
+}
+\newcommand*{\TUDa@title@footnote}[2][1]{
+\textsuperscript{\@fnsymbol{#1}}#2
+}
+
+
+
+
+\renewcommand*{\maketitle}[1][1]{
+	\def\and{,~ }
+	\cs_if_exist_use:N \TUDa_pass_TitleData:
+	\TUDa_disable_marginpar:
+	\cleardoublepage
+	\begin{titlepage}
+		\setcounter{page}{%
+			#1%
+		}%
+		\def\thefootnote{\fnsymbol{footnote}}
+		\if@titlepageiscoverpage
+		\edef\titlepage@restore{%
+			\noexpand\endgroup
+			\noexpand\global\noexpand\@colht\the\@colht
+			\noexpand\global\noexpand\@colroom\the\@colroom
+			\noexpand\global\vsize\the\vsize
+			\noexpand\global\noexpand\@titlepageiscoverpagefalse
+			\noexpand\let\noexpand\titlepage@restore\noexpand\relax
+		}%
+		\begingroup
+		\topmargin=\dimexpr \coverpagetopmargin-1in\relax
+		\oddsidemargin=\dimexpr \coverpageleftmargin-1in\relax
+		\evensidemargin=\dimexpr \coverpageleftmargin-1in\relax
+		\textwidth=\dimexpr
+		\paperwidth-\coverpageleftmargin-\coverpagerightmargin\relax
+		\textheight=\dimexpr
+		\paperheight-\coverpagetopmargin-\coverpagebottommargin\relax
+		\headheight=0pt
+		\headsep=0pt
+		\footskip=\baselineskip
+		\@colht=\textheight
+		\@colroom=\textheight
+		\vsize=\textheight
+		\columnwidth=\textwidth
+		\hsize=\columnwidth
+		\linewidth=\hsize
+		\else
+		\let\titlepage@restore\relax
+		\fi
+		\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+		\hbox_gset:Nn \g_TUDa_title_box {
+			\parbox[t]{\linewidth}{
+				\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
+					\begin{addmargin}{3mm}
+						\raggedright
+						\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
+						\leavevmode\usekomafont{title}%
+						\expandafter\fontsize\TUDa_title_fontsize:
+						\selectfont
+						\@title\strut\par
+						\vskip0pt
+					\end{addmargin}
+				\end{minipage}%
+				\par\nointerlineskip
+				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par
+				\begin{addmargin}{3mm}
+					\expandafter\fontsize\TUDa_titleinfo_fontsize:
+					\selectfont
+					{\ifx\@subtitle\@empty\else\usekomafont{subtitle}{\@subtitle\par}\fi}%
+					{\ifx\@subject\@empty\else\usekomafont{subject}{\@subject\par}\fi}
+					{%
+						\usekomafont{author}
+						\lineskip 0.75em
+						\@author
+						\par
+					}%
+					{\usekomafont{date}{\@date\par}}%
+					{\usekomafont{publishers}{\@publishers \par}}%
+				\end{addmargin}
+			\tl_if_empty:NF \@thanks {
+			\expandafter\fontsize\TUDa_titlethanks_fontsize:\selectfont\par
+			\rule{\linewidth}{\g_TUDa_titlerule_dim}\par
+			\begin{addmargin}{3mm}
+				\let\footnotetext\TUDa@title@footnote
+				\@thanks
+			\end{addmargin}
+				\par\vspace{-\dp\strutbox}
+				\let\@thanks\@empty
+			}
+			\rule{\linewidth}{\g_TUDa_titlerule_dim}\par}
+		
+		}
+			
+		\TUDa_adjust_titlepage_style:
+		
+
+		\nointerlineskip\box_use:N \g_TUDa_title_box
+		\par
+		\vfill\null
+		\if@twoside
+		\@tempswatrue
+		\expandafter\ifnum \@nameuse{scr@v@3.12}>\scr@compatibility\relax
+		\else
+		\ifx\@uppertitleback\@empty\ifx\@lowertitleback\@empty
+		\@tempswafalse
+		\fi\fi
+		\fi
+		\if@tempswa
+		\next@tpage
+		\begin{minipage}[t]{\textwidth}
+			\@uppertitleback
+		\end{minipage}\par
+		\vfill
+		\begin{minipage}[b]{\textwidth}
+			\@lowertitleback
+		\end{minipage}\par
+		\@thanks\let\@thanks\@empty
+		\fi
+		\fi
+		\ifx\@dedication\@empty
+		\else
+		\next@tdpage\null\vfill
+		{\centering\usekomafont{dedication}{\@dedication \par}}%
+		\vskip \z@ \@plus3fill
+		\@thanks\let\@thanks\@empty
+		\cleardoubleemptypage
+		\fi
+		\ifx\titlepage@restore\relax\else\clearpage\titlepage@restore\fi
+	\end{titlepage}
+	\setcounter{footnote}{0}%
+	\global\let\and\relax
+	\cleardoublepage
+	\TUDa_restore_typearea:
+	\aftergroup\TUDa_restore_typearea:
+}
+
+
+}
 
 %%Abstract anpassungen mit Sprache
 \providecommand{\abstract}{}% für book
