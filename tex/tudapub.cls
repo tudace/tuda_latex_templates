@@ -1003,6 +1003,8 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\newcommand{\Metadata}[1]{\ClassError{tudapub}{You~cannot~use~\string\Metadata\ ~with~pdfa=false.}{}}
 \fi:
 
+\RequirePackage[utf8]{luainputenc}
+
 %%Abstract anpassungen mit Sprache
 \providecommand{\abstract}{}% für book
 \RenewDocumentEnvironment{abstract}{o}{

@@ -19,14 +19,15 @@
 	\fi
 	\RequirePackage{eurosym}
 	\DeclareUnicodeCharacter{20AC}{\euro}
+\else
+	\RequirePackage{fontspec}
 \fi
 
 \csname if@TUDa@T1\endcsname
-        \RequirePackage{XCharter}%activates T1
-        \PassOptionsToPackage{type1}{roboto}
-        \PassOptionsToPackage{type1}{roboto-mono}
+    \RequirePackage{XCharter}%activates T1
+    \PassOptionsToPackage{type1}{roboto}
+    \PassOptionsToPackage{type1}{roboto-mono}
 \else
-	\RequirePackage{fontspec}
 	\setmainfont{XCharter}
 \fi
 
@@ -40,7 +41,7 @@
 }
 
 
-\csname if@TUDa@T1\endcsname
+\ifPDFTeX
 	\RequirePackage[T1]{fontenc}
 \fi
 
