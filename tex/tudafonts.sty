@@ -13,12 +13,12 @@
 
 \ifPDFTeX
         \csname @TUDa@T1true\endcsname
-	%Declare Euro Symbol
+        %Fallback for older versions
 	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
 	\RequirePackage[utf8]{inputenc}
+        \cs_if_exist:NF \texteuro {\RequirePackage{textcomp}}
+        \DeclareUnicodeCharacter{20AC}{\texteuro}
 	\fi
-	\RequirePackage{eurosym}
-	\DeclareUnicodeCharacter{20AC}{\euro}
 \else
 	\RequirePackage{fontspec}
 \fi
