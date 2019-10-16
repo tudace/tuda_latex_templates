@@ -156,8 +156,8 @@
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 
 %Itemize Items
-\defbeamertemplate*{itemize item}{TUDa}{\usebeamerfont*{itemize item}\raise1.25pt\hbox{\donotcoloroutermaths$\bullet$}}
-\defbeamertemplate*{itemize subitem}{TUDa}{\usebeamerfont*{itemize item}\raise1.5pt\hbox{\tiny\donotcoloroutermaths$\bullet$}}
+\defbeamertemplate*{itemize item}{TUDa}{\usebeamerfont*{itemize item}\raise\dimexpr.4\ht\strutbox-.4ex\hbox{\rule{.8ex}{.8ex}}}
+\defbeamertemplate*{itemize subitem}{TUDa}{\usebeamerfont*{itemize item}\setlength{\fboxsep}{\z@}\setlength{\fboxrule}{1pt}\raise\dimexpr.4\ht\strutbox-.2ex-\fboxrule\hbox{\fbox{\color{bg}\rule{.4ex}{.4ex}}}}
 \defbeamertemplate*{itemize subsubitem}{TUDa}{\usebeamerfont*{itemize subitem}\hbox{--}}
 
 %List spacing
