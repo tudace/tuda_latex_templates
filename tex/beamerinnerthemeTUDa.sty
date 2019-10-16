@@ -45,38 +45,34 @@
 	\vspace{\dim_eval:n {-\c_TUDa_largerule_dim}}
 	\hbox_set:Nn \l_TUDa_titlehead_box {
 	\begin{beamercolorbox}[
-		wd=\TUDa@beamer@linewidth,
-%		sep=.5\ht\TUDa@logobox,
+		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent,
 		sep=\TUDa@beamer@logosep,
 	]{title}
 	\raggedright
-%	\hspace*{\fill}\smash{\raisebox{-\height}{\usebox\TUDa@logobox}}
 	\usebeamerfont{title}
 	\skip_horizontal:n {1ex}
 	\strut\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-2ex\relax}{
 		\inserttitle
 		\par
 	}
-%\hfill%
 	\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\usebox\TUDa@logobox}
-%	\smash{\raisebox{-\height}{\usebox\TUDa@logobox}}
 	\ifx\insertsubtitle\@empty
 	\else
 	\par\vspace{\c_TUDa_largerule_dim}
 	\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-2ex\relax}{
 		\usebeamerfont{subtitle}\insertsubtitle
 	}
-%	\skip_vertical:n {-.25\ht\TUDa@logobox}
 	\fi
 	\end{beamercolorbox}
 	}
 	\box_use:N \l_TUDa_titlehead_box
-\nointerlineskip\begin{beamercolorbox}[wd=\linewidth,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+\nointerlineskip\begin{beamercolorbox}[
+	wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
 	\end{beamercolorbox}
 	\dim_set:Nn \l_TUDa_titlegraphic_ht_dim {\textheight-\box_ht:N\l_TUDa_titlehead_box
 	+\c_TUDa_largerule_dim-.5\c_TUDa_rulesep_dim-\c_TUDa_smallrule_dim}
 	\let\height\l_TUDa_titlegraphic_ht_dim
-	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\linewidth}
+	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}
 	\let\width\l_TUDa_titlegraphic_wd_dim
 	\nointerlineskip
 	\begin{beamercolorbox}[wd=\width,

@@ -11,6 +11,9 @@
 	logo .initial:n =true,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
+        colorframetitle .bool_gset:N = \g_TUDa_colorframetitle_bool,
+        colorframetitle .initial:n = false,
+        colorframetitle .default:n = true,
 }
 
 
@@ -25,11 +28,19 @@
 
 \newlength{\TUDa@beamer@sep}
 \setlength{\TUDa@beamer@sep}{1em}
+\newlength{\TUDa@beamer@logosep}
+\setlength{\TUDa@beamer@logosep}{2mm}
+\newlength{\TUDa@beamer@extraindent}
+\ExplSyntaxOn
+\bool_if:NT \g_TUDa_colorframetitle_bool {\setlength{\TUDa@beamer@extraindent}{\TUDa@beamer@logosep}}
 
-\setbeamersize{text~margin~left=\TUDa@beamer@sep,text~margin~right=\TUDa@beamer@sep}
+\setbeamersize{
+  text~margin~left= \dimexpr\TUDa@beamer@sep+\TUDa@beamer@extraindent\relax,
+  text~margin~right=\dimexpr\TUDa@beamer@sep+\TUDa@beamer@extraindent\relax
+}
 
 \newlength{\TUDa@beamer@linewidth}
-\setlength{\TUDa@beamer@linewidth}{\dimexpr\paperwidth-2\TUDa@beamer@sep\relax}
+\setlength{\TUDa@beamer@linewidth}{\dimexpr\paperwidth-2\TUDa@beamer@sep-2\TUDa@beamer@extraindent\relax}
 
 %Logo
 
@@ -38,16 +49,8 @@
 	\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}%
 }
 
-\newlength{\TUDa@beamer@logosep}
-\setlength{\TUDa@beamer@logosep}{2mm}
-
-\ExplSyntaxOff
-
-%\RequirePackage[paper=slide]{tudarules}
-
-\ExplSyntaxOn
-\TUDa@makeheadrule[color=identbarcolor,width=\TUDa@beamer@linewidth]{TUDa@beamer@headrule}
-\TUDa@makefootrule[width=\TUDa@beamer@linewidth]{TUDa@beamer@rule}
+\TUDa@makeheadrule[color=identbarcolor,width=\paperwidth-2\TUDa@beamer@sep]{TUDa@beamer@headrule}
+\TUDa@makefootrule[width=\paperwidth-2\TUDa@beamer@sep]{TUDa@beamer@rule}
 
 \newlength{\TUDa@beamer@headheight}
 \setlength{\TUDa@beamer@headheight}{
@@ -114,7 +117,7 @@
 \defbeamertemplate{headline}{TUDa theme.logo} {%
 %	\vspace{.75\TUDa@beamer@sep}
 	\begin{beamercolorbox}[
-		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,%wd=\TUDa@beamer@linewidth,
+		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,
 		ht=.75\TUDa@beamer@sep,dp=\box_dp:N \TUDa@beamer@headrule_box]{headline}
 		\TUDa@beamer@headrule
 	\end{beamercolorbox}
@@ -125,9 +128,10 @@
 \defbeamertemplate{frametitle}{TUDa theme.logo}{%
 \nointerlineskip%
 \begin{beamercolorbox}[
-	sep=\TUDa@beamer@logosep,%wd=\dimexpr\TUDa@beamer@linewidth\relax,
-	rightskip=-\TUDa@beamer@logosep,
-%	leftskip=-\TUDa@beamer@logosep
+  sep=\TUDa@beamer@logosep,
+  wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+  rightskip=-\TUDa@beamer@logosep,
+  leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
 	]{frametitle}
 	\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-1em\relax\relax}{%
 		\usebeamerfont{frametitle}\insertframetitle
@@ -143,7 +147,7 @@
 	\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\usebox\TUDa@logobox}
 \end{beamercolorbox}
 \nointerlineskip
-\color{black}\TUDa@beamer@rule
+\leavevmode\color{black}\hspace*{-\TUDa@beamer@extraindent}\TUDa@beamer@rule
 }
 
 \defbeamertemplate*{headline}{TUDa theme.nologo}
@@ -157,7 +161,9 @@
 \defbeamertemplate*{frametitle}{TUDa theme.nologo}{%
 	\nointerlineskip%
 \begin{beamercolorbox}[
-	sep=\TUDa@beamer@logosep,
+  sep=\TUDa@beamer@logosep,
+  wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+  leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
 	]{frametitle}
 	\parbox[t]{\dimexpr\TUDa@beamer@linewidth-2\TUDa@beamer@logosep}{%
 		\usebeamerfont{frametitle}

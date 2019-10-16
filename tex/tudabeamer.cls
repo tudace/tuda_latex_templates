@@ -13,10 +13,12 @@
 \ExplSyntaxOn
 \keys_define:nn {TUDa/beamer} {
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-	colortitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
-	colorbacktitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
-	colorframetitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
-	colorback .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+%	colortitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+%	colorbacktitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
+	colorframetitle .code:n = \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
+	\PassOptionsToPackage{\l_keys_key_tl=#1}{beamerouterthemeTUDa},
+	colorframetitle .default:n = true,
+%	colorback .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
 	logo .code:n = \PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa},
 	pdfa .bool_gset:N = \g_TUDa@pdfa_bool,
 	pdfa .initial:n = false,
@@ -28,7 +30,7 @@
 }
 
 
-\clist_map_inline:nn {colortitle, colorbacktitle, colorframetitle, colorback} {
+\clist_map_inline:nn {colortitle, colorbacktitle, colorback} {
 	\Module@DeclarePassOption[TUDa/beamer]{#1}{beamercolorthemeTUDa}
 }
 
