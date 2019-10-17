@@ -1,6 +1,6 @@
 #!/bin/bash
 cd tex
-fileversion="1.11"
+fileversion="1.20-beta"
 filedate=$(date '+%Y/%m/%d')
 echo $filedate
 for filename in *.sty *.cls *.def *.cfg
