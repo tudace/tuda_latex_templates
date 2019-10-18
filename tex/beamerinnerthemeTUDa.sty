@@ -161,27 +161,6 @@
 \defbeamertemplate*{itemize subitem}{TUDa}{\usebeamerfont*{itemize item}\setlength{\fboxsep}{\z@}\setlength{\fboxrule}{1pt}\raise\dimexpr.4\ht\strutbox-.2ex-\fboxrule\hbox{\fbox{\color{bg}\rule{.4ex}{.4ex}}}}
 \defbeamertemplate*{itemize subsubitem}{TUDa}{\usebeamerfont*{itemize subitem}\hbox{--}}
 
-%List spacing
-\setlength\labelwidth{.75em}
-\setlength\leftmargini{\dimexpr\labelwidth+\labelsep}
-\setlength\leftmarginii{\dimexpr\labelwidth+\labelsep}
-\setlength\leftmarginiii{\dimexpr\labelwidth+\labelsep}
-
-\def\@listi{\leftmargin\leftmargini
-	\topsep \z@ \@plus2\p@ \@minus2.5\p@
-	\parsep 0\p@
-	\itemsep3\p@ \@plus2\p@ \@minus3\p@}
-\let\@listI\@listi
-\def\@listii{\leftmargin\leftmarginii
-	\topsep    \z@ \@plus1\p@ \@minus2\p@
-	\parsep    0\p@   \@plus\p@
-	\itemsep   \parsep}
-\def\@listiii{\leftmargin\leftmarginiii
-	\topsep    \z@ \@plus1\p@ \@minus2\p@
-	\parsep    0\p@   \@plus\p@
-	\itemsep   \parsep}
-
-
 \mode<all>
 
 \endinput
