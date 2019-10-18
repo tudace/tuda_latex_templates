@@ -13,8 +13,6 @@
 \ExplSyntaxOn
 \keys_define:nn {TUDa/beamer} {
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-%	colortitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
-%	colorbacktitle .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
 	colorframetitle .code:n = \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
 	\PassOptionsToPackage{\l_keys_key_tl=#1}{beamerouterthemeTUDa},
 	colorframetitle .default:n = true,
@@ -33,6 +31,8 @@
 \clist_map_inline:nn {colortitle, colorbacktitle, colorback} {
 	\Module@DeclarePassOption[TUDa/beamer]{#1}{beamercolorthemeTUDa}
 }
+
+\Module@DeclarePassOption[TUDa/beamer]{centerframetitle}{beamerouterthemeTUDa}
 
 \ExplSyntaxOff
 
