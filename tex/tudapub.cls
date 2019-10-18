@@ -857,7 +857,11 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\newcommand{\Metadata}[1]{\ClassError{tudapub}{You~cannot~use~\string\Metadata\ ~with~pdfa=false.}{}}
 \fi:
 
+\csname if@TUDa@T1\endcsname
+\ifLuaTeX
 \RequirePackage[utf8]{luainputenc}
+\fi
+\fi
 
 \exp_args:NV \tl_if_eq:nnTF {\g_TUDa_pubType_tl}  {thesis} {
 	\input{tudathesis.cfg}
