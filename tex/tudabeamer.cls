@@ -16,7 +16,6 @@
 	colorframetitle .code:n = \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
 	\PassOptionsToPackage{\l_keys_key_tl=#1}{beamerouterthemeTUDa},
 	colorframetitle .default:n = true,
-%	colorback .code:n = \PassOptionsToPackage{accentcolor=#1}{beamercolorthemeTUDa},
 	logo .code:n = \PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa},
 	pdfa .bool_gset:N = \g_TUDa@pdfa_bool,
 	pdfa .initial:n = false,
@@ -31,8 +30,8 @@
 \clist_map_inline:nn {colortitle, colorbacktitle, colorback} {
 	\Module@DeclarePassOption[TUDa/beamer]{#1}{beamercolorthemeTUDa}
 }
-
 \Module@DeclarePassOption[TUDa/beamer]{centerframetitle}{beamerouterthemeTUDa}
+\Module@DeclarePassOption[TUDa/beamer]{authorontitle}{beamerinnerthemeTUDa}
 
 \ExplSyntaxOff
 

@@ -32,6 +32,9 @@
 	\setbeamercolor*{title}{fg=black,bg=white}
 }
 
+\setbeamercolor*{author}{parent=title}
+\setbeamercolor*{institute}{parent=title}
+
 \bool_if:NTF \g_TUDa@beamer_colorframetitle_bool {
 	\setbeamercolor*{frametitle}{fg=textonaccentcolor,bg=accentcolor}	
 } {

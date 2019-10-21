@@ -1,14 +1,51 @@
+%% This is file `beamerinnerthemeTUDa.sty' version 1.11 (2019/10/15),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%%  Copyright (C) 2018--2019 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainers of this work are
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%   Markus Lazanowski <latex@ce.tu-darmstadt.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% ============================================================================
+%%
+\def\fileversion{1.11}
+\def\filedate{2019/10/15}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerinnerthemeTUDa}
  [\filedate\space\fileversion]
 
+\RequirePackage{l3keys2e}
+
 \mode<presentation>
-%TODO wihtout outertheme
 
 \RequirePackage{trimclip}
 
-\ExplSyntaxOn
 
+\ExplSyntaxOn
+\keys_define:nn {TUDa/beamer/inner} {
+	authorontitle .bool_gset:N = \g_TUDa_authorontitle_bool,
+	authorontitle .initial:n = false,
+	authorontitle .default:n = true
+}
+\ProcessKeysOptions{TUDa/beamer/inner}
 
 \box_new:N \l_TUDa_titlegraphic_box
 
@@ -44,8 +81,9 @@
 	\nointerlineskip
 	\vspace{\dim_eval:n {-\c_TUDa_largerule_dim}}
 	\hbox_set:Nn \l_TUDa_titlehead_box {
+	\parbox{\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}{%
 	\begin{beamercolorbox}[
-		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent,
+		wd=\linewidth,
 		sep=\TUDa@beamer@logosep,
 	]{title}
 	\raggedright
@@ -64,12 +102,39 @@
 	}
 	\fi
 	\end{beamercolorbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bool if authorontrile
+\bool_if:NT \g_TUDa_authorontitle_bool {
+\par\nointerlineskip
+\begin{beamercolorbox}[
+	wd=\linewidth,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+\end{beamercolorbox}
+\par\nointerlineskip
+	\begin{beamercolorbox}[
+	wd=\linewidth,
+	sep=\c_TUDa_largerule_dim,
+	]{title}
+	\raggedright
+	\skip_horizontal:n {1ex}
+	\parbox[t]{\dimexpr\linewidth-2ex\relax}{
+		\ifx\insertauthor\@empty
+		\else
+		\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
+		\fi
+		\ifx\insertauthor\@empty
+		\else
+		\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute
+		\fi
+	}
+\end{beamercolorbox}
+}
+	}
 	}
 	\box_use:N \l_TUDa_titlehead_box
 \nointerlineskip\begin{beamercolorbox}[
 	wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
 	\end{beamercolorbox}
-	\dim_set:Nn \l_TUDa_titlegraphic_ht_dim {\textheight-\box_ht:N\l_TUDa_titlehead_box
+	\dim_set:Nn \l_TUDa_titlegraphic_ht_dim {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box
 	+\c_TUDa_largerule_dim-.5\c_TUDa_rulesep_dim-\c_TUDa_smallrule_dim}
 	\let\height\l_TUDa_titlegraphic_ht_dim
 	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}
@@ -90,7 +155,7 @@
 {
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[ wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent,sep=.5pt,
-		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi]{block title}%TODO
+		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi]{block title}
 	\ifx\insertblocktitle\@empty
 	\else
 	\begin{beamercolorbox}[colsep=.75ex,
