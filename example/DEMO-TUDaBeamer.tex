@@ -97,6 +97,21 @@ Ein Beispiel.
 \end{example}
 \end{frame}
 
+\begin{frame}{Hinweis zur Ausrichtung (insbesondere columns)}
+	Die Standardausrichtung wurde gegenüber den Beamer-Voreinstellungen von \code{c} zu \code{t} geändert. Dies bedeutet, dass Inhalt auf der Folie oben ausgerichtet wird. Dies entspricht den Vorgaben, hat allerdings den Nachteil, dass die \code{columns}-Umgebung in diesem Fall bei der Positionierung von Bildern ungewohnte Ergebnisse erzeugt.
+
+	Die Ausrichtung kann in diesem Fall entweder global mit der Option \code{c} wieder zum Standard geändert werden, oder aber das \code{c} wird direkt an die \code{columns}-Umgebung übergeben. Zum Beispiel:
+\begin{columns}[onlytextwidth,c]%ohne das c ist die Ausrichtung verschoben
+	\column{.8\linewidth}
+	\begin{itemize}
+		\item eins
+		\item zwei
+	\end{itemize}
+	\column{.2\linewidth}
+	\includegraphics[width=\linewidth]{example-image}
+\end{columns}
+\end{frame}
+
 
 \begin{frame}[fragile]{Anpassungen der Mathematikschriftarten}
 	Es gibt keine fest Vorgabe zur Verwendung einer Mathematikschrift.
