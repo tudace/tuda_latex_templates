@@ -22,8 +22,8 @@
 \begin{document}
 
 \title{LaTeX-Beamer im Corporate Design der TU Darmstadt}
-\subtitle{Version 1.0}
-\author[M. Peischl]{Marei Peischl \and der \TeX-Löwe}
+\subtitle{Version 1.2}
+\author[M. Peischl]{Marei Peischl}
 \department{\TeX/\LaTeX}
 \institute{pei\TeX}
 
@@ -57,11 +57,12 @@
 	\item \code{\textbackslash{}titlegraphic} Ersetzt den unteren Teil der Titelfolie. Zusätzlich existiert \code{\textbackslash{}titlegraphic*{Inhalt}}.
 	In diesem Fall wird der Inhalt in eine Box gesetzt, die so skaliert wird, dass Sie den Bereich des Titelbildes überdeckt und entsprechend mittig ausgeschnitten.
 \end{itemize}
+	Über die Option \code{authorontitle=true/false} kann zusätzlich zu den offiziellen Vorgaben der Autor und das Institut groß auf der Titelfolie gezeigt werden.
 \end{frame}
 
 \setupTUDaFrame{logo=true}
 \begin{frame}[fragile]{Logo im Frametitle}
-Das Logo innerhalb des Frametitle kann mit der Klassenoption \code{logo=false} ausgeschalten werden.
+Das Logo innerhalb des Frametitle kann mit der Klassenoption \code{logo=false} abgeschaltet werden.
 
 Soll das Logo später für ein Folie oder einen Bereich wieder aktiviert werden, steht das Makro
 \begin{verbatim}
