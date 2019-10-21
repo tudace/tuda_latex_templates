@@ -218,7 +218,10 @@
 	}
 ]{TUDa.poster.rule}
 
-\DeclareNewPageStyleByLayers{TUDa.poster}{TUDa.poster.rule,TUDa.poster.background,TUDa.poster.qrcode,TUDa.poster.footer}
+\DeclareNewPageStyleByLayers{TUDa.poster.title}{TUDa.poster.rule,TUDa.poster.background,TUDa.poster.qrcode,TUDa.poster.footer}
+\DeclareNewPageStyleByLayers{TUDa.poster}{TUDa.poster.rule,TUDa.poster.qrcode,TUDa.poster.footer}
+\pagestyle{TUDa.poster}
+
 
 \dim_new:N \g_TUDa_titlegraphic_max_height_dim
 \skip_new:N \g_TUDa_title_fill_skip 
@@ -269,7 +272,7 @@
 		]{TUDa.poster.logo}
 	}
 
-	\AddLayersToPageStyle{TUDa.poster}{TUDa.poster.logo}
+	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.logo}
 	\begingroup
 
 	\bool_if:NT \g_TUDa_logo@inhead_bool {
