@@ -118,7 +118,6 @@
 }
 
 \defbeamertemplate{headline}{TUDa theme.logo} {%
-%	\vspace{.75\TUDa@beamer@sep}
 	\begin{beamercolorbox}[
 		leftskip=\TUDa@beamer@sep,rightskip=\TUDa@beamer@sep,
 		ht=.75\TUDa@beamer@sep,dp=\box_dp:N \TUDa@beamer@headrule_box]{headline}
@@ -127,6 +126,7 @@
 }
 
 
+\box_new:N \l_TUDa_frametitle_box
 
 \defbeamertemplate{frametitle}{TUDa~theme.logo}{%
 \nointerlineskip%
@@ -136,9 +136,10 @@
   rightskip=-\TUDa@beamer@logosep,
   leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
 	]{frametitle}
-	\bool_if:NTF \g_TUDa_centerframetitle_bool {\parbox[c]}{\parbox[t]}
+	\hbox_set:Nn \l_TUDa_frametitle_box {
+	\parbox[t]
 		{\dimexpr\linewidth- \wd\TUDa@logobox-1em\relax\relax}{%
-		\usebeamerfont{frametitle}\insertframetitle
+		\usebeamerfont{frametitle}\strut\insertframetitle
 		\ifx\insertframesubtitle\@empty
 		\else
 		\par
@@ -146,12 +147,17 @@
 		\usebeamerfont{framesubtitle}
 		\insertframesubtitle
 		\fi
-	}
+	}}
+	\leavevmode
+	\bool_if:NTF \g_TUDa_centerframetitle_bool
+		{\raisebox{\dimexpr-.5\height+.5\depth}}
+		{\use:n}
+			{\box_use:N \l_TUDa_frametitle_box}
 	\hfill%
-	\raisebox{\dim_eval:n {
-			\bool_if:NTF \g_TUDa_centerframetitle_bool
-				{-.5\height+\dp\strutbox} {-\height+\ht\strutbox}
-			}}{\usebox\TUDa@logobox}
+	\bool_if:NTF \g_TUDa_centerframetitle_bool
+		{\raisebox{\dimexpr-.5\height+.5\depth}}
+		{\raisebox{\dimexpr-\height+\ht\strutbox}}
+		{\usebox\TUDa@logobox}
 \end{beamercolorbox}
 \nointerlineskip
 \leavevmode\color{black}\hspace*{-\TUDa@beamer@extraindent}\TUDa@beamer@rule
@@ -188,7 +194,7 @@
 %	Rule for voffset similar to logo
 	\rule[\dim_eval:n {
 		\bool_if:NTF \g_TUDa_centerframetitle_bool
-		{-.5\ht\TUDa@logobox+\dp\strutbox} {-\ht\TUDa@logobox+\ht\strutbox}
+		{-.5\ht\TUDa@logobox+.5\dp\TUDa@logobox} {-\ht\TUDa@logobox+\ht\strutbox}
 	}]{0pt}{\dimexpr\ht\TUDa@logobox+\dp\TUDa@logobox\relax}
 \end{beamercolorbox}
 	\nointerlineskip
