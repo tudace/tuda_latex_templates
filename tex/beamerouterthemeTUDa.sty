@@ -179,10 +179,10 @@
   wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
   leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
 	]{frametitle}
-	\bool_if:NTF \g_TUDa_centerframetitle_bool {\parbox[c]}{\parbox[t]}
-		{\dimexpr\TUDa@beamer@linewidth-2\TUDa@beamer@logosep}{%
-		\usebeamerfont{frametitle}
-		\insertframetitle
+	\hbox_set:Nn \l_TUDa_frametitle_box {
+	\parbox[t]
+	{\dimexpr\linewidth- \wd\TUDa@logobox-1em\relax\relax}{%
+		\usebeamerfont{frametitle}\strut\insertframetitle
 		\ifx\insertframesubtitle\@empty
 		\else
 		\par
@@ -190,7 +190,12 @@
 		\usebeamerfont{framesubtitle}
 		\insertframesubtitle
 		\fi
-	}%
+}}
+\leavevmode
+\bool_if:NTF \g_TUDa_centerframetitle_bool
+{\raisebox{\dimexpr-.5\height+.5\depth}}
+{\use:n}
+{\box_use:N \l_TUDa_frametitle_box}
 %	Rule for voffset similar to logo
 	\rule[\dim_eval:n {
 		\bool_if:NTF \g_TUDa_centerframetitle_bool
