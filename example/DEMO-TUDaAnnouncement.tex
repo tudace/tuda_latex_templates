@@ -1,0 +1,37 @@
+\documentclass[
+	paper=a4,
+	ngerman,
+	accentcolor=9c,
+	footer=true,
+	type=announcement,
+	fontsize=12pt
+%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
+	]{tudaposter}
+
+\usepackage[english, main=ngerman]{babel}
+\usepackage[babel]{csquotes}
+
+
+%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+\let\file\texttt
+\let\code\texttt
+
+\begin{document}
+
+\title{\LaTeX{} im Corporate Design der TU~Darmstadt}
+\subtitle{Aushänge mit tudaposter}
+
+\footerqrcode{https://peitex.de}
+\footer{Inhalt der Fußzeile}%Falls aktiviert
+
+
+\maketitle
+
+\section*{Grundlengende Informationen}
+Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und Nicht"-wissenschaftlichen Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa\TeX-Bundles.
+
+Für dieses Dokument gelten die in DEMO-TUDaPoster beschriebenen Mechanismen. Zusätzlich wird jedoch ein Modus aktiviert, der entsprechend des Corporate Design Handbuchs für Aushänge verwendet werden soll.
+
+Die Option \code{type=announcement} ändert dementsprechend den Texteinzug, dass dieser identisch zum Einzug im Titelblock ist. Darüber hinaus wird hier das Logo immer in der Kopfzeile platziert und der Untertitel in Fettschrift gesetzt.
+
+\end{document}
