@@ -131,7 +131,7 @@
 	{1} {}
 	{2} {
 		\addtokomafont{subtitle}{\bfseries}
-		\keys_set:nn {TUDa/poster}{indenttext}
+		\keys_set:nn {TUDa/poster}{indenttext=true,logo=head}
 	}
 }
 %%%%%%%%%%%%%%%%%%%%%%
