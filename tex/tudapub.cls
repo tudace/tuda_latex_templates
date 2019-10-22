@@ -447,14 +447,14 @@
 
 \setkomafont{pagehead}{\Large\bfseries}
 
-
 	\if@twocolumn
 	\edef\sls@evenheadshift{\dim_eval:n {-\marginparwidth-\marginparsep\relax}}
 	\let\sls@oddheadshift\sls@evenheadshift
 	\let\sls@evenfootshift\sls@evenheadshift
 	\let\sls@oddfootshift\sls@evenheadshift
 	\fi
-	\ModifyLayer[
+	\RedeclareLayer[
+		clone=scrheadings.head.above.line,
 		background,
 		mode=picture,
 		contents={
@@ -464,7 +464,8 @@
 			\smash{\TUDa@headline}
 		}
 	]{TUDa.head.above.line}	
-	\ModifyLayer[
+	\RedeclareLayer[
+		clone=plain.scrheadings.head.above.line,
 		background,
 		mode=picture,
 		contents={\smash{\TUDa@headline}}
