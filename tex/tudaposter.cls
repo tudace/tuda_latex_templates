@@ -343,17 +343,53 @@
 \box_new:N \g_TUDa_title_info_box
 \box_new:N \g_TUDa_title_box
 
+\colorlet{TUDa@InfoBoxColor}{white}
+
 \cs_new:Nn \TUDa_make_title_info_box:n {
 	\usekomafont{titleinfo}
 	\setlength{\fboxsep}{.2\baselineskip}
-	\colorbox{white}{\hspace*{\dimexpr.2\c_TUDa_logoheight_dim-\fboxsep}%
+	\colorbox{TUDa@InfoBoxColor}{\hspace*{\dimexpr.2\c_TUDa_logoheight_dim-\fboxsep}%
 		\parbox{2\c_TUDa_logoheight_dim}{
 			\raggedright
 			#1
 	}}
 }
 
+\cs_new:Nn \TUDa_make_title_logo_box:n {
+	\setlength{\fboxsep}{\z@}%
+	\parbox{2.2\c_TUDa_logoheight_dim}{
+		\colorbox{TUDa@InfoBoxColor}{
+			\rlap{
+				\makebox[2.5\c_TUDa_logoheight_dim][r]{
+					\colorbox{TUDa@InfoBoxColor}{#1\hspace{.3\c_TUDa_logoheight_dim}}
+				}
+			}
+		}
+	}
+}
+
+
 \newcommand{\addTitleBox}[1]{\seq_gput_right:Nn \g_TUDa_title_info_seq {\TUDa_make_title_info_box:n {#1}}}
+
+\NewDocumentCommand{\addTitleBoxLogo}{sm}{
+	\IfBooleanTF{#1}{
+		\seq_gput_right:Nn \g_TUDa_title_info_seq {
+			\TUDa_make_title_logo_box:n {#2}
+		}
+	}{
+		\seq_gput_right:Nn \g_TUDa_title_info_seq {
+			\TUDa_make_title_logo_box:n {
+				\hbox_set:Nn \l_tmpa_box {
+					\includegraphics[width=1.5\c_TUDa_logoheight_dim]{#2}
+				}
+				\dim_set:Nn \l_tmpa_dim {2\c_TUDa_logoheight_dim/3}
+				\dim_compare:nTF {\box_ht:N \l_tmpa_box > \l_tmpa_dim}
+				{\includegraphics[width=\l_tmpa_dim]{#2}}
+				{\box_use:N \l_tmpa_box}
+			}
+		}
+	}
+}
 
 \cs_new:Nn \TUDa_Setup_Title_box: {
 	\hbox_gset:Nn \g_TUDa_title_info_box
