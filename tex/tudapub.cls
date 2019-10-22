@@ -20,6 +20,12 @@
 
 \int_new:N \g_TUDa_ruledheaders_int
 \int_new:N \g_TUDa_paper_int
+\msg_new:nnnn {TUDa} {compatibility-only} {
+	You~used~the~outdated~#1~option.\\
+	This~only~exists~due~to~compatibility~reasons.
+}{
+	Please~look~at~tuda-ci~documentation~for~further~information~and~avoid~using~outdated~options.
+}
 
 %Message Declaration for option processing
 \msg_new:nnn {TUDaPub} {titlepage-option-disabled} {
@@ -80,6 +86,7 @@
 	headline .initial:n =false,
 	colorback .bool_gset:N = \g_TUDa_colorback_bool,
 	colorback .initial:n = true,
+	colortitleback .code:n =  \msg_warning:nnx {TUDa} {compatibility-only} {\l_keys_key_tl}\keys_set:nn {TUDa/pub} {logo=head,colorback=false},
 	pdfa .bool_gset:N = \g_TUDa@pdfa_bool,
 	pdfa .initial:n = true,
 	twocolumn .bool_gset:N = \g_TUDa_twocolumn_bool,
@@ -879,13 +886,10 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 }
 
 
-
-
 \renewcommand*{\maketitle}[1][1]{
 	\def\and{,~ }
 	\cs_if_exist_use:N \TUDa_pass_TitleData:
 	\TUDa_disable_marginpar:
-	\cleardoublepage
 	\begin{titlepage}
 		\setcounter{page}{%
 			#1%
@@ -924,6 +928,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		\hbox_gset:Nn \g_TUDa_title_box {
 			\parbox[t]{\linewidth}{
 				\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
+					\bool_if:NT \g_TUDa_logo@inhead_bool {\color{textonaccentcolor}}
 					\begin{addmargin}{3mm}
 						\raggedright
 						\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
