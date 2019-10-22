@@ -7,6 +7,7 @@
 \bool_new:N \g_TUDa_logo@inhead_bool
 \dim_new:N \g_TUDa_margin_dim
 \int_new:N \g_TUDa_paper_int
+\int_new:N \g_TUDa_postertype_int
 
 \keys_define:nn {TUDa/poster} {
 	accentcolor .code:n = {\PassOptionsToPackage{accent=#1}{tudacolors}},
@@ -34,6 +35,11 @@
 	fontsize .initial:n = auto,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
+	type .choices:nn = {default, announcement}{\int_gset_eq:NN \g_TUDa_postertype_int \l_keys_choice_int},
+	type .initial:n = default,
+	indenttext .bool_gset:N = \g_TUDa_indenttext_bool,
+	indenttext .initial:n = false,
+	indenttext .default:n = true,
 }
 
 
@@ -120,16 +126,36 @@
 \TUDa@makefootrule[width=\contentwidth, color=identbarcolor]{TUDa@smallrule}
 
 %%%%%%%%%%%%%%%%%%%%%%
-%
+\int_case:nn {\g_TUDa_postertype_int}
+{
+	{1} {}
+	{2} {
+		\addtokomafont{subtitle}{\bfseries}
+		\keys_set:nn {TUDa/poster}{indenttext}
+	}
+}
 %%%%%%%%%%%%%%%%%%%%%%
+\dim_new:N \g_TUDa_titleindent_dim
+\begingroup
+\expandafter\fontsize\TUDa_title_fontsize:\selectfont
+	\dim_gset:Nn \g_TUDa_titleindent_dim {.5ex}
+\endgroup
+
+
 \RequirePackage{geometry}
 \geometry{
 	margin= \g_TUDa_margin_dim,
+	hmargin = \dim_eval:n {
+		\g_TUDa_margin_dim +
+		\bool_if:NTF \g_TUDa_indenttext_bool
+		{\g_TUDa_titleindent_dim} {0pt}
+	},
 	top=\dim_eval:n {
 		\box_ht:N \TUDa@posterrule_box + \box_dp:N \TUDa@posterrule_box
 		+ .5\c_TUDa_logoheight_dim
 		+\g_TUDa_margin_dim}
 }
+
 \setlength\columnsep{\g_TUDa_margin_dim}
 
 
@@ -168,10 +194,10 @@
 
 \bool_if:NTF \g_TUDa_poster_foot_bool {
 	\DeclareNewLayer[
-		clone=TUDa.poster.qrcode,
+	clone=TUDa.poster.qrcode,
 	align=bl,
 	hoffset=\g_TUDa_margin_dim,
-	width=\textwidth,
+	width=\paperwidth-2\g_TUDa_margin_dim,
 	height=\g_TUDa_footheight_dim,
 	contents={
 		\putUL{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
@@ -192,24 +218,28 @@
 }
 
 \DeclareNewLayer[
-	textarea,background,mode=picture,
+	background,mode=picture,
+	width=\paperwidth-2\g_TUDa_margin_dim,
+	hoffset=\g_TUDa_margin_dim,
 	voffset=\g_TUDa_margin_dim+\box_ht:N \TUDa@posterrule_box + \box_dp:N \TUDa@posterrule_box,
 	contents={\color{accentcolor}\rule{\layerwidth}{\layerheight}}
 ]{TUDa.poster.background}
 
 \DeclareNewLayer[
+%	clone=TUDa.poster.background,
 	textarea,
 	foreground,
 	align=tr,
-	addhoffset=\textwidth,
+	addhoffset=\textwidth+\bool_if:NTF \g_TUDa_indenttext_bool {\g_TUDa_titleindent_dim}{0pt},
 	width=2.2\c_TUDa_logoheight_dim,
 	height=15cm,
 	contents={\box_use:N \g_TUDa_title_info_box}
 ]{TUDa.poster.logo}
 
 \DeclareNewLayer[
+	clone=TUDa.poster.background,
+%	textarea,
 	align=tl,
-	textarea,
 	voffset=\g_TUDa_margin_dim,
 	height=\box_ht:N \TUDa@posterrule_box + \box_dp:N \TUDa@posterrule_box,
 	mode=picture,
@@ -230,24 +260,24 @@
 	\begingroup
 	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
 	\vbox_gset:Nn \g_TUDa_title_box {
-		\usekomafont{title}
+		\usesizeofkomafont{title}
 		\parbox[t]{\linewidth}{
 			\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
-				\begin{addmargin}{.5ex}
+				\bool_if:NF \g_TUDa_indenttext_bool {\begin{addmargin}{\g_TUDa_titleindent_dim }}
+					\usekomafont{title}
 					\raggedright
 					\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
 					\leavevmode\usekomafont{disposition}\usekomafont{title}%
 					\@title\strut\par
-					\vskip0pt
-				\end{addmargin}
+				\bool_if:NTF \g_TUDa_indenttext_bool {\nointerlineskip\leavevmode}{\end{addmargin}}
 			\end{minipage}%
 			\par\nointerlineskip
-			\TUDa@smallrule\usekomafont{subtitle}\par
-			\begin{addmargin}{.5ex}
+			\bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule\usekomafont{subtitle}\par
+			\bool_if:NF \g_TUDa_indenttext_bool {\begin{addmargin}{\g_TUDa_titleindent_dim }}
 				\@subtitle\strut
-			\end{addmargin}
+			\bool_if:NF \g_TUDa_indenttext_bool {\end{addmargin}}
 		 \par\nointerlineskip
-		 \TUDa@smallrule
+		 \bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule
 		}
 	}
 	\endgroup
@@ -291,7 +321,7 @@
 		\par\nointerlineskip
 		\vbox{\parbox[t]{\linewidth}{\@titlegraphic}}
 	}
-	\thispagestyle{TUDa.poster}
+	\thispagestyle{TUDa.poster.title}
 	\endgroup\par
 }
 
