@@ -750,7 +750,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\hbox_gset:Nn \g_TUDa_title_info_box
 	{
 		\parbox{\dimexpr2.5\c_TUDa_logoheight_dim}{
-		\seq_use:Nn \g_TUDa_title_info_seq  {\par\nointerlineskip\vspace{5mm}}
+		\seq_use:Nn \g_TUDa_title_info_seq  {\par\nointerlineskip\vspace{\dim_eval:n {\c_TUDa_largerule_dim+\c_TUDa_rulesep_dim}}}
 		}
 	}
 }
