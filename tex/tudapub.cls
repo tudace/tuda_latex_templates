@@ -449,19 +449,22 @@
 	\RedeclareLayer[
 		clone=scrheadings.head.above.line,
 		background,
-		mode=picture,
 		contents={
 			\dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
 				\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
 			}
 			\smash{\TUDa@headline}
 		}
-	]{TUDa.head.above.line}	
+	]{TUDa.head.above.line}
 	\RedeclareLayer[
 		clone=plain.scrheadings.head.above.line,
 		background,
-		mode=picture,
-		contents={\smash{\TUDa@headline}}
+		contents={
+			\dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
+				\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
+			}
+			\smash{\TUDa@headline}
+		}
 	]{plain.TUDa.head.above.line}
 	\bool_if:NT \g_TUDa_headline_bool {
 		\clist_map_variable:nNn {oneside, even, odd} \l_tmpa_tl {
@@ -500,7 +503,7 @@
 \box_new:N  \g_TUDa_title_box 
 \skip_new:N \g_TUDa_title_fill_skip
 
-\renewcommand{\titlepagestyle}{title.TUDa}
+\renewcommand{\titlepagestyle}{TUDa}
 
 
 \seq_new:N \g_TUDa_author_seq
@@ -879,10 +882,12 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \textsuperscript{\@fnsymbol{#1}}#2
 }
 
-
+% The following macro is an adapted version of the corresponding KOMA-Script macro
+% Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
 \renewcommand*{\maketitle}[1][1]{
 	\def\and{,~ }
 	\cs_if_exist_use:N \TUDa_pass_TitleData:
+	\if@titlepage
 	\TUDa_disable_marginpar:
 	\begin{titlepage}
 		\setcounter{page}{%
@@ -1004,10 +1009,147 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\cleardoublepage
 	\TUDa_restore_typearea:
 	\aftergroup\TUDa_restore_typearea:
+	\else
+	\par
+	\@tempcnta=%
+	#1%
+	\relax\ifnum\@tempcnta=1\else
+	\ClassWarning{\KOMAClassName}{%
+		Optional argument of \string\maketitle\space ignored\MessageBreak
+		in `titlepage=false' mode%
+	}%
+	\fi
+	\ifx\@uppertitleback\@empty\else
+	\ClassWarning{\KOMAClassName}{%
+		non empty \string\uppertitleback\space ignored
+		by \string\maketitle\MessageBreak
+		in `titlepage=false' mode%
+	}%
+	\fi
+	\ifx\@lowertitleback\@empty\else
+	\ClassWarning{\KOMAClassName}{%
+		non empty \string\lowertitleback\space ignored
+		by \string\maketitle\MessageBreak
+		in `titlepage=false' mode%
+	}%
+	\fi
+	\begingroup
+	\let\titlepage@restore\relax
+	\def\thefootnote{\fnsymbol{footnote}}
+	\next@tdpage
+		\ifx\@extratitle\@empty
+			\ifx\@frontispiece\@empty\else \mbox{}\fi
+		\else
+		\@makeextratitle
+		\fi
+		\ifx\@frontispiece\@empty
+		\ifx\@extratitle\@empty\else\next@tdpage\fi
+		\else
+		\next@tpage
+		\@makefrontispiece
+		\next@tdpage
+		\fi
+	\@maketitle
+	\ifx\titlepagestyle\@empty\else\thispagestyle{\titlepagestyle}\fi
+	\@thanks\global\let\@thanks\@empty
+	\endgroup
+	\fi
 }
 
 
 }
+
+\renewcommand*{\@maketitle}{%
+	\global\@topnum=\z@
+	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+	\vspace*{-\dim_eval:n {
+			\headheight
+			+\headsep
+			+\topskip
+			-\box_ht:N\TUDa@headline_box
+			-\box_dp:N \TUDa@headline_box
+%			-\dp\strutbox
+	}}
+	\par
+	\nointerlineskip
+	\begingroup
+	\usekomafont{disposition}
+	\hsize=\g_TUDa_headwidth_dim
+	\raisebox{\dim_eval:n {
+			-.5\c_TUDa_logoheight_dim
+	}}[0pt][.5\c_TUDa_logoheight_dim]{
+		\bool_if:NT \g_TUDa_colorback_bool {\color{accentcolor}\rule{\g_TUDa_headwidth_dim}{.5\c_TUDa_logoheight_dim}}
+	}
+	\par\nointerlineskip
+	\setlength{\fboxsep}{\z@}
+	\bool_if:NT \g_TUDa_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\g_TUDa_headwidth_dim}{
+			\raisebox{-\height}{%
+				\begin{minipage}[t]{\dimexpr\linewidth-2.2\c_TUDa_logoheight_dim-1ex}
+					\bool_if:NT \g_TUDa_colorback_bool  {\begin{addmargin}{.5\c_TUDa_largerule_dim}}
+						\raggedright
+						\bool_if:NT \g_TUDa_colorback_bool {\color{textonaccentcolor}}
+						\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
+						\leavevmode
+						{\Huge\usekomafont{title}{
+						\Huge
+						\@title \par
+						}}%
+						\vskip 1em
+						\bool_if:NTF \g_TUDa_colorback_bool {\end{addmargin}} {\par}
+			\vspace{\dim_eval:n {\c_TUDa_largerule_dim+\c_TUDa_rulesep_dim}}
+			\end{minipage}
+		}
+		\hfill
+		\raisebox{-\height}{
+		\TUDa_Setup_Title_box:
+		\makebox[2.2\c_TUDa_logoheight_dim][l]{
+		\box_use:N \g_TUDa_title_info_box
+		}
+		}
+		\dim_compare:nNnTF {\box_ht:N \g_TUDa_title_info_box + \box_ht:N \g_TUDa_title_info_box} > {1.1\c_TUDa_logoheight_dim}
+				{\vspace{\c_TUDa_largerule_dim}}
+				{\vspace{.5\c_TUDa_logoheight_dim}}
+
+		\par
+	}}
+	\par
+	\nointerlineskip
+	\rule{\g_TUDa_headwidth_dim}{\g_TUDa_titlerule_dim}
+	\begin{addmargin}{.5\c_TUDa_largerule_dim}
+	\Large
+	\clist_map_inline:nn {subtitle, subject, author, date, publishers}
+		{\tl_if_empty:cF {@##1} {{\usekomafont{##1}\use:c {@##1}\par}}}
+	\vspace{\c_TUDa_rulesep_dim}
+	\end{addmargin}
+	\tl_if_empty:NF \@thanks {
+	\par\nointerlineskip
+	\rule{\g_TUDa_headwidth_dim}{\g_TUDa_titlerule_dim}
+	\expandafter\fontsize\TUDa_titlethanks_fontsize:\selectfont
+	\begin{addmargin}{.5\c_TUDa_largerule_dim}
+		\let\footnotetext\TUDa@title@footnote
+		\@thanks
+		\vspace{\c_TUDa_rulesep_dim}
+	\end{addmargin}
+	\par
+	\let\@thanks\@empty
+	}
+	\par\nointerlineskip
+		\rule{\g_TUDa_headwidth_dim}{\g_TUDa_titlerule_dim}
+	\par
+%	\bool_if:NT  \g_TUDa_headontitle_bool {
+%		\if@twoside
+%		\box_use:N \g_TUDa_ex_headline_odd_box
+%		\else
+%		\box_use:N \g_TUDa_ex_headline_oneside_box
+%		\fi
+%		\par
+%		\rule{\linewidth}{\g_TUDa_titlerule_dim}
+%		\par
+%	}
+	\endgroup
+	\vskip 2em
+%	\ConfigureHeadline{}
+}%
 
 %%Abstract anpassungen mit Sprache
 \providecommand{\abstract}{}% für book
