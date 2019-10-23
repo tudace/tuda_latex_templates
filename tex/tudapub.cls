@@ -69,7 +69,7 @@
 	},
 	ruledheaders .initial:n = all,
 	type .choices:nn = {publication, thesis} {\tl_gset_eq:NN \g_TUDa_pubType_tl \l_keys_choice_tl},
-	type / intern .code:n = {\keys_set:nn {TUDa/pub}  {titlepage=false, pdfa=false}},
+	type / intern .code:n = {\keys_set:nn {TUDa/pub}  {titlepage=false, pdfa=false, IMRAD=false}},
 	type .initial:n = publication,
 	unknown .code:n = {\prop_gput:NVn \g_TUDa_unknown_clsopts_prop \l_keys_key_tl {#1}},
 	headline .choice:,
@@ -1136,19 +1136,8 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\par\nointerlineskip
 		\rule{\g_TUDa_headwidth_dim}{\g_TUDa_titlerule_dim}
 	\par
-%	\bool_if:NT  \g_TUDa_headontitle_bool {
-%		\if@twoside
-%		\box_use:N \g_TUDa_ex_headline_odd_box
-%		\else
-%		\box_use:N \g_TUDa_ex_headline_oneside_box
-%		\fi
-%		\par
-%		\rule{\linewidth}{\g_TUDa_titlerule_dim}
-%		\par
-%	}
 	\endgroup
-	\vskip 2em
-%	\ConfigureHeadline{}
+	\vskip .5\c_TUDa_logoheight_dim
 }%
 
 %%Abstract anpassungen mit Sprache
