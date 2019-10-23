@@ -25,10 +25,10 @@
 \subtitle{Die Dokumentenklasse tudapub}
 \author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and der \TeX-Löwe}
 
-%\titleimage{
+\titleimage{
 %	%Folgende Box kann selbstverständlich durch ein mit \includegraphics geladenes Bild ersetzt werden.
-%	\color{black!30}\rule{\width}{\height}
-%}
+	\color{black!30}\rule{\width}{\height}
+}
 
 
 %Varianten der Infoboxen
@@ -70,11 +70,11 @@ Sie ist Teil des TUDa-CI-Bundles und basiert in Teilen auf dem tuddesign-Paket v
 In diesem Dokument werden die speziellen Optionen und Einstellungsmöglichkeiten erläutert.
 
 \section{Verwendung}
-Die Klasse kann wie für Dokumentenklassen üblich eingebunden werden
+Die Klasse wird wie gewohnt geladen:
 \begin{verbatim}
 \documentclass[<Optionen>{tudapub}
 \end{verbatim}
-Im folgenden werden die möglichen Optionen beschrieben
+Im folgenden werden die möglichen Optionen beschrieben.
 
 \subsection{Klassenoptionen}
 
@@ -82,11 +82,11 @@ Im folgenden werden die möglichen Optionen beschrieben
 	\item[class=<article|report|book>] Diese Option legt die Basisdokumentenklasse fest. Die Werte laden die entsprechende KOMA-Script-Klasse \cite{scrguide}. Der Wert \code{article} lädt somit die Klasse \code{scrartcl}.
 	
 	KOMA-Script ist eine Sammlung von Klassen und Paketen für \LaTeX, die neben den typografischen Anpassungen an den Europäischen Raum auch die Konfigurationsmöglichkeiten stark erweitert.
-	\item[color=<Farbe>] Wählt die Schmuckfarbe für die Nutzung in der Identitätsleiste aus. Die Farbcodes finden sich in der Farbübersicht in den Corporate Design Richtlinien. Neben diesen Farben kann prinzipiell jede beliebige Farbe übergeben werden. Die Optionen \code{accentcolor}, \code{textaccentcolor} und \code{identbarcolor} werden anlog direkt an tudacolors übergeben. Auf diesem Weg können die Farben unabhängig voneinander gesetzt werden.
+	\item[color=<Farbe>] Wählt die Schmuckfarbe für die Nutzung in der Identitätsleiste aus. Die Farbcodes finden sich in der Farbübersicht in den Corporate Design Richtlinien. Neben diesen Farben kann prinzipiell jede beliebige Farbe übergeben werden. Die Optionen \code{accentcolor}, \code{textaccentcolor} und \code{identbarcolor} werden anlog direkt an \pck{tudacolors} übergeben. Auf diesem Weg können die Farben unabhängig voneinander gesetzt werden.
 	\item[marginpar] Schaltet die Randnotizspalte um. Voreingestellt ist \code{auto}. Dies bedeutet, dass die Randnotizspalte wie im Corporate Design Handbuch über die fünfte Spalte läuft.  \marginpar{Beispiel für eine Randnotiz}.
 	Darüber werden auch die Werte \code{true} und \code{false} akzeptiert. \code{false} setzt die Breite der Randnotizspalte auf 0. Der Mechanismus selbst wird nicht deaktiviert.
 	
-	Randnotizen werden über den komafont-Mechanismus im Element \code{marginpar} gesetzt. Seine Voreinstellung entspricht
+	Randnotizen werden über den komafont-Mechanismus \cite[vgl.][]{scrguide} im Element \code{marginpar} gesetzt. Seine Voreinstellung entspricht
 	\begin{verbatim}
 	\setkomafont{marginpar}{\accentfont}
 	\end{verbatim}
@@ -100,21 +100,24 @@ Im folgenden werden die möglichen Optionen beschrieben
 	}
 	\item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann Randnotizen deaktiviert. 
 	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend 
-	beschränkt. False lädt den Standardstil aus KOMA-Script.
+	beschränkt. False lädt den Standardstil aus \KOMAScript.
 	\item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
+	Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
 	\item[headline] Die Kopfzeile verfügt über die im Corporate Design beschriebenen Layoutmöglichkeiten über den Wert \code{automark}. Da diese Lösung typografisch nicht sonderlich sinnvoll ist, ist es auch möglich, diese abzuschalten. Voreingestellt ist ein Stil ohne Kolumnentitel.
-	\item[colorback] Schaltet zwischen dem farbigen Block auf der Titelseite und weißem Hintergrund um.
+	\item[logo] Option für die Titelseite, siehe \ref{sec:title}
+	\item[colorback] Option für die Titelseite, siehe \ref{sec:title}
+	\item[IMRAD=true/false] Deaktiviert die Prüfung auf IMRAD-Labels, siehe Abschnitt \ref{sec:IMRAD}.
+	\item[logofile=<Dateipfad>] Erlaubt es ein alternatives Logo zu übergeben. Diese Option existiert, um die Templates auch ohne das TUDa-Logo nutzen zu können. Die Logos sind der internen Verwendung vorbehalten und dürfen daher nicht mit diesem Template veröffentlicht werden.
 \end{description}
 
-\noindent Der Rest der Dokumentenklasse entspricht dem Standard von KOMA-Script, vgl. Abschnitt \ref{KOMA}.
+\noindent Der Rest der Dokumentenklasse entspricht dem Standard von \KOMAScript, vgl. Abschnitt \ref{sec:KOMA}.
 
 \subsection{Die Titelseite}
+\label{sec:title}
 
 Die Titelseite wird von tudapub automatisch generiert. Die Verwendung hierfür entspricht größtenteils der klassischen Methode unter Verwendung von \code{maketitle}.
 
-Die \KOMAScript-Option \code{titlepage} erlaubt es üblicherweise, zwischen Titelseiten und Titelkopf umzuschalten.
-Diese Funktion wurde deaktiviert und erzeugt bei Verwendung eine entsprechende Warnung. Die Corporate Design Vorgaben lassen die Erzeugung eines einzelnen Titelkopfes nicht zu. Der Wert \code{titlepage=firstiscover} wird erzwungen.
-
+Die \KOMAScript-Option \code{titlepage} erlaubt es üblicherweise, zwischen Titelseiten und Titelkopf umzuschalten. Bis Version 1.2 war diese Option deaktiviert. Mittlerweile existiert ein Modus für einen Titelkopf, dieser entspricht jedoch nicht den offiziellen Vorgaben und ist für interne Verwendung gedacht. Aufgrund der Implementierung wird \code{titlepage=true} identisch zu \code{titlepage=firstiscover} behandelt.
 
 Die Makros wie \code{author}, \code{title}, \code{subtitle} und \code{date} entsprechen der normalen Verwendung. Für die Institutszuweisung kann ebenfalls wie gewohnt \code{thanks} verwendet werden.
 
@@ -127,18 +130,6 @@ Das Makro \code{titleimage} akzeptiert beliebigen Inhalt. Dieser wird bündig mi
 \begin{verbatim}
 \titleimage{\includegraphics[width=\width]{example-image}}
 \end{verbatim}
-
-
-
-
-Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/body}.
-\begin{description}
-	\item[logo=head] Das Logo wird im Kopf direkt neben dem Titel platziert. Der Titel wird in der Breite reduziert. Der Hintergrund des Titels wird in der Farbe der Identitätsleiste eingefärbt. Zusätzliche Infoboxen (s.u.) werden ebenfalls im Kopf platziert.
-	\item[logo=body] Das Logo samt der Infoboxen wird im Körper der Titelseite platziert. Sofern ein 
-\end{description}
-
-
-
 
 Zusätzlich stehen die Makros \code{titleimage} und \code{addTitleBox} zur Verfügung, um den unteren Teil der Titelseite zu füllen.
 
@@ -155,10 +146,16 @@ Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \
 \addTitleBoxLogo*{\includegraphics[width=\linewidth]{example-image}}
 \end{verbatim}
 
+\minisec{Optionen für die Titelseite}
+Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/body}.
+\begin{description}
+	\item[logo=head] Das Logo wird im Kopf direkt neben dem Titel platziert. Der Titel wird in der Breite reduziert. Der Hintergrund des Titels wird in der Farbe der Identitätsleiste eingefärbt. Zusätzliche Infoboxen (s.u.) werden ebenfalls im Kopf platziert.
+	\item[logo=body] Das Logo samt der Infoboxen wird im Körper der Titelseite platziert.
+\end{description}
+
+Darüber hinaus lässt sich die Farbgebung umschalten. Die Option \code{colorback} schaltet zwischen dem farbigen Block auf der Titelseite und weißem Hintergrund um. Falls die Kombination \code{colorback=false} und \code{logo=head} geschaltet ist, bleibt der obere Teil der Titelseite jedoch farbig.
+
 \subsection{Strukturierungselemente}
-
-
-
 \minisec{Die abstract-Umgebung}
 Die \code{abstract}-Umgebung wird für \cls{tudapub} um eine Option für die Sprache erweitert. Somit ist es möglich, mehrere Zusammenfassungen in einem Dokument zu nutzen.
 
@@ -208,6 +205,7 @@ Um diesen Fehler zu beheben, können die notwendigen *.icc-Dateien unter \url{ht
 Darüber hinaus werden bei \hologo{XeLaTeX} einige Features nicht unterstützt. In diesem Fall erzeugt \code{pdfa=false} ein kompilierbares Dokument, allerdings sollte für validierbare PDF/A-Dateien auf \hologo{LuaLaTeX} einer möglichst aktuellen Version umgestiegen werden.
 
 \subsection{Zusätzliche Metadaten nach Wunsch der Universitätsbibliothek}
+\label{sec:IMRAD}
 Es existiert ein Mechanismus um das Strukturierungsmodell IMRaD \cite{imrad} zu kennzeichnen.
 Im Stil der einzelnen Teilbereiche können so, über Aufruf von 
 
@@ -257,7 +255,7 @@ Es gibt ähnliche Ansätze für ein paar weitere Kombinationen. Einige Beispiele
 
 
 \section{Standard-KOMA-Script}
-\label{KOMA}
+\label{sec:KOMA}
 Da die Klasse bis auf ein paar erzwungene Einstellungen, die das Layout betreffen, vollständig \KOMAScript-kompatibel ist, ist für sämtliche Modifikationen ein Blick in die \KOMAScript-Dokumentation hilfreich. Für einen Großteil bietet \KOMAScript{} eine eigene Lösung, wodurch Ergänzungspakete oft hinfällig sind.
 
 Beispiele für typische Modifikationen, die auch im Rahmen des Corporate Design zulässig sind:
@@ -274,7 +272,7 @@ Beispiele für typische Modifikationen, die auch im Rahmen des Corporate Design 
 
 \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
 Das Paket \pck{pdfx}, über welches die PDF/A Kompatibilität erzeugt wird, hat nur einen begrenzten Support für \hologo{XeLaTeX}.
-Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren XeLateX-Versionen passieren, dass \pck{pdfx} bereits Fehlermeldungen erzeugt. Diese werden vor der Überprüfung auf das Paketalter ausgegeben. Das Paket muss geladen worden sein, bevor die Überprüfung auf Alter möglich ist.
+Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hologo{XeLaTeX}-Versionen passieren, dass \pck{pdfx} bereits Fehlermeldungen erzeugt. Diese werden vor der Überprüfung auf das Paketalter ausgegeben. Das Paket muss geladen worden sein, bevor die Überprüfung auf Alter möglich ist.
 
 
 \end{document}
