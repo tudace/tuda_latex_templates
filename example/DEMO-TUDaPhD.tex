@@ -230,53 +230,54 @@ thesis={type=drfinal,dr=phil}
 
 Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 \begin{description}
-	\item[type=<Wert>] Auswahl des Typus. Dieser wird auf die Titelseite gesetzt und wählt zudem aus welche Informationen für die Titelseite zwingend übergeben werden müssen.
-	Es stehen die folgenden Werte zur Verfügung:
-	\begin{itemize}
-		\item \code{sta}: Studienarbeit
-		\item \code{diplom}: Diplomarbeit
-		\item \code{bachelor}: Bachelorarbeit
-		\item \code{master}: Masterarbeit
-		\item \code{pp}: Project-Proposal
-		\item \code{dr}: vorgelegte Dissertation
-		\item \code{drfinal}: genehmighte Dissertation
-	\end{itemize}
-	Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht	
-	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
-	\begin{quote}
-	Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
-	\end{quote}
-	Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden. 
-	\begin{verbatim}
-	\drtext{Zur Erlangung des Grades \ldots}
-	\end{verbatim}
-	
+\item[type=<Wert>] Auswahl des Typus. Dieser wird auf die Titelseite gesetzt und wählt zudem aus welche Informationen für die Titelseite zwingend übergeben werden müssen.
+Es stehen die folgenden Werte zur Verfügung (die Werte in Klammern sind die notwendigen Titeldaten)
+\begin{itemize}
+\item \code{sta}: Studienarbeit (title, author, date)
+\item \code{diplom}: Diplomarbeit (title, author, submissiondate, reviewer, department)
+\item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
+\item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
+\item \code{pp}: Project-Proposal  (title, author, date, department)
+\item \code{dr}: vorgelegte Dissertation (title, author, submissiondate , birthplace, department, reviewer)
+\item \code{drfinal}: genehmighte Dissertation (title, author, submissiondate,examdate, birthplace, department, reviewer)
+\end{itemize}
+Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
+\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
+\begin{quote}
+Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
+\end{quote}
+Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden.
+\begin{verbatim}
+\drtext{Zur Erlangung des Grades \ldots}
+\end{verbatim}
+
 	\item[department=<Kürzel>] Die Fachbereiche sind fest als Textbausteine in deutscher sowie englischer Sprache hinterlegt. Diese Option ermöglicht die Auswahl als Dokumentenklassenoption. Aus Kompatibilitätsgründen kann jedoch auch das Makro \code{department}-Makro hierfür genutzt werden. Zur Verfügung stehen:\par
-	\begin{tabular}{@{}l@{${}\to{}$}l@{}}
-		arch  & Architektur\\
-		bauing& Bau- und Umweltingenieurwissenschaften\\
-		bio   &Biologie\\
-		chem  &Chemie\\
-		etit  &Elektrotechnik und Informationstechnik\\
-		gugw  &Gesellschafts- und Geschichtswissenschaften\\
-		humanw&Humanwissenschaften\\
-		inf   &Informatik\\
-		mb    &Maschinenbau\\
-		matgeo&Material- und Geowissenschaften\\
-		math  &Mathematik\\
-		phys  &Physik\\
-		wi    &Rechts- und Wirtschaftswissenschaften
-	\end{tabular}
+\begin{tabular}{@{}l@{${}\to{}$}l@{}}
+	arch  & Architektur\\
+	bauing& Bau- und Umweltingenieurwissenschaften\\
+	bio   &Biologie\\
+	chem  &Chemie\\
+	etit  &Elektrotechnik und Informationstechnik\\
+	gugw  &Gesellschafts- und Geschichtswissenschaften\\
+	humanw&Humanwissenschaften\\
+	inf   &Informatik\\
+	mb    &Maschinenbau\\
+	matgeo&Material- und Geowissenschaften\\
+	math  &Mathematik\\
+	phys  &Physik\\
+	wi    &Rechts- und Wirtschaftswissenschaften
+\end{tabular}
 	
-	Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
-	Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
-		
-	\item[ignore-missing-data] Diese Option ist ein Schalter, der es ermöglicht die Fehlermeldung über nicht übergebene Titeldaten auszuschalten. In diesem Fall wird lediglich eine Warnung erzeugt, falls die angegeben Daten nicht mit den Anforderungen übereinstimmen.
+Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
+Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
+
+Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Falls diese automatische Erstellung nicht gewünscht ist, kann dies über die Option \code{instbox=false} deaktiviert werden.
+\item[ignore-missing-data] Diese Option ist ein Schalter, der es ermöglicht die Fehlermeldung über nicht übergebene Titeldaten auszuschalten. In diesem Fall wird lediglich eine Warnung erzeugt, falls die angegeben Daten nicht mit den Anforderungen übereinstimmen.
 \end{description}
 
 \minisec{Abweichung von den Vorgaben für die Titelseite}
 Da es möglich sein kann von dieser Vorgabe abzuweichen existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weiter Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub.
 
 \printbibliography
-	
+
 \end{document}
