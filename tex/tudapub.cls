@@ -27,13 +27,6 @@
 	Please~look~at~tuda-ci~documentation~for~further~information~and~avoid~using~outdated~options.
 }
 
-%Message Declaration for option processing
-\msg_new:nnn {TUDaPub} {titlepage-option-disabled} {
-	You~set~the~titlepage~option~to~#1.\\
-	The~Corporate~Design~guidelines~for~TU~Darmstadt~do~not~support~this~option.\\
-	The~KOMA-Script~option~titlepage~is~forced~to~"firstiscover".
-}
-
 \bool_new:N \g_TUDa_geometry_bool
 \bool_new:N \g_TUDa_custommargins_bool
 
@@ -76,6 +69,7 @@
 	},
 	ruledheaders .initial:n = all,
 	type .choices:nn = {publication, thesis} {\tl_gset_eq:NN \g_TUDa_pubType_tl \l_keys_choice_tl},
+	type / intern .code:n = {\keys_set:nn {TUDa/pub}  {titlepage=false, pdfa=false}},
 	type .initial:n = publication,
 	unknown .code:n = {\prop_gput:NVn \g_TUDa_unknown_clsopts_prop \l_keys_key_tl {#1}},
 	headline .choice:,
@@ -105,7 +99,6 @@
 	logo / top .code:n = {\bool_gset_true:N \g_TUDa_logo@inhead_bool},
 	logo / bottom .code:n = {\bool_gset_false:N \g_TUDa_logo@inhead_bool},
 	logo .initial:n = {body},
-	titlepage .code:n = {\msg_warning:nnn {TUDaPub} {titlepage-option-disabled} {#1}},
 	paper .choices:nn = {a0,a1,a2,a3,a4,a5,a6}{
 		\int_gset_eq:NN \g_TUDa_paper_int  \l_keys_choice_int
 		\PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
