@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/09/25 v1.20-beta
+ tuda-ci 2019/10/26 v1.20
 
 ***************************************************************************
 
@@ -47,6 +47,7 @@ https://www.ce.tu-darmstadt.de/ce/latex_tuda/index.de.jsp
 ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
+
 
 ## Enthaltene Templatedateien
 
@@ -130,3 +131,8 @@ exercise sheets/exams | DEMO-TUDaExercise.tex | tudaexercise.cls
    - Switch pdfa-mode to PDF/A-2b and enforce Type1 for valid documents
    - add tudaexercise.cls and corresponding demo file
    - documentation enhancements
+   - type=intern for tudapub for intern reports
+   - announcement mode for tudaposter
+   - Layout adjustments on TUDabeamer
+   - Additional pagestyle=false mode for tudapub
+
