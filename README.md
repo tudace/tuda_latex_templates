@@ -53,10 +53,12 @@ Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos do
 
 Dokumententyp | Templatedatei(en) | Dokumentenklasse
 ------------- | ----------------- | ----------------
+Interne Berichte (minimales template) | DEMO-TUDaReport.tex | tudapub.cls
 Wissenschaftliche Artikel | DEMO-TUDaPub.tex, verwendet auch DEMO-TUDaBibliography.bib | tudapub.cls mit tudasize9pt.clo
 Abschlussarbeiten | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, verwendet auch DEMO-TUDaBibliography.bib | tudapub.cls mit tudathesis.cfg
 Wissenschaftliche Poster | DEMO-TUDaSciPoster.tex | tudasciposter.cls
 Veranstaltungsankündigungen | DEMO-TUDaPoster.tex | tudaposter.cls
+| DEMO-TUDaAnnouncement.tex | tudaposter.cls
 Präsentationen | DEMO-TUDaBeamer.tex | tudabeamer.cls
 Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudaletter.cls mit tudalettersize10pt.clo
 Übungsblätter | DEMO-TUDaExercise.tex | tudaexercise.cls
@@ -65,6 +67,7 @@ Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudalet
 
 * README.md
 * demo/
+  - DEMO-TUDaAnnouncement.tex
   - DEMO-TUDaBeamer.tex
   - DEMO-TUDaBibliography.bib
   - DEMO-TUDaExercise.tex
@@ -72,6 +75,7 @@ Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudalet
   - DEMO-TUDaPhD.tex
   - DEMO-TUDaPoster.tex
   - DEMO-TUDaPub.tex
+  - DEMP-TUDaReport.tex
   - DEMO-TUDaSciPoster.tex
   - DEMO-TUDaThesis.tex
   - TuDa_Demo.lco
@@ -109,10 +113,12 @@ If you are not a German speaker and require some help using these files, please 
 
 document type | name of template file | used documentclass and config
 ------------- | ----------------- | ----------------
+minimal Template for intern reports | DEMO-TUDaReport.tex | tudapub.cls
 scientific paper | DEMO-TUDaPub.tex, using DEMO-TUDaBibliography.bib | tudapub.cls and tudasize9pt.clo
 theses | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, using DEMO-TUDaBibliography.bib | tudapub.cls and tudathesis.cfg
 scientific poster | DEMO-TUDaSciPoster.tex | tudasciposter.cls
 announcement poster | DEMO-TUDaPoster.tex | tudaposter.cls
+| DEMO-TUDaAnnouncement.tex | tudaposter.cls
 presentation | DEMO-TUDaBeamer.tex | tudaposter.cls
 letter | DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  | tudaletter.cls and tudalettersize10pt.clo
 exercise sheets/exams | DEMO-TUDaExercise.tex | tudaexercise.cls
@@ -127,7 +133,7 @@ exercise sheets/exams | DEMO-TUDaExercise.tex | tudaexercise.cls
    - Improved implementation of the headline option
    - Add information on package dependencies
  * v1.11 (2019-09-25) bugfixes + smaller adjustments to simplify usage
- * v1.20 (2019-10-xx) Enhancements for exercise sheets/exams and pdfa-mode
+ * v1.20 (2019-10-26) Enhancements for exercise sheets/exams and pdfa-mode
    - Switch pdfa-mode to PDF/A-2b and enforce Type1 for valid documents
    - add tudaexercise.cls and corresponding demo file
    - documentation enhancements
