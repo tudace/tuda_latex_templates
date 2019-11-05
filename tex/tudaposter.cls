@@ -50,16 +50,24 @@
 	indenttext .bool_gset:N = \g_TUDa_indenttext_bool,
 	indenttext .initial:n = false,
 	indenttext .default:n = true,
+	marginpar .tl_gset:N = \g_TUDa_marginpar_tl,
+	marginpar .default:n = true,
+	marginpar .initial:n = false,
+	headings .choice:,
+	headings / default .meta:n = {headings=large},
+	headings / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
+	headings / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
+	headings .initial:n = default,
 }
 
 
 \ProcessKeysOptions{TUDa/poster}
 
+\ExplSyntaxOff
 \LoadClass[parskip=half-]{scrartcl}
+\ExplSyntaxOn
 
 \tl_if_empty:NT \l_keys_choice_tl {\keys_set:nn {TUDa/poster} {paper=a0}}
-
-
 
 \int_case:nn {\g_TUDa_paper_int}
 {
