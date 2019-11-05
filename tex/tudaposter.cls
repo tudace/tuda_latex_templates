@@ -35,7 +35,17 @@
 	fontsize .initial:n = auto,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-	type .choices:nn = {default, announcement}{\int_gset_eq:NN \g_TUDa_postertype_int \l_keys_choice_int},
+	type .choice:,
+	type / default .code:n = {
+		\int_gset:Nn \g_TUDa_postertype_int {1}
+	},
+	type / announcement .code:n = {
+		\int_gset:Nn \g_TUDa_postertype_int {2}
+		\keys_set:nn {TUDa/poster}{
+			indenttext=false,%allow overwrite - check default
+			logo=head
+		}
+	},
 	type .initial:n = default,
 	indenttext .bool_gset:N = \g_TUDa_indenttext_bool,
 	indenttext .initial:n = false,
@@ -131,7 +141,6 @@
 	{1} {}
 	{2} {
 		\addtokomafont{subtitle}{\bfseries}
-		\keys_set:nn {TUDa/poster}{indenttext=true,logo=head}
 	}
 }
 %%%%%%%%%%%%%%%%%%%%%%
