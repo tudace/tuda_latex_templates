@@ -11,9 +11,9 @@
 
 \keys_define:nn {TUDa/poster} {
 	accentcolor .code:n = {\PassOptionsToPackage{accent=#1}{tudacolors}},
-	color .meta:n = {accent=#1},
+	color .code:n = {\PassOptionsToPackage{color=#1}{tudacolors}},
 	textaccentcolor .code:n = {\PassOptionsToPackage{textaccent=#1}{tudacolors}},
-	identbarcolor .code:n = {\PassOptionsToPackage{indentbar=#1}{tudacolors}},
+	identbarcolor .code:n = {\PassOptionsToPackage{identbar=#1}{tudacolors}},
 	logo .choice:,
 	logo / head .code:n = {\bool_gset_true:N \g_TUDa_logo@inhead_bool},
 	logo / body .code:n = {\bool_gset_false:N \g_TUDa_logo@inhead_bool},
