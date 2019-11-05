@@ -236,7 +236,9 @@
 	mode=picture,
 	contents={%
 		\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {
-		\raisebox{\depth}{\qrcode[height={\g_TUDa_qrcode_dim}]{\g_TUDa_poster_qrcode_tl}}
+		\let\width\g_TUDa_qrcode_dim
+		\let\height\g_TUDa_qrcode_dim
+		\g_TUDa_poster_qrcode_tl
  		}
 	}
  	]{TUDa.poster.qrcode}
@@ -261,7 +263,7 @@
 		clone=TUDa.poster.qrcode,
 		align=bl,
 		hoffset=\g_TUDa_margin_dim,
-		width=\textwidth,
+		width=\paperwidth-2\g_TUDa_margin_dim,
 		height=0pt,
 		contents={\smash{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}}
 	]{TUDa.poster.footer}
@@ -492,8 +494,11 @@
 
 \tl_new:N \g_TUDa_poster_qrcode_tl
 \newcommand*{\footerqrcode}[1]{
-	\tl_gset:Nn \g_TUDa_poster_qrcode_tl {#1}
+	\tl_gset:Nn \g_TUDa_poster_qrcode_tl
+	{\raisebox{\depth}{\qrcode[height={\g_TUDa_qrcode_dim}]{#1}}}
 }
+
+\newcommand*{\footerqrcodeimg}[1]{\tl_gset:Nn \g_TUDa_poster_qrcode_tl {#1}}
 
 
 \RedeclareSectionCommand[afterskip=1ex plus .2ex]{section}
