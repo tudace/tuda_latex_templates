@@ -59,6 +59,9 @@
 	headings / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
 	headings / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
 	headings .initial:n = default,
+	colorsubtitle .bool_gset:N = \g_TUDa_colorsubtitle_bool,
+	colorsubtitle .default:n = true,
+	colorsubtitle .initial:n = false,
 }
 
 
@@ -306,7 +309,6 @@
 
 
 \dim_new:N \g_TUDa_titlegraphic_max_height_dim
-\skip_new:N \g_TUDa_title_fill_skip 
 
 \newcommand*{\titleinfo}[1]{\def\@titleinfo{#1}}
 \titleinfo{}
@@ -320,9 +322,11 @@
 	{
 		\usesizeofkomafont{title}
 		\parbox[t]{\linewidth}{
-			\bool_if:NT \g_TUDa_smalltitle_bool {\raisebox{\dimexpr1.5\c_TUDa_logoheight_dim-\height}}
+			\bool_if:NT \g_TUDa_smalltitle_bool {\raisebox{
+					\dim_max:nn {0pt} {1.5\c_TUDa_logoheight_dim - \height}
+				}}
 			{
-			\begin{minipage}[\bool_if:NTF \g_TUDa_smalltitle_bool {t} {b}]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
+			\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
 				\leavevmode\par\nointerlineskip
 				\bool_if:NF \g_TUDa_indenttext_bool {\begin{addmargin}{\g_TUDa_titleindent_dim }}
 					\usekomafont{title}
@@ -354,38 +358,34 @@
 	\endgroup
 
 	\TUDa_Setup_Title_box:
-	
-	\bool_if:NTF \g_TUDa_smalltitle_bool {
-		\skip_set:Nn \g_TUDa_title_fill_skip {\box_dp:N \g_TUDa_title_box}
-	}{
-		\dim_compare:nT {\box_ht:N \g_TUDa_title_box < 2\c_TUDa_logoheight_dim} {
-			\skip_set:Nn \g_TUDa_title_fill_skip {2\c_TUDa_logoheight_dim - \box_ht:N \g_TUDa_title_box}
-		}
-	}
-	\dim_set:Nn \l_tmpa_dim {\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim+\g_TUDa_title_fill_skip}
+	\dim_set:Nn \l_tmpa_dim {\bool_if:NT \g_TUDa_colorsubtitle_bool {\box_dp:N \g_TUDa_title_box}+
+		\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim}
 
 	\ModifyLayer[
 		height=\l_tmpa_dim
 	]{TUDa.poster.background}
-	
-	\DeclareLayer[
-		clone=TUDa.poster.marginpar,
-		height=\textheight-\l_tmpa_dim-.5\c_TUDa_logoheight_dim,
-		addvoffset=\dim_eval:n {\l_tmpa_dim},% +.5\c_TUDa_logoheight_dim},
-	]{TUDa.poster.marginpar.title}
-	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.marginpar.title}
-	
-	\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {
-		\ModifyLayer[addwidth=-\g_TUDa_qrcode_dim-\c_TUDa_rulesep_dim]{TUDa.poster.footer}
-	}
 	
 	\bool_if:NF \g_TUDa_logo@inhead_bool {
 		\ModifyLayer[
 		addvoffset=\l_tmpa_dim +\box_dp:N \g_TUDa_title_box+\c_TUDa_smallrule_dim
 		]{TUDa.poster.logo}
 	}
+	
+	\dim_set:Nn \l_tmpa_dim{\box_ht:N \g_TUDa_title_box+\box_dp:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim}
+	\DeclareLayer[
+		clone=TUDa.poster.marginpar,
+		height=\textheight-\l_tmpa_dim,
+		addvoffset=\l_tmpa_dim,
+	]{TUDa.poster.marginpar.title}
 
+	
+	\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {
+		\ModifyLayer[addwidth=-\g_TUDa_qrcode_dim-\c_TUDa_rulesep_dim]{TUDa.poster.footer}
+	}
+	
+	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.marginpar.title}
 	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.logo}
+
 	\begingroup
 
 	\bool_if:NT \g_TUDa_logo@inhead_bool {
