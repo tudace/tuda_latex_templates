@@ -273,13 +273,12 @@
 ]{TUDa.poster.background}
 
 \DeclareNewLayer[
-%	clone=TUDa.poster.background,
 	textarea,
 	foreground,
 	align=tr,
-	addhoffset=\textwidth+\bool_if:NTF \g_TUDa_indenttext_bool {\g_TUDa_titleindent_dim}{0pt},
+	hoffset=\paperwidth-\g_TUDa_margin_dim,
 	width=2.2\c_TUDa_logoheight_dim,
-	height=15cm,
+	height=.5\textheight,
 	contents={\box_use:N \g_TUDa_title_info_box}
 ]{TUDa.poster.logo}
 
@@ -309,6 +308,9 @@
 \dim_new:N \g_TUDa_titlegraphic_max_height_dim
 \skip_new:N \g_TUDa_title_fill_skip 
 
+\newcommand*{\titleinfo}[1]{\def\@titleinfo{#1}}
+\titleinfo{}
+
 \renewcommand*{\maketitle}{
 	\begingroup
 	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
@@ -318,7 +320,10 @@
 	{
 		\usesizeofkomafont{title}
 		\parbox[t]{\linewidth}{
-			\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
+			\bool_if:NT \g_TUDa_smalltitle_bool {\raisebox{\dimexpr1.5\c_TUDa_logoheight_dim-\height}}
+			{
+			\begin{minipage}[\bool_if:NTF \g_TUDa_smalltitle_bool {t} {b}]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
+				\leavevmode\par\nointerlineskip
 				\bool_if:NF \g_TUDa_indenttext_bool {\begin{addmargin}{\g_TUDa_titleindent_dim }}
 					\usekomafont{title}
 					\raggedright
@@ -326,21 +331,36 @@
 					\leavevmode\usekomafont{disposition}\usekomafont{title}%
 					\@title\strut\par
 				\bool_if:NTF \g_TUDa_indenttext_bool {\nointerlineskip\leavevmode}{\end{addmargin}}
-			\end{minipage}%
-			\par\nointerlineskip
-			\bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule\usekomafont{subtitle}\par
+			\end{minipage}
+		}
+	\par\nointerlineskip
+	\exp_args:Nf \tl_if_empty:nF {\@subtitle\@titleinfo} {
+			\bool_if:NT \g_TUDa_smalltitle_bool {\color{textonaccentcolor}}
+			\bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule\par
+			\vspace{\c_TUDa_rulesep_dim}
+			\nointerlineskip
 			\bool_if:NF \g_TUDa_indenttext_bool {\begin{addmargin}{\g_TUDa_titleindent_dim }}
-				\@subtitle\strut
+			\tl_if_empty:NF \@subtitle {{\usekomafont{subtitle}\strut\@subtitle\strut\par}}
+			\tl_if_empty:NF \@titleinfo {{\usekomafont{titleinfo}\strut\@titleinfo\par}}
+			\vspace{\c_TUDa_rulesep_dim}
 			\bool_if:NF \g_TUDa_indenttext_bool {\end{addmargin}}
 		 \par\nointerlineskip
-		 \bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule
+		 \bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}
+		}
+		}
+		 \TUDa@smallrule
 		}
 	}
 	\endgroup
 
 	\TUDa_Setup_Title_box:
-	\dim_compare:nT {\box_ht:N \g_TUDa_title_box < 2\c_TUDa_logoheight_dim} {
-		\skip_set:Nn \g_TUDa_title_fill_skip {2\c_TUDa_logoheight_dim - \box_ht:N \g_TUDa_title_box}
+	
+	\bool_if:NTF \g_TUDa_smalltitle_bool {
+		\skip_set:Nn \g_TUDa_title_fill_skip {\box_dp:N \g_TUDa_title_box}
+	}{
+		\dim_compare:nT {\box_ht:N \g_TUDa_title_box < 2\c_TUDa_logoheight_dim} {
+			\skip_set:Nn \g_TUDa_title_fill_skip {2\c_TUDa_logoheight_dim - \box_ht:N \g_TUDa_title_box}
+		}
 	}
 	\dim_set:Nn \l_tmpa_dim {\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim+\g_TUDa_title_fill_skip}
 
@@ -372,11 +392,7 @@
 		\dim_compare:nT {\box_ht:N \g_TUDa_title_info_box+ \box_dp:N \g_TUDa_title_info_box  > \box_ht:N \g_TUDa_title_box} 
 		{\msg_warning:nn {TUDaPoster} {infobox-too-high}}
 	}
-
-	\vspace*{\dim_eval:n {\g_TUDa_title_fill_skip-\topskip}}\nointerlineskip
-
-	\box_use:N \g_TUDa_title_box
- 
+	\leavevmode\box_use:N \g_TUDa_title_box\par
 	\dim_set:Nn \g_TUDa_titlegraphic_max_height_dim {\textheight-\pagetotal}
 	\global\def\contentheight{\g_TUDa_titlegraphic_max_height_dim}
 	\global\def\contentwidth{\linewidth}
@@ -386,6 +402,9 @@
 	}
 	\thispagestyle{TUDa.poster.title}
 	\endgroup\par
+	\let\@title\@empty
+	\let\@subtitle\@empty
+	\let\@titleinfo\@empty
 }
 
 \global\def\contentwidth{\linewidth}
