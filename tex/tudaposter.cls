@@ -50,7 +50,8 @@
 	indenttext .bool_gset:N = \g_TUDa_indenttext_bool,
 	indenttext .initial:n = false,
 	indenttext .default:n = true,
-	marginpar .tl_gset:N = \g_TUDa_marginpar_tl,
+	marginpar .bool_gset:N = \g_TUDa_marginpar_bool,
+	marginpar / auto .meta:n = {marginpar = true} ,
 	marginpar .default:n = true,
 	marginpar .initial:n = false,
 	headings .choice:,
@@ -151,6 +152,10 @@
 		\addtokomafont{subtitle}{\bfseries}
 	}
 }
+
+%%%%%%%%%%%%%%%%%%%%%%
+%marginpar option
+\dim_new:N \g_TUDa_marginpar_dim
 %%%%%%%%%%%%%%%%%%%%%%
 \dim_new:N \g_TUDa_titleindent_dim
 \begingroup
@@ -158,8 +163,11 @@
 	\dim_gset:Nn \g_TUDa_titleindent_dim {.5ex}
 \endgroup
 
+\dim_new:N \g_TUDa_columnSep_dim
+\dim_gset:Nn \g_TUDa_columnSep_dim {1em}
 
 \RequirePackage{geometry}
+
 \geometry{
 	margin= \g_TUDa_margin_dim,
 	hmargin = \dim_eval:n {
@@ -173,7 +181,29 @@
 		+\g_TUDa_margin_dim}
 }
 
-\setlength\columnsep{\g_TUDa_margin_dim}
+\bool_if:NTF \g_TUDa_marginpar_bool {
+	\dim_gset:Nn \g_TUDa_marginpar_dim {2.2\c_TUDa_logoheight_dim}
+	\geometry{
+		includemp, marginpar=\g_TUDa_marginpar_dim, marginparsep=\g_TUDa_columnSep_dim,
+		right = \dim_eval:n {
+			\g_TUDa_margin_dim +
+			\bool_if:nTF {\g_TUDa_indenttext_bool && !\g_TUDa_marginpar_bool}
+			{\g_TUDa_titleindent_dim} {0pt}
+		},
+	}
+	\KOMAoptions{mpinclude}
+}{
+	\dim_gzero:N \g_TUDa_marginpar_dim
+	\geometry{
+		nomarginpar,
+		right = \dim_eval:n {
+			\bool_if:NT \g_TUDa_indenttext_bool
+			{\g_TUDa_titleindent_dim}
+			+ \g_TUDa_margin_dim
+		},
+	}
+	\KOMAoptions{mpinclude=false}
+}
 
 
 \bool_if:NT \g_TUDa_poster_foot_bool {
@@ -265,8 +295,14 @@
 	}
 ]{TUDa.poster.rule}
 
+
+\RequirePackage{scrlayer-notecolumn}
+\DeclareNewLayer[
+	clone=notecolumn.marginpar,
+]{TUDa.poster.marginpar}
+
 \DeclareNewPageStyleByLayers{TUDa.poster.title}{TUDa.poster.rule,TUDa.poster.background,TUDa.poster.qrcode,TUDa.poster.footer}
-\DeclareNewPageStyleByLayers{TUDa.poster}{TUDa.poster.rule,TUDa.poster.qrcode,TUDa.poster.footer}
+\DeclareNewPageStyleByLayers{TUDa.poster}{TUDa.poster.rule,TUDa.poster.qrcode,TUDa.poster.footer, TUDa.poster.marginpar}
 \pagestyle{TUDa.poster}
 
 
@@ -276,7 +312,10 @@
 \renewcommand*{\maketitle}{
 	\begingroup
 	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
-	\vbox_gset:Nn \g_TUDa_title_box {
+	\bool_if:NT \g_TUDa_marginpar_bool
+		{\setlength{\linewidth}{\dim_eval:n  {\textwidth+\g_TUDa_marginpar_dim + \marginparsep}}}
+	\vbox_gset:Nn \g_TUDa_title_box
+	{
 		\usesizeofkomafont{title}
 		\parbox[t]{\linewidth}{
 			\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
@@ -308,6 +347,13 @@
 	\ModifyLayer[
 		height=\l_tmpa_dim
 	]{TUDa.poster.background}
+	
+	\DeclareLayer[
+		clone=TUDa.poster.marginpar,
+		height=\textheight-\l_tmpa_dim-.5\c_TUDa_logoheight_dim,
+		addvoffset=\dim_eval:n {\l_tmpa_dim},% +.5\c_TUDa_logoheight_dim},
+	]{TUDa.poster.marginpar.title}
+	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.marginpar.title}
 	
 	\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {
 		\ModifyLayer[addwidth=-\g_TUDa_qrcode_dim-\c_TUDa_rulesep_dim]{TUDa.poster.footer}
@@ -439,4 +485,31 @@
 	You~should~probably~switch~to~logo=bottom~or~reduce~the~number/size~of~InfoBoxes.
 }
 
+\keys_define:nn {TUDa/poster/marginpar}{
+	valign .tl_set:N = \l_TUDa_marginpar_valign_tl,
+	valign .initial:n = t,
+}
+
+
+
+
+\newcommand*{\infofont}{\accentfont\normalcolor\footnotesize}
+\DeclareTextFontCommand{\infotext}{\infofont}
+
+\int_new:N \g_TUDa_marginpar_int
+
+\NewDocumentCommand{\SetMarginpar}{om}{
+	\bool_if:NF \g_TUDa_marginpar_bool {\msg_warning:nn {TUDa/Poster} {marginpar-disabled}}
+	\IfNoValueF{#1}{\keys_set:nn {TUDa/poster/marginpar} {#1}}
+	\ModifyLayer[contents={\parbox[t][\layerheight][\l_TUDa_marginpar_valign_tl]{\layerwidth}{#2}}]{TUDa.poster.marginpar}
+	\bool_set_true:N \l_tmpa_bool
+}
+
+\msg_new:nnnn {TUDa/Poster} {marginpar-disabled} {
+	You~are~adding~data~to~the~marginpar~box,~though~marginpar option is set to false.\\
+	I~will~add~it,~but~cannot~ensure~the~position.
+} {
+	I'd~suggest~to~switch~the~marginpar~option~to~true.
+	See~the~TUDa-CI~documentation~for~further~information.
+}
 \endinput
