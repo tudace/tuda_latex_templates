@@ -68,7 +68,7 @@
 }
 
 \keys_define:nn {TUDa/pub} {
-	color .meta:n = {accentcolor=#1},
+	color .meta:n = {color=#1},
 	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
 	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
 	textonaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
