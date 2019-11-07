@@ -57,7 +57,7 @@ Wissenschaftliche Artikel   	     	 | DEMO-TUDaPub.tex, verwendet auch DEMO-TUDa
 Abschlussarbeiten 			 | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, verwendet auch DEMO-TUDaBibliography.bib	| tudapub.cls mit tudathesis.cfg
 Wissenschaftliche Poster		 | DEMO-TUDaSciPoster.tex		 	   					| tudasciposter.cls
 Veranstaltungsankündigungen		 | DEMO-TUDaPoster.tex									| tudaposter.cls
-					 | DEMO-TUDaAnnouncement.tex								| tudaposter.cls
+Ausschreibungen				 | DEMO-TUDaAnnouncement.tex								| tudaposter.cls
 Präsentationen				 | DEMO-TUDaBeamer.tex									| tudabeamer.cls
 Briefe					 | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco 			| tudaletter.cls mit tudalettersize10pt.clo
 Übungsblätter				 | DEMO-TUDaExercise.tex	       							| tudaexercise.cls
@@ -126,7 +126,7 @@ scientific paper     	      		| DEMO-TUDaPub.tex, using DEMO-TUDaBibliography.bi
 theses	   				| DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, using DEMO-TUDaBibliography.bib | tudapub.cls and tudathesis.cfg
 scientific poster			| DEMO-TUDaSciPoster.tex 		      				| tudasciposter.cls
 announcement poster			| DEMO-TUDaPoster.tex 							| tudaposter.cls
-	     				| DEMO-TUDaAnnouncement.tex 						| tudaposter.cls
+theses announcements	   		| DEMO-TUDaAnnouncement.tex 						| tudaposter.cls
 presentation				| DEMO-TUDaBeamer.tex 							| tudaposter.cls
 letter					| DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			| tudaletter.cls and tudalettersize10pt.clo
 exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
