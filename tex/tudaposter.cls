@@ -43,7 +43,9 @@
 		\int_gset:Nn \g_TUDa_postertype_int {2}
 		\keys_set:nn {TUDa/poster}{
 			indenttext=false,%allow overwrite - check default
-			logo=head
+			logo=head,
+			title=small,
+			colorsubtitle=true
 		}
 	},
 	type .initial:n = default,
@@ -279,6 +281,7 @@
 
 
 \dim_new:N \g_TUDa_titlegraphic_max_height_dim
+\dim_new:N  \g_TUDa_titleback_dim
 
 \newcommand*{\titleinfo}[1]{\def\@titleinfo{#1}}
 \titleinfo{}
@@ -309,15 +312,15 @@
 		}
 	\par\nointerlineskip
 	\exp_args:Nf \tl_if_empty:nF {\@subtitle\@titleinfo} {
-			\bool_if:NT \g_TUDa_smalltitle_bool {\color{textonaccentcolor}}
 			\bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule\par
 			\vspace{\c_TUDa_rulesep_dim}
 			\nointerlineskip
-			\bool_if:NF \g_TUDa_indenttext_bool {\begin{addmargin}{\g_TUDa_titleindent_dim }}
+			\bool_if:NTF \g_TUDa_indenttext_bool {\begingroup}{\begin{addmargin}{\g_TUDa_titleindent_dim }}
+			\bool_if:NT \g_TUDa_colorsubtitle_bool {\color{textonaccentcolor}}
 			\tl_if_empty:NF \@subtitle {{\usekomafont{subtitle}\strut\@subtitle\strut\par}}
 			\tl_if_empty:NF \@titleinfo {{\usekomafont{titleinfo}\strut\@titleinfo\par}}
 			\vspace{\c_TUDa_rulesep_dim}
-			\bool_if:NF \g_TUDa_indenttext_bool {\end{addmargin}}
+			\bool_if:NTF \g_TUDa_indenttext_bool {\engroup} {\end{addmargin}}
 		 \par\nointerlineskip
 		 \bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}
 		}
@@ -328,24 +331,25 @@
 	\endgroup
 
 	\TUDa_Setup_Title_box:
-	\dim_set:Nn \l_tmpa_dim {\bool_if:NT \g_TUDa_colorsubtitle_bool {\box_dp:N \g_TUDa_title_box}+
-		\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim}
+	\dim_gset:Nn \g_TUDa_titleback_dim {	
+		\bool_if:NT \g_TUDa_colorsubtitle_bool {\box_dp:N \g_TUDa_title_box}+
+				\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim
+			}
 
 	\ModifyLayer[
-		height=\l_tmpa_dim
+		height=\g_TUDa_titleback_dim
 	]{TUDa.poster.background}
 	
 	\bool_if:NF \g_TUDa_logo@inhead_bool {
 		\ModifyLayer[
-		addvoffset=\l_tmpa_dim +\box_dp:N \g_TUDa_title_box+\c_TUDa_smallrule_dim
+		addvoffset=\g_TUDa_titleback_dim+\c_TUDa_smallrule_dim %+\box_dp:N \g_TUDa_title_box
 		]{TUDa.poster.logo}
 	}
 	
-	\dim_set:Nn \l_tmpa_dim{\box_ht:N \g_TUDa_title_box+\box_dp:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim}
 	\DeclareLayer[
 		clone=TUDa.poster.marginpar,
-		height=\textheight-\l_tmpa_dim,
-		addvoffset=\l_tmpa_dim,
+		height=\textheight-\box_ht:N \g_TUDa_title_box-\box_dp:N \g_TUDa_title_box-.5\c_TUDa_logoheight_dim,
+		addvoffset=\box_ht:N \g_TUDa_title_box+\box_dp:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim,
 	]{TUDa.poster.marginpar.title}
 
 	
