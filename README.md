@@ -144,14 +144,14 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
  * v1.20 (2019-10-26 - was not published on CTAN) 
    - Enhancements for exercise sheets/exams and pdfa-mode
    - Switch pdfa-mode to PDF/A-2b and enforce Type1 for valid documents
-   - add tudaexercise.cls and corresponding demo file
-   - documentation enhancements
-   - type=intern for tudapub for intern reports
-   - announcement mode for tudaposter
+   - Add tudaexercise.cls and corresponding demo file
+   - Documentation enhancements
+   - Type=intern for tudapub for intern reports
+   - Announcement mode for tudaposter
    - Layout adjustments on TUDabeamer
    - Additional pagestyle=false mode for tudapub
- * v2.00 (2019-11-07) Additional Template files + some improved implementattions
+ * v2.00 (2019-11-07) Additional Template files + some improved implementations
    - changed title fontsize adjustments to use clo-files
-   - additional optiosn for tudaposter, to use it for job/thesis announcements
+   - additional options for tudaposter, to use it for job/thesis announcements
    - improved implementation of tudaexercise
    - Bugfixes concerning the PDF/A-Mode
