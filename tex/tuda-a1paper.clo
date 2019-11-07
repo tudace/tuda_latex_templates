@@ -1,4 +1,4 @@
-\ProvidesExplFile{tuda-a4paper.clo}{\filedate}{\fileversion}{tuda-ci size adjustments for a0paper}
+\ProvidesExplFile{tuda-a1paper.clo}{\filedate}{\fileversion}{tuda-ci size adjustments for a0paper}
 \cs_set:Nn \TUDa_setup_title_sizes: {
 		\cs_set:Nn \TUDa_title_fontsize: {{86pt}{120pt}}
 		\cs_set:Nn \TUDa_titleinfo_fontsize: {{35pt}{42pt}}
