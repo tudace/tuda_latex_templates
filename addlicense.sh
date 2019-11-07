@@ -1,9 +1,9 @@
 #!/bin/bash
 cd tex
-fileversion="1.20-beta"
+fileversion="2.0"
 filedate=$(date '+%Y/%m/%d')
 echo $filedate
-for filename in *.sty *.cls *.def *.cfg
+for filename in *.sty *.cls *.def *.cfg *.clo
 do
     echo $filename
     (sed  "s/<FILENAME>/$filename/; s/<FILEDATE>/$(date '+%Y\/%m\/%d')/; s/<FILEVERSION>/$fileversion/" ../LICENSE_info && cat $filename ) >> tmp_license.txt
