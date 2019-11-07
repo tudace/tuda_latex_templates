@@ -373,7 +373,7 @@
 
 
 
-\setkomafont{disposition}{\sffamily\bfseries}
+
 
 
 
@@ -386,10 +386,11 @@
 
 \usepackage{tudacolors}
 
-%TODO: mode -> light head. 
-
+\setkomafont{disposition}{\sffamily\bfseries}
 \setkomafont{pageheadfoot}{\sffamily\small}
 \setkomafont{pagenumber}{}
+\addtokomafont{captionlabel}{\accentfont}
+\addtokomafont{caption}{\accentfont}
 
 
 \KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}

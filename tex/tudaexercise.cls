@@ -266,6 +266,8 @@
 
 \setkomafont{pageheadfoot}{\sffamily\small}
 \setkomafont{pagenumber}{}
+\addtokomafont{captionlabel}{\accentfont}
+\addtokomafont{caption}{\accentfont}
 
 \KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}
 \KOMAoptions{headsepline=.5\c_TUDa_smallrule_dim}

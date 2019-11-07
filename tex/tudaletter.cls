@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
-\ProvidesExplPackage{tudaletter}
+\ProvidesExplClass{tudaletter}
 	{\filedate}{\fileversion}{Letters for TUDa-CI, Corporate Design of TU Darmstadt}
 
 \RequirePackage{l3keys2e}
