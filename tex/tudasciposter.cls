@@ -37,6 +37,11 @@
 	fontsize .code:n = \prop_gput:Nnn \g_TUDa_clsopts_prop {fontsize} {#1},
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
+	title .choice:,
+	title / default .meta:n = {title=large},
+	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
+	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
+	title .initial:n = default,
 }
 
 
@@ -45,39 +50,17 @@
 
 \ProcessKeysOptions{TUDa/poster}
 
-
-\int_case:nn {\g_TUDa_paper_int}
-{
-	%paper=a0
-	{1} {		%{130pt}{146pt}
-		\cs_set:Nn \TUDa_title_fontsize: {{125pt}{165pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{42pt}{55pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{28pt}{35pt}}
-		\prop_gput_if_new:Nnn \g_TUDa_clsopts_prop {fontsize} {30pt}
-		\dim_const:Nn \c_TUDa_margin_dim {30mm}
-	}
-	%paper=a1
-	{2} {
-		\cs_set:Nn \TUDa_title_fontsize: {{86pt}{120pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{35pt}{42pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{22pt}{26pt}}
-		\prop_gput_if_new:Nnn \g_TUDa_clsopts_prop {fontsize} {21pt}
-		\dim_const:Nn \c_TUDa_margin_dim {30mm}
-	}
-	%paper=a2
-	{3} {
-		\cs_set:Nn \TUDa_title_fontsize: {{65pt}{82pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{22pt}{28pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{14pt}{20pt}}
-		\prop_gput_if_new:Nnn \g_TUDa_clsopts_prop {fontsize} {15pt}
-		\dim_const:Nn \c_TUDa_margin_dim {30mm}
-	}
-	%paper=a3
-	{4} {
-		\cs_set:Nn \TUDa_title_fontsize: {{47pt}{61pt}}
-		\prop_gput_if_new:Nnn \g_TUDa_clsopts_prop {fontsize} {11pt}
-		\dim_const:Nn \c_TUDa_margin_dim {15mm}
-	}
+\dim_new:N \g_TUDa_margin_dim
+\bool_if:NTF \g_TUDa_smalltitle_bool {
+	\file_input:n {tuda-a\int_use:N \g_TUDa_paper_int paper.clo}
+	\TUDa_setup_title_sizes:
+	\file_input:n {tuda-a\int_use:N \g_TUDa_paper_int paper.clo}
+	\TUDa_setup_base_sizes:
+}{
+	\int_gdecr:N \g_TUDa_paper_int
+	\file_input:n {tuda-a\int_use:N \g_TUDa_paper_int paper.clo}
+	\TUDa_setup_title_sizes:
+	\TUDa_setup_base_sizes:
 }
 
 
@@ -133,7 +116,7 @@
 \box_new:N \g_TUDa_credit_box
 
 \TUDa@makeheadrule[
-	width=\paperwidth-2\c_TUDa_margin_dim,
+	width=\paperwidth-2\g_TUDa_margin_dim,
  	color=identbarcolor
  	]{TUDa@posterrule}
 
@@ -311,7 +294,7 @@
 }
 
 \newlength{\contentwidth}
-\setlength{\contentwidth}{\dimexpr\paperwidth-2\c_TUDa_margin_dim\relax}
+\setlength{\contentwidth}{\dimexpr\paperwidth-2\g_TUDa_margin_dim\relax}
 \newlength{\contentheight}
 
 
@@ -320,14 +303,14 @@
 	{
 		spread,
 		parbox=false,
-		bottom=\dim_eval:n {\c_TUDa_margin_dim
+		bottom=\dim_eval:n {\g_TUDa_margin_dim
 			\bool_if:NT \g_TUDa_poster_foot_bool {+\g_TUDa_footheight_dim + 3\c_TUDa_rulesep_dim}
 		},
-		left=\c_TUDa_margin_dim,
-		right=\c_TUDa_margin_dim,
+		left=\g_TUDa_margin_dim,
+		right=\g_TUDa_margin_dim,
 		before= {\TUDa@poster_setup_title_box:},
 		top= \dim_eval:n {
-			\c_TUDa_margin_dim
+			\g_TUDa_margin_dim
 			+\box_ht:N \TUDa@posterrule_box
 			+\box_dp:N \TUDa@posterrule_box
 +			\g_TUDa_titleblock_dim
@@ -336,10 +319,10 @@
 			+\box_dp:N \g_TUDa_author_box
 		},
 		overlay={%
-			\coordinate(topleft) at ([xshift=\c_TUDa_margin_dim, yshift=-\c_TUDa_margin_dim]current~page.north~ west);
-			\coordinate(topright) at ([xshift=-\c_TUDa_margin_dim, yshift=-\c_TUDa_margin_dim]current~page.north~ east);
-			\coordinate(bottomleft) at ([xshift=\c_TUDa_margin_dim, yshift=\c_TUDa_margin_dim]current~page.south~ west);
-			\coordinate(bottomright) at ([xshift=-\c_TUDa_margin_dim, yshift=\c_TUDa_margin_dim]current~page.south~ east);
+			\coordinate(topleft) at ([xshift=\g_TUDa_margin_dim, yshift=-\g_TUDa_margin_dim]current~page.north~ west);
+			\coordinate(topright) at ([xshift=-\g_TUDa_margin_dim, yshift=-\g_TUDa_margin_dim]current~page.north~ east);
+			\coordinate(bottomleft) at ([xshift=\g_TUDa_margin_dim, yshift=\g_TUDa_margin_dim]current~page.south~ west);
+			\coordinate(bottomright) at ([xshift=-\g_TUDa_margin_dim, yshift=\g_TUDa_margin_dim]current~page.south~ east);
 			
 		
 			\node[inner~sep=0pt, anchor=north~west](identbar) at (topleft){\TUDa@posterrule};

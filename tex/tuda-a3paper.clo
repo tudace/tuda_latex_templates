@@ -1,6 +1,11 @@
-\cs_set:Nn \TUDa_title_fontsize: {{56pt}{68pt}}
-\cs_set:Nn \TUDa_subtitle_fontsize: {{22pt}{28pt}}
-\cs_set:Nn \TUDa_titleinfo_fontsize: {{19pt}{24pt}}
-\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {17pt}}
-\dim_gset:Nn \g_TUDa_margin_dim {15mm}
+\ProvidesExplFile{tuda-a3paper.clo}{\filedate}{\fileversion}{tuda-ci size adjustments for a3paper}
+\cs_set:Nn \TUDa_setup_title_sizes: {
+  \cs_set:Nn \TUDa_title_fontsize: {{47pt}{61pt}}
+  \cs_set:Nn \TUDa_titleinfo_fontsize: {{16pt}{20pt}}
+  \cs_set:Nn \TUDa_titlethanks_fontsize: {{12pt}{16pt}}
+}
+\cs_set:Nn \TUDa_setup_base_sizes: {
+  \tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {17pt}}
+  \dim_gset:Nn \g_TUDa_margin_dim {15mm}
+}
 \endinput

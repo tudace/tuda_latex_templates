@@ -113,6 +113,11 @@
 	noinstbox .code:n = {\tl_gput_right:Nn \g_TUDa_thesis_options_tl {,noinstbox=#1}},
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
+	title .choice:,
+	title / default .meta:n = {title=large},
+	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
+	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
+	title .initial:n = default,
 }
 %
 %%special option handling grouped values
@@ -602,55 +607,11 @@
 \setkomafont{author}{}
 \setkomafont{date}{}
 
-%TODO finish font setup
-
-\int_case:nn {\g_TUDa_paper_int}
-{
-	%paper=a0
-	{1} {
-		\cs_set:Nn \TUDa_title_fontsize: {{125pt}{165pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{42pt}{55pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{28pt}{35pt}}
-	}
-	%paper=a1
-	{2} {
-		\cs_set:Nn \TUDa_title_fontsize: {{86pt}{120pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{35pt}{42pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{22pt}{26pt}}
-	}
-	%paper=a2
-	{3} {
-		\cs_set:Nn \TUDa_title_fontsize: {{65pt}{82pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{22pt}{28pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{14pt}{20pt}}
-	}
-	%paper=a3
-	{4} {
-		\cs_set:Nn \TUDa_title_fontsize: {{47pt}{61pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{16pt}{20pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{12pt}{16pt}}
-	}
-	%paper=a4
-	{5} {
-		\cs_set:Nn \TUDa_title_fontsize: {{36pt}{47pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{12pt}{14pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{10pt}{11.5pt}}
-	}
-	%paper=a5
-	{6} {
-		\cs_set:Nn \TUDa_title_fontsize: {{22pt}{28pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{10pt}{11.5pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{10pt}{11.5pt}}
-	}
-	%paper=a6
-	{7} {
-		\cs_set:Nn \TUDa_title_fontsize: {{14pt}{16pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{9pt}{10pt}}	
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{9pt}{10pt}}
-	}
+\bool_if:NF \g_TUDa_smalltitle_bool {
+	\int_gdecr:N \g_TUDa_paper_int
 }
-
-
+\file_input:n {tuda-a\int_use:N \g_TUDa_paper_int paper.clo}
+\TUDa_setup_title_sizes:
 
 \seq_new:N \g_TUDa_title_info_seq 
 \box_new:N \g_TUDa_title_info_box

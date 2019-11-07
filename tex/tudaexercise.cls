@@ -548,63 +548,7 @@
 \newcommand*{\term}[1]{\tl_gset:Nn \g_TUDa_ex_term_tl {#1}}
 \term{}
 
-
-\int_case:nn {\g_TUDa_paper_int}
-{
-	%paper=a0
-	{1} {
-		\cs_set:Nn \TUDa_title_fontsize: {{125pt}{165pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{42pt}{55pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{28pt}{35pt}}
-	}
-	%paper=a1
-	{2} {
-		\cs_set:Nn \TUDa_title_fontsize: {{86pt}{120pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{35pt}{42pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{22pt}{26pt}}
-	}
-	%paper=a2
-	{3} {
-		\cs_set:Nn \TUDa_title_fontsize: {{65pt}{82pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{22pt}{28pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{14pt}{20pt}}
-	}
-	%paper=a3
-	{4} {
-		\cs_set:Nn \TUDa_title_fontsize: {{47pt}{61pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{16pt}{20pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{12pt}{16pt}}
-	}
-	%paper=a4
-	{5} {
-		\cs_set:Nn \TUDa_title_fontsize: {{36pt}{47pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{12pt}{14pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{10pt}{11.5pt}}
-	}
-	%paper=a5
-	{6} {
-		\cs_set:Nn \TUDa_title_fontsize: {{22pt}{28pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{10pt}{11.5pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{10pt}{11.5pt}}
-	}
-	%paper=a6
-	{7} {
-		\cs_set:Nn \TUDa_title_fontsize: {{14pt}{16pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{9pt}{10pt}}	
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{9pt}{10pt}}
-	}
-}
-
 \TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@title_headline}
-
-% \cs_new:Nn \TUDa_Setup_Title_box: {
-% 	\hbox_gset:Nn \g_TUDa_title_info_box
-% 	{
-% 		\parbox{\dimexpr2.5\c_TUDa_logoheight_dim}{
-% 		\seq_use:Nn \g_TUDa_title_info_seq  {\par\nointerlineskip\vspace{5mm}}
-% 		}
-% 	}
-% }
 
 %Logos
 \RequirePackage{graphicx}

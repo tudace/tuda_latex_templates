@@ -1,8 +1,8 @@
 \ProvidesExplFile{tuda-a4paper.clo}{\filedate}{\fileversion}{tuda-ci size adjustments for a0paper}
 \cs_set:Nn \TUDa_setup_title_sizes: {
-	\cs_set:Nn \TUDa_title_fontsize: {{132pt}{148pt}}
-	\cs_set:Nn \TUDa_subtitle_fontsize: {{50pt}{62pt}}
-	\cs_set:Nn \TUDa_titleinfo_fontsize: {{45pt}{56pt}}
+	\cs_set:Nn \TUDa_title_fontsize: {{125pt}{165pt}}
+	\cs_set:Nn \TUDa_subtitle_fontsize: {{42pt}{55pt}}
+	\cs_set:Nn \TUDa_titleinfo_fontsize: {{28pt}{35pt}}
 }
 \cs_set:Nn \TUDa_setup_base_sizes: {
 	\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {30pt}}

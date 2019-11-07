@@ -1,11 +1,11 @@
 \ProvidesExplFile{tuda-a4paper.clo}{\filedate}{\fileversion}{tuda-ci size adjustments for a5paper}
 \cs_set:Nn \TUDa_setup_title_sizes: {
-	\cs_set:Nn \TUDa_title_fontsize: {{27pt}{32pt}}
-	\cs_set:Nn \TUDa_subtitle_fontsize: {{12pt}{14pt}}
-	\cs_set:Nn \TUDa_titleinfo_fontsize: {{11pt}{13pt}}
+  \cs_set:Nn \TUDa_title_fontsize: {{22pt}{28pt}}
+  \cs_set:Nn \TUDa_titleinfo_fontsize: {{10pt}{11.5pt}}
+  \cs_set:Nn \TUDa_titlethanks_fontsize: {{10pt}{11.5pt}}
 }
 \cs_set:Nn \TUDa_setup_base_sizes: {
-	\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {10pt}}
-	\dim_gset:Nn \g_TUDa_margin_dim {12mm}
+  \tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {10pt}}
+  \dim_gset:Nn \g_TUDa_margin_dim {12mm}
 }
 \endinput

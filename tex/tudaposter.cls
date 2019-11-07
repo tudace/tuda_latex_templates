@@ -90,7 +90,7 @@
 
 
 \setkomafont{title}{\color{textonaccentcolor}\expandafter\fontsize\TUDa_title_fontsize:\selectfont}
-\setkomafont{subtitle}{\expandafter\fontsize\TUDa_subtitle_fontsize:\selectfont}
+\setkomafont{subtitle}{\expandafter\fontsize\TUDa_titleinfo_fontsize:\selectfont}
 \newkomafont{titleinfo}{\expandafter\fontsize\TUDa_titleinfo_fontsize:\selectfont}
 
 
@@ -509,4 +509,7 @@
 	I'd~suggest~to~switch~the~marginpar~option~to~true.
 	See~the~TUDa-CI~documentation~for~further~information.
 }
+
+\addtokomafont{captionlabel}{\accentfont}
+\addtokomafont{caption}{\accentfont}
 \endinput
