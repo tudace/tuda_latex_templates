@@ -141,4 +141,8 @@ exercise sheets/exams | DEMO-TUDaExercise.tex | tudaexercise.cls
    - announcement mode for tudaposter
    - Layout adjustments on TUDabeamer
    - Additional pagestyle=false mode for tudapub
-
+ * v2.00 (2019-11-07) Additional Template files + some improved implementattions
+   - changed title fontsize adjustments to use clo-files
+   - additional optiosn for tudaposter, to use it for job/thesis announcements
+   - improved implementation of tudaexercise
+   - Bugfixes concerning the PDF/A-Mode
