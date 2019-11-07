@@ -1,10 +1,40 @@
+%% This is file `DEMO-TUDaAnnouncement.tex' version 1.20-beta (2019/10/26),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%%  Copyright (C) 2018--2019 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainers of this work are
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%   Markus Lazanowski <latex@ce.tu-darmstadt.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+
 \documentclass[
 	paper=a4,
 	ngerman,
-	accentcolor=9c,
+	color=black!20,
 	footer=true,
 	type=announcement,
-	fontsize=12pt
 %	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
 	]{tudaposter}
 
@@ -16,11 +46,31 @@
 \let\file\texttt
 \let\code\texttt
 
+\usepackage{layout}
+\usepackage{blindtext}
+
+%Setzt die Box in der Marginalspalte. Alternativ auch \marginpar nutzbar.
+\SetMarginpar{
+\begin{flushright}
+	\infofont
+	Graduate School of Computational Engineering\\
+	\includegraphics[width=5\baselineskip]{example-image}\\
+	Prof. Dr. X\\[\baselineskip]
+	\url{www.peitex.de}
+\end{flushright}
+\vfill
+\minisec{Requirements}
+Beschreibung
+}
+
+\usepackage{url}
 \begin{document}
 
-\title{\LaTeX{} im Corporate Design der TU~Darmstadt}
+\title{\LaTeX{} im Corporate Design der TU~Darmstadt
+}
 \subtitle{Aushänge mit tudaposter}
-\addTitleBoxLogo*{\includegraphics[width=.5\linewidth]{example-image}}
+\titleinfo{Zusätzliche Informationen, die unterhalb des Untertitels eingefügt werden.}
+%\addTitleBoxLogo*{\includegraphics[width=.5\linewidth]{example-image}}
 
 \footerqrcode{https://peitex.de}
 \footer{Inhalt der Fußzeile}%Falls aktiviert
@@ -28,11 +78,14 @@
 
 \maketitle
 
-\section*{Grundlengende Informationen}
-Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und Nicht"=wissenschaftlichen Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa\TeX-Bundles.
+\section*{Grundlegende Informationen}
 
-Für dieses Dokument gelten die in DEMO-TUDaPoster beschriebenen Mechanismen. Zusätzlich wird jedoch ein Modus aktiviert, der entsprechend des Corporate Design Handbuchs für Aushänge verwendet werden soll.
+Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und Nicht"=wissenschaftlichen Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa-CI-Bundles.
 
-Die Option \code{type=announcement} ändert dementsprechend den Texteinzug, dass dieser identisch zum Einzug im Titelblock ist. Darüber hinaus wird hier das Logo immer in der Kopfzeile platziert und der Untertitel in Fettschrift gesetzt.
+Für dieses Dokument gelten die in DEMO-TUDaPoster beschriebenen Mechanismen. Zusätzlich wird jedoch ein Modus aktiviert, der überwiegend für Aushänge zur Bekanntgabe von Abschlussarbeiten verwendet wird: \code{type=announcement}.
+
+Dieser entspricht den Einzeloptionen: \code{marginpar=true}, \code{title=small}, \code{indenttext=false}, \code{logo=head}, \code{colorsubtitle=true}
+
+
 
 \end{document}
