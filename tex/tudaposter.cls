@@ -55,7 +55,7 @@
 	marginpar .default:n = true,
 	marginpar .initial:n = false,
 	title .choice:,
-	title / default .meta:n = {headings=large},
+	title / default .meta:n = {title=large},
 	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
 	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
 	title .initial:n = default,
