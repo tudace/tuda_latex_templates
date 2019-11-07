@@ -1,0 +1,6 @@
+\cs_set:Nn \TUDa_title_fontsize: {{56pt}{68pt}}
+\cs_set:Nn \TUDa_subtitle_fontsize: {{22pt}{28pt}}
+\cs_set:Nn \TUDa_titleinfo_fontsize: {{19pt}{24pt}}
+\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {17pt}}
+\dim_gset:Nn \g_TUDa_margin_dim {15mm}
+\endinput

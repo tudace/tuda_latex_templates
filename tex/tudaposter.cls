@@ -54,11 +54,11 @@
 	marginpar / auto .meta:n = {marginpar = true} ,
 	marginpar .default:n = true,
 	marginpar .initial:n = false,
-	headings .choice:,
-	headings / default .meta:n = {headings=large},
-	headings / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
-	headings / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
-	headings .initial:n = default,
+	title .choice:,
+	title / default .meta:n = {headings=large},
+	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
+	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
+	title .initial:n = default,
 	colorsubtitle .bool_gset:N = \g_TUDa_colorsubtitle_bool,
 	colorsubtitle .default:n = true,
 	colorsubtitle .initial:n = false,
@@ -71,50 +71,18 @@
 \LoadClass[parskip=half-]{scrartcl}
 \ExplSyntaxOn
 
-\tl_if_empty:NT \l_keys_choice_tl {\keys_set:nn {TUDa/poster} {paper=a0}}
+\tl_if_empty:NT \g_TUDa_paper_tl {\keys_set:nn {TUDa/poster} {paper=a0}}
 
-\int_case:nn {\g_TUDa_paper_int}
-{
-	%paper=a0
-	{1} {
-		\cs_set:Nn \TUDa_title_fontsize: {{132pt}{148pt}}
-		\cs_set:Nn \TUDa_subtitle_fontsize: {{50pt}{62pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{45pt}{56pt}}
-		\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {30pt}}
-		\dim_gset:Nn \g_TUDa_margin_dim {30mm}
-	}
-	%paper=a1
-	{2} {
-		\cs_set:Nn \TUDa_title_fontsize: {{100pt}{124pt}}
-		\cs_set:Nn \TUDa_subtitle_fontsize: {{35pt}{42pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{30pt}{37pt}}
-		\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {25pt}}
-		\dim_gset:Nn \g_TUDa_margin_dim {30mm}
-	}
-	%paper=a2
-	{3} {
-		\cs_set:Nn \TUDa_title_fontsize: {{72pt}{84pt}}
-		\cs_set:Nn \TUDa_subtitle_fontsize: {{28pt}{34pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{25pt}{30pt}}
-		\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {25pt}}
-		\dim_gset:Nn \g_TUDa_margin_dim {30mm}
-	}
-	%paper=a3
-	{4} {
-		\cs_set:Nn \TUDa_title_fontsize: {{56pt}{68pt}}
-		\cs_set:Nn \TUDa_subtitle_fontsize: {{22pt}{28pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{19pt}{24pt}}
-		\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {17pt}}
-		\dim_gset:Nn \g_TUDa_margin_dim {15mm}
-	}
-	%paper=a4
-	{5} {
-		\cs_set:Nn \TUDa_title_fontsize: {{42pt}{52pt}}
-		\cs_set:Nn \TUDa_subtitle_fontsize: {{20pt}{25pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{17pt}{20pt}}
-		\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {14pt}}
-		\dim_gset:Nn \g_TUDa_margin_dim {15mm}
-	}
+\bool_if:NTF \g_TUDa_smalltitle_bool {
+	\file_input:n {tuda-a\int_use:N \g_TUDa_paper_int paper.clo}
+	\TUDa_setup_title_sizes:
+	\file_input:n {tuda-a\int_use:N \g_TUDa_paper_int paper.clo}
+	\TUDa_setup_base_sizes:
+}{
+	\int_gdecr:N \g_TUDa_paper_int
+	\file_input:n {tuda-a\int_use:N \g_TUDa_paper_int paper.clo}
+	\TUDa_setup_title_sizes:
+	\TUDa_setup_base_sizes:
 }
 
 
