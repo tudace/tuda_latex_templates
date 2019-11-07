@@ -88,7 +88,7 @@
 
 \setkomafont{title}{\color{textonaccentcolor}\expandafter\fontsize\TUDa_title_fontsize:\selectfont}
 \setkomafont{subtitle}{\expandafter\fontsize\TUDa_subtitle_fontsize:\selectfont}
-\newkomafont{titleinfo}{\normalfont}
+\newkomafont{titleinfo}{\expandafter\fontsize\TUDa_titleinfo_fontsize:\selectfont}
 
 
 \KOMAoptions{fontsize=\g_TUDa_fontsize_tl}
