@@ -42,6 +42,7 @@
 	type / announcement .code:n = {
 		\int_gset:Nn \g_TUDa_postertype_int {2}
 		\keys_set:nn {TUDa/poster}{
+			marginpar=true,
 			indenttext=false,%allow overwrite - check default
 			logo=head,
 			title=small,
