@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/10/26 v1.20
+ tuda-ci 2019/11/07 v1.20
 
 ***************************************************************************
 
@@ -48,20 +48,23 @@ ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
 
-
 ## Enthaltene Templatedateien
 
-Dokumententyp | Templatedatei(en) | Dokumentenklasse
-------------- | ----------------- | ----------------
-Interne Berichte (minimales template) | DEMO-TUDaReport.tex | tudapub.cls
-Wissenschaftliche Artikel | DEMO-TUDaPub.tex, verwendet auch DEMO-TUDaBibliography.bib | tudapub.cls mit tudasize9pt.clo
-Abschlussarbeiten | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, verwendet auch DEMO-TUDaBibliography.bib | tudapub.cls mit tudathesis.cfg
-Wissenschaftliche Poster | DEMO-TUDaSciPoster.tex | tudasciposter.cls
-Veranstaltungsankündigungen | DEMO-TUDaPoster.tex | tudaposter.cls
-| DEMO-TUDaAnnouncement.tex | tudaposter.cls
-Präsentationen | DEMO-TUDaBeamer.tex | tudabeamer.cls
-Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudaletter.cls mit tudalettersize10pt.clo
-Übungsblätter | DEMO-TUDaExercise.tex | tudaexercise.cls
+Dokumententyp				 | Templatedatei(en)									| Dokumentenklasse
+---------------------------------------- | ------------------------------------------------------------------------------------ | ----------------
+Interne Berichte (minimales template)	 | DEMO-TUDaReport.tex									| tudapub.cls mit tudasize9pt.clo
+Wissenschaftliche Artikel   	     	 | DEMO-TUDaPub.tex, verwendet auch DEMO-TUDaBibliography.bib				| tudapub.cls 
+Abschlussarbeiten 			 | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, verwendet auch DEMO-TUDaBibliography.bib	| tudapub.cls mit tudathesis.cfg
+Wissenschaftliche Poster		 | DEMO-TUDaSciPoster.tex		 	   					| tudasciposter.cls
+Veranstaltungsankündigungen		 | DEMO-TUDaPoster.tex									| tudaposter.cls
+					 | DEMO-TUDaAnnouncement.tex								| tudaposter.cls
+Präsentationen				 | DEMO-TUDaBeamer.tex									| tudabeamer.cls
+Briefe					 | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco 			| tudaletter.cls mit tudalettersize10pt.clo
+Übungsblätter				 | DEMO-TUDaExercise.tex	       							| tudaexercise.cls
+
+Darüber hinaus existieren Beispieldateien für:
+Kompatibilitätsmodus TUDexercise: https://github.com/tudace/tuda_latex_templates/blob/master/example/Examples-TUDexercise-compat.tex
+Farbskalen von tuda-pgfplots: https://github.com/tudace/tuda_latex_templates/blob/master/example/Examples-TUDa-pgfplots.tex
 
 ## Liste aller enthaltenen Dateien:
 
@@ -99,8 +102,13 @@ Briefe | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco  | tudalet
   - tudasciposter.cls
   - tudasize9pt.clo
   - tudathesis.cfg
-
-
+  - tuda-a0paper.clo
+  - tuda-a1paper.clo
+  - tuda-a2paper.clo
+  - tuda-a3paper.clo
+  - tuda-a4paper.clo
+  - tuda-a5paper.clo
+ 
 
 # Summary
 
@@ -111,17 +119,17 @@ If you are not a German speaker and require some help using these files, please 
  
 ## Includes templates and document types
 
-document type | name of template file | used documentclass and config
-------------- | ----------------- | ----------------
-minimal Template for intern reports | DEMO-TUDaReport.tex | tudapub.cls
-scientific paper | DEMO-TUDaPub.tex, using DEMO-TUDaBibliography.bib | tudapub.cls and tudasize9pt.clo
-theses | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, using DEMO-TUDaBibliography.bib | tudapub.cls and tudathesis.cfg
-scientific poster | DEMO-TUDaSciPoster.tex | tudasciposter.cls
-announcement poster | DEMO-TUDaPoster.tex | tudaposter.cls
-| DEMO-TUDaAnnouncement.tex | tudaposter.cls
-presentation | DEMO-TUDaBeamer.tex | tudaposter.cls
-letter | DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  | tudaletter.cls and tudalettersize10pt.clo
-exercise sheets/exams | DEMO-TUDaExercise.tex | tudaexercise.cls
+document type				| name of template file							| used documentclass and config
+--------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------
+minimal Template for internal reports	| DEMO-TUDaReport.tex 							| tudapub.cls
+scientific paper     	      		| DEMO-TUDaPub.tex, using DEMO-TUDaBibliography.bib 			| tudapub.cls and tudasize9pt.clo
+theses	   				| DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, using DEMO-TUDaBibliography.bib | tudapub.cls and tudathesis.cfg
+scientific poster			| DEMO-TUDaSciPoster.tex 		      				| tudasciposter.cls
+announcement poster			| DEMO-TUDaPoster.tex 							| tudaposter.cls
+	     				| DEMO-TUDaAnnouncement.tex 						| tudaposter.cls
+presentation				| DEMO-TUDaBeamer.tex 							| tudaposter.cls
+letter					| DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			| tudaletter.cls and tudalettersize10pt.clo
+exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
 
 # Version History 
 
@@ -133,7 +141,8 @@ exercise sheets/exams | DEMO-TUDaExercise.tex | tudaexercise.cls
    - Improved implementation of the headline option
    - Add information on package dependencies
  * v1.11 (2019-09-25) bugfixes + smaller adjustments to simplify usage
- * v1.20 (2019-10-26) Enhancements for exercise sheets/exams and pdfa-mode
+ * v1.20 (2019-10-26 - was not published on CTAN) 
+   - Enhancements for exercise sheets/exams and pdfa-mode
    - Switch pdfa-mode to PDF/A-2b and enforce Type1 for valid documents
    - add tudaexercise.cls and corresponding demo file
    - documentation enhancements
