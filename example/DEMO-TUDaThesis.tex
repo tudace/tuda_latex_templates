@@ -278,8 +278,13 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 \end{description}
 
 \minisec{Abweichung von den Vorgaben für die Titelseite}
-Da es möglich sein kann von dieser Vorgabe abzuweichen existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weiter Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub.
-		
+Da es möglich sein kann von dieser Vorgabe abzuweichen existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weiter Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub. Zusätzlich sei auf die Möglichkeiten des \code{\textbackslash{}department}-Makros verwiesen, sofern die Abweichung sich auf den Text beschränkt.
+
+\section{Erhöhter Zeilenabstand -- Informationen zum setspace-Paket}
+Sofern die Vorgaben es erfordern, ist es möglich mit dem setspace-Paket den Durchschuss zu erhöhen. Allerdings beeinflusst dies natürlich sämtliche Zeilenabstände. Ein erhöhter Zeilenabstand sollte daher erst nach der Titelseite aktiviert werden. Allgemein ist es jedoch empfehlenswert auch für Verzeichnisse und sonstige Sonderelemente außerhalb des Fließtextes auf bei normalen Einstellungen zu bleiben. 
+
+Setspace liefert hierfür die Möglichkeit, das Paket ohne Optionen zu laden und später über Makros, wie \code{\textbackslash{}onehalfspacing} das umschalten zu verzögern. Alternativ kann auch durch die Umgebungen, wie \code{singlespace} lokal wieder zum Normalzustand gewechselt werden, sofern dies erforderlich ist. 
+
 \printbibliography
 	
 \end{document}
