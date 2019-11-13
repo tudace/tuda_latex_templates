@@ -314,18 +314,20 @@
 	\par\nointerlineskip
 	\exp_args:Nf \tl_if_empty:nF {\@subtitle\@titleinfo} {
 			\bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule\par
-			\vspace{\c_TUDa_rulesep_dim}
 			\nointerlineskip
+			\vspace{\c_TUDa_rulesep_dim}
 			\bool_if:NTF \g_TUDa_indenttext_bool {\begingroup}{\begin{addmargin}{\g_TUDa_titleindent_dim }}
 			\bool_if:NT \g_TUDa_colorsubtitle_bool {\color{textonaccentcolor}}
 			\tl_if_empty:NF \@subtitle {{\usekomafont{subtitle}\strut\@subtitle\strut\par}}
-			\tl_if_empty:NF \@titleinfo {{\usekomafont{titleinfo}\strut\@titleinfo\par}}
+			\tl_if_empty:NF \@titleinfo {{\usekomafont{titleinfo}\@titleinfo\par}}
+		\nointerlineskip
+			\bool_if:NTF \g_TUDa_indenttext_bool {\endgroup} {\end{addmargin}}
 			\vspace{\c_TUDa_rulesep_dim}
-			\bool_if:NTF \g_TUDa_indenttext_bool {\engroup} {\end{addmargin}}
 		 \par\nointerlineskip
 		 \bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}
 		}
 		}
+		\nointerlineskip
 		 \TUDa@smallrule
 		}
 	}
@@ -368,13 +370,15 @@
 		{\msg_warning:nn {TUDaPoster} {infobox-too-high}}
 	}
 	\leavevmode\box_use:N \g_TUDa_title_box\par
-	\dim_set:Nn \g_TUDa_titlegraphic_max_height_dim {\textheight-\pagetotal}
+%	\bool_if:NT \g_TUDa_marginpar_bool {\vspace{\c_TUDa_smallrule_dim}}
+	\dim_set:Nn \g_TUDa_titlegraphic_max_height_dim {\textheight-\pagetotal}%-\c_TUDa_smallrule_dim}
 	\global\def\contentheight{\g_TUDa_titlegraphic_max_height_dim}
-	\global\def\contentwidth{\linewidth}
 	\tl_if_empty:NF \@titlegraphic{
-		\par\nointerlineskip
-		\vbox{\parbox[t]{\linewidth}{\@titlegraphic}}
+		\par
+		\nointerlineskip
+		\vbox{\parbox[t]{\dim_eval:n {\paperwidth-2\g_TUDa_margin_dim}}{\@titlegraphic}}
 	}
+	\global\def\contentwidth{\linewidth}
 	\thispagestyle{TUDa.poster.title}
 	\endgroup\par
 	\let\@title\@empty
