@@ -790,7 +790,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		\cs_set:Npn \sep {\exp_not:N \sep}
 		\cs_if_exist:cTF {\tl_mixed_case:n {#1}} {
 			\iow_now:Nx \TUDa@xmpdata_stream {
-				\c_backslash_str \tl_mixed_case:n {#1} {#2}
+				\c_backslash_str \tl_mixed_case:n {#1} {\exp_not:n {#2}}
 			}
 		}{
 			\msg_error:nnn {TUDaPub} {unknown-metadata} {#1}
