@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/11/07 v1.20
+ tuda-ci 2019/11/13 v2.01
 
 ***************************************************************************
 
@@ -155,3 +155,7 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - additional options for tudaposter, to use it for job/thesis announcements
    - improved implementation of tudaexercise
    - Bugfixes concerning the PDF/A-Mode
+ * v2.01 (2019-11-13) small bugfixes
+   - Fix expansion of metadata for PDF/A mode
+   - Adjustment of english translation for thesis mode of tudapub
+   - fix support for titlegraphic in announcement mode for tudaposter
