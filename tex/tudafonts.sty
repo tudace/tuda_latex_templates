@@ -16,7 +16,9 @@
         %Fallback for older versions
 	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
 	\RequirePackage[utf8]{inputenc}
-        \cs_if_exist:NF \texteuro {\RequirePackage{textcomp}}
+        \expandafter\ifx\csname texteuro\endcsname\relax
+        \RequirePackage{textcomp}
+        \fi
         \DeclareUnicodeCharacter{20AC}{\texteuro}
 	\fi
 \else
