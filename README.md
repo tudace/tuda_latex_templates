@@ -160,5 +160,5 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - Adjustment of english translation for thesis mode of tudapub
    - fix support for titlegraphic in announcement mode for tudaposter
  * v2.02 (2019-11-16) bugfixes
-   - fix expl3 error with pdflatex and tudafonts
+   - fix font issues and Type1 mode
    - improve marginpar adjustment for tudaposter
