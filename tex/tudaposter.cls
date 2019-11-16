@@ -339,22 +339,36 @@
 				\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim
 			}
 
-	\ModifyLayer[
-		height=\g_TUDa_titleback_dim
+		\ModifyLayer[
+	height=\g_TUDa_titleback_dim
 	]{TUDa.poster.background}
 	
 	\bool_if:NF \g_TUDa_logo@inhead_bool {
 		\ModifyLayer[
-		addvoffset=\g_TUDa_titleback_dim+\c_TUDa_smallrule_dim %+\box_dp:N \g_TUDa_title_box
+		addvoffset=\g_TUDa_titleback_dim+\c_TUDa_smallrule_dim
 		]{TUDa.poster.logo}
+	}
+
+	\bool_if:NT \g_TUDa_logo@inhead_bool {
+		\dim_compare:nT {\box_ht:N \g_TUDa_title_info_box+ \box_dp:N \g_TUDa_title_info_box  > \box_ht:N \g_TUDa_title_box} 
+		{\msg_warning:nn {TUDaPoster} {infobox-too-high}}
+	}
+	\leavevmode\box_use:N \g_TUDa_title_box\par
+	\dim_set:Nn \g_TUDa_titlegraphic_max_height_dim {\textheight-\pagetotal}
+	\global\def\contentheight{\g_TUDa_titlegraphic_max_height_dim}
+	\tl_if_empty:NF \@titlegraphic{
+		\vbox_gset:Nn \g_TUDa_titlegraphic_box {\parbox[t]{\dim_eval:n {\paperwidth-2\g_TUDa_margin_dim}}{\@titlegraphic}}
+		\par\nointerlineskip
+		\box_use:N \g_TUDa_titlegraphic_box
 	}
 	
 	\DeclareLayer[
-		clone=TUDa.poster.marginpar,
-		height=\textheight-\box_ht:N \g_TUDa_title_box-\box_dp:N \g_TUDa_title_box-.5\c_TUDa_logoheight_dim,
-		addvoffset=\box_ht:N \g_TUDa_title_box+\box_dp:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim,
+	clone=TUDa.poster.marginpar,
+	height=\bool_if:NF \l_TUDa_marginpar_overlap_bool {-\box_ht:N \g_TUDa_titlegraphic_box-\box_dp:N \g_TUDa_titlegraphic_box}
+	+\textheight-\box_ht:N \g_TUDa_title_box-\box_dp:N \g_TUDa_title_box-.5\c_TUDa_logoheight_dim,
+	addvoffset=\bool_if:NF \l_TUDa_marginpar_overlap_bool {+\box_ht:N\g_TUDa_titlegraphic_box+\box_dp:N \g_TUDa_titlegraphic_box}
+	+\box_ht:N \g_TUDa_title_box+\box_dp:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim,
 	]{TUDa.poster.marginpar.title}
-
 	
 	\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {
 		\ModifyLayer[addwidth=-\g_TUDa_qrcode_dim-\c_TUDa_rulesep_dim]{TUDa.poster.footer}
@@ -362,25 +376,9 @@
 	
 	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.marginpar.title}
 	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.logo}
-
-	\begingroup
-
-	\bool_if:NT \g_TUDa_logo@inhead_bool {
-		\dim_compare:nT {\box_ht:N \g_TUDa_title_info_box+ \box_dp:N \g_TUDa_title_info_box  > \box_ht:N \g_TUDa_title_box} 
-		{\msg_warning:nn {TUDaPoster} {infobox-too-high}}
-	}
-	\leavevmode\box_use:N \g_TUDa_title_box\par
-%	\bool_if:NT \g_TUDa_marginpar_bool {\vspace{\c_TUDa_smallrule_dim}}
-	\dim_set:Nn \g_TUDa_titlegraphic_max_height_dim {\textheight-\pagetotal}%-\c_TUDa_smallrule_dim}
-	\global\def\contentheight{\g_TUDa_titlegraphic_max_height_dim}
-	\tl_if_empty:NF \@titlegraphic{
-		\par
-		\nointerlineskip
-		\vbox{\parbox[t]{\dim_eval:n {\paperwidth-2\g_TUDa_margin_dim}}{\@titlegraphic}}
-	}
-	\global\def\contentwidth{\linewidth}
 	\thispagestyle{TUDa.poster.title}
-	\endgroup\par
+	\global\def\contentwidth{\linewidth}
+	\par
 	\let\@title\@empty
 	\let\@subtitle\@empty
 	\let\@titleinfo\@empty
@@ -394,6 +392,7 @@
 \newcommand{\titlegraphic}[1]{
 	\def\@titlegraphic{#1}
 }
+\box_new:N \g_TUDa_titlegraphic_box
 
 \seq_new:N \g_TUDa_title_info_seq 
 
@@ -486,9 +485,12 @@
 	You~should~probably~switch~to~logo=bottom~or~reduce~the~number/size~of~InfoBoxes.
 }
 
-\keys_define:nn {TUDa/poster/marginpar}{
+\keys_define:nn {TUDa/poster/marginparopts}{
 	valign .tl_set:N = \l_TUDa_marginpar_valign_tl,
 	valign .initial:n = t,
+	overlap .bool_set:N = \l_TUDa_marginpar_overlap_bool,
+	overlap .initial:n = false,
+	overlap .default:n = true
 }
 
 
@@ -499,10 +501,10 @@
 
 \int_new:N \g_TUDa_marginpar_int
 
-\NewDocumentCommand{\SetMarginpar}{om}{
+\NewDocumentCommand{\SetMarginpar}{o+m}{
 	\bool_if:NF \g_TUDa_marginpar_bool {\msg_warning:nn {TUDa/Poster} {marginpar-disabled}}
-	\IfNoValueF{#1}{\keys_set:nn {TUDa/poster/marginpar} {#1}}
-	\ModifyLayer[contents={\parbox[t][\layerheight][\l_TUDa_marginpar_valign_tl]{\layerwidth}{#2}}]{TUDa.poster.marginpar}
+	\IfNoValueF{#1}{\keys_set:nn {TUDa/poster/marginparopts} {#1}}
+	\ModifyLayer[addvoffset={-\ht\strutbox},contents={\parbox[t][\layerheight][\l_TUDa_marginpar_valign_tl]{\layerwidth}{#2}}]{TUDa.poster.marginpar}
 	\bool_set_true:N \l_tmpa_bool
 }
 
