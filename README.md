@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/11/13 v2.01
+ tuda-ci 2019/11/16 v2.02
 
 ***************************************************************************
 
@@ -159,3 +159,6 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - Fix expansion of metadata for PDF/A mode
    - Adjustment of english translation for thesis mode of tudapub
    - fix support for titlegraphic in announcement mode for tudaposter
+ * v2.02 (2019-11-16) bugfixes
+   - fix expl3 error with pdflatex and tudafonts
+   - improve marginpar adjustment for tudaposter
