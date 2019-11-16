@@ -21,8 +21,6 @@
         \fi
         \DeclareUnicodeCharacter{20AC}{\texteuro}
 	\fi
-\else
-	\RequirePackage{fontspec}
 \fi
 
 \csname if@TUDa@T1\endcsname
@@ -30,7 +28,8 @@
     \PassOptionsToPackage{type1}{roboto}
     \PassOptionsToPackage{type1}{roboto-mono}
 \else
-	\setmainfont{XCharter}
+    \RequirePackage{fontspec}
+    \setmainfont{XCharter}
 \fi
 
 \RequirePackage{roboto}
