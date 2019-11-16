@@ -12,15 +12,15 @@
 \RequirePackage{anyfontsize}
 
 \ifPDFTeX
-        \csname @TUDa@T1true\endcsname
-        %Fallback for older versions
-	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
-	\RequirePackage[utf8]{inputenc}
-        \expandafter\ifx\csname texteuro\endcsname\relax
-        \RequirePackage{textcomp}
-        \fi
-        \DeclareUnicodeCharacter{20AC}{\texteuro}
-	\fi
+    \csname @TUDa@T1true\endcsname
+    %Fallback for older versions
+    \expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
+    \RequirePackage[utf8]{inputenc}
+    \fi
+    \expandafter\ifx\csname texteuro\endcsname\relax
+       \RequirePackage{textcomp}
+    \fi
+    \DeclareUnicodeCharacter{20AC}{\texteuro}
 \fi
 
 \csname if@TUDa@T1\endcsname
