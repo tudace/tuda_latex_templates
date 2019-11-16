@@ -34,7 +34,7 @@
 		\PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
 	},
 	paper .initial:n = a0,
-	fontsize .code:n = \prop_gput:Nnn \g_TUDa_clsopts_prop {fontsize} {#1},
+	fontsize .tl_gset:N = \g_TUDa_fontsize_tl,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
 	title .choice:,
@@ -62,6 +62,8 @@
 	\TUDa_setup_title_sizes:
 	\TUDa_setup_base_sizes:
 }
+
+\prop_gput:NnV \g_TUDa_clsopts_prop {fontsize} \g_TUDa_fontsize_tl
 
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
