@@ -19,7 +19,7 @@
 \LoadLetterOption{DEMO-TUDaFromaddress}%Laden der Datei DEMO-TUDaFromaddress.lco mit hinterlegten Adressdaten
 
 \begin{document}
-	
+
 \begin{letter}{%
     Technische Universität Darmstadt\\%
     Referat Kommunikation\\%
@@ -35,12 +35,12 @@
 \opening{Sehr geehrte Damen und Herren,}
 Dieses Template dient der Verwendungsdokumentation der tudaletter-Klasse.
 
-Die wichtigsten Optionen sind direkt im Quellcode zu dieser Datei hinterlegt und entsprechend Kommentiert. Andere Optionen stellen nicht zwangsweise eine Konformität zu den Corporate Design Richtlinien dar. Layoutänderungen jeglicher Art solten daher vermieden werden.
+Die wichtigsten Optionen sind direkt im Quellcode zu dieser Datei hinterlegt und entsprechend kommentiert. Andere Optionen stellen nicht zwangsweise eine Konformität zu den Corporate Design Richtlinien dar. Layoutänderungen jeglicher Art solten daher vermieden werden.
 
 Zusätzliche Optionen sind im Folgenden aufgelistet:\\
 \parbox{\linewidth}{
 \begin{description}
-	\item[premium=true/false] Aktiviert/deaktiviert Farbige Hervorhebungen. Voreinstellung ist false.
+	\item[premium=true/false] Aktiviert/deaktiviert farbige Hervorhebungen. Voreinstellung ist false.
 	\item[firstpagenumber=true/false] Aktiviert/deaktiviert die Angabe der Seitenzahl auf der ersten Seite. Voreinstellung ist true.
 	\item[raggedright=true/false] Brieftext linksbündig. Voreinstellung ist false. Dies entspricht Blocksatz.
 	\item[logo=true/false] Logo auf Folgeseiten aktiviert/deaktiviert. Voreinstellung ist true.
@@ -52,7 +52,7 @@ geladen. Sämtliche dort gesetzten Werte können innerhalb der Briefdatei übers
 
 Die Adressdatei wird üblicherweise lokal im System installiert, um sie nicht immer mit allen anderen Dateien kopieren zu müssen. Falls Sie dies dürchführen möchten, findet sich eine entsprechende Erklärung am Ende der DEMO"=TUDaFromaddress.lco"=Datei
 
-Eine Besonderheit der Klasse tudaletter, stellt der Unterschied in der Zeilenlänge zwischen der ersten und den folgenden Seiten dar. Da \LaTeX{} grundsätzlich keine Änderung der Zeilenlänge innerhalb eines Absatzes unterstützt ist hier eine komplexe Implementierung nötig. In einigen speziellen Fällen, kann dieser Mechanismus Fehlschlagen. Eine Sammlung an Soderfällen ist bereits implementiert, sollten Sie jedoch auf weiter stoßen, werden wir uns um eine Erweiterung der Implementierung bemühen.
+Eine Besonderheit der Klasse tudaletter, stellt der Unterschied in der Zeilenlänge zwischen der ersten und den folgenden Seiten dar. Da \LaTeX{} grundsätzlich keine Änderung der Zeilenlänge innerhalb eines Absatzes unterstützt, ist hier eine komplexe Implementierung nötig. In einigen speziellen Fällen, kann dieser Mechanismus fehlschlagen. Eine Sammlung an Soderfällen ist bereits implementiert, sollten Sie jedoch auf weiter stoßen, werden wir uns um eine Erweiterung der Implementierung bemühen.
 
 Der einfachste Fall um solche Schwierigkeiten zu beheben ist in diesem Beispiel mithilfe der parbox um die Auflistung gezeigt.
 
@@ -61,7 +61,7 @@ Der einfachste Fall um solche Schwierigkeiten zu beheben ist in diesem Beispiel 
 \encl{Quelldateien zu diesem Dokument:\\
 	\texttt{DEMO-TUDaLetter.tex} (Brieftext),\\
 	\texttt{TUDa\_Demo.lco} (Adressdaten)}
-	
+
 \end{letter}
 
 \end{document}

@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplClass{tudapub}
-	{\filedate}{\fileversion}{Publications using TU Darmstadt's Coporate Desing (TUDa-CI)}
+	{\filedate}{\fileversion}{Publications using TU Darmstadt's Coporate Design (TUDa-CI)}
 
 \RequirePackage{l3keys2e}
 \RequirePackage{URspecialopts}
