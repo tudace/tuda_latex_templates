@@ -44,74 +44,74 @@
 		spacing=1cm,
 %		showframe, %Gitter einblenden. Für Platzierung häufig hilfreich
 	},]
-	
+
 	\begin{posterboxenv}[title=Zusammenfassung]{name=intro,column=1,row=1,span=4}
 	Die \cls{tudasciposter}-Klasse basiert auf dem \pck{tcolorbox} Paket von Thomas F. Sturm.
 	Sie versucht einen einfachen Weg zu bieten, wissenschaftliche Poster im Corporate Design der TU Darmstadt zu erstellen. Dieses Dokument dient als Dokumentation und Verwendungsbeispiel.
-	
+
 	Dieses Dokument verwendet unterschiedliche Boxentypen. Dies ist selbstverständlich für die praktische Verwendung nicht empfehlenswert. Dieser Modus dient lediglich Demonstrationszwecken.
 	\end{posterboxenv}
 
 	\begin{posterboxenv}[title=Titelei]{name=title, row=2, span=2,rowspan=2}
 	Die Definition des Titelblockes funktioniert analog zu Standard-\LaTeX{} mit \macro{maketitle}.
-	
+
 	Für die Datenübergabe stehen die Makros \macro{title}, \macro{author}, \macro{institute} und \macro{titlegraphic} zur Verfügung. Letztere wird rechtsbündig  unterhalb des TUDa-Logos platziert. Die \macro{linewidth} zu diesem Zeitpunkt entspricht der Breite des TUDa-Logos.
-	
+
 	Zusätzlich zu den Titeldaten stehen über \macro{setqrcode} und \macro{setfoot} Makros zur Verfügung, die die Fußzeile füllen.
 	Ein Beispiel ist in der Datei \file{DEMO"=TUDaSciPoster.tex} gezeigt
 	\end{posterboxenv}
 
 \begin{posterboxenv}[title=Fußzeile]{name=footer,below=title, span=2, rowspan=2 }
 	Die Fußzeile ist grundsätzlich aktiviert, kann jedoch über die Klassenoption \code{footer=false} deaktiviert werden. In diesem Fall werden jedoch mit \macro{thanks} übergebene Zusätzliche Titelinformationen nicht angezeigt.
-	
+
 	Für die Übergabe weiterer Daten stehen die Makros \macro{footer}, \macro{footergraphics} und \macro{footerqrcode} zur Verfügung.
-	
+
 	\macro{footergraphics} ist für die Übergabe von Logos gedacht und \macro{footerqrcode} übernimmt eine URL die anschließend in der Rechten unteren Ecke als QRCode platziert wird.
-	
+
 	Die Fußzeile selbst erhält die Daten aus \macro{thanks}, kann jedoch ergänzt werden. Sie hat die Breite des Satzspiegels abzüglich der Logos/QRcode.
 \end{posterboxenv}
 
 
 \begin{posterboxenv}[title=Platzierung der Boxen]{name=positioning,below=footer, span=2}
-Bei der \pck{poster}-Bibliothek des \pck{tcolorbox} Paketes, werden die Boxen manuell positioniert. 
+Bei der \pck{poster}-Bibliothek des \pck{tcolorbox} Paketes, werden die Boxen manuell positioniert.
 
-Dies benötigt zwar einen zusätzlichen Arbeitsschritt, erlaubt jedoch einer feinere Ausrichtung der Boxen, auch relativ zueinander. 
+Dies benötigt zwar einen zusätzlichen Arbeitsschritt, erlaubt jedoch einer feinere Ausrichtung der Boxen, auch relativ zueinander.
 
 Diese Mechanismen ermöglichen Auch Querverweise einfacher zu positionieren. Hierfür ist ein Blick in die \pck{tcolorbox}-Dokumentation hilfreich,
 \end{posterboxenv}
-	
+
 \begin{posterboxenv}[title=Zusammenfassung]{name=intro,column=1,row=1,span=4}
 	Die \cls{tudasciposter}-Klasse basiert auf dem \pck{tcolorbox} Paket von Thomas F. Sturm.
 	Sie versucht einen einfachen Weg zu bieten, wissenschaftliche Poster im Corporate Design der TU Darmstadt zu erstellen. Dieses Dokument dient als Dokumentation und Verwendungsbeispiel.
-	
+
 	Dieses Dokument verwendet unterschiedliche Boxentypen. Dies ist selbstverständlich für die praktische Verwendung nicht empfehlenswert. Dieser Modus dient lediglich Demonstrationszwecken.
 \end{posterboxenv}
 
 \begin{posterboxenv}[title=Titelei]{name=title, row=2, span=2,rowspan=2}
 	Die Definition des Titelblockes funktioniert analog zu Standard-\LaTeX{} mit \macro{maketitle}.
-	
+
 	Für die Datenübergabe stehen die Makros \macro{title}, \macro{author}, \macro{institute} und \macro{titlegraphic} zur Verfügung. Letztere wird rechtsbündig  unterhalb des TUDa-Logos platziert. Die \macro{linewidth} zu diesem Zeitpunkt entspricht der Breite des TUDa-Logos.
-	
+
 	Zusätzlich zu den Titeldaten stehen über \macro{setqrcode} und \macro{setfoot} Makros zur Verfügung, die die Fußzeile füllen.
 	Ein Beispiel ist in der Datei \file{DEMO"=TUDaSciPoster.tex} gezeigt
 \end{posterboxenv}
-	
+
 \begin{posterboxenv}[title=Fußzeile]{name=footer,below=title, span=2, rowspan=2 }
 	Die Fußzeile ist grundsätzlich aktiviert, kann jedoch über die Klassenoption \code{footer=false} deaktiviert werden. In diesem Fall werden jedoch mit \macro{thanks} übergebene Zusätzliche Titelinformationen nicht angezeigt.
-	
+
 	Für die Übergabe weiterer Daten stehen die Makros \macro{footer}, \macro{footergraphics} und \macro{footerqrcode} zur Verfügung.
-	
+
 	\macro{footergraphics} ist für die Übergabe von Logos gedacht und \macro{footerqrcode} übernimmt eine URL die anschließend in der Rechten unteren Ecke als QRCode platziert wird.
-	
+
 	Die Fußzeile selbst erhält die Daten aus \macro{thanks}, kann jedoch ergänzt werden. Sie hat die Breite des Satzspiegels abzüglich der Logos/QRcode.
 \end{posterboxenv}
-	
+
 
 \begin{posterboxenv}[title=Platzierung der Boxen]{name=positioning,below=footer, span=2}
-	Bei der \pck{poster}-Bibliothek des \pck{tcolorbox} Paketes, werden die Boxen manuell positioniert. 
-	
-	Dies benötigt zwar einen zusätzlichen Arbeitsschritt, erlaubt jedoch einer feinere Ausrichtung der Boxen, auch relativ zueinander. 
-	
+	Bei der \pck{poster}-Bibliothek des \pck{tcolorbox} Paketes, werden die Boxen manuell positioniert.
+
+	Dies benötigt zwar einen zusätzlichen Arbeitsschritt, erlaubt jedoch einer feinere Ausrichtung der Boxen, auch relativ zueinander.
+
 	Diese Mechanismen ermöglichen Auch Querverweise einfacher zu positionieren. Hierfür ist ein Blick in die \pck{tcolorbox}-Dokumentation hilfreich,
 \end{posterboxenv}
 
@@ -122,8 +122,8 @@ Diese Mechanismen ermöglichen Auch Querverweise einfacher zu positionieren. Hie
 
 \begin{posterboxenv}[title=Eine Box im Stil TUDa-colored, TUDa-colored]{name=colored,column=3, row=3, span=2}
 	Eine Zwischenstufe zwischen dem \code{boxed} und dem \code{official} Stil stellt dieser Boxentyp dar.
-	
-	Einstellung über globale Klassenoption \code{style=colored} oder lokaler Stil \code{TUDa-colored} 
+
+	Einstellung über globale Klassenoption \code{style=colored} oder lokaler Stil \code{TUDa-colored}
 
 \end{posterboxenv}
 
@@ -164,6 +164,6 @@ Um eine Skalierung eines größeren auf ein kleineres Designs zu erreichen, empf
 
 \end{tcbposter}
 
-\end{document}	
-		
-	
+\end{document}
+
+

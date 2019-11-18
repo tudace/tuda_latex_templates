@@ -42,7 +42,7 @@ Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitg
 
 https://download.hrz.tu-darmstadt.de/protected/CE/TUDa_LaTeX/tuda_logo.pdf
 
-Für die Permanente Installation der Logodateien findet sich unter
+Für die permanente Installation der Logodateien findet sich unter
 https://www.ce.tu-darmstadt.de/ce/latex_tuda/index.de.jsp
 ein Paket mit entsprechenden Hinweisen.
 

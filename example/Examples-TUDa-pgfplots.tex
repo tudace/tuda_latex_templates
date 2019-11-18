@@ -41,13 +41,13 @@
 \maketitle
 
 \begin{frame}
-	
+
 The package tuda-pgfplots provides color settings for pgfplots to use to the Corporate Design colors of TU Darmstadt. It is part of the tuda-ci bundle.
 
 It's usage requires knowlege of the pgfplots package, see the documentation using texdoc or via \url{https://ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/}.
 
 The rest of this documents shows some easy exambles of usage.
-	
+
 \end{frame}
 
 \begin{frame}{Bar charts: tudabarplot}
@@ -91,7 +91,7 @@ The rest of this documents shows some easy exambles of usage.
 
 \begin{frame}
 	\frametitle{More plots: 3d visualization with colormar viridis}
-	\begin{figure}	
+	\begin{figure}
 		\begin{tikzpicture}
 		\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
 			colormap name=tudab,
@@ -99,31 +99,31 @@ The rest of this documents shows some easy exambles of usage.
 		\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
 		\end{axis}
 		\end{tikzpicture}
-	\end{figure}	
+	\end{figure}
 \end{frame}
 
 \begin{frame}
 	\frametitle{More plots: 3d visualization with colormar viridis}
-	\begin{figure}	
+	\begin{figure}
 		\begin{tikzpicture}
 		\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
 		]
 		\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
 		\end{axis}
 		\end{tikzpicture}
-	\end{figure}	
+	\end{figure}
 \end{frame}
 
 \begin{frame}
 	\frametitle{More plots: 3d visualization with colormar viridis}
-	\begin{figure}	
+	\begin{figure}
 		\begin{tikzpicture}
 		\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
 		]
 		\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
 		\end{axis}
 		\end{tikzpicture}
-	\end{figure}	
+	\end{figure}
 \end{frame}
 
 \begin{frame}{Colormaps}
