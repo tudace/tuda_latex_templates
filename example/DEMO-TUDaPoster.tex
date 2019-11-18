@@ -35,7 +35,7 @@
 \maketitle
 
 \section*{Grundlengende Informationen}
-Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und Nicht-wissenschaftlichen-Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa-CI-Bundles.
+Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und nicht-wissenschaftlichen-Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa-CI-Bundles.
 
 \begin{multicols}{2}
 \subsection*{Verwendung}
@@ -46,7 +46,7 @@ Die tudaposter-Klasse basiert wie auch tudapub auf \KOMAScript{} und bietet dahe
 Im Unterschied zur tudasciposter-Klasse, die auf tikzposter basiert, ermöglicht tudaposter es wie gewohnt Fließtext zu schreiben, um ergänzende Informationen einfach zu platzieren.
 
 \subsection*{Titelei}
-Die Titelerzeugung funktioniert wie bei Standard-\LaTeX{} über den maketitle-Mechanismus. Neben der Makros title, subtitle und author stehen noch 
+Die Titelerzeugung funktioniert wie bei Standard-\LaTeX{} über den maketitle-Mechanismus. Neben der Makros title, subtitle und author stehen noch
 titlegraphic, addTitleBox, footerqrcode und footer zur Verfügung. Bis auf footerqrcode wird lediglich der Inhalt entsprechend platziert. Ein Beispiel für die Verwendung ist der Datei DEMO-TUDaPoster.tex gezeigt.
 
 \subsection*{Längenangaben}
@@ -55,19 +55,19 @@ Innerhalb des Posterinhaltes (Dazu zählt auch die titlegraphic) sind zwei Läng
 
 \subsection*{Dokumentenklassenoptionen}
 \begin{description}
-	\item[paper=<Papierformat>] Papierformat. Voreingestellt ist a0. Unterstützt werden Formate von A0 bis A4. 
-	\item[fontsize=<Schriftgröße/auto>] Basischriftgröße. Die anderen Größen werden entsprechend skaliert. Für die unterstützte Papierformate sind entsprechende Skalierungsschritte hinterlegt diese Voreinstellung entspricht dem Wert auto.
+	\item[paper=<Papierformat>] Papierformat. Voreingestellt ist a0. Unterstützt werden Formate von A0 bis A4.
+	\item[fontsize=<Schriftgröße/auto>] Basischriftgröße. Die anderen Größen werden entsprechend skaliert. Für die unterstützte Papierformate sind entsprechende Skalierungsschritte hinterlegt, diese Voreinstellung entspricht dem Wert auto.
 	\item[logo=head/body] Das Logo wird in der Idenditätsleiste (head) oder innerhalb des Dokumenteninhalts, ggf. überlappend mit dem Bild gesetzt.
 	\item[color=<Farbkürzel>] Akzentfarbe nach den Corporate Design Richtlinien.
 	\item[colorsubtitle=true/false] Hintergrundfarbe beim Untertitel an-/ausschalten.
 	\item[footer=true/false] Aktivierung/Deaktivierung der Fußzeile. Voreinstellung ist false.
 	\item[marginpar=true/false] Ermöglicht die Nutzung einer Randnotizspalte . Diese hat die Breite des Logos. Sie wird entweder über das Makro \code{\tbs{}SetMarginpar} oder über das Standard-Makro \code{\tbs{}marginpar} befüllt. Eine Verwendung dieses Modus ist in der zusätzlichen Demo-Datei \file{DEMO-TUDaAnnouncement} gezeigt.
-	
-	Die Randnotizspalte überlappt die Abbildung, die zum Titel gehört. Kombinationen von \code{marginpar=true} und \code{\tbs{}titlegraphic} sollten daher nur mit Vorsicht genuzt werden. 
-	
+
+	Die Randnotizspalte überlappt die Abbildung, die zum Titel gehört. Kombinationen von \code{marginpar=true} und \code{\tbs{}titlegraphic} sollten daher nur mit Vorsicht genuzt werden.
+
 	\item[title=large/small/default] Ermöglicht es die Schriftgrößen um eine Stufe zu verkleinern. Die Option \code{large} entspricht hierbei der Option \code{default}. Im Fall des Wertes \code{small} werden die Titelschriftgrößen des nächsten kleineren Papierformates verwendet. Die Basischriftgröße und die Randeinstellungen bleiben davon unberührt.
 	\item[type=default/announcement] Diese Option liefert die Möglichkeit bestimmte Posterlayouts über einen Einzigen Wert zu laden.
-	Der Wert \code{announcement} setzt die folgenden Optionen: \code{marginpar=true, indenttext=false, logo=head, title=small,colorsubtitle=true} und aktiviert zusätzlich die Ausgabe ds Untertitels in fetter Schrift.
+	Der Wert \code{announcement} setzt die folgenden Optionen: \code{marginpar=true, indenttext=false, logo=head, title=small,colorsubtitle=true} und aktiviert zusätzlich die Ausgabe des Untertitels in fetter Schrift.
 \end{description}
 \end{multicols}
 

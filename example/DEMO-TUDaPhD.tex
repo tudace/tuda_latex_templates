@@ -49,7 +49,7 @@
 
 %Paketvorschläge Mathematik
 %%%%%%%%%%%%%%%%%%%
-%\usepackage{mathtools} %erweiterte Fassung von amsmath, dem Standardpaket 
+%\usepackage{mathtools} %erweiterte Fassung von amsmath, dem Standardpaket
 %\usepackage{amssymb} %Weitere mathematiscche Symbole
 
 %Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
@@ -61,51 +61,51 @@
 \newcommand*{\FeatureFalse}{\ding{56}}
 
 \begin{document}
-	
+
 \Metadata{
 	title=TUDaPhD -- LaTeX-Dissertationstemplate im CD der TU Darmstadt,
 	author=Marei Peischl
 }
-	
-	
+
+
 \frontmatter
-	
+
 \title{\LaTeX{} im Corporate Design der TU Darmstadt}
 \subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
-\author[M. Peischl]{Marei Peischl}%optionales Argument ist die Signatur, 
+\author[M. Peischl]{Marei Peischl}%optionales Argument ist die Signatur,
 \birthplace{Geburtsort}%Geburtsort, bei Dissertationen zwingend notwendig
 \reviewer{Gutachter 1 \and Gutachter 2 \and noch einer \and falls das immernoch nicht reicht}%Gutachter
-	
-	
+
+
 %%Sofern keine passende Option verfügbar ist
 %\drtext{}
 
-%Diese Felder werden untereinander auf der Titelseite platziert. 
+%Diese Felder werden untereinander auf der Titelseite platziert.
 %\department ist eine notwendige Angabe, siehe auch dem Abschnitt `Abweichung von den Vorgaben für die Titelseite'
 \department{phys} %Kürzel werden entsprechend der Liste in diesem Dokument ersetzt.
 \institute{Institut}
 \group{Arbeitsgruppe}
-	
+
 \submissiondate{\today}
 \examdate{\today}
 \tuprints{urn=1234,printid=12345}
-	
+
 \dedication{For \TeX{} \& Friends}
-	
+
 \maketitle
 
 \affidavit
-	
+
 \addchap{Vorwort -- Über diese Datei}
 Die Datei \file{DEMO-TUDaPhD.tex} beziehungsweise ihre Ausgabe \file{DEMO-TUDaPhD.pdf} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
-Sie ist Teil des TUDa-CI-Bundles und basiert in Teilen auf dem tuddesign-Paket von C.~v.~Loewenich und J.~Werner. 
+Sie ist Teil des TUDa-CI-Bundles und basiert in Teilen auf dem tuddesign-Paket von C.~v.~Loewenich und J.~Werner.
 
 Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen. In diesem Dokument werden überwiegend die speziell auf Abschlussarbeiten ausgelegten Möglichkeiten beschrieben.
-	
+
 Es ist voreingestellt, dass eine PDF/A-Datei erzeugt wird. Die beste Kompatibilität hierfür bietet Lua\LaTeX. Bei anderen Compilern kann dies entsprechend der Informationen in DEMO-TUDaPub zu Problemen führen. In diesem Fall sollte entweder der Compiler gewechselt oder \code{pdfa=false} aktiviert werden.
-	
+
 Für weitere Informationen kann ein Blick in die zur Dokumentenklasse gehörigen Dokumentation (tudapub.pdf) hilfreich sein. Sie wird zusammen mit den Quelldateien verteilt.
-	
+
 \minisec{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}
 Zwar basieren alle drei DEMO-Dateien auf der Klasse \code{tudapub}, allerdings sind die Basiseinstelungen dem Dokumententyp angepasst.
 Für Erläuterungen zu den TUDaPub spezifischen Optionen, sei auf die Datei DEMO-TUDaPub verwiesen.
@@ -141,14 +141,14 @@ custommargins&\FeatureFalse&\FeatureTrue&\FeatureFalse\\
 \begin{abstract}[english]
 	Englische Zusammenfassung, falls benötigt
 \end{abstract}
-	
+
 \tableofcontents
-	
-%Weitere Verzeichnisse wie \listoffigures oder ein  Abkürzungsverzeichnis	
-	
+
+%Weitere Verzeichnisse wie \listoffigures oder ein  Abkürzungsverzeichnis
+
 \mainmatter
 
-	
+
 
 \chapter{Verwendung}
 Die Klasse kann wie für Dokumentenklassen üblich eingebunden werden
@@ -157,30 +157,30 @@ Die Klasse kann wie für Dokumentenklassen üblich eingebunden werden
 \end{verbatim}
 Die Option \code{thesis} wechselt hierbei in den Modus, der spezielle Features für Abschlussarbeiten freischaltet, die in diesem Dokument beschrieben werden.
 
-Darüber hinaus lässt sich die Klasse verwenden wie die Standard-KOMA-Script-Klasse, auf der sie basiert. 
+Darüber hinaus lässt sich die Klasse verwenden wie die Standard-KOMA-Script-Klasse, auf der sie basiert.
 Voreingstellt ist hierbei \code{scrreprt}, dieses Dokument verwendet jedoch \code{class=scrboook}.
 
-Allgemein bietet \KOMAScript{} viele Möglichkeiten  zu Anpassungen. Wie in der tudapub-Demo-Datei beschrieben, können hier jedoch nicht alle erläutert werden, ein Blick in die offizielle Dokumentation ist daher häufig hilfreich \cite{scrguide}.
-	
+Allgemein bietet \KOMAScript{} viele Möglichkeiten zu Anpassungen. Wie in der tudapub-Demo-Datei beschrieben, können hier jedoch nicht alle erläutert werden, ein Blick in die offizielle Dokumentation ist daher häufig hilfreich \cite{scrguide}.
+
 \section{Übergabe der Titelinformationen}
-	
-Die Titelinformationen werden analog zur klassichen Titelerzeugung mit \verb+\maketitle+ übergeben. Allerdings wurden die Felder um ein paar speziellere Daten erweitert. Sofern nicht anders angegeben, verfügen alle Makros über ein Notwendiges Argument für die Datenübergabe, z.\,B. 
+
+Die Titelinformationen werden analog zur klassichen Titelerzeugung mit \verb+\maketitle+ übergeben. Allerdings wurden die Felder um ein paar speziellere Daten erweitert. Sofern nicht anders angegeben, verfügen alle Makros über ein notwendiges Argument für die Datenübergabe, z.\,B.
 \begin{verbatim}
 \title{\LaTeX{} im Corporate Design der TU Darmstadt}
 \end{verbatim}
-Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss. 
-	
+Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss.
+
 \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
-	\item[title] Titel, wird in sehr großer schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt, als für andere Publikationen.
+	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
 	\item[subtitle] Untertitel. Dieses Feld kann alternativ für eine Übersetzung genutzt werden.
 	\item[author] Der Autor/dir Autoren. Mehere Autoren werden durch \verb+\and+ getrennt.
 	\item[birthplace] Geburtsort. Angabe ist bei Dissertationen notwendig.
 	\item[reviewer] Gutachter. Mehrere Gutachter werden, wie Autoren durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
-	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden Folgenden werden unterhalb des Logos auf der Titelseite platziert.
-	\item[department] Fach-/Studienbereich allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
-	
-	Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit Abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
-	
+	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
+	\item[department] Fach-/Studienbereich, allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
+
+	Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
+
 	\begin{verbatim}
 	\department[Ersatztext]{Kürzel/Bezeichnung}
 	\end{verbatim}
@@ -196,8 +196,8 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\begin{verbatim}
 	\tuprints{urn=1234, printid=12345}
 	\end{verbatim}
-	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben. 
-	
+	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
+
 	\item[titleimage] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Als Maße können hier die Längen \verb+\layerwidth+ und \verb+\layerheight+ verwendet werden. Sie passen sich dem Verfügbaren Platz an. Für ein Beispiel sei auf die TUDapub-Dokumentation verwiesen.
 \end{description}
 
@@ -213,15 +213,15 @@ Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \co
 
 Diese Variante wird auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
 
-Auch ist das Standard-Layout der Kolumnentitel wenig Vorteilhaft, da die Kolumnentitel damit local größer sein können als die eigentliche Überschrift.
+Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit local größer sein können als die eigentliche Überschrift.
 
-	
-Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des typearea-Paketes optimiert. 
+
+Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des typearea-Paketes optimiert.
 
 Wenn die option \code{marginpar=true} gesetzt bleibt, ragen die Kopf- und Fußzeile über die Marginalspalte hinaus. Aus ästhetischen Gründen wird daher empfohlen in diesem Fall die Kopf- und Fußzeile  mit \code{marginpar=false}  auf den Textbereich zu beschränken.
-	
-	
-Darüber hinaus kann über 
+
+
+Darüber hinaus kann über
 \begin{verbatim}
 \pagestyle{TUDa.headings}
 \end{verbatim}
@@ -232,7 +232,7 @@ ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolu
 Die Klasse unterstützt alle Optionen der \file{tudapub}-Klasse. Darüber hinaus besteht über Wertzuweisung der Option \code{thesis} die Möglichkeit spezielle Einstellungen zu wählen.
 Es ist prinzipiell möglich die Optionen auch direkt als Optionen zur \file{tudapub}-Klasse zu übergeben, allerdings ist dies aufgrund der schlechteren Übersicht nicht zu empfehlen.
 
-Für dieses Dokument wurden beispielsweise die Optionen als 
+Für dieses Dokument wurden beispielsweise die Optionen als
 \begin{verbatim}
 thesis={type=drfinal,dr=phil}
 \end{verbatim}
@@ -277,7 +277,7 @@ Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text dire
 	phys  &Physik\\
 	wi    &Rechts- und Wirtschaftswissenschaften
 \end{tabular}
-	
+
 Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
 Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
 
@@ -286,12 +286,12 @@ Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unt
 \end{description}
 
 \minisec{Abweichung von den Vorgaben für die Titelseite}
-Da es möglich sein kann von dieser Vorgabe abzuweichen existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weiter Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub. Zusätzlich sei auf die Möglichkeiten des \code{\textbackslash{}department}-Makros verwiesen, sofern die Abweichung sich auf den Text beschränkt.
+Da es möglich sein kann von dieser Vorgabe abzuweichen, existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weitere Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub. Zusätzlich sei auf die Möglichkeiten des \code{\textbackslash{}department}-Makros verwiesen, sofern die Abweichung sich auf den Text beschränkt.
 
 \section{Erhöhter Zeilenabstand -- Informationen zum setspace-Paket}
-Sofern die Vorgaben es erfordern, ist es möglich mit dem setspace-Paket den Durchschuss zu erhöhen. Allerdings beeinflusst dies natürlich sämtliche Zeilenabstände. Ein erhöhter Zeilenabstand sollte daher erst nach der Titelseite aktiviert werden. Allgemein ist es jedoch empfehlenswert auch für Verzeichnisse und sonstige Sonderelemente außerhalb des Fließtextes auf bei normalen Einstellungen zu bleiben. 
+Sofern die Vorgaben es erfordern, ist es möglich mit dem setspace-Paket den Durchschuss zu erhöhen. Allerdings beeinflusst dies natürlich sämtliche Zeilenabstände. Ein erhöhter Zeilenabstand sollte daher erst nach der Titelseite aktiviert werden. Allgemein ist es jedoch empfehlenswert auch für Verzeichnisse und sonstige Sonderelemente außerhalb des Fließtextes auf bei normalen Einstellungen zu bleiben.
 
-Setspace liefert hierfür die Möglichkeit, das Paket ohne Optionen zu laden und später über Makros, wie \code{\textbackslash{}onehalfspacing} das umschalten zu verzögern. Alternativ kann auch durch die Umgebungen, wie \code{singlespace} lokal wieder zum Normalzustand gewechselt werden, sofern dies erforderlich ist. 
+Setspace liefert hierfür die Möglichkeit, das Paket ohne Optionen zu laden und später über Makros, wie \code{\textbackslash{}onehalfspacing} das Umschalten zu verzögern. Alternativ kann auch durch die Umgebungen, wie \code{singlespace} lokal wieder zum Normalzustand gewechselt werden, sofern dies erforderlich ist.
 
 \printbibliography
 

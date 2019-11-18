@@ -3,7 +3,7 @@
 	accentcolor=9c,% Farbe für Hervorhebungen auf Basis der Deklarationen in den Corporate Design Richtlinien
 %	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
 	]{tudapub}
-	
+
 \usepackage[english, main=ngerman]{babel}
 \usepackage[babel]{csquotes}
 
@@ -19,8 +19,8 @@
 \usepackage{hologo}
 
 \begin{document}
-	
-	
+
+
 \title{\texorpdfstring{TUDaPub -- \LaTeX-Paper im Corporate Design der TU Darmstadt}{TUDaPub -- LaTeX-Paper im Corporate Design der TU Darmstadt}}
 \subtitle{Die Dokumentenklasse tudapub}
 \author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and der \TeX-Löwe}
@@ -42,7 +42,7 @@
 	author=Marei Peischl (peiTeX),
 	title=TUDaPub -- LaTeX-Paper im Corporate Design der TU Darmstadt,
 	subject=Basisdokumentation und Template zur Nutzung der tudapub-Dokumentenkasse,
-	date=2019-04-29, 
+	date=2019-04-29,
 	keywords=TU Darmstadt \sep Corporate Design \sep LaTeX
 }
 
@@ -50,7 +50,7 @@
 
 \begin{abstract}
 	Dieses Dokument stellt ein Template und gleichzeitig die Verwendungsdokumentation zur Dokumentenklasse tudapub, einem Teil des TUDa-CI-Paketes dar.
-	
+
 	Noch befindet sich das Projekt in der Testphase. Sollten Sie Fragen, Wünsche und Anregungen haben, bitten wir um eine entsprechende Mitteilung.
 \end{abstract}
 
@@ -65,8 +65,8 @@
 \section{Über diese Datei}
 Die Datei \file{DEMO-TUDaPub.tex} beziehungsweise ihre Ausgabe \file{DEMO-TUDaPub.pdf} ist die Dokumentation der Dokumentenklasse \file{tudapub.sty}.
 
-Sie ist Teil des TUDa-CI-Bundles und basiert in Teilen auf dem tuddesign-Paket von C.~v.~Loewenich und J.~Werner. 
-	
+Sie ist Teil des TUDa-CI-Bundles und basiert in Teilen auf dem tuddesign-Paket von C.~v.~Loewenich und J.~Werner.
+
 In diesem Dokument werden die speziellen Optionen und Einstellungsmöglichkeiten erläutert.
 
 \section{Verwendung}
@@ -80,12 +80,12 @@ Im folgenden werden die möglichen Optionen beschrieben.
 
 \begin{description}
 	\item[class=<article|report|book>] Diese Option legt die Basisdokumentenklasse fest. Die Werte laden die entsprechende KOMA-Script-Klasse \cite{scrguide}. Der Wert \code{article} lädt somit die Klasse \code{scrartcl}.
-	
+
 	KOMA-Script ist eine Sammlung von Klassen und Paketen für \LaTeX, die neben den typografischen Anpassungen an den Europäischen Raum auch die Konfigurationsmöglichkeiten stark erweitert.
 	\item[color=<Farbe>] Wählt die Schmuckfarbe für die Nutzung in der Identitätsleiste aus. Die Farbcodes finden sich in der Farbübersicht in den Corporate Design Richtlinien. Neben diesen Farben kann prinzipiell jede beliebige Farbe übergeben werden. Die Optionen \code{accentcolor}, \code{textaccentcolor} und \code{identbarcolor} werden anlog direkt an \pck{tudacolors} übergeben. Auf diesem Weg können die Farben unabhängig voneinander gesetzt werden.
 	\item[marginpar] Schaltet die Randnotizspalte um. Voreingestellt ist \code{auto}. Dies bedeutet, dass die Randnotizspalte wie im Corporate Design Handbuch über die fünfte Spalte läuft.  \marginpar{Beispiel für eine Randnotiz}.
 	Darüber werden auch die Werte \code{true} und \code{false} akzeptiert. \code{false} setzt die Breite der Randnotizspalte auf 0. Der Mechanismus selbst wird nicht deaktiviert.
-	
+
 	Randnotizen werden über den komafont-Mechanismus \cite[vgl.][]{scrguide} im Element \code{marginpar} gesetzt. Seine Voreinstellung entspricht
 	\begin{verbatim}
 	\setkomafont{marginpar}{\accentfont}
@@ -98,8 +98,8 @@ Im folgenden werden die möglichen Optionen beschrieben.
 		\includegraphics[width=\marginparwidth]{example-image}\\
 		Flattersatz in der marginnline aus \KOMAScript
 	}
-	\item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann Randnotizen deaktiviert. 
-	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend 
+	\item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann Randnotizen deaktiviert.
+	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend
 	beschränkt. False lädt den Standardstil aus \KOMAScript.
 	\item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
 	Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
@@ -186,7 +186,7 @@ Zum Beispiel:
 	title=LaTeX im Corporate Design der TU Darmstadt,
 }
 \end{verbatim}
-Das Feld \code{publisher} ist mit \enquote{TU Darmstadt} vorbelegt, kann aber überschrieben werden. 
+Das Feld \code{publisher} ist mit \enquote{TU Darmstadt} vorbelegt, kann aber überschrieben werden.
 
 Um mehrere Einträge zu trennen, wird das Makro \code{\textbackslash{}sep} genutzt.
 \begin{verbatim}
@@ -207,7 +207,7 @@ Darüber hinaus werden bei \hologo{XeLaTeX} einige Features nicht unterstützt. 
 \subsection{Zusätzliche Metadaten nach Wunsch der Universitätsbibliothek}
 \label{sec:IMRAD}
 Es existiert ein Mechanismus um das Strukturierungsmodell IMRaD \cite{imrad} zu kennzeichnen.
-Im Stil der einzelnen Teilbereiche können so, über Aufruf von 
+Im Stil der einzelnen Teilbereiche können so, über Aufruf von
 
 \begin{verbatim}
 \IMRADlabel{introduction}
@@ -232,7 +232,7 @@ Beispiele für Abweichungen aus typografischen Gründen sind Beispielsweise auch
 Üblicherweise existieren die Makros \verb+\frontmatter+, \verb+\mainmatter+ und \verb+\backmatter+ lediglich bei der Basisklasse \cls{scrbook}.
 Auf Wunsch wurden diese Makros auch bei \cls{scrartcl} und \cls{scrreprt} als Basis bereitgestellt.
 
-Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet. 
+Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet.
 
 
 \subsection{Mathematikschriften}
