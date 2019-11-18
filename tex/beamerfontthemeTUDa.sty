@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerfontthemeTUDa}
- [\filedate\space\fileversion]    
- 
+ [\filedate\space\fileversion]
+
 \RequirePackage{l3keys2e}
 
 \ExplSyntaxOn
@@ -16,13 +16,13 @@
 \ProcessKeysOptions{TUDa/beamer/fonts}
 
 \ExplSyntaxOff
- 
+
 \mode<presentation>
 
 \RequirePackage{tudafonts}
 
 \ExplSyntaxOn
-\bool_if:NTF \g_TUDa_serif_bool 
+\bool_if:NTF \g_TUDa_serif_bool
 	{\usefonttheme{serif}}
 	{\renewcommand*{\familydefault}{\sfdefault}}
 \ExplSyntaxOff

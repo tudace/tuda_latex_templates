@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tudabeamer}
  [\filedate\space\fileversion\space]
-   
+
 \RequirePackage{l3keys2e}
 \RequirePackage{URspecialopts}
 
@@ -118,7 +118,7 @@
 	\cs_set:Npn \and {\exp_not:n {\exp_not:N \sep}}
 	\bool_if:NTF \g_TUDa_pass_TitleData_bool {
 		\tl_gset:Nx \g_TUDa@xmp_title {\insertshorttitle}
-		\tl_gset:Nx \g_TUDa@xmp_author {\insertshortauthor}	
+		\tl_gset:Nx \g_TUDa@xmp_author {\insertshortauthor}
 		\iow_now:Nx \TUDa@xmpdata_stream
 		{
 			\exp_not:N \Title{\tl_to_str:V \g_TUDa@xmp_title}
@@ -136,7 +136,7 @@
 	}
 	\endgroup
 }
-\cs_new:Nn \TUDa_write_xmp_line:nn {		
+\cs_new:Nn \TUDa_write_xmp_line:nn {
 	\cs_if_exist:cTF {\tl_mixed_case:n {#1}} {
 		\iow_now:Nx \TUDa@xmpdata_stream {
 			\c_backslash_str \tl_mixed_case:n {#1} {#2}\iow_newline:

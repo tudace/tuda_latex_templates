@@ -1,16 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplPackage{tudarules}{\filedate}{\fileversion}{Creation of colored bars for tuda-ci bundle}
-   
+
 
 \RequirePackage{l3keys2e}
-	
+
 \seq_if_exist:NF \l_TUDa_tmpa_seq {\seq_new:N \l_TUDa_tmpa_seq}
 \tl_if_exist:NF \l_TUDa_tmpa_tk {\tl_new:N \l_TUDa_tmpa_tl}
 
 \cs_new:Nn \TUDa_rules_set_values:n {
 	\seq_set_split:Nnn \l_TUDa_tmpa_seq {|} {#1}
-	
+
 	\int_step_inline:nnnn {1}  {1} {4} {
 		\tl_set:Nn \l_TUDa_tmpa_tl {c_TUDa_
 			\clist_item:nn {largerule, rulesep, smallrule, logoheight} {##1}
@@ -78,7 +78,7 @@
 	}{
 		\hbox_gset:cn {#3_box} {
 			\parbox[t]{\l_TUDa_headrule_width_dim}{
-				\setlength{\baselineskip}{\z@}		
+				\setlength{\baselineskip}{\z@}
 				\null\par\nointerlineskip
 				\textcolor{\l_TUDa_headrule_color_tl}{\rule{\linewidth}{\c_TUDa_largerule_dim}}
 				\vspace{\c_TUDa_rulesep_dim}\par\nointerlineskip
@@ -102,7 +102,7 @@
 	\cs_new:cpn {#2} {\box_use:c {#2_box}}
 }
 
-	
+
 %DL | 3.5mm | 1.4mm | 1.2pt | 17  mm | 0.6pt| 10mm | 14mm |
 %A6 | 3  mm | 1.4mm | 1.2pt | 16.5mm | 0.6pt| 10mm | 15mm |
 %A5 | 3.3mm | 1.4mm | 1.2pt | 19  mm | 0.6pt| 12mm | 16mm |
