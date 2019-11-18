@@ -93,7 +93,7 @@
   	leftskip=\TUDa@beamer@sep,
   	rightskip=\TUDa@beamer@sep, ht=2.75mm,dp=2.75mm]{footline}
 	\usebeamerfont{author~ in~ head/foot}%
-	\bool_set_false:N \l_TUDa_tmpa_bool 
+	\bool_set_false:N \l_TUDa_tmpa_bool
 	\clist_map_variable:nNn {date, department, institute, author} \l_tmpa_tl {
 		\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
 			\bool_if:NTF \l_TUDa_tmpa_bool {~|~}

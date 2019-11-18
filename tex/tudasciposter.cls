@@ -190,7 +190,7 @@
 		\seq_map_inline:Nn \g_TUDa_author_seq {
 			\seq_put_right:Nx \l_tmpa_seq {##1}
 		}
-		\tl_gset:Nx \g_TUDa@xmp_author {\seq_use:Nn \l_tmpa_seq {\sep}}	
+		\tl_gset:Nx \g_TUDa@xmp_author {\seq_use:Nn \l_tmpa_seq {\sep}}
 		\iow_now:Nx \TUDa@xmpdata_stream
 		{
 			\exp_not:N \Title{\tl_to_str:V \g_TUDa@xmp_title}
@@ -208,7 +208,7 @@
 	\endgroup
 }
 
-\cs_new:Nn \TUDa_write_xmp_line:nn {		
+\cs_new:Nn \TUDa_write_xmp_line:nn {
 	\cs_if_exist:cTF {\tl_mixed_case:n {#1}} {
 		\iow_now:Nx \TUDa@xmpdata_stream {
 			\c_backslash_str \tl_mixed_case:n {#1} {\exp_not:n {#2}}%\iow_newline:
@@ -325,28 +325,28 @@
 			\coordinate(topright) at ([xshift=-\g_TUDa_margin_dim, yshift=-\g_TUDa_margin_dim]current~page.north~ east);
 			\coordinate(bottomleft) at ([xshift=\g_TUDa_margin_dim, yshift=\g_TUDa_margin_dim]current~page.south~ west);
 			\coordinate(bottomright) at ([xshift=-\g_TUDa_margin_dim, yshift=\g_TUDa_margin_dim]current~page.south~ east);
-			
-		
+
+
 			\node[inner~sep=0pt, anchor=north~west](identbar) at (topleft){\TUDa@posterrule};
 
 			\fill[identbarcolor]
 			(identbar.south~east)rectangle([yshift=-\g_TUDa_titleblock_dim]identbar.south~west) coordinate(bottomlefttitleblock);
-			
+
 			\node[anchor=north~east,inner~sep=0pt,minimum~width=2.5\c_TUDa_logoheight_dim](TUDalogo) at ([xshift=.3\c_TUDa_logoheight_dim,yshift=-.5\c_TUDa_logoheight_dim]identbar.south~east){
 				\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}};
-			
+
 			\node[inner~sep=0pt,text~width=2.2\c_TUDa_logoheight_dim,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_TUDa_rulesep_dim]TUDalogo.south~west){\box_use:N \g_TUDa_titlegraphic_box};
-			
+
 			\node[anchor=north~west,inner~sep=0pt,]  (title) at ([xshift=3\c_TUDa_rulesep_dim,yshift=-.5\c_TUDa_logoheight_dim]identbar.south~west) {\box_use:N \g_TUDa_title_box};
-			
+
 			\draw[line~ width=.5\c_TUDa_smallrule_dim](bottomlefttitleblock)--++(\contentwidth,0);
-			
+
 			\node[anchor=north~west, inner~xsep=0pt, inner~ ysep=\c_TUDa_rulesep_dim] (author) at ([xshift=3\c_TUDa_rulesep_dim]bottomlefttitleblock) {\box_use:N \g_TUDa_author_box};
-			
+
 			\draw[line~ width=.5\c_TUDa_smallrule_dim](author.south-|identbar.west)--++(\contentwidth,0);
 
-			
-			
+
+
 		\bool_if:NT \g_TUDa_poster_foot_bool {
 			\coordinate(lastpos) at (bottomright);
 			\tl_if_empty:NF \g_TUDa_poster_qrcode_tl
@@ -356,11 +356,11 @@
 					\exp_args:NnV \use:n {\qrcode[height=\dim_use:N \g_TUDa_footheight_dim]}\g_TUDa_poster_qrcode_tl
 				};
 				\coordinate (lastpos) at (qrcode.south~west);
-			}	
+			}
 			\box_if_empty:NF \g_TUDa_footergraphics_box {
 				\node[anchor=south~east, inner~sep=\z@] at (lastpos) {
 					\accentfont
-					\box_use:N \g_TUDa_footergraphics_box	
+					\box_use:N \g_TUDa_footergraphics_box
 				};
 			}
 			\node[anchor=north~ west, inner~ sep=\z@] (infofooter) at ([yshift=\g_TUDa_footheight_dim]bottomleft) {
@@ -374,8 +374,8 @@
 					\let\footnotetext\TUDa@title@footnote
 					\g_TUDa_thanks_tl}
 			};
-		
-			
+
+
 }
 	}}
 }
@@ -453,7 +453,7 @@
 		top=\c_TUDa_rulesep_dim,
 		bottom=\c_TUDa_rulesep_dim,
 		frame~code={
-			\iftcb@hasTitle	
+			\iftcb@hasTitle
 			\fill[tcbcolframe](frame.north~west)rectangle(title.north~east);
 			\fill[tcbcolframe](title.south~west)rectangle(interior.north~east);
 			\else

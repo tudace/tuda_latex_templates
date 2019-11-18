@@ -35,11 +35,11 @@
 % Load the TUDa-colorscheme
 \RequirePackage{tudacolors}
 
-\bool_if:NTF \g_TUDaletter_premium_bool 
+\bool_if:NTF \g_TUDaletter_premium_bool
 {	\def\TUDa@premiumcolor{accentcolor}
 	\def\TUDa@use@premiumcolor{\color{accentcolor}}
 	\def\TUDa@use@premiumcolor@text{\color{textaccentcolor}}
-}{	
+}{
 	\def\TUDa@premiumcolor{black}
 	\let\TUDa@use@premiumcolor\relax
 	\let\TUDa@use@premiumcolor@text\relax
@@ -65,7 +65,7 @@
 
 \geometry{
 	twoside=false,
-	left=\c_TuDa_LeftMargin_dim, 
+	left=\c_TuDa_LeftMargin_dim,
 	right=\c_TuDa_RightMargin_dim,
 	bottom=20mm,
 	footskip=3mm,
@@ -90,7 +90,7 @@
 
 \@setplength{toaddrhpos}{\c_TuDa_LeftMargin_dim}
 \@setplength{toaddrvpos}{50mm}
-\@setplength{backaddrheight}{4mm} 
+\@setplength{backaddrheight}{4mm}
 \@setplength{toaddrindent}{0mm}
 
 \@setplength{refhpos}{\c_TuDa_LeftMargin_dim}
@@ -244,7 +244,7 @@
 	\@nobreaktrue
 	\@afterindentfalse
 	\everypar{%
-		\if@nobreak 
+		\if@nobreak
 			\@nobreakfalse\clubpenalty\@M
 			\if@afterindent
 			\else{\setbox\z@\lastbox}
@@ -256,7 +256,7 @@
 		\ifnum\thepage=1%
 		\TUD@page@free=-\pagegoal%
 		\advance\TUD@page@free\pagetotal%
-		\dim_compare:nTF {-\TUD@page@free>2\baselineskip}  
+		\dim_compare:nTF {-\TUD@page@free>2\baselineskip}
 		{
 			\bool_if:NF \g_TUDaletter_logo_bool {
 				\advance\TUD@page@free-.3\baselineskip
@@ -275,7 +275,7 @@
 	}%
 	\global\setlength{\linewidth}{\dim_eval:n {\c_TuDa_Linewidth_dim + \c_TuDa_firstpage_extraindent_dim}}
 	\afterpage{
-		\global\setlength{\linewidth}{\c_TuDa_Linewidth_dim}	
+		\global\setlength{\linewidth}{\c_TuDa_Linewidth_dim}
 		\widowpenalty=10000
 	}
 }
@@ -293,7 +293,7 @@
 \newcommand*{\TUDa@letterpagemark}{
 	%get lastpage for this letter if not already done
 	\int_compare:nTF {\value{page} = 1} {
-			\bool_if:NTF \g_TUDa_firstpagenumber_bool 
+			\bool_if:NTF \g_TUDa_firstpagenumber_bool
 			{\bool_set_true:N \l_tmpa_bool}
 			{\bool_set_false:N \l_tmpa_bool}
 		}
@@ -305,7 +305,7 @@
 			\int_const:cn {c_TUDa_letter\thisletter _lastpage_int} {0}
 			\else
 			\int_const:cn {c_TUDa_letter\thisletter _lastpage_int} {
-				\cs_if_exist:NTF \hypersetup 
+				\cs_if_exist:NTF \hypersetup
 				{\exp_args:NNc \expandafter \@secondoffive { r@\thisletter.lastpage}}
 				{\exp_args:NNc \expandafter \use_ii:nn { r@\thisletter.lastpage}}
 			}
@@ -352,7 +352,7 @@
 	height=\box_ht:N \TuDa@LetterheadRule_box,
 	contents=\TuDa@LetterheadRule
 	]{letter.head}
-} 	
+}
 
 \DeclareNewLayer[
 	background,
@@ -395,10 +395,10 @@
 	\use:c {pdfx@localcommands}
 	\prop_map_function:NN \g_TUDa_MetaData_prop  \TUDa_write_xmp_line:nn
 	\endgroup
-	\iow_close:N  \TUDa@xmpdata_stream 
+	\iow_close:N  \TUDa@xmpdata_stream
 	}
 }
-\cs_new:Nn \TUDa_write_xmp_line:nn {		
+\cs_new:Nn \TUDa_write_xmp_line:nn {
 	\cs_if_exist:cTF {\tl_mixed_case:n {#1}} {
 		\iow_now:Nx \TUDa@xmpdata_stream {
 			\c_backslash_str \tl_mixed_case:n {#1} {#2}\iow_newline:

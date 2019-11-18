@@ -16,9 +16,9 @@
 %% scrkernel-version.dtx  (with options: `clo,10pt')
 %% scrkernel-fonts.dtx  (with options: `clo,10pt')
 %% scrkernel-paragraphs.dtx  (with options: `clo,10pt')
-%% 
+%%
 %% Copyright (c) 1994-2017 Markus Kohm [komascript at gmx info]
-%% 
+%%
 %% The original file was generated from file(s) of the KOMA-Script bundle.
 %% https://ctan.org/pkg/koma-script
 %%
@@ -32,7 +32,7 @@
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% The Current Maintainers of this work are Marei Peischl <kontakt@peitex.de> and Markus Lazanowski <latex@ce.tu-darmstadt.de>.
 %%
 %%
