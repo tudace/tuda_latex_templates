@@ -566,7 +566,7 @@
 \newcommand*{\tasksep}{~}%TODO
 
 \providecaptionname{ngerman, german}{\solutionname}{Lösungsvorschlag}
-\providecaptionname{english, american, british}{\taskname}{Solution}
+\providecaptionname{english, american, british}{\solutionname}{Solution}
 \newcommand*{\solutionsep}{:~}
 
 \providecaptionname{ngerman, german}{\StudentNamename}{Nachname,~Vorname}
