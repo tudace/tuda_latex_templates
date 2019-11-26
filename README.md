@@ -22,7 +22,7 @@ Es liefert neben den Klassen-, Paket- und Konfigurationsdateien auch Anwenderdok
 Das Gesamtpaket wurde in Teilen inspiriert von Clemens von Loewenichs and Joe Werners TUD-Design Paket.
 
 Derzeit existieren diese Templates nur in Deutscher Sprache.
- 
+
 ## Verwendungshinweis
 Die Richtlinien des Corporate Designs, sowie die Anforderungen der Universitätsbibliothek erfordern einige spezielle Konfigurationen. Beispielsweise ist für wissenschaftliche Veröffentlichungen und Abschlussarbeiten die Erzeugung einer archivierbaren PDF-Datei (PDF/A) vorgesehen.
 Dies ist mit aktuellen LaTeX-Paketen und dem Compiler LuaLaTeX deutlich konsequenter umzusetzen.
@@ -38,11 +38,11 @@ In den häufigsten Fällen fehlt ein Teilpaket mit dem Namen URspecialopts.sty. 
 Für die Verwendung der Klassen und Pakete muss entweder der gesamte Inhalt des tex-Verzeichnisses im Arbeitsverzeichnis liegen oder in der TeX-Distribution installiert werden. Dies ist entweder über die Paketverwaltung der Distribution möglich oder das Paket kann manuell mithilfe der Release Informationen im GitHub Repository installiert werden.
 
 ### Logos & verwendete Bilddateien
-Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitgliedern der TU Darmstadt über das interne Netzwerk heruntergeladen werden. 
+Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitgliedern der TU Darmstadt über das interne Netzwerk heruntergeladen werden.
 
 https://download.hrz.tu-darmstadt.de/protected/CE/TUDa_LaTeX/tuda_logo.pdf
 
-Für die Permanente Installation der Logodateien findet sich unter 
+Für die permanente Installation der Logodateien findet sich unter
 https://www.ce.tu-darmstadt.de/ce/latex_tuda/index.de.jsp
 ein Paket mit entsprechenden Hinweisen.
 
@@ -53,7 +53,7 @@ Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos do
 Dokumententyp				 | Templatedatei(en)									| Dokumentenklasse
 ---------------------------------------- | ------------------------------------------------------------------------------------ | ----------------
 Interne Berichte (minimales template)	 | DEMO-TUDaReport.tex									| tudapub.cls mit tudasize9pt.clo
-Wissenschaftliche Artikel   	     	 | DEMO-TUDaPub.tex, verwendet auch DEMO-TUDaBibliography.bib				| tudapub.cls 
+Wissenschaftliche Artikel   	     	 | DEMO-TUDaPub.tex, verwendet auch DEMO-TUDaBibliography.bib				| tudapub.cls
 Abschlussarbeiten 			 | DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, verwendet auch DEMO-TUDaBibliography.bib	| tudapub.cls mit tudathesis.cfg
 Wissenschaftliche Poster		 | DEMO-TUDaSciPoster.tex		 	   					| tudasciposter.cls
 Veranstaltungsankündigungen		 | DEMO-TUDaPoster.tex									| tudaposter.cls
@@ -108,7 +108,7 @@ Farbskalen von tuda-pgfplots: https://github.com/tudace/tuda_latex_templates/blo
   - tuda-a3paper.clo
   - tuda-a4paper.clo
   - tuda-a5paper.clo
- 
+
 
 # Summary
 
@@ -116,7 +116,7 @@ The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darm
 Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation, which currently are only available in German.
 
 If you are not a German speaker and require some help using these files, please feel free to contact the maintainers.
- 
+
 ## Includes templates and document types
 
 document type				| name of template file							| used documentclass and config
@@ -131,7 +131,7 @@ presentation				| DEMO-TUDaBeamer.tex 							| tudaposter.cls
 letter					| DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			| tudaletter.cls and tudalettersize10pt.clo
 exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
 
-# Version History 
+# Version History
 
  * v1.00 First official version - published on 2019-07-20
  * v1.01 (2019-08-05) Smaller layout fixes and documentation enhancements
@@ -141,7 +141,7 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - Improved implementation of the headline option
    - Add information on package dependencies
  * v1.11 (2019-09-25) bugfixes + smaller adjustments to simplify usage
- * v1.20 (2019-10-26 - was not published on CTAN) 
+ * v1.20 (2019-10-26 - was not published on CTAN)
    - Enhancements for exercise sheets/exams and pdfa-mode
    - Switch pdfa-mode to PDF/A-2b and enforce Type1 for valid documents
    - Add tudaexercise.cls and corresponding demo file

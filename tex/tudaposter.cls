@@ -182,21 +182,21 @@
 
 \bool_if:NT \g_TUDa_poster_foot_bool {
 	\dim_compare:nT {\g_TUDa_footheight_dim = 0pt} {
-		\dim_set:Nn \g_TUDa_footheight_dim 
+		\dim_set:Nn \g_TUDa_footheight_dim
 		{1.5\baselineskip}
 	}
 	\geometry{bottom=\dim_eval:n {\g_TUDa_footheight_dim+\footskip+\g_TUDa_margin_dim}}
-} 
+}
 %%%%%%%%%%%%%%%%%%%%%%
 
 
 
 \RequirePackage{scrlayer}
 
-	
+
 \dim_new:N \g_TUDa_qrcode_dim
-\dim_gset:Nn \g_TUDa_qrcode_dim {.7\c_TUDa_logoheight_dim}	
-	
+\dim_gset:Nn \g_TUDa_qrcode_dim {.7\c_TUDa_logoheight_dim}
+
 \DeclareNewLayer[
 	background,
 	align=br,
@@ -334,7 +334,7 @@
 	\endgroup
 
 	\TUDa_Setup_Title_box:
-	\dim_gset:Nn \g_TUDa_titleback_dim {	
+	\dim_gset:Nn \g_TUDa_titleback_dim {
 		\bool_if:NT \g_TUDa_colorsubtitle_bool {\box_dp:N \g_TUDa_title_box}+
 				\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim
 			}
@@ -342,7 +342,7 @@
 		\ModifyLayer[
 	height=\g_TUDa_titleback_dim
 	]{TUDa.poster.background}
-	
+
 	\bool_if:NF \g_TUDa_logo@inhead_bool {
 		\ModifyLayer[
 		addvoffset=\g_TUDa_titleback_dim+\c_TUDa_smallrule_dim
@@ -350,7 +350,7 @@
 	}
 
 	\bool_if:NT \g_TUDa_logo@inhead_bool {
-		\dim_compare:nT {\box_ht:N \g_TUDa_title_info_box+ \box_dp:N \g_TUDa_title_info_box  > \box_ht:N \g_TUDa_title_box} 
+		\dim_compare:nT {\box_ht:N \g_TUDa_title_info_box+ \box_dp:N \g_TUDa_title_info_box  > \box_ht:N \g_TUDa_title_box}
 		{\msg_warning:nn {TUDaPoster} {infobox-too-high}}
 	}
 	\leavevmode\box_use:N \g_TUDa_title_box\par
@@ -361,7 +361,7 @@
 		\par\nointerlineskip
 		\box_use:N \g_TUDa_titlegraphic_box
 	}
-	
+
 	\DeclareLayer[
 	clone=TUDa.poster.marginpar,
 	height=\bool_if:NF \l_TUDa_marginpar_overlap_bool {-\box_ht:N \g_TUDa_titlegraphic_box-\box_dp:N \g_TUDa_titlegraphic_box}
@@ -369,11 +369,11 @@
 	addvoffset=\bool_if:NF \l_TUDa_marginpar_overlap_bool {+\box_ht:N\g_TUDa_titlegraphic_box+\box_dp:N \g_TUDa_titlegraphic_box}
 	+\box_ht:N \g_TUDa_title_box+\box_dp:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim,
 	]{TUDa.poster.marginpar.title}
-	
+
 	\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {
 		\ModifyLayer[addwidth=-\g_TUDa_qrcode_dim-\c_TUDa_rulesep_dim]{TUDa.poster.footer}
 	}
-	
+
 	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.marginpar.title}
 	\AddLayersToPageStyle{TUDa.poster.title}{TUDa.poster.logo}
 	\thispagestyle{TUDa.poster.title}
@@ -394,7 +394,7 @@
 }
 \box_new:N \g_TUDa_titlegraphic_box
 
-\seq_new:N \g_TUDa_title_info_seq 
+\seq_new:N \g_TUDa_title_info_seq
 
 \seq_gput_right:Nn \g_TUDa_title_info_seq {
 	\rlap{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}

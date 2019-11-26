@@ -33,7 +33,7 @@
 
 % Sofern bereits in lokaler Zweig der LaTeX-Distributionsstruktur existiert, erhalten Sie beim ausführen von
 %	 kpsewhich -var-value TEXMFLOCAL
-% in einem Terminal eine Ausgabe wie 
+% in einem Terminal eine Ausgabe wie
 %	 C:/texlive/texmf-local
 
 % In disem Fall ist somit unter C:/texlive/texmf-local eine Struktur, die analog zur TeX-Distribution aufgebaut ist.

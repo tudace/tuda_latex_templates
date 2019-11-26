@@ -11,7 +11,7 @@
 \tl_new:N \g_TUDa_thesis_options_tl
 
 \prop_new:N \g_TUDa_clsopts_prop
-\prop_new:N \g_TUDa_unknown_clsopts_prop 
+\prop_new:N \g_TUDa_unknown_clsopts_prop
 \prop_gput:Nnn \g_TUDa_clsopts_prop {captions} {nooneline}
 \prop_gput:Nnn \g_TUDa_clsopts_prop {parskip} {half-}
 
@@ -94,7 +94,7 @@
 	unknown .code:n = {\prop_gput:NVn \g_TUDa_unknown_clsopts_prop \l_keys_key_tl {#1}},
 	BCOR .code:n = \PassOptionsToPackage{bindingoffset=#1}{geometry},
 	bindingoffset .meta:n = {BCOR=#1},
-	captions .code:n = {\prop_gput:Nnx \g_TUDa_clsopts_prop {captions} {	
+	captions .code:n = {\prop_gput:Nnx \g_TUDa_clsopts_prop {captions} {
 		\use:n {\prop_item:Nn \g_TUDa_clsopts_prop {captions}}, #1}
 	},
 	titlepage .code:n = {\msg_warning:nnn {TUDaPub} {titlepage-option-disabled} {#1}},
@@ -122,7 +122,7 @@
 \ProcessKeysOptions{TUDa/pub}
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
-	\tl_if_empty:nTF {#2} 
+	\tl_if_empty:nTF {#2}
 		{\PassOptionsToClass  {#1} {scrartcl}}
 		{
 		\clist_map_inline:nn {#2} {\PassOptionsToClass  {#1=##1} {scrartcl}}
@@ -138,7 +138,7 @@
 
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.scrartcl.cls@#1} {
-	\tl_if_empty:nTF {#2} 
+	\tl_if_empty:nTF {#2}
 		{\KOMAoptions{#1} }
 		{\clist_map_inline:nn {#2} {\KOMAoptions{#1=##1}}}
 	}
@@ -158,7 +158,7 @@
 }}
 
 
-	
+
 
 \usepackage{tudarules}
 \usepackage{tudafonts}
@@ -262,7 +262,7 @@
 \RequirePackage{tudacolors}
 \RequirePackage{environ}
 
-%TODO: mode -> light head. 
+%TODO: mode -> light head.
 
 \setkomafont{pageheadfoot}{\sffamily\small}
 \setkomafont{pagenumber}{}
@@ -271,7 +271,7 @@
 
 \KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}
 \KOMAoptions{headsepline=.5\c_TUDa_smallrule_dim}
-  
+
 \box_new:N \g_TUDa_ex_headline_odd_box
 \box_new:N \g_TUDa_ex_headline_even_box
 \box_new:N \g_TUDa_ex_headline_oneside_box
@@ -327,7 +327,7 @@
 \cs_new:Nn \TUDa_ex_adjust_headheight: {
 	\if@twoside
 	\dim_set:Nn \l_tmpa_dim {
-		\dim_max:nn 
+		\dim_max:nn
 			{\box_ht:N \g_TUDa_ex_headline_odd_box}
 			{\box_ht:N \g_TUDa_ex_headline_even_box}
 	}
@@ -365,7 +365,7 @@
 			\box_use:N \TUDa@headline_box
 		},
 		addvoffset=-\box_dp:N \TUDa@headline_box
-	]{TUDa.ex.head.above.line}	
+	]{TUDa.ex.head.above.line}
 	\ModifyLayer[
         background,
 %       mode=picture,
@@ -388,7 +388,7 @@
 \tl_gset_eq:NN  \g_TUDa_titleimage_code_tl \c_empty_tl
 \newcommand{\titleimage}[1]{\tl_gset:Nn \g_TUDa_titleimage_code_tl {#1}}
 
-\box_new:N  \g_TUDa_title_box 
+\box_new:N  \g_TUDa_title_box
 \skip_new:N \g_TUDa_title_fill_skip
 
 \renewcommand{\titlepagestyle}{plain.TUDa.ex}
@@ -419,8 +419,8 @@
 	\seq_use:Nnnn \g_TUDa_author_seq {~\authorandname{}~} {,~} {~\&~}
       }
 
-\tl_new:N \g_TUDa_shorttitle_tl      
-      
+\tl_new:N \g_TUDa_shorttitle_tl
+
 \RenewDocumentCommand{\title}{om}{
   \IfNoValueTF{#1}{
     \tl_gset:Nn  \g_TUDa_shorttitle_tl {#2}
@@ -552,7 +552,7 @@
 
 %Logos
 \RequirePackage{graphicx}
-	
+
 %%hyperref
 \usepackage{hyperref}
 \hypersetup{hidelinks, unicode}
@@ -588,7 +588,7 @@
 
 
 %task environment
-%TODO: discussion: allow sectioning 
+%TODO: discussion: allow sectioning
 \DeclareSectionCommand[%
 style=section,%
 level=1,%
