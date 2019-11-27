@@ -648,11 +648,13 @@ tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
 tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 ]{@solution}
 
-\NewEnviron{solution}{
-  \if_bool:N \l_TUDa_ex_solution_bool
-  \TUDa_ex_solutionheader:
-  \BODY\par
-  \fi:
+
+\def\solution{
+\bool_if:NTF \l_TUDa_ex_solution_bool \TUDa_ex_solutionheader: \iffalse
+}
+
+\def\endsolution{
+	\bool_if:NF \l_TUDa_ex_solution_bool \fi
 }
 
 \setkomafont{@solution}{\normalfont}
