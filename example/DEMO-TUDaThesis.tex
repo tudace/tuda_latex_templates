@@ -55,6 +55,7 @@
 %Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
 \let\file\texttt
 \let\code\texttt
+\let\tbs\textbackslash
 
 \usepackage{pifont}% Zapf-Dingbats Symbole
 \newcommand*{\FeatureTrue}{\ding{52}}
@@ -161,7 +162,8 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden Folgenden werden unterhalb des Logos auf der Titelseite platziert.
 	\item[department] Fach-/Studienbereich allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
 
-	Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit Abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
+
+	Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit Abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\tbs{}department} ein optionales Argument:
 
 	\begin{verbatim}
 	\department[Ersatztext]{Kürzel/Bezeichnung}
@@ -208,7 +210,7 @@ hinzugefügt werden. Die Vorbelegung für Stadt ist hierbei \enquote{Darmstadt}.
 Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde.
 
-Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\textbackslash{}geometry} vor Beginn des Dokuments manuell angepasst werden.
+Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\tbs{}geometry} vor Beginn des Dokuments manuell angepasst werden.
 
 Diese Variante wird auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
 
@@ -294,12 +296,12 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 \end{description}
 
 \minisec{Abweichung von den Vorgaben für die Titelseite}
-Da es möglich sein kann von dieser Vorgabe abzuweichen existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weiter Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub. Zusätzlich sei auf die Möglichkeiten des \code{\textbackslash{}department}-Makros verwiesen, sofern die Abweichung sich auf den Text beschränkt.
+Da es möglich sein kann von dieser Vorgabe abzuweichen existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weiter Informationen zur Konstruktion der Boxen findet sich in den Verwendungshinweisen zu Basisklasse TUDaPub. Zusätzlich sei auf die Möglichkeiten des \code{\tbs{}department}-Makros verwiesen, sofern die Abweichung sich auf den Text beschränkt.
 
 \section{Erhöhter Zeilenabstand -- Informationen zum setspace-Paket}
 Sofern die Vorgaben es erfordern, ist es möglich mit dem setspace-Paket den Durchschuss zu erhöhen. Allerdings beeinflusst dies natürlich sämtliche Zeilenabstände. Ein erhöhter Zeilenabstand sollte daher erst nach der Titelseite aktiviert werden. Allgemein ist es jedoch empfehlenswert auch für Verzeichnisse und sonstige Sonderelemente außerhalb des Fließtextes auf bei normalen Einstellungen zu bleiben.
 
-Setspace liefert hierfür die Möglichkeit, das Paket ohne Optionen zu laden und später über Makros, wie \code{\textbackslash{}onehalfspacing} das umschalten zu verzögern. Alternativ kann auch durch die Umgebungen, wie \code{singlespace} lokal wieder zum Normalzustand gewechselt werden, sofern dies erforderlich ist.
+Setspace liefert hierfür die Möglichkeit, das Paket ohne Optionen zu laden und später über Makros, wie \code{\tbs{}onehalfspacing} das umschalten zu verzögern. Alternativ kann auch durch die Umgebungen, wie \code{singlespace} lokal wieder zum Normalzustand gewechselt werden, sofern dies erforderlich ist.
 
 \printbibliography
 
