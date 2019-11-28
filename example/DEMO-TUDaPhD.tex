@@ -205,6 +205,17 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
 In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
 
+
+Es besteht zusätzlich die Möglichkeit ein anderssprachiges Affidavit als Ergänzung mit abzudrucken. Um die Struktur und die ggf. notwendige Sprachumschaltung zu erledigen, existiert hierfür ab Version 2.03 eine Umgebung:
+
+\begin{verbatim}
+\begin{affidavit*}[Babel-Sprachoption]{Überschrift}
+Text
+\end{affidavit*}
+\end{verbatim}
+
+Diese Variante verfügt bewusst über keine Unterschriftenzeile, da diese Version laut Verständnis der Entwickler keine rechtliche Verbindlichkeit besitzt.
+
 \section{Layout-Optionen mit Verstoß gegen das Corporate Design}
 Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde.
