@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/11/16 v2.02
+ tuda-ci 2019/11/28 v2.03
 
 ***************************************************************************
 
@@ -154,11 +154,16 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - changed title fontsize adjustments to use clo-files
    - additional options for tudaposter, to use it for job/thesis announcements
    - improved implementation of tudaexercise
-   - Bugfixes concerning the PDF/A-Mode
+   - bugfixes concerning the PDF/A-Mode
  * v2.01 (2019-11-13) small bugfixes
-   - Fix expansion of metadata for PDF/A mode
-   - Adjustment of english translation for thesis mode of tudapub
+   - fix expansion of metadata for PDF/A mode
+   - adjustment of english translation for thesis mode of tudapub
    - fix support for titlegraphic in announcement mode for tudaposter
  * v2.02 (2019-11-16) bugfixes
    - fix font issues and Type1 mode
    - improve marginpar adjustment for tudaposter
+ * v2.03 (2019-11-28) bugfixes + small implemtation corrections
+   - allow verbatim in solution environment for tudaexercise
+   - add affidavit* to provide custom texts
+   - add \AffidavitSignature
+   - fix typos
