@@ -167,3 +167,4 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - add affidavit* to provide custom texts
    - add \AffidavitSignature
    - fix typos
+   - extended documentation
