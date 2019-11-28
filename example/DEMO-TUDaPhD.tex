@@ -41,20 +41,23 @@
 %%%%%%%%%%%%%%%%%%%
 %Paketvorschläge Tabellen
 %%%%%%%%%%%%%%%%%%%
-%\usepackage{array}% Basispaket für Tabellenkonfiguration, wird von den folgenden automatisch geladen
-\usepackage{tabularx}% Tabellen, die sich automatisch der Breite anpassen
-%\usepackage{longtable}% Mehrseitige Tabellen
-%\usepackage{xltabular}% Mehrseitige Tabellen mit anpassarer Breite
-\usepackage{booktabs}% Verbesserte Möglichkeiten für Tabellenlayout über horizontale Linien
+%\usepackage{array}     % Basispaket für Tabellenkonfiguration, wird von den folgenden automatisch geladen
+\usepackage{tabularx}   % Tabellen, die sich automatisch der Breite anpassen
+%\usepackage{longtable} % Mehrseitige Tabellen
+%\usepackage{xltabular} % Mehrseitige Tabellen mit anpassarer Breite
+\usepackage{booktabs}   % Verbesserte Möglichkeiten für Tabellenlayout über horizontale Linien
 
+%%%%%%%%%%%%%%%%%%%
 %Paketvorschläge Mathematik
 %%%%%%%%%%%%%%%%%%%
-%\usepackage{mathtools} %erweiterte Fassung von amsmath, dem Standardpaket
-%\usepackage{amssymb} %Weitere mathematiscche Symbole
+%\usepackage{mathtools} % erweiterte Fassung von amsmath
+%\usepackage{amssymb}   % erweiterter Zeichensatz
+%\usepackage{siunitx}   % Einheiten
 
 %Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
 \let\file\texttt
 \let\code\texttt
+\let\tbs\textbackslash
 
 \usepackage{pifont}% Zapf-Dingbats Symbole
 \newcommand*{\FeatureTrue}{\ding{52}}
@@ -125,7 +128,7 @@ Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
 thesis&\ttfamily type=bachelor&\ttfamily type=dr,
 	dr=rernat
 &\FeatureFalse\\\midrule
-marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue\\\midrule
+marginpar&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
 Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
 abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
 custommargins&\FeatureFalse&\FeatureTrue&\FeatureFalse\\
@@ -226,7 +229,7 @@ hinzugefügt werden. Die Vorbelegung für Stadt ist hierbei \enquote{Darmstadt}.
 Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde.
 
-Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\textbackslash{}geometry} vor Beginn des Dokuments manuell angepasst werden.
+Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\tbs{}geometry} vor Beginn des Dokuments manuell angepasst werden.
 
 Diese Variante wird auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
 
@@ -258,47 +261,46 @@ thesis={type=drfinal,dr=phil}
 Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 \begin{description}
 \item[type=<Wert>] Auswahl des Typus. Dieser wird auf die Titelseite gesetzt und wählt zudem aus welche Informationen für die Titelseite zwingend übergeben werden müssen.
-Es stehen die folgenden Werte zur Verfügung (die Werte in Klammern sind die notwendigen Titeldaten)
-\begin{itemize}
-\item \code{sta}: Studienarbeit (title, author, date)
-\item \code{diplom}: Diplomarbeit (title, author, submissiondate, reviewer, department)
-\item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
-\item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
-\item \code{pp}: Project-Proposal  (title, author, date, department)
-\item \code{dr}: vorgelegte Dissertation (title, author, submissiondate , birthplace, department, reviewer)
-\item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate,examdate, birthplace, department, reviewer)
-\end{itemize}
-Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
+	Es stehen die folgenden Werte zur Verfügung (die Werte in Klammern sind die notwendigen Titeldaten):
+	\begin{itemize}
+	\item \code{sta}: Studienarbeit (title, author, date)
+	\item \code{diplom}: Diplomarbeit (title, author, submissiondate, reviewer, department)
+	\item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
+	\item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
+	\item \code{pp}: Project-Proposal  (title, author, date, department)
+	\item \code{dr}: vorgelegte Dissertation (title, author, submissiondate , birthplace, department, reviewer)
+	\item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate,examdate, birthplace, department, reviewer)
+	\end{itemize}
+	Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
 \item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
-\begin{quote}
-Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
-\end{quote}
-Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden.
-\begin{verbatim}
-\drtext{Zur Erlangung des Grades \ldots}
-\end{verbatim}
+	\begin{quote}
+	Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
+	\end{quote}
+	Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden.
+	\begin{verbatim}
+	\drtext{Zur Erlangung des Grades \ldots}
+	\end{verbatim}
+\item[department=<Kürzel>] Die Fachbereiche sind fest als Textbausteine in deutscher sowie englischer Sprache hinterlegt. Diese Option ermöglicht die Auswahl als Dokumentenklassenoption. Aus Kompatibilitätsgründen kann jedoch auch das Makro \code{department}-Makro hierfür genutzt werden. Zur Verfügung stehen:\par
+	\begin{tabular}{@{}l@{${}\to{}$}l@{}}
+		arch  & Architektur\\
+		bauing& Bau- und Umweltingenieurwissenschaften\\
+		bio   &Biologie\\
+		chem  &Chemie\\
+		etit  &Elektrotechnik und Informationstechnik\\
+		gugw  &Gesellschafts- und Geschichtswissenschaften\\
+		humanw&Humanwissenschaften\\
+		inf   &Informatik\\
+		mb    &Maschinenbau\\
+		matgeo&Material- und Geowissenschaften\\
+		math  &Mathematik\\
+		phys  &Physik\\
+		wi    &Rechts- und Wirtschaftswissenschaften
+	\end{tabular}
 
-	\item[department=<Kürzel>] Die Fachbereiche sind fest als Textbausteine in deutscher sowie englischer Sprache hinterlegt. Diese Option ermöglicht die Auswahl als Dokumentenklassenoption. Aus Kompatibilitätsgründen kann jedoch auch das Makro \code{department}-Makro hierfür genutzt werden. Zur Verfügung stehen:\par
-\begin{tabular}{@{}l@{${}\to{}$}l@{}}
-	arch  & Architektur\\
-	bauing& Bau- und Umweltingenieurwissenschaften\\
-	bio   &Biologie\\
-	chem  &Chemie\\
-	etit  &Elektrotechnik und Informationstechnik\\
-	gugw  &Gesellschafts- und Geschichtswissenschaften\\
-	humanw&Humanwissenschaften\\
-	inf   &Informatik\\
-	mb    &Maschinenbau\\
-	matgeo&Material- und Geowissenschaften\\
-	math  &Mathematik\\
-	phys  &Physik\\
-	wi    &Rechts- und Wirtschaftswissenschaften
-\end{tabular}
+	Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
+	Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
 
-Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
-Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
-
-Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Falls diese automatische Erstellung nicht gewünscht ist, kann dies über die Option \code{instbox=false} deaktiviert werden.
+	Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Falls diese automatische Erstellung nicht gewünscht ist, kann dies über die Option \code{instbox=false} deaktiviert werden.
 \item[ignore-missing-data] Diese Option ist ein Schalter, der es ermöglicht die Fehlermeldung über nicht übergebene Titeldaten auszuschalten. In diesem Fall wird lediglich eine Warnung erzeugt, falls die angegeben Daten nicht mit den Anforderungen übereinstimmen.
 \end{description}
 
@@ -308,7 +310,7 @@ Da es möglich sein kann von dieser Vorgabe abzuweichen, existiert für Sonderf�
 \section{Erhöhter Zeilenabstand -- Informationen zum setspace-Paket}
 Sofern die Vorgaben es erfordern, ist es möglich mit dem setspace-Paket den Durchschuss zu erhöhen. Allerdings beeinflusst dies natürlich sämtliche Zeilenabstände. Ein erhöhter Zeilenabstand sollte daher erst nach der Titelseite aktiviert werden. Allgemein ist es jedoch empfehlenswert auch für Verzeichnisse und sonstige Sonderelemente außerhalb des Fließtextes auf bei normalen Einstellungen zu bleiben.
 
-Setspace liefert hierfür die Möglichkeit, das Paket ohne Optionen zu laden und später über Makros, wie \code{\textbackslash{}onehalfspacing} das Umschalten zu verzögern. Alternativ kann auch durch die Umgebungen, wie \code{singlespace} lokal wieder zum Normalzustand gewechselt werden, sofern dies erforderlich ist.
+Setspace liefert hierfür die Möglichkeit, das Paket ohne Optionen zu laden und später über Makros, wie \code{\tbs{}onehalfspacing} das Umschalten zu verzögern. Alternativ kann auch durch die Umgebungen, wie \code{singlespace} lokal wieder zum Normalzustand gewechselt werden, sofern dies erforderlich ist.
 
 \printbibliography
 
