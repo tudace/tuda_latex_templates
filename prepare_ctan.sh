@@ -1,4 +1,6 @@
 #!/bin/bash
+git checkout .
+./addlicense.sh
 
 rm -f tuda-ci.zip
 mkdir -p tuda-ci
