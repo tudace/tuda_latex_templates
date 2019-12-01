@@ -632,7 +632,7 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 \cs_undefine:N \subtask
 
 \NewDocumentEnvironment{subtask}{o}{
-	\@subtask{#1}
+	\@subtask{\IfNoValueF{#1}{#1}}
       }{}
 
 %Solution mechanism
