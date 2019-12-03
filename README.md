@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/11/28 v2.03
+ tuda-ci 2019/11/28 v2.03a (only different from v2.03 for CTAN)
 
 ***************************************************************************
 
@@ -162,9 +162,10 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
  * v2.02 (2019-11-16) bugfixes
    - fix font issues and Type1 mode
    - improve marginpar adjustment for tudaposter
- * v2.03 (2019-11-28) bugfixes + small implemtation corrections
+ * v2.03 (2019-11-28) bugfixes + small implemetation corrections
    - allow verbatim in solution environment for tudaexercise
    - add affidavit* to provide custom texts
    - add \AffidavitSignature
    - fix typos
    - extended documentation
+ * v2.03a (2019-11-29) Fix CTAN Version, due to deployment issues
