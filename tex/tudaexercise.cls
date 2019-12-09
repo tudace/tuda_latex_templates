@@ -27,10 +27,32 @@
 
 \bool_new:N \g_TUDa_geometry_bool
 \bool_new:N \g_TUDa_custommargins_bool
+\bool_new:N \l_TUDa_ex_solution_bool
+
+\RequirePackage{environ}
+
+\def\solution{\TUDa_ex_solutionheader:}
+\def\endsolution{}
+
+\cs_new:Nn \TUDa_setup_solution: {
+	\bool_if:NTF \l_TUDa_ex_solution_bool {
+		\def\solution{\TUDa_ex_solutionheader:}
+		\def\endsolution{}
+	}{
+		\RenewEnviron{solution}{
+			\if_false:
+			\BODY
+			\fi:
+		}
+	}
+}
 
 
 \keys_define:nn {TUDa/exercise} {
-  solution .bool_set:N = \l_TUDa_ex_solution_bool,
+  solution .code:n = {
+	\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
+	\TUDa_setup_solution:
+  },
   solution .initial:n = false,
   solution .default:n = true,
   compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
@@ -648,14 +670,6 @@ tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
 tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 ]{@solution}
 
-
-\def\solution{
-\bool_if:NTF \l_TUDa_ex_solution_bool \TUDa_ex_solutionheader: \iffalse
-}
-
-\def\endsolution{
-	\bool_if:NF \l_TUDa_ex_solution_bool \fi
-}
 
 \setkomafont{@solution}{\normalfont}
 
