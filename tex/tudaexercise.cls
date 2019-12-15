@@ -1,6 +1,3 @@
-%%
-\def\fileversion{1.01}
-\def\filedate{2019/09/09}
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplClass{tudaexercise}
