@@ -138,6 +138,7 @@
         colorback .initial:n  = true,
 }
 
+\RequirePackage{tudarules}
 \ProcessKeysOptions{TUDa/pub}
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
@@ -177,9 +178,6 @@
 }}
 
 
-
-
-\usepackage{tudarules}
 \usepackage{tudafonts}
 
 \dim_new:N \g_TUDa_innerMargin_dim
