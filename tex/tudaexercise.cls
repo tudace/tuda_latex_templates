@@ -156,6 +156,10 @@
 
 \LoadClass{scrartcl}
 
+%Has to be loaded here due to headwidth options
+\RequirePackage[draft=false]{scrlayer-scrpage}
+\KOMAoptions {twoside = false ,headsepline = .5\c_TUDa_smallrule_dim}
+
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.scrartcl.cls@#1} {
 	\tl_if_empty:nTF {#2}
@@ -240,8 +244,6 @@
 
 %%%%%Anfang Randeinstellungen Geometry
 
-%Has to be loaded here due to headwidth options
-\usepackage[draft=false]{scrlayer-scrpage}
 
 \bool_if:NTF  \g_TUDa_geometry_bool {
 	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot, headheight=\g_TUDa_headheight_dim
@@ -285,9 +287,6 @@
 \setkomafont{pagenumber}{}
 \addtokomafont{captionlabel}{\accentfont}
 \addtokomafont{caption}{\accentfont}
-
-\KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}
-\KOMAoptions{headsepline=.5\c_TUDa_smallrule_dim}
 
 \box_new:N \g_TUDa_ex_headline_odd_box
 \box_new:N \g_TUDa_ex_headline_even_box
