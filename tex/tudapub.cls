@@ -159,8 +159,8 @@
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.\g_TUDa_pub_class_tl.cls@#1} {
 	\tl_if_empty:nTF {#2}
-		{\KOMAoptions{#1} }
-		{\clist_map_inline:nn {#2} {\KOMAoptions{#1=##1}}}
+		{\KOMAoptions{#1}}
+		{\KOMAoption{#1}{#2}}
 	}
 }
 

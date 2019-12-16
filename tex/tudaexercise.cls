@@ -163,10 +163,12 @@
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.scrartcl.cls@#1} {
 	\tl_if_empty:nTF {#2}
-		{\KOMAoptions{#1} }
-		{\clist_map_inline:nn {#2} {\KOMAoptions{#1=##1}}}
+		{\KOMAoptions{#1}}
+		{\KOMAoption{#1}{#2}
 	}
 }
+}
+
 \renewcommand*\sectionlinesformat[4]{%
 \parbox{\linewidth}{
 	\rule[5\g_TUDa_titlerule_dim]{\linewidth}{\g_TUDa_titlerule_dim}\par\nointerlineskip
