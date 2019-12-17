@@ -343,21 +343,14 @@
 	\cs_set:Nn \TUDa_restore_typearea: {\loadgeometry{\c_TUDa_default_geometry_tl}}
 
 }{
-\bool_if:NTF \g_TUDa_geometry_bool {
-	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot,includemp, nomarginpar, headheight=\g_TUDa_headheight_dim
-	]{geometry}
-
-
-	\savegeometry{TUDa@nomarginpar}
-	\cs_set:Nn \TUDa_disable_marginpar: {\loadgeometry{TUDa@nomarginpar}}
-}{
-	\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}
 	\let\TUDa_disable_marginpar:\relax
 	\def\TUDa_restore_typearea:{
-		\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}\recalctypearea
+		\KOMAoptions{headinclude, footinclude}
+		\bool_if:NTF \g_TUDa_marginpar_bool {\KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}}
+		{\KOMAoptions{headwidth=text,footwidth=text}}
+		\recalctypearea
 	}
-}
-%maybe enforce marginar?=false in that case
+	\TUDa_restore_typearea:
 }
 
 
