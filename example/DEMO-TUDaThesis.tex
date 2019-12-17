@@ -209,6 +209,15 @@ Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument
 
 Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\tbs{}geometry} vor Beginn des Dokuments manuell angepasst werden.
 
+Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
+\begin{verbatim}
+\geometry{
+	reset,
+	<Eigene Anpassungen>
+}
+\end{verbatim}
+Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
+
 Diese Variante wird auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
 
 Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit local größer sein können als die eigentliche Überschrift.
