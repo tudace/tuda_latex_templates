@@ -173,3 +173,4 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - bugfixes in tudaexercise.cls (#114, #103, #113)
    - add mechanism to use \studentID for tudapub's thesis mode
    - extend documentation
+   - improved implementation of tudaexercise's headline mechanism
