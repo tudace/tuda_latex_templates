@@ -158,7 +158,7 @@
 
 %Has to be loaded here due to headwidth options
 \RequirePackage[draft=false]{scrlayer-scrpage}
-\KOMAoptions {twoside = false ,headsepline = .5\c_TUDa_smallrule_dim}
+\KOMAoptions {twoside = false}
 
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.scrartcl.cls@#1} {
@@ -241,9 +241,7 @@
 \dim_new:N \g_TUDa_headheight_dim
 \dim_new:N \g_TUDa_headwidth_dim
 
-
-\dim_gset:Nn \g_TUDa_headheight_dim {1.25\baselineskip +\c_TUDa_largerule_dim +\c_TUDa_rulesep_dim +\c_TUDa_smallrule_dim}
-
+\dim_gset:Nn \g_TUDa_headheight_dim {\c_TUDa_largerule_dim +\c_TUDa_rulesep_dim +\c_TUDa_smallrule_dim}
 %%%%%Anfang Randeinstellungen Geometry
 
 
@@ -254,12 +252,8 @@
 	\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}
 }
 
-
 %%%%%%%%
 %Ende Randeinstellungen klassisch
-
-
-
 
 \newcommand*{\institution}[1]{
 	\def\TUDa@institution{#1}
@@ -346,8 +340,8 @@
 	\if@twoside
 	\dim_set:Nn \l_tmpa_dim {
 		\dim_max:nn
-			{\box_ht:N \g_TUDa_ex_headline_odd_box}
-			{\box_ht:N \g_TUDa_ex_headline_even_box}
+			{\box_ht:N \g_TUDa_ex_headline_odd_box+\box_dp:N \g_TUDa_ex_headline_odd_box}
+			{\box_ht:N \g_TUDa_ex_headline_even_box+\box_dp:N \g_TUDa_ex_headline_even_box}
 	}
 	\else
 	\dim_set:Nn \l_tmpa_dim {
@@ -355,11 +349,17 @@
 		+ \box_dp:N \g_TUDa_ex_headline_oneside_box
 	}
 	\fi
-        \dim_add:Nn \l_tmpa_dim {\box_dp:N \TUDa@headline_box}
-	\KOMAoptions{headinclude, headheight=\l_tmpa_dim}
-        \global\setlength{\headheight}{\l_tmpa_dim}
-	\clist_map_inline:nn {odd, even, oneside} {
-	\ModifyLayer[contents={\raisebox{\c_TUDa_rulesep_dim}[0pt][0pt]{\box_use:c {g_TUDa_ex_headline_##1_box}}}]{TUDa.ex.head.##1}
+	\dim_compare:nT {\l_tmpa_dim > \z@}
+	{
+		\dim_add:Nn \l_tmpa_dim {\box_dp:N \TUDa@headline_box +\c_TUDa_rulesep_dim}
+		\KOMAoptions{headinclude, headheight=\l_tmpa_dim,headsepline = .5\c_TUDa_smallrule_dim}
+		\if@twoside
+		\cehead{\box_use:c {g_TUDa_ex_headline_even_box}}
+		\cohead{\box_use:c {g_TUDa_ex_headline_odd_box}}
+		\else
+		\chead{\box_use:c {g_TUDa_ex_headline_oneside_box}}
+		\fi
+		\global\setlength{\headheight}{\l_tmpa_dim}
 	}
 }
 
@@ -373,29 +373,20 @@
 \box_if_exist:NF \TUDa@headline_box {
 	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
 }
-	\ModifyLayer[
-		background,
-		mode=picture,
-		contents={%\layercontentsmeasure
-			\dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
-				\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
-			}
-			\box_use:N \TUDa@headline_box
-		},
-		addvoffset=-\box_dp:N \TUDa@headline_box
-	]{TUDa.ex.head.above.line}
-	\ModifyLayer[
-        background,
-%       mode=picture,
-        contents={%\layercontentsmeasure
-          \dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
-            \TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
-          }
-          \box_use:N \TUDa@headline_box
-        },
+\ModifyLayer[
+	background,
+	height=\box_dp:N \TUDa@headline_box,
+	align=tl,
+	voffset=\g_TUDa_topMargin_dim,
+	contents=\raisebox{\depth}{\box_use:N \TUDa@headline_box},
 	]{plain.TUDa.ex.head.above.line}
-	\lehead{headmark}%TODO
-	\lohead{headmark}%TODO
+	\ModifyLayer[
+	background,
+	height=\box_dp:N \TUDa@headline_box,
+	align=tl,
+	voffset=\g_TUDa_topMargin_dim,
+	contents=\raisebox{\depth}{\box_use:N \TUDa@headline_box},
+	]{TUDa.ex.head.above.line}
 	\ofoot[\pagemark]{\pagemark}
 }
 
@@ -466,9 +457,10 @@
   \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
   \vspace*{-\dim_eval:n {
       \headheight
+	-\c_TUDa_largerule_dim -\c_TUDa_rulesep_dim
       +\headsep
-      +\topskip
-      -\dp\strutbox
+      +\ht\strutbox
+      +\p@
     }}
   \par
   \nointerlineskip
