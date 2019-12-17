@@ -527,7 +527,10 @@
 }
 
 \renewcommand*{\@author}{
-	\seq_use:Nnnn \g_TUDa_author_seq {~\authorandname{}~} {,~} {~\&~}
+  \begingroup
+  \hyphenpenalty=100000
+  \seq_use:Nnnn \g_TUDa_author_seq {~\authorandname{}~} {,~} {~\&~}
+  \endgroup
 }
 
 \msg_new:nnn {TUDaPub} {infobox-too-high} {
