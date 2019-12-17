@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/11/28 v2.03a (only different from v2.03 for CTAN)
+ tuda-ci 2019/12/17 v2.04
 
 ***************************************************************************
 
@@ -169,3 +169,7 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - fix typos
    - extended documentation
  * v2.03a (2019-11-29) Fix CTAN Version, due to deployment issues
+ * v2.04 (2019-12-17) Bugfixes & Layout adjustments
+   - bugfixes in tudaexercise.cls (#114, #103, #113)
+   - add mechanism to use \studentID for tudapub's thesis mode
+   - extend documentation
