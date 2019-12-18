@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
 
- tuda-ci 2019/12/17 v2.04
+ tuda-ci 2019/12/18 v2.05
 
 ***************************************************************************
 
@@ -174,3 +174,4 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - add mechanism to use \studentID for tudapub's thesis mode
    - extend documentation
    - improved implementation of tudaexercise's headline mechanism
+ * v2.05 (2019-12-18) Fix identbarcolor mechanism in tudaexercise
