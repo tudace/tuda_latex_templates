@@ -138,7 +138,7 @@
         colorback .initial:n  = true,
 }
 
-\RequirePackage{tudarules}
+
 \ProcessKeysOptions{TUDa/pub}
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
@@ -155,6 +155,8 @@
 	{\providecommand*{\@fontsizefilebase}{tudasize}}
 
 \LoadClass{scrartcl}
+
+\RequirePackage{tudarules}
 
 %Has to be loaded here due to headwidth options
 \RequirePackage[draft=false]{scrlayer-scrpage}
