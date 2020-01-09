@@ -140,8 +140,7 @@
 	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}
 	\let\width\l_TUDa_titlegraphic_wd_dim
 	\nointerlineskip
-	\begin{beamercolorbox}[wd=\width,
-		]{titlegraphic}
+	\begin{beamercolorbox}[wd=\width,center]{titlegraphic}
 	\raisebox{-\c_TUDa_largerule_dim}[\dim_eval:n {\height-\c_TUDa_largerule_dim}][0pt]{\inserttitlegraphic}
 	\end{beamercolorbox}
 }
