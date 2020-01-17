@@ -69,7 +69,7 @@ Farbskalen von tuda-pgfplots: https://github.com/tudace/tuda_latex_templates/blo
 ## Liste aller enthaltenen Dateien:
 
 * README.md
-* demo/
+* example/
   - DEMO-TUDaAnnouncement.tex
   - DEMO-TUDaBeamer.tex
   - DEMO-TUDaBibliography.bib
