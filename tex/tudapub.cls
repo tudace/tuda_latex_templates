@@ -784,7 +784,10 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\cs_new:Nn \TUDa_write_xmp_line:nn {
 		\begingroup
 		\cs_set:Npn \sep {\exp_not:N \sep}
-		\cs_if_exist:cTF {\tl_mixed_case:n {#1}} {
+		\exp_args:Nf \cs_if_exist:cTF {
+                  \str_uppercase:f {\tl_head:n {#1}}
+                  \str_lowercase:f { \tl_tail:n {#1}}
+                }{
 			\iow_now:Nx \TUDa@xmpdata_stream {
 				\c_backslash_str \tl_mixed_case:n {#1} {\exp_not:n {#2}}
 			}
