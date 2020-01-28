@@ -177,3 +177,4 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
  * v2.05 (2019-12-18) Fix identbarcolor mechanism in tudaexercise
  * v2.06 (2020-01-18) Reimplement pdf/a mechanisms to work with newer expl3 kernel
  * v2.07 (2020-01-28) Restore compatibility for older expl3 kernels
+   - add key to change license information for `\tuprints`
