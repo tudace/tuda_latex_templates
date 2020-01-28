@@ -72,6 +72,8 @@
 
 \ExplSyntaxOff
 \LoadClass[parskip=half-]{scrartcl}
+\RequirePackage{scrlayer}
+\RequirePackage{scrlayer-notecolumn}
 \ExplSyntaxOn
 
 \tl_if_empty:NT \g_TUDa_paper_tl {\keys_set:nn {TUDa/poster} {paper=a0}}
@@ -93,12 +95,9 @@
 \setkomafont{subtitle}{\expandafter\fontsize\TUDa_titleinfo_fontsize:\selectfont}
 \newkomafont{titleinfo}{\expandafter\fontsize\TUDa_titleinfo_fontsize:\selectfont}
 
-
-\KOMAoptions{fontsize=\g_TUDa_fontsize_tl}
-
-
-
-
+\ExplSyntaxOff
+\KOMAoptions{fontsize=\csname g_TUDa_fontsize_tl\endcsname}
+\ExplSyntaxOn
 
 \RequirePackage{tudafonts}
 \renewcommand*{\familydefault}{\sfdefault}
@@ -189,11 +188,6 @@
 }
 %%%%%%%%%%%%%%%%%%%%%%
 
-
-
-\RequirePackage{scrlayer}
-
-
 \dim_new:N \g_TUDa_qrcode_dim
 \dim_gset:Nn \g_TUDa_qrcode_dim {.7\c_TUDa_logoheight_dim}
 
@@ -270,8 +264,6 @@
 	}
 ]{TUDa.poster.rule}
 
-
-\RequirePackage{scrlayer-notecolumn}
 \DeclareNewLayer[
 	clone=notecolumn.marginpar,
 ]{TUDa.poster.marginpar}
