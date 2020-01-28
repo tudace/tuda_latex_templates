@@ -1,8 +1,8 @@
 # TUDa-CI – Corporate Design LaTeX-Templates for TU Darmstadt
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2019/12/18 v2.05
+ tuda-ci 2020/01/28 v2.07
 
 ***************************************************************************
 
@@ -175,3 +175,5 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - extend documentation
    - improved implementation of tudaexercise's headline mechanism
  * v2.05 (2019-12-18) Fix identbarcolor mechanism in tudaexercise
+ * v2.06 (2020-01-18) Reimplement pdf/a mechanisms to work with newer expl3 kernel
+ * v2.07 (2020-01-28) Restore compatibility for older expl3 kernels
