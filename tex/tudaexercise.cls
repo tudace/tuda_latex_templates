@@ -634,6 +634,7 @@ afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
 tocstyle=subsection,%
 tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
 tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
+counterwithin=task,%
 ]{subtask}
 
 \renewcommand*{\thesubtask}{\alph{subtask})}
