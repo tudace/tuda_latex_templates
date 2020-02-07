@@ -62,11 +62,11 @@
 \begin{document}
 
 \Metadata{
-	title=TUDaThesis -- Template für Abschlussarbeiten im CD der TU Darmstadt,
+	title=TUDaThesis - Abschlussarbeiten im CD der TU Darmstadt,
 	author=Marei Peischl
 }
 
-\title{\LaTeX{} im Corporate Design der TU Darmstadt}
+\title{TUDaThesis -- Abschlussarbeiten im CD der TU Darmstadt}
 \subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
 \author[M. Peischl]{Marei Peischl}%optionales Argument ist die Signatur,
 \birthplace{Geburtsort}%Geburtsort, bei Dissertationen zwingend notwendig
@@ -107,24 +107,23 @@ Für Erläuterungen zu den TUDaPub spezifischen Optionen, sei auf die Datei DEMO
 Da die Basisklasse für beide identisch ist, kann jede Option abgeändert werden. Die Folgende Liste zeigt lediglich die gezeigten Features bei Standardeinstellungen.
 
 \begin{tabularx}{\linewidth}{@{}p{.25\linewidth}*3{>{\centering\arraybackslash}X}@{}}
-\toprule
-Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub\\
-\midrule
-twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
-Kolophon&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-Widmung&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-Schriftgröße&11pt&11pt&9pt\\\midrule
-ruledheaders&section&chapter&all\\\midrule
-Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
-thesis&\ttfamily type=bachelor&\ttfamily type=dr,
-	dr=rernat
-&\FeatureFalse\\\midrule
-marginpar&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
-Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
-abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
-custommargins&\FeatureFalse&\FeatureTrue&\FeatureFalse\\
-\bottomrule
+	\toprule
+	Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub\\
+	\midrule
+	twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+	parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
+	Kolophon&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+	Widmung&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+	Schriftgröße&11pt&11pt&9pt\\\midrule
+	ruledheaders&section&chapter&all\\\midrule
+	Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
+	thesis&\ttfamily type=bachelor&\ttfamily type=dr, dr=rernat
+	&\FeatureFalse\\\midrule
+	marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue\\\midrule
+	Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
+	abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
+	custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse\\
+	\bottomrule
 \end{tabularx}
 
 
@@ -152,6 +151,7 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
 	\item[subtitle] Untertitel. Dieses Feld kann alternativ für eine Übersetzung genutzt werden.
 	\item[author] Der Autor/dir Autoren. Mehere Autoren werden durch \verb+\and+ getrennt.
+	\item[studentID] Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
 	\item[birthplace] Geburtsort. Angabe ist bei Dissertationen notwendig.
 	\item[reviewer] Gutachter. Mehrere Gutachter werden, wie Autoren durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
@@ -207,6 +207,15 @@ Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde.
 
 Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\tbs{}geometry} vor Beginn des Dokuments manuell angepasst werden.
+
+Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
+\begin{verbatim}
+\geometry{
+	reset,
+	<Eigene Anpassungen>
+}
+\end{verbatim}
+Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
 
 Diese Variante wird auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
 

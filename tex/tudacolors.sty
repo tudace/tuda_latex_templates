@@ -54,14 +54,14 @@
 		\colorlet{textonaccentcolor}{white}
 	} {
 		\colorlet{textonaccentcolor}{black}
-		\msg_warning:nnxx {tudacolors} {unselectable-color} {white} {textonaccentcolor}
+		\tl_if_in:NnT \g_TUDa_color_accent_tl {TUDa} {\msg_warning:nnxx {tudacolors} {unselectable-color} {white} {textonaccentcolor}}
 	}
 } {
 	\clist_if_in:NVTF \c_TUDa_color_allow_blacktext_clist \g_TUDa_color_accent_tl {
 		\colorlet{textonaccentcolor}{black}
 	} {
 		\colorlet{textonaccentcolor}{white}
-		\msg_warning:nnxx {tudacolors} {unselectable-color} {black} {textonaccentcolor}
+		\tl_if_in:NnT \g_TUDa_color_accent_tl {TUDa} {msg_warning:nnxx {tudacolors} {unselectable-color} {black} {textonaccentcolor}}
 	}
 }
 

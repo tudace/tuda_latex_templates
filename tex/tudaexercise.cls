@@ -1,6 +1,3 @@
-%%
-\def\fileversion{1.01}
-\def\filedate{2019/09/09}
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplClass{tudaexercise}
@@ -27,10 +24,32 @@
 
 \bool_new:N \g_TUDa_geometry_bool
 \bool_new:N \g_TUDa_custommargins_bool
+\bool_new:N \l_TUDa_ex_solution_bool
+
+\RequirePackage{environ}
+
+\def\solution{\TUDa_ex_solutionheader:}
+\def\endsolution{}
+
+\cs_new:Nn \TUDa_setup_solution: {
+	\bool_if:NTF \l_TUDa_ex_solution_bool {
+		\def\solution{\TUDa_ex_solutionheader:}
+		\def\endsolution{}
+	}{
+		\RenewEnviron{solution}{
+			\if_false:
+			\BODY
+			\fi:
+		}
+	}
+}
 
 
 \keys_define:nn {TUDa/exercise} {
-  solution .bool_set:N = \l_TUDa_ex_solution_bool,
+  solution .code:n = {
+	\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
+	\TUDa_setup_solution:
+  },
   solution .initial:n = false,
   solution .default:n = true,
   compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
@@ -119,6 +138,7 @@
         colorback .initial:n  = true,
 }
 
+
 \ProcessKeysOptions{TUDa/pub}
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
@@ -136,13 +156,21 @@
 
 \LoadClass{scrartcl}
 
+\RequirePackage{tudarules}
+
+%Has to be loaded here due to headwidth options
+\RequirePackage[draft=false]{scrlayer-scrpage}
+\KOMAoptions {twoside = false}
+
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.scrartcl.cls@#1} {
 	\tl_if_empty:nTF {#2}
-		{\KOMAoptions{#1} }
-		{\clist_map_inline:nn {#2} {\KOMAoptions{#1=##1}}}
+		{\KOMAoptions{#1}}
+		{\KOMAoption{#1}{#2}
 	}
 }
+}
+
 \renewcommand*\sectionlinesformat[4]{%
 \parbox{\linewidth}{
 	\rule[5\g_TUDa_titlerule_dim]{\linewidth}{\g_TUDa_titlerule_dim}\par\nointerlineskip
@@ -158,9 +186,6 @@
 }}
 
 
-
-
-\usepackage{tudarules}
 \usepackage{tudafonts}
 
 \dim_new:N \g_TUDa_innerMargin_dim
@@ -218,13 +243,9 @@
 \dim_new:N \g_TUDa_headheight_dim
 \dim_new:N \g_TUDa_headwidth_dim
 
-
-\dim_gset:Nn \g_TUDa_headheight_dim {1.25\baselineskip +\c_TUDa_largerule_dim +\c_TUDa_rulesep_dim +\c_TUDa_smallrule_dim}
-
+\dim_gset:Nn \g_TUDa_headheight_dim {\c_TUDa_largerule_dim +\c_TUDa_rulesep_dim +\c_TUDa_smallrule_dim}
 %%%%%Anfang Randeinstellungen Geometry
 
-%Has to be loaded here due to headwidth options
-\usepackage[draft=false]{scrlayer-scrpage}
 
 \bool_if:NTF  \g_TUDa_geometry_bool {
 	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot, headheight=\g_TUDa_headheight_dim
@@ -233,12 +254,8 @@
 	\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}
 }
 
-
 %%%%%%%%
 %Ende Randeinstellungen klassisch
-
-
-
 
 \newcommand*{\institution}[1]{
 	\def\TUDa@institution{#1}
@@ -268,9 +285,6 @@
 \setkomafont{pagenumber}{}
 \addtokomafont{captionlabel}{\accentfont}
 \addtokomafont{caption}{\accentfont}
-
-\KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}
-\KOMAoptions{headsepline=.5\c_TUDa_smallrule_dim}
 
 \box_new:N \g_TUDa_ex_headline_odd_box
 \box_new:N \g_TUDa_ex_headline_even_box
@@ -328,8 +342,8 @@
 	\if@twoside
 	\dim_set:Nn \l_tmpa_dim {
 		\dim_max:nn
-			{\box_ht:N \g_TUDa_ex_headline_odd_box}
-			{\box_ht:N \g_TUDa_ex_headline_even_box}
+			{\box_ht:N \g_TUDa_ex_headline_odd_box+\box_dp:N \g_TUDa_ex_headline_odd_box}
+			{\box_ht:N \g_TUDa_ex_headline_even_box+\box_dp:N \g_TUDa_ex_headline_even_box}
 	}
 	\else
 	\dim_set:Nn \l_tmpa_dim {
@@ -337,11 +351,17 @@
 		+ \box_dp:N \g_TUDa_ex_headline_oneside_box
 	}
 	\fi
-        \dim_add:Nn \l_tmpa_dim {\box_dp:N \TUDa@headline_box}
-	\KOMAoptions{headinclude, headheight=\l_tmpa_dim}
-        \global\setlength{\headheight}{\l_tmpa_dim}
-	\clist_map_inline:nn {odd, even, oneside} {
-	\ModifyLayer[contents={\raisebox{\c_TUDa_rulesep_dim}[0pt][0pt]{\box_use:c {g_TUDa_ex_headline_##1_box}}}]{TUDa.ex.head.##1}
+	\dim_compare:nT {\l_tmpa_dim > \z@}
+	{
+		\dim_add:Nn \l_tmpa_dim {\box_dp:N \TUDa@headline_box +\c_TUDa_rulesep_dim}
+		\KOMAoptions{headinclude, headheight=\l_tmpa_dim,headsepline = .5\c_TUDa_smallrule_dim}
+		\if@twoside
+		\cehead{\box_use:c {g_TUDa_ex_headline_even_box}}
+		\cohead{\box_use:c {g_TUDa_ex_headline_odd_box}}
+		\else
+		\chead{\box_use:c {g_TUDa_ex_headline_oneside_box}}
+		\fi
+		\global\setlength{\headheight}{\l_tmpa_dim}
 	}
 }
 
@@ -355,29 +375,20 @@
 \box_if_exist:NF \TUDa@headline_box {
 	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
 }
-	\ModifyLayer[
-		background,
-		mode=picture,
-		contents={%\layercontentsmeasure
-			\dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
-				\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
-			}
-			\box_use:N \TUDa@headline_box
-		},
-		addvoffset=-\box_dp:N \TUDa@headline_box
-	]{TUDa.ex.head.above.line}
-	\ModifyLayer[
-        background,
-%       mode=picture,
-        contents={%\layercontentsmeasure
-          \dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
-            \TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
-          }
-          \box_use:N \TUDa@headline_box
-        },
+\ModifyLayer[
+	background,
+	height=\box_dp:N \TUDa@headline_box,
+	align=tl,
+	voffset=\g_TUDa_topMargin_dim,
+	contents=\raisebox{\depth}{\box_use:N \TUDa@headline_box},
 	]{plain.TUDa.ex.head.above.line}
-	\lehead{headmark}%TODO
-	\lohead{headmark}%TODO
+	\ModifyLayer[
+	background,
+	height=\box_dp:N \TUDa@headline_box,
+	align=tl,
+	voffset=\g_TUDa_topMargin_dim,
+	contents=\raisebox{\depth}{\box_use:N \TUDa@headline_box},
+	]{TUDa.ex.head.above.line}
 	\ofoot[\pagemark]{\pagemark}
 }
 
@@ -448,9 +459,10 @@
   \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
   \vspace*{-\dim_eval:n {
       \headheight
+	-\c_TUDa_largerule_dim -\c_TUDa_rulesep_dim
       +\headsep
-      +\topskip
-      -\dp\strutbox
+      +\ht\strutbox
+      +\p@
     }}
   \par
   \nointerlineskip
@@ -622,6 +634,7 @@ afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
 tocstyle=subsection,%
 tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
 tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
+counterwithin=task,%
 ]{subtask}
 
 \renewcommand*{\thesubtask}{\alph{subtask})}
@@ -632,7 +645,7 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 \cs_undefine:N \subtask
 
 \NewDocumentEnvironment{subtask}{o}{
-	\@subtask{#1}
+	\@subtask{\IfNoValueF{#1}{#1}}
       }{}
 
 %Solution mechanism
@@ -648,14 +661,6 @@ tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
 tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 ]{@solution}
 
-
-\def\solution{
-\bool_if:NTF \l_TUDa_ex_solution_bool \TUDa_ex_solutionheader: \iffalse
-}
-
-\def\endsolution{
-	\bool_if:NF \l_TUDa_ex_solution_bool \fi
-}
 
 \setkomafont{@solution}{\normalfont}
 

@@ -1,8 +1,8 @@
 # TUDa-CI – Corporate Design LaTeX-Templates for TU Darmstadt
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2019/11/28 v2.03a (only different from v2.03 for CTAN)
+ tuda-ci 2020/01/28 v2.07
 
 ***************************************************************************
 
@@ -69,7 +69,7 @@ Farbskalen von tuda-pgfplots: https://github.com/tudace/tuda_latex_templates/blo
 ## Liste aller enthaltenen Dateien:
 
 * README.md
-* demo/
+* example/
   - DEMO-TUDaAnnouncement.tex
   - DEMO-TUDaBeamer.tex
   - DEMO-TUDaBibliography.bib
@@ -169,3 +169,12 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - fix typos
    - extended documentation
  * v2.03a (2019-11-29) Fix CTAN Version, due to deployment issues
+ * v2.04 (2019-12-17) Bugfixes & Layout adjustments
+   - bugfixes in tudaexercise.cls (#114, #103, #113)
+   - add mechanism to use \studentID for tudapub's thesis mode
+   - extend documentation
+   - improved implementation of tudaexercise's headline mechanism
+ * v2.05 (2019-12-18) Fix identbarcolor mechanism in tudaexercise
+ * v2.06 (2020-01-18) Reimplement pdf/a mechanisms to work with newer expl3 kernel
+ * v2.07 (2020-01-28) Restore compatibility for older expl3 kernels
+   - add key to change license information for `\tuprints`

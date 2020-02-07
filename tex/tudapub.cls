@@ -159,8 +159,8 @@
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.\g_TUDa_pub_class_tl.cls@#1} {
 	\tl_if_empty:nTF {#2}
-		{\KOMAoptions{#1} }
-		{\clist_map_inline:nn {#2} {\KOMAoptions{#1=##1}}}
+		{\KOMAoptions{#1}}
+		{\KOMAoption{#1}{#2}}
 	}
 }
 
@@ -343,21 +343,14 @@
 	\cs_set:Nn \TUDa_restore_typearea: {\loadgeometry{\c_TUDa_default_geometry_tl}}
 
 }{
-\bool_if:NTF \g_TUDa_geometry_bool {
-	\RequirePackage[top=\g_TUDa_topMargin_dim, inner=\g_TUDa_innerMargin_dim, outer=\dim_eval:n {\g_TUDa_outerMargin_dim}, bottom=\g_TUDa_bottomMargin_dim, columnsep= \g_TUDa_columnSep_dim, includehead, includefoot,includemp, nomarginpar, headheight=\g_TUDa_headheight_dim
-	]{geometry}
-
-
-	\savegeometry{TUDa@nomarginpar}
-	\cs_set:Nn \TUDa_disable_marginpar: {\loadgeometry{TUDa@nomarginpar}}
-}{
-	\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}
 	\let\TUDa_disable_marginpar:\relax
 	\def\TUDa_restore_typearea:{
-		\KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}\recalctypearea
+		\KOMAoptions{headinclude, footinclude}
+		\bool_if:NTF \g_TUDa_marginpar_bool {\KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}}
+		{\KOMAoptions{headwidth=text,footwidth=text}}
+		\recalctypearea
 	}
-}
-%maybe enforce marginar?=false in that case
+	\TUDa_restore_typearea:
 }
 
 
@@ -534,7 +527,10 @@
 }
 
 \renewcommand*{\@author}{
-	\seq_use:Nnnn \g_TUDa_author_seq {~\authorandname{}~} {,~} {~\&~}
+  \begingroup
+  \hyphenpenalty=100000
+  \seq_use:Nnnn \g_TUDa_author_seq {~\authorandname{}~} {,~} {~\&~}
+  \endgroup
 }
 
 \msg_new:nnn {TUDaPub} {infobox-too-high} {
@@ -788,9 +784,19 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\cs_new:Nn \TUDa_write_xmp_line:nn {
 		\begingroup
 		\cs_set:Npn \sep {\exp_not:N \sep}
-		\cs_if_exist:cTF {\tl_mixed_case:n {#1}} {
+		%Fallback test for older kernels
+		\cs_if_exist:NTF \str_uppercase:f {
+			\tl_set:Nx \l_tmpa_tl {
+				\str_uppercase:f {\tl_head:n {#1}}
+				\str_lowercase:f { \tl_tail:n {#1}}
+			}
+		} {
+			%may be removed in some time
+			\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
+		}
+		\cs_if_exist:cTF {\l_tmpa_tl}{
 			\iow_now:Nx \TUDa@xmpdata_stream {
-				\c_backslash_str \tl_mixed_case:n {#1} {\exp_not:n {#2}}
+				\c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
 			}
 		}{
 			\msg_error:nnn {TUDaPub} {unknown-metadata} {#1}

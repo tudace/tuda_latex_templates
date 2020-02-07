@@ -209,9 +209,19 @@
 }
 
 \cs_new:Nn \TUDa_write_xmp_line:nn {
-	\cs_if_exist:cTF {\tl_mixed_case:n {#1}} {
+	%Fallback test for older kernels
+	\cs_if_exist:NTF \str_uppercase:f {
+		\tl_set:Nx \l_tmpa_tl {
+			\str_uppercase:f {\tl_head:n {#1}}
+			\str_lowercase:f { \tl_tail:n {#1}}
+		}
+	} {
+		%may be removed in some time
+		\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
+	}
+	\cs_if_exist:cTF {\l_tmpa_tl}{
 		\iow_now:Nx \TUDa@xmpdata_stream {
-			\c_backslash_str \tl_mixed_case:n {#1} {\exp_not:n {#2}}%\iow_newline:
+			\c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
 		}
 	}{
 		\msg_error:nnn {TUDapub} {unknown-metadata} {#1}

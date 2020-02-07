@@ -11,7 +11,7 @@
 	custommargins=true,% Ränder werden mithilfe von typearea automatisch berechnet
 	marginpar=false,% Kopfzeile und Fußzeile erstrecken sich nicht über die Randnotizspalte
 	%BCOR=5mm,%Bindekorrektur, falls notwendig
-	parskip=half-,%Absatzkennzeichnung durch Abstand vgl. KOMA-Sript
+%	parskip=half-,%Absatzkennzeichnung durch Abstand vgl. KOMA-Script
 	fontsize=11pt,%Basisschriftgröße laut Corporate Design ist mit 9pt häufig zu klein
 %	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
 ]{tudapub}
@@ -66,18 +66,19 @@
 \begin{document}
 
 \Metadata{
-	title=TUDaPhD -- LaTeX-Dissertationstemplate im CD der TU Darmstadt,
+	title=TUDaPhD - LaTeX-Dissertationstemplate im CD der TU Darmstadt,
 	author=Marei Peischl
 }
 
 
 \frontmatter
 
-\title{\LaTeX{} im Corporate Design der TU Darmstadt}
+\title{TUDaPhD -- \LaTeX-Dissertationstemplate im CD der TU Darmstadt}
 \subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
 \author[M. Peischl]{Marei Peischl}%optionales Argument ist die Signatur,
 \birthplace{Geburtsort}%Geburtsort, bei Dissertationen zwingend notwendig
 \reviewer{Gutachter 1 \and Gutachter 2 \and noch einer \and falls das immernoch nicht reicht}%Gutachter
+\publishers{Darmstadt}% Feld für die Ortsangabe oder einen Verlag. Dies ist mit Darmstadt -- D17 vorbelegt, s.u. jedoch wurde die Anforderung für diese Vorgabe reduziert, daher genügt auch die Ortsangabe.
 
 
 %%Sofern keine passende Option verfügbar ist
@@ -115,24 +116,24 @@ Für Erläuterungen zu den TUDaPub spezifischen Optionen, sei auf die Datei DEMO
 Da die Basisklasse für beide identisch ist, kann jede Option abgeändert werden. Die Folgende Liste zeigt lediglich die gezeigten Features bei Standardeinstellungen.
 
 \begin{tabularx}{\linewidth}{@{}p{.25\linewidth}*3{>{\centering\arraybackslash}X}@{}}
-\toprule
-Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub\\
-\midrule
-twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
-Kolophon&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-Widmung&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-Schriftgröße&11pt&11pt&9pt\\\midrule
-ruledheaders&section&chapter&all\\\midrule
-Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
-thesis&\ttfamily type=bachelor&\ttfamily type=dr,
+	\toprule
+	Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub\\
+	\midrule
+	twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+	parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
+	Kolophon&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+	Widmung&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+	Schriftgröße&11pt&11pt&9pt\\\midrule
+	ruledheaders&section&chapter&all\\\midrule
+	Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
+	thesis&\ttfamily type=bachelor&\ttfamily type=dr,
 	dr=rernat
-&\FeatureFalse\\\midrule
-marginpar&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
-Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
-abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
-custommargins&\FeatureFalse&\FeatureTrue&\FeatureFalse\\
-\bottomrule
+	&\FeatureFalse\\\midrule
+	marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue\\\midrule
+	Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
+	abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
+	custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse\\
+	\bottomrule
 \end{tabularx}
 
 
@@ -177,6 +178,7 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
 	\item[subtitle] Untertitel. Dieses Feld kann alternativ für eine Übersetzung genutzt werden.
 	\item[author] Der Autor/dir Autoren. Mehere Autoren werden durch \verb+\and+ getrennt.
+	\item[studentID] Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
 	\item[birthplace] Geburtsort. Angabe ist bei Dissertationen notwendig.
 	\item[reviewer] Gutachter. Mehrere Gutachter werden, wie Autoren durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
@@ -201,6 +203,8 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\tuprints{urn=1234, printid=12345}
 	\end{verbatim}
 	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
+
+	Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
 
 	\item[titleimage] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Als Maße können hier die Längen \verb+\layerwidth+ und \verb+\layerheight+ verwendet werden. Sie passen sich dem Verfügbaren Platz an. Für ein Beispiel sei auf die TUDapub-Dokumentation verwiesen.
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Informationen ergänzt werden.
@@ -232,6 +236,15 @@ Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde.
 
 Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\tbs{}geometry} vor Beginn des Dokuments manuell angepasst werden.
+
+Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
+\begin{verbatim}
+\geometry{
+reset,
+<Eigene Anpassungen>
+}
+\end{verbatim}
+Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
 
 Diese Variante wird auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
 
