@@ -27,6 +27,9 @@
     \RequirePackage{XCharter}%activates T1
     \PassOptionsToPackage{type1}{roboto}
     \PassOptionsToPackage{type1}{roboto-mono}
+    %Workaround for missing ligature replacements with roboto in T1
+    \RequirePackage{microtype}
+    \DisableLigatures{encoding = *, family=\sfdefault,  shape = sc }
 \else
     \RequirePackage{fontspec}
     \setmainfont{XCharter}
