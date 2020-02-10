@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/01/28 v2.07
+ tuda-ci 2020/02/10 v2.08
 
 ***************************************************************************
 
@@ -178,3 +178,7 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
  * v2.06 (2020-01-18) Reimplement pdf/a mechanisms to work with newer expl3 kernel
  * v2.07 (2020-01-28) Restore compatibility for older expl3 kernels
    - add key to change license information for `\tuprints`
+ * v2.08 (2020-02-10) Bugfixes
+   - disable missing ligatures for roboto in scshape (Type1 only)
+   - implement KOMA-Script's new naming scheme
+   - fix counter mechanisms for tudaexercise
