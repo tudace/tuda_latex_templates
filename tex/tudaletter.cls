@@ -152,33 +152,33 @@
 	\par@updaterelative
       \begingroup
 	  \usekomafont{TUDa_frominst}
-      \ifkomavarempty{frominstitution}{}{%
+      \Ifkomavarempty{frominstitution}{}{%
       	{\usekomavar[\raggedright]{frominstitution}}
       	\\[\baselineskip]}%
-      \ifkomavarempty{frominstitution-en}{}{%
+      \Ifkomavarempty{frominstitution-en}{}{%
       	\usekomavar[\raggedright]{frominstitution-en}
       	\\[\baselineskip]}%
 	  \endgroup
-      \ifkomavarempty{fromlogo}{}{\usekomavar{fromlogo}\\[\baselineskip]}%
-      \ifkomavarempty{fromname}{}
+      \Ifkomavarempty{fromlogo}{}{\usekomavar{fromlogo}\\[\baselineskip]}%
+      \Ifkomavarempty{fromname}{}
       {{\usekomafont{fromname}\usekomavar{fromname}}
-      		\ifkomavarempty{fromfunction}{}{\\\usekomavar{fromfunction}}
+		\Ifkomavarempty{fromfunction}{}{\\\usekomavar{fromfunction}}
       		\\[\baselineskip]}%
-      \ifkomavarempty{fromaddress}{}{\usekomavar{fromaddress}\\[\baselineskip]}%
+      \Ifkomavarempty{fromaddress}{}{\usekomavar{fromaddress}\\[\baselineskip]}%
       \@tempswafalse
       \clist_map_inline:nn {fromphone, fromfax, fromemail, fromurl}{
          \@tempswatrue
-	  	 \ifkomavarempty{##1}{}{
-	  	 	\ifkomavarempty*{##1}{}{\makebox[1cm][l]{\usekomavar*{##1}}}\usekomavar{##1}\par
+			\Ifkomavarempty{##1}{}{
+			\Ifkomavarempty*{##1}{}{\makebox[1cm][l]{\usekomavar*{##1}}}\usekomavar{##1}\par
   	 	}
   	  }
       \if@tempswa
       \vspace{2\baselineskip}
       \fi
-        \ifkomavarempty*{date}{}{\usekomavar*{date}\\\usekomavar{date}}
+        \Ifkomavarempty*{date}{}{\usekomavar*{date}\\\usekomavar{date}}
       \seq_use:Nn  \g_TUDa_reffields_seq {}
-      \ifkomavarempty{frombank}{}{\vfill%
-        \ifkomavarempty*{frombank}{Bankverbindung}{\usekomavar*{frombank}}\\\usekomavar{frombank}
+      \Ifkomavarempty{frombank}{}{\vfill%
+        \Ifkomavarempty*{frombank}{Bankverbindung}{\usekomavar*{frombank}}\\\usekomavar{frombank}
 	 }
 }
 
@@ -187,7 +187,7 @@
 \tl_const:Nn \TUDa@reffield_separator_tl {\\}
 
 \cs_new:Nn \TUDa@set@reffield:n {
-	\ifkomavarempty{#1}{}{%
+	\Ifkomavarempty{#1}{}{%
 		\if@tempswa\\[\baselineskip]\fi
 		\parbox[t]{\linewidth}{\noindent\raggedright
 			\usekomafont{refname}
@@ -216,7 +216,7 @@
 			\let\scr@datemarkerfield@name=\scr@date@name
 			\setkomavar{date}{}%
 		}
-		\ifkomavarempty{##1}{}{%
+		\Ifkomavarempty{##1}{}{%
 			\seq_gput_right:Nn \g_TUDa_reffields_seq {%
 				\TUDa@set@reffield:n {##1}
 			}%
@@ -228,7 +228,7 @@
 	\@gen@firsthead
 	\@mkboth{\scr@fromname@var}{\scr@subject@var}%
 	\thispagestyle{empty}\noindent
-	\ifkomavarempty{toname}{\setkomavar{toname}{\mbox{}}}{}
+	\Ifkomavarempty{toname}{\setkomavar{toname}{\mbox{}}}{}
 	\@foldmarks\@firstheadfootfield\@addrfield\@locfield
 	\ifdim\useplength{subjectvpos}=\z@\else\@subjfield\fi
 	\@datefield

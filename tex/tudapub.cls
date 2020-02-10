@@ -1122,11 +1122,11 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	}
 	\bool_if:NT \l_tmpa_bool {
 		\scr@ifundefinedorrelax{chapter}{%
-			\iftocfeature{toc}{leveldown}
+			\Iftocfeature{toc}{leveldown}
 			{\subsection*}
 			{\section*}
 		}{
-			\iftocfeature{toc}{leveldown}
+			\Iftocfeature{toc}{leveldown}
 			{\section*}
 			{\chapter*}
 		} {\abstractname}
