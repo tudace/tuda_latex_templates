@@ -120,7 +120,7 @@
 \hbox_gset:Nn \g_TUDaLetter_firsthead_box {
 	\parbox{\useplength{firstheadwidth}}{
 	\raggedleft
-	\TuDa@LetterheadRule\par
+	\smash{\TuDa@LetterheadRule}\par
 	\vspace{.5\c_TUDa_logoheight_dim}
 	\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}
 	}
