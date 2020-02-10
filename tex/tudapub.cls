@@ -1204,6 +1204,10 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	Either~you~need~to~recompile~your~document~or~add~a~label~using~\string\IMRADlabel.
 }
 
+%backwards compatibility for KOMA-Script
+\cs_if_exist:NF \Iftocfeature{
+	\let\Iftocfeature\iftocfeature
+}
 
 \endinput
 %End of class tudapub.cls

@@ -458,4 +458,9 @@
 
 \bool_if:NT \g_TUDa_raggedright_bool {\AtBeginLetter{\RaggedRight}}
 
+%backwards compatibility for KOMA-Script
+\cs_if_exist:NF \Ifkomavarempty{
+	\let\Ifkomavarempty\ifkomavarempty
+}
+
 \endinput
