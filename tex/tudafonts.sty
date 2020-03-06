@@ -28,8 +28,11 @@
     \PassOptionsToPackage{type1}{roboto}
     \PassOptionsToPackage{type1}{roboto-mono}
     %Workaround for missing ligature replacements with roboto in T1
+    \ifXeTeX
+    \else
     \RequirePackage{microtype}
     \DisableLigatures{encoding = *, family=\sfdefault,  shape = sc }
+    \fi
 \else
     \RequirePackage{fontspec}
     \setmainfont{XCharter}
