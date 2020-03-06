@@ -1,0 +1,83 @@
+\documentclass[
+	color=3c,
+%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
+	]{tudaleaflet}
+
+\usepackage[ngerman]{babel}
+
+\usepackage{blindtext}
+
+%Literaturverweise
+\usepackage{biblatex}
+\bibliography{DEMO-TUDaBibliography}
+
+%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+\let\file\texttt
+\let\code\texttt
+\let\pck\textsf
+\let\cls\textsf
+
+
+\begin{document}
+	
+
+
+%%TODO sponsors
+%\renewcommand*{\raggedtitle}{\raggedleft}
+
+
+\title{TUDaLeaflet}
+%\titleimage{\includegraphics[width=\width,height=\height]{example-image}}
+\subtitle{Leaflets using TUDa-CI}
+\addTitleBox{arg1}
+\maketitle
+
+
+\section{Grundlegende Funktionsweise}
+\cls{tudaleaflet} basiert auf der \cls{leaflet}-Klasse. Die Verwendung ähnelt der einer einfachen ArtikelKlasse lediglich die Seitemumbrüche sind auf ein Faltblatt ausgelegt. Es werden üblicherweise 6 Teil-Seiten erzeugt. Für weitere Informationen zur \cls{leaflet}-Klasse, kann \cite{leaflet} hilfreich sein. Optionen, die nicht durch \cls{tudaleaflet} definiert wurden, werden ggf. an die Basisklasse weitergereicht.
+
+Diese ist keine \KOMAScript-Klasse. Dennoch wurde durch \pck{scrextend} einige Mechanismen zur besseren Kompatibilität eingebaut, allerdings sind nicht alle Mechanismen verfügbar \cite[vgl.][]{scrguide}.
+
+\section{Die Titelseite}
+Die Titelseite wird analog zu den übrigen TUDa-CI-Klassen erzeugt. Als Makros stehen hierbei die folgenden zur Verfügung:
+\begin{description}
+	\item[title] Titel
+	\item[subtitle] Untertitel, wird im Block zwischen Titel und Titelbild platziert.
+	\item[author] Autor, wird ggf. unter dem Untertitel platziert.
+	\item[date] Datum, wiederum unter dem ggf. platzierten Autor
+	\item[addTitleBox] Institutsboxen.
+	Die Institutsboxen werden mit vorgegebenem Abstand unter dem Logo platziert. Hier kann Text erscheinen oder auch ein Institutslogo. Der Hintergrund ist weiß.
+	
+	Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudaleaflet} analog zu \cls{tudapub} das Makro \code{\addTitleBoxLogo}. Als Argument akzeptiert es einen Bilddateipfad.
+	\begin{verbatim}
+	\addTitleBoxLogo{example-image}
+	\addTitleBoxLogo*{
+	  \includegraphics
+	    [width=\linewidth]
+	    {example-image}
+	}
+	\end{verbatim}
+	\item[titleimage] Titelbild. Das Makro \code{titleimage} akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
+	Üblicherweise wird dieses Makro zur Platzierung einer Grafik genutzt:
+	\begin{verbatim}
+	\titleimage{
+	  \includegraphics
+	  [width=\width]
+	  {example-image}
+	}
+	\end{verbatim}
+	Die Makros \verb+\height+ und \verb+\width+ sind hier lokal so definiert, dass es damit möglich ist, die Fläche zu füllen.
+\end{description}
+
+\subsection{Optionen zur Anpassung der Titelseite}
+\begin{description}
+	\item[colorback] aktiviert die Hintergrundfarbe der \verb+\titleimage+-Fläche. Voreingestellt ist \verb+color+""\verb+back=true+
+	\item[colorbacktitle] Analog für den Titelblock, Voreingestellt ist hier \verb+colorbacktitle=false+
+	\item[colorbacksubtitle] Diese Option funktioniert nur für \verb+colorbacktitle=true+. Damit ist es möglich, dass auch der Streifen zwischen Titelblock und Bildfläche in der Farbe der Identitätsleiste eingefärbt wird. Falls \verb+colorbacktitle=false+ erzeugt dies eine Fehlermeldung. Voreingestellt ist \verb+colorbacksubtitle=false+
+	\item[logofile] Alternatives Hauptlogo, z.\,B. falls das TUDa-Logo nicht vorliegt.
+\end{description}
+
+\printbibliography
+
+
+\end{document}
