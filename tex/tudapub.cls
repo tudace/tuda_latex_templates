@@ -772,8 +772,11 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		\use:c {Hy@pdfstringtrue}
 		\tl_gset:Nf \g_TUDa@xmp_title_tl {\@title}
 		\prop_gput_if_new:Nnx \g_TUDa_MetaData_prop {title} {\tl_to_str:V \g_TUDa@xmp_title_tl}
-		\tl_gset:Nf \g_TUDa@xmp_author_tl {\@author}
-		\prop_gput_if_new:Nnx \g_TUDa_MetaData_prop {author} {\tl_to_str:V \g_TUDa@xmp_author_tl}
+		\prop_if_in:NnF \g_TUDa_MetaData_prop {author} {
+			\tl_gset:Nx \g_TUDa@xmp_author_tl {\seq_use:Nn \g_TUDa_author_seq {\exp_not:N \sep}}
+			\tl_gset:Nx \g_TUDa@xmp_author_tl {\g_TUDa@xmp_author_tl}
+			\prop_gput:Nnx \g_TUDa_MetaData_prop {author} {\tl_to_str:V \g_TUDa@xmp_author_tl}
+		}
 		\prop_gput_if_new:Nnn \g_TUDa_MetaData_prop {publisher}{TU~Darmstadt}
 		\prop_gput_if_new:Nnn \g_TUDa_MetaData_prop {creator}{LaTeX~using~TUDa-CI}
 		\use:c {pdfx@localcommands}%should be held inside group
