@@ -5,6 +5,7 @@
 \ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
 
 \RequirePackage{l3keys2e}
+\tl_new:N \g_TUDa_sponsor_pos_tl
 \keys_define:nn {TUDa/leaflet} {
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
@@ -21,8 +22,9 @@
 	colorbacksubtitle .bool_set:N = \g_TUDa_colorbacksubtitle_bool,
 	colorbacksubtitle .initial:n = false,
 	colorbacksubtitle .default:n = true,
+	sponsor .choices:nn = {title,lastfoot,manual}{\tl_gset_eq:NN \g_TUDa_sponsor_pos_tl \l_keys_choice_tl},
+	sponsor .initial:n = title,
 }
-
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{leaflet}}
 
@@ -78,12 +80,12 @@
 
 % Title specific additions to pagestyle
 
-\DeclareNewLayer[textarea,background,mode=picture,
-addheight=\headheight-\box_dp:N \TUDa_headrule_box+\c_TUDa_rulesep_dim,
+\DeclareNewLayer[textarea,mode=picture,
+addheight=\headheight-\box_dp:N \TUDa_headrule_box+\dp\strutbox,
 contents={
 	\bool_if:NT \g_TUDa_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}
 	\tl_if_empty:NTF \g_TUDa_titleimage_code_tl
-	{\bool_if:NT \g_TUDa_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}\show\test}
+	{\bool_if:NT \g_TUDa_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}}
 	{\putUL{\color{identbarcolor}\raisebox{-\height}{\parbox[t]{\textwidth}{
 					\let\width\layerwidth
 					\let\height\layerheight
@@ -94,7 +96,6 @@ contents={
 	\dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_TUDa_title_info_box - .5\c_TUDa_logoheight_dim} {\unitlength}){
 		\rlap{\box_use:N \g_TUDa_title_info_box}
 	}
-	\put(0,0){\rule{\linewidth}{\g_TUDa_titlerule_dim}}
 }
 ]{title.TUDa.image}
 
@@ -135,6 +136,21 @@ contents={
 \newcommand*{\raggedtitle}{\raggedright}
 \renewcommand*{\maketitle}{
 	\def\and{,~ }
+	\hbox_gset:Nn \g_TUDa_sponsor_box {
+		\def\height{\dimexpr.8\c_TUDa_logoheight_dim\relax}
+		\parbox[b]{\textwidth}{%
+			\rule{\linewidth}{\g_TUDa_titlerule_dim}\par\nointerlineskip
+			\vspace{.1\c_TUDa_logoheight_dim}
+			\seq_use:Nn \g_TUDa_sponsors_seq {\hfill}\par
+			\addvspace{.1\c_TUDa_logoheight_dim}
+			\ifx\@sponsors\@empty
+			\else
+			\@sponsors\par
+			\fi
+			\par\nointerlineskip\addvspace{\dim_eval:n {.1\c_TUDa_logoheight_dim-\c_TUDa_rulesep_dim}}
+%			\rule{\linewidth}{\g_TUDa_titlerule_dim}
+		}
+	}
 	\begin{titlepage}
 		\def\thefootnote{\fnsymbol{footnote}}
 		\hbox_gset:Nn \g_TUDa_title_box {
@@ -211,11 +227,24 @@ contents={
 		+\box_dp:N \g_TUDa_title_box
 		+\g_TUDa_title_fill_skip
 	}
-	
 	\ModifyLayer[
 	addvoffset=\l_tmpa_dim,
-	addheight=-\l_tmpa_dim
+	addheight= -\l_tmpa_dim
 	]{title.TUDa.image}
+	\DeclareNewLayer[clone=TUDa.flyer.footline,%clone=title.TUDa.image,
+	mode=picture,
+	align=bl,
+	height=\box_ht:N  \g_TUDa_sponsor_box + \box_dp:N  \g_TUDa_sponsor_box,
+	addvoffset=-\dp\strutbox,
+	contents=\raisebox{\depth}{\box_use:N \g_TUDa_sponsor_box}
+	]
+	{title.TUDa.sponsor}
+	\exp_args:Nx \tl_if_eq:nnT {\g_TUDa_sponsor_pos_tl} {title} {
+		\AddLayersToPageStyle{title.TUDa}{title.TUDa.sponsor}
+		\ModifyLayer[
+		addheight=-\box_ht:N  \g_TUDa_sponsor_box -\box_dp:N  \g_TUDa_sponsor_box-\dp\strutbox
+		]{title.TUDa.image}
+	}
 	\ModifyLayer[
 	addvoffset={-\dim_eval:n {\headheight -\box_ht:N \TUDa_headrule_box-\box_dp:N \TUDa_headrule_box }},
 	height={
@@ -284,6 +313,21 @@ contents={
 \def\subtitle#1{\def\@subtitle{#1}}
 \subtitle{}
 
+\seq_new:N \g_TUDa_sponsors_seq
+\def\AddSponsor{\seq_gput_right:Nn \g_TUDa_sponsors_seq}
+
+\def\sponsors#1{\def\@sponsors{#1}}
+\sponsors{}
+
+\box_new:N \g_TUDa_sponsor_box
+
+\newcommand*{\footergraphics}[1]{
+	\begingroup
+	\let\height\g_TUDa_footheight_dim
+	\hbox_gset:Nn \g_TUDa_footergraphics_box {#1}
+	\endgroup
+}
+
 \tl_new:N  \g_TUDa_titleimage_code_tl
 \tl_gset_eq:NN  \g_TUDa_titleimage_code_tl \c_empty_tl
 \newcommand{\titleimage}[1]{\tl_gset:Nn \g_TUDa_titleimage_code_tl {#1}}
@@ -344,5 +388,22 @@ contents={
 
 \addTitleBoxLogo*{\makebox[\linewidth][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}}
 \date{}
+
+\let\insertSponsors\relax
+
+\str_case:Vn \g_TUDa_sponsor_pos_tl {
+	{lastfoot}{
+	\AtEndDocument{
+		\par\vspace*{\fill}
+		\leavevmode\raisebox{\dimexpr\depth-\baselineskip}[0pt][0pt]{
+			\box_use:N \g_TUDa_sponsor_box
+		}
+	}
+	}
+	{manual} {
+		\renewcommand*{\insertSponsors}{\par\vfill\leavevmode\box_use:N \g_TUDa_sponsor_box\par\nobreak\nointerlineskip\rule{\linewidth}{\g_TUDa_titlerule_dim}
+	}
+}
+}
 
 \endinput
