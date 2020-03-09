@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/02/10 v2.08
+ tuda-ci 2020/03/09 v2.09
 
 ***************************************************************************
 
@@ -61,6 +61,7 @@ Ausschreibungen				 | DEMO-TUDaAnnouncement.tex								| tudaposter.cls
 Präsentationen				 | DEMO-TUDaBeamer.tex									| tudabeamer.cls
 Briefe					 | DEMO-TUDaLetter.tex, verwendet auch DEMO-TUDaFromaddress.lco 			| tudaletter.cls mit tudalettersize10pt.clo
 Übungsblätter				 | DEMO-TUDaExercise.tex	       							| tudaexercise.cls
+Flyer/Faltblätter			 | DEMO-TUDaLeaflet.tex									| tudaleaflet.cls
 
 Darüber hinaus existieren Beispieldateien für:
 Kompatibilitätsmodus TUDexercise: https://github.com/tudace/tuda_latex_templates/blob/master/example/Examples-TUDexercise-compat.tex
@@ -74,6 +75,7 @@ Farbskalen von tuda-pgfplots: https://github.com/tudace/tuda_latex_templates/blo
   - DEMO-TUDaBeamer.tex
   - DEMO-TUDaBibliography.bib
   - DEMO-TUDaExercise.tex
+  - DEMO-TUDaLeaflet.tex
   - DEMO-TUDaLetter.tex
   - DEMO-TUDaPhD.tex
   - DEMO-TUDaPoster.tex
@@ -94,6 +96,7 @@ Farbskalen von tuda-pgfplots: https://github.com/tudace/tuda_latex_templates/blo
   - tudacolors.sty
   - tudaexercise.cls
   - tudafonts.sty
+  - tudaleaflet.cls
   - tudaletter.cls
   - tudalettersize10pt.clo
   - tudaposter.cls
@@ -130,6 +133,7 @@ theses announcements	   		| DEMO-TUDaAnnouncement.tex 						| tudaposter.cls
 presentation				| DEMO-TUDaBeamer.tex 							| tudaposter.cls
 letter					| DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			| tudaletter.cls and tudalettersize10pt.clo
 exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
+leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
 
 # Version History
 
@@ -182,3 +186,8 @@ exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
    - disable missing ligatures for roboto in scshape (Type1 only)
    - implement KOMA-Script's new naming scheme
    - fix counter mechanisms for tudaexercise
+ * v2.09 (2020-03-09) bugfixes and smaller feature extensions
+   - intoduction of tudaleaflet
+   - fix bug concerning the combination of twocolumn and marinpar=false
+   - smaller Layout adjustments
+   - documentation enhancements
