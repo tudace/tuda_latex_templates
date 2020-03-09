@@ -19,12 +19,6 @@
 
 
 \begin{document}
-	
-
-
-%%TODO sponsors
-%\renewcommand*{\raggedtitle}{\raggedleft}
-
 
 \title{TUDaLeaflet}
 %\titleimage{\includegraphics[width=\width,height=\height]{example-image}}
@@ -80,6 +74,8 @@ Die Titelseite wird analog zu den übrigen TUDa-CI-Klassen erzeugt. Als Makros s
 	\item[colorbacksubtitle] Diese Option funktioniert nur für \verb+colorbacktitle=true+. Damit ist es möglich, dass auch der Streifen zwischen Titelblock und Bildfläche in der Farbe der Identitätsleiste eingefärbt wird. Falls \verb+colorbacktitle=false+ erzeugt dies eine Fehlermeldung. Voreingestellt ist \verb+colorbacksubtitle=false+
 	\item[logofile] Alternatives Hauptlogo, z.\,B. falls das TUDa-Logo nicht vorliegt.
 \end{description}
+
+Die Textausrichtung des Titels ist durch das Makro \verb+\raggedtitle+ gesetzt. Dies ist auf \verb+\raggedright+ vorbelegt, um Umbrüche innerhalb des Titels zu Verhindern, ermöglicht aber auch andere Ausrichtungen. Eine Änderung ist mit \verb+\renewcommand+ möglich.
 
 \subsection{Sponsorenlogos}
 Sponsorenlogos werden üblicherweise über
