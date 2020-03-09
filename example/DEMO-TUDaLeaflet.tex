@@ -28,10 +28,14 @@
 
 \title{TUDaLeaflet}
 %\titleimage{\includegraphics[width=\width,height=\height]{example-image}}
-\subtitle{Leaflets using TUDa-CI}
-\addTitleBox{arg1}
-\maketitle
+\subtitle{Flyer mit TUDa-CI}
+\addTitleBox{Insitut}
 
+\AddSponsor{\includegraphics[height=\height ]{example-image}}
+\AddSponsor{\includegraphics[height=\height ]{example-image}}
+\AddSponsor{\includegraphics[height=\height ]{example-image}}
+
+\maketitle
 
 \section{Grundlegende Funktionsweise}
 \cls{tudaleaflet} basiert auf der \cls{leaflet}-Klasse. Die Verwendung ähnelt der einer einfachen ArtikelKlasse lediglich die Seitemumbrüche sind auf ein Faltblatt ausgelegt. Es werden üblicherweise 6 Teil-Seiten erzeugt. Für weitere Informationen zur \cls{leaflet}-Klasse, kann \cite{leaflet} hilfreich sein. Optionen, die nicht durch \cls{tudaleaflet} definiert wurden, werden ggf. an die Basisklasse weitergereicht.
@@ -77,7 +81,31 @@ Die Titelseite wird analog zu den übrigen TUDa-CI-Klassen erzeugt. Als Makros s
 	\item[logofile] Alternatives Hauptlogo, z.\,B. falls das TUDa-Logo nicht vorliegt.
 \end{description}
 
-\printbibliography
+\subsection{Sponsorenlogos}
+Sponsorenlogos werden üblicherweise über
+\begin{verbatim}
+\AddSponsor{<logo1>}
+\AddSponsor{<log2>}
+\end{verbatim}
+übergeben. Innerhalb des Arguments ist \verb+\height+ so gesetzt. Somit werden im Beispiel alle Logos auf die gleiche Höhe gesetzt. Der Abstand dazwischen wird entsprechend aufgefüllt, sodass der gesamte Block immer links und rechts mit dem Text abschließt.
 
+Die zweite Variante ermöglicht die Platzierung mit manueller vertikaler ausrichtung, wie es bei logos mit unterschiedlicher Höhe notwendig sein könnte. Hierbei werden lediglich die Abstände und Trennlinien um die Logos ergänzt:
+
+\begin{verbatim}
+\sponsors{
+ <logo1><logo2>
+}
+\end{verbatim}
+
+Die Logos werden üblicherweise im unteren Teil der Titelseite platziert. Allerdings erlauben die Corporate Design Richtlinien auch, dass am Ende des Dokuments platziert werden.
+Um diese Unterscheidung zu ermöglichen stellt TUDaLeaflet die Option \verb+sponsor+ zur Verfügung. Sie akzeptiert die Werte \verb+title+, \verb+lastfoot+ oder \verb+manual+.
+\verb+title+ entspricht der Voreinstellung. Der Wert \verb+lastfoot+ platziert die Sponsoren mit einem \verb+\vfill+ auf der letzten Seite. \verb+manual+ ermöglicht es die Box manuell zu platzieren. Hierfür steht das Makro
+\begin{verbatim}
+\insertSponsors
+\end{verbatim}
+zur Verfügung. Es fügt die Box an der entsprechenden Position ein. Allerdings nur, falls \verb+sponsor=manual+. Ist dies nicht der Fall, hat das Makro keine Wirkung.
+
+
+\printbibliography
 
 \end{document}
