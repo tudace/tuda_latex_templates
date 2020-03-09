@@ -438,13 +438,6 @@
 		}
 
 \setkomafont{pagehead}{\Large\bfseries}
-
-	\if@twocolumn
-	\edef\sls@evenheadshift{\dim_eval:n {-\marginparwidth-\marginparsep\relax}}
-	\let\sls@oddheadshift\sls@evenheadshift
-	\let\sls@evenfootshift\sls@evenheadshift
-	\let\sls@oddfootshift\sls@evenheadshift
-	\fi
 	\RedeclareLayer[
 		clone=scrheadings.head.above.line,
 		background,
