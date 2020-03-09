@@ -34,6 +34,7 @@
 	paper/a0 .code:n = { \TUDa_rules_set_values:n  { 16 mm | 5.2mm | 4.8pt | 80  mm | 2.4pt| 30mm | 35mm}},
 	paper/slide .code:n = { \TUDa_rules_set_values:n  { 2mm | .7mm | .6pt | 11 mm | .3pt| 7.5mm | 10mm}},
 	paper/beamer .meta:n = {paper= slide},
+	paper/leaflet .meta:n = {paper=a5},
 	color .tl_gset:N = \g_TUDarules_default_color_tl,
 	color .initial:n = black,
 	mode .tl_gset:N = \g_TUDarules_default_mode_tl,
@@ -92,7 +93,7 @@
 
 \NewDocumentCommand{\TUDa@makefootrule}{om}{
 	\keys_set:nn {TUDa/rules} {
-		width= \linewidth
+		width= \textwidth
 	}
 	\IfNoValueF {#1} {\keys_set:nn {TUDa/rules}{#1}}
 	\box_new:c {#2_box}
