@@ -295,8 +295,6 @@ contents={
 	{-1em}%
 	{\usekomafont{disposition}\usekomafont{subsubsection}\sectfont}}
 
-\show\test
-
 \clist_map_inline:nn {section, subsection, subsubsection} {
 	\cs_set_eq:cc {TUDa_save_#1} {#1}
 	\exp_args:Nc \RenewDocumentCommand{#1}{sO{##3}m}{
