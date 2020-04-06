@@ -1134,12 +1134,12 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 
 %Anpassungen marginpar
 \cs_set_eq:NN\TUDa_orig@marginpar:\marginpar
-\newkomafont{marginpar}{\color{textaccentcolor}\accentfont}
+\newkomafont{marginpar}{\accentfont\color{textaccentcolor}}
 \RenewDocumentCommand{\marginpar}{om}{
 	\IfNoValueTF{#1}{
-		\TUDa_orig@marginpar:{\usekomafont{marginpar}#2}
+		\TUDa_orig@marginpar:{\leavevmode\usekomafont{marginpar}#2}
 	}{
-		\TUDa_orig@marginpar:[\usekomafont{marginpar}#1]{\usekomafont{marginpar}#2}
+		\TUDa_orig@marginpar:[\leavevmode\usekomafont{marginpar}#1]{\leavevmode\usekomafont{marginpar}#2}
 	}
 }
 
