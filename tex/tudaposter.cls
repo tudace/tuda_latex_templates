@@ -508,6 +508,4 @@
 	See~the~TUDa-CI~documentation~for~further~information.
 }
 
-\addtokomafont{captionlabel}{\accentfont}
-\addtokomafont{caption}{\accentfont}
 \endinput

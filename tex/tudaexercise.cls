@@ -283,8 +283,8 @@
 
 \setkomafont{pageheadfoot}{\sffamily\small}
 \setkomafont{pagenumber}{}
-\addtokomafont{captionlabel}{\accentfont}
-\addtokomafont{caption}{\accentfont}
+\addtokomafont{captionlabel}{\sffamily}
+\addtokomafont{caption}{\sffamily}
 
 \box_new:N \g_TUDa_ex_headline_odd_box
 \box_new:N \g_TUDa_ex_headline_even_box

@@ -387,8 +387,8 @@
 \setkomafont{disposition}{\sffamily\bfseries}
 \setkomafont{pageheadfoot}{\sffamily\small}
 \setkomafont{pagenumber}{}
-\addtokomafont{captionlabel}{\accentfont}
-\addtokomafont{caption}{\accentfont}
+\addtokomafont{captionlabel}{\sffamily}
+\addtokomafont{caption}{\sffamily}
 
 
 \KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}
