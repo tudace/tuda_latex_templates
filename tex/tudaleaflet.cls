@@ -330,6 +330,8 @@ contents={
 \tl_gset_eq:NN  \g_TUDa_titleimage_code_tl \c_empty_tl
 \newcommand{\titleimage}[1]{\tl_gset:Nn \g_TUDa_titleimage_code_tl {#1}}
 
+\author{}%to remove warning if no author given
+
 \box_new:N  \g_TUDa_title_box
 \skip_new:N \g_TUDa_title_fill_skip
 
