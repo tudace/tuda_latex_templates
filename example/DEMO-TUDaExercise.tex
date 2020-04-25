@@ -140,6 +140,20 @@ Beispiel für einen Lösungsvorschlag
 
 \end{task}
 
+\begin{task}[credit=10]{Punkte}
+Punkteangaben sind über den Optionsschlüssel \code{credit} möglich. Der Wert wird hinter den Aufgabentitel in runde Klammern gesetzt. Dies geschieht mithilfe des Makros \code{\tbs{}creditformat}
+
+Alternativ existiert der Schlüssel \code{points} dieser ergänzt zusätzlich zur Angabe auch den Text \code{\tbs{}PointName} bzw. \code{\tbs{PointsName}} je nachdem ob der Wert größer 1 oder nicht. Der Schlüssel \code{points} akzeptiert daher nur numerische Werte.
+\begin{subtask}[points=1,title=Beispiel für den Schlüssel points]
+Da ältere Versionen von TUDaExercise keine Optionsverarbeitung für subtask erlaubten, ist hier ein zusätzlicher Mechanismus enthalten. Falls sowohl ein Titel, als auch spezifische Angaben notwendig sind, existiert hier zusätzlich der Schlüssel \code{title}.
+Geprüft wird darauf, ob das Argument ein Gleichheitszeichen enthält, ist dies der Fall, so wird davon ausgegangen, dass Optionen nach Schlüssel=Wert-Struktur übergeben werden.
+\end{subtask}
+
+\begin{subtask}[Fallback-Modus, falls ein = im Titel detektiert wird, aber keine Zuweisung möglich ist.]
+Falls bei der Optionsverarbeitung Unstimmigkeiten festgestellt werden, so wird das gesamte Argument als Titel verarbeitet.
+\end{subtask}
+\end{task}
+
 \begin{task}{Kompatibilitätsmodus}
 Die Klasse \cls{tudaexercise} verfügt über einen Kompatibilitätsmodus, um den Umstieg von zuvor existierenden Templates, wie TUDexercise zu erleichtern.
 Um den Kompatibilitätsmodus zu aktivieren, existiert die Option \code{compat=true}.
