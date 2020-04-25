@@ -270,7 +270,7 @@ contents={
 \renewcommand*{\familydefault}{\sfdefault}
 
 %Titlepage font setup
-\setkomafont{disposition}{\accentfont\bfseries}
+\setkomafont{disposition}{\bfseries}
 \setkomafont{title}{\Huge}
 \setkomafont{subtitle}{}
 \setkomafont{date}{}
