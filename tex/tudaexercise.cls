@@ -45,17 +45,32 @@
 }
 
 
+\bool_new:N \l_TUDa_ex_subtask_fallback_bool
+\keys_define:nn {TUDa/subtask} {
+  credit .tl_set:N = \l_TUDa_ex_credit_tl,
+  credit .initial:n =,
+  points .int_set:N = \l_TUDa_ex_points_int,
+  points .initial:n = 0,
+  title .tl_set:N = \l_TUDa_ex_title_tl,
+  title .initial:n =,
+  unknown .code:n = \bool_set_true:N \l_TUDa_ex_subtask_fallback_bool \tl_clear:N \l_TUDa_ex_credit_tl \int_zero:N \l_TUDa_ex_points_int,
+}
+
 \keys_define:nn {TUDa/exercise} {
-  solution .code:n = {
-	\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
-	\TUDa_setup_solution:
-  },
-  solution .initial:n = false,
-  solution .default:n = true,
-  compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
-  compatilibity .meta:n = {compat=#1},
-  compatibility .default:n = true,
-  compat .initial:n = false,
+	solution .code:n = {
+		\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
+		\TUDa_setup_solution:
+	},
+	solution .initial:n = false,
+	solution .default:n = true,
+	compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
+	compatilibity .meta:n = {compat=#1},
+	compatibility .default:n = true,
+	compat .initial:n = false,
+	credit .tl_set:N = \l_TUDa_ex_credit_tl,
+	credit .initial:n =,
+	points .int_set:N = \l_TUDa_ex_points_int,
+	points .initial:n = 0,
 }
 
 \keys_define:nn {TUDa/exercise/headline} {
@@ -180,7 +195,13 @@
 			\exp_args:No \tl_if_empty:nF {#4}
 				{:~}
 		}
-		#4\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
+		#4
+		\tl_if_in:nnT {#1} {task} {
+			\tl_if_empty:NTF \l_TUDa_ex_credit_tl
+				{\pointformat{\l_TUDa_ex_points_int}}
+				{\creditformat{\l_TUDa_ex_credit_tl}}
+		}
+		\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
 		\skip_vertical:n {\TUDa_titlerule_sep: -\dp\strutbox}
 	\smash{\rule{\linewidth}{\g_TUDa_titlerule_dim}}
 }}
@@ -590,6 +611,22 @@
 \providecaptionname{english, american, british}{\StudentIDname}{Enrollment ID}
 \newcommand*{\StudentIDsep}{:~}
 
+\providecommand{\creditformat}[1]{\space(#1)}
+\newcommand*{\pointformat}[1]{
+	\int_case:nnF {#1}
+		{
+		{0} {}
+		{1} {\creditformat{\int_to_arabic:n {#1}\space\PointName}}
+		}
+		{\creditformat{\int_to_arabic:n {#1}\space\PointsName}}
+	}
+\providecaptionname{ngerman, german}{\PointName}{Punkt}
+\providecaptionname{english, american, british}{\PointName}{Point}
+\providecommand{\PointsName}{Punkte}
+\providecaptionname{ngerman, german}{\PointsName}{Punkte}
+\providecaptionname{english, american, british}{\PointsName}{Points}
+
+
 %Has to be initialized after captionnames have been defined
  \AtBeginDocument{
   \TUDa_update_headline_boxes:
@@ -619,8 +656,10 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsection@numwidth {2.3em},%
 \cs_undefine:N \task
 
 \NewDocumentEnvironment{task}{om}{
+	\begingroup
 	\IfNoValueF{#1}{\keys_set:nn {TUDa/exercise}{#1}}
 	\@task{#2}
+	\endgroup
 }{}
 
 
@@ -645,8 +684,15 @@ counterwithin=task,%
 \cs_undefine:N \subtask
 
 \NewDocumentEnvironment{subtask}{o}{
-	\@subtask{\IfNoValueF{#1}{#1}}
-      }{}
+	\tl_if_in:nnT {#1} {=} {
+		\keys_set:nn {TUDa/subtask} {#1}
+	}
+	\bool_if:NTF \l_TUDa_ex_subtask_fallback_bool {
+		\@subtask{\IfNoValueF{#1}{#1}}
+	}{
+		\@subtask{\l_TUDa_ex_title_tl}
+	}
+	}{}
 
 %Solution mechanism
 
