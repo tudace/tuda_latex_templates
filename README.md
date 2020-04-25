@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/03/09 v2.09
+ tuda-ci 2020/04/25 v2.10
 
 ***************************************************************************
 
@@ -191,3 +191,7 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix bug concerning the combination of twocolumn and marinpar=false
    - smaller Layout adjustments
    - documentation enhancements
+ * v2.10 (2020-04-25) bugfixes + feature enhancement for tudaexercise
+   - add a mechanism for credits in tudaexercise
+   - captions & headings in leaflets no longer using \accentfont
+   - fixing marginpar alignment
