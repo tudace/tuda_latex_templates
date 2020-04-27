@@ -101,6 +101,8 @@
   }
 }
 
+\bool_new:N \g_TUDa_smalltitle_bool
+
 \keys_define:nn {TUDa/pub} {
 	color .code:n = {\PassOptionsToPackage{color=#1}{tudacolors}},
 	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
@@ -141,16 +143,21 @@
 	paper .initial:n = a4,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-        solution .meta:nn = {TUDa/exercise}{solution=#1},
-        compat .meta:nn = {TUDa/exercise}{compat=#1},
-        compatibility .meta:nn = {TUDa/exercise}{compat=#1},
-        compatibility .default:n = true,
-        headontitle .bool_gset:N = \g_TUDa_headontitle_bool,
-        headontitle .initial:n = false,
-        headontitle .default:n =true,
-        colorback .bool_gset:N  = \g_TUDa_colorback_bool,
-        colorback .default:n = true,
-        colorback .initial:n  = true,
+	solution .meta:nn = {TUDa/exercise}{solution=#1},
+	compat .meta:nn = {TUDa/exercise}{compat=#1},
+	compatibility .meta:nn = {TUDa/exercise}{compat=#1},
+	compatibility .default:n = true,
+	headontitle .bool_gset:N = \g_TUDa_headontitle_bool,
+	headontitle .initial:n = false,
+	headontitle .default:n =true,
+	colorback .bool_gset:N  = \g_TUDa_colorback_bool,
+	colorback .default:n = true,
+	colorback .initial:n  = true,
+	title .choice:,
+	title / default .meta:n = {title=large},
+	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
+	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
+	title .initial:n = default,
 }
 
 
@@ -248,15 +255,6 @@
 			\dim_gset_eq:NN \g_TUDa_topMargin_dim \g_TUDa_outerMargin_dim
 		}
 	}
-
-%TODO pubched
-%%punched
-%\dim_gset:Nn \g_TUDa_outerMargin_dim {15mm}
-%\dim_gset:Nn \g_TUDa_innerMargin_dim {20mm}
-%\if@twoside
-%\else
-%\dim_gset_eq:NN \g_TUDa_innerMargin_dim \g_TUDa_outerMargin_dim
-%\fi
 
 \dim_new:N \g_TUDa_columnSep_dim
 \dim_gset:Nn \g_TUDa_columnSep_dim {10pt}
@@ -489,10 +487,9 @@
   \nointerlineskip
   \raisebox{\dim_eval:n {
       -.5\c_TUDa_logoheight_dim
-    }}[0pt][.5\c_TUDa_logoheight_dim]{
+    }}[0pt][\dim_eval:n {\bool_if:NTF \g_TUDa_smalltitle_bool {.25} {.5}\c_TUDa_logoheight_dim}]{
     \bool_if:NT \g_TUDa_colorback_bool {\color{accentcolor}\rule{\linewidth}{.5\c_TUDa_logoheight_dim}}
-
-  }
+ }
   \par\nointerlineskip
   \begingroup
   \setlength{\fboxsep}{\z@}
@@ -504,7 +501,7 @@
             \bool_if:NT \g_TUDa_colorback_bool {\color{textonaccentcolor}}
             \tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
             \leavevmode\usekomafont{title}%
-            {\usekomafont{title}{\huge \@title \par}}%
+            {\usekomafont{title}\bool_if:NTF \g_TUDa_smalltitle_bool {\LARGE} {\huge} {\@title\par}}%
             \vskip 1em
             \bool_if:NF \g_TUDa_ex_compatibility_bool
             {
@@ -516,10 +513,20 @@
             \vskip .5em
           \bool_if:NTF \g_TUDa_colorback_bool {\end{addmargin}} {\par}
         \end{minipage}}
-		\hfill\raisebox{\dim_eval:n {\bool_if:NTF \g_TUDa_colorback_bool
+		\tl_if_empty:NF \g_TUDa_logofile_tl {
+		\hfill\raisebox{\dim_eval:n {
+				\bool_if:NTF \g_TUDa_colorback_bool
 				{-\height}
 				{-.9\c_TUDa_logoheight_dim}
-			}}[0pt][\dim_eval:n {\bool_if:NTF \g_TUDa_colorback_bool {1.5}{1.3}\c_TUDa_logoheight_dim}]{\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}}
+			}}
+			[0pt]
+			[\dim_eval:n {
+			\bool_if:NTF \g_TUDa_smalltitle_bool
+				{\bool_if:NTF \g_TUDa_colorback_bool {1.15}{1}}
+				{\bool_if:NTF \g_TUDa_colorback_bool {1.5}{1.3}
+			}\c_TUDa_logoheight_dim}]
+		{\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}}
+		}
       \par\medskip
     }}
   \par
