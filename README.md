@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/04/25 v2.10
+ tuda-ci 2020/06/12 v2.11
 
 ***************************************************************************
 
@@ -195,3 +195,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - add a mechanism for credits in tudaexercise
    - captions & headings in leaflets no longer using \accentfont
    - fixing marginpar alignment
+ * v2.11 (2020-06-12) add translation for ThesisStatus
+   - add option for a custom status
