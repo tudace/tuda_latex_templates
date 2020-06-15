@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplClass{tudaexercise}
-	{\filedate}{\fileversion}{Exercise sheets and exams using TU Darmstadt's Coporate Desing (TUDa-CI)}
+	{\filedate}{\fileversion}{Exercise sheets and exams using TU Darmstadt's Corporate Desing (TUDa-CI)}
 
 \RequirePackage{l3keys2e}
 
