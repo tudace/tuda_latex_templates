@@ -891,18 +891,26 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 			\parbox[t]{\linewidth}{
 				\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
 					\bool_if:NT \g_TUDa_logo@inhead_bool {\color{textonaccentcolor}}
-					\begin{addmargin}{3mm}
+					\tl_if_empty:NF \@titlehead {
+						\begin{addmargin}{3mm}
+							{\usekomafont{titlehead}{\@titlehead\par}}
+						\end{addmargin}
+					}
+					\begin{addmargin}[\dim_eval:n {\box_if_empty:NF \g_TUDa_PaperID_box {\box_wd:N\g_TUDa_PaperID_box+.5\c_TUDa_logoheight_dim} +3mm}]{3mm}
 						\raggedright
-						\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
 						\leavevmode\usekomafont{title}%
 						\expandafter\fontsize\TUDa_title_fontsize:
 						\selectfont
-						\@title\strut\par
-						\vskip0pt
+						\llap{\raisebox{\dimexpr-\height+.5\baselineskip}[0pt][0pt]{\box_use:N \g_TUDa_PaperID_box}\hspace{.5\c_TUDa_logoheight_dim}}
+						\@title\strut
+						\par
+						\box_if_empty:NTF \g_TUDa_PaperID_box
+						{\vskip0pt}
+						{\rule{0pt}{.5\c_TUDa_logoheight_dim}}
 					\end{addmargin}
 				\end{minipage}%
 				\par\nointerlineskip
-				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par
+				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par\vspace{\c_TUDa_rulesep_dim}
 				\begin{addmargin}{3mm}
 					\expandafter\fontsize\TUDa_titleinfo_fontsize:
 					\selectfont
@@ -914,20 +922,20 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 						\@author
 						\par
 					}%
-					{\usekomafont{date}{\@date\par}}%
-					{\usekomafont{publishers}{\@publishers \par}}%
+					{\ifx\@date\@empty\else\usekomafont{date}{\@date\par}\fi}%
+					{\ifx\@publishers\@empty\else\usekomafont{publishers}{\@publishers \par}\fi}%
 				\end{addmargin}
-			\tl_if_empty:NF \@thanks {
-			\expandafter\fontsize\TUDa_titlethanks_fontsize:\selectfont\par
-			\rule{\linewidth}{\g_TUDa_titlerule_dim}\par
-			\begin{addmargin}{3mm}
-				\let\footnotetext\TUDa@title@footnote
-				\@thanks
-			\end{addmargin}
-				\par\vspace{-\dp\strutbox}
-				\let\@thanks\@empty
-			}
-			\rule{\linewidth}{\g_TUDa_titlerule_dim}\par}
+				\tl_if_empty:NF \@thanks {
+					\expandafter\fontsize\TUDa_titlethanks_fontsize:\selectfont\par
+					\rule{\linewidth}{\g_TUDa_titlerule_dim}\par
+					\begin{addmargin}{3mm}
+						\let\footnotetext\TUDa@title@footnote
+						\@thanks
+					\end{addmargin}
+					\par\vspace{-\dp\strutbox}
+					\let\@thanks\@empty
+				}
+				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par}
 
 		}
 
@@ -1020,6 +1028,18 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 }
 
 
+}
+
+\newkomafont{paperid}{\sffamily}
+\box_new:N \g_TUDa_PaperID_box
+\newcommand*{\SetPaperID}[2]{
+	\hbox_gset:Nn \g_TUDa_PaperID_box {
+		\usekomafont{paperid}
+		\dim_set:Nn \l_tmpa_dim {\exp_last_unbraced:No \use_i:nn \TUDa_title_fontsize: + \exp_last_unbraced:No \use_ii:nn \TUDa_title_fontsize:}
+		\fontsize{1.1\l_tmpa_dim}{1.1\l_tmpa_dim}
+		\selectfont
+		#1{\Huge #2}
+	}
 }
 
 \renewcommand*{\@maketitle}{%
