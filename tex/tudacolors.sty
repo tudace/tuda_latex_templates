@@ -4,6 +4,11 @@
 
 \RequirePackage{l3keys2e}
 
+\str_if_exist:NF \g_TUDa_department_str {
+	\str_new:N \g_TUDa_department_str
+	\str_gset:Nn \g_TUDa_department_str {default}
+}
+
 \keys_define:nn {TUDa/colors} {
 	accent .tl_gset:N = \g_TUDa_color_accent_tl,
 	accent .initial:n = 0b,
@@ -23,6 +28,11 @@
 	text/white .meta:n = {text=preferwhite},
 	cmyk .code:n = \PassOptionsToPackage{cmyk}{xcolor},
 	RGB .code:n = \PassOptionsToPackage{RGB}{xcolor},
+	department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = \str_gset:Nn \g_TUDa_department_str {mecheng}\keys_set:nn {TUDa/colors}{accent=TUDaPrimary2,identbar=TUDaPrimary1},
+	department .initial:V = \g_TUDa_department_str,
+	mecheng .meta:n = {department=mecheng},
 }
 
 \ProcessKeysOptions{TUDa/colors}
@@ -30,6 +40,18 @@
 \RequirePackage{xcolor}
 
 \input{tudacolors.def}
+
+\str_if_eq:VnT \g_TUDa_department_str {mecheng} {
+	\colorlet{TUDaPrimary1}{TUDa-6b}
+	\colorlet{TUDaPrimary2}{TUDa-2d}
+	\colorlet{TUDaSecondary1}{TUDa-9a}
+	\colorlet{TUDaSecondary2}{TUDa-8a}
+	\colorlet{TUDaSecondary3}{TUDa-6a}
+	\colorlet{TUDaSecondary4}{TUDa-3a}
+	\colorlet{TUDaSecondary5}{TUDa-4a}
+	\colorlet{TUDaSecondary6}{TUDa-5a}
+	\colorlet{TUDaArrow}{TUDaPrimary2}
+}
 
 \clist_map_inline:nn {accent, textaccent, identbar} {
 	\cs_if_exist:cF {\string\color@\tl_use:c {g_TUDa_color_#1_tl}} {

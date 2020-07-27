@@ -11,6 +11,7 @@
 \Module@DefineSpecialPassKey[TUDa/beamer]{color}<tudacolors>
 
 \ExplSyntaxOn
+\str_new:N \g_TUDa_department_str
 \keys_define:nn {TUDa/beamer} {
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
 	colorframetitle .code:n = \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
@@ -24,6 +25,14 @@
 	serif .default:n = true,
 	sans-serif .code:n = \PassOptionsToPackage{sans-serif=#1}{beamerfontthemeTUDa},
 	sans-serif .default:n = true,
+	department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = {
+		\str_gset:Nn \g_TUDa_department_str {mecheng}
+		\keys_set:nn {TUDa/pub}{colorback=false}
+	},
+	department .initial:n = default,
+	mecheng .meta:n = {department=mecheng},
 }
 
 
