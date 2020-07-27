@@ -589,6 +589,7 @@
 
 
 \newkomafont{institution}{\sffamily}
+\newkomafont{titleinfo}{\sffamily}
 \setkomafont{subtitle}{\bfseries}
 \setkomafont{subject}{}
 \setkomafont{publishers}{}
@@ -912,6 +913,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 				\par\nointerlineskip
 				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par\vspace{\c_TUDa_rulesep_dim}
 				\begin{addmargin}{3mm}
+					\usekomafont{titleinfo}
 					\expandafter\fontsize\TUDa_titleinfo_fontsize:
 					\selectfont
 					{\ifx\@subtitle\@empty\else\usekomafont{subtitle}{\@subtitle\par}\fi}%
