@@ -8,6 +8,7 @@
 \dim_new:N \g_TUDa_margin_dim
 \int_new:N \g_TUDa_paper_int
 \int_new:N \g_TUDa_postertype_int
+\str_new:N \g_TUDa_department_str
 
 \keys_define:nn {TUDa/poster} {
 	accentcolor .code:n = {\PassOptionsToPackage{accent=#1}{tudacolors}},
@@ -65,6 +66,14 @@
 	colorsubtitle .bool_gset:N = \g_TUDa_colorsubtitle_bool,
 	colorsubtitle .default:n = true,
 	colorsubtitle .initial:n = false,
+	department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = {
+		\str_gset:Nn \g_TUDa_department_str {mecheng}
+		\keys_set:nn {TUDa/pub}{colorback=false}
+	},
+	department .initial:n = default,
+	mecheng .meta:n = {department=mecheng},
 }
 
 

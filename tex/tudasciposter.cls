@@ -7,6 +7,7 @@
 \prop_new:N \g_TUDa_clsopts_prop
 \tl_new:N \g_TUDa_boxstyle_tl
 \int_new:N \g_TUDa_paper_int
+\g_TUDa_department_str
 
 \keys_define:nn {TUDa/poster} {
 	accentcolor .code:n = {\PassOptionsToPackage{accent =#1}{tudacolors}},
@@ -42,6 +43,14 @@
 	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
 	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
 	title .initial:n = default,
+	department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = {
+		\str_gset:Nn \g_TUDa_department_str {mecheng}
+		\keys_set:nn {TUDa/pub}{colorback=false}
+	},
+	department .initial:n = default,
+	mecheng .meta:n = {department=mecheng},
 }
 
 

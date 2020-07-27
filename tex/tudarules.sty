@@ -5,6 +5,11 @@
 
 \RequirePackage{l3keys2e}
 
+\str_if_exist:NF \g_TUDa_department_str {
+	\str_new:N \g_TUDa_department_str
+	\str_gset:Nn \g_TUDa_department_str {default}
+}
+
 \seq_if_exist:NF \l_TUDa_tmpa_seq {\seq_new:N \l_TUDa_tmpa_seq}
 \tl_if_exist:NF \l_TUDa_tmpa_tk {\tl_new:N \l_TUDa_tmpa_tl}
 
@@ -38,7 +43,11 @@
 	color .tl_gset:N = \g_TUDarules_default_color_tl,
 	color .initial:n = black,
 	mode .tl_gset:N = \g_TUDarules_default_mode_tl,
-	mode .initial:n = box
+	mode .initial:n = box,
+	department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = \str_gset:Nn \g_TUDa_department_str {mecheng},
+	mecheng .meta:n = {department=mecheng},
 }
 
 \ProcessKeysOptions{TUDa/rules}

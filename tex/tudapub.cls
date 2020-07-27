@@ -118,6 +118,14 @@
 	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
 	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
 	title .initial:n = default,
+	department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = {
+		\str_gset:Nn \g_TUDa_department_str {mecheng}
+		\keys_set:nn {TUDa/pub}{colorback=false}
+	},
+	department .initial:n = default,
+	mecheng .meta:n = {department=mecheng},
 }
 %
 %%special option handling grouped values
