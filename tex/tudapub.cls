@@ -122,7 +122,7 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/pub}{colorback=false}
+		\keys_set:nn {TUDa/pub}{colorback=false,ruledheaders=section}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
@@ -1226,5 +1226,6 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\let\Iftocfeature\iftocfeature
 }
 
+\file_if_exist_input:n {tuda\g_TUDa_department_str.cfg}
 \endinput
 %End of class tudapub.cls
