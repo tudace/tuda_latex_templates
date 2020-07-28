@@ -138,6 +138,8 @@
 
 \Module@Process@SpecialOptions[TUDa/special]
 
+\PassOptionsToPackage{DIV=calc}{typearea}
+
 \ProcessKeysOptions{TUDa/pub}
 
 
@@ -162,9 +164,8 @@
 \file_if_exist:nT {tudasize\prop_item:Nn \g_TUDa_clsopts_prop {fontsize}.clo}
 	{\providecommand*{\@fontsizefilebase}{tudasize}}
 
-%\PassOptionsToPackage{DIV=7}{typearea}
-
 \LoadClass{\g_TUDa_pub_class_tl}
+
 
 \prop_map_inline:Nn \g_TUDa_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.\g_TUDa_pub_class_tl.cls@#1} {
