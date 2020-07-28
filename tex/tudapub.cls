@@ -122,12 +122,12 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/pub}{colorback=false,ruledheaders=section,departmentlogo=tuda_maschinenbau_logo}
+		\keys_set:nn {TUDa/pub}{colorback=false,ruledheaders=section,departmentlogofile=tuda_maschinenbau_logo}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
-	departmentlogo .tl_gset:N = \g_TUDa_departmentlogo_tl,
-	departmentlogo .initial:n =,
+	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
+	departmentlogofile .initial:n =,
 }
 %
 %%special option handling grouped values
