@@ -373,32 +373,27 @@
 
 
 
-
-
-
-
 \dim_new:N \g_TUDa_titlerule_dim
 \dim_gset:Nn \g_TUDa_titlerule_dim {.5\c_TUDa_smallrule_dim}
 
-%\dim_new:N \g_TUDa_titlerule_sep_dim
-%\dim_set:Nn \g_TUDa_titlerule_sep_dim {1ex}
 \cs_new:Nn \TUDa_titlerule_sep: {\the\dp\strutbox}
 
 \usepackage{tudacolors}
 
 \setkomafont{disposition}{\sffamily\bfseries}
 \setkomafont{pageheadfoot}{\sffamily\small}
+\addtokomafont{pagefoot}{\rule{0pt}{\dimexpr\baselineskip+\c_TUDa_rulesep_dim}}
 \setkomafont{pagenumber}{}
 \addtokomafont{captionlabel}{\sffamily}
 \addtokomafont{caption}{\sffamily}
 
 
 \KOMAoptions{footsepline=.5\c_TUDa_smallrule_dim}
+\setlength{\footheight}{\dimexpr\baselineskip+\c_TUDa_rulesep_dim}
 \bool_if:NT \g_TUDa_headline_bool {\KOMAoptions{headsepline=.5\c_TUDa_smallrule_dim}}
 
 %Adjust headheight
 \AtBeginDocument{
-\KOMAoptions{headlines=1.5}
 \bool_if:NTF \g_TUDa_marginpar_bool
 	{
 		\KOMAoptions {
@@ -417,7 +412,7 @@
 }
 
 \newpairofpagestyles[scrheadings]{TUDa.headings}{
-	\KOMAoptions{headsepline, headlines=1.25, footlines=1.25}
+	\KOMAoptions{headsepline, headlines=1.25}
 	\setkomafont{pagehead}{}
 	\chead{}
 	\ohead{\headmark}
