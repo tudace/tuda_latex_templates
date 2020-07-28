@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/04/25 v2.10
+ tuda-ci 2020/07/28 v3.0 alpha
 
 ***************************************************************************
 
@@ -195,3 +195,8 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - add a mechanism for credits in tudaexercise
    - captions & headings in leaflets no longer using \accentfont
    - fixing marginpar alignment
+ * v2.11 (2020-06-12) add english translation for drfinal/dr (submitted/accepted)
+ * v3.0 () 
+	- mecheng option for tudapub to support the department of mechanical engineering
+	- generalize the pagestyle mechanisms
+	- cleanup title creation
