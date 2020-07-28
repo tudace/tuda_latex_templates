@@ -821,7 +821,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \fi
 \fi
 
-\exp_args:NV \tl_if_eq:nnTF {\g_TUDa_pubType_tl}  {thesis} {
+\str_if_eq:VnTF \g_TUDa_pubType_tl  {thesis} {
 	\input{tudathesis.cfg}
 } {
 
