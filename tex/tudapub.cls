@@ -682,20 +682,12 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 ]{title.TUDa.background}
 
 \DeclareNewLayer[
-	mode=picture,
-	align=tl,
+	clone=plain.TUDa.head.above.line,
 	hoffset=\coverpageleftmargin,
-	voffset=\coverpagetopmargin,
 	width=\paperwidth-\coverpageleftmargin-\coverpagerightmargin,
-	contents={
-%		\box_if_exist:NF \TUDa@title_headline_box
-%		{}
-		\dim_compare:nF {\box_wd:N \TUDa@title_headline_box=\layerwidth} {
-			\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@title_headline}
-		}
-		\putUL{\TUDa@title_headline}
-	}
 ]{title.TUDa.rule}
+
+
 
 \TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@title_headline}
 
