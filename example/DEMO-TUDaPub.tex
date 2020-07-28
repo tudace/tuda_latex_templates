@@ -254,6 +254,47 @@ Hier existiert eine Variante, die die Buchstaben der Basischriftart \enquote{Cha
 Es gibt ähnliche Ansätze für ein paar weitere Kombinationen. Einige Beispiele finden sich in der XCharter Dokumentation. \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
 
 
+\section{Fachbereichsspezifische Anpassungen}
+Einige Fachbereiche haben spezielle Anforderungen. Dieser Abschnitt betrachtet die speziellen Anpassungen. Bisher (Juli 2020) existieren diese Modifikationen lediglich für den Fachbereich Maschinenbau, der Mechanismus ist jedoch erweiterungsfähig.
+
+
+\subsection{Fachbereich Maschinenbau}
+Der entsprechende Modus wird über die Option \code{department=mecheng} oder kurz \code{mecheng} aktiviert. Die Farbgebung passt sich dann automatisch an und die Trennlinie der Fußzeile erhält die geforderte Form des Zeitstrahles. 
+
+Darüber hinaus erfordern manche Stellen dieses Fachbereits die übergabe einer ID zu Kennzeichnung des Dokuments. Hierfür wurde der Mechanismus 
+\begin{verbatim}
+\SetPaperID{<Buchstabe>}{<tiefgestelle Nummer>}}
+\end{verbatim}
+eingeführt.
+Dieser funktioniert auch ohne die Aktivierung des \code{mecheng}-Modus, allerdings ergänzt due Option einige zusätzliche Parameter für angepasste Abstände.
+
+Darüber hinaus aktiviert der Modus die Optionen:
+\code{colorback=false}, \code{ruledheaders=section}.
+
+\minisec{Logo}
+Das Fachbereichslogo wird über die Option \verb+departmentlogo=tuda_maschinenbau_logo+ übergeben. Falls die Datei fehlt, kann über diesen Weg eine alternative Datei übergeben werden. Falls der Wert leer bleibt, wird kein Bild eingefügt.
+
+\minisec{Farbanpassungen}
+Der Fachbereich untergliedert die im Corporate Design Handbuch beschriebenen Farben zusätzlich. Daher existieren, wenn \code{mecheng} aktiviert wurde zusätzlich die folgenden Farbnamen:
+
+\begin{verbatim}
+\colorlet{TUDaPrimary1}{TUDa-6b}
+\colorlet{TUDaPrimary2}{TUDa-2d}
+\colorlet{TUDaSecondary1}{TUDa-9a}
+\colorlet{TUDaSecondary2}{TUDa-8a}
+\colorlet{TUDaSecondary3}{TUDa-6a}
+\colorlet{TUDaSecondary4}{TUDa-3a}
+\colorlet{TUDaSecondary5}{TUDa-4a}
+\colorlet{TUDaSecondary6}{TUDa-5a}
+\colorlet{TUDaArrow}{TUDaPrimary2}
+\end{verbatim}
+
+\minisec{Zeitstrahl}
+Des Design-Element des Zeitstrahls kann über das Makro \verb+\MechEngArrow{<Länge>}+ erzeugt werden. Die Farbe entspricht dabei der Farbe \code{TUDaArrow}, die mit der zweiten Primärfarbe (blau) vorbelegt ist.
+
+
+
+
 \section{Standard-KOMA-Script}
 \label{sec:KOMA}
 Da die Klasse bis auf ein paar erzwungene Einstellungen, die das Layout betreffen, vollständig \KOMAScript-kompatibel ist, ist für sämtliche Modifikationen ein Blick in die \KOMAScript-Dokumentation hilfreich. Für einen Großteil bietet \KOMAScript{} eine eigene Lösung, wodurch Ergänzungspakete oft hinfällig sind.
