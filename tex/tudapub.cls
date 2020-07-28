@@ -418,7 +418,7 @@
 	\ohead{\headmark}
 }
 
-\newpairofpagestyles{TUDa}{
+\newpairofpagestyles{TUDa.base}{
 	\KOMAoptions{plainfootsepline}
 
 	\bool_if:NTF \g_TUDa_marginpar_bool
@@ -444,7 +444,7 @@
 			}
 			\smash{\TUDa@headline}
 		}
-	]{TUDa.head.above.line}
+	]{TUDa.base.head.above.line}
 	\RedeclareLayer[
 		clone=plain.scrheadings.head.above.line,
 		background,
@@ -454,16 +454,19 @@
 			}
 			\smash{\TUDa@headline}
 		}
-	]{plain.TUDa.head.above.line}
+	]{plain.TUDa.base.head.above.line}
 	\bool_if:NT \g_TUDa_headline_bool {
 		\clist_map_variable:nNn {oneside, even, odd} \l_tmpa_tl {
-			\ModifyLayer[pretocontents={\rule[-6pt]{0pt}{\layerheight}}]{TUDa.head.\l_tmpa_tl}
+			\ModifyLayer[pretocontents={\rule[-6pt]{0pt}{\layerheight}}]{TUDa.base.head.\l_tmpa_tl}
 		}
 		\lehead{\headmark}
 		\lohead{\headmark}
 	}
 	\ofoot[\pagemark]{\pagemark}
 }
+
+\DeclarePageStyleAlias{TUDa}{TUDa.base}
+\DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.base}
 
 \cs_new:Nn \TUDa_sls@leftmargin: {%
 	\dimexpr
@@ -678,7 +681,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 ]{title.TUDa.background}
 
 \DeclareNewLayer[
-	clone=plain.TUDa.head.above.line,
+	clone=plain.TUDa.base.head.above.line,
 	hoffset=\coverpageleftmargin,
 	width=\paperwidth-\coverpageleftmargin-\coverpagerightmargin,
 ]{title.TUDa.rule}
