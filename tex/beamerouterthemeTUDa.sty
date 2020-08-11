@@ -42,8 +42,9 @@
   text~margin~right=\dimexpr\TUDa@beamer@sep+\TUDa@beamer@extraindent\relax,
 }
 
-\newlength{\TUDa@beamer@linewidth}
-\setlength{\TUDa@beamer@linewidth}{\dimexpr\paperwidth-2\TUDa@beamer@sep-2\TUDa@beamer@extraindent\relax}
+\def\TUDa@beamer@linewidth{\dimexpr\paperwidth
+	-\beamer@leftmargin-\beamer@rightmargin
+}
 
 %Logo
 
@@ -159,8 +160,16 @@
 		{\raisebox{\dimexpr-\height+\ht\strutbox}}
 		{\usebox\TUDa@logobox}
 \end{beamercolorbox}%
-\nointerlineskip
-\leavevmode\color{black}\hspace*{-\TUDa@beamer@extraindent}\rlap{\TUDa@beamer@rule}%
+	\nointerlineskip
+\begin{beamercolorbox}[
+	sep=\TUDa@beamer@logosep,
+	wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+	rightskip=-\TUDa@beamer@logosep,
+	leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+	ht=\c_TUDa_smallrule_dim,
+	dp=0pt
+	]{smallrule}
+\end{beamercolorbox}
 }
 
 \defbeamertemplate*{headline}{TUDa~theme.nologo}
@@ -203,7 +212,15 @@
 	}]{0pt}{\dimexpr\ht\TUDa@logobox+\dp\TUDa@logobox\relax}
 \end{beamercolorbox}
 	\nointerlineskip
-\TUDa@beamer@rule
+\begin{beamercolorbox}[
+	sep=\TUDa@beamer@logosep,
+	wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+	rightskip=-\TUDa@beamer@logosep,
+	leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+	ht=\c_TUDa_smallrule_dim,
+	dp=0pt
+	]{smallrule}
+\end{beamercolorbox}
 }
 
 \cs_new:Nn \TUDa_setup_frame: {
