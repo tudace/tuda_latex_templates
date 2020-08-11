@@ -17,8 +17,32 @@
     centerframetitle .bool_gset:N = \g_TUDa_centerframetitle_bool,
     centerframetitle .initial:n = false,
     centerframetitle .default:n = true,
+   	framebgcolor .code:n = {
+    	\cs_set_eq:Nc\TUDa_save_background_canvas:{beamer@thcbg@background~canvas}
+    	\setbeamercolor{background~canvas}{bg=TUDa-#1}
+    	\setbeamertemplate{background~canvas}[TUDa]
+    },
+    singleframebgcolor .code:n = {
+    	\cs_set_eq:Nc\TUDa_save_background_canvas:{beamer@thcbg@background~canvas}
+    	\keys_set:nn {TUDa/beamer/outer} {
+    		framebgcolor = #1
+    	}
+    },
 }
 
+\define@key{beamerframe}{bgcolor}{
+	\keys_set:nn {TUDa/beamer/outer} {singleframebgcolor=#1}
+}
+
+\defbeamertemplate*{background~canvas}{TUDa}{
+	\ifbeamercolorempty[bg]{background~canvas}{}{
+		\color{bg}\vrule width\paperwidth height\paperheight
+	}
+	\cs_if_exist:NT \TUDa_save_background_canvas: {
+		\cs_gset_eq:cN {beamer@thcbg@background~canvas} \TUDa_save_background_canvas: 
+		\cs_undefine:N \TUDa_save_background_canvas:
+	}
+}
 
 \ProcessKeysOptions{TUDa/beamer/outer}
 
