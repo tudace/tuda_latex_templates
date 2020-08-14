@@ -18,9 +18,14 @@
     centerframetitle .initial:n = false,
     centerframetitle .default:n = true,
    	framebgcolor .code:n = {
- 		\cs_if_exist:cTF {\string\color@#1}
-			{\global\setbeamercolor{background~canvas}{bg=#1}}
-    		{\setbeamercolor{background~canvas}{bg=TUDa-#1}}
+   		\ifbeamercolorempty[bg]{#1}{
+   			\cs_if_exist:cTF {\string\color@#1}
+   			{\setbeamercolor{background~canvas}{bg=#1}}
+   			{\setbeamercolor{background~canvas}{bg=TUDa-#1}}
+   		}{
+  			\setbeamercolor{background~canvas}{use=#1,fg=#1.fg,bg=#1.bg}
+			\setbeamercolor{normal~text}{use=#1,fg=#1.fg,bg=}
+ 		}
    		\setbeamertemplate{background~canvas}[TUDa]
     },
     singleframebgcolor .code:n = {
