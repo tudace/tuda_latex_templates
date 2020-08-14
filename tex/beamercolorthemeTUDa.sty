@@ -20,7 +20,7 @@
 \ExplSyntaxOff
 \RequirePackage[RGB]{tudacolors}
 
-\mode<all>
+\mode<beamer>
 
 \setbeamercolor*{smallrule}{bg=black}
 \setbeamercolor*{identbar}{bg=identbarcolor}
@@ -29,7 +29,7 @@
 \bool_if:NTF \g_TUDa@beamer_colortitle_bool {
 	\setbeamercolor*{title}{fg=textonaccentcolor,bg=accentcolor}
 }{
-	\setbeamercolor*{title}{fg=black,bg=white}
+	\setbeamercolor*{title}{parent=normal~text}
 }
 
 \setbeamercolor*{author}{parent=title}
@@ -38,19 +38,20 @@
 \bool_if:NTF \g_TUDa@beamer_colorframetitle_bool {
 	\setbeamercolor*{frametitle}{fg=textonaccentcolor,bg=accentcolor}
 } {
-	\setbeamercolor*{frametitle}{fg=black,bg=white}
+	\setbeamercolor*{frametitle}{parent=normal~text}%fg=p,bg=}
 }
 \ExplSyntaxOff
 
 \setbeamercolor*{frametitlecover}{bg=white}
 
-\setbeamercolor*{author in head/foot}{fg=black, bg=white}
-\setbeamercolor*{date in head/foot}{fg=black, bg=white}
+
+\setbeamercolor*{author in head/foot}{fg=red, bg=white}
+\setbeamercolor*{date in head/foot}{fg=blue, bg=white}
 
 \setbeamercolor*{normal text}{bg=white,fg=black}
 \setbeamercolor*{background canvas}{bg=white}
 
-\setbeamercolor*{section in toc}{fg=black,bg=white}
+\setbeamercolor*{section in toc}{parent=normal text}
 
 
 \setbeamercolor*{alerted text}{fg=textaccentcolor}
@@ -59,7 +60,7 @@
 \setbeamercolor*{palette primary}{fg=textaccentcolor}
 \setbeamercolor*{palette secondary}{fg=textaccentcolor}
 \setbeamercolor*{palette tertiary}{fg=textaccentcolor}
-\setbeamercolor*{palette quaternary}{fg=black}
+\setbeamercolor*{palette quaternary}{parent=normal text}
 
 \setbeamercolor{bibliography item}{parent=item}
 \setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
