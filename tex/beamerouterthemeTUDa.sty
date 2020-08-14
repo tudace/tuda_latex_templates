@@ -34,6 +34,9 @@
     		framebgcolor = #1
     	}
     },
+	headsepline .bool_gset:N = \g_TUDa_headsepline_bool,
+	headsepline .initial:n = true,
+	headsepline .default:n = true,
 }
 
 \define@key{beamerframe}{bgcolor}{
@@ -190,16 +193,18 @@
 		{\raisebox{\dimexpr-\height+\ht\strutbox}}
 		{\usebox\TUDa@logobox}
 \end{beamercolorbox}%
+\bool_if:NT \g_TUDa_headsepline_bool {
 	\nointerlineskip
-\begin{beamercolorbox}[
-	sep=\TUDa@beamer@logosep,
-	wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
-	rightskip=-\TUDa@beamer@logosep,
-	leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
-	ht=\c_TUDa_smallrule_dim,
-	dp=0pt
-	]{smallrule}
-\end{beamercolorbox}
+	\begin{beamercolorbox}[
+		sep=\TUDa@beamer@logosep,
+		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+		rightskip=-\TUDa@beamer@logosep,
+		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		ht=\c_TUDa_smallrule_dim,
+		dp=0pt
+		]{smallrule}
+	\end{beamercolorbox}
+}
 }
 
 \defbeamertemplate*{headline}{TUDa~theme.nologo}
@@ -241,16 +246,18 @@
 		{-.5\ht\TUDa@logobox+.5\dp\TUDa@logobox} {-\ht\TUDa@logobox+\ht\strutbox}
 	}]{0pt}{\dimexpr\ht\TUDa@logobox+\dp\TUDa@logobox\relax}
 \end{beamercolorbox}
+\bool_if:NT \g_TUDa_headsepline_bool {
 	\nointerlineskip
-\begin{beamercolorbox}[
-	sep=\TUDa@beamer@logosep,
-	wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
-	rightskip=-\TUDa@beamer@logosep,
-	leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
-	ht=\c_TUDa_smallrule_dim,
-	dp=0pt
-	]{smallrule}
-\end{beamercolorbox}
+	\begin{beamercolorbox}[
+		sep=\TUDa@beamer@logosep,
+		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+		rightskip=-\TUDa@beamer@logosep,
+		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		ht=\c_TUDa_smallrule_dim,
+		dp=0pt
+		]{smallrule}
+	\end{beamercolorbox}
+}
 }
 
 \cs_new:Nn \TUDa_setup_frame: {
