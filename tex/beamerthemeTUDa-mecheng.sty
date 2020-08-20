@@ -1,0 +1,265 @@
+\RequirePackage{expl3}
+\ProvidesExplPackage{beamerthemeTUDa-mecheng}{\filedate}{\fileversion}{specific tudabeamer configuration for the department of mechanical engineering}
+
+
+\tl_if_empty:NT \g_TUDa_departmentlogo_tl {
+	\keys_set:nn {TUDa/beamer}{departmentlogofile=tuda_maschinenbau_logo_rgb}
+} 
+
+
+\mode<beamer>
+
+
+% Setup Arrow
+\RequirePackage{pgf}
+
+\cs_new:Nn \TUDa_mecheng_arrow:N {
+	\begin{pgfpicture}
+		\pgfsetcolor{TUDa-Arrow}
+		\pgfsetrectcap
+		\pgfsetlinewidth{2\c_TUDa_smallrule_dim}
+		\pgfpathmoveto{\pgfpointorigin}
+		\pgfpathlineto{\pgfpointpolar{174}{.05#1}}
+		\pgfpathlineto{\pgfpointpolar{186}{.05#1}}
+		\pgfpathclose
+		\pgfusepath{fill}
+		\pgfpathmoveto{\pgfpoint{-.04#1}{0}}
+		\pgfpathlineto{\pgfpoint{-#1}{0}}
+		\pgfusepath{stroke}
+	\end{pgfpicture}
+}
+
+\NewDocumentCommand{\MechEngArrow}{sm}{
+	\IfBooleanT{#1}{\begingroup\colorlet{TUDa-Arrow}{.}}
+	\dim_set:Nn \l_tmpa_dim {#2}\TUDa_mecheng_arrow:N \l_tmpa_dim
+	\IfBooleanT{#1}{\endgroup}
+}
+
+%adjustments for colortheme
+\setbeamercolor{Primary1}{fg=TUDa-Primary1, bg=TUDa-Primary2}
+\setbeamercolor{Primary2}{fg=TUDa-Primary2, bg=TUDa-Primary1}
+
+\setbeamercolor{structure}{fg=black!50}
+
+\setbeamercolor{department in head/foot}{parent=palette primary}
+\setbeamercolor{institute in head/foot}{parent=palette primary}
+\setbeamercolor{title in head/foot}{parent=palette primary}
+\setbeamercolor{author in head/foot}{parent=palette primary}
+\setbeamercolor{date in head/foot}{parent=palette primary}
+
+%innertheme adjustments
+\defbeamertemplate*{title~ page}{TUDa-mecheng}[1][]
+{	
+	\nointerlineskip
+	\vspace{\dimexpr.5\c_TUDa_logoheight_dim-\ht\strutbox}
+	\hbox_set:Nn \l_TUDa_titlehead_box {
+		\parbox{\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}{%
+			\begin{beamercolorbox}[
+				wd=\linewidth,
+				]{title}
+				\raggedright
+				\usebeamerfont{title}
+				\hbox_set:Nn \l_TUDa_frametitle_box {
+					\parbox[c]{\dimexpr\linewidth- \wd\TUDa@logobox\relax}{
+						\inserttitle
+						\par
+					}
+				}
+				\dim_compare:nT {\box_ht:N \l_TUDa_frametitle_box > \baselineskip} {\raisebox{\dimexpr-\height+.5\c_TUDa_logoheight_dim}}
+				{\box_use:N \l_TUDa_frametitle_box}
+				\hspace{\fill}
+				\raisebox{\dimexpr-.5\height+.5\ht\strutbox-.5\dp\strutbox\relax}{\usebox\TUDa@logobox}\hspace*{\dimexpr-\beamer@rightmargin+\TUDa@beamer@logosep}
+				\ifx\insertsubtitle\@empty
+				\else
+				\par\vspace{\c_TUDa_largerule_dim}
+				\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox\relax}{
+					\usebeamerfont{subtitle}\insertsubtitle
+				}
+				\fi
+			\end{beamercolorbox}
+			\bool_if:NT \g_TUDa_authorontitle_bool {
+				\par\nointerlineskip
+				\begin{beamercolorbox}[
+					wd=\linewidth,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+				\end{beamercolorbox}
+				\par\nointerlineskip
+				\begin{beamercolorbox}[
+					wd=\linewidth,
+					sep=\c_TUDa_largerule_dim,
+					]{title}
+					\raggedright
+					\skip_horizontal:n {1ex}
+					\parbox[t]{\dimexpr\linewidth-2ex\relax}{
+						\ifx\insertauthor\@empty
+						\else
+						\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
+						\fi
+						\ifx\insertauthor\@empty
+						\else
+						\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute
+						\fi
+					}
+				\end{beamercolorbox}
+			}
+		}
+	}
+	\box_use:N \l_TUDa_titlehead_box
+	\par\skip_vertical:n {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box-.5\c_TUDa_rulesep_dim-\c_TUDa_smallrule_dim}
+	\begin{beamercolorbox}[
+		rightskip=.07\linewidth,%place image left of arrow tip
+		ht=\c_TUDa_smallrule_dim,dp=1mm,
+		wd=\dimexpr\textwidth]{footline}
+		\includegraphics[width=\dimexpr2\linewidth/11]{\g_TUDa_departmentlogo_tl}\hfill
+		\insertlogo\par\nointerlineskip
+		\MechEngArrow*{\linewidth}
+	\end{beamercolorbox}
+}
+
+
+\defbeamertemplate{background}{TUDa-mecheng-title}{
+	\dim_set:Nn	\l_TUDa_titlegraphic_ht_dim  {\paperheight}
+	\dim_set:Nn	\l_TUDa_titlegraphic_wd_dim {\paperwidth}
+	\let\height\paperheight
+	\let\width\paperwidth
+	\inserttitlegraphic
+}
+
+
+\renewcommand*{\maketitle}{
+	\begingroup
+	\setbeamertemplate{background}[TUDa-mecheng-title]
+	\ifbeamer@inframe\titlepage\else\frame[plain]{\titlepage}\fi
+	\endgroup
+}
+
+
+%outertheme adjustments:
+\define@key{beamerframe}{arrowcolor}{\keys_set:nn {TUDa/beamer/mecheng} {arrowcolor=#1}}
+\define@key{beamerframe}{titlecolor}{\keys_set:nn {TUDa/beamer/mecheng} {frametitlecolor=#1}}
+
+
+\setbeamercolor{logo}{parent=normal~text}
+
+\logo{
+	\str_set:Nx \l_tmpa_str {\str_range:Nnn \beamer@thc@fg {1} {-4}}
+	\raisebox{-\dp\strutbox}{
+		\file_if_exist:nTF {tuda_maschinenbau_logo_\l_tmpa_str.pdf} {
+			\includegraphics[height=1.7\baselineskip]{\g_TUDa_departmentlogo_tl-\l_tmpa_str}
+		} {
+			\includegraphics[height=1.7\baselineskip]{\g_TUDa_departmentlogo_tl}
+		}
+	}
+}
+
+\defbeamertemplate*{footline}{TUDa-mecheng~theme}
+{
+	\begin{beamercolorbox}[
+		wd=\linewidth,
+		leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin,
+		]{footline}
+		\MechEngArrow*{\linewidth}
+		\par\skip_vertical:n {.5\TUDa@beamer@logosep}
+		\makebox[\linewidth][s]{
+			\insertlogo
+			\hfill
+			\bool_set_false:N \l_TUDa_tmpa_bool
+			\clist_map_variable:nNn {department, institute, author,title} \l_tmpa_tl {
+				\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
+					\bool_if:NTF \l_TUDa_tmpa_bool
+					{\space|\space}
+					{\bool_set_true:N \l_TUDa_tmpa_bool}
+					\usebeamercolor[fg]{\l_tmpa_tl\space in\space head/foot}\usebeamerfont{\l_tmpa_tl\space in\space head/foot}
+					\use:c {insertshort\l_tmpa_tl}
+				}
+			}\quad
+			\tl_if_empty:cF {beamer@shortdate} {
+				\usebeamercolor{date~ in~ head/foot}\usebeamerfont{date~ in~ head/foot}
+				\insertshortdate\quad
+			}
+			\usebeamerfont{framenumber}
+			\makebox[.05\linewidth][l]{
+				\quad\llap{\insertframenumber}
+			}
+		}
+		\skip_vertical:n {\TUDa@beamer@logosep}
+	\end{beamercolorbox}
+}
+
+\defbeamertemplate{frametitle}{TUDa-mecheng~theme.logo}{%
+	\nointerlineskip%
+	\begin{beamercolorbox}[
+		sep=\TUDa@beamer@logosep,
+		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+		rightskip=-\TUDa@beamer@logosep,
+		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		]{frametitle}
+		\hbox_set:Nn \l_TUDa_frametitle_box {
+			\parbox[t]
+			{\dimexpr\linewidth- \wd\TUDa@logobox-1em\relax\relax}{%
+				\usebeamerfont{frametitle}\strut\insertframetitle
+				\ifx\insertframesubtitle\@empty
+				\else
+				\par
+				\usebeamercolor[fg]{framesubtitle}
+				\usebeamerfont{framesubtitle}
+				\insertframesubtitle
+				\fi
+		}}
+		\leavevmode
+		\bool_if:NTF \g_TUDa_centerframetitle_bool
+		{\raisebox{\dimexpr-.5\height+.5\depth}}
+		{\use:n}
+		{\box_use:N \l_TUDa_frametitle_box}
+		\hfill%
+		\raisebox{\dimexpr-.5\height+.5\depth}
+		{\usebox\TUDa@logobox}
+	\end{beamercolorbox}%
+	\nointerlineskip
+	\begin{beamercolorbox}[
+		sep=\TUDa@beamer@logosep,
+		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+		rightskip=-\TUDa@beamer@logosep,
+		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		ht=\c_TUDa_smallrule_dim.
+		dp=0
+		]{smallrule}
+	\end{beamercolorbox}
+}
+
+\cs_set:Nn \__TUDa_reset_framebgcolor: {
+	\setbeamercolor{normal~text}{fg=black,bg=}
+	\setbeamercolor{structure}{fg=textaccentcolor}
+	\usebeamercolor[fg]{normal~text}
+	\setbeamercolor{footline}{use=Primary2,fg=Primary2.fg}
+	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__TUDa_save_background_canvas: 
+	\cs_undefine:N \__TUDa_save_background_canvas:
+	\TUDa_setup_frametitle_color:
+}
+
+\cs_set:Nn \__TUDa_set_framebgcolor:n {
+	\str_case:nnTF {#1} {
+		{Primary1} {\tl_set:Nn \l_tmpa_tl {Primary2}}
+		{Primary2} {\tl_set:Nn \l_tmpa_tl {Primary1}}
+	}{
+		\exp_args:Nnx \setbeamercolor{frametitle}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg,bg=}
+		\exp_args:Nnx \setbeamercolor{normal~text}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg,bg=\l_tmpa_tl.bg}
+		\exp_args:Nnx \setbeamercolor{structure}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg}
+		\exp_args:Nnx \setbeamercolor{footline}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg}
+	}{
+		\cs_if_exist:cTF {\string\color@#1}
+		{\setbeamercolor{normal~text}{bg=#1}}
+		{\setbeamercolor{normal~text}{bg=TUDa-#1}}
+	}
+	\usebeamercolor[fg]{normal~text}
+}
+
+\setbeamertemplate{headline}[TUDa theme.simple]
+
+
+
+\usefonttheme{TUDa-mecheng}
+
+
+\mode<all>
+
+\endinput
