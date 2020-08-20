@@ -17,19 +17,15 @@
     centerframetitle .bool_gset:N = \g_TUDa_centerframetitle_bool,
     centerframetitle .initial:n = false,
     centerframetitle .default:n = true,
-   	framebgcolor .code:n = {
-   		\ifbeamercolorempty[bg]{#1}{
-   			\cs_if_exist:cTF {\string\color@#1}
-   			{\setbeamercolor{background~canvas}{bg=#1}}
-   			{\setbeamercolor{background~canvas}{bg=TUDa-#1}}
-   		}{
-  			\setbeamercolor{background~canvas}{use=#1,fg=#1.fg,bg=#1.bg}
-			\setbeamercolor{normal~text}{use=#1,fg=#1.fg,bg=}
- 		}
-   		\setbeamertemplate{background~canvas}[TUDa]
-    },
+	framebgcolor .choice:,
+	framebgcolor / reset .code:n = 
+		\__TUDa_reset_framebgcolor:
+	,
+   	framebgcolor / unknown .code:n = {
+   		\__TUDa_set_framebgcolor:n {#1}
+	},
     singleframebgcolor .code:n = {
-    	\cs_set_eq:Nc\TUDa_save_background_canvas:{beamer@thcbg@background~canvas}
+    	\cs_gset_eq:Nc \__TUDa_save_background_canvas: {beamer@thcbg@normal~text}
     	\keys_set:nn {TUDa/beamer/outer} {
     		framebgcolor = #1
     	}
@@ -40,16 +36,25 @@
 }
 
 \define@key{beamerframe}{bgcolor}{
-	\keys_set:nn {TUDa/beamer/outer} {singleframebgcolor=#1}
+	\keys_set:nn {TUDa/beamer/outer} {
+		singleframebgcolor=#1
+	}
 }
 
-\defbeamertemplate*{background~canvas}{TUDa}{
-	\ifbeamercolorempty[bg]{background~canvas}{}{
-		\color{bg}\vrule width\paperwidth height\paperheight
-	}
-	\cs_if_exist:NT \TUDa_save_background_canvas: {
-		\cs_gset_eq:cN {beamer@thcbg@background~canvas} \TUDa_save_background_canvas: 
-		\cs_undefine:N \TUDa_save_background_canvas:
+\cs_new:Nn \__TUDa_reset_framebgcolor: {
+	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__TUDa_save_background_canvas: 
+	\cs_undefine:N \__TUDa_save_background_canvas:
+}
+
+\cs_new:Nn \__TUDa_set_framebgcolor:n {
+		\cs_if_exist:cTF {\string\color@#1}
+		{\setbeamercolor{normal~text}{bg=#1}}
+		{\setbeamercolor{normal~text}{bg=TUDa-#1}}
+}
+
+\BeforeBeginEnvironment{frame}{
+	\cs_if_exist:NT \__TUDa_save_background_canvas: {
+	\__TUDa_reset_framebgcolor:
 	}
 }
 
@@ -167,7 +172,7 @@
 \begin{beamercolorbox}[
   sep=\TUDa@beamer@logosep,
   wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
-  rightskip=-\TUDa@beamer@logosep,
+  rightskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
   leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
 	]{frametitle}
 	\hbox_set:Nn \l_TUDa_frametitle_box {
@@ -215,6 +220,18 @@
 		\TUDa@beamer@headrule
 	\end{beamercolorbox}
       }
+
+\defbeamertemplate*{headline}{TUDa~theme.simple}
+{
+   		\ifbeamercolorempty[bg]{background~canvas}{
+  			\vspace{\dimexpr.5\c_TUDa_logoheight_dim-\c_TUDa_rulesep_dim}
+  			\skip_horizontal:n {\beamer@leftmargin}
+			\color{identbarcolor}
+			\vrule width\dimexpr\textwidth-\beamer@leftmargin-\beamer@rightmargin height\c_TUDa_rulesep_dim
+		}{
+			\vspace{\dimexpr.5\c_TUDa_logoheight_dim}
+		}
+}
 
 \defbeamertemplate*{frametitle}{TUDa~theme.nologo}{%
 	\nointerlineskip%
