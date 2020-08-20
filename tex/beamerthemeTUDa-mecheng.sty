@@ -36,16 +36,18 @@
 }
 
 %adjustments for colortheme
-\setbeamercolor{Primary1}{fg=TUDa-Primary1, bg=TUDa-Primary2}
-\setbeamercolor{Primary2}{fg=TUDa-Primary2, bg=TUDa-Primary1}
+\ExplSyntaxOff
+\setbeamercolor*{Primary1}{fg=TUDa-Primary1, bg=TUDa-Primary2}
+\setbeamercolor*{Primary2}{fg=TUDa-Primary2, bg=TUDa-Primary1}
 
-\setbeamercolor{structure}{fg=black!50}
+\setbeamercolor*{structure}{fg=black!50}
 
-\setbeamercolor{department in head/foot}{parent=palette primary}
-\setbeamercolor{institute in head/foot}{parent=palette primary}
-\setbeamercolor{title in head/foot}{parent=palette primary}
-\setbeamercolor{author in head/foot}{parent=palette primary}
-\setbeamercolor{date in head/foot}{parent=palette primary}
+\setbeamercolor*{department in head/foot}{parent=palette primary}
+\setbeamercolor*{institute in head/foot}{parent=palette primary}
+\setbeamercolor*{title in head/foot}{parent=palette primary}
+\setbeamercolor*{author in head/foot}{parent=palette primary}
+\setbeamercolor*{date in head/foot}{parent=palette primary}
+\ExplSyntaxOn
 
 %innertheme adjustments
 \defbeamertemplate*{title~ page}{TUDa-mecheng}[1][]
