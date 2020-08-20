@@ -5,13 +5,15 @@
 \RequirePackage{l3keys2e}
 
 \ExplSyntaxOn
+\cs_if_exist:NF \g_TUDa_colorframetitle_bool {\bool_new:N \g_TUDa_colorframetitle_bool}
+
 \keys_define:nn {TUDa/beamer/outer} {
 	logo .bool_gset:N = \g_TUDa_headlinelogo_bool,
 	logo .default:n =true,
 	logo .initial:n =true,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-    colorframetitle .bool_gset:N = \g_TUDa_colorframetitle_bool,
+    colorframetitle .code:n = \use:c {bool_gset_#1:N} \g_TUDa_colorframetitle_bool \keys_set:nn  {TUDa/beamer/color} {colorframetitle=#1},
     colorframetitle .initial:n = false,
     colorframetitle .default:n = true,
     centerframetitle .bool_gset:N = \g_TUDa_centerframetitle_bool,
@@ -33,7 +35,6 @@
 	headsepline .bool_gset:N = \g_TUDa_headsepline_bool,
 	headsepline .initial:n = true,
 	headsepline .default:n = true,
-	colorframetitle .meta:nn = {TUDa/beamer/color} {colorframetitle=#1},
 }
 
 \define@key{beamerframe}{bgcolor}{
