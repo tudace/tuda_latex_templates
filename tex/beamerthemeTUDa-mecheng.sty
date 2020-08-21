@@ -57,9 +57,11 @@
 \defbeamertemplate*{title~ page}{TUDa-mecheng}[1][]
 {	
 	\nointerlineskip
-	\vspace{\dimexpr.5\c_TUDa_logoheight_dim-\ht\strutbox}
+	\vspace{\dimexpr.5\c_TUDa_logoheight_dim-\ht\strutbox+
+	\box_dp:N \TUDa@beamer@headrule_box + \box_ht:N \TUDa@beamer@headrule_box 
+	}
 	\hbox_set:Nn \l_TUDa_titlehead_box {
-		\parbox{\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}{%
+		\parbox{\dimexpr\TUDa@beamer@linewidth}{%
 			\begin{beamercolorbox}[
 				wd=\linewidth,
 				]{title}
@@ -110,7 +112,7 @@
 		}
 	}
 	\box_use:N \l_TUDa_titlehead_box
-	\par\skip_vertical:n {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box-.5\c_TUDa_rulesep_dim-\c_TUDa_smallrule_dim}
+	\par\skip_vertical:n {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box}
 	\begin{beamercolorbox}[
 		rightskip=.07\linewidth,%place image left of arrow tip
 		ht=\c_TUDa_smallrule_dim,dp=1mm,
@@ -192,9 +194,9 @@
 	\nointerlineskip%
 	\begin{beamercolorbox}[
 		sep=\TUDa@beamer@logosep,
-		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+		wd=\dimexpr\TUDa@beamer@linewidth\relax,
 		rightskip=-\TUDa@beamer@logosep,
-		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		leftskip=\dimexpr-\TUDa@beamer@logosep\relax,
 		]{frametitle}
 		\hbox_set:Nn \l_TUDa_frametitle_box {
 			\parbox[t]
@@ -220,9 +222,9 @@
 	\nointerlineskip
 	\begin{beamercolorbox}[
 		sep=\TUDa@beamer@logosep,
-		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
+		wd=\dimexpr\TUDa@beamer@linewidth\relax,
 		rightskip=-\TUDa@beamer@logosep,
-		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		leftskip=\dimexpr-\TUDa@beamer@logosep\relax,
 		ht=\c_TUDa_smallrule_dim.
 		dp=0
 		]{smallrule}

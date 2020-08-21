@@ -51,7 +51,7 @@
 	\nointerlineskip
 	\vspace{\dim_eval:n {-\c_TUDa_largerule_dim}}
 	\hbox_set:Nn \l_TUDa_titlehead_box {
-	\parbox{\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}{%
+	\parbox{\dimexpr\paperwidth-2\TUDa@beamer@sep}{%
 	\begin{beamercolorbox}[
 		wd=\linewidth,
 		sep=\TUDa@beamer@logosep,
@@ -77,7 +77,7 @@
 \bool_if:NT \g_TUDa_authorontitle_bool {
 \par\nointerlineskip
 \begin{beamercolorbox}[
-	wd=\linewidth,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+	wd=\dimexpr\paperwidth-2\TUDa@beamer@sep,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
 \end{beamercolorbox}
 \par\nointerlineskip
 	\begin{beamercolorbox}[
@@ -86,7 +86,7 @@
 	]{title}
 	\raggedright
 	\skip_horizontal:n {1ex}
-	\parbox[t]{\dimexpr\linewidth-2ex\relax}{
+	\parbox[t]{\dimexpr\paperwidth-2\TUDa@beamer@sep-2ex\relax}{
 		\ifx\insertauthor\@empty
 		\else
 		\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
@@ -102,17 +102,18 @@
 	}
 	\box_use:N \l_TUDa_titlehead_box
 \nointerlineskip\begin{beamercolorbox}[
-	wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+	wd=\dimexpr\paperwidth-2\TUDa@beamer@sep,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
 	\end{beamercolorbox}
 	\dim_set:Nn \l_TUDa_titlegraphic_ht_dim {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box
 	+\c_TUDa_largerule_dim-.5\c_TUDa_rulesep_dim-\c_TUDa_smallrule_dim}
 	\let\height\l_TUDa_titlegraphic_ht_dim
-	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent}
+	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\dimexpr\paperwidth-2\TUDa@beamer@sep}
 	\let\width\l_TUDa_titlegraphic_wd_dim
 	\nointerlineskip
 	\begin{beamercolorbox}[wd=\width,center]{titlegraphic}
 	\raisebox{-\c_TUDa_largerule_dim}[\dim_eval:n {\height-\c_TUDa_largerule_dim}][0pt]{\inserttitlegraphic}
 	\end{beamercolorbox}
+%	\endgroup
 }
 
 
