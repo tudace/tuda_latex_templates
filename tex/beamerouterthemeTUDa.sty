@@ -3,10 +3,17 @@
  [\filedate\space\fileversion]
 
 \RequirePackage{l3keys2e}
-
-\newlength{\TUDa@beamer@extraindent}
+\RequirePackage[paper=slide]{tudarules}
 
 \ExplSyntaxOn
+
+\newlength{\TUDa@beamer@extraindent}
+\newlength{\TUDa@beamer@sep}
+\setlength{\TUDa@beamer@sep}{.3\c_TUDa_logoheight_dim}%1em}
+\newlength{\TUDa@beamer@logosep}
+\setlength{\TUDa@beamer@logosep}{2mm}
+
+
 \cs_if_exist:NF \g_TUDa_colorframetitle_bool {\bool_new:N \g_TUDa_colorframetitle_bool}
 
 \keys_define:nn {TUDa/beamer/outer} {
@@ -15,13 +22,10 @@
 	logo .initial:n =true,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-    colorframetitle .code:n = 
+    colorframetitle .code:n =  {
 	    \use:c {bool_gset_#1:N} \g_TUDa_colorframetitle_bool
-	    \bool_if:NTF \g_TUDa_colorframetitle_bool
-		    {\setlength{\TUDa@beamer@extraindent}{\TUDa@beamer@logosep}}
-	    	{\setlength{\TUDa@beamer@extraindent}{\z@}}
 		\cs_if_exist_use:N  \__TUDa_setup_frametitle_color:  
-	,
+		},
     colorframetitle .default:n = true,
     centerframetitle .bool_gset:N = \g_TUDa_centerframetitle_bool,
     centerframetitle .initial:n = false,
@@ -74,12 +78,7 @@
 
 
 \RequirePackage{graphicx}
-\RequirePackage[paper=slide]{tudarules}
 
-\newlength{\TUDa@beamer@sep}
-\setlength{\TUDa@beamer@sep}{1em}
-\newlength{\TUDa@beamer@logosep}
-\setlength{\TUDa@beamer@logosep}{2mm}
 
 \ExplSyntaxOn
 \bool_if:NT \g_TUDa_colorframetitle_bool
@@ -182,7 +181,7 @@
 \begin{beamercolorbox}[
   sep=\TUDa@beamer@logosep,
   wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
-  rightskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+  rightskip=\dimexpr-\TUDa@beamer@logosep\relax,
   leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
 	]{frametitle}
 	\hbox_set:Nn \l_TUDa_frametitle_box {
@@ -211,10 +210,7 @@
 \bool_if:NT \g_TUDa_headsepline_bool {
 	\nointerlineskip
 	\begin{beamercolorbox}[
-		sep=\TUDa@beamer@logosep,
-		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
-		rightskip=-\TUDa@beamer@logosep,
-		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		wd=\dimexpr\textwidth+2\TUDa@beamer@extraindent,
 		ht=\c_TUDa_smallrule_dim,
 		dp=0pt
 		]{smallrule}
@@ -276,10 +272,7 @@
 \bool_if:NT \g_TUDa_headsepline_bool {
 	\nointerlineskip
 	\begin{beamercolorbox}[
-		sep=\TUDa@beamer@logosep,
-		wd=\dimexpr\TUDa@beamer@linewidth+2\TUDa@beamer@extraindent\relax,
-		rightskip=-\TUDa@beamer@logosep,
-		leftskip=\dimexpr-\TUDa@beamer@logosep+\TUDa@beamer@extraindent\relax,
+		wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent\relax,
 		ht=\c_TUDa_smallrule_dim,
 		dp=0pt
 		]{smallrule}
