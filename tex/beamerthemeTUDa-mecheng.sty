@@ -40,13 +40,13 @@
 \setbeamercolor*{Primary1}{fg=TUDa-Primary1, bg=TUDa-Primary2}
 \setbeamercolor*{Primary2}{fg=TUDa-Primary2, bg=TUDa-Primary1}
 
-\setbeamercolor*{structure}{fg=black!50}
+\setbeamercolor*{footer info}{fg=black!50}
 
 \setbeamercolor*{department in head/foot}{parent=palette primary}
 \setbeamercolor*{institute in head/foot}{parent=palette primary}
 \setbeamercolor*{title in head/foot}{parent=palette primary}
 \setbeamercolor*{author in head/foot}{parent=palette primary}
-\setbeamercolor*{date in head/foot}{parent=palette primary}
+\setbeamercolor{footline}{use=Primary2,fg=Primary2.fg}
 \ExplSyntaxOn
 
 %innertheme adjustments
@@ -140,7 +140,7 @@
 \logo{
 	\str_set:Nx \l_tmpa_str {\str_range:Nnn \beamer@thc@fg {1} {-4}}
 	\raisebox{-\dp\strutbox}{
-		\file_if_exist:nTF {tuda_maschinenbau_logo_\l_tmpa_str.pdf} {
+		\file_if_exist:nTF {\g_TUDa_departmentlogo_tl-\l_tmpa_str.pdf} {
 			\includegraphics[height=1.7\baselineskip]{\g_TUDa_departmentlogo_tl-\l_tmpa_str}
 		} {
 			\includegraphics[height=1.7\baselineskip]{\g_TUDa_departmentlogo_tl}
@@ -225,12 +225,12 @@
 
 \cs_set:Nn \__TUDa_reset_framebgcolor: {
 	\setbeamercolor{normal~text}{fg=black,bg=}
-	\setbeamercolor{structure}{fg=textaccentcolor}
 	\usebeamercolor[fg]{normal~text}
 	\setbeamercolor{footline}{use=Primary2,fg=Primary2.fg}
-	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__TUDa_save_background_canvas: 
+	\setbeamercolor{footer~info}{fg=black!50}
+	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__TUDa_save_background_canvas:
 	\cs_undefine:N \__TUDa_save_background_canvas:
-	\TUDa_setup_frametitle_color:
+	\__TUDa_setup_frametitle_color:
 }
 
 \cs_set:Nn \__TUDa_set_framebgcolor:n {
