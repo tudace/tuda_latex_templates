@@ -4,14 +4,14 @@
 
 \RequirePackage{l3keys2e}
 \ExplSyntaxOn
-\bool_new:N   \g_TUDa@beamer_colorframetitle_bool
+\bool_if_exist:NF \g_TUDa_colorframetitle_bool {\bool_new:N \g_TUDa_colorframetitle_bool}
 
 \keys_define:nn {TUDa/beamer/color} {
 	colortitle .bool_gset:N = \g_TUDa@beamer_colortitle_bool,
 	colortitle .default:n = true,
 	colortitle .initial:n = true,
 	colorbacktitle .meta:n = {colortitle=#1},
-	colorframetitle .code:n = \use:c {bool_gset_#1:N} \g_TUDa@beamer_colorframetitle_bool \cs_if_exist_use:N  \__TUDa_setup_frametitle_color:,
+	colorframetitle .code:n = \use:c {bool_gset_#1:N} \g_TUDa_colorframetitle_bool \cs_if_exist_use:N  \__TUDa_setup_frametitle_color:,
 	colorframetitle .default:n = true,
 	colorback .meta:n = {colorframetitle=#1}
 }
@@ -35,7 +35,7 @@
 
 
 \cs_new:Nn \__TUDa_setup_frametitle_color: {
-	\bool_if:NTF \g_TUDa@beamer_colorframetitle_bool {
+	\bool_if:NTF \g_TUDa_colorframetitle_bool {
 		\setbeamercolor*{frametitle}{fg=textonaccentcolor,bg=accentcolor}
 	} {
 		\setbeamercolor*{frametitle}{use=normal~text,fg=normal~text.fg,bg=}

@@ -4,6 +4,8 @@
 
 \RequirePackage{l3keys2e}
 
+\newlength{\TUDa@beamer@extraindent}
+
 \ExplSyntaxOn
 \cs_if_exist:NF \g_TUDa_colorframetitle_bool {\bool_new:N \g_TUDa_colorframetitle_bool}
 
@@ -13,8 +15,13 @@
 	logo .initial:n =true,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-    colorframetitle .code:n = \use:c {bool_gset_#1:N} \g_TUDa_colorframetitle_bool \keys_set:nn  {TUDa/beamer/color} {colorframetitle=#1},
-    colorframetitle .initial:n = false,
+    colorframetitle .code:n = 
+	    \use:c {bool_gset_#1:N} \g_TUDa_colorframetitle_bool
+	    \bool_if:NTF \g_TUDa_colorframetitle_bool
+		    {\setlength{\TUDa@beamer@extraindent}{\TUDa@beamer@logosep}}
+	    	{\setlength{\TUDa@beamer@extraindent}{\z@}}
+		\cs_if_exist_use:N  \__TUDa_setup_frametitle_color:  
+	,
     colorframetitle .default:n = true,
     centerframetitle .bool_gset:N = \g_TUDa_centerframetitle_bool,
     centerframetitle .initial:n = false,
@@ -73,9 +80,10 @@
 \setlength{\TUDa@beamer@sep}{1em}
 \newlength{\TUDa@beamer@logosep}
 \setlength{\TUDa@beamer@logosep}{2mm}
-\newlength{\TUDa@beamer@extraindent}
+
 \ExplSyntaxOn
-\bool_if:NT \g_TUDa_colorframetitle_bool {\setlength{\TUDa@beamer@extraindent}{\TUDa@beamer@logosep}}
+\bool_if:NT \g_TUDa_colorframetitle_bool
+	{\setlength{\TUDa@beamer@extraindent}{\TUDa@beamer@logosep}}
 
 \setbeamersize{
   text~margin~left= \dimexpr\TUDa@beamer@sep+\TUDa@beamer@extraindent\relax,
