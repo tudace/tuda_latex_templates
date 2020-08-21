@@ -28,23 +28,33 @@
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
+		\keys_set:nn {TUDa/beamer} {
+			colorframetitle=false,
+			colortitle=false,
+			centerframetitle,
+			headsepline=false
+		}
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/pub}{colorback=false}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
+	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
+	departmentlogofile .initial:n =,
 }
 
 
 \clist_map_inline:nn {colortitle, colorbacktitle, colorback} {
 	\Module@DeclarePassOption[TUDa/beamer]{#1}{beamercolorthemeTUDa}
 }
-\Module@DeclarePassOption[TUDa/beamer]{centerframetitle}{beamerouterthemeTUDa}
+
+\clist_map_inline:nn {centerframetitle, logo, headsepline} {
+		\Module@DeclarePassOption[TUDa/beamer]{#1}{beamerouterthemeTUDa}
+}
 \Module@DeclarePassOption[TUDa/beamer]{authorontitle}{beamerinnerthemeTUDa}
 
 \ExplSyntaxOff
 
-\Module@DeclarePassOption[TUDa/beamer]{logo}{beamerouterthemeTUDa}
+
 
 \PassOptionsToPackage{pdfpagelabels=false,plainpages=false}{hyperref}
 \PassOptionsToClass{t}{beamer}
@@ -80,14 +90,6 @@
 \ExplSyntaxOff
 
 \hypersetup{hidelinks, unicode}
-
-% Load the TUD theme
-\AtEndOfClass{%
-  \usetheme{TUDa}%
-  \@input{\jobname.len}%
-  \@starttoc{len}%
-  \let\accentfont\normalfont%
-}
 
 
 %\department command
@@ -183,6 +185,16 @@
 \msg_new:nnn {tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
 \msg_info:nn {tudapub} {no-pdfa}
 \fi:
+
+\str_if_empty:NF \g_TUDa_department_str {}
+
+% Load the TUDa theme
+\usetheme{TUDa}%
+\@input{\jobname.len}%
+\@starttoc{len}%
+\let\accentfont\normalfont%
+\file_if_exist:nT {beamerthemeTUDa-\g_TUDa_department_str.sty} {\usetheme{TUDa-\g_TUDa_department_str}}
+
 \ExplSyntaxOff
 
 \endinput
