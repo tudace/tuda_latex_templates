@@ -41,12 +41,16 @@
 \setbeamercolor*{Primary2}{fg=TUDa-Primary2, bg=TUDa-Primary1}
 
 \setbeamercolor*{footer info}{fg=black!50}
-
-\setbeamercolor*{department in head/foot}{parent=palette primary}
-\setbeamercolor*{institute in head/foot}{parent=palette primary}
-\setbeamercolor*{title in head/foot}{parent=palette primary}
-\setbeamercolor*{author in head/foot}{parent=palette primary}
+\setbeamercolor*{department in head/foot}{parent=footer info}
+\setbeamercolor*{institute in head/foot}{parent=footer info}
+\setbeamercolor*{title in head/foot}{parent=footer info}
+\setbeamercolor*{author in head/foot}{parent=footer info}
+\setbeamercolor*{date in head/foot}{parent=footer info}
 \setbeamercolor{footline}{use=Primary2,fg=Primary2.fg}
+
+\setbeamercolor*{departmentlogo}{}
+\setbeamercolor*{logo}{}
+
 \ExplSyntaxOn
 
 %innertheme adjustments
@@ -111,8 +115,11 @@
 		rightskip=.07\linewidth,%place image left of arrow tip
 		ht=\c_TUDa_smallrule_dim,dp=1mm,
 		wd=\dimexpr\textwidth]{footline}
-		\includegraphics[width=\dimexpr2\linewidth/11]{\g_TUDa_departmentlogo_tl}\hfill
-		\insertlogo\par\nointerlineskip
+		\setbeamertemplate{departmentlogo}[TUDa-mecheng~theme][width=\dimexpr2\linewidth/11\relax]
+		\insertdepartmentlogo
+		\hfill
+		\insertlogo
+		\par\nointerlineskip
 		\MechEngArrow*{\linewidth}
 	\end{beamercolorbox}
 }
@@ -134,16 +141,15 @@
 	\endgroup
 }
 
+\newcommand*{\insertdepartmentlogo}{\usebeamertemplate*{departmentlogo}}
 
-\setbeamercolor{logo}{parent=normal~text}
-
-\logo{
+\defbeamertemplate*{departmentlogo}{TUDa-mecheng~theme}[1][height=1.7\baselineskip]{
 	\str_set:Nx \l_tmpa_str {\str_range:Nnn \beamer@thc@fg {1} {-4}}
 	\raisebox{-\dp\strutbox}{
 		\file_if_exist:nTF {\g_TUDa_departmentlogo_tl-\l_tmpa_str.pdf} {
-			\includegraphics[height=1.7\baselineskip]{\g_TUDa_departmentlogo_tl-\l_tmpa_str}
+			\includegraphics[#1]{\g_TUDa_departmentlogo_tl-\l_tmpa_str}
 		} {
-			\includegraphics[height=1.7\baselineskip]{\g_TUDa_departmentlogo_tl}
+			\includegraphics[#1]{\g_TUDa_departmentlogo_tl}
 		}
 	}
 }
@@ -157,7 +163,7 @@
 		\MechEngArrow*{\linewidth}
 		\par\skip_vertical:n {.5\TUDa@beamer@logosep}
 		\makebox[\linewidth][s]{
-			\insertlogo
+			\insertdepartmentlogo
 			\hfill
 			\bool_set_false:N \l_TUDa_tmpa_bool
 			\clist_map_variable:nNn {department, institute, author,title} \l_tmpa_tl {
@@ -240,7 +246,7 @@
 	}{
 		\exp_args:Nnx \setbeamercolor{frametitle}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg,bg=}
 		\exp_args:Nnx \setbeamercolor{normal~text}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg,bg=\l_tmpa_tl.bg}
-		\exp_args:Nnx \setbeamercolor{structure}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg}
+		\exp_args:Nnx \setbeamercolor{footer~info}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg}
 		\exp_args:Nnx \setbeamercolor{footline}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg}
 	}{
 		\cs_if_exist:cTF {\string\color@#1}
