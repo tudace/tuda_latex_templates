@@ -68,7 +68,8 @@
 				\raggedright
 				\usebeamerfont{title}
 				\hbox_set:Nn \l_TUDa_frametitle_box {
-					\parbox[c]{\dimexpr\linewidth- \wd\TUDa@logobox\relax}{
+					\parbox[c]{\dimexpr\linewidth- \wd\TUDa@logobox-1em\relax}{
+						\raggedright{}
 						\inserttitle
 						\par
 					}
@@ -84,19 +85,8 @@
 					\usebeamerfont{subtitle}\insertsubtitle
 				}
 				\fi
-			\end{beamercolorbox}
 			\bool_if:NT \g_TUDa_authorontitle_bool {
-				\par\nointerlineskip
-				\begin{beamercolorbox}[
-					wd=\linewidth,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
-				\end{beamercolorbox}
-				\par\nointerlineskip
-				\begin{beamercolorbox}[
-					wd=\linewidth,
-					sep=\c_TUDa_largerule_dim,
-					]{title}
-					\raggedright
-					\skip_horizontal:n {1ex}
+				\par
 					\parbox[t]{\dimexpr\linewidth-2ex\relax}{
 						\ifx\insertauthor\@empty
 						\else
@@ -107,21 +97,36 @@
 						\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute
 						\fi
 					}
-				\end{beamercolorbox}
 			}
+			\end{beamercolorbox}
 		}
 	}
 	\box_use:N \l_TUDa_titlehead_box
-	\par\skip_vertical:n {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box}
+	\par\skip_vertical:n {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box+.5\c_TUDa_smallrule_dim}
 	\begin{beamercolorbox}[
 		rightskip=.07\linewidth,%place image left of arrow tip
-		ht=\c_TUDa_smallrule_dim,dp=1mm,
+		ht=\c_TUDa_smallrule_dim,%dp=1mm,
 		wd=\dimexpr\textwidth]{footline}
 		\setbeamertemplate{departmentlogo}[TUDa-mecheng~theme][width=\dimexpr2\linewidth/11\relax]
 		\insertdepartmentlogo
 		\hfill
+		\bool_if:NF \g_TUDa_authorontitle_bool {
+			\begingroup
+			\usebeamerfont{footline}
+			\bool_set_false:N \l_TUDa_tmpa_bool
+			\clist_map_variable:nNn {department, institute, author,date} \l_tmpa_tl {
+				\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
+					\bool_if:NTF \l_TUDa_tmpa_bool
+						{\space|\space}
+						{\bool_set_true:N \l_TUDa_tmpa_bool}
+					\use:c {insert\l_tmpa_tl}
+				}
+			}
+			\endgroup
+		\quad
+		}
 		\insertlogo
-		\par\nointerlineskip
+		\par\nointerlineskip\skip_vertical:n {2\c_TUDa_smallrule_dim}
 		\MechEngArrow*{\linewidth}
 	\end{beamercolorbox}
 }
@@ -147,13 +152,11 @@
 
 \defbeamertemplate*{departmentlogo}{TUDa-mecheng~theme}[1][height=1.7\baselineskip]{
 	\str_set:Nx \l_tmpa_str {\str_range:Nnn \beamer@thc@fg {1} {-4}}
-	\raisebox{-\dp\strutbox}{
 		\file_if_exist:nTF {\g_TUDa_departmentlogo_tl-\l_tmpa_str.pdf} {
 			\includegraphics[#1]{\g_TUDa_departmentlogo_tl-\l_tmpa_str}
 		} {
 			\includegraphics[#1]{\g_TUDa_departmentlogo_tl}
 		}
-	}
 }
 
 \defbeamertemplate*{footline}{TUDa-mecheng~theme}
