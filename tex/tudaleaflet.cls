@@ -1,5 +1,3 @@
-\def\filedate{2020/02/02}
-\def\fileversion{}
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
 \ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
