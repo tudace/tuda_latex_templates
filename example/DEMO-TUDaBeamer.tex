@@ -123,5 +123,37 @@ Ein Beispiel.
 	\end{verbatim}
 	Allgemein kann jedoch die Mathematikschriftart wie auch sonst durch Pakete angepasst werden.
 \end{frame}
+
+
+\begin{frame}[fragile]{Spezielle Anpassungen des Fachbereichs Maschinenbau}
+	Mit Version 3.0 wird TUDa-CI um die Anpassungen des Corporate Designs des Fachbereichs Maschinenbau ergänzt.
+	Daher verfügt tudabeamer nun ebenfalls über die Option 
+	\begin{verbatim}
+	department=mecheng
+	\end{verbatim}
+	oder kurz 
+	\begin{verbatim}
+	mecheng
+	\end{verbatim}
+	Dieser Modus setzt automatisch alle notwendigen Änderungen, benötigt jedoch die zusätzlichen Logos.
+	
+	Falls das Logo des Fachbereichs nicht vorliegt, kann durch die Option
+	\begin{verbatim}
+	departmentlogo=example-image
+	\end{verbatim} ein Beispielbild statt des Logos verwendet werden.
+\end{frame}
+
+\begin{frame}[fragile]{mecheng: Hintergrundfarbe}
+	Diese Variante des Corporate Designs erlaubt es zusätzlich die Hintergrundfarbe der einzelnen Folien zu verändern. Hierfür wurden die Frames um die Option \code{bgcolor} erweitert. Um in die beiden Voreingestellten Modi zu wechseln, gibt es die Konfiguration
+	\begin{verbatim}
+	bgcolor=Primary1
+	\end{verbatim}
+	oder
+	\begin{verbatim}
+	bgcolor=Primary2
+	\end{verbatim}
+	Damit wird auch die Textfarbe entsprechend der Vorgaben gewählt. Bei Auswahl einer abweichenden Farbe bleibt die Textfarbe unverändert und muss ggf. manuell angepasst werden.
+\end{frame}
+
 \end{document}
 
