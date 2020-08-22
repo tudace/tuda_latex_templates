@@ -30,7 +30,7 @@
 	RGB .code:n = \PassOptionsToPackage{RGB}{xcolor},
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
-	department / mecheng .code:n = \str_gset:Nn \g_TUDa_department_str {mecheng}\keys_set:nn {TUDa/colors}{accent=TUDaPrimary2,identbar=TUDaPrimary1},
+	department / mecheng .code:n = \str_gset:Nn \g_TUDa_department_str {mecheng}\keys_set:nn {TUDa/colors}{accent=TUDa-Primary2,identbar=TUDa-Primary1},
 	department .initial:V = \g_TUDa_department_str,
 	mecheng .meta:n = {department=mecheng},
 }
@@ -42,15 +42,15 @@
 \input{tudacolors.def}
 
 \str_if_eq:VnT \g_TUDa_department_str {mecheng} {
-	\colorlet{TUDaPrimary1}{TUDa-6b}
-	\colorlet{TUDaPrimary2}{TUDa-2d}
-	\colorlet{TUDaSecondary1}{TUDa-9a}
-	\colorlet{TUDaSecondary2}{TUDa-8a}
-	\colorlet{TUDaSecondary3}{TUDa-6a}
-	\colorlet{TUDaSecondary4}{TUDa-3a}
-	\colorlet{TUDaSecondary5}{TUDa-4a}
-	\colorlet{TUDaSecondary6}{TUDa-5a}
-	\colorlet{TUDaArrow}{TUDaPrimary2}
+	\colorlet{TUDa-Primary1}{TUDa-6b}
+	\colorlet{TUDa-Primary2}{TUDa-2d}
+	\colorlet{TUDa-Secondary1}{TUDa-9a}
+	\colorlet{TUDa-Secondary2}{TUDa-8a}
+	\colorlet{TUDa-Secondary3}{TUDa-6a}
+	\colorlet{TUDa-Secondary4}{TUDa-3a}
+	\colorlet{TUDa-Secondary5}{TUDa-4a}
+	\colorlet{TUDa-Secondary6}{TUDa-5a}
+	\colorlet{TUDa-Arrow}{TUDa-Primary2}
 }
 
 \clist_map_inline:nn {accent, textaccent, identbar} {
