@@ -238,10 +238,14 @@
 	\setbeamercolor{footer~info}{fg=black!50}
 	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__TUDa_save_background_canvas:
 	\cs_undefine:N \__TUDa_save_background_canvas:
+	\cs_if_exist:NT \__TUDa_save_department_textaccentcolor:
+		{\cs_set_eq:cN {\string\color@textaccentcolor} \__TUDa_save_department_textaccentcolor:}
+	\cs_undefine:N \__TUDa_save_department_textaccentcolor:
 	\__TUDa_setup_frametitle_color:
 }
 
 \cs_set:Nn \__TUDa_set_framebgcolor:n {
+	
 	\str_case:nnTF {#1} {
 		{Primary1} {\tl_set:Nn \l_tmpa_tl {Primary2}}
 		{Primary2} {\tl_set:Nn \l_tmpa_tl {Primary1}}
@@ -250,6 +254,8 @@
 		\exp_args:Nnx \setbeamercolor{normal~text}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg,bg=\l_tmpa_tl.bg}
 		\exp_args:Nnx \setbeamercolor{footer~info}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg}
 		\exp_args:Nnx \setbeamercolor{footline}{use=\l_tmpa_tl,fg=\l_tmpa_tl.fg}
+		\cs_set_eq:Nc \__TUDa_save_department_textaccentcolor: {\string\color@textaccentcolor}
+		\colorlet{textaccentcolor}{TUDa-\l_tmpa_tl}
 	}{
 		\cs_if_exist:cTF {\string\color@#1}
 		{\setbeamercolor{normal~text}{bg=#1}}
@@ -258,7 +264,7 @@
 	\usebeamercolor[fg]{normal~text}
 }
 
-\setbeamertemplate{headline}[TUDa theme.simple]
+\setbeamertemplate{headline}[TUDa~theme.simple]
 
 %font adjustments
 \setbeamerfont{subtitle}{size=\normalsize,series=\mdseries}
