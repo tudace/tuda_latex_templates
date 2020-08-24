@@ -7,6 +7,7 @@
 
 \str_const:Nn \c__TUDa_base_str {letter}
 \str_new:N  \g_TUDa_department_str
+\bool_new:N \g__TUDa_adjust_textwidth_bool
 
 \keys_define:nn {TUDa/letter} {
 	logo .bool_gset:N = \g_TUDaletter_logo_bool,
@@ -33,6 +34,10 @@
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	textwidth .choice:,
+	textwidth / wide .code:n = \bool_gset_true:N \g__TUDa_adjust_textwidth_bool,
+	textwidth / narrow .code:n = \bool_gset_false:N  \g__TUDa_adjust_textwidth_bool,
+	textwidth .initial:n = wide,
 }
 
 
@@ -71,7 +76,14 @@
 %% Spacing:
 \dim_const:Nn \c_TuDa_HeadMargin_dim {12.5mm}
 \dim_const:Nn \c_TuDa_LeftMargin_dim {24.0mm}
-\dim_const:Nn \c_TuDa_RightMargin_dim  {\c_TuDa_HeadMargin_dim}
+\dim_const:Nn \c_TuDa_firstpage_extraindent_dim {-\paperwidth+120mm +\c_TuDa_LeftMargin_dim  +\c_TuDa_HeadMargin_dim}
+\bool_if:NTF \g__TUDa_adjust_textwidth_bool
+	{
+		\dim_const:Nn \c_TuDa_RightMargin_dim  {\c_TuDa_HeadMargin_dim}
+		
+	}{
+		\dim_const:Nn \c_TuDa_RightMargin_dim  {\c_TuDa_HeadMargin_dim-\c_TuDa_firstpage_extraindent_dim}
+	}
 \dim_const:Nn \c_TuDa_BottomMargin_dim {\c_TuDa_LeftMargin_dim}
 \dim_const:Nn \c_TuDa_Linewidth_dim {\paperwidth-\c_TuDa_LeftMargin_dim-\c_TuDa_RightMargin_dim}
 
@@ -115,13 +127,8 @@
 \@setplength{locvpos}{\dimexpr\useplength{refvpos}+\useplength{subjectaftervskip}+1.4\baselineskip\relax}
 \@setplength{refaftervskip}{0pt}
 \@setplength{subjectbeforevskip}{0pt}
-\@setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_TuDa_RightMargin_dim\relax}
+\@setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_TuDa_HeadMargin_dim\relax}
 \@setplength{locheight}{\dimexpr\paperheight-\useplength{locvpos}-\c_TuDa_BottomMargin_dim\relax}
-
-
-
-\dim_const:Nn \c_TuDa_firstpage_extraindent_dim {-\paperwidth+120mm +\c_TuDa_LeftMargin_dim  +\c_TuDa_RightMargin_dim}
-
 
 \RequirePackage[paper=a4]{tudarules}
 
@@ -260,40 +267,42 @@
 	\@afterheading%
 	\@nobreaktrue
 	\@afterindentfalse
-	\everypar{%
-		\if@nobreak
-			\@nobreakfalse\clubpenalty\@M
-			\if@afterindent
-			\else{\setbox\z@\lastbox}
+	\bool_if:NT \g__TUDa_adjust_textwidth_bool {
+		\everypar{%
+			\if@nobreak
+				\@nobreakfalse\clubpenalty\@M
+				\if@afterindent
+				\else{\setbox\z@\lastbox}
+				\fi
+			\else
+				\clubpenalty \@clubpenalty
 			\fi
-		\else
-			\clubpenalty \@clubpenalty
-		\fi
-		%TODO: ifdum < 2 \baselineskip
-		\ifnum\thepage=1%
-		\TUD@page@free=-\pagegoal%
-		\advance\TUD@page@free\pagetotal%
-		\dim_compare:nTF {-\TUD@page@free>2\baselineskip}
-		{
-			\bool_if:NF \g_TUDaletter_logo_bool {
-				\advance\TUD@page@free-.3\baselineskip
+			%TODO: ifdum < 2 \baselineskip
+			\ifnum\thepage=1%
+			\TUD@page@free=-\pagegoal%
+			\advance\TUD@page@free\pagetotal%
+			\dim_compare:nTF {-\TUD@page@free>2\baselineskip}
+			{
+				\bool_if:NF \g_TUDaletter_logo_bool {
+					\advance\TUD@page@free-.3\baselineskip
+				}
+				\divide\TUD@page@free\baselineskip%
+				\c@TUD@page@free@lines=\TUD@page@free%
+				\int_compare:nT {\value{TUD@page@free@lines}<0} {
+				\hangafter=\value{TUD@page@free@lines}\hangindent=\c_TuDa_firstpage_extraindent_dim%
+				}
+		} {
+			\dim_compare:nT {-\TUD@page@free>\baselineskip} {
+				\hangafter=-2\hangindent=\c_TuDa_firstpage_extraindent_dim%
 			}
-			\divide\TUD@page@free\baselineskip%
-			\c@TUD@page@free@lines=\TUD@page@free%
-			\int_compare:nT {\value{TUD@page@free@lines}<0} {
-			\hangafter=\value{TUD@page@free@lines}\hangindent=\c_TuDa_firstpage_extraindent_dim%
-			}
-	} {
-		\dim_compare:nT {-\TUD@page@free>\baselineskip} {
-			\hangafter=-2\hangindent=\c_TuDa_firstpage_extraindent_dim%
 		}
-	}
-		\fi%
-	}%
-	\global\setlength{\linewidth}{\dim_eval:n {\c_TuDa_Linewidth_dim + \c_TuDa_firstpage_extraindent_dim}}
-	\afterpage{
-		\global\setlength{\linewidth}{\c_TuDa_Linewidth_dim}
-		\widowpenalty=10000
+			\fi%
+		}%
+		\global\setlength{\linewidth}{\dim_eval:n {\c_TuDa_Linewidth_dim + \c_TuDa_firstpage_extraindent_dim}}
+		\afterpage{
+			\global\setlength{\linewidth}{\c_TuDa_Linewidth_dim}
+			\widowpenalty=10000
+		}
 	}
 }
 
