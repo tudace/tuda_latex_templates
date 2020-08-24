@@ -34,6 +34,9 @@
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	headrule .bool_gset:N = \g_TUDa_headrule_bool,
+	headrule .initial:n = true,
+	headrule .default:n = true,
 	textwidth .choice:,
 	textwidth / wide .code:n = \bool_gset_true:N \g__TUDa_adjust_textwidth_bool,
 	textwidth / narrow .code:n = \bool_gset_false:N  \g__TUDa_adjust_textwidth_bool,
@@ -132,8 +135,12 @@
 
 \RequirePackage[paper=a4]{tudarules}
 
-
-\TUDa@makeheadrule[width=\useplength{firstheadwidth}, color=\TUDa@premiumcolor]{TuDa@LetterheadRule}
+\bool_if:NTF \g_TUDa_headrule_bool {
+	\TUDa@makeheadrule[width=\useplength{firstheadwidth},color=identbarcolor]{TuDa@LetterheadRule}
+} {
+	\box_new:N \TuDa@LetterheadRule_box
+	\def\TuDa@LetterheadRule{}
+}
 \TUDa@makefootrule[width=\useplength{firstheadwidth}]{TuDa@LetterfootRule}
 
 
@@ -141,7 +148,8 @@
 \hbox_gset:Nn \g_TUDaLetter_firsthead_box {
 	\parbox{\useplength{firstheadwidth}}{
 	\raggedleft
-	\smash{\TuDa@LetterheadRule}\par
+	\smash{\TuDa@LetterheadRule}
+	\par
 	\vspace{.5\c_TUDa_logoheight_dim}
 	\makebox[2.2\c_TUDa_logoheight_dim][l]{\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}}
 	}
