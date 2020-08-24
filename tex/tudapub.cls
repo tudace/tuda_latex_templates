@@ -660,9 +660,10 @@
 	contents={
 		\tl_if_empty:NTF \g_TUDa_titleimage_code_tl
 		{\bool_if:NT \g_TUDa_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}}
-		{\putUL{\color{identbarcolor}\raisebox{-\height}{\parbox[t]{\textwidth}{
-					\let\width\layerwidth
-					\let\height\layerheight
+		{\putUL{\color{identbarcolor}
+				\let\width\layerwidth
+				\let\height\layerheight\raisebox{-\height}{\parbox[t]{\textwidth}{
+					\leavevmode\ignorespaces
 					\g_TUDa_titleimage_code_tl
 					}}}}
 		\bool_if:NF \g_TUDa_logo@inhead_bool {
