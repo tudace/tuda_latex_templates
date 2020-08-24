@@ -9,7 +9,7 @@
 \Define@specialopt@Module[TUDa/special]
 
 
-
+\str_const:Nn \c__TUDa_base_str {pub}
 \tl_new:N \g_TUDa_pub_class_tl
 \tl_new:N \g_TUDa_thesis_options_tl
 
@@ -17,6 +17,7 @@
 \prop_new:N \g_TUDa_unknown_clsopts_prop
 \prop_gput:Nnn \g_TUDa_clsopts_prop {titlepage} {firstiscover}
 \prop_gput:Nnn \g_TUDa_clsopts_prop {captions} {nooneline}
+\prop_gput:Nnn \g_TUDa_clsopts_prop {DIV} {calc}
 
 \int_new:N \g_TUDa_ruledheaders_int
 \int_new:N \g_TUDa_paper_int
