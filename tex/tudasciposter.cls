@@ -7,7 +7,7 @@
 \prop_new:N \g_TUDa_clsopts_prop
 \tl_new:N \g_TUDa_boxstyle_tl
 \int_new:N \g_TUDa_paper_int
-\g_TUDa_department_str
+\str_new:N \g_TUDa_department_str
 
 \keys_define:nn {TUDa/poster} {
 	accentcolor .code:n = {\PassOptionsToPackage{accent =#1}{tudacolors}},
@@ -43,14 +43,18 @@
 	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
 	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
 	title .initial:n = default,
+	colorback .bool_gset:N = \g_TUDa_colorback_bool,
+	colorback .initial:n = true,
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/pub}{colorback=false}
+		\keys_set:nn {TUDa/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
+	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
+	departmentlogofile .initial:n =,
 }
 
 
@@ -348,8 +352,10 @@
 
 			\node[inner~sep=0pt, anchor=north~west](identbar) at (topleft){\TUDa@posterrule};
 
-			\fill[identbarcolor]
+			\bool_if:NTF \g_TUDa_colorback_bool 
+			\fill \path [identbarcolor]
 			(identbar.south~east)rectangle([yshift=-\g_TUDa_titleblock_dim]identbar.south~west) coordinate(bottomlefttitleblock);
+
 
 			\node[anchor=north~east,inner~sep=0pt,minimum~width=2.5\c_TUDa_logoheight_dim](TUDalogo) at ([xshift=.3\c_TUDa_logoheight_dim,yshift=-.5\c_TUDa_logoheight_dim]identbar.south~east){
 				\includegraphics[height=\c_TUDa_logoheight_dim]{\g_TUDa_logofile_tl}};
@@ -403,7 +409,9 @@
 \colorlet{backgroundcolor}{white}
 \colorlet{framecolor}{white}
 % Title Colors
-\colorlet{titlefgcolor}{textonaccentcolor}
+\bool_if:NTF \g_TUDa_colorback_bool
+	{\colorlet{titlefgcolor}{textonaccentcolor}}
+	{\colorlet{titlefgcolor}{black}}
 \colorlet{titlebgcolor}{accentcolor}
 % Block Colors
 \colorlet{blocktitlebgcolor}{accentcolor}

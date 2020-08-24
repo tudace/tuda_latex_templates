@@ -105,7 +105,9 @@
 }
 
 
-\setkomafont{title}{\color{textonaccentcolor}\expandafter\fontsize\TUDa_title_fontsize:\selectfont}
+\setkomafont{title}{
+	\bool_if:NT \g_TUDa_colorback_bool
+	{\color{textonaccentcolor}}\expandafter\fontsize\TUDa_title_fontsize:\selectfont}
 \setkomafont{subtitle}{\expandafter\fontsize\TUDa_titleinfo_fontsize:\selectfont}
 \newkomafont{titleinfo}{\expandafter\fontsize\TUDa_titleinfo_fontsize:\selectfont}
 
