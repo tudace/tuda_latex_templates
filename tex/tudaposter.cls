@@ -10,6 +10,8 @@
 \int_new:N \g_TUDa_postertype_int
 \str_new:N \g_TUDa_department_str
 
+\str_const:Nn \c__TUDa_base_str {poster}
+
 \keys_define:nn {TUDa/poster} {
 	accentcolor .code:n = {\PassOptionsToPackage{accent=#1}{tudacolors}},
 	color .code:n = {\PassOptionsToPackage{color=#1}{tudacolors}},
@@ -127,8 +129,6 @@
 
 \TUDa@makeheadrule[width=\contentwidth, color=identbarcolor]{TUDa@posterrule}
 
-\TUDa@makefootrule[width=\contentwidth, color=identbarcolor]{TUDa@smallrule}
-
 %%%%%%%%%%%%%%%%%%%%%%
 \int_case:nn {\g_TUDa_postertype_int}
 {
@@ -221,37 +221,31 @@
  	]{TUDa.poster.qrcode}
 
 
-\bool_if:NTF \g_TUDa_poster_foot_bool {
-	\DeclareNewLayer[
-	clone=TUDa.poster.qrcode,
-	align=bl,
-	hoffset=\g_TUDa_margin_dim,
-	width=\paperwidth-2\g_TUDa_margin_dim,
-	height=\g_TUDa_footheight_dim,
-	contents={
-		\putUL{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
-		\put(0,0) {
-			\parbox[b][\g_TUDa_footheight_dim][c]{\layerwidth}{\strut\g_TUDa_poster_foot_tl\strut}}
-		\putLL{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
-	}
-	]{TUDa.poster.footer}
+
+\DeclareNewLayer[
+clone=TUDa.poster.qrcode,
+align=bl,
+hoffset=\g_TUDa_margin_dim,
+width=\paperwidth-2\g_TUDa_margin_dim,
+height=\g_TUDa_footheight_dim,
+contents={
+	\bool_if:NTF \g_TUDa_poster_foot_bool {
+	\putUL{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
+	\put(0,0) {
+		\parbox[b][\g_TUDa_footheight_dim][c]{\layerwidth}{\strut\g_TUDa_poster_foot_tl\strut}}
+	\putLL{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
 }{
-	\DeclareNewLayer[
-		clone=TUDa.poster.qrcode,
-		align=bl,
-		hoffset=\g_TUDa_margin_dim,
-		width=\paperwidth-2\g_TUDa_margin_dim,
-		height=0pt,
-		contents={\smash{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}}
-	]{TUDa.poster.footer}
+	\smash{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
 }
+}
+]{TUDa.poster.footer}
 
 \DeclareNewLayer[
 	background,mode=picture,
 	width=\paperwidth-2\g_TUDa_margin_dim,
 	hoffset=\g_TUDa_margin_dim,
 	voffset=\g_TUDa_margin_dim+\box_ht:N \TUDa@posterrule_box + \box_dp:N \TUDa@posterrule_box,
-	contents={\color{accentcolor}\rule{\layerwidth}{\layerheight}}
+	contents=\bool_if:NT \g_TUDa_colorback_bool {\color{accentcolor}\rule{\layerwidth}{\layerheight}},
 ]{TUDa.poster.background}
 
 \DeclareNewLayer[
@@ -388,9 +382,6 @@
 	\let\@titleinfo\@empty
 }
 
-\global\def\contentwidth{\linewidth}
-\global\def\contentheight{\g_TUDa_titlegraphic_max_height_dim}
-
 
 \def\@titlegraphic{}
 \newcommand{\titlegraphic}[1]{
@@ -508,7 +499,7 @@
 \NewDocumentCommand{\SetMarginpar}{o+m}{
 	\bool_if:NF \g_TUDa_marginpar_bool {\msg_warning:nn {TUDa/Poster} {marginpar-disabled}}
 	\IfNoValueF{#1}{\keys_set:nn {TUDa/poster/marginparopts} {#1}}
-	\ModifyLayer[addvoffset={-\ht\strutbox},contents={\parbox[t][\layerheight][\l_TUDa_marginpar_valign_tl]{\layerwidth}{#2}}]{TUDa.poster.marginpar}
+	\ModifyLayer[addvoffset={-\ht\strutbox},contents={\parbox[t][\layerheight][\l_TUDa_marginpar_valign_tl]{\layerwidth}{#2\strut}}]{TUDa.poster.marginpar}
 	\bool_set_true:N \l_tmpa_bool
 }
 
@@ -519,5 +510,13 @@
 	I'd~suggest~to~switch~the~marginpar~option~to~true.
 	See~the~TUDa-CI~documentation~for~further~information.
 }
+
+\TUDa@makefootrule[width=\contentwidth, color=identbarcolor]{TUDa@smallrule}
+
+\global\def\contentwidth{\linewidth}
+\global\def\contentheight{\g_TUDa_titlegraphic_max_height_dim}
+
+\file_if_exist_input:n {tuda\g_TUDa_department_str.cfg}
+
 
 \endinput
