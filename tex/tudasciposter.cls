@@ -371,38 +371,37 @@
 			\draw[line~ width=.5\c_TUDa_smallrule_dim](author.south-|identbar.west)--++(\contentwidth,0);
 
 
-
-		\bool_if:NT \g_TUDa_poster_foot_bool {
-			\coordinate(lastpos) at (bottomright);
-			\tl_if_empty:NF \g_TUDa_poster_qrcode_tl
-			{
-				\node[anchor=south~east, inner~sep=\z@] (qrcode)at (lastpos)
-				{
-					\exp_args:NnV \use:n {\qrcode[height=\dim_use:N \g_TUDa_footheight_dim]}\g_TUDa_poster_qrcode_tl
-				};
-				\coordinate (lastpos) at (qrcode.south~west);
-			}
-			\box_if_empty:NF \g_TUDa_footergraphics_box {
-				\node[anchor=south~east, inner~sep=\z@] at (lastpos) {
-					\accentfont
-					\box_use:N \g_TUDa_footergraphics_box
-				};
-			}
-			\node[anchor=north~ west, inner~ sep=\z@] (infofooter) at ([yshift=\g_TUDa_footheight_dim]bottomleft) {
-				\parbox{\dim_eval:n {\contentwidth
-						-\box_wd:N \g_TUDa_footergraphics_box
-						\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {-\g_TUDa_footheight_dim-\c_TUDa_rulesep_dim}
-				}}{
-			\rule{\linewidth}{.5\c_TUDa_smallrule_dim}\\
-					\accentfont\small\g_TUDa_poster_foot_tl
-					\par\medskip
-					\let\footnotetext\TUDa@title@footnote
-					\g_TUDa_thanks_tl}
-			};
-
-
-}
+		\bool_if:NT \g_TUDa_poster_foot_bool {\__TUDa_typeset_footer:}
 	}}
+}
+
+\cs_new:Nn \__TUDa_typeset_footer: {
+			\coordinate(lastpos) at (bottomright);
+	\tl_if_empty:NF \g_TUDa_poster_qrcode_tl
+	{
+		\node[anchor=south~east, inner~sep=\z@] (qrcode)at (lastpos)
+		{
+			\exp_args:NnV \use:n {\qrcode[height=\dim_use:N \g_TUDa_footheight_dim]}\g_TUDa_poster_qrcode_tl
+		};
+		\coordinate (lastpos) at (qrcode.south~west);
+	}
+	\box_if_empty:NF \g_TUDa_footergraphics_box {
+		\node[anchor=south~east, inner~sep=\z@] at (lastpos) {
+			\accentfont
+			\box_use:N \g_TUDa_footergraphics_box
+		};
+	}
+	\node[anchor=north~ west, inner~ sep=\z@] (infofooter) at ([yshift=\g_TUDa_footheight_dim]bottomleft) {
+		\parbox{\dim_eval:n {\contentwidth
+				-\box_wd:N \g_TUDa_footergraphics_box
+				\tl_if_empty:NF \g_TUDa_poster_qrcode_tl {-\g_TUDa_footheight_dim-\c_TUDa_rulesep_dim}
+		}}{
+			\rule{\linewidth}{.5\c_TUDa_smallrule_dim}\\
+			\accentfont\small\g_TUDa_poster_foot_tl
+			\par\medskip
+			\let\footnotetext\TUDa@title@footnote
+			\g_TUDa_thanks_tl}
+	};
 }
 
 % Background Colors
