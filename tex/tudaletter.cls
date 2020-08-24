@@ -5,7 +5,10 @@
 
 \RequirePackage{l3keys2e}
 
-\keys_define:nn {TUDaLetter} {
+\str_const:Nn \c__TUDa_base_str {letter}
+\str_new:N  \g_TUDa_department_str
+
+\keys_define:nn {TUDa/letter} {
 	logo .bool_gset:N = \g_TUDaletter_logo_bool,
 	logo .default:n = true,
 	logo .initial:n = true,
@@ -19,10 +22,21 @@
 	pdfa .initial:n = true,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
+		department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = {
+		\str_gset:Nn \g_TUDa_department_str {mecheng}
+		\keys_set:nn {TUDa/letter}{departmentlogofile=tuda_maschinenbau_logo,headrule=false,logo=false}
+		\PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
+	},
+	department .initial:n = default,
+	mecheng .meta:n = {department=mecheng},
+	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
+	departmentlogofile .initial:n =,
 }
 
 
-\ProcessKeysOptions{TUDaLetter}
+\ProcessKeysOptions{TUDa/letter}
 
 \bool_if:NT  \g_TUDa@pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
 
@@ -151,6 +165,9 @@
 	\setparsizes{\z@}{\z@}{\z@ plus 1fil}
 	\par@updaterelative
       \begingroup
+      \int_compare:nT {0 < \@pageat <3} {
+     	 \TUDa@letterpagemark\\[\baselineskip]
+  	  }
 	  \usekomafont{TUDa_frominst}
       \Ifkomavarempty{frominstitution}{}{%
       	{\usekomavar[\raggedright]{frominstitution}}
@@ -463,4 +480,5 @@
 	\let\Ifkomavarempty\ifkomavarempty
 }
 
+\file_if_exist_input:n {tuda\g_TUDa_department_str.cfg}
 \endinput

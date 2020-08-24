@@ -63,6 +63,8 @@
 	title / large .code:n = \bool_gset_false:N \g_TUDa_smalltitle_bool,
 	title / small  .code:n = \bool_gset_true:N \g_TUDa_smalltitle_bool,
 	title .initial:n = default,
+	colorback .bool_gset:N = \g_TUDa_colorback_bool,
+	colorback .initial:n = true,
 	colorsubtitle .bool_gset:N = \g_TUDa_colorsubtitle_bool,
 	colorsubtitle .default:n = true,
 	colorsubtitle .initial:n = false,
@@ -70,12 +72,13 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/pub}{colorback=false}
+		\keys_set:nn {TUDa/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
+	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
+	departmentlogofile .initial:n =,
 }
-
 
 \ProcessKeysOptions{TUDa/poster}
 
