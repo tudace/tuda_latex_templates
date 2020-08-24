@@ -51,8 +51,9 @@
 
 \newcommand*{\@fontsizefilebase}{tudalettersize}
 
-\PassOptionsToClass{fontsize=10pt, refline=nodate, parskip=full-,addrfield=topaligned}{scrlttr2}
-\LoadClass{scrlttr2}
+\PassOptionsToClass{fontsize=10pt,parskip=full-}{scrletter}
+\PassOptionsToPackage{refline=nodate,addrfield=topaligned,firstfoot=false,pagenumber=botright}{scrletter}
+\LoadClass{scrletter}
 
 % Load the TUDa-colorscheme
 \RequirePackage{tudacolors}
@@ -87,17 +88,17 @@
 	}{
 		\dim_const:Nn \c_TuDa_RightMargin_dim  {\c_TuDa_HeadMargin_dim-\c_TuDa_firstpage_extraindent_dim}
 	}
-\dim_const:Nn \c_TuDa_BottomMargin_dim {\c_TuDa_LeftMargin_dim}
+\dim_const:Nn \c_TuDa_BottomMargin_dim {20mm}
 \dim_const:Nn \c_TuDa_Linewidth_dim {\paperwidth-\c_TuDa_LeftMargin_dim-\c_TuDa_RightMargin_dim}
 
-\RequirePackage[heightrounded]{geometry}
+\RequirePackage{geometry}
 
 \geometry{
 	twoside=false,
 	left=\c_TuDa_LeftMargin_dim,
 	right=\c_TuDa_RightMargin_dim,
-	bottom=20mm,
-	footskip=3mm,
+	bottom=\c_TuDa_BottomMargin_dim,
+	footskip=7mm,
 }
 
 \dim_const:Nn \c_TUDa_textwidth_dim {\textwidth}
@@ -174,6 +175,7 @@
 \setkomafont{refname}{}
 \setkomafont{refvalue}{}
 
+\setkomafont{pageheadfoot}{\footnotesize}
 
 \newcommand{\TUD@locfield}{%
 	\usekomafont{TUDa_location}\usekomafont{fromaddress}
@@ -259,7 +261,7 @@
 	\removereffields
 	\@gen@firsthead
 	\@mkboth{\scr@fromname@var}{\scr@subject@var}%
-	\thispagestyle{empty}\noindent
+	\thispagestyle{letter.first}\noindent
 	\Ifkomavarempty{toname}{\setkomavar{toname}{\mbox{}}}{}
 	\@foldmarks\@firstheadfootfield\@addrfield\@locfield
 	\ifdim\useplength{subjectvpos}=\z@\else\@subjfield\fi
@@ -291,9 +293,6 @@
 			\advance\TUD@page@free\pagetotal%
 			\dim_compare:nTF {-\TUD@page@free>2\baselineskip}
 			{
-				\bool_if:NF \g_TUDaletter_logo_bool {
-					\advance\TUD@page@free-.3\baselineskip
-				}
 				\divide\TUD@page@free\baselineskip%
 				\c@TUD@page@free@lines=\TUD@page@free%
 				\int_compare:nT {\value{TUD@page@free@lines}<0} {
@@ -319,7 +318,6 @@
 }
 
 \setkomafont{backaddress}{\accentfont\tiny\TUDa@use@premiumcolor@text\raisebox{\dimexpr-\totalheight+\ht\strutbox\relax}{\rule{\z@}{4mm}}}
-\setkomafont{pagenumber}{\tiny}
 
 \raggedbottom
 
@@ -353,60 +351,52 @@
 	}
 }
 
-\setkomavar{nextfoot}{
-	\parbox{\useplength{firstfootwidth}}{\usekomafont{pagefoot}
-		\raggedleft\TuDa@LetterfootRule\par\TUDa@letterpagemark}
+
+\setkomavar{firstfoot}{\usekomavar{nextfoot}}
+
+\setkomavar{nextfoot}{%
+	\ifnum\@pageat>2
+	\parbox[c]{\layerwidth}{%
+		\ifcase\@pageat\or\or\or\raggedright\or\centering\or\raggedleft\fi
+		\strut\pagemark%
+	}%
+	\fi
 }
 
-\setkomavar{firstfoot}{
-	\usekomavar{nextfoot}
+\let\letterpagemark\TUDa@letterpagemark
+
+
+\bool_if:NT \g_TUDa_headrule_bool {
+	\bool_if:NTF \g_TUDaletter_logo_bool {
+		\setkomavar{nexthead}{\box_use:N \g_TUDaLetter_firsthead_box}
+	}{
+		\setkomavar{nexthead}{\raisebox{\depth}{\TuDa@LetterheadRule}}
+	}
 }
 
-%pagestyle
-\RequirePackage{scrlayer}
-
-\bool_if:NTF \g_TUDaletter_logo_bool {
-	\DeclareNewLayer[
-	background,
-		align=tl,
-		hoffset=\useplength{firstheadhpos},
-		voffset=\useplength{firstheadvpos},
-		width=\box_wd:N \g_TUDaLetter_firsthead_box,
-		height=\box_ht:N \g_TUDaLetter_firsthead_box,
-		contents={\box_use:N \g_TUDaLetter_firsthead_box}
-	]{letter.head}
-}{
-	\DeclareNewLayer[
-	background,
-	align=tl,
-	hoffset=\useplength{firstheadhpos},
-	voffset=\useplength{firstheadvpos},
-	%TODO: replace leiste logo=?
-	width=\box_wd:N \TuDa@LetterheadRule_box,
-	height=\box_ht:N \TuDa@LetterheadRule_box,
-	contents=\TuDa@LetterheadRule
-	]{letter.head}
+\newpairofpagestyles[letter]{TUDaLetter}{
+	\exp_args:Nx \KOMAoptions{
+		footwidth=\dimexpr\paperwidth-2\c_TuDa_HeadMargin_dim \c_colon_str-\dim_eval:n {\c_TuDa_HeadMargin_dim -1mm},
+		headwidth=\dimexpr\paperwidth-2\c_TuDa_HeadMargin_dim \c_colon_str-\dim_eval:n {\c_TuDa_HeadMargin_dim -1mm},
+		footsepline=.5\c_TUDa_smallrule_dim,plainfootsepline
+	}
+	\ModifyLayer[voffset=\c_TuDa_HeadMargin_dim,align=tl]{TUDaLetter.head.even}
+	\ModifyLayer[voffset=\c_TuDa_HeadMargin_dim,align=tl]{TUDaLetter.head.odd}
+	\ModifyLayer[voffset=\c_TuDa_HeadMargin_dim,align=tl]{TUDaLetter.head.oneside}
+	\ModifyLayer[voffset=\c_TuDa_HeadMargin_dim,align=tl]{plain.TUDaLetter.head.even}
+	\ModifyLayer[voffset=\c_TuDa_HeadMargin_dim,align=tl]{plain.TUDaLetter.head.odd}
+	\ModifyLayer[voffset=\c_TuDa_HeadMargin_dim,align=tl]{plain.TUDaLetter.head.oneside}
+	\lehead{\usekomavar{nexthead}}%
+	\lohead{\usekomavar{nexthead}}%
+	\lefoot{\usekomavar{nextfoot}}%
+	\lofoot{\usekomavar{nextfoot}}%
 }
 
-\DeclareNewLayer[
-	background,
-	align=tl,
-	hoffset=\useplength{firstfoothpos},
-	voffset=\useplength{firstfootvpos},
-	width=\useplength{firstfootwidth},
-	height=\baselineskip,
-	contents={\raisebox{\ht\strutbox}{\parbox[t]{\layerwidth}{\usekomavar{nextfoot}}}}
-]{letter.foot}
+\DeclarePageStyleByLayers{TUDaLetter.first}{TUDaLetter.foot.even,TUDaLetter.foot.odd,TUDaLetter.foot.oneside,TUDaLetter.foot.above.line}
+\pagestyle{TUDaLetter}
 
-\RequirePackage{tikz}
-\DeclareNewPageStyleByLayers{TUDaletter}{
-	letter.head, letter.foot.rule, letter.foot
-}
-
-\DeclarePageStyleAlias{letter}{TUDaletter}
-\DeclarePageStyleAlias{plain.letter}{TUDaletter}
-
-\pagestyle{plain.letter}
+\DeclarePageStyleAlias{letter.first}{TUDaLetter.first}
+\def\letterpagestyle{TUDaLetter}
 
 %pdfa
 \if_bool:N \g_TUDa@pdfa_bool
