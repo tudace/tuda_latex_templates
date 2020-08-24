@@ -49,7 +49,7 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo}
+		\keys_set:nn {TUDa/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo,foot=true,accent=2d}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
@@ -554,6 +554,7 @@
 %ADjust caption indent
 \setcapindent{1em}
 
+\file_if_exist_input:n {tuda\g_TUDa_department_str.cfg}
 
 \endinput
 %end of tudasciposter.cls
