@@ -50,12 +50,14 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo,foot=true,accent=2d}
+		\keys_set:nn {TUDa/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo,titlesepline=false}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	titlesepline .bool_gset:N = \g_TUDa_titlesepline_bool,
+	titlesepline .initial:n = true,
 }
 
 
@@ -365,7 +367,8 @@
 
 			\node[anchor=north~west,inner~sep=0pt,]  (title) at ([xshift=3\c_TUDa_rulesep_dim,yshift=-.5\c_TUDa_logoheight_dim]identbar.south~west) {\box_use:N \g_TUDa_title_box};
 
-			\draw[line~ width=.5\c_TUDa_smallrule_dim](bottomlefttitleblock)--++(\contentwidth,0);
+			\bool_if:NT \g_TUDa_titlesepline_bool
+				{\draw[line~ width=.5\c_TUDa_smallrule_dim](bottomlefttitleblock)--++(\contentwidth,0);}
 
 			\node[anchor=north~west, inner~xsep=0pt, inner~ ysep=\c_TUDa_rulesep_dim] (author) at ([xshift=3\c_TUDa_rulesep_dim]bottomlefttitleblock) {\box_use:N \g_TUDa_author_box};
 
