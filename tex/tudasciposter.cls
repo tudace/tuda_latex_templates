@@ -338,10 +338,11 @@
 		right=\g_TUDa_margin_dim,
 		before= {\TUDa@poster_setup_title_box:},
 		top= \dim_eval:n {
-			\g_TUDa_margin_dim
+			\bool_if:NF \g_TUDa_colorback_bool {1.5}
+				\g_TUDa_margin_dim
 			+\box_ht:N \TUDa@posterrule_box
 			+\box_dp:N \TUDa@posterrule_box
-+			\g_TUDa_titleblock_dim
+			+\g_TUDa_titleblock_dim
 			+4\c_TUDa_rulesep_dim
 			+\box_ht:N \g_TUDa_author_box
 			+\box_dp:N \g_TUDa_author_box
@@ -352,6 +353,7 @@
 			\coordinate(bottomleft) at ([xshift=\g_TUDa_margin_dim, yshift=\g_TUDa_margin_dim]current~page.south~ west);
 			\coordinate(bottomright) at ([xshift=-\g_TUDa_margin_dim, yshift=\g_TUDa_margin_dim]current~page.south~ east);
 
+			\dim_gset:Nn \g_TUDa_titleindent_dim {\bool_if:NTF \g_TUDa_colorback_bool {3\c_TUDa_rulesep_dim} {\c_zero_dim}}
 
 			\node[inner~sep=0pt, anchor=north~west](identbar) at (topleft){\TUDa@posterrule};
 
@@ -365,12 +367,13 @@
 
 			\node[inner~sep=0pt,text~width=2.2\c_TUDa_logoheight_dim,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_TUDa_rulesep_dim]TUDalogo.south~west){\box_use:N \g_TUDa_titlegraphic_box};
 
-			\node[anchor=north~west,inner~sep=0pt,]  (title) at ([xshift=3\c_TUDa_rulesep_dim,yshift=-.5\c_TUDa_logoheight_dim]identbar.south~west) {\box_use:N \g_TUDa_title_box};
+			\node[anchor=north~west,inner~sep=0pt,]  (title) at ([
+			xshift=\g_TUDa_titleindent_dim,yshift=-.5\c_TUDa_logoheight_dim]identbar.south~west) {\box_use:N \g_TUDa_title_box};
 
 			\bool_if:NT \g_TUDa_titlesepline_bool
 				{\draw[line~ width=.5\c_TUDa_smallrule_dim](bottomlefttitleblock)--++(\contentwidth,0);}
 
-			\node[anchor=north~west, inner~xsep=0pt, inner~ ysep=\c_TUDa_rulesep_dim] (author) at ([xshift=3\c_TUDa_rulesep_dim]bottomlefttitleblock) {\box_use:N \g_TUDa_author_box};
+			\node[anchor=north~west, inner~xsep=0pt, inner~ ysep=\c_TUDa_rulesep_dim] (author) at ([xshift=\g_TUDa_titleindent_dim]bottomlefttitleblock) {\box_use:N \g_TUDa_author_box};
 
 			\draw[line~ width=.5\c_TUDa_smallrule_dim](author.south-|identbar.west)--++(\contentwidth,0);
 
@@ -428,6 +431,7 @@
 \colorlet{innerblockbodyfgcolor}{black}
 
 \dim_new:N \g_TUDa_titleblock_dim
+\dim_new:N \g_TUDa_titleindent_dim
 
 \cs_new:Nn \TUDa@poster_setup_title_box: {
 	\hbox_gset:Nn \g_TUDa_title_box {
