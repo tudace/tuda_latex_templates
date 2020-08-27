@@ -14,7 +14,7 @@
 	accentcolor .code:n = {\PassOptionsToPackage{accent =#1}{tudacolors}},
 	color .meta:n = {accentcolor = #1},
 	textaccentcolor .code:n = {\PassOptionsToPackage{textaccent =#1}{tudacolors}},
-	identbarcolor .code:n = {\PassOptionsToPackage{indentbar =#1}{tudacolors}},
+	identbarcolor .code:n = {\PassOptionsToPackage{identbar =#1}{tudacolors}},
 	titletext .code:n = {\PassOptionsToPackage{text =#1}{tudacolors}},
 	footer .bool_gset:N = \g_TUDa_poster_foot_bool,
 	footer .default:n = true,
