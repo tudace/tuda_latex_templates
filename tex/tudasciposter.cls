@@ -8,6 +8,7 @@
 \tl_new:N \g_TUDa_boxstyle_tl
 \int_new:N \g_TUDa_paper_int
 \str_new:N \g_TUDa_department_str
+\str_const:Nn \c__TUDa_base_str {sciposter}
 
 \keys_define:nn {TUDa/poster} {
 	accentcolor .code:n = {\PassOptionsToPackage{accent =#1}{tudacolors}},
