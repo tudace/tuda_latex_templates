@@ -10,6 +10,8 @@
 	\str_gset:Nn \g_TUDa_department_str {default}
 }
 
+\bool_new:N \g_TUDa_simple_rules_bool
+
 \seq_if_exist:NF \l_TUDa_tmpa_seq {\seq_new:N \l_TUDa_tmpa_seq}
 \tl_if_exist:NF \l_TUDa_tmpa_tk {\tl_new:N \l_TUDa_tmpa_tl}
 
@@ -67,6 +69,11 @@
 	mode / TikZ  .code:n = \bool_gset_true:N \g_TUDa_rule_TikZmode_bool,
 }
 
+
+\str_case:Vn \g_TUDa_department_str {
+	{mecheng} {\bool_gset_true:N \g_TUDa_simple_rules_bool}
+}
+
 \NewDocumentCommand{\TUDa@makeheadrule}{som}{
 	\keys_set:nn {TUDa/rules} {
 		%TODO maybe package options for default
@@ -77,39 +84,50 @@
 		color=  \g_TUDarules_default_color_tl
 	}
 	\IfNoValueF {#2} {\keys_set:nn {TUDa/rules}{#2}}
-	\box_if_exist:cF {#3_box} {\box_new:c {#3_box}}
-	\bool_if:NTF \g_TUDa_rule_TikZmode_bool {
-		\hbox_gset:cn {#3_box} {
-			\begin{tikzpicture}
-				\fill[\l_TUDa_headrule_color_tl](0,\c_TUDa_rulesep_dim)rectangle++(\l_TUDa_headrule_width_dim,\c_TUDa_largerule_dim);
-				\fill(0,0)rectangle(\l_TUDa_headrule_width_dim,-\c_TUDa_smallrule_dim);
-			\end{tikzpicture}
-		}
+	\IfBooleanF {#1} {\box_if_exist:cF {#3_box} {\box_new:c {#3_box}}}
+	\bool_if:NTF \g_TUDa_simple_rules_bool {
+		\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
+			{#3_box} 
+			{
+				\color{\l_TUDa_headrule_color_tl}
+				\smash{\rule{\l_TUDa_headrule_width_dim}{.5\c_TUDa_largerule_dim}}	
+			}
 	}{
-		\hbox_gset:cn {#3_box} {
-			\parbox[t]{\l_TUDa_headrule_width_dim}{
-				\setlength{\baselineskip}{\z@}
-				\null\par\nointerlineskip
-				\textcolor{\l_TUDa_headrule_color_tl}{\rule{\linewidth}{\c_TUDa_largerule_dim}}
-				\vspace{\c_TUDa_rulesep_dim}\par\nointerlineskip
-				\rule{\linewidth}{\c_TUDa_smallrule_dim}
+		\bool_if:NTF \g_TUDa_rule_TikZmode_bool {
+			\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
+				{#3_box} {
+				\begin{tikzpicture}
+					\fill[\l_TUDa_headrule_color_tl](0,\c_TUDa_rulesep_dim)rectangle++(\l_TUDa_headrule_width_dim,\c_TUDa_largerule_dim);
+					\fill(0,0)rectangle(\l_TUDa_headrule_width_dim,-\c_TUDa_smallrule_dim);
+				\end{tikzpicture}
+			}
+		}{
+			\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
+			{#3_box} 
+			{
+				\parbox[t]{\l_TUDa_headrule_width_dim}{
+					\setlength{\baselineskip}{\z@}
+					\null\par\nointerlineskip
+					\textcolor{\l_TUDa_headrule_color_tl}{\rule{\linewidth}{\c_TUDa_largerule_dim}}
+					\vspace{\c_TUDa_rulesep_dim}\par\nointerlineskip
+					\rule{\linewidth}{\c_TUDa_smallrule_dim}
+				}
 			}
 		}
 	}
-	\IfBooleanTF {#1}
-		\cs_set:cpn \cs_new:cpn {#3} {\box_use:c {#3_box}}
+	\IfBooleanF {#1} {\cs_set:cpn {#3} {\box_use:c {#3_box}}}
 }
 
-\NewDocumentCommand{\TUDa@makefootrule}{om}{
+\NewDocumentCommand{\TUDa@makefootrule}{som}{
 	\keys_set:nn {TUDa/rules} {
 		width= \textwidth
 	}
-	\IfNoValueF {#1} {\keys_set:nn {TUDa/rules}{#1}}
-	\box_new:c {#2_box}
-	\hbox_gset:cn {#2_box} {
+	\IfNoValueF {#2} {\keys_set:nn {TUDa/rules}{#2}}
+	\IfBooleanF {#1} {\box_new:c {#3_box}}
+    \IfBooleanTF {#1} \use_none:n \hbox_gset:cn {#3_box} {
 		\raisebox{-\height}{\rule{\l_TUDa_headrule_width_dim}{.5\c_TUDa_smallrule_dim}}
 	}
-	\cs_new:cpn {#2} {\box_use:c {#2_box}}
+	\IfBooleanF{#1} {\cs_new:cpn {#3} {\box_use:c {#3_box}}}
 }
 
 
