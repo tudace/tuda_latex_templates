@@ -129,6 +129,9 @@
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	BCORtitlepage .bool_gset:N = \g_TUDa_BCOR_titlepage_bool,
+	BCORtitlepage .initial:n = false,
+	BCORtitlepage .default:n = true,
 }
 %
 %%special option handling grouped values
@@ -337,7 +340,10 @@
 		}  {
 			\tl_const:Nn \c_TUDa_default_geometry_tl {TUDa@nomarginpar}
 		}
-		\AtBeginDocument{\loadgeometry{\c_TUDa_default_geometry_tl}}
+		\AtBeginDocument{
+			\loadgeometry{\c_TUDa_default_geometry_tl}
+			\bool_if:NT \g_TUDa_BCOR_titlepage_bool {\xdef\coverpageleftmargin{\the\dimexpr\coverpageleftmargin+\the\ta@bcor}}
+		}
 	}
 
 	\dim_gset:Nn \g_TUDa_headwidth_dim 			  {\paperwidth-\g_TUDa_innerMargin_dim-\g_TUDa_outerMargin_dim-\Gm@bindingoffset}
