@@ -27,7 +27,7 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/letter}{departmentlogofile=tuda_maschinenbau_logo,headrule=false,logo=false}
+		\keys_set:nn {TUDa/letter}{departmentlogofile=tuda_maschinenbau_logo,headrule=false,logo=false,textwidth=narrow}
 		\PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
 	},
 	department .initial:n = default,
