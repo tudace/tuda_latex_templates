@@ -1007,19 +1007,23 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\let\titlepage@restore\relax
 	\def\thefootnote{\fnsymbol{footnote}}
 	\next@tdpage
-		\ifx\@extratitle\@empty
-			\ifx\@frontispiece\@empty\else \mbox{}\fi
-		\else
-		\@makeextratitle
-		\fi
-		\ifx\@frontispiece\@empty
-		\ifx\@extratitle\@empty\else\next@tdpage\fi
-		\else
-		\next@tpage
-		\@makefrontispiece
-		\next@tdpage
-		\fi
+	\ifx\@extratitle\@empty
+		\ifx\@frontispiece\@empty\else \mbox{}\fi
+	\else
+	\@makeextratitle
+	\fi
+	\ifx\@frontispiece\@empty
+	\ifx\@extratitle\@empty\else\next@tdpage\fi
+	\else
+	\next@tpage
+	\@makefrontispiece
+	\next@tdpage
+	\fi
+	\if@twocolumn
+	\twocolumn[\@maketitle]
+	\else
 	\@maketitle
+	\fi
 	\ifx\titlepagestyle\@empty\else\thispagestyle{\titlepagestyle}\fi
 	\@thanks\global\let\@thanks\@empty
 	\endgroup
