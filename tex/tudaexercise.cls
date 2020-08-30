@@ -5,6 +5,7 @@
 
 \RequirePackage{l3keys2e}
 
+\str_const:Nn \c__TUDa_base_str {exercise}
 \tl_new:N \g_TUDa_thesis_options_tl
 
 \prop_new:N \g_TUDa_clsopts_prop
@@ -163,10 +164,12 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/pub}{colorback=false}
+		\keys_set:nn {TUDa/pub}{colorback=false,departmentlogofile=tuda_maschinenbau_logo,identbarcolor=Primary1}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
+	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
+	departmentlogofile .initial:n =,
 }
 
 
@@ -393,7 +396,7 @@
 	}
 }
 
-\newpairofpagestyles{TUDa.ex}{
+\newpairofpagestyles{TUDa.exercise}{
 	\KOMAoptions{plainfootsepline}
 		\KOMAoptions {
 			headwidth=text,
@@ -409,18 +412,21 @@
 	align=tl,
 	voffset=\g_TUDa_topMargin_dim,
 	contents=\raisebox{\depth}{\box_use:N \TUDa@headline_box},
-	]{plain.TUDa.ex.head.above.line}
+		]{plain.TUDa.exercise.head.above.line}
 	\ModifyLayer[
 	background,
 	height=\box_dp:N \TUDa@headline_box,
 	align=tl,
 	voffset=\g_TUDa_topMargin_dim,
 	contents=\raisebox{\depth}{\box_use:N \TUDa@headline_box},
-	]{TUDa.ex.head.above.line}
+		]{TUDa.exercise.head.above.line}
 	\ofoot[\pagemark]{\pagemark}
 }
 
-\pagestyle{TUDa.ex}
+\DeclarePageStyleAlias{TUDa}{TUDa.exercise}
+\DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.exercise}
+\renewcommand{\titlepagestyle}{plain.TUDa}
+
 
 %Titelseite
 \tl_new:N  \g_TUDa_titleimage_code_tl
@@ -430,7 +436,7 @@
 \box_new:N  \g_TUDa_title_box
 \skip_new:N \g_TUDa_title_fill_skip
 
-\renewcommand{\titlepagestyle}{plain.TUDa.ex}
+
 
 
 \seq_new:N \g_TUDa_author_seq
@@ -480,7 +486,7 @@
 \textsuperscript{\@fnsymbol{#1}}#2
 }
 
-\renewcommand*{\titlepagestyle}{plain.TUDa.ex}
+\renewcommand*{\titlepagestyle}{plain.TUDa.exercise}
 
 \renewcommand*{\@maketitle}{%
   \global\@topnum=\z@
@@ -760,6 +766,8 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
   \cs_set_eq:NN \thetask \thesubsection
   \cs_set_eq:NN \thesubtask \thesubsection
 }
+
+\file_if_exist_input:n {tuda\g_TUDa_department_str.cfg}
 
 \endinput
 %End of class tudaexercise.cls

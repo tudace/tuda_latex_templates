@@ -3,6 +3,9 @@
 \ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
 
 \RequirePackage{l3keys2e}
+
+\str_const:Nn \c__TUDa_base_str {leaflet}
+
 \tl_new:N \g_TUDa_sponsor_pos_tl
 \keys_define:nn {TUDa/leaflet} {
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
@@ -22,6 +25,16 @@
 	colorbacksubtitle .default:n = true,
 	sponsor .choices:nn = {title,lastfoot,manual}{\tl_gset_eq:NN \g_TUDa_sponsor_pos_tl \l_keys_choice_tl},
 	sponsor .initial:n = title,
+	department .choice:,
+	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
+	department / mecheng .code:n = {
+		\str_gset:Nn \g_TUDa_department_str {mecheng}
+		\keys_set:nn {TUDa/leaflet} {colorback=false, departmentlogofile=tuda_maschinenbau_logo}
+	},
+	department .initial:n = default,
+	mecheng .meta:n = {department=mecheng},
+	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
+	departmentlogofile .initial:n =,
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{leaflet}}
@@ -50,9 +63,7 @@
 \setlength{\footheight}{2mm}
 \setmargins{10mm}{\dimexpr10mm+\headheight\relax}{10mm}{10mm}%Hardcoded, according to the guideline
 
-\TUDa@makeheadrule[color=identbarcolor]{TUDa_headrule}
-\box_new:N \TUDa_footrule_box
-\hbox_gset:Nn \TUDa_footrule_box {\rule{\textwidth}{.5\c_TUDa_smallrule_dim}}
+
 
 \dim_new:N \g_TUDa_titlerule_dim
 \dim_gset:Nn \g_TUDa_titlerule_dim {.5\c_TUDa_smallrule_dim}
@@ -403,5 +414,10 @@ contents={
 	}
 }
 }
+
+\file_if_exist_input:n {tuda\g_TUDa_department_str.cfg}
+
+\TUDa@makeheadrule[color=identbarcolor]{TUDa_headrule}
+\TUDa@makefootrule{TUDa_footrule}
 
 \endinput
