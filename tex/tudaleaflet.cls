@@ -63,11 +63,6 @@
 \setlength{\footheight}{2mm}
 \setmargins{10mm}{\dimexpr10mm+\headheight\relax}{10mm}{10mm}%Hardcoded, according to the guideline
 
-
-
-\dim_new:N \g_TUDa_titlerule_dim
-\dim_gset:Nn \g_TUDa_titlerule_dim {.5\c_TUDa_smallrule_dim}
-
 \DeclareNewLayer[
 	head,
 	mode=picture,

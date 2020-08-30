@@ -232,12 +232,12 @@ width=\paperwidth-2\g_TUDa_margin_dim,
 height=\g_TUDa_footheight_dim,
 contents={
 	\bool_if:NTF \g_TUDa_poster_foot_bool {
-	\putUL{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
+	\putUL{\rule{\layerwidth}{\g_TUDa_titlerule_dim}}
 	\put(0,0) {
 		\parbox[b][\g_TUDa_footheight_dim][c]{\layerwidth}{\strut\g_TUDa_poster_foot_tl\strut}}
-	\putLL{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
+	\putLL{\rule{\layerwidth}{\g_TUDa_titlerule_dim}}
 }{
-	\smash{\rule{\layerwidth}{.5\c_TUDa_smallrule_dim}}
+	\smash{\rule{\layerwidth}{\g_TUDa_titlerule_dim}}
 }
 }
 ]{TUDa.poster.footer}
@@ -313,7 +313,9 @@ contents={
 		}
 	\par\nointerlineskip
 	\exp_args:Nf \tl_if_empty:nF {\@subtitle\@titleinfo} {
-			\bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}\TUDa@smallrule\par
+			\bool_if:NT \g_TUDa_indenttext_bool {\hspace*{-\g_TUDa_titleindent_dim}}
+			\rule{\linewidth}{\g_TUDa_titlerule_dim}
+			\par
 			\nointerlineskip
 			\vspace{\c_TUDa_rulesep_dim}
 			\bool_if:NTF \g_TUDa_indenttext_bool {\begingroup}{\begin{addmargin}{\g_TUDa_titleindent_dim }}
@@ -328,7 +330,7 @@ contents={
 		}
 		}
 		\nointerlineskip
-		 \TUDa@smallrule
+		\rule{\linewidth}{\g_TUDa_titlerule_dim}
 		}
 	}
 	\endgroup
@@ -512,8 +514,6 @@ contents={
 	I'd~suggest~to~switch~the~marginpar~option~to~true.
 	See~the~TUDa-CI~documentation~for~further~information.
 }
-
-\TUDa@makefootrule[width=\contentwidth, color=identbarcolor]{TUDa@smallrule}
 
 \global\def\contentwidth{\linewidth}
 \global\def\contentheight{\g_TUDa_titlegraphic_max_height_dim}

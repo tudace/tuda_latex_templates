@@ -11,6 +11,7 @@
 }
 
 \bool_new:N \g_TUDa_simple_rules_bool
+\dim_new:N \g_TUDa_titlerule_dim
 
 \seq_if_exist:NF \l_TUDa_tmpa_seq {\seq_new:N \l_TUDa_tmpa_seq}
 \tl_if_exist:NF \l_TUDa_tmpa_tk {\tl_new:N \l_TUDa_tmpa_tl}
@@ -25,6 +26,7 @@
 		\dim_if_exist:cF {\l_TUDa_tmpa_tl} {\dim_new:c {\l_TUDa_tmpa_tl}}
 		\dim_gset:cn {\l_TUDa_tmpa_tl} {\seq_item:Nn \l_TUDa_tmpa_seq {##1}}
 	}
+	\dim_gset:Nn \g_TUDa_titlerule_dim {.5\c_TUDa_smallrule_dim}
 }
 
 \keys_define:nn {TUDa/rules} {
@@ -125,19 +127,9 @@
 	\IfNoValueF {#2} {\keys_set:nn {TUDa/rules}{#2}}
 	\IfBooleanF {#1} {\box_new:c {#3_box}}
     \IfBooleanTF {#1} \use_none:n \hbox_gset:cn {#3_box} {
-		\raisebox{-\height}{\rule{\l_TUDa_headrule_width_dim}{.5\c_TUDa_smallrule_dim}}
+		\raisebox{-\height}{\rule{\l_TUDa_headrule_width_dim}{\g_TUDa_titlerule_dim}}
 	}
 	\IfBooleanF{#1} {\cs_new:cpn {#3} {\box_use:c {#3_box}}}
 }
 
-
-%DL | 3.5mm | 1.4mm | 1.2pt | 17  mm | 0.6pt| 10mm | 14mm |
-%A6 | 3  mm | 1.4mm | 1.2pt | 16.5mm | 0.6pt| 10mm | 15mm |
-%A5 | 3.3mm | 1.4mm | 1.2pt | 19  mm | 0.6pt| 12mm | 16mm |
-%A4 | 4  mm | 1.4mm | 1.2pt | 22  mm | 0.6pt| 15mm | 20mm |
-%A3 | 4.5mm | 1.4mm | 1.2pt | 24.5mm | 0.6pt| 15mm | 20mm |
-%A2 | 8  mm | 2.5mm | 2.2pt | 44.5mm | 1.1pt| 30mm | 35mm |
-%A1 | 10 mm | 3.0mm | 2.8pt | 55.5mm | 1.4pt| 30mm | 35mm |
-%A0 | 16 mm | 5.2mm | 4.8pt | 80  mm | 2.4pt| 30mm | 35mm |
-%punched a4 =  inner, bottom=20mm top outer =15mm
 \endinput

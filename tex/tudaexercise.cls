@@ -300,11 +300,6 @@
 
 \setkomafont{disposition}{\sffamily\bfseries}
 
-
-
-\dim_new:N \g_TUDa_titlerule_dim
-\dim_gset:Nn \g_TUDa_titlerule_dim {.5\c_TUDa_smallrule_dim}
-
 \cs_new:Nn \TUDa_titlerule_sep: {\the\dp\strutbox}
 
 \RequirePackage{tudacolors}
