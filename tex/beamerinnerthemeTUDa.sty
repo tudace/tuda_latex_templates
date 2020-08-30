@@ -1,6 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerinnerthemeTUDa}
- [\filedate\space\fileversion]
+\ProvidesExplPackage{beamerinnerthemeTUDa}{\filedate}{\fileversion}{}
 
 \RequirePackage{l3keys2e}
 
@@ -9,7 +8,6 @@
 \RequirePackage{trimclip}
 
 
-\ExplSyntaxOn
 \keys_define:nn {TUDa/beamer/inner} {
 	authorontitle .bool_gset:N = \g_TUDa_authorontitle_bool,
 	authorontitle .initial:n = false,
@@ -117,84 +115,83 @@
 }
 
 
-\ExplSyntaxOff
 % Blocks
 
 
-\defbeamertemplate*{block begin}{TUDa}
+\defbeamertemplate*{block~begin}{TUDa}
 {
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[ wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent,sep=.5pt,
-		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi]{block title}
+		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi]{block~title}
 	\ifx\insertblocktitle\@empty
 	\else
 	\begin{beamercolorbox}[colsep=.75ex,
-		 wd=\dimexpr\linewidth-1pt\relax]{block title}
+		 wd=\dimexpr\linewidth-1pt\relax]{block~title}
 		\usebeamerfont*{block title}\insertblocktitle%
 	\end{beamercolorbox}%
-	\ifbeamercolorempty[bg]{block title}
+	\ifbeamercolorempty[bg]{block~title}
 	{}
-	{\ifbeamercolorempty[bg]{block body}{}{\par\nointerlineskip\vskip-0.5pt}}%
+	{\ifbeamercolorempty[bg]{block~body}{}{\par\nointerlineskip\vskip-0.5pt}}%
 	\leavevmode
 	\fi
-	\begin{beamercolorbox}[colsep=.75ex,vmode, wd=\dimexpr\linewidth-1pt\relax]{block body}%
-		\usebeamerfont{block body}%
-		\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+	\begin{beamercolorbox}[colsep=.75ex,vmode, wd=\dimexpr\linewidth-1pt\relax]{block~body}%
+		\usebeamerfont{block~body}%
+		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
 	}
 
-\defbeamertemplate*{block end}{TUDa}
+\defbeamertemplate*{block~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 
-\defbeamertemplate*{block alerted begin}{TUDa}
+\defbeamertemplate*{block~alerted~begin}{TUDa}
 {
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
 		wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent,
 		sep=1.5pt,
 		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi,
-	]{block frame alerted}
+	]{block~frame~alerted}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block title alerted}
-		\usebeamerfont*{block title alerted}\insertblocktitle%
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~title~alerted}
+		\usebeamerfont*{block~title~alerted}\insertblocktitle%
 	\end{beamercolorbox}%
 	\vskip1.5pt\par\nointerlineskip
 	\fi
 	\leavevmode
-	\usebeamerfont{block body alerted}%
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block body alerted}%
+	\usebeamerfont{block~body~alerted}%
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~body~alerted}%
 	}
 
-\defbeamertemplate*{block alerted end}{TUDa}
+\defbeamertemplate*{block~alerted~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 
 
-\defbeamertemplate*{block example begin}{TUDa}
+\defbeamertemplate*{block~example~begin}{TUDa}
 {
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
 		wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent,
 		sep=1.5pt,
 		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi,
-		]{block frame example}
+		]{block~frame~example}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block title example}
-		\usebeamerfont*{block title example}\insertblocktitle%
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~title~example}
+		\usebeamerfont*{block~title~example}\insertblocktitle%
 	\end{beamercolorbox}%
 \vskip1.5pt\par\nointerlineskip
 	\fi
 	\leavevmode
-	\usebeamerfont{block body example}%
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block body example}%
+	\usebeamerfont{block~body~example}%
+	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~body~example}%
 	}
-\defbeamertemplate*{block example end}{TUDa}
+\defbeamertemplate*{block~example~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 
 %Itemize Items
-\defbeamertemplate*{itemize item}{TUDa}{\usebeamerfont*{itemize item}\raise\dimexpr.4\ht\strutbox-.4ex\hbox{\rule{.8ex}{.8ex}}}
-\defbeamertemplate*{itemize subitem}{TUDa}{\usebeamerfont*{itemize item}\setlength{\fboxsep}{\z@}\setlength{\fboxrule}{1pt}\raise\dimexpr.4\ht\strutbox-.2ex-\fboxrule\hbox{\fbox{\color{bg}\rule{.4ex}{.4ex}}}}
-\defbeamertemplate*{itemize subsubitem}{TUDa}{\usebeamerfont*{itemize subitem}\hbox{--}}
+\defbeamertemplate*{itemize~item}{TUDa}{\usebeamerfont*{itemize~item}\raise\dimexpr.4\ht\strutbox-.4ex\hbox{\rule{.8ex}{.8ex}}}
+\defbeamertemplate*{itemize~subitem}{TUDa}{\usebeamerfont*{itemize~item}\setlength{\fboxsep}{\z@}\setlength{\fboxrule}{1pt}\raise\dimexpr.4\ht\strutbox-.2ex-\fboxrule\hbox{\fbox{\color{bg}\rule{.4ex}{.4ex}}}}
+\defbeamertemplate*{itemize~subsubitem}{TUDa}{\usebeamerfont*{itemize~subitem}\hbox{--}}
 
 \mode<all>
 
