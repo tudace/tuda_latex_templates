@@ -419,7 +419,7 @@
 	\ohead{\headmark}
 }
 
-\newpairofpagestyles{TUDa.base}{
+\newpairofpagestyles{TUDa.pub}{
 	\KOMAoptions{plainfootsepline}
 
 	\bool_if:NTF \g_TUDa_marginpar_bool
@@ -435,30 +435,30 @@
 			}
 		}
 
-\setkomafont{pagehead}{\Large\bfseries}
+	\setkomafont{pagehead}{\Large\bfseries}
 	\RedeclareLayer[
 		clone=scrheadings.head.above.line,
 		background,
 		contents={
 			\dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
-				\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
+				\TUDa@makeheadrule[color=identbarcolor, width=\layerwidth]{TUDa@headline}
 			}
 			\smash{\TUDa@headline}
 		}
-	]{TUDa.base.head.above.line}
+	]{TUDa.pub.head.above.line}
 	\RedeclareLayer[
 		clone=plain.scrheadings.head.above.line,
 		background,
 		contents={
 			\dim_compare:nF {\box_wd:N \TUDa@headline_box=\layerwidth} {
-				\TUDa@makeheadrule*[color=identbarcolor, width=\layerwidth]{TUDa@headline}
+				\TUDa@makeheadrule[color=identbarcolor, width=\layerwidth]{TUDa@headline}
 			}
 			\smash{\TUDa@headline}
 		}
-	]{plain.TUDa.base.head.above.line}
+	]{plain.TUDa.pub.head.above.line}
 	\bool_if:NT \g_TUDa_headline_bool {
 		\clist_map_variable:nNn {oneside, even, odd} \l_tmpa_tl {
-			\ModifyLayer[pretocontents={\rule[-6pt]{0pt}{\layerheight}}]{TUDa.base.head.\l_tmpa_tl}
+			\ModifyLayer[pretocontents={\rule[-6pt]{0pt}{\layerheight}}]{TUDa.pub.head.\l_tmpa_tl}
 		}
 		\lehead{\headmark}
 		\lohead{\headmark}
@@ -466,8 +466,10 @@
 	\ofoot[\pagemark]{\pagemark}
 }
 
-\DeclarePageStyleAlias{TUDa}{TUDa.base}
-\DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.base}
+\DeclarePageStyleAlias{TUDa}{TUDa.pub}
+\DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.pub}
+\pagestyle{TUDa}
+\renewcommand{\titlepagestyle}{plain.TUDa}
 
 \cs_new:Nn \TUDa_sls@leftmargin: {%
 	\dimexpr
@@ -486,7 +488,7 @@
 	+1in\relax
 }
 
-\pagestyle{TUDa}
+
 
 %Titelseite
 \tl_new:N  \g_TUDa_titleimage_code_tl
@@ -496,7 +498,7 @@
 \box_new:N  \g_TUDa_title_box
 \skip_new:N \g_TUDa_title_fill_skip
 
-\renewcommand{\titlepagestyle}{TUDa}
+
 
 
 \seq_new:N \g_TUDa_author_seq
@@ -683,7 +685,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 ]{title.TUDa.background}
 
 \DeclareNewLayer[
-	clone=plain.TUDa.base.head.above.line,
+	clone=plain.TUDa.pub.head.above.line,
 	hoffset=\coverpageleftmargin,
 	width=\paperwidth-\coverpageleftmargin-\coverpagerightmargin,
 ]{title.TUDa.rule}
