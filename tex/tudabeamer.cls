@@ -87,8 +87,6 @@
 	\PassOptionsToPackage{a-2b}{pdfx}
 	\RequirePackage{pdfx}
 }
-\ExplSyntaxOff
-
 \hypersetup{hidelinks, unicode}
 
 
@@ -112,9 +110,6 @@
 		\beamer@insertshort{\beamer@shortdepartment}%
 }}
 %end of \department command
-%
-
-\ExplSyntaxOn
 \if_bool:N \g_TUDa@pdfa_bool
 \iow_new:N \TUDa@xmpdata_stream
 \iow_open:Nn \TUDa@xmpdata_stream {\jobname.xmpdata}
