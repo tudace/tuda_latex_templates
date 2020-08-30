@@ -495,15 +495,11 @@
     }}
   \par
   \nointerlineskip
-  \raisebox{\dim_eval:n {
-      -.5\c_TUDa_logoheight_dim
-    }}[0pt][\dim_eval:n {\bool_if:NTF \g_TUDa_smalltitle_bool {.25} {.5}\c_TUDa_logoheight_dim}]{
-    \bool_if:NT \g_TUDa_colorback_bool {\color{accentcolor}\rule{\linewidth}{.5\c_TUDa_logoheight_dim}}
- }
-  \par\nointerlineskip
   \begingroup
   \setlength{\fboxsep}{\z@}
   \bool_if:NT \g_TUDa_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\linewidth}{
+	\rule{\linewidth}{\bool_if:NTF \g_TUDa_smalltitle_bool {.25} {.5}\c_TUDa_logoheight_dim}
+	\par\nointerlineskip
       \raisebox{-\height}{%
         \begin{minipage}[t]{\dimexpr\linewidth-2.2\c_TUDa_logoheight_dim-1ex}
           \bool_if:NT \g_TUDa_colorback_bool  {\begin{addmargin}{3mm}}

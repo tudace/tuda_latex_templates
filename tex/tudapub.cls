@@ -1061,14 +1061,9 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\begingroup
 	\usekomafont{disposition}
 	\hsize=\g_TUDa_headwidth_dim
-	\raisebox{\dim_eval:n {
-			-.5\c_TUDa_logoheight_dim
-	}}[0pt][.5\c_TUDa_logoheight_dim]{
-		\bool_if:NT \g_TUDa_colorback_bool {\color{accentcolor}\rule{\g_TUDa_headwidth_dim}{.5\c_TUDa_logoheight_dim}}
-	}
-	\par\nointerlineskip
 	\setlength{\fboxsep}{\z@}
 	\bool_if:NT \g_TUDa_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\g_TUDa_headwidth_dim}{
+			\rule{\z@}{.5\c_TUDa_logoheight_dim}\par\nointerlineskip
 			\raisebox{-\height}{%
 				\begin{minipage}[t]{\dimexpr\linewidth-2.2\c_TUDa_logoheight_dim-1ex}
 					\bool_if:NT \g_TUDa_colorback_bool  {\begin{addmargin}{.5\c_TUDa_largerule_dim}}
