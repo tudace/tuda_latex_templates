@@ -27,7 +27,7 @@ Derzeit existieren diese Templates nur in Deutscher Sprache.
 Die Richtlinien des Corporate Designs (https://www.intern.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf), sowie die Anforderungen der Universitätsbibliothek erfordern einige spezielle Konfigurationen. Beispielsweise ist für wissenschaftliche Veröffentlichungen und Abschlussarbeiten die Erzeugung einer archivierbaren PDF-Datei (PDF/A) vorgesehen.
 Dies ist mit aktuellen LaTeX-Paketen und dem Compiler LuaLaTeX deutlich konsequenter umzusetzen.
 Aus diesem Grund wird empfohlen, die verwendete Distribution vorab zu aktualisieren und LuaLaTeX zu verwenden.
-Weitere Hinweise finden sich in den Beispieldateien dokumentiert.
+Weitere Hinweise finden sich in den Beispieldateien dokumentiert. Diese sind auch als kompilierte PDFs unter https://ctan.org/pkg/tuda-ci oder – falls das Paket installiert ist – im ensprechenden Doku-Verzeichnis (<Pfad zu Ihrer LaTeX-Installation>/doc/latex/tuda-ci) verfügbar.
 
 ## Abhängigkeiten
 Das Bundle verwendet Pakete der Standard-LaTeX-Distributionen. Bei der Verwendung von paketierten Versionen über die Linux-Paketverwaltung kann dies ggf. zu Schwierigkeiten führen.

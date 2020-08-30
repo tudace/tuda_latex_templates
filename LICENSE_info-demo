@@ -24,6 +24,10 @@
 %% https://github.com/tudace/tuda_latex_templates
 %% Please use the issue tracker for feedback!
 %%
+%% If you need a compiled version of this document, have a look at
+%% https://ctan.org/pkg/tuda-ci
+%% or at the documentation directory of this package (if installed)
+%% <path to your LaTeX distribution>/doc/latex/tuda-ci
 %% ============================================================================
 %%
 % !TeX program = lualatex
