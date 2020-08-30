@@ -603,7 +603,7 @@
 \newcommand*{\term}[1]{\tl_gset:Nn \g_TUDa_ex_term_tl {#1}}
 \term{}
 
-\TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@title_headline}
+\TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@headline}
 
 %Logos
 \RequirePackage{graphicx}
