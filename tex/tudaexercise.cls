@@ -67,8 +67,12 @@
 	paper .initial:n = a4,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-	compatibility .meta:nn = {TUDa/exercise}{compat=#1},
+	compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
+	compat .initial:n = false,
+	compatilibity .meta:n = {compat=#1},
 	compatibility .default:n = true,
+	credit .tl_set:N = \l_TUDa_ex_credit_tl,
+	credit .initial:n =,
 	headontitle .bool_gset:N = \g_TUDa_headontitle_bool,
 	headontitle .initial:n = false,
 	headontitle .default:n =true,
@@ -93,6 +97,11 @@
 	match-task-subtask-syntax .bool_gset:N = \g_TUDa_match_task_subtask_bool,
 	match-task-subtask-syntax .initial:n = false, 
 	match-task-subtask-syntax .default:n = true,
+	solution .code:n = {
+		\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
+		\TUDa_setup_solution:
+	},
+	solution .default:n = true,
 	unknown .code:n = {\prop_gput:NVn \g_TUDa_unknown_clsopts_prop \l_keys_key_tl {#1}},
 }
 
@@ -126,6 +135,15 @@
 
 
 \bool_new:N \l_TUDa_ex_subtask_fallback_bool
+
+\keys_define:nn {TUDa/task}{
+	points .int_set:N = \l_TUDa_ex_points_int,
+	points .initial:n = 0,
+	credit .tl_set:N = \l_TUDa_ex_credit_tl,
+	credit .initial:n =,
+	solution .meta:nn ={TUDa/exercise}{solution=#1},
+}
+
 \keys_define:nn {TUDa/subtask} {
 	credit .tl_set:N = \l_TUDa_ex_credit_tl,
 	credit .initial:n =,
@@ -134,23 +152,6 @@
 	title .tl_set:N = \l_TUDa_ex_title_tl,
 	title .initial:n =,
 	unknown .code:n = \bool_set_true:N \l_TUDa_ex_subtask_fallback_bool \tl_clear:N \l_TUDa_ex_credit_tl \int_zero:N \l_TUDa_ex_points_int,
-}
-
-\keys_define:nn {TUDa/exercise} {
-	solution .code:n = {
-		\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
-		\TUDa_setup_solution:
-	},
-	solution .initial:n = false,
-	solution .default:n = true,
-	compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
-	compatilibity .meta:n = {compat=#1},
-	compatibility .default:n = true,
-	compat .initial:n = false,
-	credit .tl_set:N = \l_TUDa_ex_credit_tl,
-	credit .initial:n =,
-	points .int_set:N = \l_TUDa_ex_points_int,
-	points .initial:n = 0,
 }
 
 \keys_define:nn {TUDa/exercise/headline} {
@@ -329,17 +330,16 @@
 
 
 \bool_if:NT \g_TUDa_ex_compatibility_bool {
-
-\cs_new:Npn \TUDa_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_TUDa_ex_headline_oneside_tl {#1} }
-
-\NewEnviron{examheader}{
-  \tl_gset:No \g_TUDa_ex_headline_oneside_tl {\BODY}
-  \tl_gset:No \g_TUDa_ex_headline_odd_tl {\BODY}
-  \tl_gset:No \g_TUDa_ex_headline_even_tl {\BODY}
-  \TUDa_ConfigureHeadline:n {}
-}
-
-  \newcommand*{\examheaderdefault}{\par\StudentName\StudentID}
+	\cs_new:Npn \TUDa_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_TUDa_ex_headline_oneside_tl {#1} }
+	
+	\NewEnviron{examheader}{
+	  \tl_gset:No \g_TUDa_ex_headline_oneside_tl {\BODY}
+	  \tl_gset:No \g_TUDa_ex_headline_odd_tl {\BODY}
+	  \tl_gset:No \g_TUDa_ex_headline_even_tl {\BODY}
+	  \TUDa_ConfigureHeadline:n {}
+	}
+	
+	  \newcommand*{\examheaderdefault}{\par\StudentName\StudentID}
 }
 
 
@@ -664,7 +664,7 @@
 
 \NewDocumentEnvironment{task}{om}{
 	\begingroup
-	\IfNoValueF{#1}{\keys_set:nn {TUDa/exercise}{#1}}
+	\IfNoValueF{#1}{\keys_set:nn {TUDa/task}{#1}}
 	\@task{#2}
 	\endgroup
 }{}
