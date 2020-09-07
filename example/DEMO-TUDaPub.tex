@@ -146,6 +146,25 @@ Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \
 \addTitleBoxLogo*{\includegraphics[width=\linewidth]{example-image}}
 \end{verbatim}
 
+\minisec{Sponsorenlogos}
+Ab Version 3.0 steht in TUDaPub auch der Sponsorenmechanismus der TUDaLeaflet-Klasse zur verfügung. Damit ist es Möglich Sponsorenlogos unterhalb des Titelbildes zu platzieren.
+
+Sponsorenlogos werden üblicherweise über
+\begin{verbatim}
+	\AddSponsor{<logo1>}
+	\AddSponsor{<log2>}
+\end{verbatim}
+übergeben. Innerhalb des Arguments ist \verb+\height+ so gesetzt. Somit werden im Beispiel alle Logos auf die gleiche Höhe gesetzt. Der Abstand dazwischen wird entsprechend aufgefüllt, sodass der gesamte Block immer links und rechts mit dem Text abschließt.
+
+Die zweite Variante ermöglicht die Platzierung mit manueller vertikaler Ausrichtung, wie es bei Logos mit unterschiedlicher Höhe notwendig sein könnte. Hierbei werden lediglich die Abstände und Trennlinien um die Logos ergänzt:
+
+\begin{verbatim}
+	\sponsors{
+		<logo1><logo2>
+	}
+\end{verbatim}
+
+
 \minisec{Optionen für die Titelseite}
 Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/body}.
 \begin{description}
