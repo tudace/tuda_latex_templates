@@ -498,7 +498,7 @@
   \begingroup
   \setlength{\fboxsep}{\z@}
   \bool_if:NT \g_TUDa_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\linewidth}{
-	\rule{\linewidth}{\bool_if:NTF \g_TUDa_smalltitle_bool {.25} {.5}\c_TUDa_logoheight_dim}
+	\rule{0pt}{\bool_if:NTF \g_TUDa_smalltitle_bool {.25} {.5}\c_TUDa_logoheight_dim}
 	\par\nointerlineskip
       \raisebox{-\height}{%
         \begin{minipage}[t]{\dimexpr\linewidth-2.2\c_TUDa_logoheight_dim-1ex}
@@ -593,8 +593,6 @@
 \tl_new:N \g_TUDa_ex_term_tl
 \newcommand*{\term}[1]{\tl_gset:Nn \g_TUDa_ex_term_tl {#1}}
 \term{}
-
-\TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@headline}
 
 %Logos
 \RequirePackage{graphicx}
@@ -759,6 +757,8 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 }
 
 \file_if_exist_input:n {tuda\g_TUDa_department_str.cfg}
+
+\TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@headline}
 
 \endinput
 %End of class tudaexercise.cls
