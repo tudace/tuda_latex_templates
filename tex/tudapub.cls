@@ -469,7 +469,7 @@
 \DeclarePageStyleAlias{TUDa}{TUDa.pub}
 \DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.pub}
 \pagestyle{TUDa}
-\renewcommand{\titlepagestyle}{plain.TUDa}
+\renewcommand{\titlepagestyle}{title.TUDa}
 
 \cs_new:Nn \TUDa_sls@leftmargin: {%
 	\dimexpr
@@ -543,28 +543,25 @@
 
 	\dim_set:Nn \l_tmpa_dim {
 		\box_ht:N \TUDa@headline_box+\box_dp:N \TUDa@headline_box-\g_TUDa_titlerule_dim
-		+\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim+\g_TUDa_title_fill_skip+
-		\box_dp:N \g_TUDa_title_box
+		+\box_ht:N \g_TUDa_title_box+.5\c_TUDa_logoheight_dim+\g_TUDa_title_fill_skip+\box_dp:N \g_TUDa_title_box
 	}
 
 	\ModifyLayer[
 		addvoffset=\l_tmpa_dim,
 		addheight=-\l_tmpa_dim
+		-\box_dp:N \g_TUDa_sponsor_box
+		+\c_TUDa_rulesep_dim
 	]{title.TUDa.image}
 
 	\bool_if:NT \g_TUDa_logo@inhead_bool {
 		\ModifyLayer[
 		addvoffset=\dim_eval:n {\box_ht:N \TUDa@headline_box+\box_dp:N \TUDa@headline_box-\g_TUDa_titlerule_dim},
-		height={\box_ht:N \g_TUDa_title_box+ \g_TUDa_title_fill_skip+.5\c_TUDa_logoheight_dim}
+		height={\box_ht:N \g_TUDa_title_box+ \g_TUDa_title_fill_skip+.5\c_TUDa_logoheight_dim
+	}
 		]{title.TUDa.background}
 
 		\AddLayersToPageStyle{title.TUDa}{title.TUDa.background}
 	}
-
-
-
-	\thispagestyle{title.TUDa}
-
 	\vspace*{\dim_eval:n {
 		-\topskip
 		-\g_TUDa_titlerule_dim
@@ -573,7 +570,7 @@
 		+.5\c_TUDa_logoheight_dim
 	}}
 	\nointerlineskip
-	\TUDa_Setup_Title_box:
+	\TUDa_setup_title_box:
 
 	\bool_if:NT \g_TUDa_logo@inhead_bool {
 		\dim_compare:nT {\box_ht:N \g_TUDa_title_info_box+ \box_dp:N \g_TUDa_title_info_box  > \box_ht:N \g_TUDa_title_box}
@@ -665,7 +662,8 @@
 		{\bool_if:NT \g_TUDa_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}}
 		{\putUL{\color{identbarcolor}
 				\let\width\layerwidth
-				\let\height\layerheight\raisebox{-\height}{\parbox[t]{\textwidth}{
+				\let\height\layerheight
+				\raisebox{-\height}{\parbox[t]{\textwidth}{
 					\leavevmode\ignorespaces
 					\g_TUDa_titleimage_code_tl
 					}}}}
@@ -676,7 +674,6 @@
 				\rlap{\box_use:N \g_TUDa_title_info_box}
 			}
 		}
-		\put(0,0){\rule{\linewidth}{\g_TUDa_titlerule_dim}}
 	}
 ]{title.TUDa.image}
 
@@ -694,11 +691,32 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 
 \TUDa@makeheadrule[color=identbarcolor, width=\textwidth]{TUDa@title_headline}
 
-\cs_new:Nn \TUDa_Setup_Title_box: {
+\cs_new:Nn \TUDa_setup_title_box: {
 	\hbox_gset:Nn \g_TUDa_title_info_box
 	{
 		\parbox{\dimexpr2.5\c_TUDa_logoheight_dim}{
 		\seq_use:Nn \g_TUDa_title_info_seq  {\par\nointerlineskip\vspace{\dim_eval:n {\c_TUDa_largerule_dim+\c_TUDa_rulesep_dim}}}
+		}
+	}
+}
+
+\cs_new:Nn \TUDa_setup_sponsor_box: {
+	\bool_if:nF {\seq_if_empty_p:N \g_TUDa_sponsors_seq &&  \tl_if_empty_p:N \@sponsors} {
+		\hbox_gset:Nn \g_TUDa_sponsor_box {
+			\def\height{\dimexpr.8\c_TUDa_logoheight_dim\relax}
+			\parbox[t]{\textwidth}{
+				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par\nointerlineskip
+				\addvspace{\c_TUDa_rulesep_dim}
+				\seq_use:Nn \g_TUDa_sponsors_seq {\hfill}
+				\ifhmode\par\fi
+				\ifx\@sponsors\@empty
+				\else
+					\addvspace{.1\c_TUDa_logoheight_dim}
+					\@sponsors\par
+				\fi
+				\par\nointerlineskip\addvspace{\c_TUDa_rulesep_dim}
+				\rule{\linewidth}{\g_TUDa_titlerule_dim}
+			}
 		}
 	}
 }
@@ -843,6 +861,11 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \textsuperscript{\@fnsymbol{#1}}#2
 }
 
+\box_new:N  \g_TUDa_sponsor_box
+\seq_new:N \g_TUDa_sponsors_seq
+\def\AddSponsor{\seq_gput_right:Nn \g_TUDa_sponsors_seq}
+\def\sponsors#1{\def\@sponsors{#1}}
+\sponsors{}
 % The following macro is an adapted version of the corresponding KOMA-Script macro
 % Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
 \renewcommand*{\maketitle}[1][1]{
@@ -885,6 +908,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		\let\titlepage@restore\relax
 		\fi
 		\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+		\TUDa_setup_sponsor_box:
 		\hbox_gset:Nn \g_TUDa_title_box {
 			\parbox[t]{\linewidth}{
 				\begin{minipage}[b]{\bool_if:NT \g_TUDa_logo@inhead_bool {.75}\linewidth}
@@ -935,15 +959,18 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 					\let\@thanks\@empty
 				}
 				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par}
-
 		}
-
 		\TUDa_adjust_titlepage_style:
-
+		\ifx\titlepagestyle\@empty\else\thispagestyle{\titlepagestyle}\fi
 
 		\nointerlineskip\box_use:N \g_TUDa_title_box
 		\par
-		\vfill\null
+		\vfill
+		\box_if_empty:NTF \g_TUDa_sponsor_box {
+				\raisebox{-\c_TUDa_rulesep_dim}[0pt][0pt]{\rule{\linewidth}{\g_TUDa_titlerule_dim}}
+		}{
+			\box_use:N \g_TUDa_sponsor_box
+		}
 		\if@twoside
 		\@tempswatrue
 		\expandafter\ifnum \@nameuse{scr@v@3.12}>\scr@compatibility\relax
@@ -1029,8 +1056,6 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\endgroup
 	\fi
 }
-
-
 }
 
 \newkomafont{paperid}{\sffamily}
@@ -1082,7 +1107,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		}
 		\hfill
 		\raisebox{-\height}{
-		\TUDa_Setup_Title_box:
+		\TUDa_setup_title_box:
 		\makebox[2.2\c_TUDa_logoheight_dim][l]{
 		\box_use:N \g_TUDa_title_info_box
 		}
