@@ -6,8 +6,6 @@
 \RequirePackage{l3keys2e}
 
 \str_const:Nn \c__TUDa_base_str {exercise}
-\tl_new:N \g_TUDa_thesis_options_tl
-
 \prop_new:N \g_TUDa_clsopts_prop
 \prop_new:N \g_TUDa_unknown_clsopts_prop
 \prop_gput:Nnn \g_TUDa_clsopts_prop {captions} {nooneline}
@@ -16,6 +14,13 @@
 \int_new:N \g_TUDa_ruledheaders_int
 \int_new:N \g_TUDa_paper_int
 
+\bool_new:N \g_TUDa_geometry_bool
+\bool_new:N \g_TUDa_custommargins_bool
+\bool_new:N \l_TUDa_ex_solution_bool
+
+\bool_new:N \g_TUDa_smalltitle_bool
+\str_new:N \g_TUDa_department_str
+
 %Message Declaration for option processing
 \msg_new:nnn {TUDaExercise} {titlepage-option-disabled} {
 	You~set~the~titlepage~option~to~#1.\\
@@ -23,89 +28,7 @@
 	The~KOMA-Script~option~titlepage~is~forced~to~"false".
 }
 
-\bool_new:N \g_TUDa_geometry_bool
-\bool_new:N \g_TUDa_custommargins_bool
-\bool_new:N \l_TUDa_ex_solution_bool
-
-\RequirePackage{environ}
-
-\def\solution{\TUDa_ex_solutionheader:}
-\def\endsolution{}
-
-\cs_new:Nn \TUDa_setup_solution: {
-	\bool_if:NTF \l_TUDa_ex_solution_bool {
-		\def\solution{\TUDa_ex_solutionheader:}
-		\def\endsolution{}
-	}{
-		\RenewEnviron{solution}{
-			\if_false:
-			\BODY
-			\fi:
-		}
-	}
-}
-
-
-\bool_new:N \l_TUDa_ex_subtask_fallback_bool
-\keys_define:nn {TUDa/subtask} {
-  credit .tl_set:N = \l_TUDa_ex_credit_tl,
-  credit .initial:n =,
-  points .int_set:N = \l_TUDa_ex_points_int,
-  points .initial:n = 0,
-  title .tl_set:N = \l_TUDa_ex_title_tl,
-  title .initial:n =,
-  unknown .code:n = \bool_set_true:N \l_TUDa_ex_subtask_fallback_bool \tl_clear:N \l_TUDa_ex_credit_tl \int_zero:N \l_TUDa_ex_points_int,
-}
-
 \keys_define:nn {TUDa/exercise} {
-	solution .code:n = {
-		\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
-		\TUDa_setup_solution:
-	},
-	solution .initial:n = false,
-	solution .default:n = true,
-	compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
-	compatilibity .meta:n = {compat=#1},
-	compatibility .default:n = true,
-	compat .initial:n = false,
-	credit .tl_set:N = \l_TUDa_ex_credit_tl,
-	credit .initial:n =,
-	points .int_set:N = \l_TUDa_ex_points_int,
-	points .initial:n = 0,
-}
-
-\keys_define:nn {TUDa/exercise/headline} {
-  headline .code:n = {
-    \if@twoside
-    \keys_set:nn  {TUDa/exercise/headline} {odd=#1,even=#1}
-    \else
-    \keys_set:nn {TUDa/exercise/headline} {oneside=#1}
-    \fi
-  },
-}
-
-\clist_map_inline:nn {odd, even, oneside} {
-  \tl_new:c {g_TUDa_ex_headline_#1_tl}
-  \keys_define:nn {TUDa/exercise/headline} {
-    #1 .choice:,
-    #1 / title-name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
-      \g_TUDa_shorttitle_tl\par
-      \StudentName\StudentID},
-    #1 / title-name .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
-      \g_TUDa_shorttitle_tl\par
-      \smallskip
-      \StudentName},
-    #1 / title .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\g_TUDa_shorttitle_tl},
-    #1 / name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\StudentName\StudentID},
-    #1 / name .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\StudentName},
-    #1 / unknown .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {##1}
-  }
-}
-
-\bool_new:N \g_TUDa_smalltitle_bool
-\str_new:N \g_TUDa_department_str
-
-\keys_define:nn {TUDa/pub} {
 	color .code:n = {\PassOptionsToPackage{color=#1}{tudacolors}},
 	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
 	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
@@ -129,7 +52,6 @@
 	custommargins .default:n = true,
 	fontsize .code:n = \prop_gput:Nnn \g_TUDa_clsopts_prop {fontsize} {#1},
 	fontsize .initial:n = {10pt},
-	unknown .code:n = {\prop_gput:NVn \g_TUDa_unknown_clsopts_prop \l_keys_key_tl {#1}},
 	BCOR .code:n = \PassOptionsToPackage{bindingoffset=#1}{geometry},
 	bindingoffset .meta:n = {BCOR=#1},
 	captions .code:n = {\prop_gput:Nnx \g_TUDa_clsopts_prop {captions} {
@@ -145,8 +67,6 @@
 	paper .initial:n = a4,
 	logofile .tl_gset:N = \g_TUDa_logofile_tl,
 	logofile .initial:n = tuda_logo,
-	solution .meta:nn = {TUDa/exercise}{solution=#1},
-	compat .meta:nn = {TUDa/exercise}{compat=#1},
 	compatibility .meta:nn = {TUDa/exercise}{compat=#1},
 	compatibility .default:n = true,
 	headontitle .bool_gset:N = \g_TUDa_headontitle_bool,
@@ -164,16 +84,16 @@
 	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
 	department / mecheng .code:n = {
 		\str_gset:Nn \g_TUDa_department_str {mecheng}
-		\keys_set:nn {TUDa/pub}{colorback=false,departmentlogofile=tuda_maschinenbau_logo,identbarcolor=Primary1}
+		\keys_set:nn {TUDa/exercise}{colorback=false,departmentlogofile=tuda_maschinenbau_logo,color=Primary1}
 	},
 	department .initial:n = default,
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	unknown .code:n = {\prop_gput:NVn \g_TUDa_unknown_clsopts_prop \l_keys_key_tl {#1}},
 }
 
-
-\ProcessKeysOptions{TUDa/pub}
+\ProcessKeysOptions{TUDa/exercise}
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
 	\tl_if_empty:nTF {#2}
@@ -181,6 +101,81 @@
 		{
 		\clist_map_inline:nn {#2} {\PassOptionsToClass  {#1=##1} {scrartcl}}
 		}
+}
+
+\RequirePackage{environ}
+
+\def\solution{\TUDa_ex_solutionheader:}
+\def\endsolution{}
+
+\cs_new:Nn \TUDa_setup_solution: {
+	\bool_if:NTF \l_TUDa_ex_solution_bool {
+		\def\solution{\TUDa_ex_solutionheader:}
+		\def\endsolution{}
+	}{
+		\RenewEnviron{solution}{
+			\if_false:
+			\BODY
+			\fi:
+		}
+	}
+}
+
+
+\bool_new:N \l_TUDa_ex_subtask_fallback_bool
+\keys_define:nn {TUDa/subtask} {
+	credit .tl_set:N = \l_TUDa_ex_credit_tl,
+	credit .initial:n =,
+	points .int_set:N = \l_TUDa_ex_points_int,
+	points .initial:n = 0,
+	title .tl_set:N = \l_TUDa_ex_title_tl,
+	title .initial:n =,
+	unknown .code:n = \bool_set_true:N \l_TUDa_ex_subtask_fallback_bool \tl_clear:N \l_TUDa_ex_credit_tl \int_zero:N \l_TUDa_ex_points_int,
+}
+
+\keys_define:nn {TUDa/exercise} {
+	solution .code:n = {
+		\bool_set_eq:Nc \l_TUDa_ex_solution_bool {c_#1_bool}
+		\TUDa_setup_solution:
+	},
+	solution .initial:n = false,
+	solution .default:n = true,
+	compat .bool_gset:N = \g_TUDa_ex_compatibility_bool,
+	compatilibity .meta:n = {compat=#1},
+	compatibility .default:n = true,
+	compat .initial:n = false,
+	credit .tl_set:N = \l_TUDa_ex_credit_tl,
+	credit .initial:n =,
+	points .int_set:N = \l_TUDa_ex_points_int,
+	points .initial:n = 0,
+}
+
+\keys_define:nn {TUDa/exercise/headline} {
+	headline .code:n = {
+		\if@twoside
+		\keys_set:nn  {TUDa/exercise/headline} {odd=#1,even=#1}
+		\else
+		\keys_set:nn {TUDa/exercise/headline} {oneside=#1}
+		\fi
+	},
+}
+
+\clist_map_inline:nn {odd, even, oneside} {
+	\tl_new:c {g_TUDa_ex_headline_#1_tl}
+	\keys_define:nn {TUDa/exercise/headline} {
+		#1 .choice:,
+		#1 / title-name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
+			\g_TUDa_shorttitle_tl\par
+			\StudentName\StudentID},
+		#1 / title-name .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {
+			\g_TUDa_shorttitle_tl\par
+			\smallskip
+			\StudentName},
+		#1 / title .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\g_TUDa_shorttitle_tl},
+		#1 / name-id .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\StudentName\StudentID},
+		#1 / name .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {\StudentName},
+		#1 / unknown .code:n = \tl_gset:cn {g_TUDa_ex_headline_#1_tl} {##1}
+	}
 }
 
 
@@ -392,15 +387,15 @@
 }
 
 \newpairofpagestyles{TUDa.exercise}{
-	\KOMAoptions{plainfootsepline}
+	\KOMAoptions{plainfootsepline,headtopline,plainheadtopline}
 		\KOMAoptions {
 			headwidth=text,
 			footwidth=text
 			}
 	\setkomafont{pagehead}{}
-\box_if_exist:NF \TUDa@headline_box {
-	\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
-}
+	\box_if_exist:NF \TUDa@headline_box {
+		\TUDa@makeheadrule[color=identbarcolor, width=\sls@headwidth]{TUDa@headline}
+	}
 \ModifyLayer[
 	background,
 	height=\box_dp:N \TUDa@headline_box,
@@ -421,7 +416,7 @@
 \DeclarePageStyleAlias{TUDa}{TUDa.exercise}
 \DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.exercise}
 \renewcommand{\titlepagestyle}{plain.TUDa}
-
+\pagestyle{TUDa}
 
 %Titelseite
 \tl_new:N  \g_TUDa_titleimage_code_tl
@@ -481,7 +476,6 @@
 \textsuperscript{\@fnsymbol{#1}}#2
 }
 
-\renewcommand*{\titlepagestyle}{plain.TUDa.exercise}
 
 \renewcommand*{\@maketitle}{%
   \global\@topnum=\z@
@@ -648,16 +642,15 @@
 
 
 %task environment
-%TODO: discussion: allow sectioning
 \DeclareSectionCommand[%
-style=section,%
-level=1,%
-indent=\z@,%
-beforeskip=\cs_if_exist_use:NF \scr@subsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
-afterskip=\cs_if_exist_use:NF \scr@subsection@afterskip {1.5ex \@plus .2ex},%
-tocstyle=section,%
-tocindent=\cs_if_exist_use:NF \scr@tso@subsection@indent {1.5em},%
-tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsection@numwidth {2.3em},%
+	style=section,%
+	level=1,%
+	indent=\z@,%
+	beforeskip=\cs_if_exist_use:NF \scr@subsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
+	afterskip=\cs_if_exist_use:NF \scr@subsection@afterskip {1.5ex \@plus .2ex},%
+	tocstyle=section,%
+	tocindent=\cs_if_exist_use:NF \scr@tso@subsection@indent {1.5em},%
+	tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsection@numwidth {2.3em},%
 ]{task}
 
 \renewcommand*{\thetask}{\g_TUDa_ex_sheetnum_tl\tl_if_empty:NF \g_TUDa_ex_sheetnum_tl{.}\arabic{task}}
