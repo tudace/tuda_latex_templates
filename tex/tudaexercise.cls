@@ -90,6 +90,9 @@
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_TUDa_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	match-task-subtask-syntax .bool_gset:N = \g_TUDa_match_task_subtask_bool,
+	match-task-subtask-syntax .initial:n = false, 
+	match-task-subtask-syntax .default:n = true,
 	unknown .code:n = {\prop_gput:NVn \g_TUDa_unknown_clsopts_prop \l_keys_key_tl {#1}},
 }
 
@@ -666,18 +669,20 @@
 	\endgroup
 }{}
 
+\cs_set_eq:cN {task*} \task
+\cs_set_eq:cN {endtask*} \endtask
 
 % subtasks
 \DeclareSectionCommand[%
-style=section,%
-level=2,%
-indent=\z@,%
-beforeskip=\cs_if_exist_use:NF \scr@subsubsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
-afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
-tocstyle=subsection,%
-tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
-tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
-counterwithin=task,%
+	style=section,%
+	level=2,%
+	indent=\z@,%
+	beforeskip=\cs_if_exist_use:NF \scr@subsubsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
+	afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
+	tocstyle=subsection,%
+	tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
+	tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
+	counterwithin=task,%
 ]{subtask}
 
 \renewcommand*{\thesubtask}{\alph{subtask})}
@@ -697,6 +702,13 @@ counterwithin=task,%
 		\@subtask{\l_TUDa_ex_title_tl}
 	}
 	}{}
+
+\NewDocumentEnvironment{subtask*}{om}{
+	\begingroup
+	\IfNoValueF{#1}{\keys_set:nn {TUDa/subtask}{#1}}
+	\@subtask{#2}
+	\endgroup
+}{}
 
 %Solution mechanism
 

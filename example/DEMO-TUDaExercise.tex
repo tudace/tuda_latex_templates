@@ -19,14 +19,11 @@
 	headline={title-name-id}
 }
 
-%compatbilitx
-\let\unit\relax
-
 \begin{document}
 
 \title[Übung TUDaExercise]{Übung zur Benutzung der TUDaExercise-Klasse}
 \author{Marei Peischl}
-\term{Sommersemester 2042}
+\term{Sommersemester 2042 -- v\fileversion\space(\filedate)}
 \sheetnumber{5}
 
 \maketitle
@@ -153,6 +150,33 @@ Geprüft wird darauf, ob das Argument ein Gleichheitszeichen enthält, ist dies 
 Falls bei der Optionsverarbeitung Unstimmigkeiten festgestellt werden, so wird das gesamte Argument als Titel verarbeitet.
 \end{subtask}
 \end{task}
+
+\begin{task*}{Beta-Feature: Einheitliche Syntax für Task/Subtask}
+TUDaExercise unterscheidet in der Standardeinstellung zwischen \code{task} und \code{subtask}. Dies ist dadurch begründet, dass \code{subtask} keine Angabe eines Titels erfordert.
+
+Es wurde der Bedarf nach einer einheitlichen Syntax geäußert (siehe \url{https://github.com/tudace/tuda_latex_templates/issues/189}). 
+
+\begin{subtask*}{Die gesternten Verianten der task/subtaks-Umgebungen}
+Die mit Version 3.0 implementierten Varianten \code{task*} und \code{subtask*} ermöglichen dies.
+
+Beide Varianten stehe nur als Umgebung und nicht als Makro zur Verfügung:
+
+\begin{verbatim}
+\begin{task*}{Aufgabentitel}
+  \begin{subtask*}{Titel der Teilaufgabe}
+    Beschreibung
+  \end{subtask*}
+\end{task*}
+\end{verbatim}
+
+\end{subtask*}
+
+\begin{subtask*}{Vertauschen der beiden Varianten}
+Zusätzlich erlaubt die Klassenoption \code{match-task-subtask-syntax} das Vertauschen von \code{subtask} und \code{subtask*}.
+
+Die Umgebungen \code{task*} und \code{task} sind identisch.
+\end{subtask*}
+\end{task*}
 
 \begin{task}{Kompatibilitätsmodus}
 Die Klasse \cls{tudaexercise} verfügt über einen Kompatibilitätsmodus, um den Umstieg von zuvor existierenden Templates, wie TUDexercise zu erleichtern.
