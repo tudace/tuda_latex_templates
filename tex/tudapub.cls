@@ -469,8 +469,8 @@
 \DeclarePageStyleAlias{TUDa}{TUDa.pub}
 \DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.pub}
 \pagestyle{TUDa}
-\renewcommand{\titlepagestyle}{title.TUDa}
 
+\renewcommand*{\titlepagestyle}{plain.TUDa}
 \cs_new:Nn \TUDa_sls@leftmargin: {%
 	\dimexpr
 	\if@twoside
@@ -962,8 +962,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 				\rule{\linewidth}{\g_TUDa_titlerule_dim}\par}
 		}
 		\TUDa_adjust_titlepage_style:
-		\ifx\titlepagestyle\@empty\else\thispagestyle{\titlepagestyle}\fi
-
+		\thispagestyle{title.TUDa}
 		\nointerlineskip\box_use:N \g_TUDa_title_box
 		\par
 		\vfill
