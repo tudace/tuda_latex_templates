@@ -362,6 +362,7 @@
 		\KOMAoptions{headinclude, footinclude}
 		\bool_if:NTF \g_TUDa_marginpar_bool {\KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}}
 		{\KOMAoptions{headwidth=text,footwidth=text}}
+		\bool_if:NT \g_TUDa_headline_bool {\KOMAoptions{headheight=\g_TUDa_headheight_dim}}
 		\recalctypearea
 	}
 	\TUDa_restore_typearea:
@@ -388,7 +389,6 @@
 
 \setkomafont{disposition}{\sffamily\bfseries}
 \setkomafont{pageheadfoot}{\sffamily\small}
-\addtokomafont{pagefoot}{\rule{0pt}{\dimexpr\baselineskip+\c_TUDa_rulesep_dim}}
 \setkomafont{pagenumber}{}
 \addtokomafont{captionlabel}{\sffamily}
 \addtokomafont{caption}{\sffamily}
@@ -439,8 +439,6 @@
 			footwidth=text
 			}
 		}
-
-	\setkomafont{pagehead}{\Large\bfseries}
 	\RedeclareLayer[
 		clone=scrheadings.head.above.line,
 		background,
@@ -461,7 +459,15 @@
 			\smash{\TUDa@headline}
 		}
 	]{plain.TUDa.pub.head.above.line}
+	\ModifyLayer[addvoffset=\c_TUDa_rulesep_dim]{TUDa.pub.foot.even}
+	\ModifyLayer[addvoffset=\c_TUDa_rulesep_dim]{TUDa.pub.foot.odd}
+	\ModifyLayer[addvoffset=\c_TUDa_rulesep_dim]{TUDa.pub.foot.oneside}
+	\ModifyLayer[addvoffset=\c_TUDa_rulesep_dim]{plain.TUDa.pub.foot.even}
+	\ModifyLayer[addvoffset=\c_TUDa_rulesep_dim]{plain.TUDa.pub.foot.odd}
+	\ModifyLayer[addvoffset=\c_TUDa_rulesep_dim]{plain.TUDa.pub.foot.oneside}
 	\bool_if:NT \g_TUDa_headline_bool {
+		\setkomafont{pagehead}{\Large\bfseries}
+		\KOMAoptions{headlines=2}
 		\clist_map_variable:nNn {oneside, even, odd} \l_tmpa_tl {
 			\ModifyLayer[pretocontents={\rule[-6pt]{0pt}{\layerheight}}]{TUDa.pub.head.\l_tmpa_tl}
 		}
