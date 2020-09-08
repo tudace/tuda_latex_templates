@@ -102,7 +102,7 @@ Im folgenden werden die möglichen Optionen beschrieben.
 	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend
 	beschränkt. False lädt den Standardstil aus \KOMAScript.
 	\item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
-	Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
+	Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=""false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
 	\item[headline] Die Kopfzeile verfügt über die im Corporate Design beschriebenen Layoutmöglichkeiten über den Wert \code{automark}. Da diese Lösung typografisch nicht sonderlich sinnvoll ist, ist es auch möglich, diese abzuschalten. Voreingestellt ist ein Stil ohne Kolumnentitel.
 	\item[logo] Option für die Titelseite, siehe \ref{sec:title}
 	\item[colorback] Option für die Titelseite, siehe \ref{sec:title}
@@ -166,7 +166,7 @@ Die zweite Variante ermöglicht die Platzierung mit manueller vertikaler Ausrich
 
 
 \minisec{Optionen für die Titelseite}
-Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/body}.
+Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/""body}.
 \begin{description}
 	\item[logo=head] Das Logo wird im Kopf direkt neben dem Titel platziert. Der Titel wird in der Breite reduziert. Der Hintergrund des Titels wird in der Farbe der Identitätsleiste eingefärbt. Zusätzliche Infoboxen (s.u.) werden ebenfalls im Kopf platziert.
 	\item[logo=body] Das Logo samt der Infoboxen wird im Körper der Titelseite platziert.
@@ -221,7 +221,7 @@ No color profile found to use for RGB screen colors
 \end{verbatim}
 Um diesen Fehler zu beheben, können die notwendigen *.icc-Dateien unter \url{http://mirror.ctan.org/support/colorprofiles} heruntergeladen und entweder installiert oder im Projektordner mit abgelegt werden. Die einfachste Lösung bleibt jedoch, das eigene \TeX-System zu aktualisieren.
 
-Darüber hinaus werden bei \hologo{XeLaTeX} einige Features nicht unterstützt. In diesem Fall erzeugt \code{pdfa=false} ein kompilierbares Dokument, allerdings sollte für validierbare PDF/A-Dateien auf \hologo{LuaLaTeX} einer möglichst aktuellen Version umgestiegen werden.
+Darüber hinaus werden bei \hologo{XeLaTeX} einige Features nicht unterstützt. In diesem Fall erzeugt \code{pdfa=""false} ein kompilierbares Dokument, allerdings sollte für validierbare PDF/A-Dateien auf \hologo{LuaLaTeX} einer möglichst aktuellen Version umgestiegen werden.
 
 \subsection{Zusätzliche Metadaten nach Wunsch der Universitätsbibliothek}
 \label{sec:IMRAD}
@@ -257,7 +257,8 @@ Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \
 \subsection{Mathematikschriften}
 Da es keine Compiler-unanbhängige, universelle Mathematikschrift gibt und die Corporate Design Richtlinien auch keinerlei Empfehlung berücksichtigen, wurden hierfür einige mögliche Varianten diskutiert. Die Voreinstallung entspricht immer dem Standard der Installation. Es werden keine spezifischen Einstellungen geladen.
 
-Die Diskussion hierzu findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/19}
+Die Diskussion hierzu findet sich unter:\\
+\url{https://github.com/tudace/tuda_latex_templates/issues/19}
 
 Im Folgenden werden ein paar Beispielkonfigurationen gezeigt. Grundsätzlich ist die Mathematikschriftart jedoch -- abgesehen durch Einschränkungen des Compilers -- frei wählbar.
 
@@ -291,32 +292,29 @@ Darüber hinaus aktiviert der Modus die Optionen:
 \code{colorback=false}, \code{ruledheaders=section}.
 
 \minisec{Logo}
-Das Fachbereichslogo wird über die Option \verb+departmentlogofile=tuda_maschinenbau_logo+ übergeben. Falls die Datei fehlt, kann über diesen Weg eine alternative Datei übergeben werden. Falls der Wert leer bleibt, wird kein Bild eingefügt.
+Das Fachbereichslogo wird über die Option \verb+departmentlogofile=tuda_maschinenbau_logo+ übergeben. Über diese Option kann auch eine abweichende Datei genutzt werden. Falls der Wert leer bleibt, wird kein Bild eingefügt.
 
 \minisec{Farbanpassungen}
 Der Fachbereich untergliedert die im Corporate Design Handbuch beschriebenen Farben zusätzlich. Daher existieren, wenn \code{mecheng} aktiviert wurde zusätzlich die folgenden Farbnamen:
 
 \begin{verbatim}
-\colorlet{TUDaPrimary1}{TUDa-6b}
-\colorlet{TUDaPrimary2}{TUDa-2d}
-\colorlet{TUDaSecondary1}{TUDa-9a}
-\colorlet{TUDaSecondary2}{TUDa-8a}
-\colorlet{TUDaSecondary3}{TUDa-6a}
-\colorlet{TUDaSecondary4}{TUDa-3a}
-\colorlet{TUDaSecondary5}{TUDa-4a}
-\colorlet{TUDaSecondary6}{TUDa-5a}
-\colorlet{TUDaArrow}{TUDaPrimary2}
+\colorlet{TUDa-Primary1}{TUDa-6b}
+\colorlet{TUDa-Primary2}{TUDa-2d}
+\colorlet{TUDa-Secondary1}{TUDa-9a}
+\colorlet{TUDa-Secondary2}{TUDa-8a}
+\colorlet{TUDa-Secondary3}{TUDa-6a}
+\colorlet{TUDa-Secondary4}{TUDa-3a}
+\colorlet{TUDa-Secondary5}{TUDa-4a}
+\colorlet{TUDa-Secondary6}{TUDa-5a}
+\colorlet{TUDa-Arrow}{TUDa-Primary2}
 \end{verbatim}
 
 \minisec{Zeitstrahl}
 Des Design-Element des Zeitstrahls kann über das Makro \verb+\MechEngArrow{<Länge>}+ erzeugt werden. Die Farbe entspricht dabei der Farbe \code{TUDaArrow}, die mit der zweiten Primärfarbe (blau) vorbelegt ist.
 
-
-
-
 \section{Standard-KOMA-Script}
 \label{sec:KOMA}
-Da die Klasse bis auf ein paar erzwungene Einstellungen, die das Layout betreffen, vollständig \KOMAScript-kompatibel ist, ist für sämtliche Modifikationen ein Blick in die \KOMAScript-Dokumentation hilfreich. Für einen Großteil bietet \KOMAScript{} eine eigene Lösung, wodurch Ergänzungspakete oft hinfällig sind.
+Da die Klasse bis auf ein paar erzwungene Einstellungen, die das Layout betreffen, vollständig \KOMAScript"=kompatibel ist, ist für sämtliche Modifikationen ein Blick in die \KOMAScript-Dokumentation hilfreich. Für einen Großteil bietet \KOMAScript{} eine eigene Lösung, wodurch Ergänzungspakete oft hinfällig sind.
 
 Beispiele für typische Modifikationen, die auch im Rahmen des Corporate Design zulässig sind:
 \begin{itemize}
