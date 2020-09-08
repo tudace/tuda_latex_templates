@@ -846,6 +846,12 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \fi
 \fi
 
+\box_new:N  \g_TUDa_sponsor_box
+\seq_new:N \g_TUDa_sponsors_seq
+\def\AddSponsor{\seq_gput_right:Nn \g_TUDa_sponsors_seq}
+\def\sponsors#1{\def\@sponsors{#1}}
+\sponsors{}
+
 \str_if_eq:VnTF \g_TUDa_pubType_tl  {thesis} {
 	\input{tudathesis.cfg}
 } {
@@ -861,11 +867,6 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \textsuperscript{\@fnsymbol{#1}}#2
 }
 
-\box_new:N  \g_TUDa_sponsor_box
-\seq_new:N \g_TUDa_sponsors_seq
-\def\AddSponsor{\seq_gput_right:Nn \g_TUDa_sponsors_seq}
-\def\sponsors#1{\def\@sponsors{#1}}
-\sponsors{}
 % The following macro is an adapted version of the corresponding KOMA-Script macro
 % Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
 \renewcommand*{\maketitle}[1][1]{
