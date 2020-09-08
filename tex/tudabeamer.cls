@@ -30,7 +30,6 @@
 	department / mecheng .code:n = {
 		\keys_set:nn {TUDa/beamer} {
 			colorframetitle=false,
-			colortitle=false,
 			centerframetitle,
 			headsepline=false
 		}
