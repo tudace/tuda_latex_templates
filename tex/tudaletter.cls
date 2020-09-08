@@ -10,15 +10,15 @@
 \bool_new:N \g__ptxcd_adjust_textwidth_bool
 
 \keys_define:nn {ptxcd/letter} {
-	logo .bool_gset:N = \g_ptxcd_letter_logo_bool,
+	logo .bool_gset:N = \g__ptxcd_letter_logo_bool,
 	logo .default:n = true,
 	logo .initial:n = true,
-	premium .bool_gset:N = \g_ptxcd_letter_premium_bool,
+	premium .bool_gset:N = \g__ptxcd_letter_premium_bool,
 	premium .default:n = true,
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-	firstpagenumber .bool_gset:N = \g_ptxcd_firstpagenumber_bool,
+	firstpagenumber .bool_gset:N = \g__ptxcd_firstpagenumber_bool,
 	firstpagenumber .initial:n = true,
-	raggedright .bool_gset:N = \g_ptxcd_raggedright_bool,
+	raggedright .bool_gset:N = \g__ptxcd_letter_raggedright_bool,
 	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
 	pdfa .initial:n = true,
 	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
@@ -34,7 +34,7 @@
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
-	headrule .bool_gset:N = \g_ptxcd_headrule_bool,
+	headrule .bool_gset:N = \g__ptxcd_letter_headrule_bool,
 	headrule .initial:n = true,
 	headrule .default:n = true,
 	textwidth .choice:,
@@ -58,7 +58,7 @@
 % Load the TUDa-colorscheme
 \RequirePackage{tudacolors}
 
-\bool_if:NTF \g_ptxcd_letter_premium_bool
+\bool_if:NTF \g__ptxcd_letter_premium_bool
 {	\cs_new:Nn \ptxcd_premiumcolor: {accentcolor}
 	\cs_new:Nn \ptxcd_use_premiumcolor: {\color{accentcolor}}
 	\cs_set:Nn \ptxcd_use_premiumcolor_text: {\color{textaccentcolor}}
@@ -78,13 +78,13 @@
 %% Spacing:
 \dim_const:Nn \c_ptxcd_HeadMargin_dim {12.5mm}
 \dim_const:Nn \c_ptxcd_LeftMargin_dim {24.0mm}
-\dim_const:Nn \c_ptxcd_firstpage_extraindent_dim {-\paperwidth+120mm +\c_ptxcd_LeftMargin_dim  +\c_ptxcd_HeadMargin_dim}
+\dim_const:Nn \c__ptxcd_firstpage_extraindent_dim {-\paperwidth+120mm +\c_ptxcd_LeftMargin_dim  +\c_ptxcd_HeadMargin_dim}
 \bool_if:NTF \g__ptxcd_adjust_textwidth_bool
 	{
 		\dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim}
 		
 	}{
-		\dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim-\c_ptxcd_firstpage_extraindent_dim}
+		\dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim-\c__ptxcd_firstpage_extraindent_dim}
 	}
 \dim_const:Nn \c_ptxcd_BottomMargin_dim {20mm}
 \dim_const:Nn \c_ptxcd_Linewidth_dim {\paperwidth-\c_ptxcd_LeftMargin_dim-\c_ptxcd_RightMargin_dim}
@@ -101,7 +101,7 @@
 
 \dim_const:Nn \c_ptxcd_textwidth_dim {\textwidth}
 
-\bool_if:NTF \g_ptxcd_letter_logo_bool {
+\bool_if:NTF \g__ptxcd_letter_logo_bool {
 	\geometry{top=64mm}
 } {
 	\geometry{top=30mm}
@@ -134,7 +134,7 @@
 
 \RequirePackage[paper=a4]{tudarules}
 
-\bool_if:NTF \g_ptxcd_headrule_bool {
+\bool_if:NTF \g__ptxcd_letter_headrule_bool {
 	\ptxcd_makeheadrule[width=\useplength{firstheadwidth},color=identbarcolor]{ptxcd_LetterheadRule}
 } {
 	\box_new:N \ptxcd_LetterheadRule_box
@@ -208,7 +208,7 @@
       \vspace{2\baselineskip}
       \fi
         \Ifkomavarempty*{date}{}{\usekomavar*{date}\\\usekomavar{date}}
-      \seq_use:Nn  \g_ptxcd_reffields_seq {}
+      \seq_use:Nn  \g__ptxcd_reffields_seq {}
       \Ifkomavarempty{frombank}{}{\vfill%
         \Ifkomavarempty*{frombank}{Bankverbindung}{\usekomavar*{frombank}}\\\usekomavar{frombank}
 	 }
@@ -233,14 +233,16 @@
 
 
 
-\seq_new:N  \g_ptxcd_reffields_seq
+\seq_new:N  \g__ptxcd_reffields_seq
 \newlength{\TUD@page@free}
 \newcounter{TUD@page@free@lines}
+\dim_new:N \g__ptxcd_page_free_dim
+\int_new:N \g__ptxcd_free_lines_int
 
 \renewcommand{\opening}[1]{%
 	\widowpenalty=100
 	\@PapersizeWarning
-	\seq_gclear:N \g_ptxcd_reffields_seq
+	\seq_gclear:N \g__ptxcd_reffields_seq
 	\renewcommand*{\@set@reffield}[1]{
 		\typeout{Field: ##1}%
 		\str_if_eq:nnT {##1}{datemarkerfield}{%
@@ -249,7 +251,7 @@
 			\setkomavar{date}{}%
 		}
 		\Ifkomavarempty{##1}{}{%
-			\seq_gput_right:Nn \g_ptxcd_reffields_seq {%
+			\seq_gput_right:Nn \g__ptxcd_reffields_seq {%
 				\ptxcd_set_reffield:n {##1}
 			}%
 		}%
@@ -268,8 +270,8 @@
 	\ifdim\useplength{subjectvpos}=\z@\if@subjafter\else\@subjfield\fi\fi
 	{\setparsizes{\z@}{\z@}{\z@ plus 1fil}\par@updaterelative#1\par}%
 	{\setlength{\@tempdima}{\baselineskip}%
-		\addtolength{\@tempdima}{-\parskip}%
-		\ifdim \@tempdima>\z@\vskip\@tempdima\fi}%
+	\addtolength{\@tempdima}{-\parskip}%
+	\ifdim \@tempdima>\z@\vskip\@tempdima\fi}%
 	\ifdim\useplength{subjectvpos}=\z@\if@subjafter\@subjfield\fi\fi
 	\setcounter{equation}{0}%
 	\@afterheading%
@@ -283,26 +285,24 @@
 				\else{\setbox\z@\lastbox}
 				\fi
 			\else
-				\clubpenalty \@clubpenalty
+				\clubpenalty\@clubpenalty
 			\fi
 			\ifnum\thepage=1%
-			\TUD@page@free=-\pagegoal%
-			\advance\TUD@page@free\pagetotal%
-			\dim_compare:nTF {-\TUD@page@free>2\baselineskip}
+			\dim_gset:Nn \g__ptxcd_page_free_dim {-\pagegoal + \pagetotal}
+			\dim_compare:nTF {-\g__ptxcd_page_free_dim>2\baselineskip}
 			{
-				\divide\TUD@page@free\baselineskip%
-				\c@TUD@page@free@lines=\TUD@page@free%
-				\int_compare:nT {\value{TUD@page@free@lines}<0} {
-				\hangafter=\value{TUD@page@free@lines}\hangindent=\c_ptxcd_firstpage_extraindent_dim%
-				}\ptxcd_use_premiumcolor_text:
+				\int_gset:Nn \g__ptxcd_free_lines_int {\fp_eval:n {ceil(\g__ptxcd_page_free_dim/\baselineskip)}}
+				\int_compare:nT {\g__ptxcd_free_lines_int<0} {
+					\hangafter=\g__ptxcd_free_lines_int\hangindent=\c__ptxcd_firstpage_extraindent_dim%
+				}
 		} {
 			\dim_compare:nT {-\TUD@page@free>\baselineskip} {
-				\hangafter=-2\hangindent=\c_ptxcd_firstpage_extraindent_dim%
+				\hangafter=-2\hangindent=\c__ptxcd_firstpage_extraindent_dim%
 			}
 		}
 			\fi%
 		}%
-		\global\setlength{\linewidth}{\dim_eval:n {\c_ptxcd_Linewidth_dim + \c_ptxcd_firstpage_extraindent_dim}}
+		\global\setlength{\linewidth}{\dim_eval:n {\c_ptxcd_Linewidth_dim + \c__ptxcd_firstpage_extraindent_dim}}
 		\afterpage{
 			\global\setlength{\linewidth}{\c_ptxcd_Linewidth_dim}
 			\widowpenalty=10000
@@ -322,7 +322,7 @@
 \cs_new:Nn \ptxcd_letterpagemark: {
 	%get lastpage for this letter if not already done
 	\int_compare:nTF {\value{page} = 1} {
-			\bool_if:NTF \g_ptxcd_firstpagenumber_bool
+			\bool_if:NTF \g__ptxcd_firstpagenumber_bool
 			{\bool_set_true:N \l_tmpa_bool}
 			{\bool_set_false:N \l_tmpa_bool}
 		}
@@ -363,8 +363,8 @@
 \cs_set_eq:NN \letterpagemark \ptxcd_letterpagemark:
 
 
-\bool_if:NT \g_ptxcd_headrule_bool {
-	\bool_if:NTF \g_ptxcd_letter_logo_bool {
+\bool_if:NT \g__ptxcd_letter_headrule_bool {
+	\bool_if:NTF \g__ptxcd_letter_logo_bool {
 		\setkomavar{nexthead}{\box_use:N \g_TUDaLetter_firsthead_box}
 	}{
 		\setkomavar{nexthead}{\raisebox{\depth}{\ptxcd_LetterheadRule}}
@@ -477,7 +477,7 @@
 
 \newkomavar{fromfunction}
 
-\bool_if:NT \g_ptxcd_raggedright_bool {\AtBeginLetter{\RaggedRight}}
+\bool_if:NT \g__ptxcd_letter_raggedright_bool {\AtBeginLetter{\RaggedRight}}
 
 %backwards compatibility for KOMA-Script
 \cs_if_exist:NF \Ifkomavarempty{
