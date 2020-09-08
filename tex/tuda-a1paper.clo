@@ -1,11 +1,11 @@
-\ProvidesExplFile{tuda-a1paper.clo}{\filedate}{\fileversion}{tuda-ci size adjustments for a0paper}
-\cs_set:Nn \TUDa_setup_title_sizes: {
-		\cs_set:Nn \TUDa_title_fontsize: {{86pt}{120pt}}
-		\cs_set:Nn \TUDa_titleinfo_fontsize: {{35pt}{42pt}}
-		\cs_set:Nn \TUDa_titlethanks_fontsize: {{22pt}{26pt}}
+\ProvidesExplFile{tuda-a1paper.clo}{\filedate}{\fileversion}{tuda-ci~size~adjustments~for~a0paper}
+\cs_set:Nn \ptxcd_setup_title_sizes: {
+		\cs_set:Nn \ptxcd_title_fontsize: {{86pt}{120pt}}
+		\cs_set:Nn \ptxcd_titleinfo_fontsize: {{35pt}{42pt}}
+		\cs_set:Nn \ptxcd_titlethanks_fontsize: {{22pt}{26pt}}
 }
-\cs_set:Nn \TUDa_setup_base_sizes: {
-	\tl_if_empty:NT \g_TUDa_fontsize_tl {\tl_gset:Nn \g_TUDa_fontsize_tl {25pt}}
-	\dim_gset:Nn \g_TUDa_margin_dim {30mm}
+\cs_set:Nn \ptxcd_setup_base_sizes: {
+	\tl_if_empty:NT \g_ptxcd_fontsize_tl {\tl_gset:Nn \g_ptxcd_fontsize_tl {25pt}}
+	\dim_gset:Nn \g_ptxcd_margin_dim {30mm}
 }
 \endinput

@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{tudafonts}
  [\filedate\space\fileversion\space
-   font loading for TUDa-CI, TU Darmstadt's Corporate Design]
+ font loading for TUDa-CI, TU Darmstadt's Corporate Design]
 
 \expandafter\newif\csname if@TUDa@T1\endcsname
 
@@ -12,30 +12,33 @@
 \RequirePackage{anyfontsize}
 
 \ifPDFTeX
-    \csname @TUDa@T1true\endcsname
-    %Fallback for older versions
-    \expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
-    \RequirePackage[utf8]{inputenc}
-    \fi
-    \expandafter\ifx\csname texteuro\endcsname\relax
-       \RequirePackage{textcomp}
-    \fi
-    \DeclareUnicodeCharacter{20AC}{\texteuro}
+	\csname @TUDa@T1true\endcsname
+	%Fallback for older versions
+	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
+	\RequirePackage[utf8]{inputenc}
+	\fi
+	\expandafter\ifx\csname texteuro\endcsname\relax
+		\RequirePackage{textcomp}
+	\fi
+	\DeclareUnicodeCharacter{20AC}{\texteuro}
 \fi
 
 \csname if@TUDa@T1\endcsname
-    \RequirePackage{XCharter}%activates T1
-    \PassOptionsToPackage{type1}{roboto}
-    \PassOptionsToPackage{type1}{roboto-mono}
-    %Workaround for missing ligature replacements with roboto in T1
-    \ifXeTeX
-    \else
-    \RequirePackage{microtype}
-    \DisableLigatures{encoding = *, family=\sfdefault,  shape = sc }
-    \fi
+	\ifLuaTeX
+		\RequirePackage[utf8]{luainputenc}
+	\fi
+	\RequirePackage{XCharter}%activates T1
+	\PassOptionsToPackage{type1}{roboto}
+	\PassOptionsToPackage{type1}{roboto-mono}
+	%Workaround for missing ligature replacements with roboto in T1
+	\ifXeTeX
+	\else
+		\RequirePackage{microtype}
+		\DisableLigatures{encoding = *, family=\sfdefault,shape = sc }
+	\fi
 \else
-    \RequirePackage{fontspec}
-    \setmainfont{XCharter}
+	\RequirePackage{fontspec}
+	\setmainfont{XCharter}
 \fi
 
 \RequirePackage{roboto}
@@ -46,11 +49,6 @@
 	The font package roboto-mono.sty could not be found. Probably your TeX-distribution is outdated.\MessageBreak
 	For correct font setup either install it manually or update you distribution}
 }
-
-
-\ifPDFTeX
-	\RequirePackage[T1]{fontenc}
-\fi
 
 \let\accentfont\robotoslab
 \DeclareTextFontCommand{\textaccent}{\accentfont}

@@ -5,114 +5,114 @@
 
 \RequirePackage{l3keys2e}
 
-\str_if_exist:NF \g_TUDa_department_str {
-	\str_new:N \g_TUDa_department_str
-	\str_gset:Nn \g_TUDa_department_str {default}
+\str_if_exist:NF \g_ptxcd_department_str {
+	\str_new:N \g_ptxcd_department_str
+	\str_gset:Nn \g_ptxcd_department_str {default}
 }
 
-\bool_new:N \g_TUDa_simple_rules_bool
-\dim_new:N \g_TUDa_titlerule_dim
+\bool_new:N \g_ptxcd_simple_rules_bool
+\dim_new:N \g_ptxcd_titlerule_dim
 
-\seq_if_exist:NF \l_TUDa_tmpa_seq {\seq_new:N \l_TUDa_tmpa_seq}
-\tl_if_exist:NF \l_TUDa_tmpa_tk {\tl_new:N \l_TUDa_tmpa_tl}
+\seq_if_exist:NF \l_ptxcd_tmpa_seq {\seq_new:N \l_ptxcd_tmpa_seq}
+\tl_if_exist:NF \l_ptxcd_tmpa_tk {\tl_new:N \l_ptxcd_tmpa_tl}
 
-\cs_new:Nn \TUDa_rules_set_values:n {
-	\seq_set_split:Nnn \l_TUDa_tmpa_seq {|} {#1}
+\cs_new:Nn \ptxcd_rules_set_values:n {
+	\seq_set_split:Nnn \l_ptxcd_tmpa_seq {|} {#1}
 
 	\int_step_inline:nnnn {1}  {1} {4} {
-		\tl_set:Nn \l_TUDa_tmpa_tl {c_TUDa_
+		\tl_set:Nn \l_ptxcd_tmpa_tl {c_ptxcd_
 			\clist_item:nn {largerule, rulesep, smallrule, logoheight} {##1}
 			_dim}
-		\dim_if_exist:cF {\l_TUDa_tmpa_tl} {\dim_new:c {\l_TUDa_tmpa_tl}}
-		\dim_gset:cn {\l_TUDa_tmpa_tl} {\seq_item:Nn \l_TUDa_tmpa_seq {##1}}
+		\dim_if_exist:cF {\l_ptxcd_tmpa_tl} {\dim_new:c {\l_ptxcd_tmpa_tl}}
+		\dim_gset:cn {\l_ptxcd_tmpa_tl} {\seq_item:Nn \l_ptxcd_tmpa_seq {##1}}
 	}
-	\dim_gset:Nn \g_TUDa_titlerule_dim {.5\c_TUDa_smallrule_dim}
+	\dim_gset:Nn \g_ptxcd_titlerule_dim {.5\c_ptxcd_smallrule_dim}
 }
 
-\keys_define:nn {TUDa/rules} {
-	color .tl_gset:N = \g_TUDa_rules_color_tl,
+\keys_define:nn {ptxcd/rules} {
+	color .tl_gset:N = \g_ptxcd_rules_color_tl,
 	blackrule .meta:n = {color=black},
 	paper .choice:,
-	paper/dl .code:n = { \TUDa_rules_set_values:n  { 3.5mm | 1.4mm | 1.2pt | 17  mm | 0.6pt| 10mm | 14mm}},
-	paper/a6 .code:n = { \TUDa_rules_set_values:n  { 3  mm | 1.4mm | 1.2pt | 16.5mm | 0.6pt| 10mm | 15mm}},
-	paper/a5 .code:n = { \TUDa_rules_set_values:n { 3.3mm | 1.4mm | 1.2pt | 19  mm | 0.6pt| 12mm | 16mm}},
-	paper/a4 .code:n = { \TUDa_rules_set_values:n  { 4  mm | 1.4mm | 1.2pt | 22  mm | 0.6pt| 15mm | 20mm}},
-	paper/a3 .code:n = { \TUDa_rules_set_values:n  { 4.5mm | 1.4mm | 1.2pt | 24.5mm | 0.6pt| 15mm | 20mm}},
-	paper/a2 .code:n = { \TUDa_rules_set_values:n  { 8  mm | 2.5mm | 2.2pt | 44.5mm | 1.1pt| 30mm | 35mm}},
-	paper/a1 .code:n = { \TUDa_rules_set_values:n { 10 mm | 3.0mm | 2.8pt | 55.5mm | 1.4pt| 30mm | 35mm}},
-	paper/a0 .code:n = { \TUDa_rules_set_values:n  { 16 mm | 5.2mm | 4.8pt | 80  mm | 2.4pt| 30mm | 35mm}},
-	paper/slide .code:n = { \TUDa_rules_set_values:n  { 2mm | .7mm | .6pt | 11 mm | .3pt| 7.5mm | 10mm}},
+	paper/dl .code:n = { \ptxcd_rules_set_values:n  { 3.5mm | 1.4mm | 1.2pt | 17  mm | 0.6pt| 10mm | 14mm}},
+	paper/a6 .code:n = { \ptxcd_rules_set_values:n  { 3  mm | 1.4mm | 1.2pt | 16.5mm | 0.6pt| 10mm | 15mm}},
+	paper/a5 .code:n = { \ptxcd_rules_set_values:n { 3.3mm | 1.4mm | 1.2pt | 19  mm | 0.6pt| 12mm | 16mm}},
+	paper/a4 .code:n = { \ptxcd_rules_set_values:n  { 4  mm | 1.4mm | 1.2pt | 22  mm | 0.6pt| 15mm | 20mm}},
+	paper/a3 .code:n = { \ptxcd_rules_set_values:n  { 4.5mm | 1.4mm | 1.2pt | 24.5mm | 0.6pt| 15mm | 20mm}},
+	paper/a2 .code:n = { \ptxcd_rules_set_values:n  { 8  mm | 2.5mm | 2.2pt | 44.5mm | 1.1pt| 30mm | 35mm}},
+	paper/a1 .code:n = { \ptxcd_rules_set_values:n { 10 mm | 3.0mm | 2.8pt | 55.5mm | 1.4pt| 30mm | 35mm}},
+	paper/a0 .code:n = { \ptxcd_rules_set_values:n  { 16 mm | 5.2mm | 4.8pt | 80  mm | 2.4pt| 30mm | 35mm}},
+	paper/slide .code:n = { \ptxcd_rules_set_values:n  { 2mm | .7mm | .6pt | 11 mm | .3pt| 7.5mm | 10mm}},
 	paper/beamer .meta:n = {paper= slide},
 	paper/leaflet .meta:n = {paper=a5},
-	color .tl_gset:N = \g_TUDarules_default_color_tl,
+	color .tl_gset:N = \g_ptxcd_rules_default_color_tl,
 	color .initial:n = black,
-	mode .tl_gset:N = \g_TUDarules_default_mode_tl,
+	mode .tl_gset:N = \g_ptxcd_rules_default_mode_tl,
 	mode .initial:n = box,
 	department .choice:,
-	department / default .code:n = \str_gset:Nn \g_TUDa_department_str {default},
-	department / mecheng .code:n = \str_gset:Nn \g_TUDa_department_str {mecheng},
+	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
+	department / mecheng .code:n = \str_gset:Nn \g_ptxcd_department_str {mecheng},
 	mecheng .meta:n = {department=mecheng},
 }
 
-\ProcessKeysOptions{TUDa/rules}
+\ProcessKeysOptions{ptxcd/rules}
 
 \RequirePackage{tudacolors}
 \RequirePackage{xparse}
 
 %Switch between TikZ and box mode
-\bool_new:N  \g_TUDa_rule_TikZmode_bool
+\bool_new:N  \g_ptxcd_rule_TikZmode_bool
 
-\keys_define:nn {TUDa/rules} {
-	width .dim_gset:N = \l_TUDa_headrule_width_dim,
-	color .tl_gset:N = \l_TUDa_headrule_color_tl,
+\keys_define:nn {ptxcd/rules} {
+	width .dim_gset:N = \l_ptxcd_headrule_width_dim,
+	color .tl_gset:N = \l_ptxcd_headrule_color_tl,
 	mode .choice:,
-	mode / box .code:n = \bool_gset_false:N \g_TUDa_rule_TikZmode_bool,
-	mode / tikz .code:n = \bool_gset_true:N \g_TUDa_rule_TikZmode_bool,
-	mode / TikZ  .code:n = \bool_gset_true:N \g_TUDa_rule_TikZmode_bool,
+	mode / box .code:n = \bool_gset_false:N \g_ptxcd_rule_TikZmode_bool,
+	mode / tikz .code:n = \bool_gset_true:N \g_ptxcd_rule_TikZmode_bool,
+	mode / TikZ  .code:n = \bool_gset_true:N \g_ptxcd_rule_TikZmode_bool,
 }
 
 
-\str_case:Vn \g_TUDa_department_str {
-	{mecheng} {\bool_gset_true:N \g_TUDa_simple_rules_bool}
+\str_case:Vn \g_ptxcd_department_str {
+	{mecheng} {\bool_gset_true:N \g_ptxcd_simple_rules_bool}
 }
 
-\NewDocumentCommand{\TUDa@makeheadrule}{som}{
-	\keys_set:nn {TUDa/rules} {
+\NewDocumentCommand{\ptxcd_makeheadrule}{som}{
+	\keys_set:nn {ptxcd/rules} {
 		%TODO maybe package options for default
 		width=\textwidth,
 	}
-	\exp_args:Nnx \keys_set:nn {TUDa/rules} {
-		mode= \g_TUDarules_default_mode_tl,
-		color=  \g_TUDarules_default_color_tl
+	\exp_args:Nnx \keys_set:nn {ptxcd/rules} {
+		mode= \g_ptxcd_rules_default_mode_tl,
+		color=  \g_ptxcd_rules_default_color_tl
 	}
-	\IfNoValueF {#2} {\keys_set:nn {TUDa/rules}{#2}}
+	\IfNoValueF {#2} {\keys_set:nn {ptxcd/rules}{#2}}
 	\IfBooleanF {#1} {\box_if_exist:cF {#3_box} {\box_new:c {#3_box}}}
-	\bool_if:NTF \g_TUDa_simple_rules_bool {
+	\bool_if:NTF \g_ptxcd_simple_rules_bool {
 		\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
 			{#3_box} 
 			{
-				\color{\l_TUDa_headrule_color_tl}
-				\raisebox{-\height}{\rule{\l_TUDa_headrule_width_dim}{.5\c_TUDa_largerule_dim}}	
+				\color{\l_ptxcd_headrule_color_tl}
+				\raisebox{-\height}{\rule{\l_ptxcd_headrule_width_dim}{.5\c_ptxcd_largerule_dim}}
 			}
 	}{
-		\bool_if:NTF \g_TUDa_rule_TikZmode_bool {
+		\bool_if:NTF \g_ptxcd_rule_TikZmode_bool {
 			\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
 				{#3_box} {
 				\begin{tikzpicture}
-					\fill[\l_TUDa_headrule_color_tl](0,\c_TUDa_rulesep_dim)rectangle++(\l_TUDa_headrule_width_dim,\c_TUDa_largerule_dim);
-					\fill(0,0)rectangle(\l_TUDa_headrule_width_dim,-\c_TUDa_smallrule_dim);
+					\fill[\l_ptxcd_headrule_color_tl](0,\c_ptxcd_rulesep_dim)rectangle++(\l_ptxcd_headrule_width_dim,\c_ptxcd_largerule_dim);
+					\fill(0,0)rectangle(\l_ptxcd_headrule_width_dim,-\c_ptxcd_smallrule_dim);
 				\end{tikzpicture}
 			}
 		}{
 			\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
 			{#3_box} 
 			{
-				\parbox[t]{\l_TUDa_headrule_width_dim}{
+				\parbox[t]{\l_ptxcd_headrule_width_dim}{
 					\setlength{\baselineskip}{\z@}
 					\null\par\nointerlineskip
-					\textcolor{\l_TUDa_headrule_color_tl}{\rule{\linewidth}{\c_TUDa_largerule_dim}}
-					\vspace{\c_TUDa_rulesep_dim}\par\nointerlineskip
-					\rule{\linewidth}{\c_TUDa_smallrule_dim}
+					\textcolor{\l_ptxcd_headrule_color_tl}{\rule{\linewidth}{\c_ptxcd_largerule_dim}}
+					\vspace{\c_ptxcd_rulesep_dim}\par\nointerlineskip
+					\rule{\linewidth}{\c_ptxcd_smallrule_dim}
 				}
 			}
 		}
@@ -120,14 +120,14 @@
 	\IfBooleanF {#1} {\cs_set:cpn {#3} {\box_use:c {#3_box}}}
 }
 
-\NewDocumentCommand{\TUDa@makefootrule}{som}{
-	\keys_set:nn {TUDa/rules} {
+\NewDocumentCommand{\ptxcd_makefootrule}{som}{
+	\keys_set:nn {ptxcd/rules} {
 		width= \textwidth
 	}
-	\IfNoValueF {#2} {\keys_set:nn {TUDa/rules}{#2}}
+	\IfNoValueF {#2} {\keys_set:nn {ptxcd/rules}{#2}}
 	\IfBooleanF {#1} {\box_new:c {#3_box}}
     \IfBooleanTF {#1} \use_none:n \hbox_gset:cn {#3_box} {
-		\raisebox{-\height}{\rule{\l_TUDa_headrule_width_dim}{\g_TUDa_titlerule_dim}}
+		\raisebox{-\height}{\rule{\l_ptxcd_headrule_width_dim}{\g_ptxcd_titlerule_dim}}
 	}
 	\IfBooleanF{#1} {\cs_new:cpn {#3} {\box_use:c {#3_box}}}
 }

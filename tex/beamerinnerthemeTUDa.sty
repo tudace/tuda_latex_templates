@@ -8,29 +8,29 @@
 \RequirePackage{trimclip}
 
 
-\keys_define:nn {TUDa/beamer/inner} {
-	authorontitle .bool_gset:N = \g_TUDa_authorontitle_bool,
+\keys_define:nn {ptxcd/beamer/inner} {
+	authorontitle .bool_gset:N = \g_ptxcd_authorontitle_bool,
 	authorontitle .initial:n = false,
 	authorontitle .default:n = true
 }
-\ProcessKeysOptions{TUDa/beamer/inner}
+\ProcessKeysOptions{ptxcd/beamer/inner}
 
-\box_new:N \l_TUDa_titlegraphic_box
+\box_new:N \l_ptxcd_titlegraphic_box
 
 
 \RenewDocumentCommand{\titlegraphic}{sm}{
 	\IfBooleanTF{#1}{
 		\def\inserttitlegraphic{
-			\hbox_set:Nn \l_TUDa_titlegraphic_box {\raisebox{\depth}{#2}}
-			\box_resize_to_wd:Nn \l_TUDa_titlegraphic_box {\width}
-			\dim_compare:nTF {\box_ht:N \l_TUDa_titlegraphic_box - \l_TUDa_titlegraphic_ht_dim > \c_zero_dim}
+			\hbox_set:Nn \l_ptxcd_titlegraphic_box {\raisebox{\depth}{#2}}
+			\box_resize_to_wd:Nn \l_ptxcd_titlegraphic_box {\width}
+			\dim_compare:nTF {\box_ht:N \l_ptxcd_titlegraphic_box - \l_ptxcd_titlegraphic_ht_dim > \c_zero_dim}
 			{
-				\dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l_TUDa_titlegraphic_box - .5\l_TUDa_titlegraphic_ht_dim}
-				\clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l_TUDa_titlegraphic_box}
+				\dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l_ptxcd_titlegraphic_box - .5\l_ptxcd_titlegraphic_ht_dim}
+				\clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l_ptxcd_titlegraphic_box}
 			}{
-				\box_resize_to_ht:Nn \l_TUDa_titlegraphic_box {\l_TUDa_titlegraphic_ht_dim}
-				\dim_set:Nn \l_tmpa_dim {(\box_wd:N \l_TUDa_titlegraphic_box - \width) / 2}
-				\clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l_TUDa_titlegraphic_box}
+				\box_resize_to_ht:Nn \l_ptxcd_titlegraphic_box {\l_ptxcd_titlegraphic_ht_dim}
+				\dim_set:Nn \l_tmpa_dim {(\box_wd:N \l_ptxcd_titlegraphic_box - \width) / 2}
+				\clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l_ptxcd_titlegraphic_box}
 			}
 		}
 	}{
@@ -39,52 +39,52 @@
 }
 
 
-\box_new:N \l_TUDa_titlehead_box
+\box_new:N \l_ptxcd_titlehead_box
 
-\dim_new:N \l_TUDa_titlegraphic_ht_dim
-\dim_new:N \l_TUDa_titlegraphic_wd_dim
+\dim_new:N \l_ptxcd_titlegraphic_ht_dim
+\dim_new:N \l_ptxcd_titlegraphic_wd_dim
 
 \defbeamertemplate*{title~ page}{TUDa}[1][]
 {
 	\nointerlineskip
-	\vspace{\dim_eval:n {-\c_TUDa_largerule_dim}}
-	\hbox_set:Nn \l_TUDa_titlehead_box {
-	\parbox{\dimexpr\paperwidth-2\TUDa@beamer@sep}{%
+	\vspace{\dim_eval:n {-\c_ptxcd_largerule_dim}}
+	\hbox_set:Nn \l_ptxcd_titlehead_box {
+	\parbox{\dimexpr\paperwidth-2\ptxcd_beamer_sep}{%
 	\begin{beamercolorbox}[
 		wd=\linewidth,
-		sep=\TUDa@beamer@logosep,
+		sep=\ptxcd_beamer_logosep,
 	]{title}
 	\raggedright
 	\usebeamerfont{title}
 	\skip_horizontal:n {1ex}
-	\strut\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-2ex\relax}{
+	\strut\parbox[t]{\dimexpr\linewidth- \wd\ptxcd_logobox-2ex\relax}{
 		\inserttitle
 		\par
 	}
-	\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\usebox\TUDa@logobox}
+	\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\usebox\ptxcd_logobox}
 	\ifx\insertsubtitle\@empty
 	\else
-	\par\vspace{\c_TUDa_largerule_dim}
-	\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \wd\TUDa@logobox-2ex\relax}{
+	\par\vspace{\c_ptxcd_largerule_dim}
+	\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \wd\ptxcd_logobox-2ex\relax}{
 		\usebeamerfont{subtitle}\insertsubtitle
 	}
 	\fi
 	\end{beamercolorbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % bool if authorontrile
-\bool_if:NT \g_TUDa_authorontitle_bool {
+\bool_if:NT \g_ptxcd_authorontitle_bool {
 \par\nointerlineskip
 \begin{beamercolorbox}[
-	wd=\dimexpr\paperwidth-2\TUDa@beamer@sep,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+	wd=\dimexpr\paperwidth-2\ptxcd_beamer_sep,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
 \end{beamercolorbox}
 \par\nointerlineskip
 	\begin{beamercolorbox}[
 	wd=\linewidth,
-	sep=\c_TUDa_largerule_dim,
+	sep=\c_ptxcd_largerule_dim,
 	]{title}
 	\raggedright
 	\skip_horizontal:n {1ex}
-	\parbox[t]{\dimexpr\paperwidth-2\TUDa@beamer@sep-2ex\relax}{
+	\parbox[t]{\dimexpr\paperwidth-2\ptxcd_beamer_sep-2ex\relax}{
 		\ifx\insertauthor\@empty
 		\else
 		\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
@@ -98,18 +98,18 @@
 }
 	}
 	}
-	\box_use:N \l_TUDa_titlehead_box
+	\box_use:N \l_ptxcd_titlehead_box
 \nointerlineskip\begin{beamercolorbox}[
-	wd=\dimexpr\paperwidth-2\TUDa@beamer@sep,ht=\c_TUDa_smallrule_dim,dp=\z@]{smallrule}
+	wd=\dimexpr\paperwidth-2\ptxcd_beamer_sep,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
 	\end{beamercolorbox}
-	\dim_set:Nn \l_TUDa_titlegraphic_ht_dim {\textheight-\box_ht:N\l_TUDa_titlehead_box-\box_dp:N \l_TUDa_titlehead_box
-	+\c_TUDa_largerule_dim-.5\c_TUDa_rulesep_dim-\c_TUDa_smallrule_dim}
-	\let\height\l_TUDa_titlegraphic_ht_dim
-	\dim_set:Nn \l_TUDa_titlegraphic_wd_dim{\dimexpr\paperwidth-2\TUDa@beamer@sep}
-	\let\width\l_TUDa_titlegraphic_wd_dim
+	\dim_set:Nn \l_ptxcd_titlegraphic_ht_dim {\textheight-\box_ht:N\l_ptxcd_titlehead_box-\box_dp:N \l_ptxcd_titlehead_box
+	+\c_ptxcd_largerule_dim-.5\c_ptxcd_rulesep_dim-\c_ptxcd_smallrule_dim}
+	\let\height\l_ptxcd_titlegraphic_ht_dim
+	\dim_set:Nn \l_ptxcd_titlegraphic_wd_dim{\dimexpr\paperwidth-2\ptxcd_beamer_sep}
+	\let\width\l_ptxcd_titlegraphic_wd_dim
 	\nointerlineskip
 	\begin{beamercolorbox}[wd=\width,center]{titlegraphic}
-	\raisebox{-\c_TUDa_largerule_dim}[\dim_eval:n {\height-\c_TUDa_largerule_dim}][0pt]{\inserttitlegraphic}
+	\raisebox{-\c_ptxcd_largerule_dim}[\dim_eval:n {\height-\c_ptxcd_largerule_dim}][0pt]{\inserttitlegraphic}
 	\end{beamercolorbox}
 %	\endgroup
 }
@@ -121,8 +121,8 @@
 \defbeamertemplate*{block~begin}{TUDa}
 {
 	\par\vskip\medskipamount%
-	\begin{beamercolorbox}[ wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent,sep=.5pt,
-		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi]{block~title}
+	\begin{beamercolorbox}[ wd=\dimexpr\linewidth+2\ptxcd_beamer_extraindent,sep=.5pt,
+		leftskip=\dimexpr\ifdim\ptxcd_beamer_extraindent>\z@\ptxcd_beamer_extraindent-\beamer@colbox@sep\else\z@\fi]{block~title}
 	\ifx\insertblocktitle\@empty
 	\else
 	\begin{beamercolorbox}[colsep=.75ex,
@@ -146,9 +146,9 @@
 {
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
-		wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent,
+		wd=\dimexpr\linewidth+2\ptxcd_beamer_extraindent,
 		sep=1.5pt,
-		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi,
+		leftskip=\dimexpr\ifdim\ptxcd_beamer_extraindent>\z@\ptxcd_beamer_extraindent-\beamer@colbox@sep\else\z@\fi,
 	]{block~frame~alerted}
 	\ifx\insertblocktitle\@empty
 	\else
@@ -170,9 +170,9 @@
 {
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
-		wd=\dimexpr\linewidth+2\TUDa@beamer@extraindent,
+		wd=\dimexpr\linewidth+2\ptxcd_beamer_extraindent,
 		sep=1.5pt,
-		leftskip=\dimexpr\ifdim\TUDa@beamer@extraindent>\z@\TUDa@beamer@extraindent-\beamer@colbox@sep\else\z@\fi,
+		leftskip=\dimexpr\dim_compare:nTF {\ptxcd_beamer_extraindent>\c_zero_dim} {-\beamer@colbox@sep} {\c_zero_dim},
 		]{block~frame~example}
 	\ifx\insertblocktitle\@empty
 	\else
