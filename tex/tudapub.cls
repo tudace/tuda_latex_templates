@@ -17,7 +17,6 @@
 \prop_new:N \g_TUDa_unknown_clsopts_prop
 \prop_gput:Nnn \g_TUDa_clsopts_prop {titlepage} {firstiscover}
 \prop_gput:Nnn \g_TUDa_clsopts_prop {captions} {nooneline}
-\prop_gput:Nnn \g_TUDa_clsopts_prop {DIV} {calc}
 
 \int_new:N \g_TUDa_ruledheaders_int
 \int_new:N \g_TUDa_paper_int
@@ -142,8 +141,6 @@
 
 \Module@Process@SpecialOptions[TUDa/special]
 
-\PassOptionsToPackage{DIV=calc}{typearea}
-
 \ProcessKeysOptions{TUDa/pub}
 
 
@@ -153,7 +150,15 @@
   \PassOptionsToPackage{T1}{tudafonts}
 }
 
-\prop_gput:Nnx \g_TUDa_clsopts_prop {twocolumn} {\bool_if:NTF \g_TUDa_twocolumn_bool {true} {false}}
+\exp_args:Nx \tl_if_eq:nnT {\prop_item:Nn \g_TUDa_clsopts_prop {fontsize}} {9pt} 
+	{
+	\prop_if_in:NnF \g_TUDa_unknown_clsopts_prop {DIV} 
+		{\PassOptionsToPackage{DIV=calc}{typearea}}
+	}
+
+\prop_gput:Nnx \g_TUDa_clsopts_prop {twocolumn} {
+	\bool_if:NTF \g_TUDa_twocolumn_bool {true} {false}
+}
 
 \prop_map_inline:Nn \g_TUDa_clsopts_prop {
 	\tl_if_empty:nTF {#2}
