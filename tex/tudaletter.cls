@@ -145,7 +145,7 @@
 
 \box_new:N \g_TUDaLetter_firsthead_box
 \hbox_gset:Nn \g_TUDaLetter_firsthead_box {
-	\parbox{\useplength{firstheadwidth}}{
+	\parbox[t]{\useplength{firstheadwidth}}{
 	\raggedleft
 	\smash{\ptxcd_LetterheadRule}
 	\par
@@ -154,6 +154,7 @@
 	}
 }
 
+\box_gset_dp:Nn \g_TUDaLetter_firsthead_box {\c_zero_dim}
 \setkomavar{firsthead}{
 	\box_use:N \g_TUDaLetter_firsthead_box
 }
@@ -365,7 +366,7 @@
 
 \bool_if:NT \g__ptxcd_letter_headrule_bool {
 	\bool_if:NTF \g__ptxcd_letter_logo_bool {
-		\setkomavar{nexthead}{\box_use:N \g_TUDaLetter_firsthead_box}
+		\setkomavar{nexthead}{\raisebox{\topskip}{\box_use:N \g_TUDaLetter_firsthead_box}}
 	}{
 		\setkomavar{nexthead}{\raisebox{\depth}{\ptxcd_LetterheadRule}}
 	}
