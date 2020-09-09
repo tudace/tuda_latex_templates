@@ -1,8 +1,10 @@
 # TUDa-CI – Installation Notes.
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2019
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2019/10/26
+ tuda-ci 2020/09/09
+
+If you only create demo files, have a look at DEMO.md.
 
 [Link to the github repository](https://github.com/tudace/tuda_latex_templates)
 
