@@ -21,6 +21,24 @@
 \bool_new:N \g_ptxcd_smalltitle_bool
 \str_new:N \g_ptxcd_department_str
 
+\RequirePackage{environ}
+
+\def\solution{\ptxcd_ex_solutionheader:}
+\def\endsolution{}
+
+\cs_new:Nn \ptxcd_setup_solution: {
+	\bool_if:NTF \l_ptxcd_ex_solution_bool {
+		\def\solution{\ptxcd_ex_solutionheader:}
+		\def\endsolution{}
+	}{
+		\RenewEnviron{solution}{
+			\if_false:
+			\BODY
+			\fi:
+		}
+	}
+}
+
 %Message Declaration for option processing
 \msg_new:nnn{tudaexercise} {titlepage-option-disabled} {
 	You~set~the~titlepage~option~to~#1.\\
