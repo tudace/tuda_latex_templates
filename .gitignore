@@ -271,3 +271,8 @@ TSWLatexianTemp*
 
 #PDF/A
 *.xmpdata
+
+*.slnc
+*.len
+*.pdf
+*.tcbtemp
