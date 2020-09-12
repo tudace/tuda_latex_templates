@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/09/11 v3.01
+ tuda-ci 2020/09/12 v3.02
 
 ***************************************************************************
 
@@ -202,4 +202,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - introduce department specific mode *mecheng*
    - restructure internals (ptxcd module)
  * v3.01 (2020-09-11) small bugfixes caused by the internal restructuring
+ * v3.02 (2020-09-12) fix bug in tudaexercise caused by 3.01
    
