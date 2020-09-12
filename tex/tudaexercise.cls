@@ -135,23 +135,6 @@
 
 \RequirePackage{environ}
 
-\def\solution{\ptxcd_ex_solutionheader:}
-\def\endsolution{}
-
-\cs_new:Nn \ptxcd_setup_solution: {
-	\bool_if:NTF \l_ptxcd_ex_solution_bool {
-		\def\solution{\ptxcd_ex_solutionheader:}
-		\def\endsolution{}
-	}{
-		\RenewEnviron{solution}{
-			\if_false:
-			\BODY
-			\fi:
-		}
-	}
-}
-
-
 \bool_new:N \l_ptxcd_ex_subtask_fallback_bool
 
 \keys_define:nn {ptxcd/task}{
