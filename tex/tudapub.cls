@@ -148,7 +148,6 @@
 %Option adjustments required for valid PDF/A
 \bool_if:NT  \g_ptxcd_pdfa_bool {
   \PassOptionsToPackage{RGB}{xcolor}
-  \PassOptionsToPackage{T1}{tudafonts}
 }
 
 \exp_args:Nx \tl_if_eq:nnT {\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}} {9pt}

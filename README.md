@@ -203,4 +203,4 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - restructure internals (ptxcd module)
  * v3.01 (2020-09-11) small bugfixes caused by the internal restructuring
  * v3.02 (2020-09-12) fix bug in tudaexercise caused by 3.01
-   
+ * v3.03 (2020-09-19) remove obsolete Type1 enforcement for pdfa mode
