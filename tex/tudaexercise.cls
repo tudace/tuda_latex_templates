@@ -23,21 +23,41 @@
 
 \RequirePackage{environ}
 
-\def\solution{\ptxcd_ex_solutionheader:}
-\def\endsolution{}
+\newenvironment{solution}{}{}
+\newenvironment{solution*}{}{}
 
 \cs_new:Nn \ptxcd_setup_solution: {
 	\bool_if:NTF \l_ptxcd_ex_solution_bool {
 		\def\solution{\ptxcd_ex_solutionheader:}
 		\def\endsolution{}
+		\expandafter\def\csname solution*\endcsname{\ignorespaces}
+		\expandafter\let\csname endsolution*\endcsname\endsolution
 	}{
 		\RenewEnviron{solution}{
 			\if_false:
 			\BODY
 			\fi:
 		}
+		\RenewEnviron{solution*}{
+			\if_false:
+			\BODY
+			\fi:
+		}
 	}
 }
+
+\ptxcd_setup_solution:
+
+\prg_new_conditional:Nnn \__ptxcd_if_solution: {T,F,TF} {
+	\bool_if:NTF \l_ptxcd_ex_solution_bool
+	{\prg_return_true:}
+	{\prg_return_false:}
+}
+
+\let\IfSolutionT \__ptxcd_if_solution:T
+\let\IfSolutionF \__ptxcd_if_solution:F
+\let\IfSolutionTF \__ptxcd_if_solution:TF
+
 
 %Message Declaration for option processing
 \msg_new:nnn{tudaexercise} {titlepage-option-disabled} {
@@ -138,21 +158,21 @@
 \bool_new:N \l_ptxcd_ex_subtask_fallback_bool
 
 \keys_define:nn {ptxcd/task}{
-	points .int_set:N = \l_ptxcd_ex_points_int,
+	points .int_set:N = \l_ptxcd_ex_task_points_int,
 	points .initial:n = 0,
-	credit .tl_set:N = \l_ptxcd_ex_credit_tl,
+	credit .tl_set:N = \l_ptxcd_ex_task_credit_tl,
 	credit .initial:n =,
 	solution .meta:nn ={ptxcd/exercise}{solution=#1},
 }
 
 \keys_define:nn {ptxcd/subtask} {
-	credit .tl_set:N = \l_ptxcd_ex_credit_tl,
+	credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
 	credit .initial:n =,
-	points .int_set:N = \l_ptxcd_ex_points_int,
+	points .int_set:N = \l_ptxcd_ex_subtask_points_int,
 	points .initial:n = 0,
 	title .tl_set:N = \l_ptxcd_ex_title_tl,
 	title .initial:n =,
-	unknown .code:n = \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool \tl_clear:N \l_ptxcd_ex_credit_tl \int_zero:N \l_ptxcd_ex_points_int,
+	unknown .code:n = \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool \tl_clear:N \l_ptxcd_ex_subtask_credit_tl \int_zero:N \l_ptxcd_ex_subtask_points_int,
 }
 
 \keys_define:nn {ptxcd/exercise/headline} {
@@ -216,9 +236,9 @@
 		}
 		#4
 		\tl_if_in:nnT {#1} {task} {
-			\tl_if_empty:NTF \l_ptxcd_ex_credit_tl
-				{\pointformat{\l_ptxcd_ex_points_int}}
-				{\creditformat{\l_ptxcd_ex_credit_tl}}
+			\tl_if_empty:cTF{l_ptxcd_ex_#1_credit_tl}
+				{\pointformat{\tl_use:c {l_ptxcd_ex_#1_points_int}}}
+				{\creditformat{\tl_use:c {l_ptxcd_ex_#1_credit_tl}}}
 		}
 		\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
 		\skip_vertical:n {\ptxcd_titlerule_sep: -\dp\strutbox}
@@ -660,10 +680,8 @@
 \cs_undefine:N \task
 
 \NewDocumentEnvironment{task}{om}{
-	\begingroup
 	\IfNoValueF{#1}{\keys_set:nn {ptxcd/task}{#1}}
 	\@task{#2}
-	\endgroup
 }{}
 
 \cs_set_eq:cN {task*} \task
