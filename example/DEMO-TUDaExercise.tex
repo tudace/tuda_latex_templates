@@ -134,6 +134,24 @@ Die Voreinstellung ist \code{solution=false}.
 \begin{solution}
 Beispiel für einen Lösungsvorschlag
 \end{solution}
+\end{task}
+
+\begin{task}{Abfrage der Einstellung \enquote{solution}}
+Ab Version 3.04 existiert zusätzlich die Möglichkeit die Einstellung \code{solution} abzufragen.
+
+Die Umgebung \code{solution*} verhält sich wie \code{solution} ohne die Beschriftung. Darüber Hinaus wurden die Makros \code{\IfSolutionTF} ergänzt.
+
+\begin{verbatim}
+\IfSolutionT{<falls solution=true>}
+\IfSolutionF{<falls solution=false>}
+\IfSolutionTF{<falls solution=true>}{<falls solution=false>}
+\end{verbatim}
+
+In der aktuellen Einstellung (\code{solution=false}) erzeugt der obige Block die folgende Ausgabe:
+
+\IfSolutionT{<falls solution=true>}
+\IfSolutionF{<falls solution=false>}
+\IfSolutionTF{<falls solution=true>}{<falls solution=false>}
 
 \end{task}
 
