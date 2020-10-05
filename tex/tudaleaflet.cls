@@ -49,7 +49,7 @@
 	}
 }
 
-\LoadClass[notumble,9pt]{leaflet}
+\LoadClass[notumble]{leaflet}
 
 %to workaround incompatibilities between leaflet and scrextend
 \let\sectfont\relax

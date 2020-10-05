@@ -126,6 +126,9 @@
 		\keys_set:nn {ptxcd/pub}{colorback=false,ruledheaders=section,departmentlogofile=tuda_maschinenbau_logo}
 	},
 	department .initial:n = default,
+	department / unknown .code:n = {
+		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
+	},
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,

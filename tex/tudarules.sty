@@ -51,6 +51,10 @@
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
 	department / mecheng .code:n = \str_gset:Nn \g_ptxcd_department_str {mecheng},
+	department / unknown .code:n = {
+		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
+	},
+	department .initial:V = \g_ptxcd_department_str,
 	mecheng .meta:n = {department=mecheng},
 }
 

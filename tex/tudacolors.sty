@@ -31,6 +31,9 @@
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
 	department / mecheng .code:n = \str_gset:Nn \g_ptxcd_department_str {mecheng}\keys_set:nn {ptxcd/colors}{accent=TUDa-2d,identbar=TUDa-6b},
+	department / unknown .code:n = {
+		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
+	},
 	department .initial:V = \g_ptxcd_department_str,
 	mecheng .meta:n = {department=mecheng},
 }
