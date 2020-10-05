@@ -377,6 +377,15 @@ $\dot{\hat{x}}$
 
 \noindent Die zugehörige Diskussion findet sich im tuda-ci Repository (\url{https://github.com/tudace/tuda_latex_templates/issues/78}). Da sich diese Problematik nicht direkt aus tuda-ci sondern aus der Konstruktion der beiden Pakete untereinander ergibt, ist es leider nicht möglich pauschal eine Anpassung in tuda-ci zu implementieren. Unter dem angegebenen Link findet sich jedoch ein möglicher Workaround, sobald beide Varianten benötigt werden.
 
+\subsection{Möglicher Option Clash mit microtype}
+Das Paket microtype wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenden Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen, um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
+
+Falls es zwingend Notwendig ist die Type 1 Schriftart zu verwenden, ist es möglich weitere Optionen vor dem Laden der Dokumentenklasse an \pck{microtype} zu übergeben.
+
+\begin{verbatim}
+	\PassOptionsToPackage{<microtype Optionen>}{microtype}
+	\documentclass{…}
+\end{verbatim}
 \appendix
 \printbibliography
 

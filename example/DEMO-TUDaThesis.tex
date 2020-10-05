@@ -24,8 +24,11 @@
 %%%%%%%%%%%%%%%%%%%
 \usepackage[english, main=ngerman]{babel}
 \usepackage[autostyle]{csquotes}% Anführungszeichen vereinfacht
-\usepackage{microtype}
 
+% Falls mit pdflatex kompiliert wird, wird microtype automatisch geladen, in diesem Fall muss diese Zeile entfernt werden, und falls weiter Optionen hinzugefügt werden sollen, muss dies über
+% \PassOptionsToPackage{Optionen}{microtype}
+% vor \documentclass hinzugefügt werden.
+\usepackage{microtype}
 
 %%%%%%%%%%%%%%%%%%%
 %Literaturverzeichnis
@@ -95,7 +98,7 @@
 Die Datei \file{DEMO-TUDaThesis.tex} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
 Sie ist Teil des TUDa-CI-Bundles wurde vom in Teilen tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
 
-Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen. In diesem Dokument werden überwiegend die speziell auf Abschlussarbeiten ausgelegten Möglichkeiten beschrieben.
+Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen. In diesem Dokument werden überwiegend die speziell auf Abschlussarbeiten ausgelegten Möglichkeiten beschrieben. Weitere Konfigurationsmöglichkeiten finden sich in der Datei \file{DEMO-TUDaPub.pdf} \cite{tudapub}.
 
 Es ist voreingestellt, dass eine PDF/A-Datei erzeugt wird. Die beste Kompatibilität hierfür bietet Lua\LaTeX. Bei anderen Compilern kann dies entsprechend der Informationen in DEMO-TUDaPub zu Problemen führen. In diesem Fall sollte entweder der Compiler gewechselt oder \code{pdfa=false} aktiviert werden.
 
