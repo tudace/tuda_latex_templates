@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/09/12 v3.02
+ tuda-ci 2020/10/05 v3.04
 
 ***************************************************************************
 
@@ -204,3 +204,7 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * v3.01 (2020-09-11) small bugfixes caused by the internal restructuring
  * v3.02 (2020-09-12) fix bug in tudaexercise caused by 3.01
  * v3.03 (2020-09-19) remove obsolete Type1 enforcement for pdfa mode
+ * v3.04 (2020-10-05) feature enhancements of tudaexercise
+   - enable pdfusetitle for tudaexercise
+   - add solution* and IfSolution mechanism for tudaexercise
+   - extend documentation on further configuration
