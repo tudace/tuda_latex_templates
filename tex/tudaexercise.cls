@@ -591,7 +591,8 @@
 \RequirePackage{graphicx}
 
 %%hyperref
-\usepackage{hyperref}
+\PassOptionsToPackage{pdfusetitle}{hyperref}
+\RequirePackage{hyperref}
 \hypersetup{hidelinks, unicode}
 
 \providecaptionname{ngerman, german}{\sheetname}{Übungsblatt}
