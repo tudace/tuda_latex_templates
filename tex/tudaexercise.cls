@@ -433,6 +433,12 @@
 	contents=\raisebox{\depth}{\box_use:N \ptxcd_headrule_box},
 		]{TUDa.exercise.head.above.line}
 	\ofoot[\pagemark]{\pagemark}
+	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.exercise.foot.even}
+	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.exercise.foot.odd}
+	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.exercise.foot.oneside}
+	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.exercise.foot.even}
+	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.exercise.foot.odd}
+	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.exercise.foot.oneside}
 }
 
 \DeclarePageStyleAlias{TUDa}{TUDa.exercise}
