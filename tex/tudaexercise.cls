@@ -532,12 +532,15 @@
             {\usekomafont{title}\bool_if:NTF \g_ptxcd_smalltitle_bool {\LARGE} {\huge} {\@title\par}}%
             \vskip 1em
             \bool_if:NF \g_ptxcd_ex_compatibility_bool
-            {
-              {\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
-              \gdef\@subtitle{}
-              \vskip .5em
-            }
-            {\ifx\@author\@empty\else\usekomafont{author}\@author\par\fi}%
+	            {
+					{\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
+					\gdef\@subtitle{}
+					\vskip .5em
+				}
+			{
+              \xdef\@author {\@author}
+              \ifx\@author\@empty\else\usekomafont{author}\@author\par\fi
+			}
             \vskip .5em
           \bool_if:NTF \g_ptxcd_colorback_bool {\end{addmargin}} {\par}
         \end{minipage}}
