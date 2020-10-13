@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/10/05 v3.04
+ tuda-ci 2020/10/13 v3.05
 
 ***************************************************************************
 
@@ -208,3 +208,4 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - enable pdfusetitle for tudaexercise
    - add solution* and IfSolution mechanism for tudaexercise
    - extend documentation on further configuration
+ * v3.05 (2020-10-13) fix \@author expansion for tudaexercise
