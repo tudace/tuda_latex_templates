@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/10/13 v3.05
+ tuda-ci 2020/10/20 v3.06
 
 ***************************************************************************
 
@@ -209,3 +209,7 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - add solution* and IfSolution mechanism for tudaexercise
    - extend documentation on further configuration
  * v3.05 (2020-10-13) fix \@author expansion for tudaexercise
+ * v3.06 (2020-10-20)
+   - add affidavit for digital thesis submission
+   - small adjustments on tudathesis titlepage
+   - simplify change of reviewer description
