@@ -157,6 +157,24 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\item[studentID] Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
 	\item[birthplace] Geburtsort. Angabe ist bei Dissertationen notwendig.
 	\item[reviewer] Gutachter. Mehrere Gutachter werden, wie Autoren durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
+	\minisec{Änderung des Bezeichners}
+	Die Änderung des Bezeichners ist über ein optionales Argument möglich:
+	\begin{verbatim}
+		\reviewer[Ersatzbezeichner]{Name1 \and Name2}
+	\end{verbatim}
+	Um die numerische Benennung abzuändern ist es zusätzlich möglich statt dem Ersatzbezeichner eine Kommaliste zu übergeben:
+	\begin{verbatim}
+		\reviewer*[Bezeichner1, Bezeichner2]{Name1 \and Name2}
+	\end{verbatim}
+	In diesem Fall entfällt die Nummerierung vor dem Bezeichner. Soll z.\,B. den Formulierungen der Promotionsordnung entsprochen werden, gilt:
+	\begin{verbatim}
+		\reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
+	\end{verbatim}
+	Für die Erstellung Fachbereichsspezifischer Templates existiert hierfür auch ein Makro, dass ohne den Aufruf von \verb+\reviewer+ Änderungen zulässt.
+	\begin{verbatim}
+	\setupReviewName{Ersatzwort für „Gutachten“}
+	\end{verbatim}
+	Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+, eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
 	\item[department] Fach-/Studienbereich, allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
 
