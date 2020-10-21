@@ -172,6 +172,25 @@ Voreingstellt ist hierbei \code{scrreprt}, dieses Dokument verwendet jedoch \cod
 
 Allgemein bietet \KOMAScript{} viele Möglichkeiten zu Anpassungen. Wie in der tudapub-Demo-Datei beschrieben, können hier jedoch nicht alle erläutert werden, ein Blick in die offizielle Dokumentation ist daher häufig hilfreich \cite{scrguide}.
 
+\section{Sprachanpassung}
+Der Modus für Abschlussarbeiten setzt einige sprachabhängige Bezeichnungen.
+Teilweise ist Deutsch für diese Elemente als Hauptsprache vorgeschrieben (z.\,B. die Selbstständigkeitserklärung). Für die korrekte Verarbeitung wird daher ein Paket zur Sprachanpassung benötigt.
+TUDa-CI verwendet hierfür das babel-Paket.
+
+Dies wird jedoch nicht automatisch geladen, da hierfür die Konfiguration der Sprachen bekannt sein müsste. Die Demo-Dateien für Abschlussarbeiten (\file{DEMO-TUDaThesis.tex}/""\file{DEMO-TUDaPhD.tex}) laden hierfür die Konfiguration:
+\begin{verbatim}
+	\usepackage[english, main=ngerman]{babel}
+\end{verbatim}
+Diese ist für ein Dokument mit Deutsch als Hauptsprache und Englischen Elementen.
+Die Hauptsprache wird als Wert der Option \verb+main=+ übergeben.
+Das Laden von \verb+ngerman+ wird in den Fällen, in denen es von TUDa-CI benötigt wird, automatisch ausgelöst.
+Für eine bessere Übersichtlichkeit ist es dennoch hilfreich es dort aufzuführen.
+
+Falls die Hauptsprache nicht Deutsch ist, wäre daher die folgende Konfiguration sinnvoll:
+\begin{verbatim}
+	\usepackage[ngerman, main=<Hauptsprache>]{babel}
+\end{verbatim}
+
 \section{Übergabe der Titelinformationen}
 
 Die Titelinformationen werden analog zur klassichen Titelerzeugung mit \verb+\maketitle+ übergeben. Allerdings wurden die Felder um ein paar speziellere Daten erweitert. Sofern nicht anders angegeben, verfügen alle Makros über ein notwendiges Argument für die Datenübergabe, z.\,B.
