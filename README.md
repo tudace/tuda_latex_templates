@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/10/20 v3.06
+ tuda-ci 2020/10/21 v3.07
 
 ***************************************************************************
 
@@ -213,3 +213,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - add affidavit for digital thesis submission
    - small adjustments on tudathesis titlepage
    - simplify change of reviewer description
+ * v3.07 (2020-10-21)
+   - improve language selection
+   - fix linebreak issues in affidavit
