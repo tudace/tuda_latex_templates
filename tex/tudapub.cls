@@ -376,8 +376,6 @@
 	\def\ptxcd_institution{#1}
 }
 
-\gdef\ptxcd_datename{Datum}
-\gdef\ptxcd_dateseparator{:~}
 
 \cs_new:Nn \ptxcd_titlerule_sep: {\the\dp\strutbox}
 
@@ -527,6 +525,17 @@
 		{\languagename} {\exp_not:N #1} {#2}
 	\def#1{#2}
 	}
+}
+
+\cs_new:Nn \ptxcd_declare_caption:Nnnn {
+	\ptxcd_define_captionFallback:Nn #1 {#2}
+	\defcaptionname{ngerman, german}{#1}{#2}
+	\defcaptionname{english, USenglish, american}{#1}{#3}
+	\defcaptionname{UKenglish, british}{#1}{#4}
+}
+
+\cs_new:Nn \ptxcd_declare_caption:Nnn {
+	\ptxcd_declare_caption:Nnnn #1 {#2} {#3} {#3}
 }
 
 \renewcommand*{\@author}{
@@ -1183,9 +1192,10 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	}
 }
 
-\ptxcd_define_captionFallback:Nn \authorandname {and}
-\defcaptionname{ngerman, german}{\authorandname}{und}
-\defcaptionname{english, USenglish, american, UKenglish, british}{\authorandname}{and}
+\ptxcd_declare_caption:Nnn \authorandname {und} {and}
+\ptxcd_declare_caption:Nnn \ptxcd_datename {Datum}{Date}
+
+\gdef\ptxcd_dateseparator{:~}
 
 
 \providecommand*{\frontmatter}{
