@@ -99,9 +99,8 @@ Im folgenden werden die möglichen Optionen beschrieben.
 		Flattersatz in der marginnline aus \KOMAScript
 	}
 	\item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann Randnotizen deaktiviert.
-	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend
-	beschränkt. False lädt den Standardstil aus \KOMAScript.
-	\item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
+	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend beschränkt. False lädt den Standardstil aus \KOMAScript.
+    \item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
 	Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=""false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
 	\item[headline] Die Kopfzeile verfügt über die im Corporate Design beschriebenen Layoutmöglichkeiten über den Wert \code{automark}. Da diese Lösung typografisch nicht sonderlich sinnvoll ist, ist es auch möglich, diese abzuschalten. Voreingestellt ist ein Stil ohne Kolumnentitel.
 	\item[logo] Option für die Titelseite, siehe \ref{sec:title}
@@ -318,7 +317,7 @@ Einige Fachbereiche haben spezielle Anforderungen. Dieser Abschnitt betrachtet d
 \subsection{Fachbereich Maschinenbau}
 Der entsprechende Modus wird über die Option \code{department=mecheng} oder kurz \code{mecheng} aktiviert. Die Farbgebung passt sich dann automatisch an und die Trennlinie der Fußzeile erhält die geforderte Form des Zeitstrahles. 
 
-Darüber hinaus erfordern manche Stellen dieses Fachbereits die übergabe einer ID zu Kennzeichnung des Dokuments. Hierfür wurde der Mechanismus 
+Darüber hinaus erfordern manche Stellen dieses Fachbereichs die Übergabe einer ID zu Kennzeichnung des Dokuments. Hierfür wurde der Mechanismus
 \begin{verbatim}
 \SetPaperID{<Buchstabe>}{<tiefgestelle Nummer>}}
 \end{verbatim}
@@ -366,7 +365,7 @@ Beispiele für typische Modifikationen, die auch im Rahmen des Corporate Design 
 
 \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
 Das Paket \pck{pdfx}, über welches die PDF/A Kompatibilität erzeugt wird, hat nur einen begrenzten Support für \hologo{XeLaTeX}.
-Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hologo{XeLaTeX}-Versionen passieren, dass \pck{pdfx} bereits Fehlermeldungen erzeugt. Abhilfe wird in diesem Fall durch eine Compiler-Wechsel auf \hologo{LuaLaTeX} (welcher ohnehin empfohlen wird) oder durch Sbschalten des PDF/A-Modus (\code{pdfa=false})  geschaffen.
+Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hologo{XeLaTeX}-Versionen passieren, dass \pck{pdfx} bereits Fehlermeldungen erzeugt. Abhilfe wird in diesem Fall durch eine Compiler-Wechsel auf \hologo{LuaLaTeX} (welcher ohnehin empfohlen wird) oder durch Abschalten des PDF/A-Modus (\code{pdfa=false})  geschaffen.
 
 
 \subsection{Geschachtelte Akzente (Inkompatibilität zwischen pdfx und amsmath)}
