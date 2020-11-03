@@ -888,13 +888,15 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		}%
 		\def\thefootnote{\fnsymbol{footnote}}
 		\if@titlepageiscoverpage
-		\edef\titlepage@restore{%
-			\noexpand\endgroup
-			\noexpand\global\noexpand\@colht\the\@colht
-			\noexpand\global\noexpand\@colroom\the\@colroom
-			\noexpand\global\vsize\the\vsize
-			\noexpand\global\noexpand\@titlepageiscoverpagefalse
-			\noexpand\let\noexpand\titlepage@restore\noexpand\relax
+		\def\titlepage@restore{%
+			\endgroup
+			\ptxcd_restore_typearea:
+			\dim_sub:Nn \evensidemargin {\marginparwidth+\marginparsep}
+			\dim_add:Nn \textwidth   {\marginparwidth+\marginparsep}
+			\columnwidth=\textwidth
+			\hsize=\columnwidth
+			\global\@titlepageiscoverpagefalse
+			\let\titlepage@restore\relax
 		}%
 		\begingroup
 		\topmargin=\dimexpr \coverpagetopmargin-1in\relax
