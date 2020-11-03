@@ -860,6 +860,10 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 \def\sponsors#1{\def\@sponsors{#1}}
 \sponsors{}
 
+\newcommand*{\ptxcd_title@footnote}[2][1]{
+	\textsuperscript{\@fnsymbol{#1}}#2
+}
+
 \str_if_eq:VnTF \g_ptxcd_pubType_tl  {thesis} {
 	\input{tudathesis.cfg}
 } {
@@ -870,9 +874,6 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	\expandafter\newcommand\csname #1\endcsname[2][]{
 		\msg_error:nnn {tudapub} {only-thesis} {#1}
 	}
-}
-\newcommand*{\ptxcd_title@footnote}[2][1]{
-\textsuperscript{\@fnsymbol{#1}}#2
 }
 
 % The following macro is an adapted version of the corresponding KOMA-Script macro
@@ -967,17 +968,17 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 						\@thanks
 					\end{addmargin}
 					\par\vspace{-\dp\strutbox}
-					\let\@thanks\@empty
 				}
 				\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par}
 		}
+		\let\@thanks\@empty
 		\ptxcd_adjust_titlepage_style:
 		\thispagestyle{title.TUDa}
 		\nointerlineskip\box_use:N \g_ptxcd_title_box
 		\par
 		\vfill
 		\box_if_empty:NTF \g_ptxcd_sponsor_box {
-				\raisebox{-\c_ptxcd_rulesep_dim}[0pt][0pt]{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}
+			\raisebox{-\c_ptxcd_rulesep_dim}[0pt][0pt]{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}
 		}{
 			\box_use:N \g_ptxcd_sponsor_box
 		}
