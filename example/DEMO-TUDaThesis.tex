@@ -58,9 +58,6 @@
 \let\code\texttt
 \let\tbs\textbackslash
 
-\newcommand*{\printlicensedemo}[1]{\par\texttt{#1}:\\
-	\begingroup\urlstyle{same}\small\csname g__ptxcd_#1:\endcsname\par\endgroup}
-
 \usepackage{pifont}% Zapf-Dingbats Symbole
 \newcommand*{\FeatureTrue}{\ding{52}}
 \newcommand*{\FeatureFalse}{\ding{56}}
@@ -234,10 +231,10 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, die durch die Universitätsbibliothek angepasst wurde.
 	Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
 
-	Die vorgefertigten Lizenzschlüssel lauten:
-	\printlicensedemo{cc-by-nc-nd-2.0-de}
-	\printlicensedemo{cc-by-4.0}
-	\printlicensedemo{cc-by-nc-nd-4.0}
+	Die vorgefertigten Lizenzschlüssel lauten: \verb+cc-by-nc-nd-2.0-de+ (noch aktuelle Voreinstellung), \verb+cc-by-4.0+, \verb+cc-by-nc-nd-4.0+.
+	Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet das Projekt über seinen Lizenzfinder unter \url{http://creativecommons.org/choose/}
+
+	Falls ein davon abweichender Wert gewählt wird, wird dieser direkt an der Stelle des Lizenztextes verwendet. Falls der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig
 	\item[titleimage] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Als Maße können hier die Längen \verb+\layerwidth+ und \verb+\layerheight+ verwendet werden. Sie passen sich dem Verfügbaren Platz an. Für ein Beispiel sei auf die TUDapub-Dokumentation verwiesen.
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Informationen ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
