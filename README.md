@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
 
- tuda-ci 2020/10/21 v3.07
+ tuda-ci 2020/11/05 v3.08
 
 ***************************************************************************
 
@@ -216,3 +216,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * v3.07 (2020-10-21)
    - improve language selection
    - fix linebreak issues in affidavit
+ * v3.08 (2020-11-05)
+   - fix titleback margins
+   - add predefined values for some cc licenses in tudathesis
