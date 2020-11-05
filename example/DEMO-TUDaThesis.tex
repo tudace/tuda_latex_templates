@@ -58,6 +58,9 @@
 \let\code\texttt
 \let\tbs\textbackslash
 
+\newcommand*{\printlicensedemo}[1]{\par\texttt{#1}:\\
+	\begingroup\urlstyle{same}\small\csname g__ptxcd_#1:\endcsname\par\endgroup}
+
 \usepackage{pifont}% Zapf-Dingbats Symbole
 \newcommand*{\FeatureTrue}{\ding{52}}
 \newcommand*{\FeatureFalse}{\ding{56}}
@@ -84,8 +87,16 @@
 \submissiondate{\today}
 \examdate{\today}
 
-%	\tuprints{urn=1234,printid=12345,doi=10.25534/tuprints-1234}
-%	\dedication{Für alle, die \TeX{} nutzen.}
+% Hinweis zur Lizenz:
+% TUDa-CI verwendet momentan die Lizenz CC BY-NC-ND 2.0 DE als Voreinstellung.
+% DIe TU Darmstadt hat jedoch die Empfehlung von dieser auf die liberalere
+% CC BY 4.0 geändert. Diese erlaubt eine Verwendung bearbeiteter Versionen und
+% die kommerzielle Nutzung.
+% TUDa-CI wird im nächsten größeren Release ebenfalls diese Anpassung vornehmen.
+% Aus diesem Grund wird empfohlen die Lizenz manuell auszuwählen.
+% \tuprints{urn=1234,printid=12345,doi=10.25534/tuprints-1234,license=cc-by-4.0}
+
+% \dedication{Für alle, die \TeX{} nutzen.}
 
 \maketitle
 
@@ -217,6 +228,16 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\end{verbatim}
 	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
 
+	Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
+
+	Ab Version 3.08 existieren vorgefertigte Werte für die Option \verb|license|, um eine einfachere Anpassung zu ermöglichen.
+	Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, die durch die Universitätsbibliothek angepasst wurde.
+	Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
+
+	Die vorgefertigten Lizenzschlüssel lauten:
+	\printlicensedemo{cc-by-nc-nd-2.0-de}
+	\printlicensedemo{cc-by-4.0}
+	\printlicensedemo{cc-by-nc-nd-4.0}
 	\item[titleimage] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Als Maße können hier die Längen \verb+\layerwidth+ und \verb+\layerheight+ verwendet werden. Sie passen sich dem Verfügbaren Platz an. Für ein Beispiel sei auf die TUDapub-Dokumentation verwiesen.
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Informationen ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
