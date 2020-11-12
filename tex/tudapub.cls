@@ -20,11 +20,10 @@
 
 \int_new:N \g_ptxcd_ruledheaders_int
 \int_new:N \g_ptxcd_paper_int
-\msg_new:nnnn {tudapub} {compatibility-only} {
+\msg_new:nnn {tudapub} {compatibility-only} {
 	You~used~the~outdated~#1~option.\\
-	This~only~exists~due~to~compatibility~reasons.
-}{
-	Please~look~at~tuda-ci~documentation~for~further~information~and~avoid~using~outdated~options.
+	This~option~has~been~removed~with~tuda-ci~version~3.08.\\
+	See~documentation~for~the~updated~implementation.
 }
 
 \bool_new:N \g_ptxcd_geometry_bool
@@ -82,6 +81,7 @@
 	colorback .initial:n = true,
 	colortitleback .code:n =  \msg_warning:nnx {tudapub} {compatibility-only} {\l_keys_key_tl}
 		\keys_set:nn {ptxcd/pub} {logo=head,colorback=false},
+	colortitleback .code:n =  \msg_error:nnx {tudapub} {compatibility-only} {\l_keys_key_tl},
 	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
 	pdfa .initial:n = true,
 	twocolumn .bool_gset:N = \g_ptxcd_twocolumn_bool,
