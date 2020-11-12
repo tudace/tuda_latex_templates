@@ -171,7 +171,16 @@ Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklass
 	\item[logo=body] Das Logo samt der Infoboxen wird im Körper der Titelseite platziert.
 \end{description}
 
-Darüber hinaus lässt sich die Farbgebung umschalten. Die Option \code{colorback} schaltet zwischen dem farbigen Block auf der Titelseite und weißem Hintergrund um. Falls die Kombination \code{colorback=false} und \code{logo=head} geschaltet ist, bleibt der obere Teil der Titelseite jedoch farbig.
+Darüber hinaus lässt sich die Farbgebung umschalten.
+Die Option \code{colorback} schaltet zwischen dem farbigen Block auf der Titelseite und weißem Hintergrund um. Sie ist in der Voreinstellung aktiviert, sodass ein Farbiger Block erzeugt wird.
+
+Mit Version 3.08 werden zusätzlich zu den \code{true}/\code{false} Werten auch die Werte \code{title}, \code{head} und \code{body} für die Option colorback ergänzt.
+Mit diesen ist es möglich nach der Auswahl der Logoposition eine Korrektur an der Farbgebung durchzuführen. Alle drei neuen Werte aktivieren die Hintergrundfarbe und schalten deren Position um:
+\begin{description}
+	\item[colorback=title] Der Titel (ohne Untertitel) wird hinterlegt.
+	\item[colorback=head] Der komplette Titelblock, inklusive Titelblock wird hinterlegt.
+	\item[colorback=body] Es wird nur der Bildbereich eingefärbt.
+\end{description}
 
 \subsection{Strukturierungselemente}
 \minisec{Die abstract-Umgebung}
