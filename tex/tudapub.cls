@@ -28,6 +28,8 @@
 
 \bool_new:N \g_ptxcd_geometry_bool
 \bool_new:N \g_ptxcd_custommargins_bool
+\bool_new:N \g_ptxcd_colorbacktitle_bool
+\bool_new:N \g_ptxcd_colorbacksubtitle_bool
 
 \keys_define:nn {ptxcd/pub} {
 	%twoside -> geometry + class
@@ -79,8 +81,18 @@
 	headline .initial:n =false,
 	colorback .bool_gset:N = \g_ptxcd_colorback_bool,
 	colorback .initial:n = true,
-	colortitleback .code:n =  \msg_warning:nnx {tudapub} {compatibility-only} {\l_keys_key_tl}
-		\keys_set:nn {ptxcd/pub} {logo=head,colorback=false},
+	colorback / title .code:n = 
+		\bool_gset_true:N \g_ptxcd_colorbacktitle_bool
+		\bool_gset_true:N \g_ptxcd_colorback_bool
+		\bool_gset_false:N \g_ptxcd_colorbacksubtitle_bool,
+	colorback / body .code:n =
+		\bool_gset_false:N \g_ptxcd_colorbacktitle_bool
+		\bool_gset_false:N \g_ptxcd_colorbacksubtitle_bool
+		\bool_gset_true:N \g_ptxcd_colorback_bool,
+	colorback / head .code:n = 
+		\bool_gset_true:N \g_ptxcd_colorbacktitle_bool
+		\bool_gset_true:N \g_ptxcd_colorback_bool
+		\bool_gset_true:N \g_ptxcd_colorbacksubtitle_bool,
 	colortitleback .code:n =  \msg_error:nnx {tudapub} {compatibility-only} {\l_keys_key_tl},
 	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
 	pdfa .initial:n = true,
@@ -95,10 +107,16 @@
 	abstract .code:n = \prop_gput:Nnn \g_ptxcd_unknown_clsopts_prop {abstract} {#1},
 	abstract .initial:n =true,
 	logo .choice:,
-	logo / head .code:n = {\bool_gset_true:N \g_ptxcd_logo@inhead_bool},
-	logo / body .code:n = {\bool_gset_false:N \g_ptxcd_logo@inhead_bool},
-	logo / top .code:n = {\bool_gset_true:N \g_ptxcd_logo@inhead_bool},
-	logo / bottom .code:n = {\bool_gset_false:N \g_ptxcd_logo@inhead_bool},
+	logo / head .code:n = {
+		\bool_gset_true:N \g__ptxcd_LogoInHead_bool
+		\bool_gset_true:N \g_ptxcd_colorbacktitle_bool
+	},
+	logo / body .code:n = {
+		\bool_gset_false:N \g__ptxcd_LogoInHead_bool
+		\bool_gset_false:N \g_ptxcd_colorbacktitle_bool
+	},
+	logo / top .meta:n = {logo=head},
+	logo / bottom .code:n = {\bool_gset_false:N \g__ptxcd_LogoInHead_bool},
 	logo .initial:n = {body},
 	paper .choices:nn = {a0,a1,a2,a3,a4,a5,a6}{
 		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
@@ -569,14 +587,14 @@
 		+\c_ptxcd_rulesep_dim
 	]{title.TUDa.image}
 
-	\bool_if:NT \g_ptxcd_logo@inhead_bool {
+	\bool_if:NT \g_ptxcd_colorbacktitle_bool {		
 		\ModifyLayer[
-		addvoffset=\dim_eval:n {\box_ht:N \ptxcd_headrule_box+\box_dp:N \ptxcd_headrule_box-\g_ptxcd_titlerule_dim},
-		height={\box_ht:N \g_ptxcd_title_box+ \g_ptxcd_title_fill_skip+.5\c_ptxcd_logoheight_dim
-	}
-		]{title.TUDa.background}
-
-		\AddLayersToPageStyle{title.TUDa}{title.TUDa.background}
+			textarea,
+			addvoffset=\dim_eval:n {\box_ht:N \ptxcd_headrule_box+\box_dp:N \ptxcd_headrule_box-\g_ptxcd_titlerule_dim},
+			height={\box_ht:N \g_ptxcd_title_box+ \g_ptxcd_title_fill_skip+.5\c_ptxcd_logoheight_dim
+			\bool_if:NT \g_ptxcd_colorbacksubtitle_bool {+\box_dp:N \g_ptxcd_title_box}
+		}
+			]{title.TUDa.background}
 	}
 	\vspace*{\dim_eval:n {
 		-\topskip
@@ -588,13 +606,12 @@
 	\nointerlineskip
 	\ptxcd_setup_title_box:
 
-	\bool_if:NT \g_ptxcd_logo@inhead_bool {
+	\bool_if:NT \g__ptxcd_LogoInHead_bool {
 		\dim_compare:nT {\box_ht:N \g_ptxcd_title_info_box+ \box_dp:N \g_ptxcd_title_info_box  > \box_ht:N \g_ptxcd_title_box}
 			{\msg_warning:nn{tudapub} {infobox-too-high}}
 		\makebox[\linewidth][r]{\smash{
 				\raisebox{-\height}{
 					\makebox[2.2\c_ptxcd_logoheight_dim][l]{
-						%				}
 						\box_use:N \g_ptxcd_title_info_box
 				}}
 		}}
@@ -673,7 +690,12 @@
 \DeclareNewLayer[textarea,background,mode=picture,
 	contents={
 		\tl_if_empty:NTF \g_ptxcd_titleimage_code_tl
-		{\bool_if:NT \g_ptxcd_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}}
+		{
+			\bool_if:NF \g_ptxcd_colorbacktitle_bool
+			{ 
+				\bool_if:NT \g_ptxcd_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}
+			}
+		}
 		{\putUL{\color{identbarcolor}
 				\let\width\layerwidth
 				\let\height\layerheight
@@ -681,7 +703,7 @@
 					\leavevmode\ignorespaces
 					\g_ptxcd_titleimage_code_tl
 					}}}}
-		\bool_if:NF \g_ptxcd_logo@inhead_bool {
+		\bool_if:NF \g__ptxcd_LogoInHead_bool {
 			\put(\dim_to_decimal_in_unit:nn {\layerwidth-2.2\c_ptxcd_logoheight_dim
 			} {\unitlength},
 			\dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_ptxcd_title_info_box - .5\c_ptxcd_logoheight_dim} {\unitlength}){
@@ -691,8 +713,12 @@
 	}
 ]{title.TUDa.image}
 
-\DeclareNewLayer[textarea,background,mode=picture,
-contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
+\DeclareNewLayer[background,mode=picture,
+	contents={
+		\bool_lazy_and:nnT {\g_ptxcd_colorback_bool} {\g_ptxcd_colorbacktitle_bool} {
+			{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
+		}
+	}
 ]{title.TUDa.background}
 
 \DeclareNewLayer[
@@ -735,7 +761,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 	}
 }
 
-\DeclareNewPageStyleByLayers{title.TUDa}{title.TUDa.rule,title.TUDa.image}
+\DeclareNewPageStyleByLayers{title.TUDa}{title.TUDa.background,title.TUDa.rule,title.TUDa.image}
 
 %Logos
 \RequirePackage{graphicx}
@@ -805,6 +831,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
 	\endgroup
 	\iow_close:N \ptxcd_xmpdata_stream
+		\let\ptxcd_pass_TitleData:\relax
 	}
 	\cs_new:Nn \ptxcd_write_xmp_line:nn {
 		\begingroup
@@ -923,8 +950,8 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 		\ptxcd_setup_sponsor_box:
 		\hbox_gset:Nn \g_ptxcd_title_box {
 			\parbox[t]{\linewidth}{
-				\begin{minipage}[b]{\bool_if:NT \g_ptxcd_logo@inhead_bool {.75}\linewidth}
-					\bool_if:NT \g_ptxcd_logo@inhead_bool {\color{textonaccentcolor}}
+				\begin{minipage}[b]{\bool_if:NT \g__ptxcd_LogoInHead_bool {.75}\linewidth}
+					\bool_lazy_and:nnT {\g_ptxcd_colorback_bool} {\g_ptxcd_colorbacktitle_bool} {\color{textonaccentcolor}}
 					\tl_if_empty:NF \@titlehead {
 						\begin{addmargin}{3mm}
 							{\usekomafont{titlehead}{\@titlehead\par}}
@@ -943,6 +970,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 						{\rule{0pt}{.5\c_ptxcd_logoheight_dim}}
 					\end{addmargin}
 				\end{minipage}%
+				\bool_if:NT \g_ptxcd_colorbacksubtitle_bool {\color{textonaccentcolor}}
 				\par\nointerlineskip
 				\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par\vspace{\c_ptxcd_rulesep_dim}
 				\begin{addmargin}{3mm}
@@ -969,6 +997,7 @@ contents={\color{identbarcolor}\rule{\layerwidth}{\layerheight}}
 					\end{addmargin}
 					\par\vspace{-\dp\strutbox}
 				}
+				\normalcolor
 				\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par}
 		}
 		\let\@thanks\@empty
