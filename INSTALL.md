@@ -1,8 +1,8 @@
 # TUDa-CI – Installation Notes.
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2020
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2020/09/09
+ tuda-ci 2021/01/04
 
 If you only create demo files, have a look at DEMO.md.
 
