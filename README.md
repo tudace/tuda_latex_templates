@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/01/04 v3.09
+ tuda-ci 2021/01/12 v3.09
 
 ***************************************************************************
 
@@ -220,5 +220,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix titleback margins
    - add predefined values for some cc licenses in tudathesis
    - additional options to adjust titlepage color scheme
- * v3.09 (2021-01-04)
+ * v3.09 (2021-01-12)
    - small patch including layout adjustments for department=mecheng
