@@ -224,3 +224,4 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - small patch including layout adjustments for department=mecheng
  * v3.10 (2021-02-05)
    - fix \thanks for titlepage=false
+   - extend support for all CreativeCommons 4.0 Licenses
