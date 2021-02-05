@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/01/12 v3.09
+ tuda-ci 2021/02/05 v3.10
 
 ***************************************************************************
 
@@ -222,3 +222,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - additional options to adjust titlepage color scheme
  * v3.09 (2021-01-12)
    - small patch including layout adjustments for department=mecheng
+ * v3.10 (2021-02-05)
+   - fix \thanks for titlepage=false

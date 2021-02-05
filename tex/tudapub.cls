@@ -1092,7 +1092,7 @@
 	\@maketitle
 	\fi
 	\ifx\titlepagestyle\@empty\else\thispagestyle{\titlepagestyle}\fi
-	\@thanks\global\let\@thanks\@empty
+	\global\let\@thanks\@empty
 	\endgroup
 	\fi
 }
