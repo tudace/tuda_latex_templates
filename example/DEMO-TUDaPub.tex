@@ -120,7 +120,7 @@ Die \KOMAScript-Option \code{titlepage} erlaubt es üblicherweise, zwischen Tite
 
 Die Makros wie \code{author}, \code{title}, \code{subtitle} und \code{date} entsprechen der normalen Verwendung. Für die Institutszuweisung kann ebenfalls wie gewohnt \code{thanks} verwendet werden.
 
-Zusätzlich stehen die Makros \code{titleimage} und \code{addTitleBox} zur Verfügung um weitere Informationen bereit zu stellen.
+Zusätzlich stehen die Makros \code{titleimage} und \code{addTitleBox} zur Verfügung um weitere Daten zu übergeben.
 
 \minisec{titleimage}
 Das Makro \code{titleimage} akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
@@ -201,7 +201,7 @@ Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen gelade
 
 \subsection{PDF/A Konformität}
 Die Klasse TUDaPub unterstützt den Standard PDF/A 2b. Der PDF/A-Modus ist automatisch aktiviert. die zugehörige Option kann jedoch über \code{pdfa=false} ausgeschaltet werden.
-Nun wird zusätzlich eine \code{\textbackslash.xmpdata}-Datei generiert. Üblicherweise werden die Titelinformationen direkt übernommen.
+Nun wird zusätzlich eine \code{\textbackslash.xmpdata}-Datei generiert. Üblicherweise werden die Titeldaten direkt übernommen.
 
 Dies kann jedoch bei der Verwendung einiger Makros innerhalb der Felder zu Problemen führen. Beispielsweise enthält der Titel für dieses Dokument das Makro \code{\LaTeX}. Es können daher nur Textelemente übernommen werden. Ähnlich den Linkbezeichnungen über PDF-Lesezeichen.
 
