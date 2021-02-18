@@ -8,7 +8,7 @@
 %	textwidth=narrow,% Verhindert die Anpassung der Textbreite nach der ersten Seite
 ]{tudaletter}
 
-% Der folgende Block ist nur für die Kompatibilität mit pdfTeX Versionen vor April 2018 notwendig
+% Der folgende Block ist nur für die Kompatibilität mit pdfTeX Versionen vor April 2018 notwendig.
 \usepackage{iftex}
 \ifPDFTeX
 \usepackage[utf8]{inputenc}
@@ -49,14 +49,14 @@ Zusätzliche Optionen sind im Folgenden aufgelistet:\\
 \end{description}
 }
 
-Für Wiederverwendung der Absenderadresse wurde die Datei \enquote{DEMO"=TUDaFromaddress.lco} angelegt. Sie wird wie bei \KOMAScript{} üblich über
-geladen. Sämtliche dort gesetzten Werte können innerhalb der Briefdatei überschrieben werden.
+Für Wiederverwendung der Absenderadresse wurde die Datei \enquote{DEMO"=TUDaFromaddress.lco} angelegt. Sie wird, wie bei \KOMAScript{} üblich, über 
+`\LoadLetterOption` geladen. Sämtliche dort gesetzten Werte können innerhalb der Briefdatei überschrieben werden.
 
-Die Adressdatei wird üblicherweise lokal im System installiert, um sie nicht immer mit allen anderen Dateien kopieren zu müssen. Falls Sie dies dürchführen möchten, findet sich eine entsprechende Erklärung am Ende der DEMO"=TUDaFromaddress.lco"=Datei
+Die Adressdatei wird üblicherweise lokal im System installiert, um sie nicht immer mit allen anderen Dateien kopieren zu müssen. Falls Sie dies durchführen möchten, findet sich eine entsprechende Erklärung am Ende der DEMO"=TUDaFromaddress.lco"=Datei.
 
-Eine Besonderheit der Klasse tudaletter, stellt der Unterschied in der Zeilenlänge zwischen der ersten und den folgenden Seiten dar. Da \LaTeX{} grundsätzlich keine Änderung der Zeilenlänge innerhalb eines Absatzes unterstützt, ist hier eine komplexe Implementierung nötig. In einigen speziellen Fällen, kann dieser Mechanismus fehlschlagen. Eine Sammlung an Soderfällen ist bereits implementiert, sollten Sie jedoch auf weiter stoßen, werden wir uns um eine Erweiterung der Implementierung bemühen.
+Eine Besonderheit der Klasse tudaletter stellt der Unterschied in der Zeilenlänge zwischen der ersten und den folgenden Seiten dar. Da \LaTeX{} grundsätzlich keine Änderung der Zeilenlänge innerhalb eines Absatzes unterstützt, ist hier eine komplexe Implementierung nötig. In einigen speziellen Fällen kann dieser Mechanismus fehlschlagen. Eine Sammlung an Soderfällen ist bereits implementiert. Sollten Sie jedoch auf weitere stoßen, werden wir uns um eine Erweiterung der Implementierung bemühen.
 
-Der einfachste Fall um solche Schwierigkeiten zu beheben ist in diesem Beispiel mithilfe der parbox um die Auflistung gezeigt.
+Der einfachste Fall, um solche Schwierigkeiten zu beheben, ist in diesem Beispiel mithilfe des Befehls parbox bei der Auflistung gezeigt.
 
 \closing{Herzliche Grüße}
 
