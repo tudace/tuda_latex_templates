@@ -165,12 +165,6 @@
 
 \ProcessKeysOptions{ptxcd/pub}
 
-
-%Option adjustments required for valid PDF/A
-\bool_if:NT  \g_ptxcd_pdfa_bool {
-  \PassOptionsToPackage{RGB}{xcolor}
-}
-
 \exp_args:Nx \tl_if_eq:nnT {\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}} {9pt}
 	{
 	\prop_if_in:NnF \g_ptxcd_unknown_clsopts_prop {DIV}
