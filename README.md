@@ -25,9 +25,10 @@ Derzeit existieren diese Templates nur in Deutscher Sprache.
 
 ## Verwendungshinweis
 Die Richtlinien des Corporate Designs (https://www.intern.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf), sowie die Anforderungen der Universitätsbibliothek erfordern einige spezielle Konfigurationen. Beispielsweise ist für wissenschaftliche Veröffentlichungen und Abschlussarbeiten die Erzeugung einer archivierbaren PDF-Datei (PDF/A) vorgesehen.
-Dies ist mit aktuellen LaTeX-Paketen und dem Compiler LuaLaTeX deutlich konsequenter umzusetzen.
-Aus diesem Grund wird empfohlen, die verwendete Distribution vorab zu aktualisieren und LuaLaTeX zu verwenden.
-Weitere Hinweise finden sich in den Beispieldateien dokumentiert. Diese sind auch als kompilierte PDFs unter http://mirror.ctan.org/tex-archive/macros/latex/contrib/tuda-ci/doc oder – falls das Paket installiert ist – im ensprechenden Doku-Verzeichnis (<Pfad zu Ihrer LaTeX-Installation>/doc/latex/tuda-ci) verfügbar.
+Dies ist mit aktuellen LaTeX-Paketen und dem Compiler LuaLaTeX deutlich besser umzusetzen, als mit älteren Formaten.
+Aus diesem Grund sollten Sie vor der Verwendung von TUDa-CI Ihre TeX-Distribution aktualisieren und nach Möglichkeit LuaLaTeX als Compiler verwenden.
+Die Nutzung anderer Kompilierungsprogramme ist grundsätzlich möglich, allerdings werden dann ggf. nicht alle Funktionen unterstützt. Es kann sogar notwendig sein, die Erzeugung von PDF/A zu unterbinden.
+Weitere Hinweise finden sich in den Beispieldateien dokumentiert. Diese sind auch als kompilierte PDFs unter http://mirror.ctan.org/macros/latex/contrib/tuda-ci/doc oder – falls das Paket installiert ist – im ensprechenden Doku-Verzeichnis (<Pfad zu Ihrer LaTeX-Installation>/doc/latex/tuda-ci) verfügbar.
 
 ## Abhängigkeiten
 Das Bundle verwendet Pakete der Standard-LaTeX-Distributionen. Bei der Verwendung von paketierten Versionen über die Linux-Paketverwaltung kann dies ggf. zu Schwierigkeiten führen.

@@ -221,7 +221,7 @@ keywords={TU Darmstadt \sep Corporate Design \sep LaTeX}
 \end{verbatim}
 Wenn der Eintrag selbst Kommata enthalten könnte, dann ist eine Gruppierung um den Eintrag notwendig. Sonst wird der Text nach dem Komma als nächstes Keyword interpretiert.
 
-\minisec{Möglich Probleme mit älteren Systemen:}
+\minisec{Mögliche Probleme mit älteren Systemen:}
 
 Bei älteren \TeX-Distributionen kann es vorkommen, dass die Farbprofile nicht vorinstalliert sind. In diesem Fall wird eine Fehlermeldung im folgenden Sinn erzeugt:
 \begin{verbatim}
@@ -375,6 +375,9 @@ Beispiele für typische Modifikationen, die auch im Rahmen des Corporate Design 
 \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
 Das Paket \pck{pdfx}, über welches die PDF/A Kompatibilität erzeugt wird, hat nur einen begrenzten Support für \hologo{XeLaTeX}.
 Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hologo{XeLaTeX}-Versionen passieren, dass \pck{pdfx} bereits Fehlermeldungen erzeugt. Abhilfe wird in diesem Fall durch eine Compiler-Wechsel auf \hologo{LuaLaTeX} (welcher ohnehin empfohlen wird) oder durch Abschalten des PDF/A-Modus (\code{pdfa=false})  geschaffen.
+
+\subsection{DVI-Ausgabe}
+Aufgrund der Voreinstellung zur Erzeugung einer PDF/A-Datei ist es nicht möglich TUDa-CI in Standardeinstellungen zur Erzeugung einer DVI-Datei zu nutzen. Ein Großteil der Funktionalität kann jedoch durch Deaktivierung der \code{pdfa}-Option genutzt werden.
 
 
 \subsection{Geschachtelte Akzente (Inkompatibilität zwischen pdfx und amsmath)}
