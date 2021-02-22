@@ -176,9 +176,31 @@
 }
 
 \tl_new:N \g_ptxcd_poster_qrcode_tl
-\newcommand*{\footerqrcode}[1]{
-	\tl_gset:Nn \g_ptxcd_poster_qrcode_tl {#1}
+
+\msg_new:nnnn {tudapub} {biblatex-required}{
+	You~tried~to~use~#1.\\
+	This~feature~requires~the~biblatex~package.
+} {
+	Try~to~remove~the~star~or~load~biblatex.
 }
+
+\NewDocumentCommand{\footerqrcode}{sm}{
+	\IfBooleanTF {#1} {
+		\cs_if_exist:NTF \blx@blxinit {
+			\begingroup
+			\blx@blxinit
+			\entrydata{#2}{
+				\tl_gset:Nx \g_ptxcd_poster_qrcode_tl{\thefield{url}}
+			}
+			\endgroup
+		}{
+			\msg_error:nnx {tudapub} {biblatex-required} {\use:c{footerqrcode*}}
+		}
+	}{
+		\tl_gset:Nn \g_ptxcd_poster_qrcode_tl {#2}
+	}
+}
+
 
 %%%%%%%%%%%%%%%%%%%
 % Begin of PDF/A mode
