@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/02/05 v3.10
+ tuda-ci 2021/02/22 v3.11
 
 ***************************************************************************
 
@@ -227,3 +227,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix \thanks for titlepage=false
    - extend support for all CreativeCommons 4.0 Licenses
    - improve documentation
+ * v3.11 (2021-02-22)
+   - Support CMYK in PDF/A
+   - Add Info for DVI-Outputs
