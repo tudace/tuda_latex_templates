@@ -36,7 +36,7 @@ Das Bundle verwendet Pakete der Standard-LaTeX-Distributionen. Bei der Verwendun
 In den häufigsten Fällen fehlt ein Teilpaket mit dem Namen URspecialopts.sty. Dieses Paket wird für die Optionsdurchreichung genutzt und ist Teil des urcls-Bundle: https://ctan.org/pkg/urcls
 
 ## Installation
-TUDa-CI ist Bestandteil der beiden populären TeX Distributionen (MikTeX & TeX Live, und damit auch im MacTeX-Paket).
+TUDa-CI ist Bestandteil der beiden populären TeX Distributionen ([MikTeX](https://miktex.org/download) & [TeX Live](https://tug.org/texlive/), und damit auch im MacTeX-Paket).
 Es ist somit möglich die Templates über die TeX Distribution zu installieren und zu updaten.
 
 Falls Sie noch keine Distribution installiert haben, finden Sie die notwendigen Informationen zur Installation von TeX Live unter:
