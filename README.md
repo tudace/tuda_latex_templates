@@ -39,6 +39,9 @@ In den häufigsten Fällen fehlt ein Teilpaket mit dem Namen URspecialopts.sty. 
 TUDa-CI ist Bestandteil der beiden populären TeX Distributionen ([MikTeX](https://miktex.org/download) & [TeX Live](https://tug.org/texlive/), und damit auch im MacTeX-Paket).
 Es ist somit möglich die Templates über die TeX Distribution zu installieren und zu updaten.
 
+Bei TeX Live werden Updates und Paketinstalation durch das Programm „TeX Live Manager“ (tlmgr) ausgeführt. Das Analogon unter MikTeX heißt „MikTeX Console”.
+Unter Mac und Windows existieren bei Standardeinstellungen auch grafische Nutzeroberflächen, die durch das Update/die Installation führen.
+
 Falls Sie noch keine Distribution installiert haben, finden Sie die notwendigen Informationen zur Installation von TeX Live unter:
 - Windows/Linux https://tug.org/texlive/acquire-netinstall.html
 - MacTeX  http://tug.org/mactex/
