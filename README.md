@@ -46,6 +46,9 @@ Falls Sie noch keine Distribution installiert haben, finden Sie die notwendigen 
 - Windows/Linux https://tug.org/texlive/acquire-netinstall.html
 - MacTeX  http://tug.org/mactex/
 
+#### Sonderfall: Paketverwaltung des Betriebssystems (Linux/BSD)
+Für einige Linux/BSD-Varianten existieren texlive-Pakete die über die Paketverwaltung des Systems installierbar sind. Da TUDa-CI sehr speziell ist, ist es nur in der Paketen *texlive-full* enthalten. Falls Sie ein kleineres Setup wünschen, empfehlen wir die Installation über den TeX Live Manager https://tug.org/texlive/doc/texlive-en/texlive-en.html#installation.
+
 ### Logos & verwendete Bilddateien
 Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitgliedern der TU Darmstadt über das interne Netzwerk heruntergeladen werden.
 
@@ -57,8 +60,7 @@ ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
 
-### Sonderfall: Paketverwaltung des Betriebssystems (Linux/BSD)
-Für einige Linux/BSD-Varianten existieren texlive-Pakete die über die Paketverwaltung des Systems installierbar sind. Da TUDa-CI sehr speziell ist, ist es nur in der Paketen *texlive-full* enthalten. Falls Sie ein kleineres Setup wünschen, empfehlen wir die Installation über den TeX Live Manager https://tug.org/texlive/doc/texlive-en/texlive-en.html#installation.
+
 
 ## Enthaltene Templatedateien
 
