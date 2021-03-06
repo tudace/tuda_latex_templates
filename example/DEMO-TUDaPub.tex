@@ -247,12 +247,21 @@ entsprechende Labels generiert werden. Sie haben den Namen \code{IMRAD:<Schlüss
 Der Prüfmechanismus ist auf Wunsch der Bibliothek standardmäßig aktiviert, kann jedoch durch die Option \code{IMRAD=false} deaktiviert werden.
 
 \subsection{Farbdarstellung}
+\label{sec:pdfa-color}
 Der PDF/A-Modus konvertiert automatisch eingegebene CMYK-Farben in RGB. Da es keine eindeutige Umwandlung gibt, sollten daher im Modus \code{pdfa=true} keine CMYK-Elemente verwendet werden.
 
 Für die Druckausgabe ist dieser Modus ungeeignet. Ab Version 3.12 gibt \cls{tudapub} eine entsprechende Infomeldung aus, um über diese Umwandlung zu informieren.
 
 \section{Erweiterte Konfigurationsmöglichkeiten}
 
+\subsection{Auswahl des Dokumentenfarbmodus}
+Farben unterliegen je nachdem auf welchem Medium sie ausgegeben werden einer anderen Farbmischung. Für die Verwendung bei der Dokumentenerzeugung ist daher wichtig welches Ausgabemedium primär genutzt werden soll.
+
+Technisch zeigt sich dieser Unterschied in Farbmodellen. TUDa-CI unterstützt entsprechend der Richtlinien sowohl ein Farbmodell für die Druckausgabe (cmyk) und für die Bildschirmdarstellung (RGB). Die Umsetzung geschieht über das Paket \pck{xcolor} wobei die entsprechenden Farbwerte für beide Modelle über \pck{tudacolors} hinterlegt sind.
+
+Normalerweise wählt TUDa-CI automatisch ein passendes Modell. Allerdings sorgt die Voreinstellung von \code{pdfa-true} für eine Konvertierung zu RGB (vgl.~\ref{sec:pdfa-color}).
+
+Soll abseits dieser automatischen Abweichung ein bestimmter Farbmodus erzeugt werden, können die \pck{xcolor}-Optionen \code{cmyk} oder \code{RGB} direkt an \cls{tudapub} übergeben werden. Sie werden entsprechend an das Paket weitergereicht und entsprechend der \pck{xcolor}-Dokumentation verarbeitet.
 
 \subsection{Anpassungen, die von den Corporate Design Richtlinien abweichen}
 
