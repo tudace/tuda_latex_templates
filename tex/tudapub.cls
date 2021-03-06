@@ -919,10 +919,12 @@
 		\def\titlepage@restore{%
 			\endgroup
 			\ptxcd_restore_typearea:
-			\dim_sub:Nn \evensidemargin {\marginparwidth+\marginparsep}
-			\dim_add:Nn \textwidth   {\marginparwidth+\marginparsep}
-			\columnwidth=\textwidth
-			\hsize=\columnwidth
+			\bool_if:nT {! \g_ptxcd_geometry_bool && \g_ptxcd_marginpar_bool} {
+				\dim_sub:Nn \evensidemargin {\marginparwidth+\marginparsep}
+				\dim_add:Nn \textwidth   {\marginparwidth+\marginparsep}
+				\columnwidth=\textwidth
+				\hsize=\columnwidth
+			}
 			\global\@titlepageiscoverpagefalse
 			\let\titlepage@restore\relax
 		}%
