@@ -135,7 +135,7 @@ Therefore it contains documentclasses as well as some helper packages and config
 If you are not a German speaker and require some help using these files, please feel free to contact the maintainers.
 
 ## Installation
-TUDa-CI is part of the popular TeX distributions ([MikTeX](https://miktex.org/download) & [TeX Live](https://tug.org/texlive/), which is included by MacTeX).
+TUDa-CI is part of the popular TeX distributions ([MikTeX](https://miktex.org/download) & [TeX Live](https://tug.org/texlive/), which is included by [MacTeX](https://www.tug.org/mactex/)).
 It's possible to install the templates using the TeX Live Manager or the MikTeX Console.
 
 In case you don't have any installed TeX system the following links might be useful:
