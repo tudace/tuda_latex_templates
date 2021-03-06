@@ -228,5 +228,8 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - extend support for all CreativeCommons 4.0 Licenses
    - improve documentation
  * v3.11 (2021-02-22)
-   - Support CMYK in PDF/A
    - Add Info for DVI-Outputs
+ * v3.12 (2021-03-06)
+   - Fix color conversion for PDF/A
+   - Fix margin restore after titlepage for custommargins=geometry
+   - Enhance information on installation
