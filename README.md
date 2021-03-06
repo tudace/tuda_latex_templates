@@ -134,7 +134,24 @@ Therefore it contains documentclasses as well as some helper packages and config
 
 If you are not a German speaker and require some help using these files, please feel free to contact the maintainers.
 
-## Includes templates and document types
+## Installation
+TUDa-CI is part of the popular TeX distributions ([MikTeX](https://miktex.org/download) & [TeX Live](https://tug.org/texlive/), which is included by MacTeX).
+It's possible to install the templates using the TeX Live Manager or the MikTeX Console.
+
+In case you don't have any installed TeX system the following links might be useful:
+- Windows/Linux https://tug.org/texlive/acquire-netinstall.html
+- MacTeX  http://tug.org/mactex/
+
+#### Remark on texlive packages provided by Linux/BSD package managers:
+In case you already use a texlive package of your OS TUDa-CI might not be included. Since it's a personal corporate design package you might need to install *texlive-full* to use it without further adjustments. These packages also will miss the logo and – this depends on your OS – the provided package might be outdated. In this case we recomment the setup using tlmgr (as described in the upper links).
+
+### Logos
+The used Logos can not be published within this bundle. Members of TU Darmstadt can download these via intranet:
+https://download.hrz.tu-darmstadt.de/protected/CE/TUDa_LaTeX/tuda_logo.pdf
+
+If you are not a member of TU Darmstadt the example files include information on how to use a replacement image instead of the logo.
+
+## Included templates and document types
 
 document type				| name of template file							| used documentclass and config
 --------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------
