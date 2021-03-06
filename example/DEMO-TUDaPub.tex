@@ -100,7 +100,7 @@ Im folgenden werden die möglichen Optionen beschrieben.
 	}
 	\item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann Randnotizen deaktiviert.
 	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend beschränkt. False lädt den Standardstil aus \KOMAScript.
-    \item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
+        \item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
 	Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=""false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
 	\item[headline] Die Kopfzeile verfügt über die im Corporate Design beschriebenen Layoutmöglichkeiten über den Wert \code{automark}. Da diese Lösung typografisch nicht sonderlich sinnvoll ist, ist es auch möglich, diese abzuschalten. Voreingestellt ist ein Stil ohne Kolumnentitel.
 	\item[logo] Option für die Titelseite, siehe \ref{sec:title}
@@ -246,6 +246,10 @@ entsprechende Labels generiert werden. Sie haben den Namen \code{IMRAD:<Schlüss
 
 Der Prüfmechanismus ist auf Wunsch der Bibliothek standardmäßig aktiviert, kann jedoch durch die Option \code{IMRAD=false} deaktiviert werden.
 
+\subsection{Farbdarstellung}
+Der PDF/A-Modus konvertiert automatisch eingegebene CMYK-Farben in RGB. Da es keine eindeutige Umwandlung gibt, sollten daher im Modus \code{pdfa=true} keine CMYK-Elemente verwendet werden.
+
+Für die Druckausgabe ist dieser Modus ungeeignet. Ab Version 3.12 gibt \cls{tudapub} eine entsprechende Infomeldung aus, um über diese Umwandlung zu informieren.
 
 \section{Erweiterte Konfigurationsmöglichkeiten}
 
