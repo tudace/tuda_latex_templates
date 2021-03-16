@@ -817,5 +817,21 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 
 \ptxcd_makeheadrule[color=identbarcolor, width=\textwidth]{ptxcd_headrule}
 
+\msg_new:nnn {tudaexercise} {points-differ} {
+	Value~of~points~changed~for~at~least~one~task.\\
+	Please~rerun~LaTeX~to~get~correct~references~and~calculations.
+}
+
+\msg_new:nnn {tudaexercise} {empty-point-mapping} {
+	I~could~not~find~references~for~points~in~the~aux~file.\\
+	Please~rerun~LaTeX~to~get~correct~references~and~calculations.
+}
+
+\msg_new:nnn {tudaexercise} {point-referencing-disabled} {
+	You~try~to~use~#1.\\
+	This~function~is~only~available~with~points=true~or~points=auto.\\	
+	Please~activate~referencing~to~use~it.
+}
+
 \endinput
 %End of class tudaexercise.cls
