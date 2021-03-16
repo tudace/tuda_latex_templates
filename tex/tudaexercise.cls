@@ -17,7 +17,6 @@
 \prop_new:N \g__ptxcd_loaded_points_prop
 \int_new:N \g__ptxcd_points_total_int
 
-\int_new:N \g_ptxcd_ruledheaders_int
 \int_new:N \g_ptxcd_paper_int
 
 \bool_new:N \g_ptxcd_geometry_bool
@@ -30,6 +29,13 @@
 \tl_new:N \g_ptxcd_tmp_tl
 \int_new:N \g_ptxcd_tmp_int
 \tl_new:N \l_ptxcd_tmp_tl
+
+\clist_map_inline:nn {section,subsection,subsubsection,task,subtask,@solution} {
+	\bool_new:c	{g__ptxcd_ruled_#1_bool}
+	\bool_gset_true:c {g__ptxcd_ruled_#1_bool}
+}
+
+\bool_new:N \g__ptxcd_runin_subtask_bool
 
 \RequirePackage{environ}
 
@@ -156,6 +162,16 @@
 	points /false .code:n =  \bool_set_false:N \l__ptxcd_points_auto_bool\bool_gset_false:N \g__ptxcd_points_bool,
 	points / auto .code:n = \bool_set_true:N \l__ptxcd_points_auto_bool\bool_gset_true:N \g__ptxcd_points_bool,
 	points .initial:n = false,
+	subtask .choice:,
+	subtask / ruled .code:n = 
+		\bool_gset_true:N \g__ptxcd_ruled_subtask_bool
+		\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
+	subtask / runin .code:n =
+		\bool_gset_false:N \g__ptxcd_ruled_subtask_bool
+		\bool_gset_true:N  \g__ptxcd_runin_subtask_bool,
+	subtask / plain .code:n =
+		\bool_gset_false:N \g__ptxcd_ruled_subtask_bool
+		\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
 }
 
 \ProcessKeysOptions{ptxcd/exercise}
@@ -252,7 +268,9 @@
 
 \renewcommand*\sectionlinesformat[4]{%
 \parbox{\linewidth}{
+	\bool_if:cT {g__ptxcd_ruled_#1_bool} {
 	\rule[5\g_ptxcd_titlerule_dim]{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
+	}
 	\@hangfrom{%
 		\hskip #2#3}{
 		\tl_if_eq:nnT {#1} {task} {
@@ -273,7 +291,7 @@
 		}
 		\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
 		\skip_vertical:n {\ptxcd_titlerule_sep: -\dp\strutbox}
-	\smash{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}
+	\bool_if:cT {g__ptxcd_ruled_#1_bool} {\smash{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}}
 }}
 
 
@@ -758,6 +776,10 @@
 	tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 	counterwithin=task,%
 ]{subtask}
+
+\bool_if:NT \g__ptxcd_runin_subtask_bool {
+	\RedeclareSectionCommand[runin=true]{subtask}
+}
 
 \renewcommand*{\thesubtask}{\alph{subtask})}
 \renewcommand*{\subtaskformat}{\thetask{}\thesubtask\enskip}
