@@ -809,14 +809,14 @@
 %Solution mechanism
 
 \DeclareSectionCommand[%
-style=section,%
-level=3,%
-indent=\z@,%
-beforeskip=\cs_if_exist_use:NF \scr@subsubsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
-afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
-tocstyle=subsection,%
-tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
-tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
+	style=section,%
+	level=3,%
+	indent=\z@,%
+	beforeskip=\cs_if_exist_use:NF \scr@subsubsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
+	afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
+	tocstyle=subsection,%
+	tocindent=\cs_if_exist_use:NF \scr@tso@subsubsection@indent {1.5em},%
+	tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 ]{@solution}
 
 

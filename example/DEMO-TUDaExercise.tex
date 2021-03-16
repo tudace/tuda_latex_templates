@@ -60,15 +60,33 @@ Aufgaben werden bei \cls{tudaexercise.cls} durch die Umgebung \code{task} defini
 
 Querverweise zwischen den Aufgaben sind wie üblich mit \code{\tbs{}label} und \code{\tbs{}ref} möglich.
 
-Neben der Umgebungsstruktur, die zur besseren Übersichtlichkeit zu empfehlen ist, verfügt tudaexercise auch über die Möglichkeit eine Aufgabe nur mit \code{\tbs{}task} einzuleiten.
 
-\begin{verbatim}
-\task{Überschrift der Aufgabe}
-\end{verbatim}
+\minisec{Die Verwendung des Makros \code{\tbs{}task}}
+Neben der Umgebungsstruktur, verfügt \cls{tudaexercise} auch über die Möglichkeit eine Aufgabe nur mit \code{\tbs{}task} einzuleiten. Dieser Mechanismus existiert um zu älteren Versionen Kompatibel zu bleiben. Sie sollte jedoch nach Möglichkeit nicht mehr verwendet werden!
 
-In diesem Dokument wird lediglich die empfohlene Variante unter Nutzung der Umgebung gezeigt.
+\end{task}
 
-Falls die Makro-Version benutzt und damit Optionen gesetzt werden, ist zu beachten, dass diese nicht automatisch wieder beendet werden kann, da ja das Ende der Umgebung fehlt. Dies ist der Hauptgrund für die Empfehlung der Umgebung.
+\begin{task}{Teilaufgaben}
+\begin{subtask}[title=Grundsturktur]
+	\cls{tudaexercise} unterstützt mit der \code{subtask}-Umgebung Aufgaben in Teilaufgaben zu untergliedern. Es wird derzeit nur eine Ebene unterstützt. Für weitere Untergliederung ist es möglich das Dokument zusätzlich mit \code{\tbs{}section} in Abschnitte zu unterteilen. 
+	
+	\begin{verbatim}
+		\begin{subtask}[title=Titel,points=5]
+			
+		\end{subtask}
+	\end{verbatim}
+
+	Teilaufgaben benötigen – im Gegensatz zu Aufgaben – keine Überschrift. Daher unterscheidet sich die Syntax für die Übergabe von der der \code{task}-Umgebung. Es gibt jedoch eine Variante um diese Unterscheidung zu umgehen, vergleiche Aufgabe \ref{task-subtask-syntax}.
+\end{subtask}
+
+\begin{subtask}[title=Anpassung der Überschriften]
+	Ab Version 3.13 unterstützt \cls{tudaexercise} zusätzlich eine Umschaltung bezüglich des Layouts der Subtask-Überschriften. Es existieren drei Optionswerte für die Dokumentenklasse:
+	\begin{description}
+		\item[subtask=ruled] Voreinstellung, die Überschriften sind durch Linien vom Fließtext abgetrennt. (vgl. dieses Dokument)
+		\item[subtask=plain] Keine Linien um die Überschrift.
+		\item[subtask=runin] Falls sehr kleine Aufgaben gesetzt werden, kann der Umbruch nach der Überschrift unterbunden werden. In diesem Fall ist die Nutzer:in selbst dafür verantwortlich, dass eine ggf. notwendige Optische Abtrennung zwischen Titel und Aufgabentext stattfindet, z.B. durch Hervorhebung des Titeltextes.
+	\end{description}
+\end{subtask}
 \end{task}
 
 \begin{task}{Kopfzeilenanpassungen}
@@ -256,30 +274,31 @@ Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}getPointsTotal} die Su
 
 
 \begin{task*}{Einheitliche Syntax für Task/Subtask}
+	\label{task-subtask-syntax}
 	TUDaExercise unterscheidet in der Standardeinstellung zwischen \code{task} und \code{subtask}. Dies ist dadurch begründet, dass \code{subtask} keine Angabe eines Titels erfordert.
 	
 	Es wurde der Bedarf nach einer einheitlichen Syntax geäußert (siehe \url{https://github.com/tudace/tuda_latex_templates/issues/189}). 
-
-\begin{subtask*}{Die gesternten Verianten der task/subtaks-Umgebungen}
-Die mit Version 3.0 implementierten Varianten \code{task*} und \code{subtask*} ermöglichen dies.
-
-Beide Varianten stehe nur als Umgebung und nicht als Makro zur Verfügung:
-
-\begin{verbatim}
-\begin{task*}{Aufgabentitel}
-  \begin{subtask*}{Titel der Teilaufgabe}
-    Beschreibung
-  \end{subtask*}
-\end{task*}
-\end{verbatim}
-
-\end{subtask*}
-
-\begin{subtask*}{Vertauschen der beiden Varianten}
-Zusätzlich erlaubt die Klassenoption \code{match-task-subtask-syntax} das Vertauschen von \code{subtask} und \code{subtask*}.
-
-Die Umgebungen \code{task*} und \code{task} sind identisch.
-\end{subtask*}
+	
+	\begin{subtask*}{Die gesternten Varianten der task/subtaks-Umgebungen}
+		Die mit Version 3.0 implementierten Varianten \code{task*} und \code{subtask*} ermöglichen dies.
+		
+		Beide Varianten stehe nur als Umgebung und nicht als Makro zur Verfügung:
+		
+		\begin{verbatim}
+			\begin{task*}{Aufgabentitel}
+				\begin{subtask*}{Titel der Teilaufgabe}
+					Beschreibung
+				\end{subtask*}
+			\end{task*}
+		\end{verbatim}
+		
+	\end{subtask*}
+	
+	\begin{subtask*}{Vertauschen der beiden Varianten}
+		Zusätzlich erlaubt die Klassenoption \code{match-task-subtask-syntax} das Vertauschen von \code{subtask} und \code{subtask*}.
+		
+		Die Umgebungen \code{task*} und \code{task} sind identisch.
+	\end{subtask*}
 \end{task*}
 
 \begin{task}{Kompatibilitätsmodus}
