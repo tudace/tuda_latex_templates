@@ -1,5 +1,6 @@
 \documentclass[
 	ngerman,
+	points=true,
 	]{tudaexercise}
 
 \usepackage[english, main=ngerman]{babel}
@@ -14,6 +15,9 @@
 \let\pck\textsf
 \let\cls\textsf
 \let\tbs\textbackslash
+
+\usepackage{booktabs}% Erweiterte möglichkeiten beim Spacing um Linien in Tabellen
+\renewcommand*{\creditformatsum}[1]{\creditformat{Gesamt: #1}}
 
 \ConfigureHeadline{
 	headline={title-name-id}
@@ -180,19 +184,73 @@ Der Mechanismus für die Referenzierung funktioniert ähnlich, wie die Objektref
 
 Für die Referenz stehen zwei Makros zur Verfügung. Eines funktioniert über den Aufruf der Aufgabennummer, der andere über labels:
 
-\begin{verbatim}
-	\getPoints{5.11}
-	\refPoints{task:refPoints}% benötigt das \label{task:refPoints}, vgl. Quellcode
-\end{verbatim}
+
+\verb+\getPoints{+\thetask\verb+}+\\
+\verb+\refPoints{task:refPoints}% benötigt das \label{task:refPoints}, vgl. Quellcode+
+
 
 Beide Makros geben in diesem Fall den gleichen Wert: \refPoints{task:refPoints}. Da die Variante code{\tbs{}refPoints} dynamisch von den Aufgabennummern abhängig ist diese Variante im Allgemeinen zu bevorzugen.
 
-Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}\getPointsTotal} die Summe der aller Aufgaben im letzten \LaTeX-Lauf zurück.
-
-
+Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}getPointsTotal} die Summe der aller Aufgaben im letzten \LaTeX-Lauf zurück.
 
 \end{subtask}
 
+\begin{subtask}[points=2,title=Punkte aus Teilaufgaben aufsummieren]
+	Der neue Mechanismus ermöglicht auch, dass der Punktewert einer Aufgabe aus der Summe der Punkte der enthaltenen Teilaufgaben berechnet wird.
+	
+	Hierfür ist die Verwendung der Umgebungen zwingend notwendig. \code{\tbs{}task} erlaubt es nicht die Teilaufgaben entsprechend einzugrenzen. Selbiges gilt für die Subtask-Umgebung. 
+	
+	Die Summe der Punkte wird nicht automatisch bei der Aufgabenbezeichnung eingetragen, jedoch existiert mit dem Optionswert \code{points=auto} eine entsprechende Funktionalität.
+	Falls die Klassenoption \code{points=auto} gesetzt ist, wird diese automatisch für alle Aufgaben aktiviert. Der automatische Wert kann jedoch über eine manuelle Angabe eines Wertes überschrieben werden, z.\,B. falls eine Aufgabe nicht aus Teilaufgaben besteht. 
+	
+	Es erfolgt derzeit keine automatische Prüfung auf die Übereinstimmung zwischen der Summe der Teilaufgaben und der Gesamtpunktzahl.
+	
+	Um die Unterscheidung der Angabe zwischen aufsummierten Werten und manuell gesetzten Werten zu ermöglich existiert intern eine weitere Variante des Makros \code{\tbs{}creditformat}.
+	
+	\begin{verbatim}
+		\newcommand*{\creditformatsum}[1]{\creditformat{#1}}
+	\end{verbatim}
+
+	Es ruft intern lediglich das Makro \code{\tbs{}creditformat} auf. Für dieses Beispieldokument wurde jedoch die Bedeutung überschrieben, sodass im Titel dieser Aufgabe gekennzeichnet wird, dass der Punktewerte eine Summe der Teilaufgaben entspricht:
+	
+	\begin{verbatim}
+		\renewcommand*{\creditformatsum}[1]{\creditformat{Gesamt: #1}}
+	\end{verbatim}
+\end{subtask}
+
+\begin{subtask}[points=3,title=Automatische Punktetabellen]
+	\cls{tudaexercise} stellt mit der Möglichkeit der Referenz auf die Aufgabenwerte auch die Auflistung aller Punkte zur Verfügung.
+	
+	Da die Struktur einer Punktetabelle nach persönlichen Vorlieben stark variiert ist das Makro sehr abstrakt konstruiert.
+
+	\begin{verbatim}
+		\mapPoints{<Code, der für jede Aufgabe ausgeführt werden soll>}
+	\end{verbatim}
+
+	\code{\tbs{}mapPoints} iteriert über alle Aufgaben und erlaubt als Argument beliebige Code-Elemente. Innerhalb des Codes können \code{\#1} (Nummer der Aufgabe) und \code{\#2} (zugehöriger Punktwert) verwendet werden. 
+	Aufgaben, deren Wert Null beträgt werden übersprungen. 
+	
+	Zum Beispiel erzeugt:
+	\begin{verbatim}
+	\begin{tabular}{@{}lr@{}}
+	  \toprule
+	  \mapPoints{Aufgabe #1&#2 Punkte\\}
+	  \midrule
+	  Gesamt&\getPointsTotal{} Punkte\\
+	  \bottomrule
+	\end{tabular}
+	\end{verbatim}
+	die Ausgabe:\\
+	\begin{tabular}{@{}lr@{}}
+		\toprule
+		\mapPoints{Aufgabe #1&#2 Punkte\\}
+		\midrule
+		Gesamt&\getPointsTotal{} Punkte\\
+		\bottomrule
+	\end{tabular}
+
+	Falls auch Aufgaben mit einem Wert von 0 verarbeitet werden sollen, existiert noch eine gesternte Version \code{\tbs{}mapPoints*}.
+	\end{subtask}
 \end{task}
 
 
