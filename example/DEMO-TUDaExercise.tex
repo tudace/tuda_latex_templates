@@ -169,10 +169,38 @@ Falls bei der Optionsverarbeitung Unstimmigkeiten festgestellt werden, so wird d
 \end{subtask}
 \end{task}
 
-\begin{task*}{Beta-Feature: Einheitliche Syntax für Task/Subtask}
-TUDaExercise unterscheidet in der Standardeinstellung zwischen \code{task} und \code{subtask}. Dies ist dadurch begründet, dass \code{subtask} keine Angabe eines Titels erfordert.
+\begin{task}[points=auto]{Automatismen für Punktetabellen}
+\label{task:refPoints}
+Mit Version 3.13 erhält  \cls{tudaexercise} die Funktionalität für automatische Punktetabellen und Referenzen auf die Punkteangaben.
 
-Es wurde der Bedarf nach einer einheitlichen Syntax geäußert (siehe \url{https://github.com/tudace/tuda_latex_templates/issues/189}). 
+\begin{subtask}[points=3,title=Referenzen aktivieren]
+\cls{tudaexercise} hat diese Funktionalität grundsätzlich deaktiviert, sie kann jedoch über die Klassenoption \code{points=true} eingeschaltet werden. 
+
+Der Mechanismus für die Referenzierung funktioniert ähnlich, wie die Objektreferenzen bei \LaTeX{}. Dadurch ist es notwendig das Dokument zweimal zu kompilieren. Falls \cls{tudaexercise} im Durchlauf feststellt, dass sich die Werte des letztes Durchlaufes von den aktuellen unterscheiden, wird eine entsprechende Warnung erzeugt. 
+
+Für die Referenz stehen zwei Makros zur Verfügung. Eines funktioniert über den Aufruf der Aufgabennummer, der andere über labels:
+
+\begin{verbatim}
+	\getPoints{5.11}
+	\refPoints{task:refPoints}% benötigt das \label{task:refPoints}, vgl. Quellcode
+\end{verbatim}
+
+Beide Makros geben in diesem Fall den gleichen Wert: \refPoints{task:refPoints}. Da die Variante code{\tbs{}refPoints} dynamisch von den Aufgabennummern abhängig ist diese Variante im Allgemeinen zu bevorzugen.
+
+Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}\getPointsTotal} die Summe der aller Aufgaben im letzten \LaTeX-Lauf zurück.
+
+
+
+\end{subtask}
+
+\end{task}
+
+
+
+\begin{task*}{Einheitliche Syntax für Task/Subtask}
+	TUDaExercise unterscheidet in der Standardeinstellung zwischen \code{task} und \code{subtask}. Dies ist dadurch begründet, dass \code{subtask} keine Angabe eines Titels erfordert.
+	
+	Es wurde der Bedarf nach einer einheitlichen Syntax geäußert (siehe \url{https://github.com/tudace/tuda_latex_templates/issues/189}). 
 
 \begin{subtask*}{Die gesternten Verianten der task/subtaks-Umgebungen}
 Die mit Version 3.0 implementierten Varianten \code{task*} und \code{subtask*} ermöglichen dies.
