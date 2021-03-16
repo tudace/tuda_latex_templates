@@ -839,6 +839,18 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 
 \ptxcd_makeheadrule[color=identbarcolor, width=\textwidth]{ptxcd_headrule}
 
+% Point referencing
+\AddtoDoHook{heading/preinit/subtask}{
+	\bool_if:NT \g__ptxcd_points_bool {
+		 \int_gadd:Nn \g__ptxcd_ex_collected_points_int {\l_ptxcd_ex_subtask_points_int}
+	}
+}
+
+\AddtoDoHook{heading/preinit/task}{
+	\int_gzero:N \g__ptxcd_ex_collected_points_int
+}
+
+
 \msg_new:nnn {tudaexercise} {points-differ} {
 	Value~of~points~changed~for~at~least~one~task.\\
 	Please~rerun~LaTeX~to~get~correct~references~and~calculations.
@@ -854,6 +866,95 @@ tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
 	This~function~is~only~available~with~points=true~or~points=auto.\\	
 	Please~activate~referencing~to~use~it.
 }
+
+\bool_if:NTF \g__ptxcd_points_bool {
+	\BeforeClosingMainAux{
+		\tl_clear:N \l_tmpa_tl
+		\tl_clear:N \l_tmpb_tl
+		\prop_map_inline:Nn  \g__ptxcd_points_collector_prop {
+			\tl_put_right:Nn \l_tmpa_tl {#1=#2,}
+		}
+		\prop_map_inline:Nn \g__ptxcd_loaded_points_prop {
+			\tl_put_right:Nn \l_tmpb_tl {#1=#2,}
+		}
+		\tl_if_eq:NNF \l_tmpa_tl \l_tmpb_tl {
+			\msg_warning:nn {tudaexercise} {points-differ}
+		}
+		\iow_now:Nx \@auxout{
+			\exp_not:N \ptxcd@LoadPoints[\thetask]{\l_tmpa_tl}
+		}
+	}
+	
+	\newcommand{\getPoints}[1]{
+		\exp_args:NNf \prop_get:NnNTF \g__ptxcd_loaded_points_prop {#1} \l_tmpa_tl
+		{\l_tmpa_tl}
+		{\nfss@text{\reset@font\bfseries??}}
+	}
+
+	\newcommand{\refPoints}[1]{
+		\edef\x{#1}
+		\cs_if_exist:cTF {r@\x} {
+			\getPoints{\tl_head:v {r@\x}}
+		}{
+			\nfss@text{\reset@font\bfseries??}
+		}
+	}
+
+	\newcommand{\getPointsTotal}{
+		\int_use:N \g__ptxcd_points_total_int
+	}
+} {
+	\newcommand{\getPoints}[1]{
+			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPoints}
+	}
+	\newcommand{\refPoints}[1]{
+			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\refPoints}
+	}
+	\newcommand{\getPointsTotal}[1]{
+		\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPointsTotal}
+	}
+}
+
+\cs_new:Nn \__ptxcd_map_points_helper:nn {#1-#2}
+\NewDocumentCommand{\mapPoints}{sO{1}m}{
+	\cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
+	\prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
+	 \msg_warning:nn {tudaexercise} {empty-point-mapping}
+ 	 \__ptxcd_map_points_helper:nn {?task?} {?points?}
+	}{
+	\int_gset:Nn \g_ptxcd_tmp_int {\value{task}}
+	\setcounter{task}{#2}
+	\tl_gclear:N \g_ptxcd_tmp_tl
+	\bool_gset_true:N \g_tmpa_bool 
+	\bool_while_do:Nn \g_tmpa_bool 
+	{
+			\exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
+			{
+				\int_compare:nF {\l_tmpa_tl = 0}
+				{
+					\tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
+					\tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
+				}
+		}
+		{\bool_gset_false:N \g_tmpa_bool}
+		\stepcounter{task}
+	}
+	\setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
+	\g_ptxcd_tmp_tl 
+	}
+}
+
+
+\newcommand*{\ptxcd@LoadPoints}[2][]{
+	\prop_gset_from_keyval:Nn \g__ptxcd_loaded_points_prop {
+		#2
+	}
+	\int_zero:N \g__ptxcd_points_total_int
+	\prop_map_inline:Nn  \g__ptxcd_loaded_points_prop  {
+		\int_gadd:Nn \g__ptxcd_points_total_int {##2}
+	}
+}
+
 
 \endinput
 %End of class tudaexercise.cls
