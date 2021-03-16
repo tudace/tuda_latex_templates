@@ -11,6 +11,10 @@
 \prop_gput:Nnn \g_ptxcd_clsopts_prop {captions} {nooneline}
 \prop_gput:Nnn \g_ptxcd_clsopts_prop {parskip} {half-}
 
+\prop_new:N \g__ptxcd_points_collector_prop
+\bool_new:N \l__ptxcd_points_auto_bool
+\bool_new:N \g__ptxcd_points_bool
+
 \int_new:N \g_ptxcd_ruledheaders_int
 \int_new:N \g_ptxcd_paper_int
 
@@ -141,6 +145,11 @@
 	},
 	solution .default:n = true,
 	unknown .code:n = {\prop_gput:NVn \g_ptxcd_unknown_clsopts_prop \l_keys_key_tl {#1}},
+	points .choice:,
+	points / true .code:n = \bool_set_false:N \l__ptxcd_points_auto_bool\bool_gset_true:N \g__ptxcd_points_bool,
+	points /false .code:n =  \bool_set_false:N \l__ptxcd_points_auto_bool\bool_gset_false:N \g__ptxcd_points_bool,
+	points / auto .code:n = \bool_set_true:N \l__ptxcd_points_auto_bool\bool_gset_true:N \g__ptxcd_points_bool,
+	points .initial:n = false,
 }
 
 \ProcessKeysOptions{ptxcd/exercise}
@@ -156,19 +165,29 @@
 \RequirePackage{environ}
 
 \bool_new:N \l_ptxcd_ex_subtask_fallback_bool
+\int_new:N \l_ptxcd_ex_task_points_int
+\int_new:N \g__ptxcd_ex_collected_points_int
+\tl_new:N \l_ptxcd_ex_task_credit_tl
 
 \keys_define:nn {ptxcd/task}{
-	points .int_set:N = \l_ptxcd_ex_task_points_int,
+	points .choice:,
+	points / auto .code:n =
+		\bool_set_true:N \l__ptxcd_points_auto_bool,
+	points / unknown .code:n = \int_set:Nn \l_ptxcd_ex_task_points_int {#1}
+	\bool_set_false:N \l__ptxcd_points_auto_bool,
 	points .initial:n = 0,
-	credit .tl_set:N = \l_ptxcd_ex_task_credit_tl,
+	credit .code:n = \tl_set:Nn \l_ptxcd_ex_task_credit_tl {#1}
+		\bool_set_false:N \l__ptxcd_points_auto_bool,
 	credit .initial:n =,
 	solution .meta:nn ={ptxcd/exercise}{solution=#1},
 }
 
+\int_new:N \l_ptxcd_ex_subtask_points_int 
 \keys_define:nn {ptxcd/subtask} {
 	credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
 	credit .initial:n =,
-	points .int_set:N = \l_ptxcd_ex_subtask_points_int,
+	points .code:n = \int_set:Nn \l_ptxcd_ex_subtask_points_int {#1}
+	\bool_set_false:N \l__ptxcd_points_auto_bool,
 	points .initial:n = 0,
 	title .tl_set:N = \l_ptxcd_ex_title_tl,
 	title .initial:n =,
