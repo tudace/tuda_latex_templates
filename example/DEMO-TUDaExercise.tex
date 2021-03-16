@@ -180,7 +180,8 @@ In der aktuellen Einstellung (\code{solution=false}) erzeugt der obige Block die
 \begin{task}[credit=10]{Punkte}
 Punkteangaben sind über den Optionsschlüssel \code{credit} möglich. Der Wert wird hinter den Aufgabentitel in runde Klammern gesetzt. Dies geschieht mithilfe des Makros \code{\tbs{}creditformat}
 
-Alternativ existiert der Schlüssel \code{points} dieser ergänzt zusätzlich zur Angabe auch den Text \code{\tbs{}PointName} bzw. \code{\tbs{PointsName}} je nachdem ob der Wert größer 1 oder nicht. Der Schlüssel \code{points} akzeptiert daher nur numerische Werte.
+Alternativ existiert der Schlüssel \code{points} dieser ergänzt zusätzlich zur Angabe auch den Text \code{\tbs{}PointName} bzw. \code{\tbs{PointsName}} je nachdem ob der Wert gleich 1. Der Schlüssel \code{points} akzeptiert daher nur numerische Werte ab Version 3.13 werden Gleitkommazahlen unterstützt. Das Dazimaltrennzeichen ist hierbei ein Punkt. Korrektur auf ein Komma ist über eine Umdefinition von \code{\tbs{}pointformat} möglich.
+
 \begin{subtask}[points=1,title=Beispiel für den Schlüssel points]
 Da ältere Versionen von TUDaExercise keine Optionsverarbeitung für subtask erlaubten, ist hier ein zusätzlicher Mechanismus enthalten. Falls sowohl ein Titel, als auch spezifische Angaben notwendig sind, existiert hier zusätzlich der Schlüssel \code{title}.
 Geprüft wird darauf, ob das Argument ein Gleichheitszeichen enthält, ist dies der Fall, so wird davon ausgegangen, dass Optionen nach Schlüssel=Wert-Struktur übergeben werden.
@@ -283,22 +284,22 @@ Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}getPointsTotal} die Su
 		Die mit Version 3.0 implementierten Varianten \code{task*} und \code{subtask*} ermöglichen dies.
 		
 		Beide Varianten stehe nur als Umgebung und nicht als Makro zur Verfügung:
-		
-		\begin{verbatim}
-			\begin{task*}{Aufgabentitel}
-				\begin{subtask*}{Titel der Teilaufgabe}
-					Beschreibung
-				\end{subtask*}
-			\end{task*}
-		\end{verbatim}
-		
-	\end{subtask*}
-	
-	\begin{subtask*}{Vertauschen der beiden Varianten}
-		Zusätzlich erlaubt die Klassenoption \code{match-task-subtask-syntax} das Vertauschen von \code{subtask} und \code{subtask*}.
-		
-		Die Umgebungen \code{task*} und \code{task} sind identisch.
-	\end{subtask*}
+
+\begin{verbatim}
+\begin{task*}{Aufgabentitel}
+  \begin{subtask*}{Titel der Teilaufgabe}
+    Beschreibung
+  \end{subtask*}
+\end{task*}
+\end{verbatim}
+
+\end{subtask*}
+
+\begin{subtask*}{Vertauschen der beiden Varianten}
+Zusätzlich erlaubt die Klassenoption \code{match-task-subtask-syntax} das Vertauschen von \code{subtask} und \code{subtask*}.
+
+Die Umgebungen \code{task*} und \code{task} sind identisch.
+\end{subtask*}
 \end{task*}
 
 \begin{task}{Kompatibilitätsmodus}

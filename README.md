@@ -263,3 +263,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - Fix color conversion for PDF/A
    - Fix margin restore after titlepage for custommargins=geometry
    - Enhance information on installation
+ * v3.13 (2021-03-16)
+   - Enhancement of tudaexercise to be more flexible to be used with exams
+   

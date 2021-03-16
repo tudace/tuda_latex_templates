@@ -15,7 +15,7 @@
 \bool_new:N \l__ptxcd_points_auto_bool
 \bool_new:N \g__ptxcd_points_bool
 \prop_new:N \g__ptxcd_loaded_points_prop
-\int_new:N \g__ptxcd_points_total_int
+\fp_new:N \g__ptxcd_points_total_fp
 
 \int_new:N \g_ptxcd_paper_int
 
@@ -187,15 +187,15 @@
 \RequirePackage{environ}
 
 \bool_new:N \l_ptxcd_ex_subtask_fallback_bool
-\int_new:N \l_ptxcd_ex_task_points_int
-\int_new:N \g__ptxcd_ex_collected_points_int
+\fp_new:N \l_ptxcd_ex_task_points_fp
+\fp_new:N \g__ptxcd_ex_collected_points_fp
 \tl_new:N \l_ptxcd_ex_task_credit_tl
 
 \keys_define:nn {ptxcd/task}{
 	points .choice:,
 	points / auto .code:n =
 		\bool_set_true:N \l__ptxcd_points_auto_bool,
-	points / unknown .code:n = \int_set:Nn \l_ptxcd_ex_task_points_int {#1}
+	points / unknown .code:n = \fp_set:Nn \l_ptxcd_ex_task_points_fp {#1}
 	\bool_set_false:N \l__ptxcd_points_auto_bool,
 	points .initial:n = 0,
 	credit .code:n = \tl_set:Nn \l_ptxcd_ex_task_credit_tl {#1}
@@ -204,16 +204,16 @@
 	solution .meta:nn ={ptxcd/exercise}{solution=#1},
 }
 
-\int_new:N \l_ptxcd_ex_subtask_points_int 
+\fp_new:N \l_ptxcd_ex_subtask_points_fp 
 \keys_define:nn {ptxcd/subtask} {
 	credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
 	credit .initial:n =,
-	points .code:n = \int_set:Nn \l_ptxcd_ex_subtask_points_int {#1}
+	points .code:n = \fp_set:Nn \l_ptxcd_ex_subtask_points_fp {#1}
 	\bool_set_false:N \l__ptxcd_points_auto_bool,
 	points .initial:n = 0,
 	title .tl_set:N = \l_ptxcd_ex_title_tl,
 	title .initial:n =,
-	unknown .code:n = \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool \tl_clear:N \l_ptxcd_ex_subtask_credit_tl \int_zero:N \l_ptxcd_ex_subtask_points_int,
+	unknown .code:n = \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool \tl_clear:N \l_ptxcd_ex_subtask_credit_tl \fp_zero:N \l_ptxcd_ex_subtask_points_fp,
 }
 
 \keys_define:nn {ptxcd/exercise/headline} {
@@ -279,14 +279,14 @@
 			\bool_if:NT \l__ptxcd_points_auto_bool {
 				\exp_args:NNx \prop_get:NnN \g__ptxcd_loaded_points_prop {\thetask} \l_ptxcd_tmp_tl
 				\quark_if_no_value:NF \l_ptxcd_tmp_tl {
-					\int_set:Nn \l_ptxcd_ex_task_points_int {\l_ptxcd_tmp_tl}
+					\fp_set:Nn \l_ptxcd_ex_task_points_fp {\l_ptxcd_tmp_tl}
 				}
 			}
 		}
 		#4
 		\tl_if_in:nnT {#1} {task} {
 			\tl_if_empty:cTF{l_ptxcd_ex_#1_credit_tl}
-				{\pointformat{\int_use:c {l_ptxcd_ex_#1_points_int}}}
+				{\pointformat{\fp_to_decimal:c {l_ptxcd_ex_#1_points_fp}}}
 				{\creditformat{\tl_use:c {l_ptxcd_ex_#1_credit_tl}}}
 		}
 		\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
@@ -697,21 +697,18 @@
 \providecommand{\creditformat}[1]{\space(#1)}
 \providecommand{\creditformatsum}[1]{\creditformat{#1}}
 \newcommand*{\pointformat}[1]{
-	\int_case:nnF {#1}{
-		{0} {}
-		{1} {
-			\bool_if:NTF \l__ptxcd_points_auto_bool 
-				\creditformatsum
-				\creditformat
-				{\int_to_arabic:n {#1}\space\PointName}
-			}
-		}{
-			\bool_if:NTF \l__ptxcd_points_auto_bool 
-				\creditformatsum
-				\creditformat
-				{\int_to_arabic:n {#1}\space\PointsName}
+	\fp_compare:nF {#1 = 0} {
+		\bool_if:NTF \l__ptxcd_points_auto_bool 
+			\creditformatsum
+			\creditformat
+		{
+			\fp_to_decimal:n {#1}\space
+			\fp_compare:nTF {#1=1}
+				\PointName
+				\PointsName
 		}
 	}
+}
 \providecaptionname{ngerman, german}{\PointName}{Punkt}
 \providecaptionname{english, american, british}{\PointName}{Point}
 \providecommand{\PointsName}{Punkte}
@@ -751,13 +748,13 @@
 	\@task{#2}
 	\bool_if:NF \l__ptxcd_points_auto_bool {
 		\prop_gput:Nxx \g__ptxcd_points_collector_prop
-		{\thetask} {\int_use:N \l_ptxcd_ex_task_points_int}
+		{\thetask} {\fp_to_decimal:N \l_ptxcd_ex_task_points_fp}
 	}
 }{
 	\bool_if:NT \l__ptxcd_points_auto_bool {
 		\prop_gput:Nxx \g__ptxcd_points_collector_prop
-			{\thetask} {\int_use:N \g__ptxcd_ex_collected_points_int}
-		\int_gzero:N \g__ptxcd_ex_collected_points_int
+			{\thetask} {\fp_to_decimal:N \g__ptxcd_ex_collected_points_fp}
+		\fp_gzero:N \g__ptxcd_ex_collected_points_fp
 	}
 }
 
@@ -864,12 +861,12 @@
 % Point referencing
 \AddtoDoHook{heading/preinit/subtask}{
 	\bool_if:NT \g__ptxcd_points_bool {
-		 \int_gadd:Nn \g__ptxcd_ex_collected_points_int {\l_ptxcd_ex_subtask_points_int}
+		 \fp_gadd:Nn \g__ptxcd_ex_collected_points_fp {\l_ptxcd_ex_subtask_points_fp}
 	}
 }
 
 \AddtoDoHook{heading/preinit/task}{
-	\int_gzero:N \g__ptxcd_ex_collected_points_int
+	\fp_gzero:N \g__ptxcd_ex_collected_points_fp
 }
 
 
@@ -923,7 +920,7 @@
 	}
 
 	\newcommand{\getPointsTotal}{
-		\int_use:N \g__ptxcd_points_total_int
+		\fp_use:N \g__ptxcd_points_total_fp
 	}
 } {
 	\newcommand{\getPoints}[1]{
@@ -952,7 +949,7 @@
 	{
 			\exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
 			{
-				\int_compare:nF {\l_tmpa_tl = 0}
+				\fp_compare:nF {\l_tmpa_tl = 0}
 				{
 					\tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
 					\tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
@@ -971,9 +968,9 @@
 	\prop_gset_from_keyval:Nn \g__ptxcd_loaded_points_prop {
 		#2
 	}
-	\int_zero:N \g__ptxcd_points_total_int
+	\fp_gzero:N \g__ptxcd_points_total_fp
 	\prop_map_inline:Nn  \g__ptxcd_loaded_points_prop  {
-		\int_gadd:Nn \g__ptxcd_points_total_int {##2}
+		\fp_gadd:Nn \g__ptxcd_points_total_fp {##2}
 	}
 }
 
