@@ -258,12 +258,12 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - extend support for all CreativeCommons 4.0 Licenses
    - improve documentation
  * v3.11 (2021-02-22)
-   - Add Info for DVI-Outputs
+   - add Info for DVI-Outputs
  * v3.12 (2021-03-06)
-   - Fix color conversion for PDF/A
-   - Fix margin restore after titlepage for custommargins=geometry
-   - Enhance information on installation
+   - fix color conversion for PDF/A
+   - fix margin restore after titlepage for custommargins=geometry
+   - enhance information on installation
  * v3.13 (2021-03-16)
-   - Enhancement of tudaexercise to be more flexible to be used with exams
-   - points now use a fp variable
+   - enhancement of tudaexercise to be more flexible to be used with exams
+   - convert points to a floating point variable
    
