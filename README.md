@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/03/06 v3.12
+ tuda-ci 2021/03/16 v3.13
 
 ***************************************************************************
 
@@ -265,4 +265,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - Enhance information on installation
  * v3.13 (2021-03-16)
    - Enhancement of tudaexercise to be more flexible to be used with exams
+   - points now use a fp variable
    
