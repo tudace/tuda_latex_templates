@@ -701,7 +701,7 @@
 %task environment
 \DeclareSectionCommand[%
 	style=section,%
-	level=1,%
+	level=2,%
 	indent=\z@,%
 	beforeskip=\cs_if_exist_use:NF \scr@subsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
 	afterskip=\cs_if_exist_use:NF \scr@subsection@afterskip {1.5ex \@plus .2ex},%
@@ -727,7 +727,7 @@
 % subtasks
 \DeclareSectionCommand[%
 	style=section,%
-	level=2,%
+	level=3,%
 	indent=\z@,%
 	beforeskip=\cs_if_exist_use:NF \scr@subsubsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
 	afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
@@ -766,7 +766,7 @@
 
 \DeclareSectionCommand[%
 style=section,%
-level=2,%
+level=3,%
 indent=\z@,%
 beforeskip=\cs_if_exist_use:NF \scr@subsubsection@beforeskip {-3.25ex\@plus -1ex \@minus -.2ex},%
 afterskip=\cs_if_exist_use:NF \scr@subsubsection@afterskip {1.5ex \@plus .2ex},%
