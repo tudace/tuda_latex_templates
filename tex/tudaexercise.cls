@@ -14,6 +14,8 @@
 \prop_new:N \g__ptxcd_points_collector_prop
 \bool_new:N \l__ptxcd_points_auto_bool
 \bool_new:N \g__ptxcd_points_bool
+\prop_new:N \g__ptxcd_loaded_points_prop
+\int_new:N \g__ptxcd_points_total_int
 
 \int_new:N \g_ptxcd_ruledheaders_int
 \int_new:N \g_ptxcd_paper_int
@@ -24,6 +26,10 @@
 
 \bool_new:N \g_ptxcd_smalltitle_bool
 \str_new:N \g_ptxcd_department_str
+
+\tl_new:N \g_ptxcd_tmp_tl
+\int_new:N \g_ptxcd_tmp_int
+\tl_new:N \l_ptxcd_tmp_tl
 
 \RequirePackage{environ}
 
@@ -251,12 +257,18 @@
 		\hskip #2#3}{
 		\tl_if_eq:nnT {#1} {task} {
 			\exp_args:No \tl_if_empty:nF {#4}
-				{:~}
+				{:~}	
+			\bool_if:NT \l__ptxcd_points_auto_bool {
+				\exp_args:NNx \prop_get:NnN \g__ptxcd_loaded_points_prop {\thetask} \l_ptxcd_tmp_tl
+				\quark_if_no_value:NF \l_ptxcd_tmp_tl {
+					\int_set:Nn \l_ptxcd_ex_task_points_int {\l_ptxcd_tmp_tl}
+				}
+			}
 		}
 		#4
 		\tl_if_in:nnT {#1} {task} {
 			\tl_if_empty:cTF{l_ptxcd_ex_#1_credit_tl}
-				{\pointformat{\tl_use:c {l_ptxcd_ex_#1_points_int}}}
+				{\pointformat{\int_use:c {l_ptxcd_ex_#1_points_int}}}
 				{\creditformat{\tl_use:c {l_ptxcd_ex_#1_credit_tl}}}
 		}
 		\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
@@ -667,15 +679,15 @@
 \providecommand{\creditformat}[1]{\space(#1)}
 \providecommand{\creditformatsum}[1]{\creditformat{#1}}
 \newcommand*{\pointformat}[1]{
-	\int_case:nnF {#1}
-		{
+	\int_case:nnF {#1}{
 		{0} {}
-		{1} {\bool_if:NTF \l__ptxcd_points_auto_bool 
+		{1} {
+			\bool_if:NTF \l__ptxcd_points_auto_bool 
 				\creditformatsum
 				\creditformat
-				{\int_to_arabic:n {#1}\space\PointName}}
-		}
-		{
+				{\int_to_arabic:n {#1}\space\PointName}
+			}
+		}{
 			\bool_if:NTF \l__ptxcd_points_auto_bool 
 				\creditformatsum
 				\creditformat
@@ -688,15 +700,12 @@
 \providecaptionname{ngerman, german}{\PointsName}{Punkte}
 \providecaptionname{english, american, british}{\PointsName}{Points}
 
-
 %Has to be initialized after captionnames have been defined
  \AtBeginDocument{
   \ptxcd_update_headline_boxes:
   \ptxcd_ex_adjust_headheight:
   \global\let\ConfigureHeadline\ptxcd_ConfigureHeadline:n
 }
-
-
 
 %task environment
 \DeclareSectionCommand[%
@@ -710,7 +719,10 @@
 	tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsection@numwidth {2.3em},%
 ]{task}
 
-\renewcommand*{\thetask}{\g_ptxcd_ex_sheetnum_tl\tl_if_empty:NF \g_ptxcd_ex_sheetnum_tl{.}\arabic{task}}
+\renewcommand*{\thetask}{
+	\g_ptxcd_ex_sheetnum_tl\tl_if_empty:NF \g_ptxcd_ex_sheetnum_tl{.}
+	\arabic{task}
+}
 \renewcommand*{\taskformat}{\taskname\tasksep\thetask{}}
 
 \let\@task\task
@@ -719,7 +731,17 @@
 \NewDocumentEnvironment{task}{om}{
 	\IfNoValueF{#1}{\keys_set:nn {ptxcd/task}{#1}}
 	\@task{#2}
-}{}
+	\bool_if:NF \l__ptxcd_points_auto_bool {
+		\prop_gput:Nxx \g__ptxcd_points_collector_prop
+		{\thetask} {\int_use:N \l_ptxcd_ex_task_points_int}
+	}
+}{
+	\bool_if:NT \l__ptxcd_points_auto_bool {
+		\prop_gput:Nxx \g__ptxcd_points_collector_prop
+			{\thetask} {\int_use:N \g__ptxcd_ex_collected_points_int}
+		\int_gzero:N \g__ptxcd_ex_collected_points_int
+	}
+}
 
 \cs_set_eq:cN {task*} \task
 \cs_set_eq:cN {endtask*} \endtask
