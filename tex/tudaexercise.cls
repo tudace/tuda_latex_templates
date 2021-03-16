@@ -665,13 +665,22 @@
 \newcommand*{\StudentIDsep}{:~}
 
 \providecommand{\creditformat}[1]{\space(#1)}
+\providecommand{\creditformatsum}[1]{\creditformat{#1}}
 \newcommand*{\pointformat}[1]{
 	\int_case:nnF {#1}
 		{
 		{0} {}
-		{1} {\creditformat{\int_to_arabic:n {#1}\space\PointName}}
+		{1} {\bool_if:NTF \l__ptxcd_points_auto_bool 
+				\creditformatsum
+				\creditformat
+				{\int_to_arabic:n {#1}\space\PointName}}
 		}
-		{\creditformat{\int_to_arabic:n {#1}\space\PointsName}}
+		{
+			\bool_if:NTF \l__ptxcd_points_auto_bool 
+				\creditformatsum
+				\creditformat
+				{\int_to_arabic:n {#1}\space\PointsName}
+		}
 	}
 \providecaptionname{ngerman, german}{\PointName}{Punkt}
 \providecaptionname{english, american, british}{\PointName}{Point}
