@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/03/16 v3.13
+ tuda-ci 2021/03/19 v3.13a
 
 ***************************************************************************
 
@@ -266,4 +266,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * v3.13 (2021-03-16)
    - enhancement of tudaexercise to be more flexible to be used with exams
    - convert points to a floating point variable
+ * v3.13a (2021-03-19)
+   - patch to fix the automatic reset of points=auto option (tudaexercise)
    
