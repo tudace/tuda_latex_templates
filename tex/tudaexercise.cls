@@ -196,11 +196,9 @@
 	points / auto .code:n =
 		\bool_set_true:N \l__ptxcd_points_auto_bool,
 	points / unknown .code:n = \fp_set:Nn \l_ptxcd_ex_task_points_fp {#1}
-	\bool_set_false:N \l__ptxcd_points_auto_bool,
-	points .initial:n = 0,
+		\bool_set_false:N \l__ptxcd_points_auto_bool,
 	credit .code:n = \tl_set:Nn \l_ptxcd_ex_task_credit_tl {#1}
 		\bool_set_false:N \l__ptxcd_points_auto_bool,
-	credit .initial:n =,
 	solution .meta:nn ={ptxcd/exercise}{solution=#1},
 }
 
@@ -210,7 +208,6 @@
 	credit .initial:n =,
 	points .code:n = \fp_set:Nn \l_ptxcd_ex_subtask_points_fp {#1}
 	\bool_set_false:N \l__ptxcd_points_auto_bool,
-	points .initial:n = 0,
 	title .tl_set:N = \l_ptxcd_ex_title_tl,
 	title .initial:n =,
 	unknown .code:n = \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool \tl_clear:N \l_ptxcd_ex_subtask_credit_tl \fp_zero:N \l_ptxcd_ex_subtask_points_fp,
