@@ -15,7 +15,7 @@
 
 [English version below](#summary)
 
-# Zusammenfassung
+## Zusammenfassung
 Das TUDa-CI-Bundle ist die Umsetzung des Corporate Designs der TU Darmstadt in LaTeX.
 Es liefert neben den Klassen-, Paket- und Konfigurationsdateien auch Anwenderdokumentation in Form von Templatedateien für verschiedene Dokumententypen.
 
@@ -60,7 +60,9 @@ ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
 
+## TeXnischer Support für TUDa-Mitglieder
 
+Neben dem Supportangebot zu TUDa-CI gibt es ab April 2021 eine TeXnische Sprechstunde. Details und die für den Zugang notwendigen Informationen finden TUDa-Mitglieder unter https://www.ce.tu-darmstadt.de/ce/latex_tuda/index.de.jsp
 
 ## Enthaltene Templatedateien
 
