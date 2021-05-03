@@ -5,6 +5,14 @@
 
 \RequirePackage{l3keys2e}
 
+\msg_new:nnnn {tudaexercise} {outdated-koma-script} {
+  Your~KOMA-Script~is~outdated.\\
+  To~use~the~feature~'#1'~you~will~be~required~to~update.
+} {
+  Please~do~not~use~this~feature~or~update~your~TeX~distribution.\\
+  The~feature~requires~KOMA-Script~v#2~or~newer.
+}
+
 \str_const:Nn \c__ptxcd_base_str {exercise}
 \prop_new:N \g_ptxcd_clsopts_prop
 \prop_new:N \g_ptxcd_unknown_clsopts_prop
@@ -248,6 +256,13 @@
 
 \LoadClass{scrartcl}
 
+\bool_if:NT \g__ptxcd_points_bool {
+  \cs_if_exist:NF \AddtoDoHook{
+    \msg_error:nnnn  {tudaexercise} {outdated-koma-script} {points=true/auto} {3.27}
+    \keys_set:nn {ptxcd/exercise} {points=false}
+    }
+}
+
 \RequirePackage{tudarules}
 
 %Has to be loaded here due to headwidth options
@@ -292,7 +307,7 @@
 }}
 
 
-\usepackage{tudafonts}
+\RequirePackage{tudafonts}
 
 \dim_new:N \g_ptxcd_innerMargin_dim
 \dim_new:N \g_ptxcd_outerMargin_dim
@@ -744,12 +759,16 @@
 	\IfNoValueF{#1}{\keys_set:nn {ptxcd/task}{#1}}
 	\@task{#2}
 	\bool_if:NF \l__ptxcd_points_auto_bool {
-		\prop_gput:Nxx \g__ptxcd_points_collector_prop
+          \cs_if_exist_use:NF \prop_gput:Nxx
+          {\exp_args:NNxx \prop_gput:Nnn}
+          \g__ptxcd_points_collector_prop
 		{\thetask} {\fp_to_decimal:N \l_ptxcd_ex_task_points_fp}
 	}
 }{
-	\bool_if:NT \l__ptxcd_points_auto_bool {
-		\prop_gput:Nxx \g__ptxcd_points_collector_prop
+  \bool_if:NT \l__ptxcd_points_auto_bool {
+    \cs_if_exist_use:NF \prop_gput:Nxx
+          {\exp_args:NNxx \prop_gput:Nnn}
+            \g__ptxcd_points_collector_prop
 			{\thetask} {\fp_to_decimal:N \g__ptxcd_ex_collected_points_fp}
 		\fp_gzero:N \g__ptxcd_ex_collected_points_fp
 	}
@@ -856,15 +875,20 @@
 \ptxcd_makeheadrule[color=identbarcolor, width=\textwidth]{ptxcd_headrule}
 
 % Point referencing
-\AddtoDoHook{heading/preinit/subtask}{
-	\bool_if:NT \g__ptxcd_points_bool {
-		 \fp_gadd:Nn \g__ptxcd_ex_collected_points_fp {\l_ptxcd_ex_subtask_points_fp}
-	}
+\cs_if_exist:NTF \AddtoDoHook {
+  \AddtoDoHook{heading/preinit/subtask}{
+    \bool_if:NT \g__ptxcd_points_bool {
+      \fp_gadd:Nn \g__ptxcd_ex_collected_points_fp {\l_ptxcd_ex_subtask_points_fp}
+    }
+  }
+
+  \AddtoDoHook{heading/preinit/task}{
+    \fp_gzero:N \g__ptxcd_ex_collected_points_fp
+  }
+} {
+  \msg_warning:nnnn  {tudaexercise} {outdated-koma-script} {point~references} {3.27}
 }
 
-\AddtoDoHook{heading/preinit/task}{
-	\fp_gzero:N \g__ptxcd_ex_collected_points_fp
-}
 
 
 \msg_new:nnn {tudaexercise} {points-differ} {
@@ -919,20 +943,8 @@
 	\newcommand{\getPointsTotal}{
 		\fp_use:N \g__ptxcd_points_total_fp
 	}
-} {
-	\newcommand{\getPoints}[1]{
-			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPoints}
-	}
-	\newcommand{\refPoints}[1]{
-			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\refPoints}
-	}
-	\newcommand{\getPointsTotal}[1]{
-		\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPointsTotal}
-	}
-}
 
-\cs_new:Nn \__ptxcd_map_points_helper:nn {#1-#2}
-\NewDocumentCommand{\mapPoints}{sO{1}m}{
+        \NewDocumentCommand{\mapPoints}{sO{1}m}{
 	\cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
 	\prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
 	 \msg_warning:nn {tudaexercise} {empty-point-mapping}
@@ -958,7 +970,25 @@
 	\setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
 	\g_ptxcd_tmp_tl 
 	}
+        }
+
+} {
+	\newcommand{\getPoints}[1]{
+			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPoints}
+	}
+	\newcommand{\refPoints}[1]{
+			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\refPoints}
+	}
+	\newcommand{\getPointsTotal}[1]{
+		\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPointsTotal}
+	}
+
+        \NewDocumentCommand{\mapPoints}{som} {
+          \msg_error:nnn {tudaexercise} {point-referencing-disabled} {\mapPoints}
+        }
 }
+
+\cs_new:Nn \__ptxcd_map_points_helper:nn {#1-#2}
 
 
 \newcommand*{\ptxcd@LoadPoints}[2][]{
