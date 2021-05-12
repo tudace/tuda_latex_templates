@@ -76,7 +76,8 @@
 }
 
 
-\str_case:Vn \g_ptxcd_department_str {
+\cs_if_exist_use:NF \str_case:Vn \str_case:on
+	\g_ptxcd_department_str {
 	{mecheng} {\bool_gset_true:N \g_ptxcd_simple_rules_bool}
 }
 
