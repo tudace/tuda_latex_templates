@@ -271,5 +271,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * v3.13a (2021-03-19)
    - patch to fix the automatic reset of points=auto option (tudaexercise)
  * v3.14 (2021-05-xx)
-   - fix pagestyle init bug in department=mecheng
-   
+   - fix bug in pagestyle init for department=mecheng
+   - fix beamer mode selection
+   - fix error in tudaexercise documentation
