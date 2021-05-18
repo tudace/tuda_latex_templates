@@ -273,10 +273,11 @@ Beispiele für Abweichungen aus typografischen Gründen sind Beispielsweise auch
 \subsubsection{Seitenränder}
 Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde.
+Die Option \code{custommargins} beziehungsweise \code{custommargins=true} aktiviert die automatische Größenberechnung durch das in KOMA integrierte \code{typearea}.
 
 Bei Verwendung einer Bindekorrektur wird diese nicht automatisch auch auf der Titelseite eingefügt. Für diesen Fall wurde mit Version 3.0 zusätzlich die Option \code{BCORtitlepage} hinzugefügt. Falls diese aktiviert wird, nimmt die Titelseite den Wert der Typearea Option \code{BCOR} auf der ersten Seite als Zusatz zum linken Rand hinzu.
 
-Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}. Damit können die Ränder auch durch einen Aufruf von \code{\textbackslash{}geometry} vor Beginn des Dokuments manuell angepasst werden.
+Die Option \code{custommargins} verfügt ab Version 1.10 auch über den Wert \code{geometry}, welcher über das Setzen von \code{custommargins=geometry} in den Klassenoptionen eingestellt wird. Damit können die Ränder auch durch einen Aufruf von \code{\textbackslash{}geometry} vor Beginn des Dokuments manuell angepasst werden.
 
 Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
 \begin{verbatim}
