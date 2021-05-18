@@ -1105,7 +1105,12 @@
 \newcommand*{\SetPaperID}[2]{
 	\hbox_gset:Nn \g_ptxcd_PaperID_box {
 		\usekomafont{paperid}
+		\if@titlepage
 		\dim_set:Nn \l_tmpa_dim {\exp_last_unbraced:No \use_i:nn \ptxcd_title_fontsize: + \exp_last_unbraced:No \use_ii:nn \ptxcd_title_fontsize:}
+		\else
+		\Huge
+		\dim_set:Nn \l_tmpa_dim {1.8\baselineskip}
+		\fi
 		\fontsize{1.1\l_tmpa_dim}{1.1\l_tmpa_dim}
 		\selectfont
 		#1{\Huge #2}
@@ -1128,21 +1133,30 @@
 	\usekomafont{disposition}
 	\hsize=\g_ptxcd_headwidth_dim
 	\setlength{\fboxsep}{\z@}
-	\bool_if:NT \g_ptxcd_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\g_ptxcd_headwidth_dim}{
+	\bool_if:NT \g_ptxcd_colorback_bool {\bool_set_true:N \g_ptxcd_colorbacktitle_bool}
+	\bool_if:NT \g_ptxcd_colorbacktitle_bool {\colorbox{identbarcolor}}
+	{\parbox[t]{\g_ptxcd_headwidth_dim}{
 			\rule{\z@}{.5\c_ptxcd_logoheight_dim}\par\nointerlineskip
 			\raisebox{-\height}{%
 				\begin{minipage}[t]{\dimexpr\linewidth-2.2\c_ptxcd_logoheight_dim-1ex}
-					\bool_if:NT \g_ptxcd_colorback_bool  {\begin{addmargin}{.5\c_ptxcd_largerule_dim}}
+					\bool_if:NT \g_ptxcd_colorbacktitle_bool  {\begin{addmargin}{.5\c_ptxcd_largerule_dim}}
 						\raggedright
 						\bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
 						\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
-						\leavevmode
-						{\Huge\usekomafont{title}{
-						\Huge
-						\@title \par
-						}}%
-						\vskip 1em
-						\bool_if:NTF \g_ptxcd_colorback_bool {\end{addmargin}} {\par}
+						\box_if_empty:NF \g_ptxcd_PaperID_box  {\begin{addmargin}[\dim_eval:n {\box_wd:N\g_ptxcd_PaperID_box+.5\c_ptxcd_logoheight_dim}]{0pt}}
+							\raggedright
+							\bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
+							\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
+							\leavevmode\usekomafont{title}%
+							\Huge
+							\llap{\raisebox{\dimexpr-\height+.5\baselineskip}[0pt][0pt]{\box_use:N \g_ptxcd_PaperID_box}\hspace{.5\c_ptxcd_logoheight_dim}}
+							\@title\strut
+							\par
+							\box_if_empty:NTF \g_ptxcd_PaperID_box
+							{\vskip1em}
+							{\rule{0pt}{.5\c_ptxcd_logoheight_dim}}
+						\box_if_empty:NF \g_ptxcd_PaperID_box {\end{addmargin}}
+					\bool_if:NTF \g_ptxcd_colorbacktitle_bool {\end{addmargin}} {\par}
 			\vspace{\dim_eval:n {\c_ptxcd_largerule_dim+\c_ptxcd_rulesep_dim}}
 			\end{minipage}
 		}
