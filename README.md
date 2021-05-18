@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/03/19 v3.13a
+ tuda-ci 2021/05/18 v3.14
 
 ***************************************************************************
 
@@ -270,7 +270,7 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - convert points to a floating point variable
  * v3.13a (2021-03-19)
    - patch to fix the automatic reset of points=auto option (tudaexercise)
- * v3.14 (2021-05-xx)
+ * v3.14 (2021-05-18)
    - fix bug in pagestyle init for department=mecheng
    - fix beamer mode selection
    - fix error in tudaexercise documentation
