@@ -760,14 +760,14 @@
 	\@task{#2}
 	\bool_if:NF \l__ptxcd_points_auto_bool {
           \cs_if_exist_use:NF \prop_gput:Nxx
-          {\exp_args:NNxx \prop_gput:Nnn}
+          {\exp_args:NNx \prop_gput:Nnx}
           \g__ptxcd_points_collector_prop
 		{\thetask} {\fp_to_decimal:N \l_ptxcd_ex_task_points_fp}
 	}
 }{
   \bool_if:NT \l__ptxcd_points_auto_bool {
     \cs_if_exist_use:NF \prop_gput:Nxx
-          {\exp_args:NNxx \prop_gput:Nnn}
+          {\exp_args:NNx \prop_gput:Nnx}
             \g__ptxcd_points_collector_prop
 			{\thetask} {\fp_to_decimal:N \g__ptxcd_ex_collected_points_fp}
 		\fp_gzero:N \g__ptxcd_ex_collected_points_fp
