@@ -220,7 +220,8 @@
 	\begingroup
 	\def\newline{}
 	\def\\{}
-	\let\thanks\use_none:n
+	\cs_set_eq:NN \thanks \use_none:n
+	\cs_set_eq:NN \inst \use_none:n
 	\cs_set:Npn \and {\sep}
 	\bool_if:NTF \g_ptxcd_pass_TitleData_bool {
 		\tl_gset:Nx \g_ptxcd_xmp_title {\@title}
@@ -454,6 +455,8 @@
 \dim_new:N \g_ptxcd_titleblock_dim
 \dim_new:N \g_ptxcd_titleindent_dim
 
+\cs_new:Nn \__ptxcd_inst:n {\textsuperscript{#1}}
+
 \cs_new:Nn \ptxcd_poster_setup_title_box: {
 	\hbox_gset:Nn \g_ptxcd_title_box {
 	\parbox{.65\paperwidth}{
@@ -464,7 +467,8 @@
 	\hbox_gset:Nn \g_ptxcd_author_box {
 		\parbox{\dimexpr\contentwidth-6\c_ptxcd_rulesep_dim\relax}{
 		\ptxcd_def_footnotelabel:
-		{\usekomafont{author}\@author\\}%\\[.2\titleinnersep]
+		\cs_set_eq:NN \inst\__ptxcd_inst:n
+		{\usekomafont{author}\@author\\}
 		\tl_gset:No \g_ptxcd_thanks_tl {\@thanks}
 		\@institute
 		}

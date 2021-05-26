@@ -274,3 +274,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix bug in pagestyle init for department=mecheng
    - fix beamer mode selection
    - fix error in tudaexercise documentation
+  * v3.15 (2021-05-26)
+   - add \inst to tudasciposter to support multiple affiliations
