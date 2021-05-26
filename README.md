@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/05/18 v3.14
+ tuda-ci 2021/05/26 v3.15
 
 ***************************************************************************
 
@@ -274,6 +274,7 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix bug in pagestyle init for department=mecheng
    - fix beamer mode selection
    - fix error in tudaexercise documentation
-  * v3.15 (2021-05-26)
+ * v3.15 (2021-05-26)
    - add \inst to tudasciposter to support multiple affiliations
    - fix calculation of headwidth with department=mecheng
+   - improve documentation on document margins for tudapub and tudapub based examples
