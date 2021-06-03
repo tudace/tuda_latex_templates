@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/05/26 v3.15
+ tuda-ci 2021/06/03 v3.16
 
 ***************************************************************************
 
@@ -278,3 +278,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - add \inst to tudasciposter to support multiple affiliations
    - fix calculation of headwidth with department=mecheng
    - improve documentation on document margins for tudapub and tudapub based examples
+ * v3.16 (2021-06-03)
+   - adjust option expansion due to changes in the LaTeX kernel
