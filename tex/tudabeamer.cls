@@ -14,8 +14,8 @@
 \str_new:N \g_ptxcd_department_str
 \keys_define:nn {ptxcd/beamer} {
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-	colorframetitle .code:n = \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
-	\PassOptionsToPackage{\l_keys_key_tl=#1}{beamerouterthemeTUDa},
+	colorframetitle .code:n = \exp_args:Nx \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
+	\exp_args:Nx \PassOptionsToPackage{\l_keys_key_tl=#1}{beamerouterthemeTUDa},
 	colorframetitle .default:n = true,
 	logo .code:n = \PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa},
 	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,

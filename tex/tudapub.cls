@@ -120,9 +120,9 @@
 	logo .initial:n = {body},
 	paper .choices:nn = {a0,a1,a2,a3,a4,a5,a6}{
 		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
-		\PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
-		\PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
-		\PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
+		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
+		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
+		\exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
 	},
 	paper .initial:n = a4,
 	IMRAD .bool_gset:N = \g_ptxcd_IMRAD_bool,

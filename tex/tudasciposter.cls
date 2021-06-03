@@ -32,8 +32,8 @@
 	unknown .code:n = {\prop_gput:NVn \g_ptxcd_clsopts_prop \l_keys_key_tl {#1}},
 	paper .choices:nn = {a0,a1,a2,a3}{
 		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
-		\PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
-		\PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
+		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
+		\exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
 	},
 	paper .initial:n = a0,
 	fontsize .tl_gset:N = \g_ptxcd_fontsize_tl,
