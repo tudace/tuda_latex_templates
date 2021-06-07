@@ -49,6 +49,11 @@ Falls Sie noch keine Distribution installiert haben, finden Sie die notwendigen 
 #### Sonderfall: Paketverwaltung des Betriebssystems (Linux/BSD)
 Für einige Linux/BSD-Varianten existieren texlive-Pakete die über die Paketverwaltung des Systems installierbar sind. Da TUDa-CI sehr speziell ist, ist es nur in der Paketen *texlive-full* enthalten. Falls Sie ein kleineres Setup wünschen, empfehlen wir die Installation über den TeX Live Manager https://tug.org/texlive/doc/texlive-en/texlive-en.html#installation.
 
+### Nutzung von TUDa-CI über Overleaf
+
+Die TUDa verfügt über eine eigene Overleaf-Installation, auf die alle Mitglieder Zugriff haben. Die DEMO-Dateien werden dort in der jweils aktuellen Version als Templates bereitgestellt: https://sharelatex01.ca.hrz.tu-darmstadt.de/templates/all
+Somit ist eine Nutzung ohen lokale Installation möglich.
+
 ### Logos & verwendete Bilddateien
 Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitgliedern der TU Darmstadt über das interne Netzwerk heruntergeladen werden.
 
@@ -143,6 +148,8 @@ It's possible to install the templates using the TeX Live Manager or the MikTeX 
 In case you don't have any installed TeX system the following links might be useful:
 - Windows/Linux https://tug.org/texlive/acquire-netinstall.html
 - MacTeX  http://tug.org/mactex/
+
+It's also possible to use the TUDa-CI-DEMO files as Overleaf-Templates on TUDa's own installation: https://sharelatex01.ca.hrz.tu-darmstadt.de/templates/all (requires TUDa Account)
 
 #### Remark on texlive packages provided by Linux/BSD package managers:
 In case you already use a texlive package of your OS TUDa-CI might not be included. Since it's a personal corporate design package you might need to install *texlive-full* to use it without further adjustments. These packages also will miss the logo and – this depends on your OS – the provided package might be outdated. In this case we recomment the setup using tlmgr (as described in the upper links).
