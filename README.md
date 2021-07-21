@@ -51,8 +51,8 @@ Für einige Linux/BSD-Varianten existieren texlive-Pakete die über die Paketver
 
 ### Nutzung von TUDa-CI über Overleaf
 
-Die TUDa verfügt über eine eigene Overleaf-Installation, auf die alle Mitglieder Zugriff haben. Die DEMO-Dateien werden dort in der jweils aktuellen Version als Templates bereitgestellt: https://sharelatex01.ca.hrz.tu-darmstadt.de/templates/all
-Somit ist eine Nutzung ohen lokale Installation möglich.
+Die TUDa verfügt über eine eigene Overleaf-Installation, auf die alle Mitglieder Zugriff haben. Die DEMO-Dateien werden dort in der jeweils aktuellen Version als Templates bereitgestellt: https://sharelatex01.ca.hrz.tu-darmstadt.de/templates/all
+Somit ist eine Nutzung ohne lokale Installation möglich.
 
 ### Logos & verwendete Bilddateien
 Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitgliedern der TU Darmstadt über das interne Netzwerk heruntergeladen werden.
