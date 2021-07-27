@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/06/03 v3.16
+ tuda-ci 2021/07/27 v3.17
 
 ***************************************************************************
 
@@ -287,3 +287,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - improve documentation on document margins for tudapub and tudapub based examples
  * v3.16 (2021-06-03)
    - adjust option expansion due to changes in the LaTeX kernel
+ * v3.17 (2021-07-27)
+   - add a temporary workaround to avoid incompatibilities with pdfa=true
+   - fix footer positions
