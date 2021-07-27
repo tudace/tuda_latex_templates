@@ -398,8 +398,33 @@
 
 %pdfa
 \if_bool:N \g_ptxcd_pdfa_bool
-\PassOptionsToPackage{a-2b}{pdfx}
-\RequirePackage{pdfx}
+	%only apply the hack if pdfx is older than the working version
+\@ifpackagelater{pdfx}{2021/07/06}{
+	\PassOptionsToPackage{a-2b}{pdfx}
+	\RequirePackage{pdfx}
+} {
+	\msg_new:nnnn{tudapub} {dirty-hack-pdfa} {
+		I~have~to~use~a~dirty~hack~to~workaround~some~incompatibilites~between~your~LaTeX~version~and~the~pdfa-mode.\\
+		Please~use~pdfa=true~only~if~you~really~need~it.\\
+		We~will~remove~this~hack~as~soon~as~all~incompatibilities~have~been~patched.
+	} {
+		See~the~corresponding~GitHub~Issue~for~more~information:~https://github.com/tudace/tuda_latex_templates/issues/321
+	}
+	\msg_warning:nn {tudapub} {dirty-hack-pdfa}
+	%check if \par is expanable and add a dirty hack
+	%Thanks to Ross Moore for the support
+	\expandafter\ifx\csname tex_par:D\endcsname \relax
+	\let\pdfx@par\par
+	\else
+	\expandafter\let\expandafter\pdfx@par\csname tex_par:D\endcsname
+	\fi
+	\let\orig@par\par
+	\let\par\pdfx@par
+	\PassOptionsToPackage{a-2b}{pdfx}
+	\RequirePackage{pdfx}
+	%restore\par
+	\let\par\orig@par
+}
 %%hyperref
 \hypersetup{hidelinks, unicode}
 \iow_new:N \ptxcd_xmpdata_stream
