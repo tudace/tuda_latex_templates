@@ -451,32 +451,6 @@
 			footwidth=text
 			}
 		}
-	\RedeclareLayer[
-		clone=scrheadings.head.above.line,
-		background,
-		contents={
-			\dim_compare:nF {\box_wd:N \ptxcd_headrule_box=\layerwidth} {
-				\ptxcd_makeheadrule[color=identbarcolor, width=\layerwidth]{ptxcd_headrule}
-			}
-			\smash{\ptxcd_headrule}
-		}
-	]{TUDa.pub.head.above.line}
-	\RedeclareLayer[
-		clone=plain.scrheadings.head.above.line,
-		background,
-		contents={
-			\dim_compare:nF {\box_wd:N \ptxcd_headrule_box=\layerwidth} {
-				\ptxcd_makeheadrule[color=identbarcolor, width=\layerwidth]{ptxcd_headrule}
-			}
-			\smash{\ptxcd_headrule}
-		}
-	]{plain.TUDa.pub.head.above.line}
-	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.even}
-	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.odd}
-	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.oneside}
-	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.pub.foot.even}
-	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.pub.foot.odd}
-	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.pub.foot.oneside}
 	\bool_if:NT \g_ptxcd_headline_bool {
 		\setkomafont{pagehead}{\Large\bfseries}
 		\KOMAoptions{headlines=2}
@@ -488,6 +462,38 @@
 	}
 	\ofoot[\pagemark]{\pagemark}
 }
+
+\RedeclareLayer[
+	clone=scrheadings.head.above.line,
+	background,
+	contents={
+	\dim_compare:nF {\box_wd:N \ptxcd_headrule_box=\layerwidth} {
+		\ptxcd_makeheadrule[color=identbarcolor, width=\layerwidth]{ptxcd_headrule}
+	}
+	\smash{\ptxcd_headrule}
+	}
+]{TUDa.pub.head.above.line}
+
+\RedeclareLayer[
+	clone=plain.scrheadings.head.above.line,
+	background,
+	contents={
+	\dim_compare:nF {\box_wd:N \ptxcd_headrule_box=\layerwidth} {
+		\ptxcd_makeheadrule[color=identbarcolor, width=\layerwidth]{ptxcd_headrule}
+	}
+	\smash{\ptxcd_headrule}
+	}
+]{plain.TUDa.pub.head.above.line}
+
+%\dim_set:Nn \l_tmpa_dim {\topmargin+1in+\headheight+\headsep+\textheight
+%	+\footskip+\dp\strutbox-\footheight +\c_ptxcd_rulesep_dim}
+\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.even}
+\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.odd}
+\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.oneside}
+\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.pub.foot.even}
+\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.pub.foot.odd}
+\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{plain.TUDa.pub.foot.oneside}
+
 
 \DeclarePageStyleAlias{TUDa}{TUDa.pub}
 \DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.pub}
@@ -799,7 +805,7 @@
 		\RequirePackage{pdfx}
 		%restore\par
 		\let\par\orig@par
-}
+	}
 
 	\sys_if_engine_pdftex:T {
 		\msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
