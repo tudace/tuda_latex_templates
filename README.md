@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/07/27 v3.17
+ tuda-ci 2021/08/05 v3.18
 
 ***************************************************************************
 
@@ -290,3 +290,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * v3.17 (2021-07-27)
    - add a temporary workaround to avoid incompatibilities with pdfa=true
    - fix footer positions
+ * 3.18 (2021-08-05)
+   - fix bug in tudabeamer block spacing
