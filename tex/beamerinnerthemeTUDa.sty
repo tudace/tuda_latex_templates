@@ -125,12 +125,12 @@
 \defbeamertemplate*{block~begin}{TUDa}
 {
 	\par\vskip\medskipamount%
-	\begin{beamercolorbox}[ wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,sep=.5pt,
+	\begin{beamercolorbox}[wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,sep=.5pt,
 		leftskip=\dimexpr\ifdim\l__ptxcd_beamer_extraindent_dim>\z@\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep\else\z@\fi]{block~title}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[colsep=.75ex,
-		 wd=\dimexpr\linewidth-1pt\relax]{block~title}
+	\begin{beamercolorbox}[colsep*=.75ex,
+		 wd=\dimexpr\linewidth-1pt-1.5ex\relax]{block~title}
 		\usebeamerfont*{block title}\insertblocktitle%
 	\end{beamercolorbox}%
 	\ifbeamercolorempty[bg]{block~title}
@@ -138,7 +138,7 @@
 	{\ifbeamercolorempty[bg]{block~body}{}{\par\nointerlineskip\vskip-0.5pt}}%
 	\leavevmode
 	\fi
-	\begin{beamercolorbox}[colsep=.75ex,vmode, wd=\dimexpr\linewidth-1pt\relax]{block~body}%
+	\begin{beamercolorbox}[colsep*=.75ex,vmode, wd=\dimexpr\linewidth-1.5ex-1pt\relax]{block~body}%
 		\usebeamerfont{block~body}%
 		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
 	}
@@ -156,14 +156,14 @@
 	]{block~frame~alerted}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~title~alerted}
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=.75ex]{block~title~alerted}
 		\usebeamerfont*{block~title~alerted}\insertblocktitle%
 	\end{beamercolorbox}%
 	\vskip1.5pt\par\nointerlineskip
 	\fi
 	\leavevmode
 	\usebeamerfont{block~body~alerted}%
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~body~alerted}%
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=.75ex]{block~body~alerted}%
 	}
 
 \defbeamertemplate*{block~alerted~end}{TUDa}
@@ -180,14 +180,14 @@
 		]{block~frame~example}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~title~example}
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=.75ex]{block~title~example}
 		\usebeamerfont*{block~title~example}\insertblocktitle%
 	\end{beamercolorbox}%
 \vskip1.5pt\par\nointerlineskip
 	\fi
 	\leavevmode
 	\usebeamerfont{block~body~example}%
-	\begin{beamercolorbox}[wd={\dimexpr\linewidth-3pt},colsep=.75ex]{block~body~example}%
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=.75ex]{block~body~example}%
 	}
 \defbeamertemplate*{block~example~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
