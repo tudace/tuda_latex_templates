@@ -292,3 +292,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix footer positions
  * 3.18 (2021-08-05)
    - fix bug in tudabeamer block spacing
+ * 3.19
+   - enhance title  mechanism for tudaposter
