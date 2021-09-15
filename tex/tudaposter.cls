@@ -109,7 +109,10 @@
 	\bool_if:NT \g_ptxcd_colorback_bool
 	{\color{textonaccentcolor}}\expandafter\fontsize\ptxcd_title_fontsize:\selectfont}
 \setkomafont{subtitle}{\expandafter\fontsize\ptxcd_titleinfo_fontsize:\selectfont}
-\newkomafont{titleinfo}{\expandafter\fontsize\ptxcd_titleinfo_fontsize:\selectfont}
+\newkomafont{titleinfo}{\usekomafont{subtitle}}
+
+\clist_map_inline:nn {author, date, publishers}
+{\setkomafont{#1}{\usekomafont{subtitle}}}
 
 \ExplSyntaxOff
 \KOMAoptions{fontsize=\csname g_ptxcd_fontsize_tl\endcsname}
@@ -147,7 +150,7 @@
 \dim_new:N \g_ptxcd_titleindent_dim
 \begingroup
 \expandafter\fontsize\ptxcd_title_fontsize:\selectfont
-	\dim_gset:Nn \g_ptxcd_titleindent_dim {.5ex}
+\dim_gset:Nn \g_ptxcd_titleindent_dim {.5ex}
 \endgroup
 
 \dim_new:N \g_ptxcd_columnSep_dim
@@ -214,13 +217,13 @@
 	voffset=\paperheight-\g_ptxcd_margin_dim,
 	mode=picture,
 	contents={%
-		\tl_if_empty:NF \g_ptxcd_poster_qrcode_tl {
-		\let\width\g_ptxcd_qrcode_dim
-		\let\height\g_ptxcd_qrcode_dim
-		\g_ptxcd_poster_qrcode_tl
- 		}
-	}
- 	]{TUDa.poster.qrcode}
+			\tl_if_empty:NF \g_ptxcd_poster_qrcode_tl {
+				\let\width\g_ptxcd_qrcode_dim
+				\let\height\g_ptxcd_qrcode_dim
+				\g_ptxcd_poster_qrcode_tl
+			}
+		}
+]{TUDa.poster.qrcode}
 
 
 
@@ -231,14 +234,14 @@
 	width=\paperwidth-2\g_ptxcd_margin_dim,
 	height=\g_ptxcd_footheight_dim,
 	contents={
-		\bool_if:NTF \g_ptxcd_poster_foot_bool {
-			\putUL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
-			\put(0,0) {\parbox[b][\g_ptxcd_footheight_dim][c]{\layerwidth}{\strut\g_ptxcd_poster_foot_tl\strut}}
-			\putLL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
-		}{
-			\smash{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
+			\bool_if:NTF \g_ptxcd_poster_foot_bool {
+				\putUL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
+				\put(0,0) {\parbox[b][\g_ptxcd_footheight_dim][c]{\layerwidth}{\strut\g_ptxcd_poster_foot_tl\strut}}
+				\putLL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
+			}{
+				\smash{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
+			}
 		}
-	}
 ]{TUDa.poster.footer}
 
 \DeclareNewLayer[
@@ -296,37 +299,49 @@
 					\dim_max:nn {0pt} {1.5\c_ptxcd_logoheight_dim - \height}
 				}}
 			{
-			\begin{minipage}[b]{\bool_if:NT \g_ptxcd_logo_inhead_bool {.75}\linewidth}
-				\leavevmode\par\nointerlineskip
-				\bool_if:NF \g_ptxcd_indenttext_bool {\begin{addmargin}{\g_ptxcd_titleindent_dim }}
-					\usekomafont{title}
-					\raggedright
-					\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
-					\leavevmode\usekomafont{disposition}\usekomafont{title}%
-					\@title\strut\par
-				\bool_if:NTF \g_ptxcd_indenttext_bool {\nointerlineskip\leavevmode}{\end{addmargin}}
-			\end{minipage}
-		}
-	\par\nointerlineskip
-	\exp_args:Nf \tl_if_empty:nF {\@subtitle\@titleinfo} {
-			\bool_if:NT \g_ptxcd_indenttext_bool {\hspace*{-\g_ptxcd_titleindent_dim}}
-			\rule{\linewidth}{\g_ptxcd_titlerule_dim}
-			\par
+				\begin{minipage}[b]{\bool_if:NT \g_ptxcd_logo_inhead_bool {.75}\linewidth}
+					\leavevmode\par\nointerlineskip
+					\bool_if:NF \g_ptxcd_indenttext_bool {\begin{addmargin}{\g_ptxcd_titleindent_dim }}
+							\usekomafont{title}
+							\raggedright
+							\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
+							\leavevmode\usekomafont{disposition}\usekomafont{title}%
+							\@title\strut\par
+							\bool_if:NTF \g_ptxcd_indenttext_bool {\nointerlineskip\leavevmode}{\end{addmargin}}
+				\end{minipage}
+			}
+			\par\nointerlineskip
+			\exp_args:Nf \tl_if_empty:nF {\@subtitle\@titleinfo\@subject\@author\@date\@publishers} {
+				\bool_if:NT \g_ptxcd_indenttext_bool {\hspace*{-\g_ptxcd_titleindent_dim}}
+				\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+				\par
+				\nointerlineskip
+				\vspace{\c_ptxcd_rulesep_dim}
+				\bool_if:NTF \g_ptxcd_indenttext_bool {\begingroup}{\begin{addmargin}{\g_ptxcd_titleindent_dim }}
+						\bool_if:NT \g_ptxcd_colorsubtitle_bool {\color{textonaccentcolor}}
+						\clist_map_inline:nn {subtitle, titleinfo, subject, author, date, publishers}
+						{\tl_if_empty:cF {@##1} {{\usekomafont{##1}\use:c {@##1}\par}}}
+						\nointerlineskip
+						\bool_if:NTF \g_ptxcd_indenttext_bool {\endgroup} {\end{addmargin}}
+				\vspace{\c_ptxcd_rulesep_dim}
+				\par\nointerlineskip
+				\bool_if:NT \g_ptxcd_indenttext_bool {\hspace*{-\g_ptxcd_titleindent_dim}}
+				\tl_if_empty:NF \@thanks {
+					\bool_if:NT \g_ptxcd_indenttext_bool {\hspace*{-\g_ptxcd_titleindent_dim}}\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+					\vspace{\c_ptxcd_rulesep_dim}
+					\par\nointerlineskip
+					\expandafter\fontsize\ptxcd_titlethanks_fontsize:\selectfont
+					\bool_if:NTF \g_ptxcd_indenttext_bool {\begingroup}{\begin{addmargin}{\g_ptxcd_titleindent_dim }}
+							\let\footnotetext\ptxcd_title@footnote
+							\@thanks
+							\vspace{\c_ptxcd_rulesep_dim}
+							\bool_if:NTF \g_ptxcd_indenttext_bool {\endgroup} {\end{addmargin}}
+					\global\let\@thanks\@empty
+					\par
+				}
+			}
 			\nointerlineskip
-			\vspace{\c_ptxcd_rulesep_dim}
-			\bool_if:NTF \g_ptxcd_indenttext_bool {\begingroup}{\begin{addmargin}{\g_ptxcd_titleindent_dim }}
-			\bool_if:NT \g_ptxcd_colorsubtitle_bool {\color{textonaccentcolor}}
-			\tl_if_empty:NF \@subtitle {{\usekomafont{subtitle}\strut\@subtitle\strut\par}}
-			\tl_if_empty:NF \@titleinfo {{\usekomafont{titleinfo}\@titleinfo\par}}
-		\nointerlineskip
-			\bool_if:NTF \g_ptxcd_indenttext_bool {\endgroup} {\end{addmargin}}
-			\vspace{\c_ptxcd_rulesep_dim}
-		 \par\nointerlineskip
-		 \bool_if:NT \g_ptxcd_indenttext_bool {\hspace*{-\g_ptxcd_titleindent_dim}
-		}
-		}
-		\nointerlineskip
-		\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+			\rule{\linewidth}{\g_ptxcd_titlerule_dim}
 		}
 	}
 	\endgroup
@@ -334,25 +349,28 @@
 	\ptxcd_Setup_Title_box:
 	\dim_gset:Nn \g_ptxcd_titleback_dim {
 		\bool_if:NT \g_ptxcd_colorsubtitle_bool {\box_dp:N \g_ptxcd_title_box}+
-				\box_ht:N \g_ptxcd_title_box+.5\c_ptxcd_logoheight_dim
-			}
+		\box_ht:N \g_ptxcd_title_box+.5\c_ptxcd_logoheight_dim
+	}
 
-		\ModifyLayer[
-	height=\g_ptxcd_titleback_dim
+	\ModifyLayer[
+		height=\g_ptxcd_titleback_dim
 	]{TUDa.poster.background}
 
 	\bool_if:NF \g_ptxcd_logo_inhead_bool {
 		\ModifyLayer[
-		addvoffset=\g_ptxcd_titleback_dim+\c_ptxcd_smallrule_dim
+			addvoffset=
+					\bool_if:NF \g_ptxcd_colorsubtitle_bool {\box_dp:N \g_ptxcd_title_box}+\g_ptxcd_titleback_dim+\c_ptxcd_smallrule_dim
 		]{TUDa.poster.logo}
-	}
-
-	\bool_if:NT \g_ptxcd_logo_inhead_bool {
-		\dim_compare:nT {\box_ht:N \g_ptxcd_title_info_box+ \box_dp:N \g_ptxcd_title_info_box  > \box_ht:N \g_ptxcd_title_box}
-		{\msg_warning:nn{tudaposter} {infobox-too-high}}
 	}
 	\leavevmode\box_use:N \g_ptxcd_title_box\par
 	\dim_set:Nn \g_ptxcd_titlegraphic_max_height_dim {\textheight-\pagetotal}
+	\bool_if:NTF \g_ptxcd_logo_inhead_bool {
+		\dim_compare:nT {\box_ht:N \g_ptxcd_title_info_box+ \box_dp:N \g_ptxcd_title_info_box  > \box_ht:N \g_ptxcd_title_box}
+		{\msg_warning:nn{tudaposter} {infobox-too-high}}
+	} {
+		\dim_compare:nT {\box_ht:N \g_ptxcd_title_info_box+ \box_dp:N \g_ptxcd_title_info_box  > \box_ht:N \g_ptxcd_titlegraphic_box + \box_dp:N \g_ptxcd_titlegraphic_box}
+		{\msg_warning:nn{tudaposter} {infobox-too-high}}
+	}
 	\global\def\contentheight{\g_ptxcd_titlegraphic_max_height_dim}
 	\tl_if_empty:NF \@titlegraphic{
 		\vbox_gset:Nn \g_ptxcd_titlegraphic_box {\parbox[t]{\dim_eval:n {\paperwidth-2\g_ptxcd_margin_dim}}{\@titlegraphic}}
@@ -361,11 +379,11 @@
 	}
 
 	\DeclareLayer[
-	clone=TUDa.poster.marginpar,
-	height=\bool_if:NF \l_ptxcd_marginpar_overlap_bool {-\box_ht:N \g_ptxcd_titlegraphic_box-\box_dp:N \g_ptxcd_titlegraphic_box}
-	+\textheight-\box_ht:N \g_ptxcd_title_box-\box_dp:N \g_ptxcd_title_box-.5\c_ptxcd_logoheight_dim,
-	addvoffset=\bool_if:NF \l_ptxcd_marginpar_overlap_bool {+\box_ht:N\g_ptxcd_titlegraphic_box+\box_dp:N \g_ptxcd_titlegraphic_box}
-	+\box_ht:N \g_ptxcd_title_box+\box_dp:N \g_ptxcd_title_box+.5\c_ptxcd_logoheight_dim,
+		clone=TUDa.poster.marginpar,
+		height=\bool_if:NF \l_ptxcd_marginpar_overlap_bool {-\box_ht:N \g_ptxcd_titlegraphic_box-\box_dp:N \g_ptxcd_titlegraphic_box}
+		+\textheight-\box_ht:N \g_ptxcd_title_box-\box_dp:N \g_ptxcd_title_box-.5\c_ptxcd_logoheight_dim,
+		addvoffset=\bool_if:NF \l_ptxcd_marginpar_overlap_bool {+\box_ht:N\g_ptxcd_titlegraphic_box+\box_dp:N \g_ptxcd_titlegraphic_box}
+		+\box_ht:N \g_ptxcd_title_box+\box_dp:N \g_ptxcd_title_box+.5\c_ptxcd_logoheight_dim,
 	]{TUDa.poster.marginpar.title}
 
 	\tl_if_empty:NF \g_ptxcd_poster_qrcode_tl {
@@ -405,7 +423,7 @@
 		\parbox{2\c_ptxcd_logoheight_dim}{
 			\raggedright
 			#1
-	}}
+		}}
 }
 
 \cs_new:Nn \ptxcd_make_title_logo_box:n {
@@ -448,11 +466,11 @@
 	\hbox_gset:Nn \g_ptxcd_title_info_box
 	{\parbox{2.2\c_ptxcd_logoheight_dim}{
 			\seq_use:Nn \g_ptxcd_title_info_seq  {\par\nointerlineskip\skip_vertical:n
-			{
-			\box_ht:N \ptxcd_headrule_box + \box_dp:N \ptxcd_headrule_box
+				{
+					\box_ht:N \ptxcd_headrule_box + \box_dp:N \ptxcd_headrule_box
+				}
 			}
-		}
-	}}
+		}}
 }
 
 
@@ -511,6 +529,53 @@
 
 \global\def\contentwidth{\linewidth}
 \global\def\contentheight{\g_ptxcd_titlegraphic_max_height_dim}
+
+%author setup
+
+\seq_new:N \g_ptxcd_author_seq
+
+\renewcommand*\author[1]{
+	\seq_gset_split:Nnn \g_ptxcd_author_seq {\and} {#1}
+}
+
+\msg_new:nnn{tudapub} {unknown-language} {
+	You~selected~an~unknown~language~#1.\\
+	The~Variable~#2~does~not~have~a~predefined~value.\\
+	Ensure~to~redefine~#2~to~match~your~language.\\
+	Otherwise~the~ngerman~vaue~#3~will~be~used.
+}
+
+\cs_new:Nn \ptxcd_define_captionFallback:Nn {
+	\providecommand*#1{
+		\msg_warning:nnxxx{tudapub} {unknown-language}
+		{\languagename} {\exp_not:N #1} {#2}
+		\def#1{#2}
+	}
+}
+
+\cs_new:Nn \ptxcd_declare_caption:Nnnn {
+	\ptxcd_define_captionFallback:Nn #1 {#2}
+	\defcaptionname{ngerman, german}{#1}{#2}
+	\defcaptionname{english, USenglish, american}{#1}{#3}
+	\defcaptionname{UKenglish, british}{#1}{#4}
+}
+
+\cs_new:Nn \ptxcd_declare_caption:Nnn {
+	\ptxcd_declare_caption:Nnnn #1 {#2} {#3} {#3}
+}
+
+\renewcommand*{\@author}{
+	\begingroup
+	\hyphenpenalty=100000
+	\seq_use:Nnnn \g_ptxcd_author_seq {~\authorandname{}~} {,~} {~\&~}
+	\endgroup
+}
+
+\ptxcd_declare_caption:Nnn \authorandname {und} {and}
+
+\newcommand*{\ptxcd_title@footnote}[2][1]{
+	\textsuperscript{#1}#2
+}
 
 \file_if_exist_input:n {tuda\g_ptxcd_department_str.cfg}
 
