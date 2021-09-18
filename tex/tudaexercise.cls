@@ -539,6 +539,19 @@
 	}
 }
 
+\cs_new:Nn \ptxcd_declare_caption:Nnnn {
+	\ptxcd_define_captionFallback:Nn #1 {#2}
+	\defcaptionname{ngerman, german}{#1}{#2}
+	\defcaptionname{english, USenglish, american}{#1}{#3}
+	\defcaptionname{UKenglish, british}{#1}{#4}
+}
+
+\cs_new:Nn \ptxcd_declare_caption:Nnn {
+	\ptxcd_declare_caption:Nnnn #1 {#2} {#3} {#3}
+}
+
+\ptxcd_declare_caption:Nnn \authorandname {und} {and}
+
 \renewcommand*{\@author}{
 	\seq_use:Nnnn \g_ptxcd_author_seq {~\authorandname{}~} {,~} {~\&~}
       }
