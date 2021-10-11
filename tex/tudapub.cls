@@ -40,7 +40,7 @@
 	class/scrartcl .code:n  = \tl_gset:Nn \g_ptxcd_pub_class_tl {scrartcl},
 	class/book .meta:n = {class=scrbook},
 	class/scrbook .code:n  = \tl_gset:Nn \g_ptxcd_pub_class_tl {scrbook},
-	class .initial:n = scrartcl,%MAYBE add custom values
+	class .initial:n = scrartcl,
 	color .meta:n = {accentcolor=#1},
 	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
 	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
@@ -650,7 +650,7 @@
 	\colorbox{InfoBox}{
 	\makebox[\dim_eval:n {2.2\c_ptxcd_logoheight_dim-\fboxsep}][r]{
 		\parbox{2\c_ptxcd_logoheight_dim}{
-		\expandafter\fontsize\ptxcd_titlethanks_fontsize:\selectfont\usekomafont{institution}%
+		\exp_args:Nx \fontsize\ptxcd_titlethanks_fontsize:\selectfont\usekomafont{institution}%
 		\raggedright%
 	#1
 	}}}
