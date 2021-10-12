@@ -33,7 +33,7 @@
 \subtitle{Die Dokumentenklasse tudapub}
 \author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and der \TeX-Löwe}
 
-\titleimage{
+\titlegraphic{
 %	%Folgende Box kann selbstverständlich durch ein mit \includegraphics geladenes Bild ersetzt werden.
 	\color{black!30}\rule{\width}{\height}
 }
@@ -120,25 +120,26 @@ Die \KOMAScript-Option \code{titlepage} erlaubt es üblicherweise, zwischen Tite
 
 Die Makros wie \code{author}, \code{title}, \code{subtitle} und \code{date} entsprechen der normalen Verwendung. Für die Institutszuweisung kann ebenfalls wie gewohnt \code{thanks} verwendet werden.
 
-Zusätzlich stehen die Makros \code{titleimage} und \code{addTitleBox} zur Verfügung um weitere Daten zu übergeben.
+Zusätzlich stehen die Makros \code{titlegraphic} und \code{addTitleBox} zur Verfügung um weitere Daten zu übergeben.
 
-\minisec{titleimage}
-Das Makro \code{titleimage} akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
+\minisec{titlegraphic}
+Das Makro \code{titlegraphic} akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
 Üblicherweise wird dieses Makro zur Platzierung einer Grafik genutzt:
 
 \begin{verbatim}
-\titleimage{\includegraphics[width=\width]{example-image}}
+\titlegraphic{\includegraphics[width=\width]{example-image}}
 \end{verbatim}
 
-Zusätzlich stehen die Makros \code{titleimage} und \code{addTitleBox} zur Verfügung, um den unteren Teil der Titelseite zu füllen.
+Um die Größe des Bildes passend zu wählen können die Makros \code{width}/\code{height} verwendet werden. Darüber hinaus existiert ab Version 3.19 auch die Variante \code{titlegraphic*} mit der die Skalierung und ein ggf. notwendiger Beschnitt für das Füllen des reservierten Bereichs automatisch geschieht.
+
+Zusätzliche Logos und Informationen können über Boxen ergänzt werden.
 
 \begin{verbatim}
-\titleimage{\includegraphics[height=\height]{titleimage}}
 \addTitleBox{Institut 1}
 \end{verbatim}
 Die Institutsboxen werden mit vorgegebenem Abstand unter dem Logo platziert. Hier kann Text erscheinen oder auch ein Institutslogo. Der Hintergrund ist weiß.
 
-Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \code{\addTitleBoxLogo}. Als Argument akzeptiert es einen Bilddateipfad.
+Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \code{addTitleBoxLogo}. Als Argument akzeptiert es einen Bilddateipfad.
 
 \begin{verbatim}
 \addTitleBoxLogo{example-image}
