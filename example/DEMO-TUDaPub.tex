@@ -146,7 +146,7 @@ Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \
 \addTitleBoxLogo*{\includegraphics[width=\linewidth]{example-image}}
 \end{verbatim}
 
-\minisec{Sponsorenlogos}
+\subsubsection{Sponsorenlogos}
 Ab Version 3.0 steht in TUDaPub auch der Sponsorenmechanismus der TUDaLeaflet-Klasse zur verfügung. Damit ist es Möglich Sponsorenlogos unterhalb des Titelbildes zu platzieren.
 
 Sponsorenlogos werden üblicherweise über
@@ -165,7 +165,7 @@ Die zweite Variante ermöglicht die Platzierung mit manueller vertikaler Ausrich
 \end{verbatim}
 
 
-\minisec{Optionen für die Titelseite}
+\subsubsection{Optionen für die Titelseite}
 Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/""body}.
 \begin{description}
 	\item[logo=head] Das Logo wird im Kopf direkt neben dem Titel platziert. Der Titel wird in der Breite reduziert. Der Hintergrund des Titels wird in der Farbe der Identitätsleiste eingefärbt. Zusätzliche Infoboxen (s.u.) werden ebenfalls im Kopf platziert.
@@ -178,6 +178,7 @@ Die Option \code{colorback} schaltet zwischen dem farbigen Block auf der Titelse
 Mit Version 3.08 werden zusätzlich zu den \code{true}/\code{false} Werten auch die Werte \code{title}, \code{head} und \code{body} für die Option colorback ergänzt.
 Mit diesen ist es möglich nach der Auswahl der Logoposition eine Korrektur an der Farbgebung durchzuführen. Alle drei neuen Werte aktivieren die Hintergrundfarbe und schalten deren Position um:
 \begin{description}
+	\item[colorback=true/false] Aktiviert/Deaktiviert die Farbfläche auf der Titelseite. Dieser Schalter ist unabhängig von der aktuelle Position der farbigen Fläche. Die übrigen Optionen aktivieren zusätzlich auch die Ausgabe der Farbfläche, falls diese zuvor deaktiviert war.
 	\item[colorback=title] Der Titel (ohne Untertitel) wird hinterlegt.
 	\item[colorback=head] Der komplette Titelblock, inklusive Titelblock wird hinterlegt.
 	\item[colorback=body] Es wird nur der Bildbereich eingefärbt.
