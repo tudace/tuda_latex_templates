@@ -201,13 +201,15 @@ Falls die Hauptsprache nicht Deutsch ist, wäre daher die folgende Konfiguration
 	\usepackage[ngerman, main=<Hauptsprache>]{babel}
 \end{verbatim}
 
-\section{Übergabe der Titeleidaten}
+\section{Übergabe der Titeldaten}
 
-Die Daten werden analog zur klassichen Titeleierzeugung mit \verb+\maketitle+ übergeben. Allerdings wurden die Felder um ein paar speziellere Daten erweitert. Sofern nicht anders angegeben, verfügen alle Makros über ein notwendiges Argument für die Datenübergabe, z.\,B.
+Die Daten werden analog zur klassischen Titeleierzeugung mit \verb+\maketitle+ übergeben. Allerdings wurden die Felder um ein paar speziellere Daten erweitert. Sofern nicht anders angegeben, verfügen alle Makros über ein notwendiges Argument für die Datenübergabe, z.\,B.
 \begin{verbatim}
-\title{\LaTeX{} im Corporate Design der TU Darmstadt}
+	\title{\LaTeX{} im Corporate Design der TU Darmstadt}
 \end{verbatim}
 Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss.
+
+Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaPub-Dokumentation geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos. \cite{tudapub}
 
 \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
 	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
@@ -231,7 +233,7 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\end{verbatim}
 	Für die Erstellung Fachbereichsspezifischer Templates existiert hierfür auch ein Makro, dass ohne den Aufruf von \verb+\reviewer+ Änderungen zulässt.
 	\begin{verbatim}
-	\setupReviewName{Ersatzwort für „Gutachten“}
+		\setupReviewName{Ersatzwort für „Gutachten“}
 	\end{verbatim}
 	Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+, eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
@@ -240,11 +242,11 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
 
 	\begin{verbatim}
-	\department[Ersatztext]{Kürzel/Bezeichnung}
+		\department[Ersatztext]{Kürzel/Bezeichnung}
 	\end{verbatim}
 	Zusätzlich gibt es ab Version 2.01 auch die Möglichkeit den gesamten Text \enquote{im Fachbereich <Bereichsbezeichnung>}, sowie die Angabe in der Infobox auf der Titelseite zu ersetzen. Dies geschieht über die gesternte Variante:
 	\begin{verbatim}
-	\department*[Text für die Box]{Text zwischen Typ und Autor}
+		\department*[Text für die Box]{Text zwischen Typ und Autor}
 	\end{verbatim}
 	\item[group] Arbeitsgruppe.
 	\item[submissiondate] Datum der Einreichung
@@ -253,11 +255,11 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	\item[publishers] Wird hier für die Ortsangabe verwendet und ist mit \enquote{Darmstadt}, bzw. \enquote{Darmstadt -- D17} (bei Dissertationen) vorbelegt.
 	\item[tuprints] \label{page:tuprints}Übergabe der Daten, sofern das dokument über tuprints Veröffentlicht werden soll.
 	\begin{verbatim}
-	\tuprints{
-	  urn=1234,
-	  printid=12345,
-	  doi=10.25534/tuprints-1234
-	}
+		\tuprints{
+			urn=1234,
+			printid=12345,
+			doi=10.25534/tuprints-1234
+		}
 	\end{verbatim}
 	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
 
@@ -272,7 +274,7 @@ Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller 
 	Ab Version 3.10 werden alle (Stand: Januar 2021) dort vorgeschlagenen Lizenzen von tuda-ci unterstützt.
 
 	Falls ein davon abweichender Wert gewählt wird, wird dieser direkt an der Stelle des Lizenztextes verwendet. Falls der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
-	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Als Maße können hier die Längen \verb+\width+ und \verb+\height+ verwendet werden. Sie passen sich dem Verfügbaren Platz an. Für ein Beispiel und weitere Möglichkeiten, wie automatischen Beschnitt, sei auf die TUDaPub-Dokumentation verwiesen.
+	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
 \end{description}
