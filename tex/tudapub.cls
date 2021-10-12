@@ -523,6 +523,31 @@
 \tl_new:N  \g_ptxcd_titleimage_code_tl
 \tl_gset_eq:NN  \g_ptxcd_titleimage_code_tl \c_empty_tl
 \newcommand{\titleimage}[1]{\tl_gset:Nn \g_ptxcd_titleimage_code_tl {#1}}
+\box_new:N \l__ptxcd_titlegraphic_box
+
+\RequirePackage{trimclip}
+
+\NewDocumentCommand{\titlegraphic}{sm}{
+	\IfBooleanTF{#1}{
+		\tl_gset:Nn  \g_ptxcd_titleimage_code_tl  {
+			\hbox_set:Nn \l__ptxcd_titlegraphic_box {\raisebox{\depth}{#2}}
+			\box_resize_to_wd:Nn \l__ptxcd_titlegraphic_box {\width}
+			\dim_compare:nTF {\box_ht:N \l__ptxcd_titlegraphic_box -\height> \c_zero_dim}
+			{
+				\dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l__ptxcd_titlegraphic_box - .5\height}
+				\clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l__ptxcd_titlegraphic_box}
+			}{
+				\box_resize_to_ht:Nn \l__ptxcd_titlegraphic_box {\height}
+				\dim_set:Nn \l_tmpa_dim {(\box_wd:N \l__ptxcd_titlegraphic_box - \width) / 2}
+				\clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l__ptxcd_titlegraphic_box}
+			}
+		}
+	}{
+		\tl_gset:Nn  \g_ptxcd_titleimage_code_tl {#2}
+	}
+}
+
+\let\titleimage\titlegraphic%for backwards compatbility
 
 \box_new:N  \g_ptxcd_title_box
 \skip_new:N \g_ptxcd_title_fill_skip
@@ -650,7 +675,7 @@
 	\colorbox{InfoBox}{
 	\makebox[\dim_eval:n {2.2\c_ptxcd_logoheight_dim-\fboxsep}][r]{
 		\parbox{2\c_ptxcd_logoheight_dim}{
-		\exp_args:Nx \fontsize\ptxcd_titlethanks_fontsize:\selectfont\usekomafont{institution}%
+		\expandafter \fontsize\ptxcd_titlethanks_fontsize:\selectfont\usekomafont{institution}%
 		\raggedright%
 	#1
 	}}}
