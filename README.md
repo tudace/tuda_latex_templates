@@ -294,3 +294,4 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix bug in tudabeamer block spacing
  * 3.19
    - enhance title  mechanism for tudaposter
+   - fix block spacing if colorframetitle=false
