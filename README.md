@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
 
- tuda-ci 2021/08/05 v3.18
+ tuda-ci 2021/10/12 v3.20
 
 ***************************************************************************
 
@@ -292,6 +292,9 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix footer positions
  * 3.18 (2021-08-05)
    - fix bug in tudabeamer block spacing
- * 3.19
+ * 3.19 (2021-10-09)
    - enhance title  mechanism for tudaposter
    - fix block spacing if colorframetitle=false
+ * 3.20 (2021-10-12)
+   - add signature-image mechanism for affidavit
+   - unify \titlegraphic mechanism in tudapub and tudabeamer
