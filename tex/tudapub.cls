@@ -808,6 +808,12 @@
 	\PassOptionsToPackage{a-2b}{pdfx}
 	\RequirePackage{pdfx}
 
+	\msg_new:nnnn{tudapub} {outdated-package-pdfa} {
+		Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
+		Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
+	}{See~DEMO-tudapub~for~further~information.}
+
+
 	\sys_if_engine_pdftex:T {
 		\msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
 	}
@@ -816,15 +822,14 @@
 		\msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
 	}
 
-
+	\@ifpackagelater{xmpincl}{2021/09/22}{
+	}{
+		\msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
+	}
 
 	\@ifpackagelater{pdfx}{2018/12/01}{
 	}{
-		\msg_new:nnnn{tudapub} {outdated-pdfx} {
-			Your~Version~of~the~PDFx-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
-			Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
-		}{See~DEMO-tudapub~for~further~information.}
-		\msg_error:nn{tudapub} {outdated-pdfx}
+		\msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
 	}
 
 
