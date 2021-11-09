@@ -836,7 +836,7 @@
 		\msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
 	}
 
-	\sys_if_engine_pdftex:T {
+	\sys_if_engine_xetex:T {
 		\msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
 	}
 
