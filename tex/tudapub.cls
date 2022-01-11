@@ -351,7 +351,14 @@
 	\savegeometry{TUDa-marginpar}
 
 	\bool_if:NTF \g_ptxcd_custommargins_bool {
-		\AtBeginDocument{\savegeometry{TUDa-default}}
+		\AtBeginDocument{
+			\savegeometry{TUDa-default}
+			\bool_if:NTF  \g_ptxcd_marginpar_bool {
+				\dim_gset:Nn \g_ptxcd_headwidth_dim {\textwidth+\marginparwidth+\marginparsep}
+			}{
+				\dim_gset:Nn \g_ptxcd_headwidth_dim {\textwidth}
+			}
+		}
 		\tl_const:Nn \c_ptxcd_default_geometry_tl {TUDa-default}
 	}{
 		\bool_if:NTF  \g_ptxcd_marginpar_bool {
