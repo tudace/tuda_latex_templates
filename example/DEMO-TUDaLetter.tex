@@ -45,7 +45,7 @@ Zusätzliche Optionen sind im Folgenden aufgelistet:\\
 	\item[firstpagenumber=true/false] Aktiviert/deaktiviert die Angabe der Seitenzahl auf der ersten Seite. Voreinstellung ist true.
 	\item[raggedright=true/false] Brieftext linksbündig. Voreinstellung ist false. Dies entspricht Blocksatz.
 	\item[logo=true/false] Logo auf Folgeseiten aktiviert/deaktiviert. Voreinstellung ist true.
-	\item[texwidth=narrow/wide] Schaltet zwischen der Anpassung der Textbreite nach der ersten Seite um. Voreinstellung ist wide, da dies den Richtlinien entspricht.
+	\item[texwidth=narrow/wide] Schaltet zwischen der Anpassung der Textbreite nach der ersten Seite um. Voreinstellung ist wide, da dies den Richtlinien entspricht. Die Textbreite der ersten Seite bestimmt auch die Breite der Betreffzeile.
 \end{description}
 }
 
@@ -54,7 +54,7 @@ Für Wiederverwendung der Absenderadresse wurde die Datei \enquote{DEMO"=TUDaFro
 
 Die Adressdatei wird üblicherweise lokal im System installiert, um sie nicht immer mit allen anderen Dateien kopieren zu müssen. Falls Sie dies durchführen möchten, findet sich eine entsprechende Erklärung am Ende der DEMO"=TUDaFromaddress.lco"=Datei.
 
-Eine Besonderheit der Klasse tudaletter stellt der Unterschied in der Zeilenlänge zwischen der ersten und den folgenden Seiten dar. Da \LaTeX{} grundsätzlich keine Änderung der Zeilenlänge innerhalb eines Absatzes unterstützt, ist hier eine komplexe Implementierung nötig. In einigen speziellen Fällen kann dieser Mechanismus fehlschlagen. Eine Sammlung an Sonderfällen ist bereits implementiert. Sollten Sie jedoch auf weitere stoßen, werden wir uns um eine Erweiterung der Implementierung bemühen.
+Eine Besonderheit der Klasse tudaletter stellt der Unterschied in der Zeilenlänge zwischen der ersten und den folgenden Seiten dar. Da \LaTeX{} grundsätzlich keine Änderung der Zeilenlänge innerhalb eines Absatzes unterstützt, ist hier eine komplexe Implementierung nötig. In einigen speziellen Fällen kann dieser Mechanismus fehlschlagen. Eine Sammlung an Sonderfällen ist bereits implementiert. Sollten Sie jedoch auf weitere stoßen, werden wir uns um eine Erweiterung der Implementierung bemühen. Der Mechanismus kann bei Problemen auch durch \verb+textwidth=narrow+ abgechaltet oder Mithilfe eines manuellen Seitenumbruchs umgangen werden.
 
 Der einfachste Fall, um solche Schwierigkeiten zu beheben, ist in diesem Beispiel mithilfe des Befehls parbox bei der Auflistung gezeigt.
 
