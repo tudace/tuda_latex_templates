@@ -1,8 +1,8 @@
 # TUDa-CI – Corporate Design LaTeX-Templates for TU Darmstadt
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2021
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2021/10/12 v3.20
+ tuda-ci 2022/01/11 v3.21
 
 ***************************************************************************
 
@@ -298,3 +298,7 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * 3.20 (2021-10-12)
    - add signature-image mechanism for affidavit
    - unify \titlegraphic mechanism in tudapub and tudabeamer
+ * 3.21 (2022-01-11)
+   - fix title width for the combination of `custommargins=geometry` and `titlepage=false`
+   - remove some obsolete warnings
+   - improve TUDaLetter documentation
