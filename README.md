@@ -302,3 +302,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix title width for the combination of `custommargins=geometry` and `titlepage=false`
    - remove some obsolete warnings
    - improve TUDaLetter documentation
+ * 3.22 (2022-01-26)
+   - improve alignment for reviewers if `type=thesis`
