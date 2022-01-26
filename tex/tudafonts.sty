@@ -3,16 +3,16 @@
  [\filedate\space\fileversion\space
  font loading for TUDa-CI, TU Darmstadt's Corporate Design]
 
-\expandafter\newif\csname if@TUDa@T1\endcsname
+\expandafter\newif\csname if@ptxcd@T1\endcsname
 
-\DeclareOption{T1}{\csname @TUDa@T1true\endcsname}
+\DeclareOption{T1}{\csname @ptxcd@T1true\endcsname}
 \ProcessOptions\relax
 
 \RequirePackage{iftex}
 \RequirePackage{anyfontsize}
 
 \ifPDFTeX
-	\csname @TUDa@T1true\endcsname
+	\csname @ptxcd@T1true\endcsname
 	%Fallback for older versions
 	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
 	\RequirePackage[utf8]{inputenc}
@@ -23,7 +23,7 @@
 	\DeclareUnicodeCharacter{20AC}{\texteuro}
 \fi
 
-\csname if@TUDa@T1\endcsname
+\csname if@ptxcd@T1\endcsname
 	\ifLuaTeX
 		\RequirePackage[utf8]{luainputenc}
 	\fi
@@ -49,6 +49,8 @@
 	The font package roboto-mono.sty could not be found. Probably your TeX-distribution is outdated.\MessageBreak
 	For correct font setup either install it manually or update you distribution}
 }
+
+\def\ptxcd@sffamily@lining{\robototlf}
 
 \let\accentfont\robotoslab
 \DeclareTextFontCommand{\textaccent}{\accentfont}
