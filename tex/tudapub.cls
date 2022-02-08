@@ -862,14 +862,14 @@
 		\cs_set:Npn \and {\exp_not:n {\exp_not:N \sep}}
 		\use:c {Hy@pdfstringtrue}
 		\tl_gset:Nf \g_ptxcd_xmp_title_tl {\@title}
-		\prop_gput_if_new:Nnx \g_ptxcd_MetaData_prop {title} {\tl_to_str:V \g_ptxcd_xmp_title_tl}
-		\prop_if_in:NnF \g_ptxcd_MetaData_prop {author} {
+		\prop_gput_if_new:Nnx \g_ptxcd_MetaData_prop {Title} {\tl_to_str:V \g_ptxcd_xmp_title_tl}
+		\prop_if_in:NnF \g_ptxcd_MetaData_prop {Author} {
 			\tl_gset:Nx \g_ptxcd_xmp_author_tl {\seq_use:Nn \g_ptxcd_author_seq {\exp_not:N \sep}}
 			\tl_gset:Nx \g_ptxcd_xmp_author_tl {\g_ptxcd_xmp_author_tl}
-			\prop_gput:Nnx \g_ptxcd_MetaData_prop {author} {\tl_to_str:V \g_ptxcd_xmp_author_tl}
+			\prop_gput:Nnx \g_ptxcd_MetaData_prop {Author} {\tl_to_str:V \g_ptxcd_xmp_author_tl}
 		}
-		\prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {publisher}{TU~Darmstadt}
-		\prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {creator}{LaTeX~using~TUDa-CI}
+		\prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {Publisher}{TU~Darmstadt}
+		\prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {Creator}{LaTeX~using~TUDa-CI}
 		\use:c {pdfx@localcommands}%should be held inside group
 		\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
 	\endgroup
@@ -879,17 +879,7 @@
 	\cs_new:Nn \ptxcd_write_xmp_line:nn {
 		\begingroup
 		\cs_set:Npn \sep {\exp_not:N \sep}
-		%Fallback test for older kernels
-		\cs_if_exist:NTF \str_uppercase:f {
-			\tl_set:Nx \l_tmpa_tl {
-				\str_uppercase:f {\tl_head:n {#1}}
-				\str_lowercase:f { \tl_tail:n {#1}}
-			}
-		} {
-			%may be removed in some time
-			\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
-		}
-		\cs_if_exist:cTF {\l_tmpa_tl}{
+		\cs_if_exist:cTF {#1}{
 			\iow_now:Nx \ptxcd_xmpdata_stream {
 				\c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
 			}
@@ -907,7 +897,21 @@
 	}
 
 	\cs_set:Nn \ptxcd_set_metadata_prop:nn {
-	\exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\tl_lower_case:n{#1}}  {#2}
+		%Fallback test for older kernels doesn't support mixed case eintries
+		\cs_if_exist:NTF \text_titlecase_first:n {
+			\exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\text_titlecase_first:n {#1}}  {#2}
+		} {
+			\cs_if_exist:NTF \str_uppercase:f {
+				\tl_set:Nx \l_tmpa_tl {
+					\str_uppercase:f {\tl_head:n {#1}}
+					\str_lowercase:f { \tl_tail:n {#1}}
+				}
+			} {
+				%may be removed in some time
+				\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
+			}
+			\exp_args:NNV \prop_gput:Nnn \g_ptxcd_MetaData_prop \l_tmpa_tl  {#2}
+			}
 	}
 
 	\msg_new:nnnn{tudapub} {unknown-metadata} {
