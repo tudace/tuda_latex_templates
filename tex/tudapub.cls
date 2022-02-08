@@ -881,7 +881,7 @@
 		\cs_set:Npn \sep {\exp_not:N \sep}
 		\cs_if_exist:cTF {#1}{
 			\iow_now:Nx \ptxcd_xmpdata_stream {
-				\c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
+				\c_backslash_str #1 {\exp_not:n {#2}}
 			}
 		}{
 			\msg_error:nnn{tudapub} {unknown-metadata} {#1}
