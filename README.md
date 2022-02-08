@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/01/11 v3.21
+ tuda-ci 2022/02/08 v3.22
 
 ***************************************************************************
 
@@ -302,5 +302,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix title width for the combination of `custommargins=geometry` and `titlepage=false`
    - remove some obsolete warnings
    - improve TUDaLetter documentation
- * 3.22 (2022-01-26)
+ * 3.22 (2022-02-08)
    - improve alignment for reviewers if `type=thesis`
+   - fix bug in handling of `\Metadata`
