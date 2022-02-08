@@ -889,7 +889,7 @@
 		\endgroup
 	}
 
-\prop_new:N \g_ptxcd_MetaData_prop
+	\prop_new:N \g_ptxcd_MetaData_prop
 
 	\newcommand*{\Metadata}[1]{
 		\keyval_parse:NNn  \use_none:n \ptxcd_set_metadata_prop:nn
@@ -901,17 +901,11 @@
 		\cs_if_exist:NTF \text_titlecase_first:n {
 			\exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\text_titlecase_first:n {#1}}  {#2}
 		} {
-			\cs_if_exist:NTF \str_uppercase:f {
-				\tl_set:Nx \l_tmpa_tl {
+			\exp_args:NNx \prop_gput:Nnn \g_ptxcd_MetaData_prop {
 					\str_uppercase:f {\tl_head:n {#1}}
-					\str_lowercase:f { \tl_tail:n {#1}}
-				}
-			} {
-				%may be removed in some time
-				\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
-			}
-			\exp_args:NNV \prop_gput:Nnn \g_ptxcd_MetaData_prop \l_tmpa_tl  {#2}
-			}
+					\str_lowercase:f {\tl_tail:n {#1}}
+				} {#2}
+		}
 	}
 
 	\msg_new:nnnn{tudapub} {unknown-metadata} {
