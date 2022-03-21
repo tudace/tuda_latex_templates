@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/02/08 v3.22
+ tuda-ci 2022/03/21 v3.23
 
 ***************************************************************************
 
@@ -305,3 +305,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * 3.22 (2022-02-08)
    - improve alignment for reviewers if `type=thesis`
    - fix bug in handling of `\Metadata`
+ * 3.23 (2022-03-21)
+   - fix font selection for reviewers in uppertitleback
