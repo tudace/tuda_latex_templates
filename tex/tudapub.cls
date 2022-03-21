@@ -661,8 +661,7 @@
 
 
 \newkomafont{institution}{\sffamily}
-\newkomafont{titleinfo}{\sffamily}
-\newkomafont{reviewer}{\ptxcd@sffamily@lining}
+\newkomafont{titleinfo}{\ptxcd@sffamily@lining}
 \setkomafont{subtitle}{\bfseries}
 \setkomafont{subject}{}
 \setkomafont{publishers}{}
