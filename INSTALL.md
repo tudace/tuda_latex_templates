@@ -1,8 +1,8 @@
-# TUDa-CI – Installation Notes.
+# TUDa-CI – Installation Notes for manual installation (Not recommended! See README.md for more information)
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/01/11
+ tuda-ci 2022/03/25
 
 If you only create demo files, have a look at DEMO.md.
 
