@@ -47,7 +47,10 @@ Falls Sie noch keine Distribution installiert haben, finden Sie die notwendigen 
 - MacTeX  http://tug.org/mactex/
 
 #### Sonderfall: Paketverwaltung des Betriebssystems (Linux/BSD)
-Für einige Linux/BSD-Varianten existieren texlive-Pakete die über die Paketverwaltung des Systems installierbar sind. Da TUDa-CI sehr speziell ist, ist es nur in der Paketen *texlive-full* enthalten. Falls Sie ein kleineres Setup wünschen, empfehlen wir die Installation über den TeX Live Manager https://tug.org/texlive/doc/texlive-en/texlive-en.html#installation.
+Für einige Linux/BSD-Varianten existieren texlive-Pakete die über die Paketverwaltung des Systems installierbar sind.
+Da TUDa-CI sehr speziell ist, ist es meistens nur in der Paketen *texlive-full* enthalten.
+Allerdings sind die in den Paketverwaltungen enthalten TeX Live Versionen häufig stark veraltet und die Logo-Dateien müssen ohnehin zusätzlich installiert werden.
+Wir empfehlen daher die Installation von TeX Live über den TeX Live Manager: https://tug.org/texlive/doc/texlive-en/texlive-en.html#installation.
 
 ### Nutzung von TUDa-CI über Overleaf
 
@@ -152,7 +155,10 @@ In case you don't have any installed TeX system the following links might be use
 It's also possible to use the TUDa-CI-DEMO files as Overleaf-Templates on TUDa's own installation: https://sharelatex01.ca.hrz.tu-darmstadt.de/templates/all (requires TUDa Account)
 
 #### Remark on texlive packages provided by Linux/BSD package managers:
-In case you already use a texlive package of your OS TUDa-CI might not be included. Since it's a personal corporate design package you might need to install *texlive-full* to use it without further adjustments. These packages also will miss the logo and – this depends on your OS – the provided package might be outdated. In this case we recomment the setup using tlmgr (as described in the upper links).
+In case you already use a texlive package of your OS TUDa-CI might not be included.
+Since it's a corporate design package you might need to install *texlive-full* to use it without further adjustments.
+These packages also will lack the logo and – this depends on your OS – the provided package might be outdated.
+In this case we recommend the setup using tlmgr (as described in the upper links).
 
 ### Logos
 The used Logos can not be published within this bundle. Members of TU Darmstadt can download these via intranet:
