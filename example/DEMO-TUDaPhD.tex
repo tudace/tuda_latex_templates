@@ -279,7 +279,7 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
 \end{description}
 
-\section{Weitere Macros}
+\section{Weitere Makros}
 Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
 In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
 
@@ -287,26 +287,41 @@ Ab Version 3.06 verfügt \verb+\affidavit+ zusätzlich über ein optionales Argu
 Es besteht die Unterscheidung zwischen \verb+digital+ und \verb+print+. Hier wird entsprechend der Vorgabe unter \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} der entsprechende Text automatisch ausgewählt.
 
 \begin{verbatim}
-\affidavit[digital]
+	\affidavit[digital]
 \end{verbatim}
 
-Da für Dissertationen bisher keine Option der rein digitalen Abgabe besteht, entfällt dort diese Unterscheidungsmöglichkeit.
+Da für Dissertationen bisher keine Option der rein digitalen Abgabe besteht, entfällt dort diese Unterscheidungsmöglichkeit, hierfür wird intern der Schlüssel \verb+dr+ verwendet.
+
+Version 3.20 ermöglicht zusätzlich die Übergabe weiterer Optionen für den Signatur-Namen, ein Signatur-Bild oder die Ortsangabe.
+Inwieweit diese Optionen verwendet werden dürfen ist jeweils vor der Verwendung durch die Nutzer:in abzuklären.
+TUDa-CI kann hierfür keine gesicherte Aussage treffen.
+In diesem Fall muss der Varianten-Option der Optionsschlüssel \verb+affidavit+ vorangestellt werden.
+
+\begin{verbatim}
+	\affidavit[affidavit=digital,signature=Signaturname,signature-image={\includegraphics[width=\width]{signaturbild}}]
+\end{verbatim}
+Eine vertikale Verschiebung des Signaturbildes ist nicht direkt implementiert, ist jedoch mit der Verwendung des \LaTeX-Makros \verb+\raisebox{<Verschiebung>}{<Inhalt>}+ problemlos möglich.
 
 Es besteht zusätzlich die Möglichkeit ein anderssprachiges Affidavit als Ergänzung mit abzudrucken. Um die Struktur und die ggf. notwendige Sprachumschaltung zu erledigen, existiert hierfür ab Version 2.03 eine Umgebung:
 
 \begin{verbatim}
-\begin{affidavit*}[Babel-Sprachoption]{Überschrift}
-Text
-\end{affidavit*}
+	\begin{affidavit*}[Babel-Sprachoption]{Überschrift}
+		Text
+	\end{affidavit*}
 \end{verbatim}
 
 Diese Variante verfügt bewusst über keine Unterschriftenzeile, da diese Version laut Verständnis der Entwickler keine rechtliche Verbindlichkeit besitzt.
 
 Die Umgebung kann jedoch auch für besondere Formen der Erklärung genutzt werden. In diesem Fall kann eine zusätzliche Signaturzeile über
 \begin{verbatim}
-\AffidavitSignature[Stadt]
+	\AffidavitSignature[Stadt]
 \end{verbatim}
 hinzugefügt werden. Die Vorbelegung für Stadt ist hierbei \enquote{Darmstadt}.
+Ab Version 3.20 ist die Übergabe einer zusätzlichen Option für den Ort der Signatur auch als Option möglich.
+
+\begin{verbatim}
+	\affidavit[signature-location=Stadt]
+\end{verbatim}
 
 \section{Layout-Optionen mit Verstoß gegen das Corporate Design}
 
