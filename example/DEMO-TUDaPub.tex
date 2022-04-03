@@ -148,7 +148,7 @@ Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \
 \end{verbatim}
 
 \subsubsection{Sponsorenlogos}
-Ab Version 3.0 steht in TUDaPub auch der Sponsorenmechanismus der TUDaLeaflet-Klasse zur verfügung. Damit ist es Möglich Sponsorenlogos unterhalb des Titelbildes zu platzieren.
+Ab Version 3.0 steht in TUDaPub auch der Sponsorenmechanismus der TUDaLeaflet-Klasse zur Verfügung. Damit ist es Möglich Sponsorenlogos unterhalb des Titelbildes zu platzieren.
 
 Sponsorenlogos werden üblicherweise über
 \begin{verbatim}
@@ -296,7 +296,7 @@ Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} u
 \minisec{Hinweis zu den Kopf-/Fußzeilen}
 Wenn die Option \code{marginpar=true} gesetzt bleibt, ragen die Kopf- und Fußzeile über die Marginalspalte hinaus. Aus ästhetischen Gründen wird daher empfohlen in diesem Fall die Kopf- und Fußzeile  mit \code{marginpar=false}  auf den Textbereich zu beschränken.
 
-Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit local größer sein können als die eigentliche Überschrift. (\code{headline=automark})
+Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit lokal größer sein können als die eigentliche Überschrift. (\code{headline=automark})
 Deswegen kann über
 \begin{verbatim}
 	\pagestyle{TUDa.headings}
@@ -346,7 +346,7 @@ Darüber hinaus erfordern manche Stellen dieses Fachbereichs die Übergabe einer
 \SetPaperID{<Buchstabe>}{<tiefgestelle Nummer>}}
 \end{verbatim}
 eingeführt.
-Dieser funktioniert auch ohne die Aktivierung des \code{mecheng}-Modus, allerdings ergänzt due Option einige zusätzliche Parameter für angepasste Abstände.
+Dieser funktioniert auch ohne die Aktivierung des \code{mecheng}-Modus, allerdings ergänzt die Option einige zusätzliche Parameter für angepasste Abstände.
 
 Darüber hinaus aktiviert der Modus die Optionen:
 \code{colorback=false}, \code{ruledheaders=section}.
@@ -404,7 +404,7 @@ $\dot{\hat{x}}$
 \noindent Die zugehörige Diskussion findet sich im tuda-ci Repository (\url{https://github.com/tudace/tuda_latex_templates/issues/78}). Da sich diese Problematik nicht direkt aus tuda-ci sondern aus der Konstruktion der beiden Pakete untereinander ergibt, ist es leider nicht möglich pauschal eine Anpassung in tuda-ci zu implementieren. Unter dem angegebenen Link findet sich jedoch ein möglicher Workaround, sobald beide Varianten benötigt werden.
 
 \subsection{Möglicher Option Clash mit microtype}
-Das Paket microtype wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenden Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen, um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
+Das Paket \pck{microtype} wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenen Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen, um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
 
 Falls es zwingend Notwendig ist die Type 1 Schriftart zu verwenden, ist es möglich weitere Optionen vor dem Laden der Dokumentenklasse an \pck{microtype} zu übergeben.
 
