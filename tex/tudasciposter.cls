@@ -35,6 +35,8 @@
 		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
 		\exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
 	},
+	paper / landscape .code:n = \PassOptionsToPackage{landscape}{geometry},
+	paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
 	paper .initial:n = a0,
 	fontsize .tl_gset:N = \g_ptxcd_fontsize_tl,
 	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
@@ -81,10 +83,9 @@
 
 \prop_gput:NnV \g_ptxcd_clsopts_prop {fontsize} \g_ptxcd_fontsize_tl
 
-
 \prop_map_inline:Nn \g_ptxcd_clsopts_prop {
 	\tl_if_empty:nTF {#2}
-	{\exp_args:NnV\PassOptionsToClass{#1}\l_tmpa_tl}
+	{\PassOptionsToClass{#1}{scrartcl}}
 	{\clist_map_inline:nn {#2} {\PassOptionsToClass{#1=##1}{scrartcl}}}
 }
 
