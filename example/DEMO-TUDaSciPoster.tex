@@ -124,12 +124,13 @@
 % Papierformat
 \begin{posterboxenv}[title=Papierformat]{name=paper,column=3,span=2,below=row5}
 	Die Klasse \cls{tudasciposter} unterstützt die Papierformate A0, A1, A2 und A3. Der Wert wird über die Klassenoption \code{paper} ausgewählt:
-
-\begin{verbatim}
-paper=a0
-\end{verbatim}
+	\begin{verbatim}
+	paper=a0
+	\end{verbatim}
 	Die Voreinstellung entspricht \code{a0}.
 	Die Änderung des Papierformates ist keine Skalierung, da Schriftgrößen nicht direkt skalieren.
+
+	Zusätzlich kann die Option \code{paper} wie bei \KOMAScript{} üblich auch einen Wert für die Ausrichtung verarbeiten. Querformat erhält man somit über \code{paper=landscape}.
 
 	Um eine Skalierung eines größeren auf ein kleineres Design zu erreichen, empfiehlt es sich, das Ausgangsformat beim Druck zu skalieren (Drucken in eine Datei mit Skalierung) oder ggf. die PDF-Datei mit Paketen wie \pck{pdfpages} umzurechnen.
 \end{posterboxenv}
