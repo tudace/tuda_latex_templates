@@ -349,6 +349,12 @@
 \setlength{\contentwidth}{\dimexpr\paperwidth-2\g_ptxcd_margin_dim\relax}
 \newlength{\contentheight}
 
+\cs_new:Nn \__ptxcd_logo_code:n {
+		\node[anchor=north~east,inner~sep=0pt,minimum~width=2.5\c_ptxcd_logoheight_dim](#1) at ([xshift=.3\c_ptxcd_logoheight_dim,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
+					\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}
+		};
+}
+
 
 \tcbposterset{
 	coverage =
@@ -384,9 +390,7 @@
 			\fill \path [identbarcolor]
 			(identbar.south~east)rectangle([yshift=-\g_ptxcd_titleblock_dim]identbar.south~west) coordinate(bottomlefttitleblock);
 
-
-			\node[anchor=north~east,inner~sep=0pt,minimum~width=2.5\c_ptxcd_logoheight_dim](TUDalogo) at ([xshift=.3\c_ptxcd_logoheight_dim,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
-				\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}};
+			\__ptxcd_logo_code:n {TUDalogo}
 
 			\node[inner~sep=0pt,text~width=2.2\c_ptxcd_logoheight_dim,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_ptxcd_rulesep_dim]TUDalogo.south~west){\box_use:N \g_ptxcd_titlegraphic_box};
 
