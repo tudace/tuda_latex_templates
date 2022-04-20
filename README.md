@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/03/21 v3.23
+ tuda-ci 2022/04/20 v3.24
 
 ***************************************************************************
 
@@ -313,5 +313,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - fix bug in handling of `\Metadata`
  * 3.23 (2022-03-21)
    - fix font selection for reviewers in uppertitleback
- * 3.24 (2022-04-xx)
+ * 3.24 (2022-04-20)
    - Fix paper=landscape for TUDa-SciPoster.
+   - Improve internals for advanced department configuration in TUDa-SciPoster
