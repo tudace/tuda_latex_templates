@@ -71,33 +71,35 @@
 \msg_new:nnnn{tudacolors} {undefined-color} {The~ color~ #1~ you~ selected~ is~ not~ defined.} {See~ the~ tuda-ci~ manual~ for~ a~ list~ of~ available~ colors.}
 \msg_new:nnnn{tudacolors} {unselectable-color} {The~ color~ you~ selected~ (#1)~ must~ not~ be~ choosen~ for~ #2.} {See~ the~ Corporate~ Design~ Guidelines~ for~ further~ information.}
 
-%select accentcolor
-\exp_args:Nnx \colorlet{accentcolor}{\g_ptxcd_color_accent_tl}
-\bool_if:NTF \g_ptxcd_color_whitetext_bool {
-	\clist_if_in:NVTF \c_ptxcd_color_allow_whitetext_clist \g_ptxcd_color_accent_tl {
-		\colorlet{textonaccentcolor}{white}
+\hook_new:n {ptxcd/init-colors}
+\hook_gput_code:nnn {ptxcd/init-colors} {tudacolors} {
+	\exp_args:Nnx \colorlet{accentcolor}{\g_ptxcd_color_accent_tl}
+	\bool_if:NTF \g_ptxcd_color_whitetext_bool {
+		\clist_if_in:NVTF \c_ptxcd_color_allow_whitetext_clist \g_ptxcd_color_accent_tl {
+			\colorlet{textonaccentcolor}{white}
+		} {
+			\colorlet{textonaccentcolor}{black}
+			\tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {\msg_warning:nnxx{tudacolors} {unselectable-color} {white} {textonaccentcolor}}
+		}
 	} {
-		\colorlet{textonaccentcolor}{black}
-		\tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {\msg_warning:nnxx{tudacolors} {unselectable-color} {white} {textonaccentcolor}}
+		\clist_if_in:NVTF \c_ptxcd_color_allow_blacktext_clist \g_ptxcd_color_accent_tl {
+			\colorlet{textonaccentcolor}{black}
+		} {
+			\colorlet{textonaccentcolor}{white}
+			\tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {msg_warning:nnxx{tudacolors} {unselectable-color} {black} {textonaccentcolor}}
+		}
 	}
-} {
-	\clist_if_in:NVTF \c_ptxcd_color_allow_blacktext_clist \g_ptxcd_color_accent_tl {
-		\colorlet{textonaccentcolor}{black}
+	\colorlet{identbarcolor}{\g_ptxcd_color_identbar_tl}
+	\exp_args:NNx \clist_if_in:NnTF \c_ptxcd_color_forbid_textaccent_clist {\g_ptxcd_color_textaccent_tl} {
+		\msg_warning:nnxx{tudacolors} {unselectable-color} {\g_ptxcd_color_textaccent_tl} {textaccentcolor}
+		\colorlet{textaccentcolor}{black}
 	} {
-		\colorlet{textonaccentcolor}{white}
-		\tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {msg_warning:nnxx{tudacolors} {unselectable-color} {black} {textonaccentcolor}}
+		\colorlet{textaccentcolor}{\g_ptxcd_color_textaccent_tl}
 	}
 }
 
-\colorlet{identbarcolor}{\g_ptxcd_color_identbar_tl}
+\hook_use:n {ptxcd/init-colors}
 
-
-\exp_args:NNx \clist_if_in:NnTF \c_ptxcd_color_forbid_textaccent_clist {\g_ptxcd_color_textaccent_tl} {
-	\msg_warning:nnxx{tudacolors} {unselectable-color} {\g_ptxcd_color_textaccent_tl} {textaccentcolor}
-	\colorlet{textaccentcolor}{black}
-} {
-	\colorlet{textaccentcolor}{\g_ptxcd_color_textaccent_tl}
-}
 
 \colorlet{InfoBox}{white}
 

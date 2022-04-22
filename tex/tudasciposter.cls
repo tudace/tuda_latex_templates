@@ -443,23 +443,26 @@
 	};
 }
 
+\hook_gput_code:nnn {ptxcd/init-colors} {tudasciposter} {
+	\bool_if:NTF \g_ptxcd_colorback_bool
+		{\colorlet{titlefgcolor}{textonaccentcolor}}
+		{\colorlet{titlefgcolor}{black}}
+	\colorlet{titlebgcolor}{accentcolor}
+	% Block Colors
+	\colorlet{blocktitlebgcolor}{accentcolor}
+	\colorlet{blocktitlefgcolor}{textonaccentcolor}
+	% Innerblock Colors
+	\colorlet{innerblockbodybgcolor}{textonaccentcolor}
+}
 % Background Colors
 \colorlet{backgroundcolor}{white}
 \colorlet{framecolor}{white}
-% Title Colors
-\bool_if:NTF \g_ptxcd_colorback_bool
-	{\colorlet{titlefgcolor}{textonaccentcolor}}
-	{\colorlet{titlefgcolor}{black}}
-\colorlet{titlebgcolor}{accentcolor}
 % Block Colors
-\colorlet{blocktitlebgcolor}{accentcolor}
-\colorlet{blocktitlefgcolor}{textonaccentcolor}
 \colorlet{blockbodybgcolor}{white}
 \colorlet{blockbodyfgcolor}{black}
 % Innerblock Colors
 \colorlet{innerblocktitlebgcolor}{black!15}
 \colorlet{innerblocktitlefgcolor}{black}
-\colorlet{innerblockbodybgcolor}{textonaccentcolor}
 \colorlet{innerblockbodyfgcolor}{black}
 
 \dim_new:N \g_ptxcd_titleblock_dim
@@ -596,8 +599,11 @@
 
 %ADjust caption indent
 \setcapindent{1em}
+\exp_args:Nx \tl_show:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
 
 \file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
+
+\hook_use:n {ptxcd/init-colors}
 
 \endinput
 %end of tudasciposter.cls
