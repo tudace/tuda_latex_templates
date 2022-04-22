@@ -139,11 +139,6 @@
 \box_new:N \g_ptxcd_author_box
 \box_new:N \g_ptxcd_credit_box
 
-\ptxcd_makeheadrule[
-	width=\paperwidth-2\g_ptxcd_margin_dim,
- 	color=identbarcolor
-	]{ptxcd_headrule}
-
 \tl_new:N \g_ptxcd_thanks_tl
 \newcommand*{\ptxcd_title@footnote}[2][1]{
 	\begingroup
@@ -597,13 +592,17 @@
 	every~ box~ on~ layer~ 4/.style={reset,\g_ptxcd_boxstyle_tl -inner},
 }
 
-%ADjust caption indent
+%Adjust caption indent
 \setcapindent{1em}
-\exp_args:Nx \tl_show:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
 
 \file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
 
 \hook_use:n {ptxcd/init-colors}
+
+\ptxcd_makeheadrule[
+	width=\paperwidth-2\g_ptxcd_margin_dim,
+	color=identbarcolor
+]{ptxcd_headrule}
 
 \endinput
 %end of tudasciposter.cls
