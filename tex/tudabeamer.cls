@@ -36,6 +36,11 @@
 		\str_gset:Nn \g_ptxcd_department_str {mecheng}
 	},
 	department .initial:n = default,
+	department / unknown .code:n = {
+		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
+	},
+	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
+	departmentconfigprefix .initial:n = ,
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
@@ -187,7 +192,8 @@
 \@input{\jobname.len}%
 \@starttoc{len}%
 \let\accentfont\normalfont%
-\file_if_exist:nT {beamerthemeTUDa-\g_ptxcd_department_str.sty} {\usetheme{TUDa-\g_ptxcd_department_str}}
+
+\file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty} {\usetheme{\g__ptxcd_config_prefix_tl TUDa-\g_ptxcd_department_str}}
 
 \ExplSyntaxOff
 

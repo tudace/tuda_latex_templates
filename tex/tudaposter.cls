@@ -77,6 +77,11 @@
 		\keys_set:nn {ptxcd/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo}
 	},
 	department .initial:n = default,
+	department / unknown .code:n = {
+		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
+	},
+	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
+	departmentconfigprefix .initial:n = tuda,
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
@@ -577,7 +582,7 @@
 	\textsuperscript{#1}#2
 }
 
-\file_if_exist_input:n {tuda\g_ptxcd_department_str.cfg}
+\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
 
 
 \endinput
