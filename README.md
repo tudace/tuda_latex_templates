@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/04/20 v3.24
+ tuda-ci 2022/04/25 v3.25
 
 ***************************************************************************
 
@@ -316,3 +316,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * 3.24 (2022-04-20)
    - Fix paper=landscape for TUDa-SciPoster.
    - Improve internals for advanced department configuration in TUDa-SciPoster
+ * 3.25 (2022-04-25)
+   - Fix departmnt specific configuration mechanism in TUDa-SciPoster
+   - Add support for specific configuration paths
