@@ -279,6 +279,10 @@ contents={
 \renewcommand*{\familydefault}{\sfdefault}
 
 %Titlepage font setup
+%compatibility after disposition was removed from scrextend
+\expandafter\ifx\csname scr@fnt@disposition\endcsname\relax
+	\newkomafont{disposition}
+\fi
 \setkomafont{disposition}{\bfseries}
 \setkomafont{title}{\Huge}
 \setkomafont{subtitle}{}
