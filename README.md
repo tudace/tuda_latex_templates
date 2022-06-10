@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/04/25 v3.25
+ tuda-ci 2022/06/10 v3.26
 
 ***************************************************************************
 
@@ -319,3 +319,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * 3.25 (2022-04-25)
    - Fix departmnt specific configuration mechanism in TUDa-SciPoster
    - Add support for specific configuration paths
+ * 3.26 (2022-06-10)
+   - update TUprints data scheme
+   - fix incompatibility with TUDaLeaflet and recent KOMA-Script updates
