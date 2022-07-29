@@ -834,7 +834,9 @@
 	\begingroup
 	\IfNoValueF{#1}{\keys_set:nn {ptxcd/subtask}{#1}}
 	\@subtask{#2}
+	\tl_gset_eq:NN \g_tmpa_tl \@currentlabel
 	\endgroup
+	\tl_set_eq:NN \@currentlabel \g_tmpa_tl
 }{}
 
 %Solution mechanism
