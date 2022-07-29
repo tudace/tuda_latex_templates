@@ -831,10 +831,8 @@
 	}{}
 
 \NewDocumentEnvironment{subtask*}{om}{
-	\begingroup
 	\IfNoValueF{#1}{\keys_set:nn {ptxcd/subtask}{#1}}
 	\@subtask{#2}
-	\endgroup
 }{}
 
 %Solution mechanism
