@@ -820,6 +820,7 @@
 \cs_undefine:N \subtask
 
 \NewDocumentEnvironment{subtask}{o}{
+	\begingroup
 	\tl_if_in:nnT {#1} {=} {
 		\keys_set:nn {ptxcd/subtask} {#1}
 	}
@@ -828,7 +829,10 @@
 	}{
 		\@subtask{\l_ptxcd_ex_title_tl}
 	}
-	}{}
+	\tl_gset_eq:NN \g_tmpa_tl \@currentlabel
+	\endgroup
+	\tl_set_eq:NN \@currentlabel \g_tmpa_tl
+}{}
 
 \NewDocumentEnvironment{subtask*}{om}{
 	\begingroup
