@@ -34,6 +34,7 @@
 	department / unknown .code:n = {
 		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
 	},
+	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
 	mecheng .meta:n = {department=mecheng},
 }
 
@@ -98,8 +99,9 @@
 	}
 }
 
-\hook_use:n {ptxcd/init-colors}
+\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str-colors.def}
 
+\hook_use:n {ptxcd/init-colors}
 
 \colorlet{InfoBox}{white}
 
