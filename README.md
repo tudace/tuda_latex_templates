@@ -176,7 +176,7 @@ theses	   				| DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, using DEMO-TUDaBibliograph
 scientific poster			| DEMO-TUDaSciPoster.tex 		      				| tudasciposter.cls
 announcement poster			| DEMO-TUDaPoster.tex 							| tudaposter.cls
 theses announcements	   		| DEMO-TUDaAnnouncement.tex 						| tudaposter.cls
-presentation				| DEMO-TUDaBeamer.tex 							| tudaposter.cls
+presentation				| DEMO-TUDaBeamer.tex 							| tudabeamer.cls
 letter					| DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			| tudaletter.cls and tudalettersize10pt.clo
 exercise sheets/exams			| DEMO-TUDaExercise.tex      						| tudaexercise.cls
 leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
