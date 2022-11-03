@@ -8,8 +8,6 @@
 \Define@specialopt@Module[ptxcd/beamer]
 \PassOptionsToClass{10pt}{beamer}
 
-\Module@DefineSpecialPassKey[ptxcd/beamer]{color}<tudacolors>
-
 \ExplSyntaxOn
 \str_new:N \g_ptxcd_department_str
 \keys_define:nn {ptxcd/beamer} {
@@ -44,6 +42,12 @@
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	color .code:n =
+	 \tl_if_in:nnTF {#1} {=} {
+			\PassOptionsToPackage{#1}{tudacolors}
+		} {
+			\PassOptionsToPackage{color=#1}{tudacolors}
+		}
 }
 
 
