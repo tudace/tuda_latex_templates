@@ -23,8 +23,8 @@
 		\tl_set:Nn \l_ptxcd_tmpa_tl {c_ptxcd_
 			\clist_item:nn {largerule, rulesep, smallrule, logoheight} {##1}
 			_dim}
-		\dim_if_exist:cF {\l_ptxcd_tmpa_tl} {\dim_new:c {\l_ptxcd_tmpa_tl}}
-		\dim_gset:cn {\l_ptxcd_tmpa_tl} {\seq_item:Nn \l_ptxcd_tmpa_seq {##1}}
+		\dim_if_exist:cT {\l_ptxcd_tmpa_tl} {\cs_undefine:c {\l_ptxcd_tmpa_tl}}
+		\dim_const:cn {\l_ptxcd_tmpa_tl} {\seq_item:Nn \l_ptxcd_tmpa_seq {##1}}
 	}
 	\dim_gset:Nn \g_ptxcd_titlerule_dim {.5\c_ptxcd_smallrule_dim}
 }
