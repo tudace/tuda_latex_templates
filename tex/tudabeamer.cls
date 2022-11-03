@@ -193,7 +193,8 @@
 \@starttoc{len}%
 \let\accentfont\normalfont%
 
-\file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty} {\usetheme{\g__ptxcd_config_prefix_tl TUDa-\g_ptxcd_department_str}}
+\file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
+	{\usepackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
 
 \ExplSyntaxOff
 
