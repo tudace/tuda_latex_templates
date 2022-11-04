@@ -177,7 +177,7 @@
 }
 
 \bool_if:NTF \g_ptxcd_marginpar_bool {
-	\dim_gset:Nn \g_ptxcd_marginpar_dim {2.2\c_ptxcd_logoheight_dim}
+	\dim_gset:Nn \g_ptxcd_marginpar_dim {\__ptxcd_logowidth:}
 	\geometry{
 		includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim,
 		right = \dim_eval:n {
@@ -262,7 +262,7 @@
 	foreground,
 	align=tr,
 	hoffset=\paperwidth-\g_ptxcd_margin_dim,
-	width=2.2\c_ptxcd_logoheight_dim,
+	width=\__ptxcd_logowidth:,
 	height=.5\textheight,
 	contents={\box_use:N \g_ptxcd_title_info_box}
 ]{TUDa.poster.logo}
@@ -433,11 +433,11 @@
 
 \cs_new:Nn \ptxcd_make_title_logo_box:n {
 	\setlength{\fboxsep}{\z@}%
-	\parbox{2.2\c_ptxcd_logoheight_dim}{
+	\parbox{\__ptxcd_logowidth:}{
 		\colorbox{InfoBox}{
 			\rlap{
-				\makebox[2.5\c_ptxcd_logoheight_dim][r]{
-					\colorbox{InfoBox}{#1\hspace{.3\c_ptxcd_logoheight_dim}}
+				\makebox[\dim_eval:n {\_ptxcd_logowidth: + \_ptxcd_logowsep:}][r]{
+					\colorbox{InfoBox}{#1\hspace{\__ptxcd_logosep:}}
 				}
 			}
 		}
@@ -469,7 +469,7 @@
 
 \cs_new:Nn \ptxcd_Setup_Title_box: {
 	\hbox_gset:Nn \g_ptxcd_title_info_box
-	{\parbox{2.2\c_ptxcd_logoheight_dim}{
+	{\parbox{\__ptxcd_logowidth:}{
 			\seq_use:Nn \g_ptxcd_title_info_seq  {\par\nointerlineskip\skip_vertical:n
 				{
 					\box_ht:N \ptxcd_headrule_box + \box_dp:N \ptxcd_headrule_box

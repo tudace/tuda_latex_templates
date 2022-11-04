@@ -100,7 +100,7 @@ contents={
 					\let\height\layerheight
 					\g_ptxcd_titleimage_code_tl
 	}}}}
-	\put(\dim_to_decimal_in_unit:nn {\layerwidth-2.2\c_ptxcd_logoheight_dim
+	\put(\dim_to_decimal_in_unit:nn {\layerwidth-\__ptxcd_logowidth:
 	} {\unitlength},
 	\dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_ptxcd_title_info_box - .5\c_ptxcd_logoheight_dim} {\unitlength}){
 		\rlap{\box_use:N \g_ptxcd_title_info_box}
@@ -126,7 +126,7 @@ contents={
 \cs_new:Nn \ptxcd_Setup_Title_box: {
 	\hbox_gset:Nn \g_ptxcd_title_info_box
 	{
-		\parbox{\dimexpr2.5\c_ptxcd_logoheight_dim}{
+		\parbox{\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}}{
 			\seq_use:Nn \g_ptxcd_title_info_seq  {\par\nointerlineskip\vspace{\dim_eval:n {\c_ptxcd_largerule_dim+\c_ptxcd_rulesep_dim}}}
 		}
 	}
@@ -146,7 +146,7 @@ contents={
 \renewcommand*{\maketitle}{
 	\def\and{,~ }
 	\hbox_gset:Nn \g_ptxcd_sponsor_box {
-		\def\height{\dimexpr.8\c_ptxcd_logoheight_dim\relax}
+		\def\height{\dim_eval:n {\__ptxcd_logosep: + .5\c_ptxcd_logoheight_dim}}
 		\parbox[b]{\textwidth}{%
 			\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
 			\vspace{.1\c_ptxcd_logoheight_dim}
@@ -354,7 +354,7 @@ contents={
 \cs_new:Nn \ptxcd_make_title_info_box:n {
 	\setlength{\fboxsep}{1.5mm}%
 	\colorbox{InfoBox}{
-		\makebox[\dim_eval:n {2.2\c_ptxcd_logoheight_dim-\fboxsep}][r]{
+		\makebox[\dim_eval:n {\__ptxcd_logowidth:-\fboxsep}][r]{
 			\parbox{2\c_ptxcd_logoheight_dim}{
 				\usekomafont{institution}
 				\raggedright%
@@ -364,10 +364,10 @@ contents={
 
 \cs_new:Nn \ptxcd_make_title_logo_box:n {
 	\setlength{\fboxsep}{\z@}
-	\parbox{2.2\c_ptxcd_logoheight_dim}{
+	\parbox{\__ptxcd_logowidth:}{
 		\colorbox{InfoBox}{
 			\rlap{
-				\makebox[2.5\c_ptxcd_logoheight_dim][r]{
+				\makebox[\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}][r]{
 					\colorbox{InfoBox}{#1\hspace{.3\c_ptxcd_logoheight_dim}}
 				}
 			}

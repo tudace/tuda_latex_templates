@@ -651,7 +651,7 @@
 			{\msg_warning:nn{tudapub} {infobox-too-high}}
 		\makebox[\linewidth][r]{\smash{
 				\raisebox{-\height}{
-					\makebox[2.2\c_ptxcd_logoheight_dim][l]{
+					\makebox[\__ptxcd_logowidth:][l]{
 						\box_use:N \g_ptxcd_title_info_box
 				}}
 		}}
@@ -682,8 +682,8 @@
 \cs_new:Nn \ptxcd_make_title_info_box:n {
 	\setlength{\fboxsep}{1.5mm}%
 	\colorbox{InfoBox}{
-	\makebox[\dim_eval:n {2.2\c_ptxcd_logoheight_dim-\fboxsep}][r]{
-		\parbox{2\c_ptxcd_logoheight_dim}{
+	\makebox[\dim_eval:n {\__ptxcd_logowidth:-\fboxsep}][r]{
+		\parbox{\dim_eval:n {\__ptxcd_logowidth:+\fboxsep-\__ptxcd_logosep:}}{
 		\expandafter \fontsize\ptxcd_titlethanks_fontsize:\selectfont\usekomafont{institution}%
 		\raggedright%
 	#1
@@ -692,12 +692,12 @@
 
 \cs_new:Nn \ptxcd_make_title_logo_box:n {
 	\setlength{\fboxsep}{\z@}%
-	\parbox{2.2\c_ptxcd_logoheight_dim}{
+	\parbox{\__ptxcd_logowidth:}{
 		\colorbox{InfoBox}{
 			\rlap{
-			\makebox[2.5\c_ptxcd_logoheight_dim][r]{
-			\colorbox{InfoBox}{#1\hspace{.3\c_ptxcd_logoheight_dim}}
-			}
+				\makebox[\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}][r]{
+					\colorbox{InfoBox}{#1\hspace{\__ptxcd_logosep:}}
+				}
 			}
 		}
 	}
@@ -744,7 +744,7 @@
 					\g_ptxcd_titleimage_code_tl
 					}}}}
 		\bool_if:NF \g__ptxcd_LogoInHead_bool {
-			\put(\dim_to_decimal_in_unit:nn {\layerwidth-2.2\c_ptxcd_logoheight_dim
+			\put(\dim_to_decimal_in_unit:nn {\layerwidth-\__ptxcd_logowidth:
 			} {\unitlength},
 			\dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_ptxcd_title_info_box - .5\c_ptxcd_logoheight_dim} {\unitlength}){
 				\rlap{\box_use:N \g_ptxcd_title_info_box}
@@ -774,7 +774,7 @@
 \cs_new:Nn \ptxcd_setup_title_box: {
 	\hbox_gset:Nn \g_ptxcd_title_info_box
 	{
-		\parbox{\dimexpr2.5\c_ptxcd_logoheight_dim}{
+		\parbox{\dim_eval:n {\__ptxcd_logowidth:+\__ptxcd_logosep:}}{
 		\seq_use:Nn \g_ptxcd_title_info_seq  {\par\nointerlineskip\vspace{\dim_eval:n {\c_ptxcd_largerule_dim+\c_ptxcd_rulesep_dim}}}
 		}
 	}
@@ -783,7 +783,7 @@
 \cs_new:Nn \ptxcd_setup_sponsor_box: {
 	\bool_if:nF {\seq_if_empty_p:N \g_ptxcd_sponsors_seq &&  \tl_if_empty_p:N \@sponsors} {
 		\hbox_gset:Nn \g_ptxcd_sponsor_box {
-			\def\height{\dimexpr.8\c_ptxcd_logoheight_dim\relax}
+			\def\height{\dim_eval:n {\__ptxcd_logosep: + .5\c_ptxcd_logoheight_dim}}
 			\parbox[t]{\textwidth}{
 				\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
 				\addvspace{\c_ptxcd_rulesep_dim}
@@ -1180,7 +1180,7 @@
 	{\parbox[t]{\g_ptxcd_headwidth_dim}{
 			\rule{\z@}{.5\c_ptxcd_logoheight_dim}\par\nointerlineskip
 			\raisebox{-\height}{%
-				\begin{minipage}[t]{\dimexpr\linewidth-2.2\c_ptxcd_logoheight_dim-1ex}
+				\begin{minipage}[t]{\dim_eval:n {\linewidth-\__ptxcd_logowidth:-1ex}}
 					\bool_if:NT \g_ptxcd_colorbacktitle_bool  {\begin{addmargin}{.5\c_ptxcd_largerule_dim}}
 						\raggedright
 						\bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
@@ -1205,14 +1205,13 @@
 		\hfill
 		\raisebox{-\height}{
 		\ptxcd_setup_title_box:
-		\makebox[2.2\c_ptxcd_logoheight_dim][l]{
+		\makebox[\__ptxcd_logowidth:][l]{
 		\box_use:N \g_ptxcd_title_info_box
 		}
 		}
-		\dim_compare:nNnTF {\box_ht:N \g_ptxcd_title_info_box + \box_ht:N \g_ptxcd_title_info_box} > {1.1\c_ptxcd_logoheight_dim}
+		\dim_compare:nNnTF {\box_ht:N \g_ptxcd_title_info_box + \box_ht:N \g_ptxcd_title_info_box} > {(\__ptxcd_logowidth:)/2}
 				{\vspace{\c_ptxcd_largerule_dim}}
 				{\vspace{.5\c_ptxcd_logoheight_dim}}
-
 		\par
 	}}
 	\par

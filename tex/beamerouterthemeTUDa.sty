@@ -91,7 +91,7 @@
 
 \box_new:N \g__ptxcd_logo_box
 \hbox_gset:Nn \g__ptxcd_logo_box {%
-	\makebox[2.2\c_ptxcd_logoheight_dim][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
+	\makebox[\__ptxcd_logowidth:][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
 }
 
 \ptxcd_makeheadrule[color=identbarcolor,width=\paperwidth-2\g__ptxcd_beamer_sep_dim]{ptxcd_beamer_headrule}

@@ -350,7 +350,7 @@
 \newlength{\contentheight}
 
 \cs_new:Nn \__ptxcd_logo_code:n {
-		\node[anchor=north~east,inner~sep=0pt,minimum~width=2.5\c_ptxcd_logoheight_dim](#1) at ([xshift=.3\c_ptxcd_logoheight_dim,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
+		\node[anchor=north~east,inner~sep=0pt,minimum~width=\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}](#1) at ([xshift=\__ptxcd_logosep:,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
 					\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}
 		};
 }
@@ -392,7 +392,7 @@
 
 			\__ptxcd_logo_code:n {TUDalogo}
 
-			\node[inner~sep=0pt,text~width=2.2\c_ptxcd_logoheight_dim,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_ptxcd_rulesep_dim]TUDalogo.south~west){\box_use:N \g_ptxcd_titlegraphic_box};
+			\node[inner~sep=0pt,text~width=\__ptxcd_logowidth:,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_ptxcd_rulesep_dim]TUDalogo.south~west){\box_use:N \g_ptxcd_titlegraphic_box};
 
 			\node[anchor=north~west,inner~sep=0pt,]  (title) at ([
 			xshift=\g_ptxcd_titleindent_dim,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~west) {\box_use:N \g_ptxcd_title_box};
@@ -483,7 +483,7 @@
 	}
 	\tl_if_empty:NF \@titlegraphic {
 		\hbox_gset:Nn \g_ptxcd_titlegraphic_box {
-			\parbox{2.2\c_ptxcd_logoheight_dim}{
+			\parbox{\__ptxcd_logowidth:}{
 			\raggedleft
 			\@titlegraphic
 			}
@@ -493,9 +493,9 @@
 		\dim_max:nn
 		{\dim_max:nn
 			{2\c_ptxcd_logoheight_dim}
-			{\box_ht:N \g_ptxcd_titlegraphic_box +\box_dp:N \g_ptxcd_titlegraphic_box+1.8\c_ptxcd_logoheight_dim}
+			{\box_ht:N \g_ptxcd_titlegraphic_box +\box_dp:N \g_ptxcd_titlegraphic_box+1.5\c_ptxcd_logoheight_dim+\__ptxcd_logosep:}
 		}
-		{\box_ht:N \g_ptxcd_title_box+ \box_dp:N \g_ptxcd_title_box+.8\c_ptxcd_logoheight_dim}
+		{\box_ht:N \g_ptxcd_title_box+ \box_dp:N \g_ptxcd_title_box+1.5\c_ptxcd_logoheight_dim+\__ptxcd_logosep:}
 	}
 }
 

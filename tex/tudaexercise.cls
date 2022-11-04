@@ -602,7 +602,7 @@
 	\rule{0pt}{\bool_if:NTF \g_ptxcd_smalltitle_bool {.25} {.5}\c_ptxcd_logoheight_dim}
 	\par\nointerlineskip
       \raisebox{-\height}{%
-        \begin{minipage}[t]{\dimexpr\linewidth-2.2\c_ptxcd_logoheight_dim-1ex}
+        \begin{minipage}[t]{\dimexpr\linewidth-\__ptxcd_logowidth:-1ex}
           \bool_if:NT \g_ptxcd_colorback_bool  {\begin{addmargin}{3mm}}
             \raggedright
             \bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
@@ -635,7 +635,7 @@
 				{\bool_if:NTF \g_ptxcd_colorback_bool {1.15}{1}}
 				{\bool_if:NTF \g_ptxcd_colorback_bool {1.5}{1.3}
 			}\c_ptxcd_logoheight_dim}]
-		{\makebox[2.2\c_ptxcd_logoheight_dim][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}}
+		{\makebox[\__ptxcd_logowidth:][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}}
 		}
       \par\medskip
     }}

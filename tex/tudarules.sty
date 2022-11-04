@@ -80,6 +80,9 @@
 	{mecheng} {\bool_gset_true:N \g_ptxcd_simple_rules_bool}
 }
 
+\cs_new:Nn \__ptxcd_logowidth: {\dim_eval:n {2.2\c_ptxcd_logoheight_dim}}
+\cs_new:Nn \__ptxcd_logosep:{\dim_eval:n {0.3\c_ptxcd_logoheight_dim}}
+
 \NewDocumentCommand{\ptxcd_makeheadrule}{som}{
 	\keys_set:nn {ptxcd/rules} {
 		%TODO maybe package options for default

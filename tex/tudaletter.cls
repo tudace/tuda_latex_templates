@@ -155,7 +155,7 @@
 	\smash{\ptxcd_LetterheadRule}
 	\par
 	\vspace{.5\c_ptxcd_logoheight_dim}
-	\makebox[2.2\c_ptxcd_logoheight_dim][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
+	\makebox[\__ptxcd_logowidth:][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
 	}
 }
 
