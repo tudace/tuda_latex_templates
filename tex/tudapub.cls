@@ -783,7 +783,7 @@
 \cs_new:Nn \ptxcd_setup_sponsor_box: {
 	\bool_if:nF {\seq_if_empty_p:N \g_ptxcd_sponsors_seq &&  \tl_if_empty_p:N \@sponsors} {
 		\hbox_gset:Nn \g_ptxcd_sponsor_box {
-			\def\height{\dim_eval:n {\__ptxcd_logosep: + .5\c_ptxcd_logoheight_dim}}
+			\edef\height{\noexpand\dimexpr\dim_eval:n {\__ptxcd_logosep: + .5\c_ptxcd_logoheight_dim}}
 			\parbox[t]{\textwidth}{
 				\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
 				\addvspace{\c_ptxcd_rulesep_dim}

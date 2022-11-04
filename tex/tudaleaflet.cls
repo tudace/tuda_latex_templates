@@ -146,7 +146,7 @@ contents={
 \renewcommand*{\maketitle}{
 	\def\and{,~ }
 	\hbox_gset:Nn \g_ptxcd_sponsor_box {
-		\def\height{\dim_eval:n {\__ptxcd_logosep: + .5\c_ptxcd_logoheight_dim}}
+		\edef\height{\noexpand\dimexpr\dim_eval:n {\__ptxcd_logosep: + .5\c_ptxcd_logoheight_dim}}
 		\parbox[b]{\textwidth}{%
 			\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
 			\vspace{.1\c_ptxcd_logoheight_dim}
