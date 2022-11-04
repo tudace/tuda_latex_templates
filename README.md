@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/08/03 v3.27
+ tuda-ci 2022/11/04 v3.28
 
 ***************************************************************************
 
@@ -324,3 +324,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - Fix incompatibility with TUDaLeaflet and recent KOMA-Script updates
  * 3.27 (2022-08-03)
    - Fix reference issues with subtask* in TUDaExercise
+ * 3.28 (2022-11-04)
+   - Fix loading mechanism for department specific beamer templates with prefix
+   - Internal adjustments to increase flexability
