@@ -829,6 +829,7 @@
 	}{
 		\@subtask{\l_ptxcd_ex_title_tl}
 	}
+	\bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
 	\tl_gset_eq:NN \g_tmpa_tl \@currentlabel
 	\endgroup
 	\tl_set_eq:NN \@currentlabel \g_tmpa_tl
