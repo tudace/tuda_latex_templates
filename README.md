@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
 
- tuda-ci 2022/11/04 v3.28
+ tuda-ci 2022/12/11 v3.29
 
 ***************************************************************************
 
@@ -327,3 +327,8 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
  * 3.28 (2022-11-04)
    - Fix loading mechanism for department specific beamer templates with prefix
    - Internal adjustments to increase flexability
+  * 3.29 (2022-12-11)
+   - Fix bug with subtask=runin for TUDaExercise
+   - Add support for lists in solutions of TUDaExercise
+   - Rename some internal mechanisms to unify the structure
+   
