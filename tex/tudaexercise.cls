@@ -862,6 +862,7 @@
 
 \cs_new:Nn \ptxcd_ex_solutionheader: {
   \@solution*{\solutionname\solutionsep}
+  \if@newlist\global\@newlistfalse\fi
 }
 
 \box_new:N \g_ptxcd_NumberForm_box
