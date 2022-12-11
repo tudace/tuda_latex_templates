@@ -929,9 +929,11 @@
 \def\sponsors#1{\def\@sponsors{#1}}
 \sponsors{}
 
-\newcommand*{\ptxcd_title@footnote}[2][1]{
-	\textsuperscript{\@fnsymbol{#1}}#2
+\cs_new:Npn \ptxcd_title_footnote:w [#1] #2 {
+	\textsuperscript{ \ptxcd_title_footnotestyle:n {#1}}#2
 }
+
+\cs_set_eq:NN \ptxcd_title_footnotestyle:n \@fnsymbol
 
 \str_if_eq:VnTF \g_ptxcd_pubType_tl  {thesis} {
 	\input{tudathesis.cfg}
@@ -956,7 +958,7 @@
 		\setcounter{page}{%
 			#1%
 		}%
-		\def\thefootnote{\fnsymbol{footnote}}
+		\def\thefootnote{\ptxcd_title_footnotestyle:n {\c@footnote}}
 		\if@titlepageiscoverpage
 		\def\titlepage@restore{%
 			\endgroup
@@ -1036,7 +1038,7 @@
 					\expandafter\fontsize\ptxcd_titlethanks_fontsize:\selectfont\par
 					\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par
 					\begin{addmargin}{3mm}
-						\let\footnotetext\ptxcd_title@footnote
+						\let\footnotetext\ptxcd_title_footnote:w
 						\@thanks
 					\end{addmargin}
 					\par\vspace{-\dp\strutbox}
@@ -1175,6 +1177,7 @@
 	\usekomafont{disposition}
 	\hsize=\g_ptxcd_headwidth_dim
 	\setlength{\fboxsep}{\z@}
+	\def\thefootnote{\ptxcd_title_footnotestyle:n {\c@footnote}}
 	\bool_if:NT \g_ptxcd_colorback_bool {\bool_set_true:N \g_ptxcd_colorbacktitle_bool}
 	\bool_if:NT \g_ptxcd_colorbacktitle_bool {\colorbox{identbarcolor}}
 	{\parbox[t]{\g_ptxcd_headwidth_dim}{
@@ -1228,7 +1231,7 @@
 	\rule{\g_ptxcd_headwidth_dim}{\g_ptxcd_titlerule_dim}
 	\expandafter\fontsize\ptxcd_titlethanks_fontsize:\selectfont
 	\begin{addmargin}{.5\c_ptxcd_largerule_dim}
-		\let\footnotetext\ptxcd_title@footnote
+		\let\footnotetext\ptxcd_title_footnote:w
 		\@thanks
 		\vspace{\c_ptxcd_rulesep_dim}
 	\end{addmargin}
