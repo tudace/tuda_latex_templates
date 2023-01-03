@@ -54,7 +54,7 @@ Wir empfehlen daher die Installation von TeX Live über den TeX Live Manager: ht
 
 ### Nutzung von TUDa-CI über Overleaf
 
-Die TUDa verfügt über eine eigene Overleaf-Installation, auf die alle Mitglieder Zugriff haben. Die DEMO-Dateien werden dort in der jeweils aktuellen Version als Templates bereitgestellt: https://sharelatex01.ca.hrz.tu-darmstadt.de/templates/all
+Die TUDa verfügt über eine eigene Overleaf-Installation, auf die alle Mitglieder Zugriff haben. Die DEMO-Dateien werden dort in der jeweils aktuellen Version als Templates bereitgestellt: https://sharelatex.tu-darmstadt.de/templates/all
 Somit ist eine Nutzung ohne lokale Installation möglich.
 
 ### Logos & verwendete Bilddateien
@@ -152,7 +152,7 @@ In case you don't have any installed TeX system the following links might be use
 - Windows/Linux https://tug.org/texlive/acquire-netinstall.html
 - MacTeX  http://tug.org/mactex/
 
-It's also possible to use the TUDa-CI-DEMO files as Overleaf-Templates on TUDa's own installation: https://sharelatex01.ca.hrz.tu-darmstadt.de/templates/all (requires TUDa Account)
+It's also possible to use the TUDa-CI-DEMO files as Overleaf-Templates on TUDa's own installation: https://sharelatex.tu-darmstadt.de/templates/all (requires TUDa Account)
 
 #### Remark on texlive packages provided by Linux/BSD package managers:
 In case you already use a texlive package of your OS TUDa-CI might not be included.
