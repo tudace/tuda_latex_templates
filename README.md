@@ -1,6 +1,6 @@
 # TUDa-CI – Corporate Design LaTeX-Templates for TU Darmstadt
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
 
  tuda-ci 2022/12/11 v3.29
 

@@ -1,6 +1,6 @@
 # TUDa-CI – Installation Notes for manual installation (Not recommended! See README.md for more information)
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2022
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
 
  tuda-ci 2022/03/25
 
