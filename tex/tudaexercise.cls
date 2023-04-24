@@ -829,12 +829,10 @@
 	}{
 		\@subtask{\l_ptxcd_ex_title_tl}
 	}
-	\bool_if:NF \l__ptxcd_points_auto_bool {
-       \cs_if_exist_use:NF \prop_gput:Nxx
-       {\exp_args:NNx \prop_gput:Nnx}
+   \cs_if_exist_use:NF \prop_gput:Nxx
+      {\exp_args:NNx \prop_gput:Nnx}
        \g__ptxcd_points_collector_prop
-		{\thetask\thesubtask} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp }
-	}
+	   {\thetask\thesubtask} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp }
 	\bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
 	\tl_gset_eq:NN \g_tmpa_tl \@currentlabel
 	\endgroup
@@ -957,16 +955,24 @@
 		}
 	}
 	
-	\newcommand{\getPoints}[1]{
-		\exp_args:NNf \prop_get:NnNTF \g__ptxcd_loaded_points_prop {#1} \l_tmpa_tl
-		{\l_tmpa_tl}
-		{\nfss@text{\reset@font\bfseries??}}
+	\cs_new:Nn \__ptxcd_getPoints:n {
+			\prop_if_in:NnTF \g__ptxcd_loaded_points_prop {#1}
+				{\prop_item:Nn \g__ptxcd_loaded_points_prop {#1}}
+				{\nfss@text{\reset@font\bfseries??}}
 	}
+	\cs_generate_variant:Nn \__ptxcd_getPoints:n {x}
+
+	\newcommand{\getPoints}[1]{\__ptxcd_getPoints:x {#1}}
 
 	\newcommand{\refPoints}[1]{
 		\edef\x{#1}
 		\cs_if_exist:cTF {r@\x} {
-			\getPoints{\tl_head:v {r@\x}}
+			\str_if_in:cnTF {r@\x} {subtask} {
+				\tl_set_eq:Nc \l_tmpa_tl {r@\x}
+				\getPoints{\tl_item:Nn \l_tmpa_tl  {2}\tl_item:Nn \l_tmpa_tl  {1}}
+			} {
+				\getPoints{\tl_head:v {r@\x}}
+			}
 		}{
 			\nfss@text{\reset@font\bfseries??}
 		}
