@@ -829,6 +829,12 @@
 	}{
 		\@subtask{\l_ptxcd_ex_title_tl}
 	}
+	\bool_if:NF \l__ptxcd_points_auto_bool {
+       \cs_if_exist_use:NF \prop_gput:Nxx
+       {\exp_args:NNx \prop_gput:Nnx}
+       \g__ptxcd_points_collector_prop
+		{\thetask\thesubtask} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp }
+	}
 	\bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
 	\tl_gset_eq:NN \g_tmpa_tl \@currentlabel
 	\endgroup
