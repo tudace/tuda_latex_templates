@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
 
- tuda-ci 2022/12/11 v3.29
+ tuda-ci 2023/04/24 v3.30
 
 ***************************************************************************
 
@@ -327,4 +327,8 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - Fix bug with subtask=runin for TUDaExercise
    - Add support for lists in solutions of TUDaExercise
    - Rename some internal mechanisms to unify the structure
+  * 3.30 (2023-04-24)
+   - Add affidavit option to remove subject specific information
+   - Fix titleblock caclulation with tudasciposter
+   - Extend points mechanism to allow acessing subtask points
    
