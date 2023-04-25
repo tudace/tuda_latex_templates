@@ -23,6 +23,10 @@ Das Gesamtpaket wurde in Teilen inspiriert von Clemens von Loewenichs and Joe We
 
 Derzeit existieren diese Templates nur in Deutscher Sprache.
 
+## Support und Hilfe
+
+Die ULB bietet über das Team Infokompetenz LaTeX-Support und insbesondere Hilfe bei der Verwendung von TUDa-CI an. (https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/texte_verarbeiten/latex/index.de.jsp). Darüber hinaus findet auch die Sprechstunde wieder statt. Die Termine zu allen Lernformaten finden sich unter https://www.ulb.tu-darmstadt.de/lernen_arbeiten/lehr_und_lernformate/textverarbeitung/textverarbeitung.de.jsp
+
 ## Verwendungshinweis
 Die Richtlinien des Corporate Designs (https://www.intern.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf), sowie die Anforderungen der Universitätsbibliothek erfordern einige spezielle Konfigurationen. Beispielsweise ist für wissenschaftliche Veröffentlichungen und Abschlussarbeiten die Erzeugung einer archivierbaren PDF-Datei (PDF/A) vorgesehen.
 Dies ist mit aktuellen LaTeX-Paketen und dem Compiler LuaLaTeX deutlich besser umzusetzen, als mit älteren Formaten.
@@ -60,10 +64,10 @@ Somit ist eine Nutzung ohne lokale Installation möglich.
 ### Logos & verwendete Bilddateien
 Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitgliedern der TU Darmstadt über das interne Netzwerk heruntergeladen werden.
 
-https://download.hrz.tu-darmstadt.de/protected/CE/TUDa_LaTeX/tuda_logo.pdf
+https://download.hrz.tu-darmstadt.de/protected/ULB/tuda_logo.pdf
 
 Für die permanente Installation der Logodateien findet sich unter
-https://www.ce.tu-darmstadt.de/ce/latex_tuda/index.de.jsp
+https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/texte_verarbeiten/latex/index.de.jsp
 ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
@@ -158,7 +162,7 @@ In this case we recommend the setup using tlmgr (as described in the upper links
 
 ### Logos
 The used Logos can not be published within this bundle. Members of TU Darmstadt can download these via intranet:
-https://download.hrz.tu-darmstadt.de/protected/CE/TUDa_LaTeX/tuda_logo.pdf
+https://download.hrz.tu-darmstadt.de/protected/ULB/tuda_logo.pdf
 
 If you are not a member of TU Darmstadt the example files include information on how to use a replacement image instead of the logo.
 

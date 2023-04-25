@@ -491,11 +491,8 @@
 	}
 	\dim_gset:Nn \g_ptxcd_titleblock_dim {
 		\dim_max:nn
-		{\dim_max:nn
-			{2\c_ptxcd_logoheight_dim}
-			{\box_ht:N \g_ptxcd_titlegraphic_box +\box_dp:N \g_ptxcd_titlegraphic_box+1.5\c_ptxcd_logoheight_dim+\__ptxcd_logosep:}
-		}
-		{\box_ht:N \g_ptxcd_title_box+ \box_dp:N \g_ptxcd_title_box+\c_ptxcd_logoheight_dim+\__ptxcd_logosep:}
+		{\box_ht:N \g_ptxcd_titlegraphic_box +\box_dp:N \g_ptxcd_titlegraphic_box+2\c_ptxcd_logoheight_dim}
+		{\box_ht:N \g_ptxcd_title_box+ \box_dp:N \g_ptxcd_title_box+\c_ptxcd_logoheight_dim}
 	}
 }
 
