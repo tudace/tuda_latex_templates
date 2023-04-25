@@ -144,6 +144,10 @@ Therefore it contains documentclasses as well as some helper packages and config
 
 If you are not a German speaker and require some help using these files, please feel free to contact the maintainers.
 
+## Support
+
+ULB is offering support for LaTeX in general and TUDa-CI. Contact email address can be found at https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/texte_verarbeiten/latex/index.en.jsp. Additionally there is a TeXnical office hour. Questions can also be answered in English. The dates can be found at  https://www.ulb.tu-darmstadt.de/lernen_arbeiten/lehr_und_lernformate/textverarbeitung/textverarbeitung.en.jsp searching for “TeXnische Sprechstunde”.
+
 ## Installation
 TUDa-CI is part of the popular TeX distributions ([MikTeX](https://miktex.org/download) & [TeX Live](https://tug.org/texlive/), which is included by [MacTeX](https://www.tug.org/mactex/)).
 It's possible to install the templates using the TeX Live Manager or the MikTeX Console.
