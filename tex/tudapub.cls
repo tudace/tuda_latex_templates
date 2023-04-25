@@ -1274,13 +1274,13 @@
 
 
 %Anpassungen marginpar
-\cs_set_eq:NN\ptxcd_orig@marginpar:\marginpar
+\cs_set_eq:NN\ptxcd_orig@marginpar:w \marginpar
 \newkomafont{marginpar}{\accentfont\color{textaccentcolor}}
 \RenewDocumentCommand{\marginpar}{om}{
 	\IfNoValueTF{#1}{
-		\ptxcd_orig@marginpar:{\leavevmode\usekomafont{marginpar}#2}
+		\ptxcd_orig@marginpar:w {\leavevmode\usekomafont{marginpar}#2}
 	}{
-		\ptxcd_orig@marginpar:[\leavevmode\usekomafont{marginpar}#1]{\leavevmode\usekomafont{marginpar}#2}
+		\ptxcd_orig@marginpar:w [{\leavevmode\usekomafont{marginpar}#1}]{\leavevmode\usekomafont{marginpar}#2}
 	}
 }
 
