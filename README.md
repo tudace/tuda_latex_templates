@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
 
- tuda-ci 2023/04/24 v3.30
+ tuda-ci 2023/06/16 v3.31
 
 ***************************************************************************
 
@@ -339,4 +339,7 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - Add affidavit option to remove subject specific information
    - Fix titleblock caclulation with tudasciposter
    - Extend points mechanism to allow acessing subtask points
+  * 3.31 (2023-06-16)
+   - Update the digital affidavit text
+   - Fix bug in calculation of points using subtasks in tudaexercise
    
