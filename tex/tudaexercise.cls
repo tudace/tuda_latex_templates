@@ -20,6 +20,7 @@
 \prop_gput:Nnn \g_ptxcd_clsopts_prop {parskip} {half-}
 
 \prop_new:N \g__ptxcd_points_collector_prop
+\prop_new:N \g__ptxcd_subtask_points_collector_prop
 \bool_new:N \l__ptxcd_points_auto_bool
 \bool_new:N \g__ptxcd_points_bool
 \prop_new:N \g__ptxcd_loaded_points_prop
@@ -831,7 +832,7 @@
 	}
    \cs_if_exist_use:NF \prop_gput:Nxx
       {\exp_args:NNx \prop_gput:Nnx}
-       \g__ptxcd_points_collector_prop
+       \g__ptxcd_subtask_points_collector_prop
 	   {\thetask\thesubtask} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp }
 	\bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
 	\tl_gset_eq:NN \g_tmpa_tl \@currentlabel
@@ -941,7 +942,12 @@
 	\BeforeClosingMainAux{
 		\tl_clear:N \l_tmpa_tl
 		\tl_clear:N \l_tmpb_tl
+		\fp_zero:N \l_tmpa_fp
 		\prop_map_inline:Nn  \g__ptxcd_points_collector_prop {
+			\tl_put_right:Nn \l_tmpa_tl {#1=#2,}
+			\fp_add:Nn \l_tmpa_fp {#2}
+		}
+		\prop_map_inline:Nn  \g__ptxcd_subtask_points_collector_prop {
 			\tl_put_right:Nn \l_tmpa_tl {#1=#2,}
 		}
 		\prop_map_inline:Nn \g__ptxcd_loaded_points_prop {
@@ -951,7 +957,7 @@
 			\msg_warning:nn {tudaexercise} {points-differ}
 		}
 		\iow_now:Nx \@auxout{
-			\exp_not:N \ptxcd@LoadPoints[\thetask]{\l_tmpa_tl}
+			\exp_not:N \ptxcd@LoadPoints[\thetask][\fp_use:N \l_tmpa_fp]{\l_tmpa_tl}
 		}
 	}
 	
@@ -1029,14 +1035,11 @@
 \cs_new:Nn \__ptxcd_map_points_helper:nn {#1-#2}
 
 
-\newcommand*{\ptxcd@LoadPoints}[2][]{
+\NewDocumentCommand{\ptxcd@LoadPoints}{oO{0}m}{
 	\prop_gset_from_keyval:Nn \g__ptxcd_loaded_points_prop {
-		#2
+		#3
 	}
-	\fp_gzero:N \g__ptxcd_points_total_fp
-	\prop_map_inline:Nn  \g__ptxcd_loaded_points_prop  {
-		\fp_gadd:Nn \g__ptxcd_points_total_fp {##2}
-	}
+	\fp_gset:Nn \g__ptxcd_points_total_fp {#2}
 }
 
 
