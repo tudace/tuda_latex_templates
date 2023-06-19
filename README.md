@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
 
- tuda-ci 2023/06/16 v3.31
+ tuda-ci 2023/06/19 v3.32
 
 ***************************************************************************
 
@@ -342,4 +342,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
   * 3.31 (2023-06-16)
    - Update the digital affidavit text
    - Fix bug in calculation of points using subtasks in tudaexercise
+  * 3.32 (2023-06-19)
+    - remove affidavit=print
    
