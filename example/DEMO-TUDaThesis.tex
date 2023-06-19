@@ -100,12 +100,12 @@
 
 \maketitle
 
-\affidavit% oder \affidavit[digital] falls eine rein digitale Abgabe vorgesehen ist.
+\affidavit
 % Es gibt mit Version 3.20 die Möglichkeit ein Bild als Signatur einzubinden.
 % TUDa-CI kann nicht garantieren, dass dies zulässig ist oder eine eigenhändige Unterschrift ersetzt.
 % Dies ist durch Studierende vor der Verwendung abzuklären.
 % Die Verwendung funktioniert so:
-%\affidavit[signature-image={\includegraphics[width=\width,height=1cm]{example-image}}, <hier können andere Optionen wie z.B. affidavit=digital zusätzlich stehen>]
+%\affidavit[signature-image={\includegraphics[width=\width,height=1cm]{example-image}}, <hier können andere Optionen zusätzlich stehen>]
 
 \tableofcontents
 
@@ -258,14 +258,9 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
 In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
 
-Ab Version 3.06 verfügt \verb+\affidavit+ zusätzlich über ein optionales Argument, über das der Modus eingestellt werden kann.
-Es besteht die Unterscheidung zwischen \verb+digital+ und \verb+print+. Hier wird entsprechend der Vorgabe unter \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} der entsprechende Text automatisch ausgewählt.
+Ab Version 3.32 entfällt die seit Version 3.06 unterstütze Unterscheidung zwischen einem Affidavit für digitale oder gedruckte Abgaben. Aus Kompatibilitätsgründen werden die Optionen weiterhin verstanden, allerdings bewirken Sie nun beide das gleiche. Der Text entstammt von  \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} (Stand 2023-06-19).
 
-\begin{verbatim}
-\affidavit[digital]
-\end{verbatim}
-
-Da für Dissertationen bisher keine Option der rein digitalen Abgabe besteht, entfällt dort diese Unterscheidungsmöglichkeit, hierfür wird intern der Schlüssel \verb+dr+ verwendet.
+Dissertationen verwenden hier einen anderen Text, für die Unterscheidung wird die Affidavit-Option \verb+affidavit=dr+ intern verwendet.
 
 Version 3.20 ermöglicht zusätzlich die Übergabe weiterer Optionen für den Signatur-Namen, ein Signatur-Bild oder die Ortsangabe.
 Inwieweit diese Optionen verwendet werden dürfen ist jeweils vor der Verwendung durch die Nutzer:in abzuklären.
@@ -273,7 +268,7 @@ TUDa-CI kann hierfür keine gesicherte Aussage treffen.
 In diesem Fall muss der Varianten-Option der Optionsschlüssel \verb+affidavit+ vorangestellt werden.
 
 \begin{verbatim}
-	\affidavit[affidavit=digital,signature=Signaturname,signature-image={\includegraphics[width=\width]{signaturbild}}]
+	\affidavit[signature=Signaturname,signature-image={\includegraphics[width=\width]{signaturbild}}]
 \end{verbatim}
 Eine vertikale Verschiebung des Signaturbildes ist nicht direkt implementiert, ist jedoch mit der Verwendung des \LaTeX-Makros \verb+\raisebox{<Verschiebung>}{<Inhalt>}+ problemlos möglich.
 
