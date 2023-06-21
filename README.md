@@ -25,7 +25,7 @@ Derzeit existieren diese Templates nur in Deutscher Sprache.
 
 ## Support und Hilfe
 
-Die ULB bietet über das Team Infokompetenz LaTeX-Support und insbesondere Hilfe bei der Verwendung von TUDa-CI an. (https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/texte_verarbeiten/latex/index.de.jsp). Darüber hinaus findet auch die Sprechstunde wieder statt. Die Termine zu allen Lernformaten finden sich unter https://www.ulb.tu-darmstadt.de/lernen_arbeiten/lehr_und_lernformate/textverarbeitung/textverarbeitung.de.jsp
+Die ULB bietet über das Team Infokompetenz LaTeX-Support und insbesondere Hilfe bei der Verwendung von TUDa-CI an. (https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp). Darüber hinaus findet auch die Sprechstunde wieder statt. Die Termine zu allen Lernformaten finden sich unter https://www.ulb.tu-darmstadt.de/lernen_arbeiten/lehr_und_lernformate/textverarbeitung/textverarbeitung.de.jsp
 
 ## Verwendungshinweis
 Die Richtlinien des Corporate Designs (https://www.intern.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf), sowie die Anforderungen der Universitätsbibliothek erfordern einige spezielle Konfigurationen. Beispielsweise ist für wissenschaftliche Veröffentlichungen und Abschlussarbeiten die Erzeugung einer archivierbaren PDF-Datei (PDF/A) vorgesehen.
@@ -146,7 +146,7 @@ If you are not a German speaker and require some help using these files, please 
 
 ## Support
 
-ULB is offering support for LaTeX in general and TUDa-CI. Contact email address can be found at https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/texte_verarbeiten/latex/index.en.jsp. Additionally there is a TeXnical office hour. Questions can also be answered in English. The dates can be found at  https://www.ulb.tu-darmstadt.de/lernen_arbeiten/lehr_und_lernformate/textverarbeitung/textverarbeitung.en.jsp searching for “TeXnische Sprechstunde”.
+ULB is offering support for LaTeX in general and TUDa-CI. Contact email address can be found at https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.en.jsp. Additionally there is a TeXnical office hour. Questions can also be answered in English. The dates can be found at  https://www.ulb.tu-darmstadt.de/lernen_arbeiten/lehr_und_lernformate/textverarbeitung/textverarbeitung.en.jsp searching for “TeXnische Sprechstunde”.
 
 ## Installation
 TUDa-CI is part of the popular TeX distributions ([MikTeX](https://miktex.org/download) & [TeX Live](https://tug.org/texlive/), which is included by [MacTeX](https://www.tug.org/mactex/)).
