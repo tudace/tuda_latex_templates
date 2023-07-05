@@ -42,14 +42,21 @@
 	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
-	color .code:n =
-	 \tl_if_in:nnTF {#1} {=} {
+	color .code:n = {
+		\tl_if_in:nnTF {#1} {=} {
+			\msg_new:nnn {tudabeamer} {color-option-warning} {
+				The~color~option~should~no~longer~be~used~to~pass~options~to~the~tudacolors~package.\\
+				Please~use~tudacolors={#1}~instead~of~color={#1}.\\
+				See~the~tudabeamer~documentation~for~more~information.
+			}
+			\msg_error:nnn {tudabeamer} {color-option-warning} {#1}
 			\PassOptionsToPackage{#1}{tudacolors}
 		} {
 			\PassOptionsToPackage{color=#1}{tudacolors}
 		}
+	},
+		tudacolors .code:n = \tl_show:n {#1}\PassOptionsToPackage{#1}{tudacolors},
 }
-
 
 \clist_map_inline:nn {colortitle, colorbacktitle, colorback} {
 	\Module@DeclarePassOption[ptxcd/beamer]{#1}{beamercolorthemeTUDa}
