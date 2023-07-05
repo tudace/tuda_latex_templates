@@ -46,10 +46,10 @@
 		\tl_if_in:nnTF {#1} {=} {
 			\msg_new:nnn {tudabeamer} {color-option-warning} {
 				The~color~option~should~no~longer~be~used~to~pass~options~to~the~tudacolors~package.\\
-				Please~use~tudacolors={#1}~instead~of~color={#1}.\\
+				Please~use~tudacolors={##1}~instead~of~color={##1}.\\
 				See~the~tudabeamer~documentation~for~more~information.
 			}
-			\msg_error:nnn {tudabeamer} {color-option-warning} {#1}
+			\msg_warning:nnn {tudabeamer} {color-option-warning} {#1}
 			\PassOptionsToPackage{#1}{tudacolors}
 		} {
 			\PassOptionsToPackage{color=#1}{tudacolors}
