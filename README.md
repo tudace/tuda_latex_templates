@@ -67,7 +67,7 @@ Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitg
 https://download.hrz.tu-darmstadt.de/protected/ULB/tuda_logo.pdf
 
 Für die permanente Installation der Logodateien findet sich unter
-https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/texte_verarbeiten/latex/index.de.jsp
+https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp
 ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
