@@ -190,5 +190,14 @@ Ein Beispiel.
 	Damit wird auch die Textfarbe entsprechend der Vorgaben gewählt. Bei Auswahl einer abweichenden Farbe bleibt die Textfarbe unverändert und muss ggf. manuell angepasst werden.
 \end{frame}
 
+\begin{frame}[fragile]{Änderung an der Option color in Version 3.33.}
+Bis version 3.33 konnte tudabeamer mit der Option \verb+color={Optionen}+ Optionen an das Paket tudacolors übergeben.
+
+Aufgrund eines Konflikts mit dem siunitx Paketes, welches jedoch weiter verbreitet ist als TUDa-CI wurde für Version 3.33 die Option so umbenannt, dass nun der Optionsschlüssel \verb+tudacolors={Optionen}+ notwendig ist.
+Siehe auch \url{https://github.com/tudace/tuda_latex_templates/issues/435}
+
+Die Funktion funktioniert weiterhin wie gewohnt, allerdings wird eine Warnung erzeugt. Falls siunitx geladen und das Problem tatsächlich auftritt, wird diese Warnung vor der erzeugten Fehlermeldung ausgegeben.
+\end{frame}
+
 \end{document}
 
