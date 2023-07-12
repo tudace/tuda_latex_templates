@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
 
- tuda-ci 2023/07/05 v3.33
+ tuda-ci 2023/07/12 v3.34
 
 ***************************************************************************
 
@@ -347,3 +347,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    * 3.33 (2023-07-05)
     - disable affidavit by default, see https://github.com/tudace/tuda_latex_templates/issues/432 for more information
     - rename color={} option of tudabeamer to tudacolors={} to avoid conflicts with siunitx
+    * 3.34 (2023-07-12)
+     - fix typo in affidavit
