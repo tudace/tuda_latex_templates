@@ -1,0 +1,52 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemeTUDa2023}
+ [\filedate\space\fileversion]
+
+\RequirePackage{l3keys2e}
+
+\ExplSyntaxOn
+\keys_define:nn {ptxcd/beamer/fonts} {
+	serif .bool_gset:N = \g_ptxcd_serif_bool,
+	serif .default:n = true,
+	serif .initial:n = false,
+	sans-serif .bool_gset_inverse:N = \g_ptxcd_serif_bool,
+	sans-serif .default:n = true,
+}
+
+\ProcessKeysOptions{ptxcd/beamer/fonts}
+
+\ExplSyntaxOff
+
+\mode<presentation>
+
+\RequirePackage{tudafonts}
+
+\ExplSyntaxOn
+\bool_if:NTF \g_ptxcd_serif_bool
+	{\usefonttheme{serif}}
+	{\renewcommand*{\familydefault}{\sfdefault}}
+\ExplSyntaxOff
+
+\setbeamerfont{title}{size=\large,series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize,series=\bfseries}
+\setbeamerfont{author}{size=\footnotesize, series=\bfseries}
+\setbeamerfont{institute}{size=\footnotesize, series=\mdseries}
+
+\setbeamerfont{frametitle}{series=\bfseries,size*={20}{20},family=\robotoblack}
+
+\setbeamerfont{footline}{size*={3.8}{5}}
+\setbeamerfont{author in head/foot}{parent=footline}
+\setbeamerfont{title~in~head/foot}{family=\robotoblackspaced}
+
+\setbeamerfont*{section title}{size=\huge,family=\robotoblack}
+\setbeamerfont*{section name}{size=\small}
+\setbeamerfont{section~entry}{size=\footnotesize}
+\setbeamerfont{toc~section~number}{family=\robotoblack,size=\huge}
+
+\setbeamerfont{title}{family=\robotoblack,size=\huge}
+\setbeamerfont*{subtitle}{family=\normalfont,size=\small}
+
+
+\mode<all>
+
+\endinput
