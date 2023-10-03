@@ -1,0 +1,146 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesExplPackage{beamerouterthemeTUDa2023}{\filedate}{\fileversion}{Outer~beamer~theme~of~tuda-ci~design~of~2023}
+
+\RequirePackage{l3keys2e}
+
+\RequirePackage[paper=slide]{tudarules}
+
+\dim_new:N \l__ptxcd_beamer_extraindent_dim
+\dim_new:N {\g__ptxcd_beamer_sep_dim}
+\dim_gset:Nn \g__ptxcd_beamer_sep_dim {.3\c_ptxcd_logoheight_dim}
+\dim_new:N \g__ptxcd_beamer_logosep_dim
+\dim_gset:Nn \g__ptxcd_beamer_logosep_dim{2mm}
+
+
+\cs_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
+
+\keys_define:nn {ptxcd/beamer/outer} {
+	logo .bool_gset:N = \g_ptxcd_headlinelogo_bool,
+	logo .default:n =true,
+	logo .initial:n =true,
+	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
+	logofile .initial:n = tuda_logo,
+	colorframetitle .code:n =  \msg_warning:nn {tudabeamer} {colorframetitle},
+	centerframetitle .code:n = \msg_warning:nn {tudabeamer} {centerframetitle},
+	framebgcolor .code:n = \msg_warning:nn {tudabeamer} {framebgcolor},
+	singleframebgcolor .code:n = \msg_warning:nn {tudabeamer} {singleframebgcolor},
+	headsepline .code:n = \msg_warning:nn {tudabeamer} {headsepline},
+}
+
+\define@key{beamerframe}{bgcolor}{
+	\keys_set:nn {ptxcd/beamer/outer} {
+		singleframebgcolor=#1
+	}
+}
+
+\ProcessKeysOptions{ptxcd/beamer/outer}
+
+
+\mode<presentation>
+
+\RequirePackage{graphicx}
+
+\bool_if:NT \g__ptxcd_colorframetitle_bool
+	{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
+
+\setbeamersize{
+	text~margin~left=\dimexpr\paperwidth/34,
+	text~margin~right=\dimexpr\paperwidth/38
+}
+
+\cs_new:Nn \__ptxcd_beamer_linewidth: {\dim_eval:n {\paperwidth-\beamer@leftmargin-\beamer@rightmargin}}
+
+%Logo
+
+\box_new:N \g__ptxcd_logo_box
+\hbox_gset:Nn \g__ptxcd_logo_box {%
+	\raisebox{\dimexpr-\height+.33\c_ptxcd_logoheight_dim}{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
+}
+
+\bool_if_exist:NF \l_ptxcd_tmpa_bool {\bool_new:N \l_ptxcd_tmpa_bool}
+
+\defbeamertemplate*{footline}{TUDa2023}{
+	\begin{beamercolorbox}[leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin]{footline}
+	\usebeamerfont{footline}
+	\rlap{\insertshortdate}
+	\hfill
+	\makebox[0pt][c]{
+		\bool_set_false:N \l_ptxcd_separate_bool
+		\tl_if_empty:NF \beamer@shortinstitute {
+			\bool_set_true:N \l_ptxcd_separate_bool
+			\insertshortinstitute\strut
+		}
+		\tl_if_empty:NF \beamer@shortauthor {
+			\bool_if:NT \l_ptxcd_separate_bool {\usebeamertemplate{footline~sep}}
+			\insertshortauthor\strut
+		}
+	}
+	\hfill
+	\llap{\insertframenumber}
+	\par\vspace{-\dp\strutbox}
+	\end{beamercolorbox}
+	\skip_vertical:n {\dimexpr\paperheight/32-\dp\strutbox}
+}
+
+\setbeamertemplate{footline~sep}{\space\smash{\rule[-.5\dp\strutbox]{.25pt}{\ht\strutbox}}\space}
+
+\RenewDocumentCommand{\logo}{sm}{
+	\IfBooleanTF{#1}{
+	\setbeamertemplate{logo}{\resizebox{!}{.06\beamer@paperheight}{\mbox{#2}}}
+	}{
+	\setbeamertemplate{logo}{#2}
+	}
+}
+
+\defbeamertemplate*{headline}{TUDa2023}{
+	\skip_vertical:n {\dimexpr\paperheight/38}
+	\hspace*{\beamer@leftmargin}\usebeamertemplate***{title~in~head/foot}\hspace*{\fill}
+	
+	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
+	%partnerlogo
+	\raisebox{\dimexpr-\height+\ht\strutbox}{
+		\box_use:N \g__ptxcd_partnerlogo_box
+	}
+	
+	\skip_horizontal:n {\dimexpr\paperheight/38}
+	%logo
+	\box_use:N \g__ptxcd_logo_box
+	\hspace*{.7pt}
+	}
+	\par
+}
+
+\defbeamertemplate*{sidebar~right}{TUDa2023}{
+	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
+		\vspace{\c_ptxcd_logoheight_dim}
+		\llap{\box_use:N \g__ptxcd_sublogo_box}
+	}
+}
+
+\defbeamertemplate*{frametitle}{TUDa2023}[1][left]{%
+	\nointerlineskip%
+	\vskip.55ex
+	\begin{beamercolorbox}[
+	wd=\textwidth,
+		]{frametitle}
+	    \usebeamerfont{frametitle}%
+	    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+	    \strut\text_uppercase:n {\insertframetitle}\strut\par%
+	    {%
+	      \ifx\insertframesubtitle\@empty%
+	      \else%
+	      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\strut\text_uppercase:n {\insertframesubtitle}\strut\par}%
+	      \fi
+	    }%
+	    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+	\end{beamercolorbox}
+	\vskip.5ex
+}
+\newcommand*{\setupTUDaFrame}[1]{
+	\keys_set:nn {ptxcd/beamer/outer} {#1}
+}
+
+\mode
+<all>
+
+\endinput

@@ -4,16 +4,17 @@
 
 \RequirePackage{l3keys2e}
 \ExplSyntaxOn
-\bool_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
+
+\clist_map_inline:nn {colortitle,
+	colorbacktitle,
+	colorframetitle,
+	colorback
+} {
+	\keys_define:nn {ptxcd/beamer/color} {#1 .code:n = \msg_warning:nn {tudabeamer} {option-removed} {#1}}
+}
 
 \keys_define:nn {ptxcd/beamer/color} {
-	colortitle .bool_gset:N = \g_ptxcd_beamer_colortitle_bool,
-	colortitle .default:n = true,
-	colortitle .initial:n = true,
-	colorbacktitle .meta:n = {colortitle=#1},
-	colorframetitle .code:n = \use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:,
-	colorframetitle .default:n = true,
-	colorback .meta:n = {colorframetitle=#1}
+
 }
 
 \ProcessKeysOptions{ptxcd/beamer/color}
@@ -28,6 +29,7 @@
 \setbeamercolor{author}{parent=title}
 \setbeamercolor{institute}{parent=title}
 \setbeamercolor{date}{parent=title}
+\setbeamercolor{titlelike}{parent=title}
 
 \setbeamercolor*{author}{parent=title}
 \setbeamercolor*{institute}{parent=title}
@@ -46,7 +48,7 @@
 \setbeamercolor{bibliography entry location}{use=structure,fg=structure.fg}
 \setbeamercolor{bibliography entry note}{use=structure,fg=normal text.fg}
 
-\setbeamercolor{titlelike}{fg=textaccentcolor,bg=white}
+
 
 \setbeamercolor*{block title}{fg=textonaccentcolor,bg=accentcolor}
 \setbeamercolor*{block body}{fg=black,bg=black!15}

@@ -1,0 +1,38 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeTUDa2023}
+ [\filedate\space\fileversion\space beamer theme using the Corporate Design of TU Darmstadt Design of 2023]
+
+\RequirePackage{expl3}
+\RequirePackage{l3keys2e}
+
+\mode<presentation>
+
+\ExplSyntaxOn
+
+\msg_new:nnn {tudabeamer} {option-removed} {
+	The~design~you~selected~doesn't~support~the~option~`#1`.\\
+	It~will~be~ignored.
+}
+
+\keys_define:nn {ptxcd/beamer} {
+	colortitle .code:n = \msg_warning:nn {tudabeamer} {option-removed} {colortitle},
+	colorbacktitle .code:n = \msg_warning:nn {tudabeamer} {option-removed} {colorbacktitle},
+	colorframetitle .code:n = \msg_warning:nn {tudabeamer} {option-removed} {colorframetitle},
+	colorback .code:n = \msg_warning:nn {tudabeamer} {option-removed} {colorback},
+	logo .code:n = \PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa2023}
+}
+
+\ProcessKeysOptions{ptxcd/beamer}
+
+\ExplSyntaxOff
+
+\usefonttheme{TUDa2023}
+\usecolortheme{TUDa2023}
+\useoutertheme{TUDa2023}
+\useinnertheme{TUDa2023}
+
+\setbeamertemplate{navigation symbols}{}
+
+\mode<all>
+
+\endinput
