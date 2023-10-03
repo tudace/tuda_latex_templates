@@ -42,6 +42,15 @@
 \fi
 
 \RequirePackage{roboto}
+\newfontfamily\robotoblackspaced
+   [ Numbers = {\roboto@figurealign,\roboto@figurestyle},
+     UprightFont    = *-Black ,
+     ItalicFont     = *-BlackItalic,
+     LetterSpace=26,
+     WordSpace=2.2
+   ]
+   {Roboto}
+
 \IfFileExists{roboto-mono.sty}{
 	\RequirePackage{roboto-mono}
 }{
