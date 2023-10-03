@@ -10,6 +10,7 @@
 
 \ExplSyntaxOn
 \str_new:N \g_ptxcd_department_str
+\tl_new:N \g__ptxcd_design_tl
 \keys_define:nn {ptxcd/beamer} {
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
 	colorframetitle .code:n = \exp_args:Nx \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
@@ -55,7 +56,13 @@
 			\PassOptionsToPackage{color=#1}{tudacolors}
 		}
 	},
-		tudacolors .code:n = \tl_show:n {#1}\PassOptionsToPackage{#1}{tudacolors},
+	tudacolors .code:n = \PassOptionsToPackage{#1}{tudacolors},
+	design .choices:nn = {2023, 2008} {
+		\tl_gset_eq:NN \g__ptxcd_design_tl \l_keys_choice_tl
+	},
+	design .initial:n = 2008,
+	design2023 .meta:n = {design=2023},
+	design2008 .meta:n = {design=2008},
 }
 
 \clist_map_inline:nn {colortitle, colorbacktitle, colorback} {
@@ -199,7 +206,7 @@
 \str_if_empty:NF \g_ptxcd_department_str {}
 
 % Load the TUDa theme
-\usetheme{TUDa}%
+\usetheme{TUDa\g__ptxcd_design_tl}%
 \@input{\jobname.len}%
 \@starttoc{len}%
 \let\accentfont\normalfont%
