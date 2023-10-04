@@ -110,6 +110,21 @@
 	\par
 }
 
+\setbeamertemplate{title~in~head/foot}{
+	\bool_set_false:N \l_ptxcd_separate_bool
+	\tl_if_empty:NF {\beamer@shorttitle} {
+		\bool_set_true:N \l_ptxcd_separate_bool
+		\text_uppercase:n {\beamer@shorttitle}
+	}
+	\tl_if_empty:NF {\beamer@shortauthor} {
+		\bool_if:NT \l_ptxcd_separate_bool {
+			\space/\space
+		}
+		\text_uppercase:n {\beamer@shortauthor}
+	}
+}
+
+
 \defbeamertemplate*{sidebar~right}{TUDa2023}{
 	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
 		\vspace{\c_ptxcd_logoheight_dim}
