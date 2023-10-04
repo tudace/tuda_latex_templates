@@ -70,7 +70,7 @@
 			\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
 				\bool_if:NTF \l_ptxcd_separate_bool
 					 {\usebeamertemplate{footline~sep}}
-					{\bool_set_true:N \l_ptxcd_tmpa_bool}
+					{\bool_set_true:N  \l_ptxcd_separate_bool}
 				\use:c {insertshort\l_tmpa_tl}
 			}
 		}
