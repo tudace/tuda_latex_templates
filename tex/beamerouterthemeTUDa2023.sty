@@ -66,13 +66,13 @@
 	\hfill
 	\makebox[0pt][c]{
 		\bool_set_false:N \l_ptxcd_separate_bool
-		\tl_if_empty:NF \beamer@shortinstitute {
-			\bool_set_true:N \l_ptxcd_separate_bool
-			\insertshortinstitute\strut
-		}
-		\tl_if_empty:NF \beamer@shortauthor {
-			\bool_if:NT \l_ptxcd_separate_bool {\usebeamertemplate{footline~sep}}
-			\insertshortauthor\strut
+		\clist_map_variable:nNn {department, institute, author} \l_tmpa_tl {
+			\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
+				\bool_if:NTF \l_ptxcd_separate_bool
+					 {\usebeamertemplate{footline~sep}}
+					{\bool_set_true:N \l_ptxcd_tmpa_bool}
+				\use:c {insertshort\l_tmpa_tl}
+			}
 		}
 	}
 	\hfill
