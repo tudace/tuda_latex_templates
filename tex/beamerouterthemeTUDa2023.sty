@@ -25,6 +25,7 @@
 	framebgcolor .code:n = \msg_warning:nn {tudabeamer} {framebgcolor},
 	singleframebgcolor .code:n = \msg_warning:nn {tudabeamer} {singleframebgcolor},
 	headsepline .code:n = \msg_warning:nn {tudabeamer} {headsepline},
+	extendedspace .bool_gset:N = \g__ptxcd_extended_space_bool,
 }
 
 \define@key{beamerframe}{bgcolor}{
@@ -93,18 +94,25 @@
 }
 
 \defbeamertemplate*{headline}{TUDa2023}{
-	\skip_vertical:n {\dimexpr\paperheight/38}
-	\hspace*{\beamer@leftmargin}\usebeamertemplate***{title~in~head/foot}\hspace*{\fill}
+	\bool_if:NTF \g__ptxcd_extended_space_bool {
+		\skip_vertical:n {\dimexpr\paperheight/16}
+	}{
+		\skip_vertical:n {\dimexpr\paperheight/38}
+		\hspace*{\beamer@leftmargin}\usebeamertemplate***{title~in~head/foot}
+	}
+	\hspace*{\fill}
 	
 	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
 	%partnerlogo
-	\raisebox{\dimexpr-\height+\ht\strutbox}{
-		\box_use:N \g__ptxcd_partnerlogo_box
+	\bool_if:NT \g__ptxcd_extended_space_bool \smash {
+		\raisebox{\dimexpr-\height+\ht\strutbox}{
+			\box_use:N \g__ptxcd_partnerlogo_box
+		}
 	}
 	
 	\skip_horizontal:n {\dimexpr\paperheight/38}
 	%logo
-	\box_use:N \g__ptxcd_logo_box
+	\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
 	\hspace*{.7pt}
 	}
 	\par
@@ -134,13 +142,16 @@
 
 \defbeamertemplate*{frametitle}{TUDa2023}[1][left]{%
 	\nointerlineskip%
-	\vskip.55ex
+	\bool_if:NF \g__ptxcd_extended_space_bool
+		{\vskip.55ex}
 	\begin{beamercolorbox}[
-	wd=\textwidth,
+		wd=\dim_eval:n {\bool_if:NT \g__ptxcd_extended_space_bool {-\box_wd:N \g__ptxcd_logo_box }+ \textwidth},
 		]{frametitle}
 	    \usebeamerfont{frametitle}%
 	    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
-	    \strut\text_uppercase:n {\insertframetitle}\strut\par%
+	    \vphantom{Ü}
+	    \text_uppercase:n {\insertframetitle}\strut
+	    \par%
 	    {%
 	      \ifx\insertframesubtitle\@empty%
 	      \else%
