@@ -327,6 +327,81 @@
 }
 
 
+% Blocks
+
+
+\defbeamertemplate*{block~begin}{TUDa}
+{
+	\par\vskip\medskipamount%
+	\begin{beamercolorbox}[wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,sep=.5pt,
+		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
+	]{block~title}
+	\ifx\insertblocktitle\@empty
+	\else
+	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,
+		 wd=\dimexpr\linewidth-1pt-1.5ex\relax]{block~title}
+		\usebeamerfont*{block title}\insertblocktitle%
+	\end{beamercolorbox}%
+	\ifbeamercolorempty[bg]{block~title}
+	{}
+	{\ifbeamercolorempty[bg]{block~body}{}{\par\nointerlineskip\vskip-0.5pt}}%
+	\leavevmode
+	\fi
+	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,vmode, wd=\dimexpr\linewidth-1.5ex-1pt\relax]{block~body}%
+		\usebeamerfont{block~body}%
+		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-\__ptxcd_block_colorsep:}\vbox{}%
+	}
+
+\defbeamertemplate*{block~end}{TUDa}
+	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
+
+\defbeamertemplate*{block~alerted~begin}{TUDa}
+{
+	\par\vskip\medskipamount%
+	\begin{beamercolorbox}[
+		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
+		sep=1.5pt,
+		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
+	]{block~frame~alerted}
+	\ifx\insertblocktitle\@empty
+	\else
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~alerted}
+		\usebeamerfont*{block~title~alerted}\insertblocktitle%
+	\end{beamercolorbox}%
+	\vskip1.5pt\par\nointerlineskip
+	\fi
+	\leavevmode
+	\usebeamerfont{block~body~alerted}%
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~alerted}%
+	}
+
+\defbeamertemplate*{block~alerted~end}{TUDa}
+	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
+
+
+\defbeamertemplate*{block~example~begin}{TUDa}
+{
+	\par\vskip\medskipamount%
+	\begin{beamercolorbox}[
+		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
+		sep=1.5pt,
+		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
+		]{block~frame~example}
+	\ifx\insertblocktitle\@empty
+	\else
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~example}
+		\usebeamerfont*{block~title~example}\insertblocktitle%
+	\end{beamercolorbox}%
+\vskip1.5pt\par\nointerlineskip
+	\fi
+	\leavevmode
+	\usebeamerfont{block~body~example}%
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~example}%
+	}
+\defbeamertemplate*{block~example~end}{TUDa}
+	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
+
+
 %Itemize Items
 \defbeamertemplate*{itemize item}{TUDa}{\raise.2\baselineskip\hbox{\vrule width .5ex height .5ex}}
 \defbeamertemplate*{itemize subitem}{TUDa}{\small\hbox{\vrule width .5ex height .5ex}}
