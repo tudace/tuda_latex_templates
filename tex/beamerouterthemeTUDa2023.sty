@@ -1,8 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesExplPackage{beamerouterthemeTUDa2023}{\filedate}{\fileversion}{Outer~beamer~theme~of~tuda-ci~design~of~2023}
 
-\RequirePackage{l3keys2e}
-
 \RequirePackage[paper=slide]{tudarules}
 
 \dim_new:N \l__ptxcd_beamer_extraindent_dim
@@ -35,7 +33,7 @@
 	}
 }
 
-\ProcessKeysOptions{ptxcd/beamer/outer}
+\ProcessKeyOptions[ptxcd/beamer/outer]
 
 \bool_if:NT \g__ptxcd_headrule_bool {\bool_gset_true:N \g__ptxcd_extended_space_bool}
 
