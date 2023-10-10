@@ -134,7 +134,7 @@
 		\def\width{\use:c {l__ptxcd_#2_wd_dim}}
 		\def\height{\use:c {l__ptxcd_#2_ht_dim}}
 		\IfBooleanTF{#1}{
-				\hbox_gset:cn {g__ptxcd_#2_box} {\includegraphics{#3}}
+				\hbox_gset:cn {g__ptxcd_#2_box} {#3}
 				\box_gautosize_to_wd_and_ht_plus_dp:cnn  {g__ptxcd_#2_box} {\width} {\height}
 		} {
 				\hbox_gset:cn {g__ptxcd_#2_box} {
