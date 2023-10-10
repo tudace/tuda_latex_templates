@@ -1,0 +1,95 @@
+\documentclass[
+	english, % main language as globale option
+%	logofile=example-image, % in case you are missing the logo files
+	design=2023, % new slide design - will be default after official release
+	authorontitle=true,
+	]{tudabeamer}
+	
+\usepackage[main=english]{babel}
+
+% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
+\fi
+
+
+% document specific setup, you will not need that one in your files!
+\newcommand*{\code}[1]{\texttt{#1}}
+
+\title[TUDaBeamer2023]{\LaTeX~beamer using TU Darmstadts Corporate Design}
+\subtitle{Design2023-beta}
+\author[M. Peischl]{Marei Peischl}
+\department{\TeX/\LaTeX}
+\institute{pei\TeX}
+
+% Scaling for additional logos and titlegraphic is described on slide “Scaling logos/titlegraphic”
+
+% sublogo/partnerlogo will be placed in the headline/sidebar
+
+\sublogo{\color{blue!50}\rule{\width}{\height}}
+\partnerlogo*{\includegraphics{example-image}}
+
+%  titlegraphic will be placed behind the title
+%\titlegraphic*{\includegraphics{example-image}}
+\date{2023-10-02}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Documencation}
+\sectionpage
+
+\begin{frame}{The tudabeamer class}
+\begin{itemize}
+	\item Basic usage identical to beamer
+	\item No special syntax required
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Additional Features for titlegraphic/logos}
+\begin{itemize}
+	\item \code{\textbackslash{}partnerlogo} additional logo next to TUDa logo
+	\item \code{\textbackslash{}sublogo} additional logo below TUDa logo
+	\item \code{\textbackslash{}titlegraphic} place image as a background for title slide
+\end{itemize}
+	The additional option \code{authorontitle=true/false} allows to place author/institue below the title.
+\end{frame}
+
+\begin{frame}{Scaling logos/titlegraphic}
+\begin{itemize}
+\item The commands shown on previous slide support \code{\textbackslash{}height}/\code{\textbackslash{}width} to adjust the size to be used for graphic scaling.
+\item All have a starred variant (e.\,g. \code{\textbackslash{}sublogo*\{\textbackslash{}includegraphics\{example-image\}\}}). This will automaticcaly scale/clip the logo/image to desired size.
+\end{itemize}
+\end{frame}
+
+\section{Slide examples}
+
+\begin{frame}{Frame with a subtitle}
+\framesubtitle{Subtitle}
+An example.
+\end{frame}
+
+\begin{frame}{Remark on vertical alignment (especially columns)}
+	The default alignment has been changed from \code{c} to \code{t} in contrast to beamers default setting.
+	This means frame content will be aligned top inside the frame. 
+	This is required by the design but might have side effects with the columns environment:
+	
+	To resolve this one can either globally add the \code{c} option or pass the option to the columns environment, e.\,g.:
+
+\begin{columns}[onlytextwidth,c]
+	\column{.8\linewidth}
+	\begin{itemize}
+		\item one
+		\item two
+	\end{itemize}
+	\column{.2\linewidth}
+	\includegraphics[width=\linewidth]{example-image}
+\end{columns}
+\end{frame}
+
+\end{document}
+
