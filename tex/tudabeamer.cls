@@ -57,8 +57,13 @@
 		}
 	},
 	tudacolors .code:n = \PassOptionsToPackage{#1}{tudacolors},
-	design .choices:nn = {2023, 2008} {
-		\tl_gset_eq:NN \g__ptxcd_design_tl \l_keys_choice_tl
+	design .choice:,
+	design / 2023 .code:n = {
+		\tl_gset:Nn  \g__ptxcd_design_tl {2023}
+		\PassOptionsToClass{aspectratio=169}{beamer}
+	},
+	design / 2008 .code:n = {
+		\tl_gset:Nn  \g__ptxcd_design_tl {2008}
 	},
 	design .initial:n = 2008,
 	design2023 .meta:n = {design=2023},
