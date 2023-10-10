@@ -26,6 +26,7 @@
 	singleframebgcolor .code:n = \msg_warning:nn {tudabeamer} {singleframebgcolor},
 	headsepline .code:n = \msg_warning:nn {tudabeamer} {headsepline},
 	extendedspace .bool_gset:N = \g__ptxcd_extended_space_bool,
+	headrule .bool_gset:N = \g__ptxcd_headrule_bool,
 }
 
 \define@key{beamerframe}{bgcolor}{
@@ -35,6 +36,8 @@
 }
 
 \ProcessKeysOptions{ptxcd/beamer/outer}
+
+\bool_if:NT \g__ptxcd_headrule_bool {\bool_gset_true:N \g__ptxcd_extended_space_bool}
 
 
 \mode<presentation>
@@ -93,7 +96,12 @@
 	}
 }
 
+\bool_if:NT \g__ptxcd_headrule_bool {
+	\ptxcd_makeheadrule[color=identbarcolor,width=\paperwidth]{ptxcd_beamer_headrule}
+}
+
 \defbeamertemplate*{headline}{TUDa2023}{
+	\bool_if:NT \g__ptxcd_headrule_bool {\smash{\ptxcd_beamer_headrule}}
 	\bool_if:NTF \g__ptxcd_extended_space_bool {
 		\skip_vertical:n {\dimexpr\paperheight/16}
 	}{
@@ -112,8 +120,13 @@
 	
 	\skip_horizontal:n {\dimexpr\paperheight/38}
 	%logo
-	\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
-	\hspace*{.7pt}
+	\bool_if:NTF \g__ptxcd_headrule_bool {
+		\raisebox{2mm}[0pt][0pt]{\box_use:N \g__ptxcd_logo_box}
+		\hspace*{10pt}
+	} {
+		\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
+		\hspace*{.7pt}
+	}
 	}
 	\par
 }
