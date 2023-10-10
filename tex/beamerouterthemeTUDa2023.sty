@@ -1,4 +1,4 @@
-\NeedsTeXFormat{LaTeX2e}
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesExplPackage{beamerouterthemeTUDa2023}{\filedate}{\fileversion}{Outer~beamer~theme~of~tuda-ci~design~of~2023}
 
 \RequirePackage[paper=slide]{tudarules}
@@ -34,8 +34,6 @@
 }
 
 \ProcessKeyOptions[ptxcd/beamer/outer]
-
-\bool_if:NT \g__ptxcd_headrule_bool {\bool_gset_true:N \g__ptxcd_extended_space_bool}
 
 
 \mode<presentation>
@@ -99,7 +97,7 @@
 }
 
 \defbeamertemplate*{headline}{TUDa2023}{
-	\bool_if:NT \g__ptxcd_headrule_bool {\smash{\ptxcd_beamer_headrule}}
+	\bool_if:NT \g__ptxcd_headrule_bool {\ptxcd_beamer_headrule\par\nointerlineskip}
 	\bool_if:NTF \g__ptxcd_extended_space_bool {
 		\skip_vertical:n {\dimexpr\paperheight/16}
 	}{
@@ -119,8 +117,12 @@
 	\skip_horizontal:n {\dimexpr\paperheight/38}
 	%logo
 	\bool_if:NTF \g__ptxcd_headrule_bool {
-		\raisebox{2mm}[0pt][0pt]{\box_use:N \g__ptxcd_logo_box}
-		\hspace*{10pt}
+		\bool_if:NTF  \g__ptxcd_extended_space_bool {
+			\raisebox{2mm}[0pt][0pt]{\box_use:N \g__ptxcd_logo_box}
+		} {
+			\raisebox{2mm}[0pt][0pt]{\setlength{\fboxsep}{\z@}\colorbox{white}{\rule{\z@}{\dim_eval:n {\box_ht:N \g__ptxcd_logo_box+\box_ht:N \ptxcd_beamer_headrule_box + \box_dp:N \ptxcd_beamer_headrule_box+1pt}}\box_use:N \g__ptxcd_logo_box}}
+		}
+			\hspace*{10pt}
 	} {
 		\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
 		\hspace*{.7pt}
