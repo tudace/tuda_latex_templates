@@ -98,7 +98,7 @@
 		\skip_vertical:n {\dimexpr\paperheight/16}
 	}{
 		\skip_vertical:n {\dimexpr\paperheight/38}
-		\hspace*{\beamer@leftmargin}\usebeamertemplate***{title~in~head/foot}
+		\hspace*{\beamer@leftmargin}\rlap{\usebeamertemplate***{title~in~head/foot}}
 	}
 	\hspace*{\fill}
 	
@@ -145,7 +145,7 @@
 	\bool_if:NF \g__ptxcd_extended_space_bool
 		{\vskip.55ex}
 	\begin{beamercolorbox}[
-		wd=\dim_eval:n {\bool_if:NT \g__ptxcd_extended_space_bool {-\box_wd:N \g__ptxcd_logo_box }+ \textwidth},
+		wd=\dim_eval:n {\bool_if:NT \g__ptxcd_extended_space_bool {-\box_wd:N \g__ptxcd_logo_box } \box_if_empty:NF \g__ptxcd_sublogo_box {-\box_wd:N \g__ptxcd_sublogo_box - 1em}+ \textwidth},
 		]{frametitle}
 	    \usebeamerfont{frametitle}%
 	    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
