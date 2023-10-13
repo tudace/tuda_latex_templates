@@ -333,6 +333,11 @@
 %Has to be loaded here due to headwidth options
 \usepackage[draft=false]{scrlayer-scrpage}
 
+\AddToHook{begindocument}[tudapub:BCOR-titlepage]{
+	\bool_if:NT  \g_ptxcd_BCOR_titlepage_bool
+		{\xdef\coverpageleftmargin{\the\dimexpr\coverpageleftmargin+\the\ta@bcor}}
+}
+
 \bool_if:NTF  \g_ptxcd_geometry_bool {
 	\RequirePackage{geometry}
 	\geometry{
@@ -353,7 +358,7 @@
 	\savegeometry{TUDa-marginpar}
 
 	\bool_if:NTF \g_ptxcd_custommargins_bool {
-		\AtBeginDocument{
+		\AddToHook{begindocument}[tudapub:custommargins]{
 			\savegeometry{TUDa-default}
 			\bool_if:NTF  \g_ptxcd_marginpar_bool {
 				\dim_gset:Nn \g_ptxcd_headwidth_dim {\textwidth+\marginparwidth+\marginparsep}
@@ -368,13 +373,12 @@
 		}  {
 			\tl_const:Nn \c_ptxcd_default_geometry_tl {TUDa-nomarginpar}
 		}
-		\AtBeginDocument{
+		\AddToHook{begindocument}[tudapub:custommargins-geometry]{
 			\loadgeometry{\c_ptxcd_default_geometry_tl}
-			\bool_if:NT \g_ptxcd_BCOR_titlepage_bool {\xdef\coverpageleftmargin{\the\dimexpr\coverpageleftmargin+\the\ta@bcor}}
 		}
 	}
 
-	\dim_gset:Nn \g_ptxcd_headwidth_dim 			  {\paperwidth-\g_ptxcd_innerMargin_dim-\g_ptxcd_outerMargin_dim-\Gm@bindingoffset}
+	\dim_gset:Nn \g_ptxcd_headwidth_dim {\paperwidth-\g_ptxcd_innerMargin_dim-\g_ptxcd_outerMargin_dim-\Gm@bindingoffset}
 
 	\cs_set:Nn \ptxcd_disable_marginpar: {\loadgeometry{TUDa-nomarginpar}}
 	\cs_set:Nn \ptxcd_restore_typearea: {\loadgeometry{\c_ptxcd_default_geometry_tl}}
@@ -420,7 +424,7 @@
 \bool_if:NT \g_ptxcd_headline_bool {\KOMAoptions{headsepline=.5\c_ptxcd_smallrule_dim}}
 
 %Adjust headheight
-\AtBeginDocument{
+\AddToHook{begindocument}[tudapub:adjust-headheight]{
 \bool_if:NTF \g_ptxcd_marginpar_bool
 	{
 		\KOMAoptions {
