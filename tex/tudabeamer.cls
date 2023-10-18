@@ -56,7 +56,7 @@
 			\PassOptionsToPackage{color=#1}{tudacolors}
 		}
 	},
-	tudacolors .code:n = \PassOptionsToPackage{#1}{tudacolors},
+	tudacolors .code:n = \PassOptionsToPackage{color=#1}{tudacolors},
 	design .choice:,
 	design / 2023 .code:n = {
 		\tl_gset:Nn  \g__ptxcd_design_tl {2023}
