@@ -122,12 +122,13 @@
 	}
 }
 
-\bool_if:NT \g__ptxcd_headrule_bool {
-	\ptxcd_makeheadrule[color=identbarcolor,width=\paperwidth]{ptxcd_beamer_headrule}
-}
-
 \defbeamertemplate*{headline}{TUDa2023}{
-	\bool_if:NT \g__ptxcd_headrule_bool {\ptxcd_beamer_headrule\par\nointerlineskip}
+	\bool_if:NT \g__ptxcd_headrule_bool {
+		\cs_if_exist:NF \ptxcd_beamer_headrule {
+			\ptxcd_makeheadrule[color=identbarcolor,width=\paperwidth]{ptxcd_beamer_headrule}
+		}
+		\ptxcd_beamer_headrule\par\nointerlineskip
+	}
 	\bool_if:NTF \g__ptxcd_extended_space_bool {
 		\skip_vertical:n {\dimexpr\paperheight/16}
 	}{
