@@ -1,7 +1,5 @@
 #!/bin/bash
 
-./addlicense.sh
-
 rm -f tuda_templates.zip
 mkdir -p texmf
 rm -rf texmf/*
