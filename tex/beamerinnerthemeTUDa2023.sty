@@ -322,6 +322,7 @@
 	\@input{\jobname.toc}%
 	}%
 	\end{multicols}%
+	\vspace*{.68\baselineskip}
 	\end{beamercolorbox}%
 	\vspace*{-.5ex}
 }
@@ -337,6 +338,7 @@
 }
 
 \defbeamertemplate*{section~in~toc}{TUDa}{%
+\addvspace{.68\baselineskip}%}
   \leavevmode
   \ifnum\beamer@tempcount>\beamer@toclastsection
   \else
@@ -345,8 +347,27 @@
   \fi\fi%
   \usebeamertemplate***{section~entry}%
 \par
-  \vspace{.68\baselineskip}%
 }
+
+
+% (sub-)section in toc: default
+
+\defbeamertemplate*{subsection~in~toc}{TUDa}{\leavevmode
+	\leftskip=12.4mm
+	\ifx\inserttocsubsectionnumber\@empty
+	\else
+		\hphantom{0}\llap{\inserttocsubsectionnumber}\hspace{.5em}
+	\fi
+	\inserttocsubsection\par}
+
+\defbeamertemplate*{subsubsection~in~toc}{TUDa}{\leavevmode
+	\leftskip=\dimexpr12.4mm+.5em\relax
+	\ifx\inserttocsubsubsectionnumber\@empty
+	\else
+	\hphantom{00}\llap{\inserttocsubsubsectionnumber}\hspace{.5em}
+	\fi
+	\inserttocsubsubsection\par}
+
 
 \defbeamertemplate*{toc~section~number}{TUDa}{
 	    \hphantom{00}\llap{\inserttocsectionnumber}\hspace{.5em}
