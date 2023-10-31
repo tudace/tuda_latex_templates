@@ -107,7 +107,9 @@
 \clist_map_inline:nn {centerframetitle, logo, headsepline} {
 		\Module@DeclarePassOption[ptxcd/beamer]{#1}{beamerouterthemeTUDa}
 }
+\Module@DeclarePassOption[ptxcd/beamer]{auhor-on-title}{beamerinnerthemeTUDa}
 \Module@DeclarePassOption[ptxcd/beamer]{authorontitle}{beamerinnerthemeTUDa}
+\Module@DeclarePassOption[ptxcd/beamer]{toc-columns}{beamerinnerthemeTUDa2023}
 
 \ExplSyntaxOff
 
