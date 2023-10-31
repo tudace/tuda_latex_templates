@@ -35,16 +35,28 @@
 
 \mode<presentation>
 
-\RequirePackage{trimclip}
+
+
+\int_new:N \g__ptxcd_beamer_toc_col_int
 
 \keys_define:nn {ptxcd/beamer/inner} {
-	authorontitle .bool_gset:N = \g_ptxcd_authorontitle_bool,
-	authorontitle .initial:n = false,
-	authorontitle .default:n = true
+	author-on-title .bool_gset:N = \g_ptxcd_authorontitle_bool,
+	author-on-title .initial:n = false,
+	author-on-title .default:n = true,
+	authorontitle .meta:n = authorontitle,
+	toc-columns .choices:nn =  {one,two,auto} {
+		\int_gset_eq:NN \g__ptxcd_beamer_toc_col_int  \l_keys_choice_int
+	 },
+	 toc-columns / 1 .meta:n = {toc-columns=one},
+	 toc-columns / 2 .meta:n = {toc-columns=two},
+	 toc-columns .initial:n = auto,
 }
 \ProcessKeysOptions{ptxcd/beamer/inner}
 
+\ExplSyntaxOff
+\RequirePackage{trimclip}
 \RequirePackage{multicol}
+\ExplSyntaxOn
 
 \box_new:N \l__ptxcd_titlegraphic_box
 \box_new:N \l__ptxcd_titlehead_box
@@ -124,7 +136,7 @@
     \else%
       \vskip.45em%
       {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-    \fi%     
+    \fi%
   \end{beamercolorbox}%
 }
 
@@ -147,7 +159,7 @@
 }
 
 % partner/sub logo
-\box_new:N  \g__ptxcd_partnerlogo_box 
+\box_new:N  \g__ptxcd_partnerlogo_box
 \dim_new:N \l__ptxcd_partnerlogo_ht_dim
 \dim_gset:Nn \l__ptxcd_partnerlogo_ht_dim {.6\c_ptxcd_logoheight_dim}
 \dim_new:N \l__ptxcd_partnerlogo_wd_dim
@@ -297,11 +309,40 @@
 % 2. under the GNU Public License.
 %
 % See the file LICENSE.md for more details.
+\ExplSyntaxOn
+\cs_new:Nn \__ptxcd_toc_check: {
+	\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int}  = {3} {
+		% if all subsections/subsubsections are hidden we can have two columns
+		\str_if_eq:eeTF	{
+			\beamer@toc@css
+			\beamer@toc@oss
+			\beamer@toc@ooss
+			\beamer@toc@csss
+			\beamer@toc@osss
+			\beamer@toc@oosss
+			\beamer@toc@ooosss
+		}{
+			\prg_replicate:nn {7} {hide}
+		}{
+			% if all subsections/subsubsections are hidden standard twocolumn layout will be choosen
+			\int_set:Nn \g__ptxcd_beamer_toc_col_int {2}
+		} {
+			% check if there are subsections/subsubsections
+			\int_gzero:N \g_tmpa_int
+			{\makeatletter%%
+			\let\babel@toc\use_none:nn
+			\let\beamer@sectionintoc \use_none:nnnnn
+			\def\beamer@subsectionintoc##1##2##3##4##5##6{\int_gset:Nn  \g_tmpa_int {1}\endinput}
+			\def\beamer@subsubsectionintoc##1##2##3##4##5##6##7{\int_gset:Nn  \g_tmpa_int  {1}\endinput}
+			\@input{\jobname.toc}%
+			}
+			\int_compare:nNnT {\g_tmpa_int} = {1} {\int_set:Nn \g__ptxcd_beamer_toc_col_int {1}}
+		}
+	}
+}
+
 \def\beamer@twocoltableofcontents[#1]{%
 	\begin{beamercolorbox}[wd=\paperwidth]{}%
-	\setlength{\columnsep}{5ex}%
-	\raggedcolumns
-	\begin{multicols}{2}%
 	\def\beamer@toc@cs{show}%
 	\def\beamer@toc@os{show}%
 	\def\beamer@toc@css{show}%
@@ -317,15 +358,23 @@
 	\def\beamer@tocsections{<*>}%
 	\setkeys{beamertoc}{firstsection=1}%
 	\setkeys{beamertoc}{#1}%
+	\UseName{__ptxcd_toc_check:}
+	\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
+		\setlength{\columnsep}{5ex}%
+		\raggedcolumns
+		\begin{multicols}{2}
+	}
 	{\makeatletter%
 	\pause[0]%
 	\@input{\jobname.toc}%
 	}%
-	\end{multicols}%
-	\vspace*{.68\baselineskip}
+	\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
+		\end{multicols}%
+	}
 	\end{beamercolorbox}%
-	\vspace*{-.5ex}
+	\vspace*{.68\baselineskip}%}
 }
+
 
 \def\beamer@tableofcontents[#1]{%
 	\ifbeamer@inframe
@@ -337,8 +386,10 @@
 	\fi
 }
 
+
+
 \defbeamertemplate*{section~in~toc}{TUDa}{%
-\addvspace{.68\baselineskip}%}
+  \ifvmode\nointerlineskip\fi
   \leavevmode
   \ifnum\beamer@tempcount>\beamer@toclastsection
   \else
@@ -352,19 +403,23 @@
 
 % (sub-)section in toc: default
 
-\defbeamertemplate*{subsection~in~toc}{TUDa}{\leavevmode
+\defbeamertemplate*{subsection~in~toc}{TUDa}[1][false]{\leavevmode
 	\leftskip=12.4mm
-	\ifx\inserttocsubsectionnumber\@empty
-	\else
-		\hphantom{0}\llap{\inserttocsubsectionnumber}\hspace{.5em}
+	\use:c {if#1}
+		\ifx\inserttocsubsectionnumber\@empty
+		\else
+			\hphantom{0}\llap{\inserttocsubsectionnumber}\hspace{.5em}
+		\fi
 	\fi
 	\inserttocsubsection\par}
 
-\defbeamertemplate*{subsubsection~in~toc}{TUDa}{\leavevmode
+\defbeamertemplate*{subsubsection~in~toc}{TUDa}[1][false]{\leavevmode
 	\leftskip=\dimexpr12.4mm+.5em\relax
-	\ifx\inserttocsubsubsectionnumber\@empty
-	\else
-	\hphantom{00}\llap{\inserttocsubsubsectionnumber}\hspace{.5em}
+	\use:c {if#1}
+		\ifx\inserttocsubsubsectionnumber\@empty
+		\else
+		\hphantom{00}\llap{\inserttocsubsubsectionnumber}\hspace{.5em}
+		\fi
 	\fi
 	\inserttocsubsubsection\par}
 
