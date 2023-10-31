@@ -101,6 +101,16 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Table of Contents}
+By design the toc is structured in two columns. This layout doesn't really support subsections or subsubsections.
+
+To be able to use the new design with old content, the mechanism was extended to support those. This will automatically switch to a single columns toc.
+
+In case you want to disable that mechanism there is the class option \code{toc-columns=one/two/auto} which can also be adjusted locally be directly setting it with the command: \code{\textbackslash{}tableofcontents[columns=two]}.
+
+Please be also aware of beamer's mechanism to filter the toc, e.g. by \code{\textbackslash{}tableofcontents[hideallsubsections]}, see the beamer documentation for details.
+\end{frame}
+
 \section{Slide examples}
 
 \begin{frame}{Frame with a subtitle}
