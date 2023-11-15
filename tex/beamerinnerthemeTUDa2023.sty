@@ -403,25 +403,24 @@
 
 
 % (sub-)section in toc: default
+\cs_new:Nn \__ptxcd_toc_sub_level_entry_numbered:n {
+		\exp_args:Nc \tl_if_blank:nF {inserttoc#1subsectionnumber}
+			{\hphantom{0}\llap{\use:c {inserttoc#1subsectionnumber}}\hspace{.5em}}
+}
+
+\cs_new:Nn \__ptxcd_toc_sub_level_entry_itemize:n {
+	\strut
+	\usebeamertemplate{itemize~#1item}\hspace{.5em}
+}
 
 \defbeamertemplate*{subsection~in~toc}{TUDa}[1][false]{\leavevmode
 	\leftskip=12.4mm
-	\use:c {if#1}
-		\ifx\inserttocsubsectionnumber\@empty
-		\else
-			\hphantom{0}\llap{\inserttocsubsectionnumber}\hspace{.5em}
-		\fi
-	\fi
+	\use:c {__ptxcd_toc_sub_level_entry_#1:n} {}
 	\inserttocsubsection\par}
 
 \defbeamertemplate*{subsubsection~in~toc}{TUDa}[1][false]{\leavevmode
 	\leftskip=\dimexpr12.4mm+.5em\relax
-	\use:c {if#1}
-		\ifx\inserttocsubsubsectionnumber\@empty
-		\else
-		\hphantom{00}\llap{\inserttocsubsubsectionnumber}\hspace{.5em}
-		\fi
-	\fi
+	\use:c {__ptxcd_toc_sub_level_entry_#1:n} {sub}
 	\inserttocsubsubsection\par}
 
 
