@@ -72,14 +72,22 @@
 \fi
 
 \RequirePackage{roboto}
-\newfontfamily\robotoblackspaced
-   [ Numbers = {\roboto@figurealign,\roboto@figurestyle},
-     UprightFont    = *-Black ,
-     ItalicFont     = *-BlackItalic,
-     LetterSpace=26,
-     WordSpace=2.2
-   ]
-   {Roboto}
+
+\csname if@ptxcd@T1\endcsname
+	\newcommand\robotoblackspaced{%
+		\robotoblack
+		\lsstyle
+	}
+\else
+	\newfontfamily\robotoblackspaced
+	   [ Numbers = {\roboto@figurealign,\roboto@figurestyle},
+		 UprightFont    = *-Black ,
+		 ItalicFont     = *-BlackItalic,
+		 LetterSpace=26,
+		 WordSpace=2.2
+	   ]
+	   {Roboto}
+\fi
 
 \IfFileExists{roboto-mono.sty}{
 	\RequirePackage{roboto-mono}
