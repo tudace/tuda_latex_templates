@@ -130,7 +130,12 @@
 		\ptxcd_beamer_headrule\par\nointerlineskip
 	}
 	\bool_if:NTF \g__ptxcd_extended_space_bool {
-		\skip_vertical:n {\dimexpr\paperheight/16}
+		\bool_if:NTF \g__ptxcd_headrule_bool {
+			\skip_vertical:n {\dim_eval:n {+\paperheight/38}}
+			\strut
+		} {
+			\skip_vertical:n {\dim_eval:n {\paperheight/16}}
+		}
 	}{
 		\skip_vertical:n {\dimexpr\paperheight/38}
 		\hspace*{\beamer@leftmargin}\rlap{\usebeamertemplate***{title~in~head/foot}}
@@ -148,11 +153,7 @@
 	\skip_horizontal:n {\dimexpr\paperheight/38}
 	%logo
 	\bool_if:NTF \g__ptxcd_headrule_bool {
-		\bool_if:NTF  \g__ptxcd_extended_space_bool {
-			\raisebox{2mm}[0pt][0pt]{\box_use:N \g__ptxcd_logo_box}
-		} {
-			\raisebox{2mm}[0pt][0pt]{\setlength{\fboxsep}{\z@}\colorbox{white}{\rule{\z@}{\dim_eval:n {\box_ht:N \g__ptxcd_logo_box+\box_ht:N \ptxcd_beamer_headrule_box + \box_dp:N \ptxcd_beamer_headrule_box+1pt}}\box_use:N \g__ptxcd_logo_box}}
-		}
+		\raisebox{2mm}[0pt][0pt]{\setlength{\fboxsep}{\z@}\colorbox{white}{\rule{\z@}{\dim_eval:n {\box_ht:N \g__ptxcd_logo_box+\box_ht:N \ptxcd_beamer_headrule_box + \box_dp:N \ptxcd_beamer_headrule_box+1pt}}\box_use:N \g__ptxcd_logo_box}}
 			\hspace*{10pt}
 	} {
 		\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
