@@ -103,8 +103,6 @@
 \PassOptionsToPackage{pdfpagelabels=false,plainpages=false}{hyperref}
 \PassOptionsToClass{t}{beamer}
 
-\Module@Process@SpecialOptions[ptxcd/beamer]
-
 \DeclareOption*{%
 	\PassOptionsToClass{\CurrentOption}{beamer}
 }
