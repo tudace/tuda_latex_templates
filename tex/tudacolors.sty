@@ -84,12 +84,6 @@
 	\colorlet{TUDa-Arrow}{TUDa-Primary2}
 }
 
-\clist_map_inline:nn {accent, textaccent, identbar} {
-	\cs_if_exist:cF {\string\color@\tl_use:c {g_ptxcd_color_#1_tl}} {
-		\cs_if_exist:cT {\string\color@TUDa-\tl_use:c {g_ptxcd_color_#1_tl}} {
-			\tl_gset:cx {g_ptxcd_color_#1_tl} {TUDa-\tl_use:c {g_ptxcd_color_#1_tl}}
-	}}
-}
 
 \clist_const:Nn \c_ptxcd_color_forbid_textaccent_clist {TUDa-0a,TUDa-5a,TUDa-6a,TUDa-6b,TUDa-7a}
 \clist_const:Nn \c_ptxcd_color_allow_blacktext_clist {TUDa-0a,TUDa-0b,TUDa-0c,TUDa-1a,TUDa-2a,TUDa-3a,TUDa-4a,TUDa-4b,TUDa-4c,TUDa-5a,TUDa-5b,TUDa-5c,TUDa-6a,TUDa-6b,TUDa-6c,TUDa-7a,TUDa-7b,TUDa-7c,TUDa-8a,TUDa-8b,TUDa-8c,TUDa-9a,TUDa-9b,TUDa-10a}
@@ -102,6 +96,12 @@
 
 \hook_new:n {ptxcd/init-colors}
 \hook_gput_code:nnn {ptxcd/init-colors} {tudacolors} {
+	\clist_map_inline:nn {accent, textaccent, identbar} {
+		\cs_if_exist:cF {\string\color@\tl_use:c {g_ptxcd_color_#1_tl}} {
+			\cs_if_exist:cT {\string\color@TUDa-\tl_use:c {g_ptxcd_color_#1_tl}} {
+				\tl_gset:cx {g_ptxcd_color_#1_tl} {TUDa-\tl_use:c {g_ptxcd_color_#1_tl}}
+		}}
+	}
 	\exp_args:Nnx \colorlet{accentcolor}{\g_ptxcd_color_accent_tl}
 	\bool_if:NTF \g_ptxcd_color_whitetext_bool {
 		\clist_if_in:NVTF \c_ptxcd_color_allow_whitetext_clist \g_ptxcd_color_accent_tl {
