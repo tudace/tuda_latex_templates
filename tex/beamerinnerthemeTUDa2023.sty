@@ -33,67 +33,23 @@
 
 \mode<presentation>
 
-\int_new:N \g__ptxcd_beamer_toc_col_int
-
-\keys_define:nn {ptxcd/beamer/inner} {
-	author-on-title .bool_gset:N = \g_ptxcd_authorontitle_bool,
-	author-on-title .initial:n = false,
-	author-on-title .default:n = true,
-	authorontitle .meta:n = {author-on-title},
-	toc-columns .choices:nn =  {one,two,auto} {
-		\int_gset_eq:NN \g__ptxcd_beamer_toc_col_int  \l_keys_choice_int
-	 },
-	 toc-columns / 1 .meta:n = {toc-columns=one},
-	 toc-columns / 2 .meta:n = {toc-columns=two},
-	 toc-columns .initial:n = auto,
-}
-
-\ProcessKeyOptions[ptxcd/beamer/inner]
+\RequirePackage{beamerinnerthemeTUDa}
 
 \ExplSyntaxOff
-\RequirePackage{trimclip}
 \RequirePackage{multicol}
 \ExplSyntaxOn
 
-\box_new:N \l__ptxcd_titlegraphic_box
-\box_new:N \l__ptxcd_titlehead_box
-\dim_new:N \l__ptxcd_titlegraphic_ht_dim
-\dim_new:N \l__ptxcd_titlegraphic_wd_dim
 
-\@ifpackageloaded{beamerouterthemeTUDa2023}{}{
-	\dim_new:N \g__ptxcd_beamer_logosep_dim
-	\dim_new:N \l__ptxcd_beamer_extraindent_dim
-	\dim_new:N \g__ptxcd_beamer_sep_dim
-	\box_new:N \g__ptxcd_logo_box
+\AddToHook{begindocument}[ptxcd-titlegraphic]{
+	\dim_set:Nn \l__ptxcd_titlegraphic_ht_dim {\paperheight}
+	\dim_set:Nn \l__ptxcd_titlegraphic_wd_dim {\paperwidth}
 }
 
-\cs_set:Nn \__ptxcd_block_colorsep: {.75ex}
-
-\RenewDocumentCommand{\titlegraphic}{sm}{
-	\def\width{\paperwidth}
-	\def\height{\paperheight}
-	\IfBooleanTF{#1}{
-		\def\inserttitlegraphic{
-			\hbox_set:Nn \l__ptxcd_titlegraphic_box {\raisebox{\depth}{#2}}
-			\box_resize_to_wd:Nn \l__ptxcd_titlegraphic_box {\width}
-			\dim_compare:nTF {\box_ht:N \l__ptxcd_titlegraphic_box - \height> \c_zero_dim}
-			{
-				\dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l__ptxcd_titlegraphic_box - .5\height}
-				\clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l__ptxcd_titlegraphic_box}
-			}{
-				\box_resize_to_ht:Nn \l__ptxcd_titlegraphic_box {\height}
-				\dim_set:Nn \l_tmpa_dim {(\box_wd:N \l__ptxcd_titlegraphic_box - \width) / 2}
-				\clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l__ptxcd_titlegraphic_box}
-			}
-		}
-	}{
-		\def\inserttitlegraphic{#2}
-	}
-}
-
-\defbeamertemplate*{titlegraphic}{TUDa2023}{%
-  {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
-}
+\defbeamertemplate*{titlegraphic}{TUDa2023}{{
+	\def\width{\l__ptxcd_titlegraphic_wd_dim}
+	\def\height{\l__ptxcd_titlegraphic_ht_dim}
+	\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
+}}
 
 \def\ps@titlegraphic@titlepage{%
   \setbeamertemplate{background}{\usebeamertemplate{titlegraphic}}
@@ -112,47 +68,47 @@
   \fi
    \vbox{}
    \thispagestyle{titlegraphic@titlepage}
-    \vskip.185\paperheight
+	\vskip.185\paperheight
   \begingroup
-    \centering
-    \usebeamertemplate{title}
+	\centering
+	\usebeamertemplate{title}
 %    \vskip1em\par
 \bool_if:NT \g_ptxcd_authorontitle_bool {
-    \usebeamertemplate{author}
-    \usebeamertemplate{institute}
+	\usebeamertemplate{author}
+	\usebeamertemplate{institute}
   }
-    \usebeamertemplate{date}
+	\usebeamertemplate{date}
   \endgroup
   \vfill
 }
 
 \defbeamertemplate*{title}{TUDa2023}[1][]{%
   \begin{beamercolorbox}[sep=8pt,center,#1]{title}
-    \usebeamerfont{title}\text_uppercase:n {\inserttitle}\par%
-    \ifx\insertsubtitle\@empty%
-    \else%
-      \vskip.45em%
-      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-    \fi%
+	\usebeamerfont{title}\text_uppercase:n {\inserttitle}\par%
+	\ifx\insertsubtitle\@empty%
+	\else%
+	  \vskip.45em%
+	  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+	\fi%
   \end{beamercolorbox}%
 }
 
 \defbeamertemplate{author}{TUDa2023}[1][]{%
   \begin{beamercolorbox}[sep=8pt,center,#1]{author}
-    \usebeamerfont{author}\insertauthor
+	\usebeamerfont{author}\insertauthor
   \end{beamercolorbox}
 }
 
 \defbeamertemplate{institute}{TUDa2023}[1][]{%
   \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-    \usebeamerfont{institute}\insertinstitute
+	\usebeamerfont{institute}\insertinstitute
   \end{beamercolorbox}
 }
 
 \defbeamertemplate{date}{TUDa2023}[1][]{%
-    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
-      \usebeamerfont{date}\insertdate
-    \end{beamercolorbox}
+	\begin{beamercolorbox}[sep=8pt,center,#1]{date}
+	  \usebeamerfont{date}\insertdate
+	\end{beamercolorbox}
 }
 
 % partner/sub logo
@@ -274,20 +230,20 @@
   \begingroup
   	\vbox{}
   	\vspace{0pt plus 1 filll}
-    \begin{beamercolorbox}[#1]{section title}
-     \usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
-    \end{beamercolorbox}
-    {\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
-    \par
-      \skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
-      \endgroup
+	\begin{beamercolorbox}[#1]{section title}
+	 \usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
+	\end{beamercolorbox}
+	{\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
+	\par
+	  \skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
+	  \endgroup
  \else
  \begin{frame}[b]
-      \begin{beamercolorbox}[#1]{section title}
-       \usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
-      \end{beamercolorbox}
-      {\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
-      \skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
+	  \begin{beamercolorbox}[#1]{section title}
+	   \usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
+	  \end{beamercolorbox}
+	  {\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
+	  \skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
 \end{frame}
 \fi
 }
@@ -430,79 +386,6 @@
 }
 
 
-% Blocks
-
-
-\defbeamertemplate*{block~begin}{TUDa}
-{
-	\par\vskip\medskipamount%
-	\begin{beamercolorbox}[wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,sep=.5pt,
-		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
-	]{block~title}
-	\ifx\insertblocktitle\@empty
-	\else
-	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,
-		 wd=\dimexpr\linewidth-1pt-1.5ex\relax]{block~title}
-		\usebeamerfont*{block title}\insertblocktitle%
-	\end{beamercolorbox}%
-	\ifbeamercolorempty[bg]{block~title}
-	{}
-	{\ifbeamercolorempty[bg]{block~body}{}{\par\nointerlineskip\vskip-0.5pt}}%
-	\leavevmode
-	\fi
-	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,vmode, wd=\dimexpr\linewidth-1.5ex-1pt\relax]{block~body}%
-		\usebeamerfont{block~body}%
-		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-\__ptxcd_block_colorsep:}\vbox{}%
-	}
-
-\defbeamertemplate*{block~end}{TUDa}
-	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
-
-\defbeamertemplate*{block~alerted~begin}{TUDa}
-{
-	\par\vskip\medskipamount%
-	\begin{beamercolorbox}[
-		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
-		sep=1.5pt,
-		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
-	]{block~frame~alerted}
-	\ifx\insertblocktitle\@empty
-	\else
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~alerted}
-		\usebeamerfont*{block~title~alerted}\insertblocktitle%
-	\end{beamercolorbox}%
-	\vskip1.5pt\par\nointerlineskip
-	\fi
-	\leavevmode
-	\usebeamerfont{block~body~alerted}%
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~alerted}%
-	}
-
-\defbeamertemplate*{block~alerted~end}{TUDa}
-	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
-
-
-\defbeamertemplate*{block~example~begin}{TUDa}
-{
-	\par\vskip\medskipamount%
-	\begin{beamercolorbox}[
-		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
-		sep=1.5pt,
-		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
-		]{block~frame~example}
-	\ifx\insertblocktitle\@empty
-	\else
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~example}
-		\usebeamerfont*{block~title~example}\insertblocktitle%
-	\end{beamercolorbox}%
-\vskip1.5pt\par\nointerlineskip
-	\fi
-	\leavevmode
-	\usebeamerfont{block~body~example}%
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~example}%
-	}
-\defbeamertemplate*{block~example~end}{TUDa}
-	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 
 
 %Itemize Items
