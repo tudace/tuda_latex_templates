@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
 
- tuda-ci v4.00-beta (2023-10-19)
+ tuda-ci v3.35 (2023-12-11)
 
 ***************************************************************************
 
@@ -347,5 +347,8 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    * 3.33 (2023-07-05)
     - disable affidavit by default, see https://github.com/tudace/tuda_latex_templates/issues/432 for more information
     - rename color={} option of tudabeamer to tudacolors={} to avoid conflicts with siunitx
-    * 3.34 (2023-07-12)
+   * 3.34 (2023-07-12)
      - fix typo in affidavit
+   * 3.35 (2023-12-11)
+     - first CTAN release of the new slide layout
+     - fix issues with headwidth calculation if custommargins=true is used

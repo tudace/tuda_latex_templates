@@ -1,4 +1,4 @@
-%% This is file `tuda-a0paper.clo' version 4.00-beta (2023-10-19),
+%% This is file `tuda-a0paper.clo' version 3.35 (2023-12-11),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -26,8 +26,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{4.00-beta}
-\def\filedate{2023-10-19}
+\def\fileversion{3.35}
+\def\filedate{2023-12-11}
 \ProvidesExplFile{tuda-a0paper.clo}{\filedate}{\fileversion}{tuda-ci~size~adjustments~for~a0paper}
 \cs_set:Nn \ptxcd_setup_title_sizes: {
   \cs_set:Nn \ptxcd_title_fontsize: {{125pt}{165pt}}
