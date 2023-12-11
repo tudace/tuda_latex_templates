@@ -29,11 +29,9 @@
 \def\fileversion{4.00-beta}
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
+
 \ProvidesExplClass{tudapub}
 	{\filedate}{\fileversion}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
-
-\RequirePackage{l3keys2e}
 \RequirePackage{URspecialopts}
 
 \Define@specialopt@Module[ptxcd/pub]
@@ -195,7 +193,7 @@
 
 \Module@Process@SpecialOptions[ptxcd/pub]
 
-\ProcessKeysOptions{ptxcd/pub}
+\ProcessKeyOptions[ptxcd/pub]
 
 
 %Option adjustments required for valid PDF/A

@@ -29,10 +29,8 @@
 \def\fileversion{4.00-beta}
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
-\ProvidesExplPackage{tudasciposter}{\filedate}{\fileversion}{Scientific Poster Layout for TU Darmstadt}
 
-\RequirePackage{l3keys2e}
+\ProvidesExplPackage{tudasciposter}{\filedate}{\fileversion}{Scientific Poster Layout for TU Darmstadt}
 
 \prop_new:N \g_ptxcd_clsopts_prop
 \tl_new:N \g_ptxcd_boxstyle_tl
@@ -97,11 +95,7 @@
 	titlesepline .initial:n = true,
 }
 
-
-
-
-
-\ProcessKeysOptions{ptxcd/poster}
+\ProcessKeyOptions[ptxcd/poster]
 
 \dim_new:N \g_ptxcd_margin_dim
 \bool_if:NTF \g_ptxcd_smalltitle_bool {

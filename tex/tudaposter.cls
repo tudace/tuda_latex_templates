@@ -29,10 +29,8 @@
 \def\fileversion{4.00-beta}
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
-\ProvidesExplPackage{tudaposter}{\filedate}{\fileversion}{Poster Layouts for the Corporate Design of TU Darmstadt}
 
-\RequirePackage{l3keys2e}
+\ProvidesExplPackage{tudaposter}{\filedate}{\fileversion}{Poster Layouts for the Corporate Design of TU Darmstadt}
 
 \bool_new:N \g_ptxcd_logo_inhead_bool
 \dim_new:N \g_ptxcd_margin_dim
@@ -117,7 +115,7 @@
 	departmentlogofile .initial:n =,
 }
 
-\ProcessKeysOptions{ptxcd/poster}
+\ProcessKeyOptions[ptxcd/poster]
 
 \ExplSyntaxOff
 \LoadClass[parskip=half-]{scrartcl}

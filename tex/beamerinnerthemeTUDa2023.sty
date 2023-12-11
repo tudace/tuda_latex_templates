@@ -31,11 +31,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesExplPackage{beamerinnerthemeTUDa2023}{\filedate}{\fileversion}{Inner~beamer~theme~of~tuda-ci,~Design~of~2023}
 
-\RequirePackage{l3keys2e}
-
 \mode<presentation>
-
-
 
 \int_new:N \g__ptxcd_beamer_toc_col_int
 
@@ -51,7 +47,8 @@
 	 toc-columns / 2 .meta:n = {toc-columns=two},
 	 toc-columns .initial:n = auto,
 }
-\ProcessKeysOptions{ptxcd/beamer/inner}
+
+\ProcessKeyOptions[ptxcd/beamer/inner]
 
 \ExplSyntaxOff
 \RequirePackage{trimclip}

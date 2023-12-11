@@ -29,10 +29,8 @@
 \def\fileversion{4.00-beta}
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
-\ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
 
-\RequirePackage{l3keys2e}
+\ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
 
 \str_const:Nn \c__ptxcd_base_str {leaflet}
 
@@ -74,7 +72,7 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{leaflet}}
 
-\ProcessKeysOptions{ptxcd/leaflet}
+\ProcessKeyOptions[ptxcd/leaflet]
 \ProcessOptions\relax
 
 \bool_if:NT \g_ptxcd_colorbacksubtitle_bool {

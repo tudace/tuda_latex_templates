@@ -29,10 +29,8 @@
 \def\fileversion{4.00-beta}
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
-\ProvidesExplPackage{tudacolors}{\filedate}{\fileversion}{Color definition for TU Darmstadt's tuda-ci bundle}
 
-\RequirePackage{l3keys2e}
+\ProvidesExplPackage{tudacolors}{\filedate}{\fileversion}{Color definition for TU Darmstadt's tuda-ci bundle}
 
 \str_if_exist:NF \g_ptxcd_department_str {
 	\str_new:N \g_ptxcd_department_str
@@ -68,7 +66,7 @@
 	mecheng .meta:n = {department=mecheng},
 }
 
-\ProcessKeysOptions{ptxcd/colors}
+\ProcessKeyOptions[ptxcd/colors]
 
 \RequirePackage{xcolor}
 

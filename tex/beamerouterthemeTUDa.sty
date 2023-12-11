@@ -30,8 +30,6 @@
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesExplPackage{beamerouterthemeTUDa}{\filedate}{\fileversion}{Outer~beamer~theme~of~tuda-ci}
-
-\RequirePackage{l3keys2e}
 \RequirePackage[paper=slide]{tudarules}
 
 
@@ -99,7 +97,7 @@
 	}
 }
 
-\ProcessKeysOptions{ptxcd/beamer/outer}
+\ProcessKeyOptions[ptxcd/beamer/outer]
 
 
 \mode<presentation>

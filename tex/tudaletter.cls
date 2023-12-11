@@ -29,11 +29,9 @@
 \def\fileversion{4.00-beta}
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
+
 \ProvidesExplClass{tudaletter}
 	{\filedate}{\fileversion}{Letters for TUDa-CI, Corporate Design of TU Darmstadt}
-
-\RequirePackage{l3keys2e}
 
 \str_const:Nn \c__ptxcd_base_str {letter}
 \str_new:N  \g_ptxcd_department_str
@@ -79,7 +77,7 @@
 }
 
 
-\ProcessKeysOptions{ptxcd/letter}
+\ProcessKeyOptions[ptxcd/letter]
 
 \bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
 

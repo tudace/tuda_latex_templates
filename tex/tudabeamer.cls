@@ -31,8 +31,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tudabeamer}
  [\filedate\space\fileversion\space]
-
-\RequirePackage{l3keys2e}
 \RequirePackage{URspecialopts}
 
 \Define@specialopt@Module[ptxcd/beamer]
@@ -124,7 +122,7 @@
 	\PassOptionsToClass{\CurrentOption}{beamer}
 }
 
-\ProcessKeysOptions{ptxcd/beamer}
+\ProcessKeyOptions[ptxcd/beamer]
 \ProcessOptions*
 
 \ExplSyntaxOn

@@ -31,8 +31,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamercolorthemeTUDa}
 [\filedate\space\fileversion]
-
-\RequirePackage{l3keys2e}
 \ExplSyntaxOn
 \bool_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
 
@@ -46,7 +44,7 @@
 	colorback .meta:n = {colorframetitle=#1}
 }
 
-\ProcessKeysOptions{ptxcd/beamer/color}
+\ProcessKeyOptions[ptxcd/beamer/color]
 
 \ExplSyntaxOff
 \RequirePackage[RGB]{tudacolors}

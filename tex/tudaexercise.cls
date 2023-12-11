@@ -29,11 +29,9 @@
 \def\fileversion{4.00-beta}
 \def\filedate{2023-10-19}
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
+
 \ProvidesExplClass{tudaexercise}
 	{\filedate}{\fileversion}{Exercise sheets and exams using TU Darmstadt's Corporate Desing (TUDa-CI)}
-
-\RequirePackage{l3keys2e}
 
 \msg_new:nnnn {tudaexercise} {outdated-koma-script} {
   Your~KOMA-Script~is~outdated.\\
@@ -218,7 +216,7 @@
 		\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
 }
 
-\ProcessKeysOptions{ptxcd/exercise}
+\ProcessKeyOptions[ptxcd/exercise]
 
 \prop_map_inline:Nn \g_ptxcd_clsopts_prop {
 	\tl_if_empty:nTF {#2}

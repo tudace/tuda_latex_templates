@@ -32,8 +32,6 @@
 \ProvidesPackage{beamerfontthemeTUDa2023}
  [\filedate\space\fileversion]
 
-\RequirePackage{l3keys2e}
-
 \ExplSyntaxOn
 \keys_define:nn {ptxcd/beamer/fonts} {
 	serif .bool_gset:N = \g_ptxcd_serif_bool,
@@ -43,7 +41,7 @@
 	sans-serif .default:n = true,
 }
 
-\ProcessKeysOptions{ptxcd/beamer/fonts}
+\ProcessKeyOptions[ptxcd/beamer/fonts]
 
 \ExplSyntaxOff
 

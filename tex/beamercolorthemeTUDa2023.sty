@@ -31,8 +31,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamercolorthemeTUDa2023}
 [\filedate\space\fileversion]
-
-\RequirePackage{l3keys2e}
 \ExplSyntaxOn
 
 \clist_map_inline:nn {colortitle,
@@ -47,7 +45,7 @@
 
 }
 
-\ProcessKeysOptions{ptxcd/beamer/color}
+\ProcessKeyOptions[ptxcd/beamer/color]
 
 \ExplSyntaxOff
 \RequirePackage[RGB]{tudacolors}
