@@ -411,6 +411,12 @@
 	\cs_set:Nn \ptxcd_disable_marginpar: {\loadgeometry{TUDa-nomarginpar}}
 	\cs_set:Nn \ptxcd_restore_typearea: {\loadgeometry{\c_ptxcd_default_geometry_tl}}
 
+	\AddToHook{cmd/Gm@changelayout/after}[tudapub-restore-headwidth]{
+		\bool_if:NTF \g_ptxcd_marginpar_bool
+			{\KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}}
+			{\KOMAoptions{headwidth=text,footwidth=text}}
+	}
+
 }{
 	\let\ptxcd_disable_marginpar:\relax
 	\def\ptxcd_restore_typearea:{
