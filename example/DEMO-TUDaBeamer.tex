@@ -33,25 +33,25 @@
 % !TeX program = lualatex
 %%
 \documentclass[
-	ngerman,%globale Übergabe der Hauptsprache
-	aspectratio=169,%Beamer eigene Option zum Umschalten des Formates
+	ngerman,%g'Globale Übergabe der Hauptsprache
+	aspectratio=169,%Beamer Option zum Umschalten des Formates
 	accentcolor=2d,% Akzentfarbe
-	logo=false,%Kein Logo auf Folgeseiten
+	logo=false,% Kein Logo auf Folgeseiten
 	colorframetitle=true,%Akzentfarbe auch im Frametitle
 %	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
 	design=2008,  %to activate the old design
 	]{tudabeamer}
 \usepackage[main=ngerman]{babel}
 
-% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
+% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig:
 \usepackage{iftex}
 \ifPDFTeX
-\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
+\usepackage[utf8]{inputenc}% Kompatibilität mit TeX Versionen vor April 2018
 \fi
 
 
-%Makros für Formatierungen der Doku
-%Im Allgemeinen nicht notwendig!
+% Makros für Formatierungen der Doku
+% Im Allgemeinen nicht notwendig!
 \let\code\texttt
 
 \title{LaTeX-Beamer im Corporate Design der TU Darmstadt}
@@ -60,12 +60,12 @@
 \department{\TeX/\LaTeX}
 \institute{pei\TeX}
 
-%Fremdlogo
-%Logo Macro mit Sternchen skaliert automatisch, sodass das Logo in die Fußzeile passt
+% Fremdlogo
+% Logo MaKro mit Sternchen skaliert automatisch, sodass das Logo in die Fußzeile passt
 \logo*{\includegraphics{example-image-16x9}}
 
 % Da das Bild frei wählbar nach Breite und/oder Höhe skaliert werden kann, werden \width/\height entsprechend gesetzt. So kann die Fläche optimal gefüllt werden.
-%Sternchenversion skaliert automatisch und beschneidet das Bild, um die Fläche zu füllen.
+% Sternchenversion skaliert automatisch und beschneidet das Bild, um die Fläche zu füllen.
 \titlegraphic*{\includegraphics{example-image}}
 \date{15. Mai 2019}
 
@@ -77,7 +77,7 @@
 \begin{frame}{Die Dokumentenklasse tudabeamer}
 \begin{itemize}
 	\item Verwendung wie beamer
-	\item keine besondere Syntax notwendig
+	\item Keine besondere Syntax notwendig
 	\item Klassenoption accentcolor wählt Akzentfarbe
 	\item Option serif=true für Serifen	
 \end{itemize}
@@ -86,10 +86,10 @@
 \begin{frame}{Zusätzliche Features der Titelfolie}
 \begin{itemize}
 	\item \code{\textbackslash{}logo} wählt Fremdlogo für Fußzeile
-	\item \code{\textbackslash{}titlegraphic} Ersetzt den unteren Teil der Titelfolie. Zusätzlich existiert \code{\textbackslash{}titlegraphic*{Inhalt}}.
-	In diesem Fall wird der Inhalt in eine Box gesetzt, die so skaliert wird, dass Sie den Bereich des Titelbildes überdeckt und entsprechend mittig ausgeschnitten.
+	\item \code{\textbackslash{}titlegraphic} ersetzt den unteren Teil der Titelfolie. Zusätzlich existiert \code{\textbackslash{}titlegraphic*{Inhalt}}.
+	In diesem Fall wird der Inhalt in eine Box gesetzt, die so skaliert wird, dass sie den Bereich des Titelbildes überdeckt und entsprechend mittig ausgeschnitten ist.
 \end{itemize}
-	Über die Option \code{authorontitle=true/false} kann zusätzlich zu den offiziellen Vorgaben der Autor und das Institut groß auf der Titelfolie gezeigt werden.
+	Über die Option \code{authorontitle=true/false} kann zu den offiziellen Vorgaben auch der Autor und das Institut groß auf der Titelfolie gezeigt werden.
 \end{frame}
 
 \setupTUDaFrame{logo=true}
@@ -100,7 +100,7 @@ Soll das Logo später für ein Folie oder einen Bereich wieder aktiviert werden,
 \begin{verbatim}
 \setupTUDaFrame{logo=true}
 \end{verbatim}
-Zur Verfügung. Dort kann die globale Einstellung lokal überschrieben werden.
+zur Verfügung. Dort kann die globale Einstellung lokal überschrieben werden.
 \end{frame}
 
 \begin{frame}{Frame mit Untertitel}
@@ -130,10 +130,10 @@ Ein Beispiel.
 \end{frame}
 
 \begin{frame}{Hinweis zur Ausrichtung (insbesondere columns)}
-	Die Standardausrichtung wurde gegenüber den Beamer-Voreinstellungen von \code{c} zu \code{t} geändert. Dies bedeutet, dass Inhalt auf der Folie oben ausgerichtet wird. Dies entspricht den Vorgaben, hat allerdings den Nachteil, dass die \code{columns}-Umgebung in diesem Fall bei der Positionierung von Bildern ungewohnte Ergebnisse erzeugt.
+	Die Standardausrichtung wurde gegenüber den Beamer-Voreinstellungen von \code{c} zu \code{t} geändert. Dies bedeutet, dass Inhalt auf der Folie oben ausgerichtet wird. Dies entspricht den Vorgaben. Es hat allerdings den Nachteil, dass die \code{columns}-Umgebung in diesem Fall bei der Positionierung von Bildern ungewohnte Ergebnisse erzeugt.
 
-	Die Ausrichtung kann in diesem Fall entweder global mit der Option \code{c} wieder zum Standard geändert werden, oder aber das \code{c} wird direkt an die \code{columns}-Umgebung übergeben. Zum Beispiel:
-\begin{columns}[onlytextwidth,c]%ohne das c ist die Ausrichtung verschoben
+	Die Ausrichtung kann in diesem Fall entweder global mit der Option \code{c} wieder zum Standard geändert werden oder aber das \code{c} wird direkt an die \code{columns}-Umgebung übergeben. Zum Beispiel:
+\begin{columns}[onlytextwidth,c]% Ohne das c ist die Ausrichtung verschoben
 	\column{.8\linewidth}
 	\begin{itemize}
 		\item eins
@@ -156,7 +156,7 @@ Ein Beispiel.
 	\setmathfont[range=it]{Roboto-Italic}
 	\setmathfont[range=\int]{Fira Math}
 	\end{verbatim}
-	Allgemein kann jedoch die Mathematikschriftart wie auch sonst durch Pakete angepasst werden.
+	Allgemein kann die Mathematikschriftart natürlich auch durch Pakete angepasst werden.
 \end{frame}
 
 
@@ -179,7 +179,7 @@ Ein Beispiel.
 \end{frame}
 
 \begin{frame}[fragile]{mecheng: Hintergrundfarbe}
-	Diese Variante des Corporate Designs erlaubt es zusätzlich die Hintergrundfarbe der einzelnen Folien zu verändern. Hierfür wurden die Frames um die Option \code{bgcolor} erweitert. Um in die beiden Voreingestellten Modi zu wechseln, gibt es die Konfiguration
+	Diese Variante des Corporate Designs erlaubt es die Hintergrundfarbe der einzelnen Folien zu verändern. Hierfür wurden die Frames um die Option \code{bgcolor} erweitert. Um in die beiden voreingestellten Modi zu wechseln, gibt es die Konfiguration
 	\begin{verbatim}
 	bgcolor=Primary1
 	\end{verbatim}
