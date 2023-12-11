@@ -57,7 +57,6 @@
 	footheight .dim_gset:N = \g_ptxcd_footheight_dim,
 	paper .choices:nn = {a0,a1,a2,a3,a4}{
 		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
-		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
 		\tl_gset_eq:NN \g_ptxcd_paper_tl \l_keys_choice_tl
 	},
 	fontsize .choice:,
@@ -153,7 +152,9 @@
 
 \RequirePackage{tudafonts}
 \renewcommand*{\familydefault}{\sfdefault}
-\RequirePackage[paper=\g_ptxcd_paper_tl,mode=tikz]{tudarules}
+
+\exp_args:Nx \PassOptionsToPackage{paper=\g_ptxcd_paper_tl , mode=tikz}{tudarules}
+\RequirePackage{tudarules}
 
 \RequirePackage{tudacolors}
 \RequirePackage{qrcode}
