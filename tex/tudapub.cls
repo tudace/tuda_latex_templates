@@ -197,10 +197,37 @@
 
 \ProcessKeyOptions[ptxcd/pub]
 
+\bool_if:NF \g_ptxcd_pdfa_bool {\bool_gset_false:N \g_ptxcd_pdfx_bool}
 
-%Option adjustments required for valid PDF/A
-\bool_if:NT  \g_ptxcd_pdfa_bool {
-  \PassOptionsToPackage{RGB}{xcolor}
+\bool_if:NT \g_ptxcd_pdfa_bool {
+	\msg_new:nnn {tudapub} {colors-to-rgb} {
+			You~did~not~add~a~color~profile.\\
+			I~will~use~the~default~one~and~automatically~try~to~convert~internal~colors~to~RGB.\\
+			This~is~required~to~be~able~to~create~PDF/A~compliance.
+	}
+
+	\cs_if_exist:NT \pdfmeta_standard_get:nN {
+		\pdfmeta_standard_get:nN  {outputintent_A} \l_tmpa_tl
+		\quark_if_no_value:NF \l_tmpa_tl  {
+			\bool_gset_false:N \g_ptxcd_pdfx_bool
+			\msg_new:nnn{tudapub} {prefer-lualatex} {
+				I~detected~usage~of~l3pdfmeta~(\DocumentMetadata)~to~create~PDF/A.\\
+				tudapub~will~not~load~pdfx~to~avoid~conflicts.\\
+				To~disable this message use pdfx=false.
+			}
+			\msg_info:nn {tudapub} {prefer-lualatex}
+		}
+
+		\prop_if_in:NnF \g__pdfmeta_outputintents_prop {GTS_PDFA1} {
+			\PassOptionsToPackage{rgb}{xcolor}
+			\msg_info:nn {tudapub} {colors-to-rgb}
+		}
+	}
+}
+
+\bool_if:NT \g_ptxcd_pdfx_bool {
+	\PassOptionsToPackage{rgb}{xcolor}
+	\msg_info:nn {tudapub} {colors-to-rgb}
 }
 
 \exp_args:Nx \tl_if_eq:nnT {\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}} {9pt}
@@ -845,23 +872,6 @@
 
 %Logos
 \RequirePackage{graphicx}
-
-\bool_if:NF \g_ptxcd_pdfa_bool {\bool_gset_false:N \g_ptxcd_pdfx_bool}
-
-\bool_if:NT \g_ptxcd_pdfa_bool {
-	\cs_if_exist:NT \pdfmeta_standard_get:nN {
-		\pdfmeta_standard_get:nN  {outputintent_A} \l_tmpa_tl
-		\quark_if_no_value:NF \l_tmpa_tl  {
-			\bool_gset_false:N \g_ptxcd_pdfx_bool
-			\msg_new:nnn{tudapub} {prefer-lualatex} {
-				I~detected~usage~of~l3pdfmeta~(\DocumentMetadata)~to~create~PDF/A.\\
-				tudapub~will~not~load~pdfx~to~avoid~conflicts.\\
-				To~disable this message use pdfx=false.
-			}
-			\msg_info:nn {tudapub} {prefer-lualatex}
-		}
-	}
-}
 
 \if_bool:N \g_ptxcd_pdfx_bool
 
