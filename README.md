@@ -1,8 +1,8 @@
 # TUDa-CI – Corporate Design LaTeX-Templates for TU Darmstadt
 
- Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
+ Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
- tuda-ci v3.35 (2023-12-11)
+ tuda-ci v3.36 (2024-01-05)
 
 ***************************************************************************
 
@@ -352,3 +352,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    * 3.35 (2023-12-11)
      - first CTAN release of the new slide layout
      - fix issues with headwidth calculation if custommargins=true is used
+   * 3.36 (2024-01--05)
+      - compatibility to create PDF/A via pdfmangement
+     - small adjustments for \tuprints

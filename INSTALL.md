@@ -1,8 +1,8 @@
 # TUDa-CI – Installation Notes for manual installation (Not recommended! See README.md for more information)
 
-Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
+Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
-tuda-ci v3.35 (2023-12-11)
+tuda-ci v3.36 (2024-01-05)
 
 If you only create demo files, have a look at DEMO.md.
 

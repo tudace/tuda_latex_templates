@@ -1,8 +1,8 @@
 # TUDa-CI – Demo creation process
 
-Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2023
+Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
-tuda-ci v3.35 (2023-12-11)
+tuda-ci v3.36 (2024-01-05)
 
 [Link to the github repository](https://github.com/tudace/tuda_latex_templates)
 
