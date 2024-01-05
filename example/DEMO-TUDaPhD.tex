@@ -292,24 +292,40 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	\item[tuprints] \label{page:tuprints}Übergabe der Daten, sofern das Dokument über TUprints Veröffentlicht werden soll.
 	\begin{verbatim}
 		\tuprints{
-			urn=1234,
-			printid=12345,
+			urn=12345,
+			printid=123456,
 			year=2022
 		}
 	\end{verbatim}
 	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
 
-	Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
+	\minisec{Lizenzangabe}
+	Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license=<Text>| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
 
-	Ab Version 3.08 existieren vorgefertigte Werte für die Option \verb|license|, um eine einfachere Anpassung zu ermöglichen.
-	Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, die durch die Universitätsbibliothek angepasst wurde.
+	Es existieren (seit v3.08) vorgefertigte Werte für die Option \verb|license|, um eine einfachere Anpassung zu ermöglichen. Diese lauten:
+
+	\parbox[t]{.5\linewidth}{%
+	\ttfamily
+	\href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-de} \textnormal{(noch aktuelle Voreinstellung)}\par
+	\href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0}\par
+	\href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
+	\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
+	}%
+	\parbox[t]{.5\linewidth}{
+	\ttfamily
+	\href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
+	\href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
+	\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
+	\href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (Ab Version 3.36)}
+	}
+
+	Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, welche durch die Universitätsbibliothek angepasst wurde.
 	Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
 
-	Die vorgefertigten Lizenzschlüssel lauten: \verb+cc-by-nc-nd-2.0-de+ (noch aktuelle Voreinstellung), \verb+cc-by-4.0+, \verb+cc-by-sa-4.0+, \verb+cc-by-nc-sa-4.0+, \verb+cc-by-nc-4.0+, \verb+cc-by-nd-4.0+, \verb+cc-by-nc-nd-4.0+.
-	Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet das Projekt über seinen Lizenzfinder unter \url{http://creativecommons.org/choose/}.
-	Ab Version 3.10 werden alle (Stand: Januar 2021) dort vorgeschlagenen Lizenzen von tuda-ci unterstützt.
+	Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet die ULB der TUDa unter https://www.ulb.tu-darmstadt.de/dpub  oder  das CC-Projekt sebst über seinen Lizenzfinder unter \url{http://creativecommons.org/choose/}.
+	Die TU Darmstadt empfiehlt in Ihrer Publikationsrichtlinie und Open-Access-Policy die Nutzung der offenen CC BY 4.0 Lizenz.
 
-	Falls ein davon abweichender Wert gewählt wird, wird dieser direkt an der Stelle des Lizenztextes verwendet. Falls der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
+	Falls ein von den oben gelisteten Schlüsseln abweichender Wert gesetzt wird, wird ebendieser direkt an der Stelle des Lizenztextes verwendet. Sofern der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
 	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
