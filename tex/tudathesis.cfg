@@ -18,7 +18,6 @@
 %%
 %% The Current Maintainers of this work are
 %%   Marei Peischl <tuda-ci@peitex.de>
-%%   Markus Lazanowski <latex@ce.tu-darmstadt.de>
 %%
 %% The development respository can be found at
 %% https://github.com/tudace/tuda_latex_templates
