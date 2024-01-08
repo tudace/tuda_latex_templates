@@ -1019,7 +1019,7 @@
 			\let\thanks\use_none:n
 			\tl_gset:Nf \g_tmpa_tl {\@title}
 			\endgroup
-			\hypersetup{pdfauthor={\tl_to_str:V \g_ptxcd_xmp_title_tl}}
+			\hypersetup{pdftitle={\tl_to_str:V \g_tmpa_tl}}
 		}
 
 		% author
