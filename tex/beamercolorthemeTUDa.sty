@@ -1,4 +1,4 @@
-%% This is file `beamercolorthemeTUDa2023.sty' version 3.36 (2024-01-05),
+%% This is file `beamercolorthemeTUDa.sty' version 3.35 (2023-12-11),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,14 +25,11 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamercolorthemeTUDa2023}
-[\filedate\space\fileversion]
-\ExplSyntaxOn
+\ProvidesPackage{beamercolorthemeTUDa}[2024-01-22 v3.35]
 
-\clist_map_inline:nn {colortitle,
+\ExplSyntaxOn
+\clist_map_inline:nn {
+	colortitle,
 	colorbacktitle,
 	colorframetitle,
 	colorback
@@ -43,11 +40,11 @@
 \keys_define:nn {ptxcd/beamer/color} {
 
 }
+\ExplSyntaxOff
 
 \ProcessKeyOptions[ptxcd/beamer/color]
 
-\ExplSyntaxOff
-\RequirePackage[RGB]{tudacolors}
+\RequirePackage{tudacolors}
 
 \definecolorset{HTML}{TUDa-}{}{%
 	dark1,000000;%
@@ -94,18 +91,16 @@
 \setbeamercolor*{block title}{fg=textonaccentcolor,bg=accentcolor}
 \setbeamercolor*{block body}{fg=black,bg=black!15}
 
-\setbeamercolor*{block title alerted}{fg=TUDa-9b,bg=black!15}
+\setbeamercolor*{block title alerted}{fg=TUDa-accent1,bg=TUDa-light2}
 \setbeamercolor*{block body alerted}{use=normal text, bg=white}
-\setbeamercolor*{block frame alerted}{bg=TUDa-9b}
+\setbeamercolor*{block frame alerted}{bg=TUDa-accent1}
 
-\setbeamercolor*{block title example}{fg=TUDa-4d,bg=black!15}
+\setbeamercolor*{block title example}{fg=TUDa-accent2,bg=TUDa-light2}
 \setbeamercolor*{block body example}{use=normal text, bg=white}
-\setbeamercolor*{block frame example}{bg=TUDa-4d}
+\setbeamercolor*{block frame example}{bg=TUDa-accent2}
 
 \setbeamercolor{footline}{fg=black!50}
 
-
-\mode
-<all>
+\mode<all>
 
 \endinput
