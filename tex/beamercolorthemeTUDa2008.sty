@@ -1,4 +1,4 @@
-%% This is file `beamercolorthemeTUDa.sty' version 3.36 (2024-01-05),
+%% This is file `beamercolorthemeTUDa2008.sty' version 3.35 (2023-12-11)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,12 +25,7 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamercolorthemeTUDa}
-[\filedate\space\fileversion]
-\ExplSyntaxOn
+\ProvidesExplPackage{beamercolorthemeTUDa2008}{2024-01-22}{4.00}{Beamer color theme of tuda-ci, compatibility for design of 2008}
 \bool_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
 
 \keys_define:nn {ptxcd/beamer/color} {
@@ -60,7 +55,6 @@
 	\setbeamercolor*{title}{parent=normal~text}
 }
 
-
 \cs_new:Nn \__ptxcd_setup_frametitle_color: {
 	\bool_if:NTF \g__ptxcd_colorframetitle_bool {
 		\setbeamercolor*{frametitle}{fg=textonaccentcolor,bg=accentcolor}
@@ -72,7 +66,6 @@
 \__ptxcd_setup_frametitle_color:
 
 \ExplSyntaxOff
-
 \setbeamercolor*{author}{parent=title}
 \setbeamercolor*{institute}{parent=title}
 
@@ -102,9 +95,10 @@
 \setbeamercolor*{block title example}{fg=TUDa-4d,bg=black!15}
 \setbeamercolor*{block body example}{use=normal text, bg=white}
 \setbeamercolor*{block frame example}{bg=TUDa-4d}
+\ExplSyntaxOn
+
+\mode<all>
 
 
-\mode
-<all>
 
 \endinput
