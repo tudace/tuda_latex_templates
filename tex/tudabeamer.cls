@@ -90,14 +90,15 @@
 	design / 2008 .code:n = {
 		\tl_gset:Nn  \g__ptxcd_design_tl {2008}
 	},
-	design .initial:n = 2008,
+	design .initial:n = default,
+	design / default .code:n {
+			\tl_gset:Nn  \g__ptxcd_design_tl {default}
+	},
 	design2023 .meta:n = {design=2023},
 	design2008 .meta:n = {design=2008},
 }
 
 \ExplSyntaxOff
-
-
 
 \PassOptionsToPackage{pdfpagelabels=false,plainpages=false}{hyperref}
 \PassOptionsToClass{t}{beamer}
@@ -110,6 +111,14 @@
 \ProcessOptions*
 
 \ExplSyntaxOn
+\tl_if_eq:NnT \g__ptxcd_design_tl  {default} {
+	\msg_warning:nn {tudabeamer} {default-design-changed} {
+		With~version~4.0~tudabeamer~switched~to~the~new~corporate~design~layout.\\
+		In~case~this~is~not~intended,~it's~possible~switch~back~using~`design=2008`~option.\\
+		`design=2023`~will~disable~this~warning.
+	}
+}
+
 \bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
 
 \bool_if:NT  \g_ptxcd_pdfa_bool {
