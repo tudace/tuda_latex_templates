@@ -1,4 +1,4 @@
-%% This is file `beamerfontthemeTUDa2023.sty' version 3.36 (2024-01-05),
+%% This is file `beamerfontthemeTUDa.sty' version 3.36 (2024-01-05)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,13 +25,10 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerfontthemeTUDa2023}
- [\filedate\space\fileversion]
+\ProvidesExplPackage{beamerfontthemeTUDa}{2024-01-22}{4.00}{Beamer font theme of tuda-ci}
 
-\ExplSyntaxOn
+\RequirePackage{tudafonts}
+
 \keys_define:nn {ptxcd/beamer/fonts} {
 	serif .bool_gset:N = \g_ptxcd_serif_bool,
 	serif .default:n = true,
@@ -42,17 +39,11 @@
 
 \ProcessKeyOptions[ptxcd/beamer/fonts]
 
-\ExplSyntaxOff
-
 \mode<presentation>
 
-\RequirePackage{tudafonts}
-
-\ExplSyntaxOn
 \bool_if:NTF \g_ptxcd_serif_bool
 	{\usefonttheme{serif}}
 	{\renewcommand*{\familydefault}{\sfdefault}}
-\ExplSyntaxOff
 
 \setbeamerfont{title}{family=\robotoblack,size=\huge}
 \setbeamerfont*{subtitle}{family=\normalfont,size=\small}
