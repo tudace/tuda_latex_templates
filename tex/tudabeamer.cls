@@ -96,6 +96,7 @@
 	design .initial:n = default,
 	design2023 .meta:n = {design=2023},
 	design2008 .meta:n = {design=2008},
+	design .usage:n = load,
 }
 \ExplSyntaxOff
 

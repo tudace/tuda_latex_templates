@@ -25,15 +25,31 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeTUDa}
- [\filedate\space\fileversion\space beamer theme using the Corporate Design of TU Darmstadt]
+\NeedsTeXFormat{LaTeX2e}[2022/06/01]
+\ProvidesExplPackage{beamerthemeTUDa}{2024-01-05}{3.36}{Beamer theme using the Corporate Design of TU Darmstadt}
 
 \mode<presentation>
 
-\RequirePackageWithOptions{beamerthemeTUDa2008}
+\tl_if_exist:NF \g__ptxcd_design_tl {
+	\tl_new:N \g__ptxcd_design_tl
+	\keys_define:nn {ptxcd/beamer} {
+		design .choice:,
+		design / 2023 .code:n = {
+			\tl_gset:Nn  \g__ptxcd_design_tl {2023}
+			\PassOptionsToClass{aspectratio=169}{beamer}
+		},
+		design / 2008 .code:n = {
+			\tl_gset:Nn  \g__ptxcd_design_tl {2008}
+		},
+		design .initial:n = 2023,
+		design .usage:n = load,
+		design2023 .meta:n = {design=2023},
+		design2008 .meta:n = {design=2008},
+	}
+	\ProcessKeyOptions[ptxcd/beamer]
+}
+
+\RequirePackageWithOptions{beamerthemeTUDa\g__ptxcd_design_tl}
 
 \mode<all>
 
