@@ -25,88 +25,91 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesExplPackage{beamerinnerthemeTUDa}{\filedate}{\fileversion}{Inner~beamer~theme~of~tuda-ci, compatibility for design of 2008}
+\ProvidesExplPackage{beamerinnerthemeTUDa}{2024-01-05}{3.36}{Inner~beamer~theme~of~tuda-ci, compatibility for design of 2008}
 
 \mode<presentation>
 
 \RequirePackage{beamerinnerthemeTUDa2008}
 
-\defbeamertemplate*{title~ page}{TUDa}[1][]
-{
+\defbeamertemplate*{title~ page}{TUDa}[1][]{
 	\nointerlineskip
 	\vspace{\dim_eval:n {-\c_ptxcd_largerule_dim}}
 	\hbox_set:Nn \l__ptxcd_titlehead_box {
-	\parbox{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim}{%
-	\begin{beamercolorbox}[
-		wd=\linewidth,
-		sep=\g__ptxcd_beamer_logosep_dim,
-	]{title}
-	\raggedright
-	\usebeamerfont{title}
-	\skip_horizontal:n {1ex}
-	\strut\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-2ex\relax}{
-		\inserttitle
-		\par
-	}
-	\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\box_use:N \g__ptxcd_logo_box}
-	\ifx\insertsubtitle\@empty
-	\else
-	\par\vspace{\c_ptxcd_largerule_dim}
-	\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-2ex\relax}{
-		\usebeamerfont{subtitle}\insertsubtitle
-	}
-	\fi
-	\end{beamercolorbox}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bool_if:NT \g_ptxcd_authorontitle_bool {
-\par\nointerlineskip
-\begin{beamercolorbox}[
-	wd=\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
-\end{beamercolorbox}
-\par\nointerlineskip
-	\begin{beamercolorbox}[
-	wd=\linewidth,
-	sep=\c_ptxcd_largerule_dim,
-	]{title}
-	\raggedright
-	\skip_horizontal:n {1ex}
-	\parbox[t]{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim-2ex\relax}{
-		\ifx\insertauthor\@empty
-		\else
-		\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
-		\fi
-		\ifx\insertauthor\@empty
-		\else
-		\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute
-		\fi
-	}
-\end{beamercolorbox}
-}
-	}
+		\parbox{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim}{%
+			\begin{beamercolorbox}[
+					wd=\linewidth,
+					sep=\g__ptxcd_beamer_logosep_dim,
+				]{title}
+				\raggedright
+				\usebeamerfont{title}
+				\skip_horizontal:n {1ex}
+				\strut\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-2ex\relax}{
+					\inserttitle
+					\par
+				}
+				\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\box_use:N \g__ptxcd_logo_box}
+				\ifx\insertsubtitle\@empty
+				\else
+					\par\vspace{\c_ptxcd_largerule_dim}
+					\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-2ex\relax}{
+						\usebeamerfont{subtitle}\insertsubtitle
+					}
+				\fi
+			\end{beamercolorbox}
+
+			\bool_if:NT \g_ptxcd_authorontitle_bool {
+				\par\nointerlineskip
+				\begin{beamercolorbox}[
+						wd=\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
+				\end{beamercolorbox}
+				\par\nointerlineskip
+				\begin{beamercolorbox}[
+						wd=\linewidth,
+						sep=\c_ptxcd_largerule_dim,
+					]{title}
+					\raggedright
+					\skip_horizontal:n {1ex}
+					\parbox[t]{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim-2ex\relax}{
+						\ifx\insertauthor\@empty
+						\else
+							\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
+						\fi
+						\ifx\insertauthor\@empty
+						\else
+							\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute
+						\fi
+					}
+				\end{beamercolorbox}
+			}
+		}
 	}
 	\box_use:N \l__ptxcd_titlehead_box
-\nointerlineskip\begin{beamercolorbox}[
-	wd=\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
+	\nointerlineskip\begin{beamercolorbox}[
+			wd=\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
 	\end{beamercolorbox}
 	\dim_set:Nn \l__ptxcd_titlegraphic_ht_dim {\textheight-\box_ht:N\l__ptxcd_titlehead_box-\box_dp:N \l__ptxcd_titlehead_box
-	+\c_ptxcd_largerule_dim-.5\c_ptxcd_rulesep_dim-\c_ptxcd_smallrule_dim}
+		+\c_ptxcd_largerule_dim-.5\c_ptxcd_rulesep_dim-\c_ptxcd_smallrule_dim}
 	\let\height\l__ptxcd_titlegraphic_ht_dim
 	\dim_set:Nn \l__ptxcd_titlegraphic_wd_dim{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim}
 	\let\width\l__ptxcd_titlegraphic_wd_dim
 	\nointerlineskip
 	\begin{beamercolorbox}[wd=\width,center]{titlegraphic}
-	\raisebox{-\c_ptxcd_largerule_dim}[\dim_eval:n {\height-\c_ptxcd_largerule_dim}][0pt]{\inserttitlegraphic}
+		\raisebox{-\c_ptxcd_largerule_dim}[\dim_eval:n {\height-\c_ptxcd_largerule_dim}][0pt]{\inserttitlegraphic}
 	\end{beamercolorbox}
-%	\endgroup
 }
 
 %Itemize Items
-\defbeamertemplate*{itemize~item}{TUDa}{\usebeamerfont*{itemize~item}\raise\dimexpr.4\ht\strutbox-.4ex\hbox{\rule{.8ex}{.8ex}}}
-\defbeamertemplate*{itemize~subitem}{TUDa}{\usebeamerfont*{itemize~item}\setlength{\fboxsep}{\z@}\setlength{\fboxrule}{1pt}\raise\dimexpr.4\ht\strutbox-.2ex-\fboxrule\hbox{\fbox{\color{bg}\rule{.4ex}{.4ex}}}}
-\defbeamertemplate*{itemize~subsubitem}{TUDa}{\usebeamerfont*{itemize~subitem}\hbox{--}}
+\defbeamertemplate*{itemize~item}{TUDa}{
+	\usebeamerfont*{itemize~item}
+	\raise\dimexpr.4\ht\strutbox-.4ex\hbox{\rule{.8ex}{.8ex}}
+}
+\defbeamertemplate*{itemize~subitem}{TUDa}{
+	\usebeamerfont*{itemize~subitem}
+	\setlength{\fboxsep}{\z@}\setlength{\fboxrule}{1pt}
+	\raise\dimexpr.4\ht\strutbox-.2ex-\fboxrule\hbox{\fbox{\color{bg}\rule{.4ex}{.4ex}}}
+}
+\defbeamertemplate*{itemize~subsubitem}{TUDa}{\usebeamerfont*{itemize~subsubitem}\hbox{--}}
 
 \mode<all>
 

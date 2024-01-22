@@ -1,4 +1,4 @@
-%% This is file `beamerinnerthemeTUDa2023.sty' version 3.36 (2024-01-05),
+%% This is file `beamerinnerthemeTUDa.sty' version 3.36 (2024-01-05)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,10 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesExplPackage{beamerinnerthemeTUDa2023}{\filedate}{\fileversion}{Inner~beamer~theme~of~tuda-ci}
+\ProvidesExplPackage{beamerinnerthemeTUDa}{2024-01-05}{3.36}{Inner~beamer~theme~of~tuda-ci}
 
 \int_new:N \g__ptxcd_beamer_toc_col_int
 
@@ -56,11 +54,11 @@
 	authorontitle .meta:n = {author-on-title},
 	toc-columns .choices:nn =  {one,two,auto} {
 		\int_gset_eq:NN \g__ptxcd_beamer_toc_col_int  \l_keys_choice_int
-	 },
-	 toc-columns / 1 .meta:n = {toc-columns=one},
-	 toc-columns / 2 .meta:n = {toc-columns=two},
-	 toc-columns .initial:n = auto,
-	 design .meta:nn = {ptxcd/beamer} {design=#1}
+	},
+	toc-columns / 1 .meta:n = {toc-columns=one},
+	toc-columns / 2 .meta:n = {toc-columns=two},
+	toc-columns .initial:n = auto,
+	design .meta:nn = {ptxcd/beamer} {design=#1}
 }
 
 \ProcessKeyOptions[ptxcd/beamer/inner]
@@ -106,10 +104,7 @@
 \useinnertheme{TUDa\g__ptxcd_design_tl}
 
 % Blocks
-
-
-\defbeamertemplate*{block~begin}{TUDa}
-{
+\defbeamertemplate*{block~begin}{TUDa}{
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,sep=.5pt,
 		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
@@ -128,13 +123,11 @@
 	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,vmode, wd=\dimexpr\linewidth-1.5ex-1pt\relax]{block~body}%
 		\usebeamerfont{block~body}%
 		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-\__ptxcd_block_colorsep:}\vbox{}%
-	}
-
+}
 \defbeamertemplate*{block~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 
-\defbeamertemplate*{block~alerted~begin}{TUDa}
-{
+\defbeamertemplate*{block~alerted~begin}{TUDa}{
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
 		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
@@ -151,14 +144,12 @@
 	\leavevmode
 	\usebeamerfont{block~body~alerted}%
 	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~alerted}%
-	}
-
+}
 \defbeamertemplate*{block~alerted~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 
 
-\defbeamertemplate*{block~example~begin}{TUDa}
-{
+\defbeamertemplate*{block~example~begin}{TUDa}{
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
 		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
@@ -175,7 +166,7 @@
 	\leavevmode
 	\usebeamerfont{block~body~example}%
 	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~example}%
-	}
+}
 \defbeamertemplate*{block~example~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 

@@ -1,4 +1,4 @@
-%% This is file `beamerinnerthemeTUDa2023.sty' version 3.36 (2024-01-05),
+%% This is file `beamerinnerthemeTUDa2023.sty' version 4.00-beta (2023-10-19),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,10 +25,7 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesExplPackage{beamerinnerthemeTUDa2023}{\filedate}{\fileversion}{Inner~beamer~theme~of~tuda-ci,~Design~of~2023}
+\ProvidesExplPackage{beamerinnerthemeTUDa2023}{2023-10-19}{4.00}{Inner~beamer~theme~of~tuda-ci,~Design~of~2023}
 
 \mode<presentation>
 
@@ -38,75 +35,74 @@
 \RequirePackage{multicol}
 \ExplSyntaxOn
 
-
 \AddToHook{begindocument}[ptxcd-titlegraphic]{
 	\dim_set:Nn \l__ptxcd_titlegraphic_ht_dim {\paperheight}
 	\dim_set:Nn \l__ptxcd_titlegraphic_wd_dim {\paperwidth}
 }
 
 \defbeamertemplate*{titlegraphic}{TUDa2023}{{
-	\def\width{\l__ptxcd_titlegraphic_wd_dim}
-	\def\height{\l__ptxcd_titlegraphic_ht_dim}
-	\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
-}}
+			\def\width{\l__ptxcd_titlegraphic_wd_dim}
+			\def\height{\l__ptxcd_titlegraphic_ht_dim}
+			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
+		}}
 
 \def\ps@titlegraphic@titlepage{%
-  \setbeamertemplate{background}{\usebeamertemplate{titlegraphic}}
-  \@nameuse{ps@navigation}%
+	\setbeamertemplate{background}{\usebeamertemplate{titlegraphic}}
+	\@nameuse{ps@navigation}%
 }
 
 \defbeamertemplate*{title~page}{TUDa2023}[1][]
 {
-  \ifbeamer@plainframe
-  	\skip_vertical:n {\dimexpr\paperheight/38- \beamer@frametopskip}%
-  	\color{red}
-  	\hspace*{\fill}
-  	\raisebox{\dimexpr-\height+.33\c_ptxcd_logoheight_dim}{\includegraphics[height=\dim_use:N \c_ptxcd_logoheight_dim]{tuda_logo}}\hspace*{\dimexpr.7pt-\beamer@rightmargin}
-  	\par
-  	 \vskip1.39\baselineskip
-  \fi
-   \vbox{}
-   \thispagestyle{titlegraphic@titlepage}
+	\ifbeamer@plainframe
+		\skip_vertical:n {\dimexpr\paperheight/38- \beamer@frametopskip}%
+		\color{red}
+		\hspace*{\fill}
+		\raisebox{\dimexpr-\height+.33\c_ptxcd_logoheight_dim}{\includegraphics[height=\dim_use:N \c_ptxcd_logoheight_dim]{tuda_logo}}\hspace*{\dimexpr.7pt-\beamer@rightmargin}
+		\par
+		\vskip1.39\baselineskip
+	\fi
+	\vbox{}
+	\thispagestyle{titlegraphic@titlepage}
 	\vskip.185\paperheight
-  \begingroup
+	\begingroup
 	\centering
 	\usebeamertemplate{title}
-%    \vskip1em\par
-\bool_if:NT \g_ptxcd_authorontitle_bool {
-	\usebeamertemplate{author}
-	\usebeamertemplate{institute}
-  }
+	%    \vskip1em\par
+	\bool_if:NT \g_ptxcd_authorontitle_bool {
+		\usebeamertemplate{author}
+		\usebeamertemplate{institute}
+	}
 	\usebeamertemplate{date}
-  \endgroup
-  \vfill
+	\endgroup
+	\vfill
 }
 
 \defbeamertemplate*{title}{TUDa2023}[1][]{%
-  \begin{beamercolorbox}[sep=8pt,center,#1]{title}
-	\usebeamerfont{title}\text_uppercase:n {\inserttitle}\par%
-	\ifx\insertsubtitle\@empty%
-	\else%
-	  \vskip.45em%
-	  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-	\fi%
-  \end{beamercolorbox}%
+	\begin{beamercolorbox}[sep=8pt,center,#1]{title}
+		\usebeamerfont{title}\text_uppercase:n {\inserttitle}\par%
+		\ifx\insertsubtitle\@empty%
+		\else%
+			\vskip.45em%
+			{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+		\fi%
+	\end{beamercolorbox}%
 }
 
 \defbeamertemplate{author}{TUDa2023}[1][]{%
-  \begin{beamercolorbox}[sep=8pt,center,#1]{author}
-	\usebeamerfont{author}\insertauthor
-  \end{beamercolorbox}
+	\begin{beamercolorbox}[sep=8pt,center,#1]{author}
+		\usebeamerfont{author}\insertauthor
+	\end{beamercolorbox}
 }
 
 \defbeamertemplate{institute}{TUDa2023}[1][]{%
-  \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-	\usebeamerfont{institute}\insertinstitute
-  \end{beamercolorbox}
+	\begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+		\usebeamerfont{institute}\insertinstitute
+	\end{beamercolorbox}
 }
 
 \defbeamertemplate{date}{TUDa2023}[1][]{%
 	\begin{beamercolorbox}[sep=8pt,center,#1]{date}
-	  \usebeamerfont{date}\insertdate
+		\usebeamerfont{date}\insertdate
 	\end{beamercolorbox}
 }
 
@@ -125,16 +121,16 @@
 
 \cs_new:Nn \__ptxcd_setup_logo_box:nnn {
 	\begingroup
-		\def\width{\use:c {l__ptxcd_#2_wd_dim}}
-		\def\height{\use:c {l__ptxcd_#2_ht_dim}}
-		\IfBooleanTF{#1}{
-				\hbox_gset:cn {g__ptxcd_#2_box} {#3}
-				\box_gautosize_to_wd_and_ht_plus_dp:cnn  {g__ptxcd_#2_box} {\width} {\height}
-		} {
-				\hbox_gset:cn {g__ptxcd_#2_box} {
-					#3
-				}
+	\def\width{\use:c {l__ptxcd_#2_wd_dim}}
+	\def\height{\use:c {l__ptxcd_#2_ht_dim}}
+	\IfBooleanTF{#1}{
+		\hbox_gset:cn {g__ptxcd_#2_box} {#3}
+		\box_gautosize_to_wd_and_ht_plus_dp:cnn  {g__ptxcd_#2_box} {\width} {\height}
+	} {
+		\hbox_gset:cn {g__ptxcd_#2_box} {
+			#3
 		}
+	}
 	\endgroup
 }
 
@@ -146,105 +142,29 @@
 	\__ptxcd_setup_logo_box:nnn {#1} {sublogo} {#2}
 }
 
-
-% Blocks
-
-%
-%\defbeamertemplate*{block~begin}{TUDa}
-%{
-%	\par\vskip\medskipamount%
-%	\begin{beamercolorbox}[wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,sep=.5pt,
-%		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
-%	]{block~title}
-%	\ifx\insertblocktitle\@empty
-%	\else
-%	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,
-%		 wd=\dimexpr\linewidth-1pt-1.5ex\relax]{block~title}
-%		\usebeamerfont*{block title}\insertblocktitle%
-%	\end{beamercolorbox}%
-%	\ifbeamercolorempty[bg]{block~title}
-%	{}
-%	{\ifbeamercolorempty[bg]{block~body}{}{\par\nointerlineskip\vskip-0.5pt}}%
-%	\leavevmode
-%	\fi
-%	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,vmode, wd=\dimexpr\linewidth-1.5ex-1pt\relax]{block~body}%
-%		\usebeamerfont{block~body}%
-%		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-\__ptxcd_block_colorsep:}\vbox{}%
-%	}
-%
-%\defbeamertemplate*{block~end}{TUDa}
-%	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
-%
-%\defbeamertemplate*{block~alerted~begin}{TUDa}
-%{
-%	\par\vskip\medskipamount%
-%	\begin{beamercolorbox}[
-%		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
-%		sep=1.5pt,
-%		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
-%	]{block~frame~alerted}
-%	\ifx\insertblocktitle\@empty
-%	\else
-%	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~alerted}
-%		\usebeamerfont*{block~title~alerted}\insertblocktitle%
-%	\end{beamercolorbox}%
-%	\vskip1.5pt\par\nointerlineskip
-%	\fi
-%	\leavevmode
-%	\usebeamerfont{block~body~alerted}%
-%	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~alerted}%
-%	}
-%
-%\defbeamertemplate*{block~alerted~end}{TUDa}
-%	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
-%
-%
-%\defbeamertemplate*{block~example~begin}{TUDa}
-%{
-%	\par\vskip\medskipamount%
-%	\begin{beamercolorbox}[
-%		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
-%		sep=1.5pt,
-%		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
-%		]{block~frame~example}
-%	\ifx\insertblocktitle\@empty
-%	\else
-%	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~example}
-%		\usebeamerfont*{block~title~example}\insertblocktitle%
-%	\end{beamercolorbox}%
-%\vskip1.5pt\par\nointerlineskip
-%	\fi
-%	\leavevmode
-%	\usebeamerfont{block~body~example}%
-%	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~example}%
-%	}
-%\defbeamertemplate*{block~example~end}{TUDa}
-%	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
-%
-
 % section page
 \defbeamertemplate*{section~page}{TUDa2023}[1][]
 {%
-\ifbeamer@inframe
-  \begingroup
-  	\vbox{}
-  	\vspace{0pt plus 1 filll}
-	\begin{beamercolorbox}[#1]{section title}
-	 \usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
-	\end{beamercolorbox}
-	{\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
-	\par
-	  \skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
-	  \endgroup
- \else
- \begin{frame}[b]
-	  \begin{beamercolorbox}[#1]{section title}
-	   \usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
-	  \end{beamercolorbox}
-	  {\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
-	  \skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
-\end{frame}
-\fi
+	\ifbeamer@inframe
+		\begingroup
+		\vbox{}
+		\vspace{0pt plus 1 filll}
+		\begin{beamercolorbox}[#1]{section title}
+			\usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
+		\end{beamercolorbox}
+		{\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
+		\par
+		\skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
+		\endgroup
+	\else
+		\begin{frame}[b]
+			\begin{beamercolorbox}[#1]{section title}
+				\usebeamerfont{section~title}\text_uppercase:n {\insertsection}\par
+			\end{beamercolorbox}
+			{\usebeamerfont{section~name}\usebeamercolor[fg]{section~name}\sectionname{}~\insertsectionnumber}
+			\skip_vertical:n {\c_ptxcd_logoheight_dim+\baselineskip}
+		\end{frame}
+	\fi
 }
 
 % toc
@@ -263,66 +183,66 @@
 % See the file LICENSE.md for more details.
 \ExplSyntaxOn
 \cs_new:Nn \__ptxcd_toc_check: {
-	\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int}  = {3} {
-		% if all subsections/subsubsections are hidden we can have two columns
-		\str_if_eq:eeTF	{
-			\beamer@toc@css
-			\beamer@toc@oss
-			\beamer@toc@ooss
-			\beamer@toc@csss
-			\beamer@toc@osss
-			\beamer@toc@oosss
-			\beamer@toc@ooosss
-		}{
-			\prg_replicate:nn {7} {hide}
-		}{
-			% if all subsections/subsubsections are hidden standard twocolumn layout will be choosen
-			\int_set:Nn \g__ptxcd_beamer_toc_col_int {2}
-		} {
-			% check if there are subsections/subsubsections
-			\int_gzero:N \g_tmpa_int
-			{\makeatletter%%
-			\let\babel@toc\use_none:nn
-			\let\beamer@sectionintoc \use_none:nnnnn
-			\def\beamer@subsectionintoc##1##2##3##4##5##6{\int_gset:Nn  \g_tmpa_int {1}\endinput}
-			\def\beamer@subsubsectionintoc##1##2##3##4##5##6##7{\int_gset:Nn  \g_tmpa_int  {1}\endinput}
-			\@input{\jobname.toc}%
-			}
-			\int_compare:nNnT {\g_tmpa_int} = {1} {\int_set:Nn \g__ptxcd_beamer_toc_col_int {1}}
-		}
-	}
+\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int}  = {3} {
+% if all subsections/subsubsections are hidden we can have two columns
+\str_if_eq:eeTF	{
+\beamer@toc@css
+\beamer@toc@oss
+\beamer@toc@ooss
+\beamer@toc@csss
+\beamer@toc@osss
+\beamer@toc@oosss
+\beamer@toc@ooosss
+}{
+\prg_replicate:nn {7} {hide}
+}{
+% if all subsections/subsubsections are hidden standard twocolumn layout will be choosen
+\int_set:Nn \g__ptxcd_beamer_toc_col_int {2}
+} {
+% check if there are subsections/subsubsections
+\int_gzero:N \g_tmpa_int
+{\makeatletter%%
+	\let\babel@toc\use_none:nn
+	\let\beamer@sectionintoc \use_none:nnnnn
+	\def\beamer@subsectionintoc##1##2##3##4##5##6{\int_gset:Nn  \g_tmpa_int {1}\endinput}
+	\def\beamer@subsubsectionintoc##1##2##3##4##5##6##7{\int_gset:Nn  \g_tmpa_int  {1}\endinput}
+	\@input{\jobname.toc}%
+}
+\int_compare:nNnT {\g_tmpa_int} = {1} {\int_set:Nn \g__ptxcd_beamer_toc_col_int {1}}
+}
+}
 }
 
 \def\beamer@twocoltableofcontents[#1]{%
 	\begin{beamercolorbox}[wd=\paperwidth]{}%
-	\def\beamer@toc@cs{show}%
-	\def\beamer@toc@os{show}%
-	\def\beamer@toc@css{show}%
-	\def\beamer@toc@oss{show}%
-	\def\beamer@toc@ooss{show}%
-	\def\beamer@toc@csss{show}%
-	\def\beamer@toc@osss{show}%
-	\def\beamer@toc@oosss{show}%
-	\def\beamer@toc@ooosss{show}%
-	\beamer@showpartnumber=\c@part%
-	\beamer@pausesectionsfalse%
-	\beamer@pausesubsectionsfalse%
-	\def\beamer@tocsections{<*>}%
-	\setkeys{beamertoc}{firstsection=1}%
-	\setkeys{beamertoc}{#1}%
-	\UseName{__ptxcd_toc_check:}
-	\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
-		\setlength{\columnsep}{5ex}%
-		\raggedcolumns
-		\begin{multicols}{2}
-	}
-	{\makeatletter%
-	\pause[0]%
-	\@input{\jobname.toc}%
-	}%
-	\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
-		\end{multicols}%
-	}
+		\def\beamer@toc@cs{show}%
+		\def\beamer@toc@os{show}%
+		\def\beamer@toc@css{show}%
+		\def\beamer@toc@oss{show}%
+		\def\beamer@toc@ooss{show}%
+		\def\beamer@toc@csss{show}%
+		\def\beamer@toc@osss{show}%
+		\def\beamer@toc@oosss{show}%
+		\def\beamer@toc@ooosss{show}%
+		\beamer@showpartnumber=\c@part%
+		\beamer@pausesectionsfalse%
+		\beamer@pausesubsectionsfalse%
+		\def\beamer@tocsections{<*>}%
+		\setkeys{beamertoc}{firstsection=1}%
+		\setkeys{beamertoc}{#1}%
+		\UseName{__ptxcd_toc_check:}
+		\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
+				\setlength{\columnsep}{5ex}%
+				\raggedcolumns
+				\begin{multicols}{2}
+					}
+					{\makeatletter%
+					\pause[0]%
+					\@input{\jobname.toc}%
+					}%
+					\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
+				\end{multicols}%
+			}
 	\end{beamercolorbox}%
 	\vspace*{.68\baselineskip}%}
 }
@@ -331,10 +251,10 @@
 
 \def\beamer@tableofcontents[#1]{%
 	\ifbeamer@inframe
-	\beamer@twocoltableofcontents[#1]
+		\beamer@twocoltableofcontents[#1]
 	\else
 		\begin{frame}[b]{\contentsname}
-		\beamer@twocoltableofcontents[#1]
+			\beamer@twocoltableofcontents[#1]
 		\end{frame}
 	\fi
 }
@@ -342,22 +262,22 @@
 
 
 \defbeamertemplate*{section~in~toc}{TUDa}{%
-  \ifvmode\nointerlineskip\fi
-  \leavevmode
-  \ifnum\beamer@tempcount>\beamer@toclastsection
-  \else
-  \ifnum\beamer@tempcount>0\relax
-		\usebeamertemplate***{toc~section~number}%
-  \fi\fi%
-  \usebeamertemplate***{section~entry}%
-\par
+	\ifvmode\nointerlineskip\fi
+	\leavevmode
+	\ifnum\beamer@tempcount>\beamer@toclastsection
+	\else
+		\ifnum\beamer@tempcount>0\relax
+			\usebeamertemplate***{toc~section~number}%
+		\fi\fi%
+	\usebeamertemplate***{section~entry}%
+	\par
 }
 
 
 % (sub-)section in toc: default
 \cs_new:Nn \__ptxcd_toc_sub_level_entry_numbered:n {
-		\exp_args:Nc \tl_if_blank:nF {inserttoc#1subsectionnumber}
-			{\hphantom{0}\llap{\use:c {inserttoc#1subsectionnumber}}\hspace{.5em}}
+	\exp_args:Nc \tl_if_blank:nF {inserttoc#1subsectionnumber}
+	{\hphantom{0}\llap{\use:c {inserttoc#1subsectionnumber}}\hspace{.5em}}
 }
 
 \cs_new:Nn \__ptxcd_toc_sub_level_entry_itemize:n {
@@ -377,11 +297,11 @@
 
 
 \defbeamertemplate*{toc~section~number}{TUDa}{
-	    \hphantom{00}\llap{\inserttocsectionnumber}\hspace{.5em}
+	\hphantom{00}\llap{\inserttocsectionnumber}\hspace{.5em}
 }
 
 \defbeamertemplate*{section~entry}{TUDa}{
-	    \strut\inserttocsection\strut
+	\strut\inserttocsection\strut
 }
 
 
