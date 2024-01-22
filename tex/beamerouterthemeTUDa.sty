@@ -1,4 +1,4 @@
-%% This is file `beamerouterthemeTUDa2023.sty' version 3.36 (2024-01-05),
+%% This is file `beamerouterthemeTUDa.sty' version 3.36 (2024-01-05),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,12 +25,11 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
-\ProvidesExplPackage{beamerouterthemeTUDa2023}{\filedate}{\fileversion}{Outer~beamer~theme~of~tuda-ci~design~of~2023}
+\ProvidesExplPackage{beamerouterthemeTUDa}{2024-01-05}{4.00}{Outer~beamer~theme~of~tuda-ci~design~of~2023}
 
-\RequirePackage[paper=slide]{tudarules}
+\PassOptionsToPackage{paper=slide}{tudarules}
+\RequirePackage{tudarules}
 
 \dim_new:N \l__ptxcd_beamer_extraindent_dim
 \dim_new:N {\g__ptxcd_beamer_sep_dim}
@@ -73,8 +72,8 @@
 	{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
 
 \setbeamersize{
-	text~margin~left=\dimexpr\paperwidth/34,
-	text~margin~right=\dimexpr\paperwidth/38
+	text~margin~left=\dim_eval:n {\paperwidth/34},
+	text~margin~right=\dim_eval:n {\paperwidth/38}
 }
 
 \cs_new:Nn \__ptxcd_beamer_linewidth: {\dim_eval:n {\paperwidth-\beamer@leftmargin-\beamer@rightmargin}}
@@ -83,7 +82,7 @@
 
 \box_new:N \g__ptxcd_logo_box
 \hbox_gset:Nn \g__ptxcd_logo_box {%
-	\raisebox{\dimexpr-\height+.33\c_ptxcd_logoheight_dim}{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
+	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
 }
 
 \bool_if_exist:NF \l_ptxcd_tmpa_bool {\bool_new:N \l_ptxcd_tmpa_bool}
