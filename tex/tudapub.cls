@@ -218,14 +218,14 @@
 		}
 
 		\prop_if_in:NnF \g__pdfmeta_outputintents_prop {GTS_PDFA1} {
-			\PassOptionsToPackage{rgb}{xcolor}
+			\PassOptionsToPackage{RGB}{xcolor}
 			\msg_info:nn {tudapub} {colors-to-rgb}
 		}
 	}
 }
 
 \bool_if:NT \g_ptxcd_pdfx_bool {
-	\PassOptionsToPackage{rgb}{xcolor}
+	\PassOptionsToPackage{RGB}{xcolor}
 	\msg_info:nn {tudapub} {colors-to-rgb}
 }
 
