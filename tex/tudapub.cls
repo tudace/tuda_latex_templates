@@ -908,7 +908,7 @@
 	}
 
 	%%hyperref
-	\hypersetup{hidelinks, unicode,pdfa}
+	\hypersetup{hidelinks, unicode}
 	\iow_new:N \ptxcd_xmpdata_stream
 	\tl_new:N \g_ptxcd_xmp_title_tl
 	\tl_new:N \g_ptxcd_xmp_author_tl
@@ -985,7 +985,7 @@
 	\hypersetup{pdfcreator=LaTeX~using~TUDa-CI}
 
 	\msg_new:nnnn {tudapub} {metadata-to-hypersetup} {
-		You~don't~use~pdfx.\\
+		You~don't~use~pdfx.~
 		Here~the~\string\Metadata\~command~only~exists~for~compatibility~reasons.\\
 		I~will~pass~the~data~to~ḩypersetup.
 	}{
@@ -1040,6 +1040,8 @@
 		\msg_info:nn{tudapub} {no-pdfa}
 	}
 \fi:
+
+\RequirePackage{bookmark}
 
 \box_new:N  \g_ptxcd_sponsor_box
 \seq_new:N \g_ptxcd_sponsors_seq
