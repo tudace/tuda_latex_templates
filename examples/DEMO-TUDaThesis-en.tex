@@ -1,9 +1,9 @@
-%% This is file `DEMO-TUDaThesis.tex' version 3.36 (2024-01-05),
+%% This is file `DEMO-TUDaThesis-en.tex' version 3.36 (2024-01-05)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
-%%  Copyright (C) 2018--2023 by Marei Peischl <marei@peitex.de>
+%% Copyright (C) 2018--2023 by Marei Peischl <marei@peitex.de>
 %%
 %% ============================================================================
 %% This work may be distributed and/or modified under the
@@ -31,111 +31,86 @@
 %%
 % !TeX program = lualatex
 %%
-
+% Enable PDF/A via pdfmanagement and no longer via pdfx
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+}
 \documentclass[
-	enlglish,% main language as global option
+	english,% main language as global option
 	ruledheaders=section,% section levels above this one will follow the ruled layout
-	class=report,% choose the base document class. It will load the corresponding KOMA-Script class
-	thesis={type=bachelor},% Thesis, for PhD thesis please have a look at DEMO-TUDaPhd example file
+	class=report,% Choose the base document class. Will choose the matching KOMA-Script class
+	thesis={type=bachelor},% Thesis, for PhD thesis have a look at DEMO-TUDaPhd example file
 	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
 	custommargins=true,% Calculate margins using typearea
 	marginpar=false,% toggle marginpar
-	%BCOR=5mm,% Binding correction
+%	BCOR=5mm,% Binding correction
 	parskip=half-,% use a parskip instead of indent, see KOMA-Script documentation
-	fontsize=11pt,% basic font size, default setting of 9pt is quite tiny
-%	logofile=example-image, % In case logo files are missing
+	fontsize=11pt,% basic font size, CI default setting of 9pt is too small for theses
+%	logofile=example-image, % In case logo files are not available
 ]{tudapub}
 
-
-% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
-\usepackage{iftex}
-\ifPDFTeX
-	\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
-\fi
-
 %%%%%%%%%%%%%%%%%%%
-%Language and improved hyphenation
+% Language setup
 %%%%%%%%%%%%%%%%%%%
 \usepackage[german, main=english]{babel}
-\usepackage[autostyle]{csquotes}% \enquote
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
+
 \usepackage{microtype}
 
 %%%%%%%%%%%%%%%%%%%
-%Bibliography
+% Bibliography
 %%%%%%%%%%%%%%%%%%%
 \usepackage{biblatex}
-\bibliography{DEMO-TUDaBibliography}
-
-
-%%%%%%%%%%%%%%%%%%%
-%Package suggestions for tables
-%%%%%%%%%%%%%%%%%%%
-%\usepackage{array}     % Fundamental tools for tables. Is automatically loaded by the following packages
-\usepackage{tabularx}   % tables with flexible columns to achieve fixed width
-%\usepackage{longtable} % tables across multiple pages
-%\usepackage{xltabular} % tables with fixed width spanning multiple pages 
-\usepackage{booktabs}   % Improved layout for horizontal rules in tables
+\addbibresource{DEMO-TUDaBibliography}% File name of BibTeX database
 
 %%%%%%%%%%%%%%%%%%%
-%Package suggestions math
+% Package suggestions for tables
 %%%%%%%%%%%%%%%%%%%
-%\usepackage{mathtools}% extended version of amsmath
-%\usepackage{amssymb}% additional symbols
-%\usepackage{siunitx}% units
+\usepackage{array}%  Fundamental tools for tables. Is automatically loaded by the following packages
+% tables with flexible columns to achieve fixed width
+%\usepackage{longtable}% tables across multiple pages
+%\usepackage{xltabular}% tables with fixed width spanning multiple pages
+% Improved layout for horizontal rules in tables
 
-% Macros used for the example file. Should be removed for own documents! 
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-\biburlsetup
-
-\usepackage{pifont}% Zapf-Dingbats Symbole
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
+%%%%%%%%%%%%%%%%%%%
+% Package suggestions math
+%%%%%%%%%%%%%%%%%%%
+%\usepackage{mathtools}% Extended version of amsmath
+%\usepackage{amssymb}% Additional symbols
+%\usepackage{siunitx}% Numbers and  Units
 
 \begin{document}
 
-\Metadata{
-	title=TUDaThesis - Thesis using TU Darmstadt CI,
-	author=Marei Peischl
-}
-
-\title{TUDaThesis -- TUDaThesis - Thesis using TU Darmstadt CI}
+\title{TUDaThesis -- Theses using TU Darmstadt's CI}
 \subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
-\author[M. Peischl]{Marei Peischl}
-%\birthplace{}% Usually only required for PhD theses
+\author{Marei Peischl}
+% \birthplace{}% Usually only required for PhD theses
 \reviewer{Reviewer 1 \and Reviewer 2 \and  … }
 
-%The following elements will be placed on the title page.
-%\department is a required date. See full tudapub documentation for details.
-\department{ce}
-\institute{Institut}
-\group{Arbeitsgruppe}
+
+% The following elements will be placed on the title page.
+% \department is a required date. See full tudapub documentation for details.
+\department{ce}% If defined the shorthand will be replaced by the full name otherwhise it's used directly
+\institute{Institute}
+\group{Group}
 
 \submissiondate{\today}
 \examdate{\today}
 
-% Hinweis zur Lizenz:
-% TUDa-CI verwendet momentan die Lizenz CC BY-NC-ND 2.0 DE als Voreinstellung.
-% Die TU Darmstadt hat jedoch die Empfehlung von dieser auf die liberalere
-% CC BY 4.0 geändert. Diese erlaubt eine Verwendung bearbeiteter Versionen und
-% die kommerzielle Nutzung.
-% TUDa-CI wird im nächsten größeren Release ebenfalls diese Anpassung vornehmen.
-% Aus diesem Grund wird empfohlen die Lizenz manuell auszuwählen.
-%\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}
-% To see further information on the license option in English, remove the license= key and pay attention to the warning & help message.
-
-% \dedication{To simplify your work with \TeX}
+%\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}% License information for TUprints
 
 \maketitle
 
 \tableofcontents
 
+
 \chapter{Introduction}
+The File \enquote{DEMO-TUDaThesis.tex} is a basic template for theses using the Corporate Design of TU Darmstadt. It is part of TUDa-CI, which is the official template bundle of TU Darmstadt. The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
+
 
 
 \printbibliography
 
 \end{document}
+%% End of file `DEMO-TUDaThesis-en.tex'.
