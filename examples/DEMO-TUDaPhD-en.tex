@@ -1,0 +1,140 @@
+%% This is file `DEMO-TUDaPhD-en.tex' version 3.36 (2024-01-05)
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%% Copyright (C) 2018--2023 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainers of this work are
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% If you need a compiled version of this document, have a look at
+%% http://mirror.ctan.org/macros/latex/contrib/tuda-ci/doc
+%% or at the documentation directory of this package (if installed)
+%% <path to your LaTeX distribution>/doc/latex/tuda-ci
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+% Enable PDF/A via pdfmanagement and no longer via pdfx
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+}
+\documentclass[
+	english,% main language as global option
+	ruledheaders=chapter,% Section levels above this one will follow the ruled layout, see DEMO-TUDaPub
+	class=book,% Choose the base document class. Will choose the matching KOMA-Script class
+	thesis={% PhD thesis, for smaller theses have a look at DEMO-TUDaThesis-en.tex
+			type=dr,
+			dr=rernat
+		},
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+	custommargins=true,% Calculate margins using typearea
+	marginpar=false,% Disable marginpar
+%	BCOR=5mm,% Binding correction
+	parskip=half-,% use a parskip instead of indent, see KOMA-Script documentation
+	fontsize=11pt,% basic font size, CI default setting of 9pt is too small for theses
+%	logofile=example-image,% In case logo files are not available
+]{tudapub}
+
+%%%%%%%%%%%%%%%%%%%
+% Language setup
+%%%%%%%%%%%%%%%%%%%
+\usepackage[german, main=english]{babel}% german has to be loaded as the titlepage is always in German
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
+
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography}% File name of BibTeX database
+
+%%%%%%%%%%%%%%%%%%%
+% Package suggestions for tables
+%%%%%%%%%%%%%%%%%%%
+\usepackage{array}%  Fundamental tools for tables. Is automatically loaded by the following packages
+% \usepackage{tabularx}% tables with flexible columns to achieve fixed width
+%\usepackage{longtable}% tables across multiple pages
+%\usepackage{xltabular}% tables with fixed width spanning multiple pages
+\usepackage{booktabs}% Improved layout for horizontal rules in tables
+
+%%%%%%%%%%%%%%%%%%%
+% Package suggestions math
+%%%%%%%%%%%%%%%%%%%
+%\usepackage{mathtools}% Extended version of amsmath
+%\usepackage{amssymb}% Additional symbols
+%\usepackage{siunitx}% Numbers and  Units
+
+\begin{document}
+
+\title{TUDaPhD -- PhD Theses using TU Darmstadt's CI}
+\subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
+\author{Marei Peischl}
+% \birthplace{}% Usually only required for PhD theses
+\reviewer{Reviewer 1 \and Reviewer 2 \and  … }
+
+% \reviewer*[Supervisor, Assistant Supervisor]{Reviewer 1 \and Reviewer 2}
+% For further customization
+
+% \publishers{Darmstadt, Technische Universität Darmstadt}
+% For the location or publisher. In this case it is specified as „Darmstadt, Technische Universität Darmstadt“. The specification is from the university.
+
+% If no suitable option is available:
+% \drtext{}
+
+% The following elements will be placed on the title page.
+% \department is a required date. See full tudapub documentation for details.
+\department{ce}% If defined the shorthand will be replaced by the full name otherwhise it's used directly
+\institute{Institute}
+\group{Group}
+
+\submissiondate{\today}
+\examdate{\today}
+
+%\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}% License information for TUprints
+
+\dedication{To simplify your work with \TeX}
+\maketitle
+\affidavit%
+\begin{abstract}
+	Deutsche Zusammenfassung
+\end{abstract}
+
+\begin{abstract}[english]
+	Englische Zusammenfassung, falls benötigt
+\end{abstract}
+
+\tableofcontents
+%  Maybe some other lists like \listoffigures or acronyms
+
+\mainmatter
+
+
+\chapter{About this file}
+The File \file{DEMO-TUDaPhD.tex} is a basic template for PhD theses using the Corporate Design of TU Darmstadt.
+It is part of TUDa-CI, which is the official template bundle of TU Darmstadt.
+The original version was inspired by the \pck{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
+
+
+\printbibliography
+
+\end{document}
+%% End of file `DEMO-TUDaPhD-en.tex'.
