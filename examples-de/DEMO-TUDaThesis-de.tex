@@ -31,7 +31,11 @@
 %%
 % !TeX program = lualatex
 %%
-
+% PDF/A über pdfmanagement und nicht über pdfx
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das  noch nicht.
+}
 \documentclass[
 	german,% Hauptsprache als globale Option, früher war ngerman notwendig
 	ruledheaders=section,% Ebene bis zu der die Überschriften mit Linien abgetrennt werden,
