@@ -139,8 +139,14 @@
 	\__ptxcd_setup_logo_box:nnn {#1} {partnerlogo} {#2}
 }
 
-\NewDocumentCommand{\sublogo}{sm}{
+\NewDocumentCommand{\sublogo}{sms}{
 	\__ptxcd_setup_logo_box:nnn {#1} {sublogo} {#2}
+	\IfBooleanT{#3}{
+		\hbox_gset:Nn \g__ptxcd_sublogo_box {
+			\hbox_unpack_drop:N \g__ptxcd_sublogo_box
+			\hskip.6\l__ptxcd_sublogo_ht_dim
+		}
+	}
 }
 
 % section page
