@@ -53,11 +53,20 @@
 	headsepline .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {headsepline},
 	extendedspace .bool_gset:N = \g__ptxcd_extended_space_bool,
 	headrule .bool_gset:N = \g__ptxcd_headrule_bool,
+	uppercase-frametitle .bool_gset:N = \g__ptxcd_uppercase_frametitle_bool,
+	uppercase-frametitle .default:n = true,
+	uppercase-frametitle .initial:n = true,
 }
 
 \define@key{beamerframe}{bgcolor}{
 	\keys_set:nn {ptxcd/beamer/outer} {
 		singleframebgcolor=#1
+	}
+}
+
+\define@key{beamerframe}{uppercase}{
+	\keys_set:nn {ptxcd/beamer/outer} {
+		uppercase-frametitle=#1
 	}
 }
 
@@ -193,7 +202,7 @@
 	    \usebeamerfont{frametitle}%
 	    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
 	    \vphantom{Ü}
-	    \text_uppercase:n {\insertframetitle}\strut
+	    \bool_if:NT \g__ptxcd_uppercase_frametitle_bool \text_uppercase:n {\insertframetitle}\strut
 	    \par%
 	    {%
 	      \ifx\insertframesubtitle\@empty%

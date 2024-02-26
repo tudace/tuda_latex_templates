@@ -116,6 +116,18 @@ Please be also aware of beamer's mechanism to filter the toc, e.g. by \code{\tex
 An example.
 \end{frame}
 
+\begin{frame}[fragile,uppercase=false]{Please be aware of uppercase frametitles}
+The mechanism to provide uppercase frame titles might have strange side effects.
+It's aware of macros, so those usually should work, but there are issues with arguments. e.g. using \verb+\color{dark2}+ will throw an error message.
+
+You can avoic this by either locally disabling the case change:
+
+\begin{verbatim}
+\frameztitle{Test \NoCaseChange{\textcolor{dark2}{\MakeUppercase{Test}}}}
+\end{verbatim}
+or use the frame option \verb+uppercase=false+ as for this frame or the class option \verb+uppercase-frametitle=false+
+\end{frame}
+
 \textcolor{TUDa-dark1}{test}
 
 \begin{frame}{Color Scheme}
