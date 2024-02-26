@@ -1,0 +1,75 @@
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+%
+% ==========================================
+%
+% \fi
+% \iffalse %no documentation on this
+%<@@=ptxcd>
+%<*tudasize>
+\ProvidesExplFile{tuda-\@@tudasizepaper@@ paper.clo}{2024-01-22}{3.35}{tuda-ci~size~adjustments~for~\@@tudasizepaper@@ paper}
+\cs_set:Nn \ptxcd_setup_title_sizes: {
+%<a0>  {125pt}{165pt}
+%<a1>  {35pt}{42pt}
+%<a2>  {65pt}{82pt}
+%<a3>  {47pt}{61pt}
+%<a4>  {36pt}{47pt}
+%<a5>  {22pt}{28pt}
+}
+\cs_set:Nn \ptxcd_titleinfo_fontsize: {
+%<a0>  {28pt}{35pt}
+%<a1>  {35pt}{42pt}
+%<a2>  {22pt}{28pt}
+%<a3>  {16pt}{20pt}
+%<a4>  {12pt}{14pt}
+%<a5>  {22pt}{28pt}
+}
+\cs_set:Nn \ptxcd_titlethanks_fontsize: {
+%<a0>  {24pt}{30pt}
+%<a1>  {22pt}{26pt}
+%<a2>  {14pt}{20pt}
+%<a3>  {12pt}{16pt}
+%<a4|a5>  {10pt}{11.5pt}
+}
+}
+\cs_set:Nn \ptxcd_setup_base_sizes: {
+  \tl_if_empty:NT \g_ptxcd_fontsize_tl {
+    \tl_gset:Nn \g_ptxcd_fontsize_tl
+%<a0>    {30pt}
+%<a1|a2>    {25pt}
+%<a3>    {17pt}
+%<a4>    {14pt}
+%<a5>    {10pt}
+  }
+  \dim_gset:Nn \g_ptxcd_margin_dim
+%<a0|a1|a2>  {30mm}
+%<a3|a4>  {15mm}
+%<a5>  {12mm}
+}
+%</tudasize>
+% \fi % no documentation on this
+% \Finale
+\endinput

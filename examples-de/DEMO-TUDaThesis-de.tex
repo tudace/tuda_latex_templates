@@ -47,7 +47,7 @@
 %	BCOR=5mm,% Bindekorrektur
 	parskip=half-,% Absatzkennzeichnung durch Abstand vgl. KOMA-Script
 	fontsize=11pt,% Basisschriftgröße laut Corporate Design ist mit 9pt häufig zu klein
-%	logofile=example-image, % Falls die Logo Dateien nicht vorliegen
+%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
 ]{tudapub}
 
 %%%%%%%%%%%%%%%%%%%
@@ -71,10 +71,10 @@
 % Paketvorschläge Tabellen
 %%%%%%%%%%%%%%%%%%%
 \usepackage{array}%  Grundlegendes Ergänzungspaket für Tabellen. Wird von den folgenden Paketen indirekt geladen
-% Tabellen mit fester Breite und entsprechend umbrechenden Spalten
+%\usepackage{tabularx}% Tabellen mit fester Breite und entsprechend umbrechenden Spalten
 %\usepackage{longtable}% Mehrseitige Tabellen
 %\usepackage{xltabular}% Mehrseitige Tabellen mit fester Breite
-% Verbesserte Möglichkeiten für Tabellenlayout über horizontale Linien
+%\usepackage{booktabs}% Verbesserte Möglichkeiten für Tabellenlayout über horizontale Linien
 
 %%%%%%%%%%%%%%%%%%%
 % Paketvorschläge Mathematik/Formelsatz
@@ -108,7 +108,6 @@
 % \birthplace{}% Geburtsort. Bei Dissertationen zwingend notwendig
 \reviewer{Reviewer 1 \and Reviewer 2 \and  … }
 
-
 % Diese Felder werden untereinander auf der Titelseite platziert.
 % \department ist eine notwendige Angabe, siehe auch dem Abschnitt `Abweichung von den Vorgaben für die Titelseite'
 \department{ce}% Das Kürzel wird automatisch ersetzt und als Studienfach gewählt sofern es definiert ist.
@@ -130,9 +129,10 @@
 %% \affidavit[signature-image={\includegraphics[width=\width,height=1cm]{example-image}}, <hier können andere Optionen zusätzlich stehen>]
 
 \tableofcontents
+% Ggf. weitere Verzeichnisse wie \listoffigures oder ein  Abkürzungsverzeichnis
 
 
-\chapter{Über diese Datei}
+\addchap{Über diese Datei}
 Die Datei \file{DEMO-TUDaThesis.tex} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
 Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
 
@@ -262,6 +262,8 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
     }
 \end{verbatim}
 	      Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
+
+	      Die printid is die ID-Nummer des TUprints-Eintrags. Die urn ist ein dauerhaft eindeutig zitierfähiger Bezeichner für das Dokument. Die Nummer entspricht bei TUprints der printid mit Ergänzung einer Prüfzimmer. Beide Angaben sind in den Details des TUprints-Eintrags zu finden.
 
 	      \minisec{Lizenzangabe}
 	      Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license=<Text>| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
