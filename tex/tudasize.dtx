@@ -27,50 +27,246 @@
 % ==========================================
 %
 % \fi
-% \iffalse %no documentation on this
+% \iffalse
+%<*dtx>
+\documentclass{tudapub}
+\usepackage{doc}
+\begin{document}
+no documentation on this so far …
+\DocInput{tudasize.dtx}
+\end{document}
+%</dtx>
 %<@@=ptxcd>
 %<*tudasize>
+%    \begin{macrocode}
 \ProvidesExplFile{tuda-\@@tudasizepaper@@ paper.clo}{2024-01-22}{3.35}{tuda-ci~size~adjustments~for~\@@tudasizepaper@@ paper}
 \cs_set:Nn \ptxcd_setup_title_sizes: {
   \cs_set:Nn \ptxcd_title_fontsize: {
-%<a0>  {125pt}{165pt}
-%<a1>  {86pt}{120pt}
-%<a2>  {65pt}{82pt}
-%<a3>  {47pt}{61pt}
-%<a4>  {36pt}{47pt}
-%<a5>  {22pt}{28pt}
-}
-\cs_set:Nn \ptxcd_titleinfo_fontsize: {
-%<a0>  {28pt}{35pt}
-%<a1>  {35pt}{42pt}
-%<a2>  {22pt}{28pt}
-%<a3>  {16pt}{20pt}
-%<a4>  {12pt}{14pt}
-%<a5>  {10pt}{11.5pt}
-}
-\cs_set:Nn \ptxcd_titlethanks_fontsize: {
-%<a0>  {24pt}{30pt}
-%<a1>  {22pt}{26pt}
-%<a2>  {14pt}{20pt}
-%<a3>  {12pt}{16pt}
-%<a4|a5>  {10pt}{11.5pt}
-}
+%<a0>	{125pt}{165pt}
+%<a1>	{86pt}{120pt}
+%<a2>	{65pt}{82pt}
+%<a3>	{47pt}{61pt}
+%<a4>	{36pt}{47pt}
+%<a5>	{22pt}{28pt}
+  }
+  \cs_set:Nn \ptxcd_titleinfo_fontsize: {
+%<a0>	{28pt}{35pt}
+%<a1>	{35pt}{42pt}
+%<a2>	{22pt}{28pt}
+%<a3>	{16pt}{20pt}
+%<a4>	{12pt}{14pt}
+%<a5>	{10pt}{11.5pt}
+  }
+  \cs_set:Nn \ptxcd_titlethanks_fontsize: {
+%<a0>	{24pt}{30pt}
+%<a1>	{22pt}{26pt}
+%<a2>	{14pt}{20pt}
+%<a3>	{12pt}{16pt}
+%<a4|a5>	{10pt}{11.5pt}
+  }
 }
 \cs_set:Nn \ptxcd_setup_base_sizes: {
   \tl_if_empty:NT \g_ptxcd_fontsize_tl {
-    \tl_gset:Nn \g_ptxcd_fontsize_tl
-%<a0>    {30pt}
-%<a1|a2>    {25pt}
-%<a3>    {17pt}
-%<a4>    {14pt}
-%<a5>    {10pt}
+	\tl_gset:Nn \g_ptxcd_fontsize_tl
+%<a0>	{30pt}
+%<a1|a2>	{25pt}
+%<a3>	{17pt}
+%<a4>	{14pt}
+%<a5>	{10pt}
   }
   \dim_gset:Nn \g_ptxcd_margin_dim
 %<a0|a1|a2>  {30mm}
 %<a3|a4>  {15mm}
 %<a5>  {12mm}
 }
+%     \end{macrocode}
 %</tudasize>
+% The following part is a modified version of 
+% scrkernel-fonts.dtx and scrkernel-paragraphs.dtx
+% 
+% Copyright (c) 1994-2022 Markus Kohm [komascript at gmx info]
+%<*scrsize>
+%    \begin{macrocode}
+\ProvidesFile{%
+%<9pt>  tudasize9pt.clo%
+%<tudaletter>  tudalettersize10pt.clo%
+}[
+%<9pt>  TUDa-CI  font size class option (9pt)
+%<tudaletter>  tudaletter font size class option (10pt)
+]
+%    \end{macrocode}
+%
+% \begin{command}{\normalsize,\datasize,\small,\footnotesize,\scriptsize,\tiny,\large,
+%                 \Large,\LARGE,\huge,\Huge}
+%    \begin{macrocode}
+\let\normalsize\@undefined
+\DeclareRobustCommand\normalsize{%
+%<*9pt>  
+  \@setfontsize\normalsize\@ixpt\@xipt%
+  \abovedisplayskip 8\p@ \@plus4\p@ \@minus4\p@
+  \abovedisplayshortskip \z@ \@plus3\p@
+  \belowdisplayshortskip 5\p@ \@plus3\p@ \@minus3\p@
+%</9pt>  
+%<*tudaletter>  
+  \@setfontsize\normalsize\@xpt\@xipt
+  \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+  \abovedisplayshortskip \z@ \@plus3\p@
+  \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+%</tudaletter>  
+  \belowdisplayskip \abovedisplayskip
+  \let\@listi\@listI
+}
+\def\datasize{%
+  \normalsize
+  \@setfontsize\normalsize
+%<9pt>  \@ixpt\@xipt
+%<tudaletter>  \@xpt\@xiiipt
+}
+\let\small\@undefined
+\DeclareRobustCommand\small{%
+%<*9pt>
+\@setfontsize\small\@viiipt\@ixpt%
+\abovedisplayskip 5\p@ \@plus2\p@ \@minus2\p@
+\abovedisplayshortskip \z@ \@plus1\p@
+\belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
+\def\@listi{\leftmargin\leftmargini
+  \topsep 3\p@ \@plus\p@ \@minus\p@
+%</9pt>  
+%<*tudaletter>  
+  \@setfontsize\small\@ixpt{11}%
+  \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
+  \abovedisplayshortskip \z@ \@plus2\p@
+  \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
+  \def\@listi{\leftmargin\leftmargini
+    \topsep 4\p@ \@plus2\p@ \@minus2\p@
+%</tudaletter>
+    \parsep 2\p@ \@plus\p@ \@minus\p@
+    \itemsep \parsep}%
+  \belowdisplayskip \abovedisplayskip
+}
+\let\footnotesize\@undefined
+\DeclareRobustCommand\footnotesize{%
+%<*9pt>  
+  \@setfontsize\footnotesize\@viipt\@viiipt
+  \abovedisplayskip 4\p@ \@plus2\p@ \@minus2\p@
+  \abovedisplayshortskip \z@ \@plus1\p@
+  \belowdisplayshortskip 2.5\p@ \@plus\p@ \@minus\p@
+%</9pt>  
+%<*tudaletter>  
+  \@setfontsize\footnotesize{7.5pt}\@xpt%
+  \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@
+  \abovedisplayshortskip \z@ \@plus\p@
+  \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
+%</tudaletter>  
+  \def\@listi{\leftmargin\leftmargini
+    \topsep 3\p@ \@plus\p@ \@minus\p@
+    \parsep 2\p@ \@plus\p@ \@minus\p@
+    \itemsep \parsep}%
+  \belowdisplayskip \abovedisplayskip
+}
+\let\scriptsize\@undefined
+\let\tiny\@undefined
+\let\large\@undefined
+\let\Large\@undefined
+\let\LARGE\@undefined
+\let\huge\@undefined
+\let\Huge\@undefined
+%<*9pt>
+\DeclareRobustCommand\scriptsize{\@setfontsize\scriptsize\@vipt\@viipt}
+\DeclareRobustCommand\tiny{\@setfontsize\tiny\@vpt\@vipt}
+\DeclareRobustCommand\large{\@setfontsize\large\@xpt\@xiipt}
+\DeclareRobustCommand\Large{\@setfontsize\Large\@xipt{13}}
+\DeclareRobustCommand\LARGE{\@setfontsize\LARGE\@xiipt{14}}
+\DeclareRobustCommand\huge{\@setfontsize\huge\@xivpt{18}}
+\DeclareRobustCommand\Huge{\@setfontsize\Huge\@xviipt{22}}
+%</9pt>
+%<*tudaletter>
+\DeclareRobustCommand\scriptsize{\@setfontsize\scriptsize\@viipt\@viiipt}
+\DeclareRobustCommand\tiny{\@setfontsize\tiny\@vipt\@viipt}
+\DeclareRobustCommand\large{\@setfontsize\large\@xiipt{14}}
+\DeclareRobustCommand\Large{\@setfontsize\Large\@xivpt{18}}
+\DeclareRobustCommand\LARGE{\@setfontsize\LARGE\@xviipt{22}}
+\DeclareRobustCommand\huge{\@setfontsize\huge\@xxpt{25}}
+\DeclareRobustCommand\Huge{\@setfontsize\Huge\@xxvpt{30}}
+%</tudaletter>
+\normalsize
+%    \end{macrocode}
+% \end{command}
+% The values are same as with the standard classes.
+%    \begin{macrocode}
+%<*9pt>
+\setlength\footnotesep    {6.3\p@}
+\setlength{\skip\footins} {8\p@ \@plus 4\p@ \@minus 2\p@}
+\setlength\textfloatsep   {18\p@ \@plus 2\p@ \@minus 4\p@}
+\setlength\dbltextfloatsep{18\p@ \@plus 2\p@ \@minus 2\p@}
+%</9pt>
+%<*tudaletter>
+\setlength\footnotesep    {6.65\p@}
+\setlength{\skip\footins} {9\p@ \@plus 4\p@ \@minus 2\p@}
+\setlength\textfloatsep   {20\p@ \@plus 2\p@ \@minus 4\p@}
+\setlength\dbltextfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
+%</tudaletter>
+\setlength\floatsep       {12\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\intextsep      {12\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\dblfloatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\@fptop         {0\p@ \@plus 1fil}
+\setlength\@fpsep         {8\p@ \@plus 2fil}
+\setlength\@fpbot         {0\p@ \@plus 1fil}
+\setlength\@dblfptop      {0\p@ \@plus 1fil}
+\setlength\@dblfpsep      {8\p@ \@plus 2fil}
+\setlength\@dblfpbot      {0\p@ \@plus 1fil}
+\setlength\partopsep      {2\p@ \@plus 1\p@ \@minus 1\p@}
+%    \end{macrocode}
+% \begin{macro}{\@listi,\@listii,\@listiii,\@listiv,\@listv,\@listvi}
+% The definitions are the same as with the standard classes.
+%    \begin{macrocode}
+\def\@listi{\leftmargin\leftmargini
+  \parsep 4\p@ \@plus2\p@ \@minus\p@
+%<9pt>  \topsep 8\p@ \@plus2\p@ \@minus3\p@
+%<tudaletter>  \topsep 8\p@ \@plus2\p@ \@minus4\p@
+  \itemsep \parsep}
+\let\@listI\@listi
+\def\@listii {\leftmargin\leftmarginii
+  \labelwidth\leftmarginii
+  \advance\labelwidth-\labelsep
+  \topsep    4\p@ \@plus2\p@ \@minus\p@
+  \parsep    2\p@ \@plus\p@  \@minus\p@
+  \itemsep   \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+  \labelwidth\leftmarginiii
+  \advance\labelwidth-\labelsep
+  \topsep    2\p@ \@plus\p@\@minus\p@
+  \parsep    \z@
+  \partopsep \p@ \@plus\z@ \@minus\p@
+  \itemsep   \topsep}
+\def\@listiv {\leftmargin\leftmarginiv
+  \labelwidth\leftmarginiv
+  \advance\labelwidth-\labelsep}
+\def\@listv  {\leftmargin\leftmarginv
+  \labelwidth\leftmarginv
+  \advance\labelwidth-\labelsep}
+\def\@listvi {\leftmargin\leftmarginvi
+  \labelwidth\leftmarginvi
+  \advance\labelwidth-\labelsep}
+%%% From File: $Id: scrkernel-paragraphs.dtx 3064 2019-02-01 07:40:28Z kohm $
+\@ifundefined{@list@extra}{}{%
+  \expandafter\ifnum\scr@v@is@ge{3.17}\par@updaterelative\fi
+  \l@addto@macro{\@listi}{\@list@extra}%
+  \let\@listI=\@listi
+  \l@addto@macro{\@listii}{\@list@extra}%
+  \l@addto@macro{\@listiii}{\@list@extra}%
+  \l@addto@macro{\footnotesize}{\protect\add@extra@listi{ftns}}%
+  \l@addto@macro{\small}{\protect\add@extra@listi{sml}}%
+}
+\@listi
+%    \end{macrocode}
+% \end{macro}^^A \@listi … \@listvi
+% \end{ilength}^^A \@fptop … \@dblfpbot
+% \end{length}^^A \footnotesep … \partopsep
+%
+% \Finale
+% \PrintChanges
+%</scrsize>
 % \fi % no documentation on this
 % \Finale
 \endinput

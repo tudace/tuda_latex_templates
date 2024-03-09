@@ -7,6 +7,7 @@ sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 docfiledir="example"
 typesetfiles={"*.tex"} 
+unpackexe="pdflatex"
 
 excludefiles={"Examples-*"}
 
