@@ -1,11 +1,20 @@
-%% This is file `tuda-a5paper.clo' version 3.36 (2024-01-05),
+%%
+%% This is file `tuda-a5paper.clo',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% tudasize.dtx  (with options: `a5,tudasize')
+%%
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
+%%
 %% ----------------------------------------------------------------------------
 %%
-%%  Copyright (C) 2018--2023 by Marei Peischl <marei@peitex.de>
+%%   Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 %%
 %% ============================================================================
+%%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
@@ -25,16 +34,18 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.36}
-\def\filedate{2024-01-05}
-\ProvidesExplFile{tuda-a5paper.clo}{\filedate}{\fileversion}{tuda-ci~size~adjustments~for~a5paper}
+\ProvidesExplFile{tuda-a5paper.clo}{2024-01-22}{3.35}{tuda-ci~size~adjustments~for~a5paper}
 \cs_set:Nn \ptxcd_setup_title_sizes: {
-  \cs_set:Nn \ptxcd_title_fontsize: {{22pt}{28pt}}
-  \cs_set:Nn \ptxcd_titleinfo_fontsize: {{10pt}{11.5pt}}
-  \cs_set:Nn \ptxcd_titlethanks_fontsize: {{10pt}{11.5pt}}
+	\cs_set:Nn \ptxcd_title_fontsize: {{22pt}{28pt}}
+	\cs_set:Nn \ptxcd_titleinfo_fontsize: {{10pt}{11.5pt}}
+	\cs_set:Nn \ptxcd_titlethanks_fontsize: {{10pt}{11.5pt}}
 }
 \cs_set:Nn \ptxcd_setup_base_sizes: {
-  \tl_if_empty:NT \g_ptxcd_fontsize_tl {\tl_gset:Nn \g_ptxcd_fontsize_tl {10pt}}
-  \dim_gset:Nn \g_ptxcd_margin_dim {12mm}
+	\tl_if_empty:NT \g_ptxcd_fontsize_tl {
+		\tl_gset:Nn \g_ptxcd_fontsize_tl {10pt}
+	}
+	\dim_gset:Nn \g_ptxcd_margin_dim {12mm}
 }
 \endinput
+%%
+%% End of file `tuda-a5paper.clo'.
