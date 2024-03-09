@@ -66,6 +66,11 @@ Please use the issue tracker for feedback!
 
 \askforoverwritefalse
 
+\generate{
+	\file{tudapub.cls}{\from{tudapub.dtx}{class,tudapub}}
+	\file{tudathesis.cfg}{\from{tudapub.dtx}{cfg,tudathesis}}
+}
+
 \ExplSyntaxOn
 \int_new:N \g_ptxcd_count_int
 
@@ -85,15 +90,8 @@ Please use the issue tracker for feedback!
 
 
 \str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
-%\tl_set:cn {\str_use:N \l__ptxcd_customize_ins_str} {
-%	\int_gincr:N \g_ptxcd_count_int
-%	\clist_item:Nn \g_ptxcd_clist {\g_ptxcd_count_int}
-%}
-
-\clist_new:N \g_ptxcd_clist 
 
 \cs_set:Npn \generateTUDaPaperFiles #1 {
-%	\clist_gset:Nn  \g_ptxcd_clist  {#1}
 	\str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
 		\clist_map_inline:nn {#1} {
 			\generate{

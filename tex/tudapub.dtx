@@ -1,38 +1,108 @@
-%% This is file `tudapub.cls' version 3.36 (2024-01-05),
-%% it is part of
-%% TUDa-CI -- Corporate Design for TU Darmstadt
-%% ----------------------------------------------------------------------------
-%%
-%%  Copyright (C) 2018--2023 by Marei Peischl <marei@peitex.de>
-%%
-%% ============================================================================
-%% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3c
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%% http://www.latex-project.org/lppl.txt
-%% and version 1.3c or later is part of all distributions of LaTeX
-%% version 2008/05/04 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%%
-%% The Current Maintainers of this work are
-%%   Marei Peischl <tuda-ci@peitex.de>
-%%
-%% The development respository can be found at
-%% https://github.com/tudace/tuda_latex_templates
-%% Please use the issue tracker for feedback!
-%%
-%% ============================================================================
-%%
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainers of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+% ============================================================================
+%
+% \fi
+%
+% \iffalse
 \def\fileversion{3.36}
 \def\filedate{2024-01-05}
-\NeedsTeXFormat{LaTeX2e}
+%<*driver>
+\ProvidesFile{tudapub.dtx}[\filedate\space\fileversion\space TUDaPub source file]
+%</driver>
+%<package|class>\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+%<tudapub>\ProvidesExplClass{tudapub}{\filedate}{\fileversion}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
+%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2024-01-05}{3.36}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
+%<*driver>
+\documentclass[
+	class=report,
+	titlepage=true,
+	IMRAD=false
+]{tudapub}[2024-01-05]
+\usepackage{doc}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{hologo}
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
 
-\ProvidesExplClass{tudapub}
-	{\filedate}{\fileversion}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
+\IfFileExists{tuda_logo.pdf}{}{
+	\UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
+}
+
+\usepackage{pifont}% Zapf-Dingbats Symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\OnlyDescription
+\begin{document}
+  \DocInput{tudapub.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{4.00}{0000-00-00}{Converted to DTX file}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% \UseName{tl_show:c} {ver@tudapub.dtx}
+% \show\
+% \show\GetFileInfo{file}
+% \GetFileInfo{tudapub.dtx}
+% \title{TUDa-CI -- Corporate Design for TU Darmstadt}
+% \author{Marei Peischl\\ \url{marei@peitex.de}}
+% \date{Version \fileversion{} of \filedate}
+%
+% \maketitle
+%
+% \begin{abstract}
+% The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt with \LaTeX.
+% Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation.
+% Up to Version 4.00 the documentation was only included in the demo files.
+% This document now sums up all features and includes references to other texdoc documents if required.
+% \end{abstract}
+% 
+%
+% \MaybeStop{}
+%
+% \section{Implementation}
+%
+% \iffalse
+%<*class>
+% \fi
+%
+%    \begin{macrocode}
 \RequirePackage{URspecialopts}
-
 \Define@specialopt@Module[ptxcd/pub]
 
 
@@ -97,7 +167,7 @@
 	},
 	ruledheaders .initial:n = all,
 	type .choices:nn = {publication, thesis} {\tl_gset_eq:NN \g_ptxcd_pubType_tl \l_keys_choice_tl},
-	type / intern .code:n = {\keys_set:nn {ptxcd/pub}  {titlepage=false, pdfa=false, IMRAD=false}},
+	type / intern .code:n = {\keys_set:nn {ptxcd/pub} {titlepage=false, pdfa=false, IMRAD=false}},
 	type .initial:n = publication,
 	unknown .code:n = {\prop_gput:NVn \g_ptxcd_unknown_clsopts_prop \l_keys_key_tl {#1}},
 	headline .choice:,
@@ -185,8 +255,9 @@
 	BCORtitlepage .initial:n = false,
 	BCORtitlepage .default:n = true,
 }
-%
-%%special option handling grouped values
+%    \end{macrocode}
+% special option handling grouped values
+%    \begin{macrocode}
 \Module@DefineSpecialKey[ptxcd/pub]{thesis}{
 	\keys_set:nn {ptxcd/pub}{type=thesis}
 	\tl_gput_right:No \g_ptxcd_thesis_options_tl {#1}
@@ -246,14 +317,13 @@
 		\clist_map_inline:nn {#2} {\PassOptionsToClass  {#1=##1} {\g_ptxcd_pub_class_tl}}
 		}
 }
-
-
-%Load tudasize clo file if available
+%    \end{macrocode}
+% Load  specific tudasize clo file if available
+%    \begin{macrocode}
 \file_if_exist:nT {tudasize\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}.clo}
 	{\providecommand*{\@fontsizefilebase}{tudasize}}
 
 \LoadClass{\g_ptxcd_pub_class_tl}
-
 
 \prop_map_inline:Nn \g_ptxcd_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.\g_ptxcd_pub_class_tl.cls@#1} {
@@ -262,8 +332,9 @@
 		{\KOMAoption{#1}{#2}}
 	}
 }
-
-%ruled headers
+%    \end{macrocode}
+% ruled headers
+%    \begin{macrocode}
 \int_compare:nT {\g_ptxcd_ruledheaders_int>=3} {
 	\cs_if_exist:NT \chapterlinesformat {
 		\renewcommand*{\chapterlinesformat}[3]{%
@@ -298,14 +369,11 @@
 	}}
 }
 
-
 \usepackage{tudarules}
-
-
-%,~ subsection,~
 \usepackage{tudafonts}
-
-%Margin & titlefontsize setup setup
+%    \end{macrocode}
+% Margin \& title fontsize setup
+%    \begin{macrocode}
 \bool_new:N \g_ptxcd_marginpar_bool
 
 \dim_new:N \g_ptxcd_marginpar_dim
@@ -313,7 +381,6 @@
 \dim_new:N \g_ptxcd_outerMargin_dim
 \dim_new:N \g_ptxcd_bottomMargin_dim
 \dim_new:N \g_ptxcd_topMargin_dim
-
 
 	%a3,a4
 	\int_compare:nTF {4<=\g_ptxcd_paper_int<=5}
@@ -344,20 +411,26 @@
 		{
 			\dim_gset:Nn \g_ptxcd_bottomMargin_dim {15mm}
 			\dim_gset:Nn \g_ptxcd_outerMargin_dim {10mm}
-			\dim_gset_eq:NN	 \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
+			\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
 			\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
 		}
 	}
 
 \dim_new:N \g_ptxcd_columnSep_dim
 \dim_gset:Nn \g_ptxcd_columnSep_dim {10pt}
-
+%    \end{macrocode}
+%
+% \begin{macro}{\coverpageleftmargin,\coverpagetopmargin.\coverpagerightmargin,\coverpagebottommargin}
 %coverpage
+%    \begin{macrocode}
 \edef\coverpageleftmargin{\dim_eval:n {\g_ptxcd_outerMargin_dim}}
 \renewcommand*{\coverpagetopmargin}{\g_ptxcd_outerMargin_dim}
 \edef\coverpagerightmargin{\dim_eval:n {\g_ptxcd_outerMargin_dim}}
 \renewcommand*{\coverpagebottommargin}{\g_ptxcd_outerMargin_dim}
-
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \str_case:onTF {\g_ptxcd_marginpar_tl} {
 	{true} {\bool_gset_true:N \g_ptxcd_marginpar_bool}
 	{false} {\bool_gset_false:N \g_ptxcd_marginpar_bool}
@@ -383,10 +456,10 @@
 \bool_if:NTF \g_ptxcd_headline_bool
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {20pt +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {1.25\baselineskip +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
-
+%    \end{macrocode}
 %%%%%Anfang Randeinstellungen Geometry
-
 %Has to be loaded here due to headwidth options
+%    \begin{macrocode}
 \usepackage[draft=false]{scrlayer-scrpage}
 
 \AddToHook{begindocument}[tudapub:BCOR-titlepage]{
@@ -426,7 +499,7 @@
 	}{
 		\bool_if:NTF  \g_ptxcd_marginpar_bool {
 			\tl_const:Nn \c_ptxcd_default_geometry_tl {TUDa-marginpar}
-		}  {
+		} {
 			\tl_const:Nn \c_ptxcd_default_geometry_tl {TUDa-nomarginpar}
 		}
 		\AddToHook{begindocument}[tudapub:custommargins-geometry]{
@@ -456,20 +529,20 @@
 	}
 	\ptxcd_restore_typearea:
 }
-
-
-
+%    \end{macrocode}
 %%%%%%%%
 %Ende Randeinstellungen klassisch
-
-
-
-
+%
+%
+% \begin{macro}{\institution}
+%    \begin{macrocode}
 \newcommand*{\institution}[1]{
 	\def\ptxcd_institution{#1}
 }
-
-
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \cs_new:Nn \ptxcd_titlerule_sep: {\the\dp\strutbox}
 
 \usepackage{tudacolors}
@@ -484,8 +557,9 @@
 \KOMAoptions{footsepline=.5\c_ptxcd_smallrule_dim}
 \setlength{\footheight}{\dimexpr\baselineskip+\c_ptxcd_rulesep_dim}
 \bool_if:NT \g_ptxcd_headline_bool {\KOMAoptions{headsepline=.5\c_ptxcd_smallrule_dim}}
-
+%    \end{macrocode}
 %Adjust headheight
+%    \begin{macrocode}
 \AddToHook{begindocument}[tudapub:adjust-headheight]{
 \bool_if:NTF \g_ptxcd_marginpar_bool
 	{
@@ -561,7 +635,8 @@
 ]{plain.TUDa.pub.head.above.line}
 
 %\dim_set:Nn \l_tmpa_dim {\topmargin+1in+\headheight+\headsep+\textheight
-%	+\footskip+\dp\strutbox-\footheight +\c_ptxcd_rulesep_dim}
+%   +\footskip+\dp\strutbox-\footheight +\c_ptxcd_rulesep_dim}
+
 \ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.even}
 \ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.odd}
 \ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.oneside}
@@ -573,8 +648,15 @@
 \DeclarePageStyleAlias{TUDa}{TUDa.pub}
 \DeclarePageStyleAlias{plain.TUDa}{plain.TUDa.pub}
 \pagestyle{TUDa}
-
+%    \end{macrocode}
+%
+% \begin{macro}{\titlepagestyle}
+%    \begin{macrocode}
 \renewcommand*{\titlepagestyle}{plain.TUDa}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \cs_new:Nn \ptxcd_sls@leftmargin: {%
 	\dimexpr
 	\if@twoside
@@ -591,13 +673,20 @@
 	}
 	+1in\relax
 }
-
-
-
+%    \end{macrocode}
 %Titelseite
+%    \begin{macrocode}
 \tl_new:N  \g_ptxcd_titleimage_code_tl
 \tl_gset_eq:NN  \g_ptxcd_titleimage_code_tl \c_empty_tl
+%    \end{macrocode}
+%
+% \begin{macro}{\titleimage}
+%    \begin{macrocode}
 \newcommand{\titleimage}[1]{\tl_gset:Nn \g_ptxcd_titleimage_code_tl {#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \box_new:N \l__ptxcd_titlegraphic_box
 
 \RequirePackage{trimclip}
@@ -631,11 +720,17 @@
 
 
 \seq_new:N \g_ptxcd_author_seq
-
+%    \end{macrocode}
+%
+% \begin{macro}{\author}
+%    \begin{macrocode}
 \renewcommand*\author[1]{
 	\seq_gset_split:Nnn \g_ptxcd_author_seq {\and} {#1}
 }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \msg_new:nnn{tudapub} {unknown-language} {
 	You~selected~an~unknown~language~#1.\\
 	The~Variable~#2~does~not~have~a~predefined~value.\\
@@ -661,21 +756,27 @@
 \cs_new:Nn \ptxcd_declare_caption:Nnn {
 	\ptxcd_declare_caption:Nnnn #1 {#2} {#3} {#3}
 }
-
+%    \end{macrocode}
+%
+% \begin{macro}{\@author}
+%    \begin{macrocode}
 \renewcommand*{\@author}{
   \begingroup
   \hyphenpenalty=100000
   \seq_use:Nnnn \g_ptxcd_author_seq {~\authorandname{}~} {,~} {~\&~}
   \endgroup
 }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \msg_new:nnn{tudapub} {infobox-too-high} {
 	The~height~of~your~Infobox~exeeds~the~space~reserved~in~the~title~block.\\
 	You~should~probably~switch~to~logo=bottom~or~reduce~the~number/size~of~InfoBoxes.
 }
 
 
-\cs_set:Nn 	\ptxcd_adjust_titlepage_style: {
+\cs_set:Nn \ptxcd_adjust_titlepage_style: {
 	\dim_set:Nn \l_tmpa_dim {\fp_to_dim:n {\expandafter \use_ii:nn\ptxcd_title_fontsize: *2.8}}
 	\dim_compare:nT  {\box_ht:N \g_ptxcd_title_box < \l_tmpa_dim} {
 		\skip_set:Nn \g_ptxcd_title_fill_skip {\dim_eval:n {\l_tmpa_dim -  \box_ht:N \g_ptxcd_title_box}}
@@ -768,9 +869,15 @@
 		}
 	}
 }
-
+%    \end{macrocode}
+%
+% \begin{macro}{\addTitleBox}
+%    \begin{macrocode}
 \newcommand{\addTitleBox}[1]{\seq_gput_right:Nn \g_ptxcd_title_info_seq {\ptxcd_make_title_info_box:n {#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \NewDocumentCommand{\addTitleBoxLogo}{sm}{
 	\IfBooleanTF{#1}{
 		\seq_gput_right:Nn \g_ptxcd_title_info_seq {
@@ -786,7 +893,7 @@
 			\dim_compare:nTF {\box_ht:N \l_tmpa_box > \l_tmpa_dim}
 			{\includegraphics[width=\l_tmpa_dim]{#2}}
 			{\box_use:N \l_tmpa_box}
-	 	}
+		}
 		}
 	}
 }
@@ -868,8 +975,9 @@
 }
 
 \DeclareNewPageStyleByLayers{title.TUDa}{title.TUDa.background,title.TUDa.rule,title.TUDa.image}
-
+%    \end{macrocode}
 %Logos
+%    \begin{macrocode}
 \RequirePackage{graphicx}
 
 \if_bool:N \g_ptxcd_pdfx_bool
@@ -899,12 +1007,12 @@
 
 	\@ifpackagelater{xmpincl}{2021/09/22}{
 	}{
-		\msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
+		\msg_error:nn{tudapub} {outdated-package-pdfa} {xmpincl}
 	}
 
 	\@ifpackagelater{pdfx}{2018/12/01}{
 	}{
-		\msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
+		\msg_error:nn{tudapub} {outdated-package-pdfa} {pdfx}
 	}
 
 	%%hyperref
@@ -965,7 +1073,7 @@
 	\cs_set:Nn \ptxcd_set_metadata_prop:nn {
 		%Fallback test for older kernels doesn't support mixed case eintries
 		\cs_if_exist:NTF \text_titlecase_first:n {
-			\exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\text_titlecase_first:n {#1}}  {#2}
+			\exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\text_titlecase_first:n {#1}} {#2}
 		} {
 			\exp_args:NNx \prop_gput:Nnn \g_ptxcd_MetaData_prop {
 					\str_uppercase:f {\tl_head:n {#1}}
@@ -1004,14 +1112,17 @@
 
 
 	\cs_new:Nn \ptxcd_pass_TitleData: {
-		% check if pdfmanagement is active
+%    \end{macrocode}
+% check if pdfmanagement is active
+%    \begin{macrocode}
 		\prop_if_exist:NTF \g__pdfmanagement_documentproperties_prop {
 			\prop_set_eq:NN \l_tmpa_prop \g__pdfmanagement_documentproperties_prop
 		} {
 			\prop_set_eq:NN \l_tmpa_prop   \g__hyp_documentproperties_prop
 		}
-
-		% title
+%    \end{macrocode}
+% title
+%    \begin{macrocode}
 		\prop_if_in:NnF \l_tmpa_prop {hyperref/pdftitle} {
 			\begingroup
 			\def\newline{}
@@ -1021,8 +1132,9 @@
 			\endgroup
 			\hypersetup{pdftitle={\tl_to_str:V \g_tmpa_tl}}
 		}
-
-		% author
+%    \end{macrocode}
+% author
+%    \begin{macrocode}
 		\prop_if_in:NnF \l_tmpa_prop {hyperref/pdfauthor} {
 			\begingroup
 				\def\newline{}
@@ -1045,8 +1157,22 @@
 
 \box_new:N  \g_ptxcd_sponsor_box
 \seq_new:N \g_ptxcd_sponsors_seq
+%    \end{macrocode}
+%
+% \begin{macro}{\AddSponsor}
+%    \begin{macrocode}
 \def\AddSponsor{\seq_gput_right:Nn \g_ptxcd_sponsors_seq}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\sponsors}
+%    \begin{macrocode}
 \def\sponsors#1{\def\@sponsors{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \sponsors{}
 
 \cs_new:Npn \ptxcd_title_footnote:w [#1] #2 {
@@ -1066,9 +1192,12 @@
 		\msg_error:nnn {tudapub} {only-thesis} {#1}
 	}
 }
-
-% The following macro is an adapted version of the corresponding KOMA-Script macro
-% Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
+%    \end{macrocode}
+%
+% \begin{macro}{\maketitle}
+%    \begin{macrocode}
+%% The following macro is an adapted version of the corresponding KOMA-Script macro
+%% Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
 \renewcommand*{\maketitle}[1][1]{
 	\def\and{,~ }
 	\cs_if_exist_use:N \ptxcd_pass_TitleData:
@@ -1262,10 +1391,18 @@
 	\endgroup
 	\fi
 }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 }
 
 \newkomafont{paperid}{\sffamily}
 \box_new:N \g_ptxcd_PaperID_box
+%    \end{macrocode}
+%
+% \begin{macro}{\SetPaperID}
+%    \begin{macrocode}
 \newcommand*{\SetPaperID}[2]{
 	\hbox_gset:Nn \g_ptxcd_PaperID_box {
 		\usekomafont{paperid}
@@ -1280,7 +1417,12 @@
 		#1{\Huge #2}
 	}
 }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@maketitle}
+%    \begin{macrocode}
 \renewcommand*{\@maketitle}{%
 	\global\@topnum=\z@
 	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
@@ -1364,9 +1506,18 @@
 	\endgroup
 	\vskip .5\c_ptxcd_logoheight_dim
 }%
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\abstract}
 %%Abstract anpassungen mit Sprache
+%    \begin{macrocode}
 \providecommand{\abstract}{}% für book
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \RenewDocumentEnvironment{abstract}{o}{
 	\begingroup
 	\IfNoValueF{#1}{\selectlanguage{#1}}
@@ -1391,9 +1542,9 @@
 }}{
 	\endgroup
 }
-
-
+%    \end{macrocode}
 %Anpassungen marginpar
+%    \begin{macrocode}
 \cs_set_eq:NN\ptxcd_orig@marginpar:w \marginpar
 \newkomafont{marginpar}{\accentfont\color{textaccentcolor}}
 \RenewDocumentCommand{\marginpar}{om}{
@@ -1406,47 +1557,71 @@
 
 \ptxcd_declare_caption:Nnn \authorandname {und} {and}
 \ptxcd_declare_caption:Nnn \ptxcd_datename {Datum}{Date}
-
+%    \end{macrocode}
+%
+% \begin{macro}{\ptxcd}
+%    \begin{macrocode}
 \gdef\ptxcd_dateseparator{:~}
-
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\frontmatter}
+%    \begin{macrocode}
 \providecommand*{\frontmatter}{
 	\if@twoside\cleardoublepage\else\clearpage\fi \@mainmattertrue
 	\pagenumbering {roman}
 }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\mainmatter}
+%    \begin{macrocode}
 \providecommand*{\mainmatter}{
 	\if@twoside\cleardoublepage\else\clearpage\fi \@mainmattertrue
 	\pagenumbering {arabic}
 }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\backmatter}
+%    \begin{macrocode}
 \providecommand*{\backmatter}{
 	\if@twoside\cleardoublepage\else\clearpage\fi \@mainmatterfalse
 }
-
-
+%    \end{macrocode}
+% \end{macro}
+%
 %IMRAD:Introduction
+%    \begin{macrocode}
 \seq_if_exist:NTF \seq_const_from_clist:Nn {
 	\seq_const_from_clist:Nn \c_ptxcd_IMRAD_seq {introduction, methods, results, discussion}
 } {
 	\seq_new:N \c_ptxcd_IMRAD_seq
 	\seq_gset_from_clist:Nn \c_ptxcd_IMRAD_seq {introduction, methods, results, discussion}
 }
-
+%    \end{macrocode}
+%
+% \begin{macro}{\IMRADlabel}
+%    \begin{macrocode}
 \newcommand*{\IMRADlabel}[1]{
 	\seq_if_in:NnTF \c_ptxcd_IMRAD_seq  {#1}
 		{\label{IMRAD:#1}}
 		{\msg_error:nnnn {tudapub} {undefined-IMRADlabel}{#1}{\seq_use:Nn \c_ptxcd_IMRAD_seq {,}}}
 }
-
-
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \bool_if:NT \g_ptxcd_IMRAD_bool {
 	\AtEndDocument{
 		\seq_map_inline:Nn \c_ptxcd_IMRAD_seq {
 			\cs_if_exist:cF {r@IMRAD:#1} {
 			\msg_warning:nnn {tudapub} {missing-IMRADlabel} {#1}
 			}
-	 	}
+		}
 	}
 }
 
@@ -1461,12 +1636,778 @@
 	You~did~not~provide~a~Label~for~key~#1.\\
 	Either~you~need~to~recompile~your~document~or~add~a~label~using~\string\IMRADlabel.
 }
-
+%    \end{macrocode}
 %backwards compatibility for KOMA-Script
+%    \begin{macrocode}
 \cs_if_exist:NF \Iftocfeature{
 	\let\Iftocfeature\iftocfeature
 }
 
 \file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
+%    \end{macrocode}
+
+%
+% \iffalse
+%</class>
+%<*tudathesis>
+% \fi
+%    \begin{macrocode}
+\tl_new:N \g_ptxcd_thesis_drtext_tl
+\clist_if_exist:NF \g_ptxcd_Required_title_data_clist {\clist_new:N \g_ptxcd_Required_title_data_clist}
+
+%Declare macros for department
+\cs_new:Nn \ptxcd_select_department:n {
+	\str_case:nnTF {#1} {
+		{arch}   {\ptxcd_declare_caption:Nnn \ptxcd_department: {Architektur} {Architecture}}
+		{bauing} {\ptxcd_declare_caption:Nnn \ptxcd_department: {Bau-~und~Umweltingenieurwissenschaften}{Civil~and~Environmental~Engineering}}
+		{bio}    {\ptxcd_declare_caption:Nnn \ptxcd_department: {Biologie}{Biology}}
+		{chem}   {\ptxcd_declare_caption:Nnn \ptxcd_department: {Chemie}{Chemistry}}
+		{etit}   {\ptxcd_declare_caption:Nnn \ptxcd_department: {Elektrotechnik~und~Informationstechnik}{Electrical~Engineering~and~Information~Technology}}
+		{gugw}   {\ptxcd_declare_caption:Nnn \ptxcd_department: {Gesellschafts-~und~Geschichtswissenschaften}{History~and~Social~Sciences}}
+		{humanw} {\ptxcd_declare_caption:Nnn \ptxcd_department: {Humanwissenschaften}{Human~Sciences}}
+		{inf}    {\ptxcd_declare_caption:Nnn \ptxcd_department: {Informatik}{Computer~Science}}
+		{mb}     {\ptxcd_declare_caption:Nnn \ptxcd_department: {Maschinenbau}{Mechanical~Engineering}}
+		{matgeo} {\ptxcd_declare_caption:Nnn \ptxcd_department: {Material-~und~Geowissenschaften}{Materials~and~Earth~Sciences}}
+		{math}   {\ptxcd_declare_caption:Nnn \ptxcd_department: {Mathematik}{Mathematics}}
+		{phys}   {\ptxcd_declare_caption:Nnn \ptxcd_department: {Physik}{Physics}}
+		{wi}     {\ptxcd_declare_caption:Nnn \ptxcd_department: {Rechts-~und~Wirtschaftswissenschaften}{Law~and~Economics}}
+	}
+	{
+		\ptxcd_declare_caption:Nnn \departmentname {Fachbereich} {department}
+		\ptxcd_declare_caption:Nnn \ptxcd_departmentprefix: {im~ \departmentname}{in~the~\departmentname{}~ of}
+		\ptxcd_declare_caption:Nnn \departmentfullname {\departmentname{}~ \ptxcd_department:} { \ptxcd_department:{}~ \text_titlecase:n{\departmentname}}
+	}
+	{\bool_if:NTF \g_ptxcd_dr_bool
+		{
+			\msg_warning:nnn{tudapub/thesis} {unrecognized-department} {#1}
+			\gdef\ptxcd_department:{#1}
+			\ptxcd_declare_caption:Nnn \departmentname {Fachbereich} {department}
+		}
+		{\ptxcd_select_studyfield:n {#1}}
+	}
+}
+
+
+\cs_new:Nn \ptxcd_select_studyfield:n {
+	\str_case:nnTF {#1} {
+		{ce}{\ptxcd_declare_caption:Nnn \ptxcd_department: {Computational\nobreakspace Engineering}{Computational\nobreakspace Engineering}}
+		{ese}{\ptxcd_declare_caption:Nnn \ptxcd_department: {Energy~Science~and~Engineering}{Energy~Science~and~Engineering}}
+		{ist}{\ptxcd_declare_caption:Nnn \ptxcd_department: {Informationssystemtechnik} {Information~Systems~Technology}}
+		{mech}{\ptxcd_declare_caption:Nnn \ptxcd_department: {Mechanik}{Mechanics}}
+		{metro}{\ptxcd_declare_caption:Nnn \ptxcd_department: {Mechatronik}{Mechatronics}}
+	}
+	{
+		\ptxcd_declare_caption:Nnn \departmentname {Studienbereich} {field~of~study}
+		\ptxcd_declare_caption:Nnn \departmentfullname {\departmentname{}~  \ptxcd_department:} {\departmentname{}:~\ptxcd_department:}
+		\ptxcd_declare_caption:Nnn \ptxcd_departmentprefix: {im~ \departmentname}{in~the~\departmentname}
+		\ptxcd_declare_caption:Nnn \ptxcd_in_department {\ptxcd_departmentprefix:{}~\ptxcd_department:} {\ptxcd_departmentprefix:{}~``\ptxcd_department:''}
+	}
+	{
+		\msg_warning:nnn{tudapub/thesis} {unrecognized-department} {#1}
+		\gdef\ptxcd_department:{#1}
+		\ptxcd_declare_caption:Nnn \departmentname {Fachbereich} {department}
+	}
+}
+
+\cs_new:Nn \ptxcd_insert_studentID:n {
+	   (\ptxcd_studentIDname :\nobreakspace#1)
+}
+
+\ptxcd_declare_caption:Nnn \ptxcd_byname {von} {by}
+\ptxcd_declare_caption:Nnn \ptxcd_fromname {aus} {from}
+\ptxcd_declare_caption:Nnn \ptxcd_departmentprefix: {im~ \departmentname}{in~the~\departmentname{}~ of}
+\ptxcd_declare_caption:Nnn \ptxcd_reviewname {Gutachten}{review}
+\ptxcd_declare_caption:Nnnn \ptxcd_examdatename {Tag~ der~ Prüfung}{Date~ of~ thesis~ defense}{Date~ of~ thesis~ defence}
+\ptxcd_declare_caption:Nnn \ptxcd_submissiondatename {Tag~ der~ Einreichung}{Date~ of~ submission}
+\ptxcd_declare_caption:Nnn \ptxcd_studentIDname {Matrikelnummer} {Student\nobreakspace ID}
+
+%Fallback content for box if not overwritten
+\newcommand*\ptxcd_box_department {\cs_if_exist_use:NF \departmentfullname {\ptxcd_department:}}
+\newcommand*\ptxcd_in_department {}
+\newcommand*{\ptxcd_thesisStatus}{}
+\tl_new:N \g__ptxcd_affidavit_version_tl
+\def\@ThesisTypeArticle{die}
+
+\keys_define:nn {ptxcd/thesis} {
+	dr .choice:,
+	dr/rernat .code:n = \tl_gset:Nn \g_ptxcd_thesis_drtext_tl {Zur~Erlangung~des~Grades~eines~Doktors~der~Naturwissenschaften~(Dr.\,rer.\,nat.)},
+	dr/ing .code:n = \tl_gset:Nn \g_ptxcd_thesis_drtext_tl {Zur~Erlangung~des~akademischen~Grades~Doktor-Ingenieur~(Dr.-Ing.)},
+	dr/phil .code:n =  \tl_gset:Nn \g_ptxcd_thesis_drtext_tl {Zur~Erlangung~des~Grades~eines~Doktor~der~Philosophie~(Dr.\,phil.)},
+	dr/rerpol .code:n = \tl_gset:Nn \g_ptxcd_thesis_drtext_tl {Zur~Erlangung~des~Grades~eines~Doctor~rerum~politicarum (Dr. rer. pol.)},
+	type .choice:,
+	type/sta .code:n = {\def\ptxcd_thesisType{Studienarbeit}
+		\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, date}
+		\bool_gset_false:N \g_ptxcd_dr_bool
+	},
+%   type/diplom  .code:n = {\def\ptxcd_thesisType{Diplomarbeit}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate, reviewer, department}},
+	type/bsc  .meta:n = {type=bachelor},
+	type/bachelor  .code:n = {\ptxcd_declare_caption:Nnn \ptxcd_thesisType{Bachelorarbeit}{bachelor~ thesis}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate, department, reviewer}\bool_gset_false:N \g_ptxcd_dr_bool},
+	type/pp  .code:n = { \ptxcd_declare_caption:Nnn \ptxcd_thesisType {Project-Proposal}{project~ proposal}\def\@ThesisTypeArticle{das}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, date, department}\bool_gset_false:N \g_ptxcd_dr_bool},
+	type/msc  .meta:n = {type=master},
+	type/master  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType{Masterarbeit}{master~ thesis}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate, department, reviewer}\bool_gset_false:N \g_ptxcd_dr_bool,
+	type/dr  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType{Dissertation}{doctoral~ thesis}\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus{vorgelegte}{submitted}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate , birthplace, department, reviewer}\bool_gset_true:N \g_ptxcd_dr_bool,
+	type/drfinal  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType {Dissertation}{doctoral~ thesis}\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus{genehmigte}{accepted}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate,examdate, birthplace, department, reviewer}\bool_gset_true:N \g_ptxcd_dr_bool,
+	type/unknown  .code:n = \def\ptxcd_thesisType{#1}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {}\def\@ThesisTypeArticle{die}\bool_gset_false:N \g_ptxcd_dr_bool,
+	ignore-missing-data .bool_gset:N = \g_ptxcd_missing_data_warning_bool,
+	ignore-missing-data .initial:n = false,
+	department .tl_gset:N  = \g_ptxcd_department_choice_tl,
+	status .code:n = \tl_if_head_is_group:nTF {#1} {\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus #1 {}} {\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus{#1}{#1}},
+	fieldofstudy .meta:n ={department = #1},
+	ignore-title-language .bool_gset:N = \g_ptxcd_ignore_title_language_bool,
+	ignore-title-language .initial:n ={false},
+	noinstbox .bool_gset:N = \g_ptxcd_manual_info_box_bool,
+	instbox .bool_gset_inverse:N = \g_ptxcd_manual_info_box_bool,
+	instbox .initial:n = true,
+	reviewer-on-uppertitleback .bool_gset:N = \g__ptxcd_reviewer_on_uppertitleback_bool,
+	reviewer-on-uppertitleback .initial:n = false,
+	hide-architecture-note .bool_gset_inverse:N = \g__ptxcd_architecture_note_bool,
+	hide-architecture-note .initial:n = false,
+	hide-architecture-note .default:n = true,
+}
+
+
+\prop_map_inline:Nn \g_ptxcd_unknown_clsopts_prop {
+	\keys_if_exist:nnT {ptxcd/thesis} {#1} {
+	\keys_set:nn {ptxcd/thesis} {#1=#2}
+	}
+}
+
+\tl_if_empty:NF  \g_ptxcd_thesis_options_tl {\keys_set:nV {ptxcd/thesis} \g_ptxcd_thesis_options_tl}
+
+
+\cs_new:Npn \drtext #1 {\tl_gset:Nn \g_ptxcd_thesis_drtext_tl {#1}}
+\tl_new:N \g_ptxcd_titleintro_tl
+\cs_new:Npn \titleintro #1 {\tl_gset:Nn \g_ptxcd_titleintro_tl {#1}}
+\tl_new:N \g_ptxcd_titleaddendum_tl
+\cs_new:Npn \titleaddendum #1 {\tl_gset:Nn \g_ptxcd_titleaddendum_tl {#1}}
+
+\msg_new:nnnn{tudapub/thesis} {required-data-missing} {You~did~not~provide~#1~data~for~the~title.~Either~provide~it~or~change~your~publication~type.} {See~ the~ TUDa-CI~ documentation~ for~ further~ information~ and~ workarounds.}
+
+\cs_new:Nn \ptxcd_missing_title_data:n {
+	\bool_if:NTF \g_ptxcd_missing_data_warning_bool
+	\msg_warning:nnn
+	\msg_error:nnn{tudapub/thesis} {required-data-missing} {#1}
+}
+
+\cs_new:Nn \ptxcd_check_title_data:Nn {
+	\clist_if_in:NnT \g_ptxcd_Required_title_data_clist {#2} {
+		\tl_if_empty:NT #1 {
+			\bool_if:NTF \g_ptxcd_missing_data_warning_bool
+			{\msg_warning:nnn}
+			{\msg_error:nnn} {tudapub/thesis} {required-data-missing} {#2}
+		}
+	}
+}
+
+\cs_generate_variant:Nn \ptxcd_check_title_data:Nn {cn}
+
+\renewcommand*\author[2][]{
+	\seq_gset_split:Nnn \g_ptxcd_author_seq {\and} {#2}
+	\tl_if_empty:nTF {#1}
+	{\tl_set:Nn \l_ptxcd_signature_tl {#2}}
+	{\tl_set:Nn \l_ptxcd_signature_tl {#1}}
+}
+
+\newcommand*{\studentID}[1]{
+  \tl_set:Nn \l_ptxcd_studentID_tl {#1}
+}
+
+\gdef\ptxcd_institution{}
+\gdef\ptxcd_institute{}
+\gdef\ptxcd_department:{}
+%\gdef\ptxcd_studentID{}
+
+\NewDocumentCommand{\department}{som}{%
+	\IfBooleanTF{#1}{
+	  \tl_gset:Nn \ptxcd_department: {#3}
+	  \tl_gset:Nn \ptxcd_in_department{#3}
+	  \IfNoValueTF {\tl_gset:Nn \ptxcd_box_department {#3}} {\tl_gset:Nn \ptxcd_box_department{#2}}
+	  \clist_remove_all:Nn \g_ptxcd_Required_title_data_clist {department}
+	}{
+	  \tl_gset:Nn \g_ptxcd_department_choice_tl {#3}
+	  \IfNoValueF {#2} {\tl_gset:Nn \ptxcd_departmentprefix: {#2}}
+	}
+}
+
+\newcommand*{\institute}[1]{
+  \gdef\ptxcd_institute{#1}
+}
+
+\gdef\ptxcd_group{}
+\newcommand*{\group}[1]{%
+  \gdef\ptxcd_group{#1}
+}
+
+\gdef\ptxcd_birthplace{}
+\newcommand*{\birthplace}[1]{%
+	\bool_if:NTF \g_ptxcd_dr_bool
+		{\gdef\ptxcd_birthplace{#1}}
+		{\msg_info:nnn{tudapub/thesis} {dr-field-only} {birthplace}}
+}
+
+\publishers{Darmstadt\bool_if:NT \g_ptxcd_dr_bool {,~Technische~Universität~Darmstadt}}
+
+\seq_new:N \g_ptxcd_reviewer_seq
+\NewDocumentCommand{\reviewer}{som}{
+	\IfNoValueF {#2} {
+		\IfBooleanTF{#1}
+			{\setupReviewName*{#2}}
+			{\setupReviewName{#2}}
+	}
+	\tl_if_empty:nTF {#3}
+		{\let\@reviewer\@empty}
+		{\seq_gset_split:Nnn \g_ptxcd_reviewer_seq {\and} {#3}}
+}
+
+\cs_set:Nn \ptxcd_thesis_print_reviewer: {
+	\clist_if_in:NnT \g_ptxcd_Required_title_data_clist {reviewer} {
+		\seq_if_empty:NT \g_ptxcd_reviewer_seq   {\ptxcd_missing_title_data:n {reviewer}}
+	}
+	\int_zero:N \l_tmpb_int
+	\par\vspace*{\baselineskip}
+	{
+	\seq_map_inline:Nn \g_ptxcd_reviewer_seq
+		{
+			\int_incr:N \l_tmpb_int
+			\cs_if_exist_use:cF {__ptxcd_reviewname_\int_use:N \l_tmpb_int :}
+				{\int_to_arabic:n {\l_tmpb_int}.~\text_titlecase:n{\ptxcd_reviewname}}
+			:~\exp_not:n {##1}\\
+		}
+	}
+}
+
+
+\gdef\ptxcd_examdate{}
+\newcommand*{\examdate}[1]{
+	\bool_if:NTF \g_ptxcd_dr_bool
+	{\gdef\ptxcd_examdate{#1}}
+	{\msg_info:nnn{tudapub/thesis} {dr-field-only} {examdate}}
+}
+
+\gdef\ptxcd_submissiondate{}
+\newcommand*{\submissiondate}[1]{
+	\gdef\ptxcd_submissiondate{#1}
+}
+
+\gdef\@date{}
+
+\cs_new:Nn \ptxcd_thesis_print_dates:n {
+	\bool_set_false:N \l_tmpa_bool
+	\tl_if_empty:NF \@date {
+		\ptxcd_datename\tl_if_empty:NF \ptxcd_datename {\ptxcd_dateseparator}\@date
+		\bool_set_true:N  \l_tmpa_bool
+	}
+	\tl_if_empty:NF \ptxcd_submissiondate {
+		\bool_if:NTF \l_tmpa_bool {#1} {\bool_set_true:N  \l_tmpa_bool}\ptxcd_submissiondatename\ptxcd_dateseparator\ptxcd_submissiondate
+	}
+	\tl_if_empty:NF \ptxcd_examdate {
+		\bool_if:NTF \l_tmpa_bool {#1} {\bool_set_true:N  \l_tmpa_bool}\ptxcd_examdatename\ptxcd_dateseparator\ptxcd_examdate
+	}
+}
+
+\tl_new:N  \g_ptxcd_license_info_tl
+
+\keys_define:nn {ptxcd/thesis} {
+	urn .tl_gset:N =\g_ptxcd_thesis_urn_tl,
+	urn .initial:V = \c_empty_tl,
+	printid .tl_gset:N = \g_ptxcd_thesis_tuprints_tl,
+	printid .initial:V = \c_empty_tl,
+	doi .tl_gset:N = \g_ptxcd_thesis_doi_tl,
+	year .tl_gset:N = \g_ptxcd_thesis_publication_year_tl,
+	year .initial:n = ,
+	license .choices:nn = {cc-by-4.0,cc-by-sa-4.0,cc-by-nc-sa-4.0,cc-by-nc-4.0,cc-by-nd-4.0,cc-by-nc-nd-4.0} {
+		\tl_gset:Nx \g_ptxcd_license_info_tl {\exp_not:N \g__ptxcd_cc_license:n {\l_keys_choice_tl} \exp_not:N \iflanguage{\exp_not:N \bbl@main@language}{}{\exp_not:n {\par\smallskip\otherlanguage{\bbl@main@language}}{\exp_not:N \g__ptxcd_cc_license:n {\l_keys_choice_tl}}}}
+	},
+	license / cc-by-nc-nd-2.0-de .code:n = \tl_gset:Nn  \g_ptxcd_license_info_tl {\use:c {g__ptxcd_cc-by-nc-nd-2.0-de:}},
+	license / inc-1.0-de  .code:n = \tl_gset:Nn \g_ptxcd_license_info_tl {
+	Die~Veröffentlichung~ist~urheberrechtlich~geschützt\newline
+	\url{https://rightsstatements.org/page/InC/1.0/}
+	},
+	license / inc-1.0-en .code:n = \tl_gset:Nn \g_ptxcd_license_info_tl {
+	This~work~is~protected~by~copyright\newline
+	\url{https://rightsstatements.org/page/InC/1.0/}
+	},
+	license / inc-1.0 .code:n = \tl_if_in:NnTF \languagename: {german} {\keys_set:nn {ptxcd/thesis}{license=inc-1.0-de}}{\keys_set:nn {ptxcd/thesis}{license=inc-1.0-en}},
+	license / initial .code:n = {\keys_set:nn {ptxcd/thesis} {license=cc-by-4.0}},
+	license / unknown .code:n  = \tl_gset:Nn \g_ptxcd_license_info_tl {#1},
+	license .initial:n = initial,
+	signature .tl_set:N = \l_ptxcd_signature_tl,
+	studentID .tl_set:N = \l_ptxcd_studentID_tl,
+	studentID .initial:n =,
+	signature-image .tl_set:N = \l_ptxcd_signature_image_tl,
+	signature-image .initial:n =,
+	signature-location .tl_set:N = \l_ptxcd_signature_location_tl,
+	signature-location .initial:n = Darmstadt,
+}
+
+\msg_new:nnnn {tudapub/thesis} {default-license-will-change} {
+	TUprints~changed~their~default~license.\\
+	tuda-ci~will~adapt~this~change~in~the~next~major~update.~\\
+	Please~choose~your~license~manually~to~avoid~unintended~changes.
+} {Use~either~the~old~default~value~license=cc-by-nc-nd-2.0-de or~license=cc-by-4.0~or~license={<custom~text>}~with~\string\tuprints.}
+
+
+\cs_new:cn {g__ptxcd_cc-by-nc-nd-2.0-de:} {
+	Die~Veröffentlichung~steht~unter~folgender~Creative~Commons~Lizenz:\\
+	Namensnennung~--~Keine~kommerzielle~Nutzung~--~Keine~Bearbeitung~ 2.0~Deutschland\\
+	\url{https://creativecommons.org/licenses/by-nc-nd/2.0/de/}
+}
+
+\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_by:}{Namensnennung}
+\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_nc:}{Nicht~kommerziell}
+\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_sa:}{Weitergabe~unter~gleichen~Bedingungen}
+\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_nd:}{Keine~Bearbeitungen}
+
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_by:}{Attribution}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_nc:}{NonCommercial}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_sa:}{ShareAlike}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_nd:}{NoDerivatives}
+
+\defcaptionname{ngerman,german}{\g__ptxcd_cc_intro:}{Die~Veröffentlichung~steht~unter~folgender~Creative~Commons~Lizenz:}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_intro:}{This~work~is~licensed~under~a~Creative~Commons~License:}
+
+\defcaptionname{ngerman,german}{\g__ptxcd_cc_sep:}{~--~}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_sep:}{--}
+
+\cs_new:Nn \g__ptxcd_cc_license:n {
+	\group_begin:
+	\g__ptxcd_cc_intro:\\
+	\seq_set_split:Nnn \l_tmpa_seq {-} {#1}
+	\bool_set_false:N \l_tmpa_bool
+	\seq_remove_all:Nn \l_tmpa_seq {cc}
+	\seq_pop_right:NN \l_tmpa_seq \l_tmpa_tl
+	\seq_map_inline:Nn \l_tmpa_seq {
+		\bool_if:NTF \l_tmpa_bool {\g__ptxcd_cc_sep:} {\bool_set_true:N \l_tmpa_bool}
+		\use:c {g__ptxcd_cc_attr_##1:}
+	}~\l_tmpa_tl{}~International\\
+	\url{https://creativecommons.org/licenses/\seq_use:Nn \l_tmpa_seq {-}/\l_tmpa_tl/}
+	\group_end:
+}
+
+
+\newcommand{\tuprints}[1]{%
+  \tl_if_in:nnTF {#1} {=}
+	  {\keys_set:nn {ptxcd/thesis} {#1}}
+	  {\keys_set:nn {ptxcd/thesis} {printid=#1}}
+  \lowertitleback{
+	\urlstyle{same}
+	\selectlanguage{ngerman}
+	Bitte~zitieren~Sie~dieses~Dokument~als:
+	\tl_if_empty:NF \g_ptxcd_thesis_urn_tl {\\URN:~urn:nbn:de:tuda-tuprints-\g_ptxcd_thesis_urn_tl}\\
+	URL:~\url{https://tuprints.ulb.tu-darmstadt.de/\g_ptxcd_thesis_tuprints_tl}\\
+	\tl_if_empty:NF \g_ptxcd_thesis_doi_tl {DOI:~\url{https://doi.org/\g_ptxcd_thesis_doi_tl}\\}
+	\tl_if_empty:NF \g_ptxcd_thesis_publication_year_tl {Jahr~der~Veröffentlichung~auf~TUprints:~\g_ptxcd_thesis_publication_year_tl}
+	\par\vspace{\baselineskip}
+	Dieses~Dokument~wird~bereitgestellt~von~tuprints,\\
+	E-Publishing-Service~der~TU~Darmstadt\\
+	\url{https://tuprints.ulb.tu-darmstadt.de}\\
+	\url{tuprints@ulb.tu-darmstadt.de}\\[2\baselineskip]
+   \tl_if_empty:NF \g_ptxcd_license_info_tl {\\[2\baselineskip]\g_ptxcd_license_info_tl}
+  }%
+}
+
+\gdef\@subject{
+	\text_titlecase_first:n{\tl_if_empty:NF \ptxcd_thesisStatus {\ptxcd_thesisStatus{}~}\ptxcd_thesisType}~
+	\tl_if_empty:NF \ptxcd_in_department {\ptxcd_in_department{}~}
+	\seq_if_empty:NF  \g_ptxcd_author_seq {\ptxcd_byname\nobreakspace\@author}
+	\tl_if_empty:NF \ptxcd_birthplace {\space\ptxcd_fromname\space\ptxcd_birthplace}
+	\tl_if_empty:NF \l_ptxcd_studentID_tl {\space\ptxcd_insert_studentID:n {\l_ptxcd_studentID_tl}}
+}
+
+\uppertitleback{
+	\liningnums
+	\raggedright
+	\@title\par\@subtitle
+	\par\vspace*{\baselineskip}
+	%ignore birthplace on english subject
+	\let\ptxcd_birthplace\@empty
+	\@subject
+	\bool_if:NT \g__ptxcd_reviewer_on_uppertitleback_bool
+		\ptxcd_thesis_print_reviewer:
+	\exp_args:Nx \tl_if_empty:nF {\@date\ptxcd_submissiondate}{
+		\par\vspace*{\baselineskip}
+		\ptxcd_thesis_print_dates:n {\\}
+	}
+	\tl_if_empty:NF \@publishers {
+		\par\vspace*{\baselineskip}
+		\@publishers
+	}
+}
+
+%%Studienbereich (field of study):
+%%ce     - Computational Engineering
+%%ese    - Energy Science and Engineering
+%%ist    - Informationssystemtechnik
+%%mech   - Mechanik
+%%metro  - Mechatronik
+%
+%{ce}{Computational~Engineering}{Computational~Engineering}
+%{ese}{Energy~Science~and~Engineering}{Energy~Science~and~Engineering}
+%{ist}{Information~Systems~Engineering}{Information~Systems~Engineering}
+%{mech}{Mechanics}{Mechanics}
+%{metro}{Mechatronics}{Mechatronics}
+
+\defcaptionname{english}{\researchgroupname}{research group}
+\defcaptionname{ngerman, german}{\researchgroupname}{Fachgebiet}
+\defcaptionname{english}{\institutename}{institute}
+\defcaptionname{ngerman, german}{\istitutename}{Institut}
+
+\renewcommand{\titlepagestyle}{title.TUDa}
+
+\box_new:N \g_ptxcd_thesis_institution_box
+
+%% The following macro is an adapted version of the corresponding KOMA-Script macro
+%% Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
+\renewcommand*{\maketitle}[1][1]{
+	\bool_if:NF \g_ptxcd_ignore_title_language_bool {
+		\bool_set_false:N \l_tmpa_bool
+		\clist_map_inline:nn {english, british, ngerman, german} {
+			\iflanguage{##1}
+			{\bool_set_true:N \l_tmpa_bool
+			\clist_map_break:}{}
+		}
+		\bool_if:NF \l_tmpa_bool {
+			\msg_error:nnx{tudapub/thesis} {unsupported-title-language} {\languagename}
+		}
+	}
+	\exp_args:NV \ptxcd_select_department:n \g_ptxcd_department_choice_tl
+	\clist_map_inline:nn {author, date} {
+		\ptxcd_check_title_data:cn {@##1} {##1}
+	}
+	\clist_map_inline:nn {examdate, birthplace, group, department, institution} {
+		\ptxcd_check_title_data:cn {TUDa@##1} {##1}
+	}
+	\cs_if_exist_use:N \ptxcd_pass_TitleData:
+	\ptxcd_disable_marginpar:
+	\cleardoublepage
+	\begin{titlepage}
+		\setcounter{page}{%
+			#1%
+		}%
+		\def\thefootnote{\fnsymbol{footnote}}
+		\if@titlepageiscoverpage
+		\def\titlepage@restore{%
+			\endgroup
+			\ptxcd_restore_typearea:
+	  \bool_if:nT {! \g_ptxcd_geometry_bool && \g_ptxcd_marginpar_bool} {
+			\dim_sub:Nn \evensidemargin {\marginparwidth+\marginparsep}
+			\dim_add:Nn \textwidth   {\marginparwidth+\marginparsep}
+					\columnwidth=\textwidth
+					\hsize=\columnwidth
+			}
+			\global\@titlepageiscoverpagefalse
+			\let\titlepage@restore\relax
+		}%
+		\begingroup
+		\topmargin=\dimexpr \coverpagetopmargin-1in\relax
+		\oddsidemargin=\dimexpr \coverpageleftmargin-1in\relax
+		\evensidemargin=\dimexpr \coverpageleftmargin-1in\relax
+		\textwidth=\dimexpr
+		\paperwidth-\coverpageleftmargin-\coverpagerightmargin\relax
+		\textheight=\dimexpr
+		\paperheight-\coverpagetopmargin-\coverpagebottommargin\relax
+		\headheight=0pt
+		\headsep=0pt
+		\footskip=\baselineskip
+		\@colht=\textheight
+		\@colroom=\textheight
+		\vsize=\textheight
+		\columnwidth=\textwidth
+		\hsize=\columnwidth
+		\linewidth=\hsize
+		\else
+		\let\titlepage@restore\relax
+		\fi
+		\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+		\ptxcd_setup_sponsor_box:
+		\hbox_gset:Nn \g_ptxcd_title_box {
+			\parbox[t]{\linewidth}{
+				\begin{minipage}[b]{\bool_if:NT \g__ptxcd_LogoInHead_bool {.75}\linewidth}
+					\bool_lazy_and:nnT {\g_ptxcd_colorback_bool} {\g_ptxcd_colorbacktitle_bool} {\color{textonaccentcolor}}
+					\tl_if_empty:NF \@titlehead {
+						\begin{addmargin}{3mm}
+							{\usekomafont{titlehead}{\@titlehead\par}}
+						\end{addmargin}
+					}
+					\begin{addmargin}[\dim_eval:n {\box_if_empty:NF \g_ptxcd_PaperID_box {\box_wd:N\g_ptxcd_PaperID_box+.5\c_ptxcd_logoheight_dim} +3mm}]{3mm}
+						\raggedright
+						\leavevmode\usekomafont{title}
+						\expandafter\fontsize\ptxcd_title_fontsize:
+						\selectfont
+						\llap{\raisebox{\dimexpr-\height+.5\baselineskip}[0pt][0pt]{\box_use:N \g_ptxcd_PaperID_box}\hspace{.5\c_ptxcd_logoheight_dim}}
+						\@title\strut
+						\par
+						\box_if_empty:NTF \g_ptxcd_PaperID_box
+						{\vskip0pt}
+						{\rule{0pt}{.5\c_ptxcd_logoheight_dim}}
+					\end{addmargin}
+				\end{minipage}%
+				\bool_if:NT \g_ptxcd_colorbacksubtitle_bool {\color{textonaccentcolor}}
+				\par\nointerlineskip
+				\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par\vspace{\c_ptxcd_rulesep_dim}
+				\begin{addmargin}{3mm}
+					\usekomafont{titleinfo}
+					\raggedright
+					\expandafter\fontsize\ptxcd_titleinfo_fontsize:
+					\selectfont
+					{\ifx\@subtitle\@empty\else\usekomafont{subtitle}{\@subtitle\par}\fi}%
+					\usekomafont{subject}
+					\bool_if:NT \g_ptxcd_dr_bool {\selectlanguage{ngerman}}
+					\tl_if_empty:NF \g_ptxcd_titleintro_tl {\g_ptxcd_titleintro_tl\par}
+					\tl_if_empty:NF \g_ptxcd_thesis_drtext_tl {\g_ptxcd_thesis_drtext_tl\par}
+					{%
+						\usekomafont{author}
+						\lineskip 0.75em
+						\@subject
+						\par
+					}%
+					{\usekomafont{date}{\ptxcd_thesis_print_dates:n {,~}\par}}%
+					\ptxcd_thesis_print_reviewer:\par
+					{\usekomafont{publishers}{\@publishers \par}}%
+					\tl_if_empty:NF \g_ptxcd_titleaddendum_tl {\g_ptxcd_titleaddendum_tl\par}
+				\end{addmargin}
+				\tl_if_empty:NF \@thanks {
+					\expandafter\fontsize\ptxcd_titlethanks_fontsize:\selectfont\par
+					\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par
+					\begin{addmargin}{3mm}
+						\let\footnotetext\ptxcd_title@footnote
+						\@thanks
+					\end{addmargin}
+					\par\vspace{-\dp\strutbox}
+				}
+				\normalcolor
+				\rule{\linewidth}{\g_ptxcd_titlerule_dim}\par
+			}
+		}
+		\let\@thanks\@empty
+		\bool_if:NF \g_ptxcd_manual_info_box_bool {
+			\exp_args:Nf \tl_if_empty:nF {\ptxcd_institution\ptxcd_department:\ptxcd_institute\ptxcd_group} {
+				\addTitleBox{
+					\setlength{\parskip}{\c_ptxcd_rulesep_dim}
+					\tl_if_empty:NF \ptxcd_institution {\ptxcd_institution\par}
+					\tl_if_empty:NF \ptxcd_box_department {\ptxcd_box_department\par}
+					\tl_if_empty:NF \ptxcd_institute {\ptxcd_institute\par}
+					\tl_if_empty:NF \ptxcd_group {\ptxcd_group}
+			}}
+		}
+		\ptxcd_adjust_titlepage_style:
+		\thispagestyle{title.TUDa}
+		\nointerlineskip\box_use:N \g_ptxcd_title_box
+		\par
+		\vfill
+		\box_if_empty:NTF \g_ptxcd_sponsor_box {
+			\raisebox{-\c_ptxcd_rulesep_dim}[0pt][0pt]{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}
+		}{
+			\box_use:N \g_ptxcd_sponsor_box
+		}
+		\if@twoside
+			\@tempswatrue
+			\expandafter\ifnum \@nameuse{scr@v@3.12}>\scr@compatibility\relax
+			\else
+				\ifx\@uppertitleback\@empty
+				\ifx\@lowertitleback\@empty
+				\@tempswafalse
+				\fi
+				\fi
+			\fi
+		\else
+		\exp_args:Nf \tl_if_empty:nTF  {\g_ptxcd_thesis_urn_tl\g_ptxcd_thesis_tuprints_tl}
+		{\@tempswafalse}
+		{\@tempswatrue}
+		\fi
+		\if@tempswa
+		\next@tpage
+		\begin{minipage}[t]{\textwidth}
+			\@uppertitleback
+		\end{minipage}\par
+		\vfill
+		\begin{minipage}[b]{\textwidth}
+			\@lowertitleback
+		\end{minipage}\par
+		\@thanks\let\@thanks\@empty
+		\fi
+		\ifx\@dedication\@empty
+		\else
+		\next@tdpage\null\vfill
+		{\centering\usekomafont{dedication}{\@dedication \par}}%
+		\vskip \z@ \@plus3fill
+		\@thanks\let\@thanks\@empty
+		\cleardoubleemptypage
+		\fi
+		\ifx\titlepage@restore\relax\else\clearpage\titlepage@restore\fi
+	\end{titlepage}
+	\setcounter{footnote}{0}%
+	\global\let\and\relax
+	\cleardoublepage
+	\ptxcd_restore_typearea:
+	\aftergroup\ptxcd_restore_typearea:
+}
+
+\newcommand*{\@ThesisType}{\ptxcd_thesisType}
+
+\bool_if:NTF \g_ptxcd_dr_bool {
+	\keys_define:nn {ptxcd/thesis} {
+		affidavit .choices:nn = {dr}{\tl_gset_eq:NN  \g__ptxcd_affidavit_version_tl \l_keys_choice_tl},
+		affidavit / default .meta:n = {affidavit=dr},
+		affidavit .initial:n = dr,
+	}
+} {
+	\keys_define:nn {ptxcd/thesis} {
+	affidavit .choices:nn = {digital,print}{\tl_gset_eq:NN  \g__ptxcd_affidavit_version_tl \l_keys_choice_tl},
+	affidavit / default .meta:n = {affidavit=digital},
+	affidavit .initial:n = default,
+	}
+}
+
+\NewDocumentCommand{\affidavit}{so}{%
+	\IfNoValueF {#2} {%
+		\tl_if_in:nnTF {#2} {=}
+			{\keys_set:nn {ptxcd/thesis} {#2}}
+			{\keys_set:nn {ptxcd/thesis} {affidavit=#2}}%
+	}%
+	\clearpage
+\begin{otherlanguage}{ngerman}
+	\bool_if:NTF \g_ptxcd_dr_bool {
+		\g__ptxcd_affidavit_dr_tl
+	} {
+		\tl_use:c {g__ptxcd_affidavit_\g__ptxcd_affidavit_version_tl _tl}
+	}
+\par
+\bigskip
+\AffidavitSignature
+\end{otherlanguage}
+\IfBooleanF{#1}{\clearpage}
+}
+
+\ExplSyntaxOff
+
+\expandafter\def\csname g__ptxcd_affidavit_dr_tl\endcsname {%
+	\section*{Erklärungen laut Promotionsordnung}
+	\subsection*{\S\,8 Abs. 1 lit. c PromO}
+	Ich versichere hiermit, dass die elektronische Version meiner Dissertation mit der schriftlichen Version übereinstimmt.
+	\subsection*{\S\,8 Abs. 1 lit. d PromO}
+	Ich versichere hiermit, dass zu einem vorherigen Zeitpunkt noch keine Promotion versucht wurde. In diesem Fall sind nähere Angaben über Zeitpunkt, Hochschule, Dissertationsthema und Ergebnis dieses Versuchs mitzuteilen.
+
+	\subsection*{\S\,9 Abs. 1 PromO}
+	Ich versichere hiermit, dass die vorliegende Dissertation selbstständig und nur unter Verwendung der angegebenen Quellen verfasst wurde.
+
+	\subsection*{\S\,9 Abs. 2 PromO}
+	Die Arbeit hat bisher noch nicht zu Prüfungszwecken gedient.
+}
+
+% Quelle: https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp
+\expandafter\def\csname g__ptxcd_affidavit_digital_tl\endcsname {%
+	\subsection*{Erklärung zur Abschlussarbeit gemäß \S\,22~Abs.~7~APB TU~Darmstadt}
+	\begin{sloppypar}%
+	Hiermit erkläre ich, \@author, dass ich die vorliegende Arbeit gemäß \S\,22~Abs.~7~APB der TU Darmstadt selbstständig, ohne Hilfe Dritter und nur mit den angegebenen Quellen und Hilfsmitteln angefertigt habe.
+	 Ich habe mit Ausnahme der zitierten Literatur und anderer in der Arbeit genannter Quellen keine fremden Hilfsmittel benutzt. Die von mir bei der Anfertigung dieser wissenschaftlichen Arbeit wörtlich oder inhaltlich benutzte Literatur und alle anderen Quellen habe ich im Text deutlich gekennzeichnet und gesondert aufgeführt. Dies gilt auch für Quellen oder Hilfsmittel aus dem Internet.
+	\end{sloppypar}%
+	\par
+	Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.
+	\par
+	Mir ist bekannt, dass im Falle eines Plagiats (\S\,38~Abs.~2 ~APB) ein Täuschungsversuch vorliegt, der dazu führt, dass die Arbeit mit 5,0 bewertet und damit ein Prüfungsversuch verbraucht wird. Abschlussarbeiten dürfen nur einmal wiederholt werden.
+	\csname bool_if:cT\endcsname {g__ptxcd_architecture_note_bool} {%
+		\par
+		Bei einer Thesis des Fachbereichs Architektur entspricht die eingereichte elektronische Fassung dem vorgestellten Modell und den vorgelegten Plänen.
+	}
+}
+
+\ExplSyntaxOn
+
+\cs_set_eq:NN \g__ptxcd_affidavit_print_tl \g__ptxcd_affidavit_digital_tl
+
+\NewDocumentEnvironment{affidavit*}{om}{
+	\IfNoValueF {#1} {\begin{otherlanguage}{#1}}
+	\section*{#2}
+}{
+	\IfNoValueF {#1} {\end{otherlanguage}}
+}
+
+\NewDocumentCommand{\AffidavitSignature}{o}{
+	\par
+	\begingroup
+	\IfNoValueF {#1} {%
+		\tl_if_in:nnTF {#1} {=}
+			{\keys_set:nn {ptxcd/thesis} {#1}}
+			{\keys_set:nn {ptxcd/thesis} {signature-location=#1}}%
+	}%
+	\tl_if_empty:NT \l_ptxcd_signature_image_tl {\bigskip}
+	\noindent \l_ptxcd_signature_location_tl,~ \ptxcd_submissiondate\hfill
+	\SignatureBox{\l_ptxcd_signature_tl}
+	\endgroup
+	\\\strut
+}
+
+\newcommand*{\SignatureBox}[2][5cm]{\parbox[t]{#1}{\centering
+		\tl_if_empty:NF \l_ptxcd_signature_image_tl
+			{\let\width\linewidth\l_ptxcd_signature_image_tl\par\nointerlineskip}
+		\rule{\linewidth}{.3pt}\\\makebox[0pt][c]{#2}}
+}
+
+%messages:
+\msg_new:nnn{tudapub/thesis} {dr-field-only} {
+	You~submitted~#1~data~for~title~information.\\
+	This~field~is~only~used~for~type=dr/drfinal.\\
+	It~will~be~ignored.
+}
+
+\msg_new:nnn{tudapub/thesis} {unrecognized-department} {
+	I~can't~recognize~your~department~#1.\\
+	I~will~use~the~string~'#1'~directly.\\
+	Ensure~your~department~has~to~shortcut.\\
+	See~tudathesis~documentation~for~further~details.
+}
+
+\msg_new:nnnn{tudapub/thesis} {unsupported-title-language} {
+	You~chose~an~unsupported~language~"#1".\\
+	\string\maketitle\ ~ist~not~configured~for~this~language.
+}{
+	You~can~manually~configure~it,~as~described~in~tudathesis~documentation.\\
+	Use~"ignore-title-language"~Option~to~ignore~this~message~at~your~own~risk.
+}
+
+\PassOptionsToPackage{ngerman}{babel}
+\AtBeginDocument{
+	\@ifpackageloaded{babel}{}{
+	\msg_new:nnnn{tudapub/thesis} {missing-babel} {
+		The~babel~package~is~not~loaded.\\
+		Please~load~babel~with~option\\
+		main=<main~language~of~your~document>\\
+		to~ensure~correct~hyphenation.
+	}{
+		I~will~use~a~workaround~(redefine~\string\otherlanguagen)~to~be~able~to~compile,~but~can't~configure~hyphenation~correctly.
+	}
+	\msg_warning:nn {tudapub/thesis} {missing-babel}
+	\renewenvironment{otherlanguage}[1]{}{}
+	}
+}
+
+% Fallback mechanism for older l3 kernels
+\cs_if_exist:NF \text_titlecase:n {
+	\cs_set_eq:NN \text_titlecase:n \tl_mixed_case:n
+}
+
+\seq_new:N \g_ptxcd_reviewer_name_seq
+\NewDocumentCommand{\setupReviewName}{som}{
+	\IfBooleanTF {#1} {
+		\clist_map_inline:nn {#3} {
+			\int_incr:N \l_tmpb_int
+			\cs_set:cn {__ptxcd_reviewname_\int_use:N \l_tmpb_int :} {##1}
+		}
+	} {
+		\IfNoValueTF {#2} {
+			\cs_set:Npn \ptxcd_reviewname  {#3}
+		} {
+		\ifnum #2 > 0
+		\cs_set:cn {__ptxcd_reviewname_#2:}
+		{#3}
+		\fi
+		}
+	}
+}
+%    \end{macrocode}
+% \iffalse
+%</tudathesis>
+% \fi
+% \Finale
 \endinput
-%End of class tudapub.cls
