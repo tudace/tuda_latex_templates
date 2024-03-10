@@ -60,6 +60,9 @@
 \usepackage{pifont}% Zapf-Dingbats Symbols
 \newcommand*{\FeatureTrue}{\ding{52}}
 \newcommand*{\FeatureFalse}{\ding{56}}
+\ExplSyntaxOn
+\newcommand*{\demo}[1]{\file{DEMO-TUDa\text_titlecase_all:n {#1}.tex}}
+\ExplSyntaxOff
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
@@ -75,9 +78,6 @@
 % \changes{4.00}{0000-00-00}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
-% \UseName{tl_show:c} {ver@tudapub.dtx}
-% \show\
-% \show\GetFileInfo{file}
 % \GetFileInfo{tudapub.dtx}
 % \title{TUDa-CI -- Corporate Design for TU Darmstadt}
 % \author{Marei Peischl\\ \url{marei@peitex.de}}
@@ -92,6 +92,16 @@
 % This document now sums up all features and includes references to other texdoc documents if required.
 % \end{abstract}
 % 
+% \chapter{The TUDa-CI \LaTeX{} bundle}
+% The TUDa-CI bundle consists of \LaTeX{} package and class file as well as sources to demonstrate their usage.
+% This document is meant to offer user documentation and will describe all options and features provided.
+% Based on the structure of the bundle this document includes descriptions based on the type of document which should be created.
+%
+% \section{Support}
+% The TU Darmstadt offers \LaTeX{} support for their members.
+% Please have a look at \url{https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.en.jsp} to find more information on workshops as well as individual support offers.
+% In case you are not a Member of TU Darmstadt and face issues directly related to this project feel free to use the issue tracker in the GitHub Repository \url{https://github.com/tudace/tuda_latex_templates/issues}.
+%
 %
 % \MaybeStop{}
 %
