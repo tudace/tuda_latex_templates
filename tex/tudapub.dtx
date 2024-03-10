@@ -91,7 +91,7 @@
 % Up to Version 4.00 the documentation was only included in the demo files.
 % This document now sums up all features and includes references to other texdoc documents if required.
 % \end{abstract}
-% 
+%
 % \chapter{The TUDa-CI \LaTeX{} bundle}
 % The TUDa-CI bundle consists of \LaTeX{} package and class file as well as sources to demonstrate their usage.
 % This document is meant to offer user documentation and will describe all options and features provided.
@@ -102,6 +102,79 @@
 % Please have a look at \url{https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.en.jsp} to find more information on workshops as well as individual support offers.
 % In case you are not a Member of TU Darmstadt and face issues directly related to this project feel free to use the issue tracker in the GitHub Repository \url{https://github.com/tudace/tuda_latex_templates/issues}.
 %
+% \chapter{The document class tudapub -- papers, reports and thesis}
+% \section{Class Options}
+% tudapub is based on \KOMAScript{} and was designed to support as many options as possible.
+% In case there is no specific TUDa-CI option, please have a look at the \KOMAScript{} documentation \cite{scrguide} before loading additional packages.
+% This is also recommended if you want to do any kind of layout adjustments.
+% Otherwhise loading additional packages might cause conflicts and affect other mechanisms of TUDa-CI or \KOMAScript.
+%
+% The specific options of tudapub are:
+% \begin{optionlist}
+% \item*[class (<article,report,book>) (article)]
+% Select the base document class.
+% The values load the corresponding \KOMAScript class \cite{scrguide}, e.\,g. if \code{class=article} therefore \cls{scrartcl} will be loaded.
+%
+% \item[accentcolor (color) (0b)]
+% Select the color for colored accents as well as the colored block in the headline.
+%
+% For more detailed color selection have a look at \autoref{sec:tudacolors}.
+%
+% \remark{This option was formerly named \code{color}. Due to conflicts with package options it was renamed to be more specific. The short version does still exist but should no longer be used.}
+%
+% \item[marginpar (true,false,auto or <width>) (auto)]
+% Adjust the marginpar.
+% By default the width is set to match the CI guideline.
+% If any other value than \code{true}, \code{false} or \code{auto} is used, the value will be used as width of the marginpar.
+% If set to false the width will be zero.
+%
+% If enabled the headline will cover the text and the marginpar like the \KOMAScript option \code{headwidth=textwithmarginpar}\cite{scrguide}.
+%
+% \item[twocolumn (Boolean) (false)] Set full document in twocolumn mode.
+% With default setup this will create two marginpar columns. Therefore it's recommended to disable marginpar for twocolumn documents.
+%
+% \item[ruledheaders (all, chapter, section, none) (all)]
+% The corporate design guideline is using rules to separate section headers.
+% By default this affects all section levels as required.
+% There might be reasons to disable this for some or all levels.
+%
+% \code{ruledheaders=none} will reset the structure to \KOMAScript{} default whereas the values \code{chapter} or \code{section} mention the lowest level which will use the rules.
+%
+% \item[title (small/large) (large)]
+% The default title font size might not match very long thesis titles.
+% Setting \code{title=small} will set the title fontsize to match one paper size below the used one.
+% So for A4 paper the font sizes defined by the guideline for A5 paper will be used.
+%
+% \item[type (publication, thesis, intern) (publication)]
+% Type is preparing the document class to support additional document types. Currently \code{publication}, \code{thesis} and \code{intern} are supported.
+% The thesis mode will enable additional title elements and specific commands like described in \autoref{sec:thesis}.
+% \code{intern} is used by \demo{report} and is equal to setting \code{pdfa=false}, \code{IMRAD=false} and \code{titlepage=false}.
+%
+% \item[headline (true, false, automark) (false)]
+% The design guideline allows to use running titles below the colored bar.
+% As the default setup for the headline is a bit confusion since the headline might be bigger than some of the titles within the ordinary text it's disabled by default.
+%
+% In case automark in general should be enabled, but in different positions, one can use the automark option and use \pck{scrlayer-scrpage}\cite{scrguide} commands for the pagestyle setup.
+%
+% \item[logo () ()] A title page option, see \autoref{sec:title}.
+% \item[colorback () ()]  A title page option, see \autoref{sec:title}.
+% \item[IMRAD (Boolean) (true)] Disable the check for IMRAD labels, see \autoref{sec:IMRAD}.
+% \item[logofile (file name) (tuda\_logo)]
+% Due to trademark restrictions it's sadly not allowed to publish the TUDa logos with TUDa-CI. Members of TU Darmstadt can Download these via \url{https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp}.
+% To be able to use the templates without the logos a setting like \code{logofile=example-image} might be used to access the example image of the \pck{mwe}\cite{mwe} package instead, which is part of all common \TeX{} distributions.
+%
+% \item[department (tokenlist) (<empty>)] Option for department specific setups. See \autoref{sec:department} for details.
+%
+% \item[departmentlogofile (tokenlist) (<empty>)] Option for department specific setups. See \autoref{sec:department} for details.
+%
+%
+% \item[BCOR (length) (0pt)] Similar as the BCOR setting of \KOMAScript to set the binding correction.
+% By default this will not be applied to the cover page. To include the cover please set the \code{BCORtitlepage} option to \code{true}.
+%
+% \item[BCORtitlepage (Boolean) (false)] As described above, this will also enable the use of BCOR on the title page.
+%
+% \end{optionlist}
+
 %
 % \MaybeStop{}
 %
@@ -114,7 +187,6 @@
 %    \begin{macrocode}
 \RequirePackage{URspecialopts}
 \Define@specialopt@Module[ptxcd/pub]
-
 
 \str_const:Nn \c__ptxcd_base_str {pub}
 \tl_new:N \g_ptxcd_pub_class_tl
