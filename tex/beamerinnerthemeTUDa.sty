@@ -51,7 +51,7 @@
 	author-on-title .bool_gset:N = \g_ptxcd_authorontitle_bool,
 	author-on-title .initial:n = false,
 	author-on-title .default:n = true,
-	authorontitle .meta:n = {author-on-title},
+	authorontitle .meta:n = {author-on-title=#1},
 	toc-columns .choices:nn =  {one,two,auto} {
 		\int_gset_eq:NN \g__ptxcd_beamer_toc_col_int  \l_keys_choice_int
 	},
