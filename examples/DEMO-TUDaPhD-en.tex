@@ -36,8 +36,9 @@
 	pdfstandard=a-2b,
 	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
 }
+
 \documentclass[
-	english,% main language as global option
+	english,% Main language as global option
 	ruledheaders=chapter,% Section levels above this one will follow the ruled layout, see DEMO-TUDaPub
 	class=book,% Choose the base document class. Will choose the matching KOMA-Script class
 	thesis={% PhD thesis, for smaller theses have a look at DEMO-TUDaThesis-en.tex
@@ -56,7 +57,7 @@
 %%%%%%%%%%%%%%%%%%%
 % Language setup
 %%%%%%%%%%%%%%%%%%%
-\usepackage[german, main=english]{babel}% german has to be loaded as the titlepage is always in German
+\usepackage[german,english]{babel}% german has to be loaded as the titlepage is always in German, english is main language
 \usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
 \usepackage{microtype}
@@ -70,18 +71,18 @@
 %%%%%%%%%%%%%%%%%%%
 % Package suggestions for tables
 %%%%%%%%%%%%%%%%%%%
-\usepackage{array}%  Fundamental tools for tables. Is automatically loaded by the following packages
-% \usepackage{tabularx}% tables with flexible columns to achieve fixed width
-%\usepackage{longtable}% tables across multiple pages
-%\usepackage{xltabular}% tables with fixed width spanning multiple pages
-\usepackage{booktabs}% Improved layout for horizontal rules in tables
+\usepackage{array}% Fundamental tools for tables. Is automatically loaded by the following packages
+%\usepackage{tabularx}% Tables with flexible columns to achieve fixed width
+%\usepackage{longtable}% Tables across multiple pages
+%\usepackage{xltabular}% Tables with fixed width spanning multiple pages
+%\usepackage{booktabs}% Improved layout for horizontal rules in tables
 
 %%%%%%%%%%%%%%%%%%%
 % Package suggestions math
 %%%%%%%%%%%%%%%%%%%
 %\usepackage{mathtools}% Extended version of amsmath
 %\usepackage{amssymb}% Additional symbols
-%\usepackage{siunitx}% Numbers and  Units
+%\usepackage{siunitx}% Numbers and Units
 
 \begin{document}
 
@@ -129,9 +130,9 @@
 
 
 \chapter{About this file}
-The File \file{DEMO-TUDaPhD.tex} is a basic template for PhD theses using the Corporate Design of TU Darmstadt.
+The File \enquote{DEMO-TUDaPhD-en.tex} is a basic template for PhD theses using the Corporate Design of TU Darmstadt.
 It is part of TUDa-CI, which is the official template bundle of TU Darmstadt.
-The original version was inspired by the \pck{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
+The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
 
 
 \printbibliography

@@ -5,7 +5,7 @@ module="tuda-ci"
 sourcefiledir="tex"
 sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"} 
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
-docfiledir="example"
+docfiledir="examples"
 typesetfiles={"*.tex"} 
 
 excludefiles={"Examples-*"}
@@ -15,11 +15,11 @@ textfiles= {"README.md"}
 flatten=false
 
 typesetsuppfiles={"*.lco"}
-supportdir="example"
+supportdir="examples"
 
 typesetexe="lualatex"
 
-tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "example/*.tex", "example/*.lco", "*.def", "example/*.bib"}
+tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "examples/*.tex", "examples/*.lco", "*.def", "examples/*.bib"}
 
 function update_tag(file,content,tagname,tagdate)
 	local replaced  = string.gsub(content,"tuda%-ci v%d+.%d+%-*%w* %(%d%d%d%d%-%d%d%-%d%d%)", "tuda-ci v"..tagname.." ("..tagdate..")")
