@@ -1073,6 +1073,14 @@
 	\def\and{,~ }
 	\cs_if_exist_use:N \ptxcd_pass_TitleData:
 	\if@titlepage
+	\edef\titlepage@restore{%
+		\noexpand\endgroup
+		\noexpand\global\noexpand\@colht\the\@colht
+		\noexpand\global\noexpand\@colroom\the\@colroom
+		\noexpand\global\vsize\the\vsize
+		\noexpand\global\noexpand\@titlepageiscoverpagefalse
+		\noexpand\let\noexpand\titlepage@restore\noexpand\relax
+	}%
 	\ptxcd_disable_marginpar:
 	\begin{titlepage}
 		\setcounter{page}{%
@@ -1080,18 +1088,6 @@
 		}%
 		\def\thefootnote{\ptxcd_title_footnotestyle:n {\c@footnote}}
 		\if@titlepageiscoverpage
-		\def\titlepage@restore{%
-			\endgroup
-			\ptxcd_restore_typearea:
-			\bool_if:nT {! \g_ptxcd_geometry_bool && \g_ptxcd_marginpar_bool} {
-				\dim_sub:Nn \evensidemargin {\marginparwidth+\marginparsep}
-				\dim_add:Nn \textwidth   {\marginparwidth+\marginparsep}
-				\columnwidth=\textwidth
-				\hsize=\columnwidth
-			}
-			\global\@titlepageiscoverpagefalse
-			\let\titlepage@restore\relax
-		}%
 		\begingroup
 		\topmargin=\dimexpr \coverpagetopmargin-1in\relax
 		\oddsidemargin=\dimexpr \coverpageleftmargin-1in\relax
