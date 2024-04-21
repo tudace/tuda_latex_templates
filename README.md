@@ -352,6 +352,9 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    * 3.35 (2023-12-11)
      - first CTAN release of the new slide layout
      - fix issues with headwidth calculation if custommargins=true is used
-   * 3.36 (2024-01--05)
+   * 3.36 (2024-01-05)
       - compatibility to create PDF/A via pdfmangement
-     - small adjustments for \tuprints
+      - small adjustments for \tuprints
+   * 3.37 (2024-04-21)
+      - refactoring the bundle
+      -  small layout adjustments and bugfixes
