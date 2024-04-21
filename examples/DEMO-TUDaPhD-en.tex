@@ -44,7 +44,7 @@
 	thesis={% PhD thesis, for smaller theses have a look at DEMO-TUDaThesis-en.tex
 			type=dr,
 			dr=rernat
-		},
+	},
 	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
 	custommargins=true,% Calculate margins using typearea
 	marginpar=false,% Disable marginpar
@@ -57,7 +57,7 @@
 %%%%%%%%%%%%%%%%%%%
 % Language setup
 %%%%%%%%%%%%%%%%%%%
-\usepackage[german,english]{babel}% german has to be loaded as the titlepage is always in German, english is main language
+\usepackage[german,main=english]{babel}% german has to be loaded as the titlepage is always in German,
 \usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
 \usepackage{microtype}
@@ -86,6 +86,8 @@
 
 \begin{document}
 
+\frontmatter
+
 \title{TUDaPhD -- PhD Theses using TU Darmstadt's CI}
 \subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
 \author{Marei Peischl}
@@ -103,7 +105,7 @@
 
 % The following elements will be placed on the title page.
 % \department is a required date. See full tudapub documentation for details.
-\department{ce}% If defined the shorthand will be replaced by the full name otherwhise it's used directly
+\department{inf}% If defined the shorthand will be replaced by the full name otherwhise it's used directly
 \institute{Institute}
 \group{Group}
 
