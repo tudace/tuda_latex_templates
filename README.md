@@ -344,17 +344,17 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    - Fix bug in calculation of points using subtasks in tudaexercise
   * 3.32 (2023-06-19)
     - remove affidavit=print
-   * 3.33 (2023-07-05)
+  * 3.33 (2023-07-05)
     - disable affidavit by default, see https://github.com/tudace/tuda_latex_templates/issues/432 for more information
     - rename color={} option of tudabeamer to tudacolors={} to avoid conflicts with siunitx
-   * 3.34 (2023-07-12)
-     - fix typo in affidavit
-   * 3.35 (2023-12-11)
-     - first CTAN release of the new slide layout
-     - fix issues with headwidth calculation if custommargins=true is used
-   * 3.36 (2024-01-05)
-      - compatibility to create PDF/A via pdfmangement
-      - small adjustments for \tuprints
-   * 3.37 (2024-04-21)
-      - refactoring the bundle
-      -  small layout adjustments and bugfixes
+  * 3.34 (2023-07-12)
+    - fix typo in affidavit
+  * 3.35 (2023-12-11)
+    - first CTAN release of the new slide layout
+    - fix issues with headwidth calculation if custommargins=true is used
+  * 3.36 (2024-01-05)
+    - compatibility to create PDF/A via pdfmangement
+    - small adjustments for \tuprints
+  * 3.37 (2024-04-21)
+    - refactoring the bundle
+    -  small layout adjustments and bugfixes
