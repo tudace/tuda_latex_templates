@@ -5,81 +5,32 @@
 %
 %  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 %
-% ============================================================================
-% This work may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.3c
-% of this license or (at your option) any later version.
+% ==========================================
+% 
+% This file is a modified version of scrkernel-fonts.dtx and scrkernel-paragraphs.dtx
+% Copyright (c) Markus Kohm, 2002-2024
+% modified by Marei Peischl <marei@peitex.de>
+%
+% This work may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, version 1.3c of the license.
 % The latest version of this license is in
-% http://www.latex-project.org/lppl.txt
-% and version 1.3c or later is part of all distributions of LaTeX
-% version 2008/05/04 or later.
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later and of this work.
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainer of this work is
-%   Marei Peischl <tuda-ci@peitex.de>
+% The Current Maintainers of this work are Marei Peischl <kontakt@peitex.de>.
 %
-% The development respository can be found at
-% https://github.com/tudace/tuda_latex_templates
-% Please use the issue tracker for feedback!
-%
+% This work consists of all files listed in MANIFEST.md.
 %
 % ==========================================
-%
 % \fi
 %<*driver>
 \typeout{No documentation included in this file.}
 \stop
 %</driver>
-% \iffalse %no documentation on this
-%<@@=ptxcd>
-%<*tudasize>
-\ProvidesExplFile{tuda-\@@tudasizepaper@@ paper.clo}{2024-04-21}{3.37}{tuda-ci~size~adjustments~for~\@@tudasizepaper@@ paper}
-\cs_set:Nn \ptxcd_setup_title_sizes: {
-  \cs_set:Nn \ptxcd_title_fontsize: {
-%<a0>	{125pt}{165pt}
-%<a1>	{86pt}{120pt}
-%<a2>	{65pt}{82pt}
-%<a3>	{47pt}{61pt}
-%<a4>	{36pt}{47pt}
-%<a5>	{22pt}{28pt}
-  }
-  \cs_set:Nn \ptxcd_titleinfo_fontsize: {
-%<a0>	{28pt}{35pt}
-%<a1>	{35pt}{42pt}
-%<a2>	{22pt}{28pt}
-%<a3>	{16pt}{20pt}
-%<a4>	{12pt}{14pt}
-%<a5>	{10pt}{11.5pt}
-  }
-  \cs_set:Nn \ptxcd_titlethanks_fontsize: {
-%<a0>	{24pt}{30pt}
-%<a1>	{22pt}{26pt}
-%<a2>	{14pt}{20pt}
-%<a3>	{12pt}{16pt}
-%<a4|a5>	{10pt}{11.5pt}
-  }
-}
-\cs_set:Nn \ptxcd_setup_base_sizes: {
-  \tl_if_empty:NT \g_ptxcd_fontsize_tl {
-	\tl_gset:Nn \g_ptxcd_fontsize_tl
-%<a0>	{30pt}
-%<a1|a2>	{25pt}
-%<a3>	{17pt}
-%<a4>	{14pt}
-%<a5>	{10pt}
-  }
-  \dim_gset:Nn \g_ptxcd_margin_dim
-%<a0|a1|a2>  {30mm}
-%<a3|a4>  {15mm}
-%<a5>  {12mm}
-}
-%</tudasize>
-% The following part is a modified version of 
-% scrkernel-fonts.dtx and scrkernel-paragraphs.dtx
-% 
-% Copyright (c) 1994-2022 Markus Kohm [komascript at gmx info]
-%<*scrsize>
+% <*/scrsize>
 %    \begin{macrocode}
 \ProvidesFile{%
 %<9pt>  tudasize9pt.clo%
@@ -133,7 +84,7 @@
   \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
   \def\@listi{\leftmargin\leftmargini
     \topsep 4\p@ \@plus2\p@ \@minus2\p@
-%</tudaletter>
+%</tudaletter>    
     \parsep 2\p@ \@plus\p@ \@minus\p@
     \itemsep \parsep}%
   \belowdisplayskip \abovedisplayskip
@@ -186,6 +137,12 @@
 \normalsize
 %    \end{macrocode}
 % \end{command}
+%
+% \begin{length}{\footnotesep,\footins,\floatsep,\textfloatsep,\intextsep,
+%                \dblfloatsep,\sbltextfloatsep,\partopsep}
+% \changes{v2.98c}{2008/03/26}{defined in the \file{scrsize\dots.clo} files}
+% \begin{ilength}{\@fptop,\@fpsep,\@fpbot,\@dblfptop,\@dblfpsep,\@dblfpbot}
+% \changes{v2.98c}{2008/03/26}{defined in the \file{scrsize\dots.clo} files}
 % The values are same as with the standard classes.
 %    \begin{macrocode}
 %<*9pt>
@@ -260,7 +217,5 @@
 %
 % \Finale
 % \PrintChanges
-%</scrsize>
-% \fi % no documentation on this
-% \Finale
+% </scrsize>
 \endinput

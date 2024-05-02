@@ -5,8 +5,6 @@ module="tuda-ci"
 sourcefiledir="tex"
 sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"} 
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
-docfiledir="examples"
-typesetfiles={"*.tex"} 
 
 excludefiles={"Examples-*"}
 
@@ -15,9 +13,13 @@ textfiles= {"README.md"}
 flatten=false
 
 typesetsuppfiles={"*.lco"}
-supportdir="examples"
 
 typesetexe="lualatex"
+typesetopts=""
+unpackexe="pdflatex"
+
+demofiles = {"examples-de/*", "examples/*", "*.tex"}
+typesetdemofiles = {"*.tex"}
 
 tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "examples/*.tex", "examples/*.lco", "*.def", "examples/*.bib"}
 
