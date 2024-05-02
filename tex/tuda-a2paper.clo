@@ -27,7 +27,7 @@
 %%
 \def\fileversion{3.37}
 \def\filedate{2024-04-21}
-\ProvidesExplFile{tuda-a2paper.clo}{\filedate}{\fileversion}{tuda-ci~size~adjustments~for~a0paper}
+\ProvidesExplFile{tuda-a2paper.clo}{\filedate}{\fileversion}{tuda-ci~size~adjustments~for~a2paper}
 \cs_set:Nn \ptxcd_setup_title_sizes: {
 		\cs_set:Nn \ptxcd_title_fontsize: {{65pt}{82pt}}
 		\cs_set:Nn \ptxcd_titleinfo_fontsize: {{22pt}{28pt}}
