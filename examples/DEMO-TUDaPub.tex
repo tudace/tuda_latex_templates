@@ -1,0 +1,70 @@
+
+% Enable PDF/A via pdfmanagement and no longer via pdfx
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+}
+
+\documentclass[
+	english,% Main language as global option
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+%	logofile=example-image,% In case logo files are not available
+]{tudapub}
+
+%%%%%%%%%%%%%%%%%%%
+% Language setup
+%%%%%%%%%%%%%%%%%%%
+\usepackage[german,main=english]{babel}% german has to be loaded as the titlepage is always in German
+\usepackage{microtype}
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
+
+%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}% File name of BibTeX database
+
+\hypersetup{% Metadata adjustments
+	pdfauthor=Marei Peischl (peiTeX),
+	pdfcreationdate=2024-05-03,
+	pdfkeywords={TU Darmstadt; Corporate Design; LaTeX}
+}
+
+\title{TUDaPub -- \LaTeX-Paper using TU Darmstadt's Corporate Design}
+\subtitle{The document class tudapub}
+\author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and Mr. Lion}
+
+% Titlegraphic might also be set via \includegraphics
+\titlegraphic{
+	\color{black!30}\rule{\width}{\height}
+}
+% Alternative box layout:
+\addTitleBox{Text, e.g. Institute}
+%\addTitleBoxLogo{example-image}
+%\addTitleBoxLogo*{\includegraphics[width=.3\linewidth]{example-image}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	Abstract using the document main languge (here English)
+\end{abstract}
+
+\begin{abstract}[german]
+	Weitere Zusammenfassung in einer anderen Sprache (hier Deutsch), sofern benötigt.
+\end{abstract}
+
+\tableofcontents
+% Additional lists like \listoffigures or acronyms might be added here
+
+\section{About this file}
+
+\enqoute{DEMO-TUDaPub.tex} is an example file for the document class \enqoute{tudapub.cls}.
+It is part of TUDa-CI, which is the official template bundle of TU Darmstadt.
+The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
+
+\printbibliography
+
+\end{document}
+%% End of file `DEMO-TUDaPub-en.tex'.
