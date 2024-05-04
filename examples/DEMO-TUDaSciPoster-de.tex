@@ -1,9 +1,9 @@
-%% This is file `DEMO-TUDaSciPoster-de.tex' version 3.37 (2024-04-21),
+%% This is file `DEMO-TUDaSciPoster-de.tex' version 3.37 (2024-04-21)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%% Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 %%
 %% ============================================================================
 %% This work may be distributed and/or modified under the
@@ -33,38 +33,51 @@
 %%
 
 \documentclass[
-	accentcolor=9c,
-%	boxstyle= boxed, % Boxen mit abgerundeten Ecken, farbigem Titelblock
-%	boxstyle=colored % Boxen mit farbigen Titelblock, keine vertikalen Linien
-%	boxstyle=default % Voreinstellung, ohne Farbe, ohne vertikale Linien
-%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
-	]{tudasciposter}
+	accentcolor=9c,% Auswahl der Akzentfarbe
+%	boxstyle=boxed,% Boxen mit abgerundeten Ecken, farbigem Titelblock
+%	boxstyle=colored,% Boxen mit farbigen Titelblock, keine vertikalen Linien
+%	boxstyle=default,% Voreinstellung: ohne Farbe, ohne vertikale Linien
+%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
+]{tudasciposter}
 
-%Sprache
-\usepackage[ngerman]{babel}
-\usepackage[autostyle]{csquotes}
+%%%%%%%%%%%%%%%%%%%
+% Spracheinstellungen
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english,main=ngerman]{babel}
+\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
 
+%%%%%%%%%%%%%%%%%%%
+% Literaturverzeichnis
+%%%%%%%%%%%%%%%%%%%
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}% Dateiname der .bib-datei
 
-%Makros für dieses Beispieldokument. Im Allgemeinen nicht notwendig.
-\newcommand{\tbs}{\textbackslash}
-\newcommand{\repl}[1]{<\textit{#1}>}
-\let\code\texttt
-\newcommand*{\macro}[1]{\code{\tbs#1}}
+%%%%%%%%%%%%%%%%%%%
+% Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+%%%%%%%%%%%%%%%%%%%
 \let\file\texttt
+\let\code\texttt
 \let\pck\textsf
 \let\cls\textsf
 
+\newcommand{\tbs}{\textbackslash}
+\newcommand{\repl}[1]{<\textit{#1}>}
+\newcommand*{\macro}[1]{\code{\tbs#1}}
+%%%%%%%%%%%%%%%%%%%
+% Ende der Demo-Formatierungseinstellungen
+%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
 \title{\pck{tcolorbox}-Poster im Corporate Design der TU~Darmstadt}
 \author{Marei Peischl\inst{*}\thanks{kontakt@peitex.de} \and der \TeX-Löwe}
 \institute{\inst{*}pei\TeX{} \TeX{}nical Solutions, Hamburg}
-%\inst kann in den Autor und Institutsfeldern genutzt werden um eine Zuordnung zu ermöglichen. Bei Nummerierung ist der Nutzer dafür verantwortlich Konflikte mit \thanks zu vermeiden.
+% \inst kann in den Autor und Institutsfeldern genutzt werden, um eine Zuordnung zu ermöglichen. Bei Nummerierung ist der Nutzer dafür verantwortlich Konflikte mit \thanks zu vermeiden.
 \titlegraphic{\includegraphics[width=.5\linewidth]{example-image}}
 \footerqrcode{https://www.peitex.de}
 \footer{Fußzeile: Falls neben den Logos andere Angaben erforderlich sind}
 
-%Instituts/Sponsorenlogos von links nach rechts
+% Instituts/Sponsorenlogos von links nach rechts
 \footergraphics{
 	\includegraphics[height=\height]{example-image}
 	\includegraphics[height=\height]{example-image}
@@ -76,21 +89,25 @@
 		columns=4,
 		rows=7,
 		spacing=1cm,
-%		showframe, %Gitter einblenden. Für Platzierung häufig hilfreich
+%		showframe,% Gitter einblenden. Für Platzierung häufig hilfreich
 	},]
 
 \begin{posterboxenv}[title=Zusammenfassung]{name=intro,column=1,row=1,span=4}
 	Die \cls{tudasciposter}-Klasse basiert auf dem \pck{tcolorbox} Paket von Thomas F. Sturm.
-	Sie versucht einen einfachen Weg zu bieten, wissenschaftliche Poster im Corporate Design der TU Darmstadt zu erstellen. Dieses Dokument dient zur Dokumentation und als Verwendungsbeispiel.
+	Sie versucht einen einfachen Weg zu bieten, wissenschaftliche Poster im Corporate Design der TU Darmstadt zu erstellen.
+	Dieses Dokument dient zur Dokumentation und als Verwendungsbeispiel.
 
-	Dieses Dokument verwendet unterschiedliche Boxentypen. Dies ist selbstverständlich für die praktische Verwendung nicht empfehlenswert. Dieser Modus dient lediglich Demonstrationszwecken.
+	Dieses Dokument verwendet unterschiedliche Boxentypen.
+	Dies ist selbstverständlich für die praktische Verwendung nicht empfehlenswert. Dieser Modus dient lediglich Demonstrationszwecken.
 \end{posterboxenv}
 
 % Titelei
 \begin{posterboxenv}[title=Titelei]{name=title, row=2, span=2, rowspan=2}
 	Die Definition des Titelblockes lehnt sich an die Standard-\LaTeX{}-Strukturierung  mit Hilfe von \macro{maketitle} an.
 
-	Für die Datenübergabe stehen die Makros \macro{title}, \macro{author}, \macro{institute} und \macro{titlegraphic} zur Verfügung. Letztere wird rechtsbündig  unterhalb des TUDa-Logos platziert. Der Wert von \macro{linewidth} zu diesem Zeitpunkt entspricht der Breite des TUDa-Logos.
+	Für die Datenübergabe stehen die Makros \macro{title}, \macro{author}, \macro{institute} und \macro{titlegraphic} zur Verfügung.
+	Letztere wird rechtsbündig unterhalb des TUDa-Logos platziert.
+	Der Wert von \macro{linewidth} zu diesem Zeitpunkt entspricht der Breite des TUDa-Logos.
 
 	Zusätzlich zu den Titeldaten stehen über \macro{setqrcode} und \macro{setfoot} Makros zur Verfügung, die die Fußzeile füllen.
 	Ein Beispiel ist in der Datei \file{DEMO"=TUDaSciPoster.tex} gezeigt
@@ -98,13 +115,15 @@
 
 % Fußzeile
 \begin{posterboxenv}[title=Fußzeile]{name=footer,below=title, span=2, rowspan=2 }
-	Die Fußzeile ist grundsätzlich aktiviert, kann jedoch mit Hilfe der Klassenoption \code{footer=false} ausgeschaltet werden. In diesem Fall werden jedoch mit \macro{thanks} übergebene zusätzliche Titeldaten nicht angezeigt.
+	Die Fußzeile ist grundsätzlich aktiviert, kann jedoch mit Hilfe der Klassenoption \code{footer=false} ausgeschaltet werden.
+	In diesem Fall werden jedoch mit \macro{thanks} übergebene zusätzliche Titeldaten nicht angezeigt.
 
 	Für die Übergabe weiterer Daten stehen die Makros \macro{footer}, \macro{footergraphics} und \macro{footerqrcode} zur Verfügung.
 
 	\macro{footergraphics} ist für die Übergabe von Logos gedacht und \macro{footerqrcode} übernimmt einen URL die anschließend in der rechten unteren Ecke als QRCode platziert wird.
 
-	Die Fußzeile selbst erhält die Daten aus \macro{thanks}, kann jedoch ergänzt werden. Sie hat die Breite des Satzspiegels abzüglich der Logos/QRcode.
+	Die Fußzeile selbst erhält die Daten aus \macro{thanks}, kann jedoch ergänzt werden.
+	Sie hat die Breite des Satzspiegels abzüglich der Logos/QRcode.
 \end{posterboxenv}
 
 % Platzierung der Boxen
@@ -118,7 +137,8 @@
 
 % Eine Box im Stil TUDa-boxed
 \begin{posterboxenv}[title=Eine Box im Stil TUDa-boxed, TUDa-boxed]{name=boxed, column=3, row=2, span=2}
-	Die Boxen können in verschiedenen Varianten gestaltet werden. Die Voreinstellung entspricht den offiziellen Vorgaben, jedoch kann es aus unterschiedlichen Gründen notwendig sein, eine klarere Abgrenzung zu setzen (lobale Klassenoption \code{boxstyle=boxed} oder lokaler Stil \code{TUDa-boxed}).
+	Die Boxen können in verschiedenen Varianten gestaltet werden.
+	Die Voreinstellung entspricht den offiziellen Vorgaben, jedoch kann es aus unterschiedlichen Gründen notwendig sein, eine klarere Abgrenzung zu setzen (lobale Klassenoption \code{boxstyle=boxed} oder lokaler Stil \code{TUDa-boxed}).
 \end{posterboxenv}
 
 % Eine Box im Stil TUDa-colored

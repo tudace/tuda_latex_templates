@@ -33,22 +33,24 @@
 %%
 
 \documentclass[
-	english, % main language as globale option
-%	logofile=example-image, % in case you are missing the logo files
-	design=2023, % new slide design - will be default after official release
-	]{tudabeamer}
-	
-\usepackage[main=english]{babel}
+	english,% Main language as global option
+	design=2023,% New slide design - will be default after official release
+%	logofile=example-image,% In case logo files are not available
+]{tudabeamer}
 
-% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
-\usepackage{iftex}
-\ifPDFTeX
-\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
-\fi
+%%%%%%%%%%%%%%%%%%%
+% Language setup
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+% \usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
-
-% document specific setup, you will not need that one in your files!
+%%%%%%%%%%%%%%%%%%%
+% Document specific setup, you will not need that one in your files!
+%%%%%%%%%%%%%%%%%%%
 \newcommand*{\code}[1]{\texttt{#1}}
+%%%%%%%%%%%%%%%%%%%
+% End of specific setup
+%%%%%%%%%%%%%%%%%%%
 
 \title[TUDaBeamer2023]{\LaTeX~beamer using TU Darmstadts Corporate Design}
 \subtitle{Design2023-beta}
@@ -59,7 +61,6 @@
 % Scaling for additional logos and titlegraphic is described on slide “Scaling logos/titlegraphic”
 
 % sublogo/partnerlogo will be placed in the headline/sidebar
-
 \sublogo{\color{blue!50}\rule{\width}{\height}}
 \partnerlogo*{\includegraphics{example-image}}
 
@@ -89,22 +90,25 @@
 	\item \code{\textbackslash{}sublogo} additional logo below TUDa logo
 	\item \code{\textbackslash{}titlegraphic} place image as a background for title slide
 \end{itemize}
-	The additional option \code{authorontitle=true/false} allows to place author/institue below the title.
+The additional option \code{authorontitle=true/false} allows to place author/institue below the title
 \end{frame}
 
 \begin{frame}{Scaling logos/titlegraphic}
 \begin{itemize}
-\item The commands shown on previous slide support \code{\textbackslash{}height}/\code{\textbackslash{}width} to adjust the size to be used for graphic scaling.
-\item All have a starred variant (e.\,g. \code{\textbackslash{}sublogo*\{\textbackslash{}includegraphics\{example-image\}\}}). This will automaticcaly scale/clip the logo/image to desired size.
+	\item The commands shown on previous slide support \code{\textbackslash{}height}/\code{\textbackslash{}width} to adjust the size to be used for graphic scaling.
+	\item All have a starred variant (e.\,g. \code{\textbackslash{}sublogo*\{\textbackslash{}includegraphics\{example-image\}\}}).
+	      This will automatically scale/clip the logo/image to desired size.
+\end{itemize}
 
 To align the sublogo together with the visible part of the TUDa logo there also exists the possibility to add a second star behind the mandatory argument. This will move the logo to the left to match. This variant is only available for the sublogo.
-\end{itemize}
 \end{frame}
 
 \begin{frame}{Table of Contents}
-By design the toc is structured in two columns. This layout doesn't really support subsections or subsubsections.
+By design the toc is structured in two columns.
+This layout doesn't really support subsections or subsubsections.
 
-To be able to use the new design with old content, the mechanism was extended to support those. This will automatically switch to a single columns toc.
+To be able to use the new design with old content, the mechanism was extended to support those.
+This will automatically switch to a single columns toc.
 
 In case you want to disable that mechanism there is the class option \code{toc-columns=one/two/auto} which can also be adjusted locally be directly setting it with the command: \code{\textbackslash{}tableofcontents[columns=two]}.
 
@@ -122,7 +126,7 @@ An example.
 The mechanism to provide uppercase frame titles might have strange side effects.
 It's aware of macros, so those usually should work, but there are issues with arguments. e.g. using \verb+\color{dark2}+ will throw an error message.
 
-You can avoic this by either locally disabling the case change:
+You can avoid this by either locally disabling the case change:
 
 \begin{verbatim}
 \frameztitle{Test \NoCaseChange{\textcolor{dark2}{\MakeUppercase{Test}}}}
@@ -136,28 +140,17 @@ or use the frame option \verb+uppercase=false+ as for this frame or the class op
 The new design introduces new colors to be used to highlight content.
 
 The additional colors are:
-\par
-\UseName{clist_map_inline:nn} {
-	dark1,
-	dark2,
-	light1,
-	light2,
-	accent1,
-	accent2,
-	accent3,
-	accent4,
-	accent5,
-	accent5,
-	hyperlink,
-} {TUDa-####1: \textcolor{TUDa-####1}{\rule{1cm}{\ht\strutbox}}\par}
+
+\renewcommand*{\do}[1]{TUDa-####1: \textcolor{TUDa-####1}{\rule{1cm}{\ht\strutbox}}\par}
+\docsvlist{dark1,dark2,light1,light2,accent1,accent2,accent3,accent4,accent5,accent5,hyperlink}
 \end{frame}
 
 \begin{frame}{Remark on vertical alignment (especially columns)}
-	The default alignment has been changed from \code{c} to \code{t} in contrast to beamers default setting.
-	This means frame content will be aligned top inside the frame. 
-	This is required by the design but might have side effects with the columns environment:
-	
-	To resolve this one can either globally add the \code{c} option or pass the option to the columns environment, e.\,g.:
+The default alignment has been changed from \code{c} to \code{t} in contrast to beamers default setting.
+This means frame content will be aligned top inside the frame as required by the design, thought there may be side effects, e\,g.
+with the columns environment.
+
+To resolve this one can either globally add the \code{c} option or pass it to the environment itself.
 
 \begin{columns}[onlytextwidth,c]
 	\column{.8\linewidth}
@@ -171,4 +164,4 @@ The additional colors are:
 \end{frame}
 
 \end{document}
-
+%% End of file `DEMO-TUDaBeamer.tex'.
