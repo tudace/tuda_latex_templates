@@ -31,47 +31,45 @@
 %%
 % !TeX program = lualatex
 %%
+
 % PDF/A über pdfmanagement und nicht über pdfx
 \DocumentMetadata{
 	pdfstandard=a-2b,
-	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das  noch nicht.
+	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das noch nicht
 }
 
 \documentclass[
 	german,% Hauptsprache als globale Option, früher war ngerman notwendig
-	ruledheaders=section,% Ebene bis zu der die Überschriften mit Linien abgetrennt werden,
-	class=report,% Basisdokumentenklasse. Wählt die Korrespondierende KOMA-Script Klasse
-	thesis={type=bachelor},% Dokumententyp Thesis, für Dissertationen siehe die Demo-Datei DEMO-TUDaPhd
-	accentcolor=9c,% Auswahl der Akzentfarbe
+	ruledheaders=section,% Ebene bis zu der die Überschriften mit Linien abgetrennt werden
+	class=report,% Basisdokumentenklasse. Wählt die korrespondierende KOMA-Script Klasse
+	thesis={type=bachelor},% Dokumententyp Thesis. Für Dissertationen siehe die Demo-Datei DEMO-TUDaPhd
+	fontsize=11pt,% Basisschriftgröße ist laut Corporate Design mit 9pt häufig zu klein
+	parskip=half-,% Absatzkennzeichnung durch Abstand vgl. KOMA-Script
 	custommargins=true,% Ränder werden mithilfe von typearea automatisch berechnet
 	marginpar=false,% Kopfzeile und Fußzeile erstrecken sich nicht über die Randnotizspalte
 %	BCOR=5mm,% Bindekorrektur
-	parskip=half-,% Absatzkennzeichnung durch Abstand vgl. KOMA-Script
-	fontsize=11pt,% Basisschriftgröße laut Corporate Design ist mit 9pt häufig zu klein
+	accentcolor=9c,% Auswahl der Akzentfarbe
 %	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
 ]{tudapub}
+
 
 %%%%%%%%%%%%%%%%%%%
 % Spracheinstellungen
 %%%%%%%%%%%%%%%%%%%
-\usepackage[english, main=ngerman]{babel}
-\usepackage[autostyle]{csquotes}% Sprachabhängig Anführungszeichen mit \enquote
-
-% Falls mit pdflatex kompiliert wird, wird microtype automatisch geladen, in diesem Fall muss diese Zeile entfernt werden, und falls weiter Optionen hinzugefügt werden sollen, muss dies über
-% \PassOptionsToPackage{Optionen}{microtype}
-% vor \documentclass hinzugefügt werden.
+\usepackage[english,main=ngerman]{babel}
 \usepackage{microtype}
+\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
 
 %%%%%%%%%%%%%%%%%%%
 % Literaturverzeichnis
 %%%%%%%%%%%%%%%%%%%
 \usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography}% Dateiname der .bib-datei
+\addbibresource{DEMO-TUDaBibliography.bib}% Dateiname der .bib-datei
 
 %%%%%%%%%%%%%%%%%%%
 % Paketvorschläge Tabellen
 %%%%%%%%%%%%%%%%%%%
-\usepackage{array}%  Grundlegendes Ergänzungspaket für Tabellen. Wird von den folgenden Paketen indirekt geladen
+\usepackage{array}% Grundlegendes Ergänzungspaket für Tabellen. Wird von den folgenden Paketen indirekt geladen
 %\usepackage{tabularx}% Tabellen mit fester Breite und entsprechend umbrechenden Spalten
 %\usepackage{longtable}% Mehrseitige Tabellen
 %\usepackage{xltabular}% Mehrseitige Tabellen mit fester Breite
@@ -89,10 +87,9 @@
 %%%%%%%%%%%%%%%%%%%
 \let\file\texttt
 \let\code\texttt
-\let\tbs\textbackslash
 \let\pck\textsf
 \let\cls\textsf
-\biburlsetup
+\let\tbs\textbackslash
 
 \usepackage{tabularx,booktabs}%Tabellenpakete (siehe oben)
 \usepackage{pifont}% Zapf-Dingbats Symbole
@@ -101,16 +98,21 @@
 %%%%%%%%%%%%%%%%%%%
 % Ende der Demo-Formatierungseinstellungen
 %%%%%%%%%%%%%%%%%%%
-\begin{document}
+
+
+\hypersetup{% Zusätzliche/Abweichende Metadaten
+	pdfauthor=Marei Peischl (peiTeX),
+	pdfcreationdate=2024-05-03,
+	pdfkeywords={TU Darmstadt; Corporate Design; LaTeX}
+}
 
 \title{TUDaThesis -- Abschlussarbeiten im Corporate Design der TU Darmstadt}
-\subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
+\subtitle{\LaTeX{} using TU Darmstadt's CI}
 \author{Marei Peischl}
-% \birthplace{}% Geburtsort. Bei Dissertationen zwingend notwendig
-\reviewer{Reviewer 1 \and Reviewer 2 \and  … }
+%\birthplace{}% Geburtsort. Bei Dissertationen zwingend notwendig
+\reviewer{Gutachter*in 1 \and Gutachter*in 2 \and …}
 
-% Diese Felder werden untereinander auf der Titelseite platziert.
-% \department ist eine notwendige Angabe, siehe auch dem Abschnitt `Abweichung von den Vorgaben für die Titelseite'
+% Die folgenden Felder werden untereinander auf der Titelseite platziert
 \department{ce}% Das Kürzel wird automatisch ersetzt und als Studienfach gewählt sofern es definiert ist.
 \institute{Institut}
 \group{Arbeitsgruppe}
@@ -120,24 +122,29 @@
 
 %\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}% Lizenzdaten für TUprints
 
+
+
+\begin{document}
+
 \maketitle
+
 %%  Das Affidavit wurde auf Wunsch des Dezernat II per default deaktiviert.
-%%  Der rechtlich bindende Text findet sich nach Aukunft des Dezernats unter https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp
+%%  Der rechtlich bindende Text findet sich nach Auskunft des Dezernats unter https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp
 %%  Es soll die docx Datei verwendet, ausgedruckt, unterschrieben, eingescannt und dann eingebunden werden.
 %%  Die einfachste Möglichkeit bietet hierfür das pdfpages Paket.
 %%
 %%  Aus Kompatibilitätsgründen für die anderen Templates ist die Funktion weiterhin verfügbar.
-%% \affidavit[signature-image={\includegraphics[width=\width,height=1cm]{example-image}}, <hier können andere Optionen zusätzlich stehen>]
+%% \affidavit[signature-image={\includegraphics[width=\width,height=1cm]{example-image}}, <hier können noch weitere Optionen stehen>]
 
 \tableofcontents
-% Ggf. weitere Verzeichnisse wie \listoffigures oder ein  Abkürzungsverzeichnis
+% Ggf. weitere Verzeichnisse wie \listoffigures oder ein Abkürzungsverzeichnis
 
 
 \addchap{Über diese Datei}
-Die Datei \file{DEMO-TUDaThesis.tex} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
+
+Die Datei \file{DEMO-TUDaThesis.tex} ist ein grundlegendes Template für Abschlussarbeiten
+im Stil des Corporate Designs der TU Darmstadt.
 Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
-
-
 
 
 Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen. In diesem Dokument werden überwiegend die speziell auf Abschlussarbeiten ausgelegten Möglichkeiten beschrieben. Weitere Konfigurationsmöglichkeiten finden sich in der Datei \file{DEMO-TUDaPub.pdf} \cite{tudapub}.
@@ -190,7 +197,7 @@ TUDa-CI verwendet hierfür das babel-Paket.
 
 Dies wird jedoch nicht automatisch geladen, da hierfür die Konfiguration der Sprachen bekannt sein müsste. Die Demo-Dateien für Abschlussarbeiten (\file{DEMO-TUDaThesis.tex}/""\file{DEMO-TUDaPhD.tex}) laden hierfür die Konfiguration:
 \begin{verbatim}
-\usepackage[english, main=ngerman]{babel}
+    \usepackage[english, main=ngerman]{babel}
 \end{verbatim}
 Diese ist für ein Dokument mit Deutsch als Hauptsprache und Englischen Elementen.
 Die Hauptsprache wird als Wert der Option \verb+main=+ übergeben.
@@ -199,18 +206,18 @@ Für eine bessere Übersichtlichkeit ist es dennoch hilfreich es dort aufzuführ
 
 Falls die Hauptsprache nicht Deutsch ist, wäre daher die folgende Konfiguration sinnvoll:
 \begin{verbatim}
-\usepackage[ngerman, main=<Hauptsprache>]{babel}
+    \usepackage[ngerman, main=<Hauptsprache>]{babel}
 \end{verbatim}
 
 \section{Übergabe der Titeldaten}
 
 Die Daten werden analog zur klassischen Titeleierzeugung mit \verb+\maketitle+ übergeben. Allerdings wurden die Felder um ein paar speziellere Daten erweitert. Sofern nicht anders angegeben, verfügen alle Makros über ein notwendiges Argument für die Datenübergabe, z.\,B.
 \begin{verbatim}
-\title{\LaTeX{} im Corporate Design der TU Darmstadt}
+    \title{\LaTeX{} im Corporate Design der TU Darmstadt}
 \end{verbatim}
 Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss.
 
-Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaPub-Dokumentation geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos. \cite{tudapub}
+Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaPub-Dokumentation \cite{tudapub} geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos.
 
 \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
 	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
@@ -222,21 +229,22 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	      \minisec{Änderung des Bezeichners}
 	      Die Änderung des Bezeichners ist über ein optionales Argument möglich:
 \begin{verbatim}
-    \reviewer[Ersatzbezeichner]{Name1 \and Name2}
+        \reviewer[Ersatzbezeichner]{Name1 \and Name2}
 \end{verbatim}
 	      Um die numerische Benennung abzuändern ist es zusätzlich möglich statt dem Ersatzbezeichner eine Kommaliste zu übergeben:
 \begin{verbatim}
-    \reviewer*[Bezeichner1, Bezeichner2]{Name1 \and Name2}
+        \reviewer*[Bezeichner1, Bezeichner2]{Name1 \and Name2}
 \end{verbatim}
 	      In diesem Fall entfällt die Nummerierung vor dem Bezeichner. Soll z.\,B. den Formulierungen der Promotionsordnung entsprochen werden, gilt:
 \begin{verbatim}
-    \reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
+        \reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
 \end{verbatim}
 	      Für die Erstellung Fachbereichsspezifischer Templates existiert hierfür auch ein Makro, dass ohne den Aufruf von \verb+\reviewer+ Änderungen zulässt.
 \begin{verbatim}
-    \setupReviewName{Ersatzwort für „Gutachten“}
+        \setupReviewName{Ersatzwort für „Gutachten“}
 \end{verbatim}
 	      Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+, eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
+
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
 	\item[department] Fach-/Studienbereich, allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
 
@@ -286,14 +294,14 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 		      \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-de}\par
 	      }
 
-	      Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, welche durch die Universitätsbibliothek angepasst wurde.
+	      Die Einführung dieser Option war Bestandteil der Vorbereitung zur Anpassung der Standardlizenz.
 	      Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251}. Die Anpassung der Voreinstellung bei TUDa-CI geschah mit Version 4.0.
 
 	      Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet die ULB der TUDa unter https://www.ulb.tu-darmstadt.de/dpub  oder  das CC-Projekt sebst über seinen Lizenzfinder unter \url{http://creativecommons.org/choose/}.
 	      Die TU Darmstadt empfiehlt in Ihrer Publikationsrichtlinie und Open-Access-Policy die Nutzung der offenen CC BY 4.0 Lizenz.
 
 	      Falls ein von den oben gelisteten Schlüsseln abweichender Wert gesetzt wird, wird ebendieser direkt an der Stelle des Lizenztextes verwendet. Sofern der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
-	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}
+	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}.
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
 \end{description}
@@ -302,7 +310,7 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
 In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
 
-Ab Version 3.32 entfällt die seit Version 3.06 unterstütze Unterscheidung zwischen einem Affidavit für digitale oder gedruckte Abgaben. Aus Kompatibilitätsgründen werden die Optionen weiterhin verstanden, allerdings bewirken nun beide das gleiche. Der Text entstammt von  \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} (Stand 2023-06-19). Es ist wingend erforderlich, dass Studierende vor der Abgabe einer Arbeit überprüfen, ob der Text der geforderten Fassung entspricht.
+Ab Version 3.32 entfällt die seit Version 3.06 unterstütze Unterscheidung zwischen einem Affidavit für digitale oder gedruckte Abgaben. Aus Kompatibilitätsgründen werden die Optionen weiterhin verstanden, allerdings bewirken nun beide das gleiche. Der Text entstammt von  \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} (Stand 2023-06-19). Es ist zwingend erforderlich, dass Studierende vor der Abgabe einer Arbeit überprüfen, ob der Text der geforderten Fassung entspricht.
 
 Dissertationen verwenden hier einen anderen Text, für die Unterscheidung wird die Affidavit-Option \verb+affidavit=dr+ intern verwendet.
 
@@ -320,22 +328,22 @@ Eine vertikale Verschiebung des Signaturbildes ist nicht direkt implementiert, i
 Es besteht zusätzlich die Möglichkeit ein anderssprachiges Affidavit als Ergänzung mit abzudrucken. Um die Struktur und die ggf. notwendige Sprachumschaltung zu erledigen, existiert hierfür ab Version 2.03 eine Umgebung:
 
 \begin{verbatim}
-\begin{affidavit*}[Babel-Sprachoption]{Überschrift}
-Text
-\end{affidavit*}
+    \begin{affidavit*}[Babel-Sprachoption]{Überschrift}
+        Text
+    \end{affidavit*}
 \end{verbatim}
 
 Diese Variante verfügt bewusst über keine Unterschriftenzeile, da diese Version laut Verständnis der Entwickler keine rechtliche Verbindlichkeit besitzt.
 
 Die Umgebung kann jedoch auch für besondere Formen der Erklärung genutzt werden. In diesem Fall kann eine zusätzliche Signaturzeile über
 \begin{verbatim}
-\AffidavitSignature[Stadt]
+    \AffidavitSignature[Stadt]
 \end{verbatim}
 hinzugefügt werden. Die Vorbelegung für Stadt ist hierbei \enquote{Darmstadt}.
 Ab Version 3.20 ist die Übergabe einer zusätzlichen Option für den Ort der Signatur auch als Option möglich.
 
 \begin{verbatim}
-\affidavit[signature-location=Stadt]
+    \affidavit[signature-location=Stadt]
 \end{verbatim}
 
 \section{Layout-Optionen mit Verstoß gegen das Corporate Design}
@@ -378,7 +386,7 @@ Es ist prinzipiell möglich die Optionen auch direkt als Optionen zur \file{tuda
 
 Für dieses Dokument wurden beispielsweise die Optionen als
 \begin{verbatim}
-thesis={type=drfinal,dr=phil}
+thesis={type=dr,dr=rernat}
 \end{verbatim}
 übergeben.
 
@@ -396,7 +404,7 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate,examdate, birthplace, department, reviewer)
 	      \end{itemize}
 	      Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
-	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
+	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{rerpol}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
 	      \begin{quote}
 		      Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
 	      \end{quote}

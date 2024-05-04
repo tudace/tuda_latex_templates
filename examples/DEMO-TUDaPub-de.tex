@@ -1,9 +1,9 @@
-%% This is file `DEMO-TUDaPub-de.tex' version 3.37 (2024-04-21),
+%% This is file `DEMO-TUDaPub-de.tex' version 3.37 (2024-04-21)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%% Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 %%
 %% ============================================================================
 %% This work may be distributed and/or modified under the
@@ -32,75 +32,92 @@
 % !TeX program = lualatex
 %%
 
+% PDF/A über pdfmanagement und nicht über pdfx
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das noch nicht
+}
+
 \documentclass[
-	ngerman,
-	accentcolor=9c,% Farbe für Hervorhebungen auf Basis der Deklarationen in den Corporate Design Richtlinien
-%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
-	]{tudapub}
+	german,% Hauptsprache als globale Option, früher war ngerman notwendig
+	accentcolor=9c,% Auswahl der Akzentfarbe
+%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
+]{tudapub}
 
-\usepackage[english, main=ngerman]{babel}
-\usepackage[autostyle]{csquotes}
 
+%%%%%%%%%%%%%%%%%%%
+% Spracheinstellungen
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english,main=ngerman]{babel}
+\usepackage{microtype}
+\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
+
+%%%%%%%%%%%%%%%%%%%
+% Literaturverzeichnis
+%%%%%%%%%%%%%%%%%%%
 \usepackage{biblatex}
-\bibliography{DEMO-TUDaBibliography}
+\addbibresource{DEMO-TUDaBibliography.bib}% Dateiname der .bib-datei
 
-%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+
+%%%%%%%%%%%%%%%%%%%
+% Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+%%%%%%%%%%%%%%%%%%%
+\usepackage{hologo}
 \let\file\texttt
 \let\code\texttt
 \let\pck\textsf
 \let\cls\textsf
-\biburlsetup
 
-\usepackage{hologo}
+%%%%%%%%%%%%%%%%%%%
+% Ende der Demo-Formatierungseinstellungen
+%%%%%%%%%%%%%%%%%%%
 
-\begin{document}
 
-%Zusätzliche Metadaten für PDF/A. In diesem Fall notwendig, weil Titel ein Makro enthält.
-\Metadata{
-	author=Marei Peischl (peiTeX),
-	title=TUDaPub - LaTeX-Paper im Corporate Design der TU Darmstadt,
-	subject=Basisdokumentation und Template zur Nutzung der tudapub-Dokumentenkasse,
-	date=2019-04-29,
-	keywords=TU Darmstadt\sep Corporate Design\sep LaTeX
+\hypersetup{% Zusätzliche/Abweichende Metadaten
+	pdfauthor=Marei Peischl (peiTeX),
+	pdftitle=TUDaPub – LaTeX-Paper im Corporate Design der TU Darmstadt,
+	pdfsubject=Basisdokumentation und Template zur Nutzung der tudapub-Dokumentenkasse,
+	pdfcreationdate=2024-05-03,
+	pdfkeywords={TU Darmstadt; Corporate Design; LaTeX}
 }
 
 \title{TUDaPub -- \LaTeX-Paper im Corporate Design der TU Darmstadt}
 \subtitle{Die Dokumentenklasse tudapub}
 \author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and der \TeX-Löwe}
 
+
+
+% Folgende Box kann selbstverständlich durch ein mit \includegraphics geladenes Bild ersetzt werden
 \titlegraphic{
-%	%Folgende Box kann selbstverständlich durch ein mit \includegraphics geladenes Bild ersetzt werden.
 	\color{black!30}\rule{\width}{\height}
 }
-
-
-%Varianten der Infoboxen
+% Varianten der Infoboxen:
 \addTitleBox{Institutsbezeichnung bzw. Logo in 2/3 Größe, vgl. \code{addTitleBoxLogo}}
 %\addTitleBoxLogo{example-image}
 %\addTitleBoxLogo*{\includegraphics[width=.3\linewidth]{example-image}}
 
-
+\begin{document}
 
 \maketitle
 
 \begin{abstract}
-	Dieses Dokument stellt ein Template und gleichzeitig die Verwendungsdokumentation zur Dokumentenklasse tudapub, einem Teil des TUDa-CI-Paketes dar.
-
-	Noch befindet sich das Projekt in der Testphase. Sollten Sie Fragen, Wünsche und Anregungen haben, bitten wir um eine entsprechende Mitteilung.
+	Zusammenfassung in der Hauptsprache des Dokuments (hier Deutsch)
 \end{abstract}
 
 \begin{abstract}[english]
-	Example for an additional abstract in English.
+	Abstract in another loaded language (here English), in case it's required.
 \end{abstract}
 
-
-
 \tableofcontents
+% Ggf. weitere Verzeichnisse wie \listoffigures oder ein Abkürzungsverzeichnis
+
 
 \section{Über diese Datei}
-Die Datei \file{DEMO-TUDaPub.tex} beziehungsweise ihre Ausgabe \file{DEMO-TUDaPub.pdf} ist die Dokumentation der Dokumentenklasse \file{tudapub.sty}.
 
-Sie ist Teil des TUDa-CI-Bundles und basiert in Teilen auf dem tuddesign-Paket von C.~v.~Loewenich und J.~Werner.
+Die Datei \file{DEMO-TUDaPub.tex} ist eine Beispieldatei für die Dokumentenklasse \file{tudapub.cls}.
+Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
+
+
 
 In diesem Dokument werden die speziellen Optionen und Einstellungsmöglichkeiten erläutert.
 
@@ -116,28 +133,28 @@ Im folgenden werden die möglichen Optionen beschrieben.
 \begin{description}
 	\item[class=<article|report|book>] Diese Option legt die Basisdokumentenklasse fest. Die Werte laden die entsprechende KOMA-Script-Klasse \cite{scrguide}. Der Wert \code{article} lädt somit die Klasse \code{scrartcl}.
 
-	KOMA-Script ist eine Sammlung von Klassen und Paketen für \LaTeX, die neben den typografischen Anpassungen an den Europäischen Raum auch die Konfigurationsmöglichkeiten stark erweitert.
+	      KOMA-Script ist eine Sammlung von Klassen und Paketen für \LaTeX, die neben den typografischen Anpassungen an den Europäischen Raum auch die Konfigurationsmöglichkeiten stark erweitert.
 	\item[color=<Farbe>] Wählt die Schmuckfarbe für die Nutzung in der Identitätsleiste aus. Die Farbcodes finden sich in der Farbübersicht in den Corporate Design Richtlinien. Neben diesen Farben kann prinzipiell jede beliebige Farbe übergeben werden. Die Optionen \code{accentcolor}, \code{textaccentcolor} und \code{identbarcolor} werden anlog direkt an \pck{tudacolors} übergeben. Auf diesem Weg können die Farben unabhängig voneinander gesetzt werden.
 	\item[marginpar] Schaltet die Randnotizspalte um. Voreingestellt ist \code{auto}. Dies bedeutet, dass die Randnotizspalte wie im Corporate Design Handbuch \cite{TUDaGuideline} über die fünfte Spalte läuft.  \marginpar{Beispiel für eine Randnotiz}.
-	Darüber werden auch die Werte \code{true} und \code{false} akzeptiert. \code{false} setzt die Breite der Randnotizspalte auf 0. Der Mechanismus selbst wird nicht deaktiviert.
+	      Darüber werden auch die Werte \code{true} und \code{false} akzeptiert. \code{false} setzt die Breite der Randnotizspalte auf 0. Der Mechanismus selbst wird nicht deaktiviert.
 
-	Randnotizen werden über den komafont-Mechanismus \cite[vgl.][]{scrguide} im Element \code{marginpar} gesetzt. Seine Voreinstellung entspricht
-	\begin{verbatim}
-	\setkomafont{marginpar}{\accentfont}
-	\end{verbatim}
-	Um zusätzlich farbige Randnotizen zu setzen, könnte dies geändert werden, über
-	\begin{verbatim}
-	\addtokomafont{marginpar}{\color{textaccentcolor}}
-	\end{verbatim}
-	\marginline{
-		\includegraphics[width=\marginparwidth]{example-image}\\
-		Flattersatz in der marginnline aus \KOMAScript
-	}
+	      Randnotizen werden über den komafont-Mechanismus \cite[vgl.][]{scrguide} im Element \code{marginpar} gesetzt. Seine Voreinstellung entspricht
+\begin{verbatim}
+\setkomafont{marginpar}{\accentfont}
+\end{verbatim}
+	      Um zusätzlich farbige Randnotizen zu setzen, könnte dies geändert werden, über
+\begin{verbatim}
+\addtokomafont{marginpar}{\color{textaccentcolor}}
+\end{verbatim}
+	      \marginline{
+		      \includegraphics[width=\marginparwidth]{example-image}\\
+		      Flattersatz in der marginnline aus \KOMAScript
+	      }
 	\item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann Randnotizen deaktiviert.
 	\item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend beschränkt. False lädt den Standardstil aus \KOMAScript.
 	\item[title=default/small/large] Die relativ große Schriftgröße des Titels kann – insbesondere bei langen Titel für Abschlussarbeiten – zu Platzproblemen führen. Die Option \code{title} verhindert dies, indem die für das jeweils kleinere Papierformat eingestellten Schriftgrößen geladen werden. Die Voreinstellung ist \code{default} und entspricht dem Wert \code{large}.
-  \item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
-	Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=""false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
+	\item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung. Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. Voreingestellt ist \code{publication}.
+	      Zusätzlich existiert ab Version 1.2 noch der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten, sowie die TUDaPub-Optionen \code{pdfa=""false} und \code{IMRAD=false}. Dieser Modus ist für kurze, interne Berichte gedacht.
 	\item[headline] Die Kopfzeile verfügt über die im Corporate Design beschriebenen Layoutmöglichkeiten über den Wert \code{automark}. Da diese Lösung typografisch nicht sonderlich sinnvoll ist, ist es auch möglich, diese abzuschalten. Voreingestellt ist ein Stil ohne Kolumnentitel.
 	\item[logo] Option für die Titelseite, siehe \ref{sec:title}
 	\item[colorback] Option für die Titelseite, siehe \ref{sec:title}
@@ -187,19 +204,18 @@ Ab Version 3.0 steht in TUDaPub auch der Sponsorenmechanismus der TUDaLeaflet-Kl
 
 Sponsorenlogos werden üblicherweise über
 \begin{verbatim}
-	\AddSponsor{<logo1>}
-	\AddSponsor{<log2>}
+\AddSponsor{<logo1>}
+\AddSponsor{<log2>}
 \end{verbatim}
 übergeben. Innerhalb des Arguments ist \verb+\height+ so gesetzt. Somit werden im Beispiel alle Logos auf die gleiche Höhe gesetzt. Der Abstand dazwischen wird entsprechend aufgefüllt, sodass der gesamte Block immer links und rechts mit dem Text abschließt.
 
 Die zweite Variante ermöglicht die Platzierung mit manueller vertikaler Ausrichtung, wie es bei Logos mit unterschiedlicher Höhe notwendig sein könnte. Hierbei werden lediglich die Abstände und Trennlinien um die Logos ergänzt:
 
 \begin{verbatim}
-	\sponsors{
-		<logo1><logo2>
-	}
+\sponsors{
+<logo1><logo2>
+}
 \end{verbatim}
-
 
 \subsubsection{Optionen für die Titelseite}
 Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/""body}.
@@ -226,16 +242,15 @@ Die \code{abstract}-Umgebung wird für \cls{tudapub} um eine Option für die Spr
 
 \begin{verbatim}
 \begin{abstract}
-	Zusammenfassung entsprechend der Dokumentensprache. In diesem Fall Deutsch.
+Zusammenfassung entsprechend der Dokumentensprache. In diesem Fall Deutsch.
 \end{abstract}
 
 \begin{abstract}[english]
-	Zusätzliche Zusammenfassung in englischer Sprache
+Zusätzliche Zusammenfassung in englischer Sprache
 \end{abstract}
 \end{verbatim}
 
 Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen geladen werden. Im Falle des Beispiels muss also sowohl \code{ngerman} als auch \code{english} an das \pck{babel}-Paket übergeben werden.
-
 
 \subsection{PDF/A Konformität}
 Die Klasse TUDaPub unterstützt den Standard PDF/A 2b. Der PDF/A-Modus ist automatisch aktiviert. die zugehörige Option kann jedoch über \code{pdfa=false} ausgeschaltet werden.
@@ -247,8 +262,8 @@ Um dieses Problem zu umgehen stellt \cls{tudapub} hierfür das Makro \code{\text
 Zum Beispiel:
 \begin{verbatim}
 \Metadata{
-	author=Marei Peischl (peiTeX),
-	title=LaTeX im Corporate Design der TU Darmstadt,
+author=Marei Peischl (peiTeX),
+title=LaTeX im Corporate Design der TU Darmstadt,
 }
 \end{verbatim}
 Das Feld \code{publisher} ist mit \enquote{TU Darmstadt} vorbelegt, kann aber überschrieben werden.
@@ -313,19 +328,19 @@ Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}. Sie verfügt über die Werte \code{true}, \code{false} und \code{geometry} mit folgender Bedeutung:
 
 \begin{description}
-\item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pck{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
-\item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pck{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des \pck{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
-\item[custommargins=geometry]  Diese Variante wurde auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führt.
-\pck{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
+	\item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pck{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
+	\item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pck{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des \pck{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
+	\item[custommargins=geometry]  Diese Variante wurde auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führt.
+	      \pck{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
 
-Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
+	      Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
 \begin{verbatim}
-	\geometry{
-	   reset,
-	   <Eigene Anpassungen>
-	}
+\geometry{
+   reset,
+   <Eigene Anpassungen>
+}
 \end{verbatim}
-Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
+	      Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
 \end{description}
 
 \minisec{Hinweis zu den Kopf-/Fußzeilen}
@@ -334,20 +349,18 @@ Wenn die Option \code{marginpar=true} gesetzt bleibt, ragen die Kopf- und Fußze
 Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit lokal größer sein können als die eigentliche Überschrift. (\code{headline=automark})
 Deswegen kann über
 \begin{verbatim}
-	\pagestyle{TUDa.headings}
+\pagestyle{TUDa.headings}
 \end{verbatim}
 ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pck{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
 
 \minisec{Hinweis zur Bindekorrektur}
 Bei Verwendung einer Bindekorrektur (\code{BCOR=<Länge>}) wird diese nicht automatisch auch auf der Titelseite eingefügt. Für diesen Fall wurde mit Version 3.0 zusätzlich die Option \code{BCORtitlepage} hinzugefügt. Falls diese aktiviert wird, nimmt die Titelseite den Wert der Typearea Option \code{BCOR} auf der ersten Seite als Zusatz zum linken Rand hinzu.
 
-
 \subsection{Frontmatter/Mainmatter/Backmatter}
 Üblicherweise existieren die Makros \verb+\frontmatter+, \verb+\mainmatter+ und \verb+\backmatter+ lediglich bei der Basisklasse \cls{scrbook}.
 Auf Wunsch wurden diese Makros auch bei \cls{scrartcl} und \cls{scrreprt} als Basis bereitgestellt.
 
 Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet.
-
 
 \subsection{Mathematikschriften}
 Da es keine Compiler-unanbhängige, universelle Mathematikschrift gibt und die Corporate Design Richtlinien auch keinerlei Empfehlung berücksichtigen, wurden hierfür einige mögliche Varianten diskutiert. Die Voreinstallung entspricht immer dem Standard der Installation. Es werden keine spezifischen Einstellungen geladen.
@@ -368,13 +381,11 @@ Hier existiert eine Variante, die die Buchstaben der Basisschriftart \enquote{Ch
 
 Es gibt ähnliche Ansätze für ein paar weitere Kombinationen. Einige Beispiele finden sich in der XCharter Dokumentation. \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
 
-
 \section{Fachbereichsspezifische Anpassungen}
 Einige Fachbereiche haben spezielle Anforderungen. Dieser Abschnitt betrachtet die speziellen Anpassungen. Bisher (Juli 2020) existieren diese Modifikationen lediglich für den Fachbereich Maschinenbau, der Mechanismus ist jedoch erweiterungsfähig.
 
-
 \subsection{Fachbereich Maschinenbau}
-Der entsprechende Modus wird über die Option \code{department=mecheng} oder kurz \code{mecheng} aktiviert. Die Farbgebung passt sich dann automatisch an und die Trennlinie der Fußzeile erhält die geforderte Form des Zeitstrahles. 
+Der entsprechende Modus wird über die Option \code{department=mecheng} oder kurz \code{mecheng} aktiviert. Die Farbgebung passt sich dann automatisch an und die Trennlinie der Fußzeile erhält die geforderte Form des Zeitstrahles.
 
 Darüber hinaus erfordern manche Stellen dieses Fachbereichs die Übergabe einer ID zu Kennzeichnung des Dokuments. Hierfür wurde der Mechanismus
 \begin{verbatim}
@@ -418,8 +429,6 @@ Beispiele für typische Modifikationen, die auch im Rahmen des Corporate Design 
 	\item Positionierung, Ausrichtung und Abstände bei captions (Die Makros \verb+\captionsabove+, \verb+\captionbelow+, \verb+\captionof+ und die Option \verb+captions+)
 \end{itemize}
 
-
-
 \section{Bekannte Probleme}
 
 \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
@@ -428,7 +437,6 @@ Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hol
 
 \subsection{DVI-Ausgabe}
 Aufgrund der Voreinstellung zur Erzeugung einer PDF/A-Datei ist es nicht möglich TUDa-CI in Standardeinstellungen zur Erzeugung einer DVI-Datei zu nutzen. Ein Großteil der Funktionalität kann jedoch durch Deaktivierung der \code{pdfa}-Option genutzt werden.
-
 
 \subsection{Geschachtelte Akzente (Inkompatibilität zwischen pdfx und amsmath)}
 Es ist nach aktuellem Paketstatus (v3.04) nicht möglich beide Pakete in Kombination ohne weitere Anpassungen so zu verwenden, dass eine Schachtelung von Akzenten möglich ist. Das folgende Beispiel wirft Fehler, sobald \pck{amsmath} direkt oder indirekt geladen wird.
@@ -444,10 +452,12 @@ Das Paket \pck{microtype} wird im Falle der Nutzung von \hologo{pdfLaTeX} oder e
 Falls es zwingend Notwendig ist die Type 1 Schriftart zu verwenden, ist es möglich weitere Optionen vor dem Laden der Dokumentenklasse an \pck{microtype} zu übergeben.
 
 \begin{verbatim}
-	\PassOptionsToPackage{<microtype Optionen>}{microtype}
-	\documentclass{…}
+\PassOptionsToPackage{<microtype Optionen>}{microtype}
+\documentclass{…}
 \end{verbatim}
 \appendix
+
 \printbibliography
 
 \end{document}
+%% End of file `DEMO-TUDaPub-de.tex'.

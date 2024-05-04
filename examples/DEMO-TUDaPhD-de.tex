@@ -31,50 +31,48 @@
 %%
 % !TeX program = lualatex
 %%
+
 % PDF/A über pdfmanagement und nicht über pdfx
 \DocumentMetadata{
 	pdfstandard=a-2b,
-	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das  noch nicht.
+	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das noch nicht
 }
 
 \documentclass[
 	german,% Hauptsprache als globale Option, früher war ngerman notwendig
 	ruledheaders=chapter,% Ebene bis zu der die Überschriften mit Linien abgetrennt werden, vgl. DEMO-TUDaPub
 	class=book,% Basisdokumentenklasse. Wählt die korrespondierende KOMA-Script Klasse
-	thesis={% Dokumententyp PhD Thesis, für kleinere Abschlussarbeiten, siehe DEMO-TUDaThesis-de.tex
+	thesis={% Dokumententyp PhD Thesis. Für kleinere Abschlussarbeiten siehe DEMO-TUDaThesis-de.tex
 			type=dr,
 			dr=rernat
 		},
-	accentcolor=9c,% Auswahl der Akzentfarbe
+	fontsize=11pt,% Basisschriftgröße ist laut Corporate Design mit 9pt häufig zu klein
+	parskip=half-,% Absatzkennzeichnung durch Abstand vgl. KOMA-Script
 	custommargins=true,% Ränder werden mithilfe von typearea automatisch berechnet
 	marginpar=false,% Kopfzeile und Fußzeile erstrecken sich nicht über die Randnotizspalte
 %	BCOR=5mm,% Bindekorrektur
-	parskip=half-,% Absatzkennzeichnung durch Abstand vgl. KOMA-Script
-	fontsize=11pt,% Basisschriftgröße laut Corporate Design ist mit 9pt häufig zu klein
+	accentcolor=9c,% Auswahl der Akzentfarbe
 %	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
 ]{tudapub}
+
 
 %%%%%%%%%%%%%%%%%%%
 % Spracheinstellungen
 %%%%%%%%%%%%%%%%%%%
-\usepackage[english, main=ngerman]{babel}
-\usepackage[autostyle]{csquotes}% Sprachabhängig Anführungszeichen mit \enquote
-
-% Falls mit pdflatex kompiliert wird, wird microtype automatisch geladen, in diesem Fall muss diese Zeile entfernt werden, und falls weiter Optionen hinzugefügt werden sollen, muss dies über
-% \PassOptionsToPackage{Optionen}{microtype}
-% vor \documentclass hinzugefügt werden.
+\usepackage[english,main=ngerman]{babel}
 \usepackage{microtype}
+\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
 
 %%%%%%%%%%%%%%%%%%%
 % Literaturverzeichnis
 %%%%%%%%%%%%%%%%%%%
 \usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography}% Dateiname der .bib-datei
+\addbibresource{DEMO-TUDaBibliography.bib}% Dateiname der .bib-datei
 
 %%%%%%%%%%%%%%%%%%%
 % Paketvorschläge Tabellen
 %%%%%%%%%%%%%%%%%%%
-\usepackage{array}%  Grundlegendes Ergänzungspaket für Tabellen. Wird von den folgenden Paketen indirekt geladen
+\usepackage{array}% Grundlegendes Ergänzungspaket für Tabellen. Wird von den folgenden Paketen indirekt geladen
 %\usepackage{tabularx}% Tabellen mit fester Breite und entsprechend umbrechenden Spalten
 %\usepackage{longtable}% Mehrseitige Tabellen
 %\usepackage{xltabular}% Mehrseitige Tabellen mit fester Breite
@@ -92,10 +90,9 @@
 %%%%%%%%%%%%%%%%%%%
 \let\file\texttt
 \let\code\texttt
-\let\tbs\textbackslash
 \let\pck\textsf
 \let\cls\textsf
-\biburlsetup
+\let\tbs\textbackslash
 
 \usepackage{tabularx,booktabs}%Tabellenpakete (siehe oben)
 \usepackage{pifont}% Zapf-Dingbats Symbole
@@ -104,25 +101,30 @@
 %%%%%%%%%%%%%%%%%%%
 % Ende der Demo-Formatierungseinstellungen
 %%%%%%%%%%%%%%%%%%%
-\begin{document}
 
-\title{TUDaPhD -- \LaTeX-Dissertationstemplate im CD der TU Darmstadt}
-\subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
+
+\hypersetup{% Zusätzliche/Abweichende Metadaten
+	pdfauthor=Marei Peischl (peiTeX),
+	pdftitle=TUDaPhD – LaTeX-Dissertationstemplate im CD der TU Darmstadt (de),
+	pdfcreationdate=2024-05-03,
+	pdfkeywords={TU Darmstadt; Corporate Design; LaTeX}
+}
+
+\title{TUDaPhD -- \LaTeX-Dissertationstemplate im CD der TU Darmstadt (de)}
+\subtitle{\LaTeX{} im Corporate Design der TU Darmstadt}
 \author{Marei Peischl}
-% \birthplace{Geburtsort}
-\reviewer{Reviewer 1 \and Reviewer 2 \and  … }
+\birthplace{Geburtsort}
+\reviewer{Gutachter*in 1 \and Gutachter*in 2 \and …}
 % Falls die Bezeichner entsprechend der Promotionsordnung angepasst werden sollen
-% \reviewer*[Erstreferent\_in,Korreferent\_in]{Gutachter 1 \and Gutachter 2}
-
-% \publishers{Darmstadt, Technische Universität Darmstadt}
+%\reviewer*[Erstreferent\_in,Korreferent\_in]{Gutachter 1 \and Gutachter 2}
+%\publishers{Darmstadt, Technische Universität Darmstadt}
 % Feld für die Ortsangabe oder einen Verlag. Dies ist nach Vorgabe der Universitätsbibiliothek mit „Darmstadt, Technische Universität Darmstadt“ vorbelegt.
 
 % Sofern keine passende Option verfügbar ist:
-% \drtext{}
+%\drtext{}
 
-% Diese Felder werden untereinander auf der Titelseite platziert.
-% \department ist eine notwendige Angabe, siehe auch dem Abschnitt `Abweichung von den Vorgaben für die Titelseite'
-\department{phys}% Das Kürzel wird automatisch ersetzt sofern der Fachbereich vordefiniert ist.
+% Die folgenden Felder werden untereinander auf der Titelseite platziert
+\department{ce}% Das Kürzel wird automatisch ersetzt und als Studienfach gewählt sofern es definiert ist.
 \institute{Institut}
 \group{Arbeitsgruppe}
 
@@ -132,7 +134,12 @@
 %\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}% Lizenzdaten für TUprints
 
 \dedication{Für alle, die \TeX{} nutzen.}
+
+
+\begin{document}
+
 \maketitle
+
 \affidavit% Selbstständigkeitserklärung
 \begin{abstract}
 	Zusammenfassung in der Hauptsprache des Dokuments (hier Deutsch)
@@ -143,15 +150,15 @@
 \end{abstract}
 
 \tableofcontents
-% Ggf. weitere Verzeichnisse wie \listoffigures oder ein  Abkürzungsverzeichnis
+% Ggf. weitere Verzeichnisse wie \listoffigures oder ein Abkürzungsverzeichnis
 
 \mainmatter
 
-
 \addchap{Über diese Datei}
-Die Datei \file{DEMO-TUDaPhD.tex} beziehungsweise ihre Ausgabe \file{DEMO-TUDaPhD.pdf} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
-Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
 
+Die Datei \file{DEMO-TUDaPhD.tex} ist ein Template für Dissertationen
+im Stil des Corporate Designs der TU Darmstadt.
+Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
 
 
 \chapter{Verwendung}
@@ -162,7 +169,7 @@ Die Klasse kann wie für Dokumentenklassen üblich eingebunden werden
 Die Option \code{thesis} wechselt hierbei in den Modus, der spezielle Features für Abschlussarbeiten freischaltet, die in diesem Dokument beschrieben werden.
 
 Darüber hinaus lässt sich die Klasse verwenden wie die Standard-KOMA-Script-Klasse, auf der sie basiert.
-Voreingestellt ist hierbei \code{scrreprt}, dieses Dokument verwendet jedoch \code{class=scrboook}.
+Voreingestellt ist hierbei \code{scrreprt}, dieses Dokument verwendet jedoch \code{class=scrbook}.
 
 Allgemein bietet \KOMAScript{} viele Möglichkeiten zu Anpassungen. Wie in der tudapub-Demo-Datei beschrieben, können hier jedoch nicht alle erläutert werden, ein Blick in die offizielle Dokumentation ist daher häufig hilfreich \cite{scrguide}.
 
@@ -193,7 +200,7 @@ Die Daten werden analog zur klassischen Titeleierzeugung mit \verb+\maketitle+ �
 \end{verbatim}
 Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss.
 
-Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaPub-Dokumentation geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos. \cite{tudapub}
+Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaPub-Dokumentation \cite{tudapub} geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos.
 
 \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
 	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
@@ -249,6 +256,8 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 \end{verbatim}
 	      Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
 
+	      Die printid is die ID-Nummer des TUprints-Eintrags. Die urn ist ein dauerhaft eindeutig zitierfähiger Bezeichner für das Dokument. Die Nummer entspricht bei TUprints der printid mit Ergänzung einer Prüfzimmer. Beide Angaben sind in den Details des TUprints-Eintrags zu finden.
+
 	      \minisec{Lizenzangabe}
 	      Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license=<Text>| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
 
@@ -256,27 +265,27 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 
 	      \parbox[t]{.5\linewidth}{%
 		      \ttfamily
-		      \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-de} \textnormal{(noch aktuelle Voreinstellung)}\par
-		      \href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0}\par
+		      \href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0} \textnormal{Voreinstellung seit Version 4.0}\par
 		      \href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
 		      \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
+		      \href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
 	      }%
 	      \parbox[t]{.5\linewidth}{
 		      \ttfamily
-		      \href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
 		      \href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
 		      \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
 		      \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (Ab Version 3.36)}
+		      \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-de}\par
 	      }
 
-	      Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, welche durch die Universitätsbibliothek angepasst wurde.
-	      Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
+	      Die Einführung dieser Option war Bestandteil der Vorbereitung zur Anpassung der Standardlizenz.
+	      Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251}. Die Anpassung der Voreinstellung bei TUDa-CI geschah mit Version 4.0.
 
 	      Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet die ULB der TUDa unter https://www.ulb.tu-darmstadt.de/dpub  oder  das CC-Projekt sebst über seinen Lizenzfinder unter \url{http://creativecommons.org/choose/}.
 	      Die TU Darmstadt empfiehlt in Ihrer Publikationsrichtlinie und Open-Access-Policy die Nutzung der offenen CC BY 4.0 Lizenz.
 
 	      Falls ein von den oben gelisteten Schlüsseln abweichender Wert gesetzt wird, wird ebendieser direkt an der Stelle des Lizenztextes verwendet. Sofern der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
-	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}
+	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}.
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
 \end{description}
@@ -285,7 +294,7 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
 In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
 
-Ab Version 3.32 entfällt die seit Version 3.06 unterstütze Unterscheidung zwischen einem Affidavit für digitale oder gedruckte Abgaben. Aus Kompatibilitätsgründen werden die Optionen weiterhin verstanden, allerdings bewirken Sie nun beide das gleiche. Der Text entstammt von  \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} (Stand 2023-06-19).
+Ab Version 3.32 entfällt die seit Version 3.06 unterstütze Unterscheidung zwischen einem Affidavit für digitale oder gedruckte Abgaben. Aus Kompatibilitätsgründen werden die Optionen weiterhin verstanden, allerdings bewirken nun beide das gleiche. Der Text entstammt von  \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} (Stand 2023-06-19). Es ist zwingend erforderlich, dass Studierende vor der Abgabe einer Arbeit überprüfen, ob der Text der geforderten Fassung entspricht.
 
 Dissertationen verwenden hier einen anderen Text, für die Unterscheidung wird die Affidavit-Option \verb+affidavit=dr+ intern verwendet.
 
@@ -293,7 +302,10 @@ Version 3.20 ermöglicht zusätzlich die Übergabe weiterer Optionen für den Si
 Inwieweit diese Optionen verwendet werden dürfen ist jeweils vor der Verwendung durch die Nutzer:in abzuklären.
 TUDa-CI kann hierfür keine gesicherte Aussage treffen.
 \begin{verbatim}
-    \affidavit[signature=Signaturname,signature-image={\includegraphics[width=\width]{signaturbild}}]
+    \affidavit[
+        signature=Signaturname,
+        signature-image={\includegraphics[width=\width]{signaturbild}}
+    ]
 \end{verbatim}
 Eine vertikale Verschiebung des Signaturbildes ist nicht direkt implementiert, ist jedoch mit der Verwendung des \LaTeX-Makros \verb+\raisebox{<Verschiebung>}{<Inhalt>}+ problemlos möglich.
 
@@ -331,12 +343,12 @@ Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument
 
 	      Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
 \begin{verbatim}
-    \geometry{
-       reset,
-       <Eigene Anpassungen>
-    }
+\geometry{
+   reset,
+   <Eigene Anpassungen>
+}
 \end{verbatim}
-	      Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
+	      Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot}, \code{includemp}.
 \end{description}
 
 \minisec{Hinweis zu den Kopf-/Fußzeilen}
@@ -345,7 +357,7 @@ Wenn die Option \code{marginpar=true} gesetzt bleibt, ragen die Kopf- und Fußze
 Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit local größer sein können als die eigentliche Überschrift. (\code{headline=automark})
 Deswegen kann über
 \begin{verbatim}
-    \pagestyle{TUDa.headings}
+\pagestyle{TUDa.headings}
 \end{verbatim}
 ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pck{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
 
