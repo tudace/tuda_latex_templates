@@ -18,8 +18,9 @@ typesetexe="lualatex"
 typesetopts=""
 unpackexe="pdflatex"
 
-demofiles = {"examples-de/*", "examples/*", "*.tex"}
-typesetdemofiles = {"*.tex"}
+demofiles = {"examples-de/*.tex", "examples/*.tex"}
+typesetsuppfiles={"examples/*.lco", "examples/*.bib", "*.bib", "*.lco"}
+typesetdemofiles = demofiles
 
 tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "examples/*.tex", "examples/*.lco", "*.def", "examples/*.bib"}
 

@@ -31,6 +31,7 @@
 %%
 % !TeX program = lualatex
 %%
+
 % Enable PDF/A via pdfmanagement and no longer via pdfx
 \DocumentMetadata{
 	pdfstandard=a-2b,
@@ -41,32 +42,31 @@
 	english,% Main language as global option
 	ruledheaders=chapter,% Section levels above this one will follow the ruled layout, see DEMO-TUDaPub
 	class=book,% Choose the base document class. Will choose the matching KOMA-Script class
-	thesis={% PhD thesis, for smaller theses have a look at DEMO-TUDaThesis-en.tex
+	thesis={% PhD thesis. For smaller theses have a look at DEMO-TUDaThesis.tex
 			type=dr,
 			dr=rernat
-	},
-	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+		},
+	fontsize=11pt,% Basic font size. CI default setting of 9pt is too small for theses
+	parskip=half-,% Use a parskip instead of indent, see KOMA-Script documentation
 	custommargins=true,% Calculate margins using typearea
 	marginpar=false,% Disable marginpar
 %	BCOR=5mm,% Binding correction
-	parskip=half-,% use a parskip instead of indent, see KOMA-Script documentation
-	fontsize=11pt,% basic font size, CI default setting of 9pt is too small for theses
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
 %	logofile=example-image,% In case logo files are not available
 ]{tudapub}
 
 %%%%%%%%%%%%%%%%%%%
 % Language setup
 %%%%%%%%%%%%%%%%%%%
-\usepackage[german,main=english]{babel}% german has to be loaded as the titlepage is always in German,
-\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
-
+\usepackage[german,main=english]{babel}% german has to be loaded as the titlepage is always in German
 \usepackage{microtype}
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
 %%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%
 \usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography}% File name of BibTeX database
+\addbibresource{DEMO-TUDaBibliography.bib}% File name of BibTeX database
 
 %%%%%%%%%%%%%%%%%%%
 % Package suggestions for tables
@@ -84,28 +84,28 @@
 %\usepackage{amssymb}% Additional symbols
 %\usepackage{siunitx}% Numbers and Units
 
-\begin{document}
+\hypersetup{% Metadata adjustments
+	pdfauthor=Marei Peischl (peiTeX),
+	pdftitle=TUDaPhD – LaTeX-Dissertationstemplate im CD der TU Darmstadt (en),
+	pdfcreationdate=2024-05-03,
+	pdfkeywords={TU Darmstadt; Corporate Design; LaTeX}
+}
 
-\frontmatter
-
-\title{TUDaPhD -- PhD Theses using TU Darmstadt's CI}
-\subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
+\title{TUDaPhD -- \LaTeX-Dissertationstemplate im CD der TU Darmstadt (en)}
+\subtitle{\LaTeX{} im Corporate Design der TU Darmstadt}
 \author{Marei Peischl}
-% \birthplace{}% Usually only required for PhD theses
-\reviewer{Reviewer 1 \and Reviewer 2 \and  … }
-
-% \reviewer*[Supervisor, Assistant Supervisor]{Reviewer 1 \and Reviewer 2}
+\birthplace{Place of Birth}
+\reviewer{Reviewer 1 \and Reviewer 2 \and …}
 % For further customization
-
-% \publishers{Darmstadt, Technische Universität Darmstadt}
-% For the location or publisher. In this case it is specified as „Darmstadt, Technische Universität Darmstadt“. The specification is from the university.
+%\reviewer*[Supervisor, Reviewer]{Supervisor 1 \and Reviewer 2}
+%\publishers{Darmstadt, Technische Universität Darmstadt}
+% For location or publisher. It is predefined as “Darmstadt, Technische Universität Darmstadt” as required by the library.
 
 % If no suitable option is available:
-% \drtext{}
+%\drtext{}
 
-% The following elements will be placed on the title page.
-% \department is a required date. See full tudapub documentation for details.
-\department{inf}% If defined the shorthand will be replaced by the full name otherwhise it's used directly
+% The following elements will be placed on the title page
+\department{ce}% If defined the shorthand will be replaced by the full name otherwhise it's used directly.
 \institute{Institute}
 \group{Group}
 
@@ -114,28 +114,34 @@
 
 %\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}% License information for TUprints
 
-\dedication{To simplify your work with \TeX}
+\dedication{To simplify your work with \TeX{} \& Friends.}
+
+\begin{document}
+
+\frontmatter
+
 \maketitle
-\affidavit%
+
+\affidavit% Please ensure you use the correct version.
 \begin{abstract}
-	Deutsche Zusammenfassung
+	Abstract using the document main languge (here English)
 \end{abstract}
 
-\begin{abstract}[english]
-	Englische Zusammenfassung, falls benötigt
+\begin{abstract}[german]
+	Weitere Zusammenfassung in einer anderen Sprache (hier Deutsch), sofern benötigt.
 \end{abstract}
 
 \tableofcontents
-%  Maybe some other lists like \listoffigures or acronyms
+% Additional lists like \listoffigures or acronyms might be added here
 
 \mainmatter
 
+\addchap{About this file}
 
-\chapter{About this file}
-The File \enquote{DEMO-TUDaPhD-en.tex} is a basic template for PhD theses using the Corporate Design of TU Darmstadt.
+\enquote{DEMO-TUDaPhD.tex} is a basic template for PhD theses
+using the Corporate Design of TU Darmstadt.
 It is part of TUDa-CI, which is the official template bundle of TU Darmstadt.
 The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
-
 
 \printbibliography
 
