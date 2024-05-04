@@ -1,9 +1,9 @@
-%% This is file `DEMO-TUDaPoster-de.tex' version 3.37 (2024-04-21),
+%% This is file `DEMO-TUDaPoster-de.tex' version 3.37 (2024-04-21)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%% Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 %%
 %% ============================================================================
 %% This work may be distributed and/or modified under the
@@ -30,27 +30,34 @@
 %% ============================================================================
 %%
 % !TeX program = lualatex
-%%
 
 \documentclass[
-	paper=a0,
-	ngerman,
-	accentcolor=9c,
-	logo=body,% Logo unterhalb der Identitätsleise
+	german, % Hauptsprache als globale Option, früher war ngerman notwendig
+	paper=a0,% Voreingestellt ist Papierformat a0
+	accentcolor=9c,% Auswahl der Akzentfarbe
+	logo=body,% Logo unterhalb der Identitätsleiste
 	footer=true,
-%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
-	]{tudaposter}
+%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
+]{tudaposter}
 
-\usepackage[english, main=ngerman]{babel}
-\usepackage[autostyle]{csquotes}
+%%%%%%%%%%%%%%%%%%%
+% Spracheinstellungen
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english,main=ngerman]{babel}
+\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
 
 
-%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+%%%%%%%%%%%%%%%%%%%
+% Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+%%%%%%%%%%%%%%%%%%%
 \let\file\texttt
 \let\code\texttt
 \let\tbs\textbackslash
 
 \usepackage{multicol}
+%%%%%%%%%%%%%%%%%%%
+% Ende der Demo-Formatierungseinstellungen
+%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
@@ -60,32 +67,39 @@
 
 \titlegraphic{\color{red!20}\rule{\contentwidth}{.3\contentheight}}
 
-\addTitleBox{test}
-\addTitleBox{jaodsijf}
+\addTitleBox{Box 1}
+\addTitleBox{Box 2}
 \footerqrcode{https://peitex.de}
-\footer{Inhalt der Fußzeile}%Falls aktiviert
-
+\footer{Inhalt der Fußzeile}% Falls aktiviert
 
 \maketitle
 
-\section*{Grundlengende Informationen}
-Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und nicht-wissenschaftlichen-Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa-CI-Bundles.
+\section*{Grundlegende Informationen}
+
+Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und nicht-wissenschaftlichen-Plakaten im Stil der TU-Darmstadt.
+Sie ist Teil des TUDa-CI-Bundles.
 
 \begin{multicols}{2}
-\subsection*{Verwendung}
-Im wesentlichen entspricht Ihre Verwendung der Klasse tudapub, da die Titel ähnlich aufgebaut sind. Unterhalb des Titels, kann der Anwender normalen Fließtext schreiben oder wie bei Standard-\LaTeX{} formatieren.
+	\subsection*{Verwendung}
+	Im Wesentlichen entspricht ihre Verwendung der Klasse tudapub, da die Titel ähnlich aufgebaut sind.
+	Unterhalb des Titels, kann der Anwender normalen Fließtext schreiben oder wie bei Standard-\LaTeX{} formatieren.
 
-Die tudaposter-Klasse basiert wie auch tudapub auf \KOMAScript{} und bietet daher mehr Mechanismen als für Poster grunsätzlich notwendig sind.
+	Die tudaposter-Klasse basiert wie auch tudapub auf \KOMAScript{} und bietet daher mehr Mechanismen als für Poster grunsätzlich notwendig sind.
 
-Im Unterschied zur tudasciposter-Klasse, die auf tikzposter basiert, ermöglicht tudaposter es wie gewohnt Fließtext zu schreiben, um ergänzende Informationen einfach zu platzieren.
+	Im Unterschied zur tudasciposter-Klasse, die auf tikzposter basiert, ermöglicht es tudaposter wie gewohnt Fließtext zu schreiben, um ergänzende Informationen einfach zu platzieren.
 
-\subsection*{Titelei}
-Die Titelerzeugung funktioniert wie bei Standard-\LaTeX{} über den maketitle-Mechanismus. Neben der Makros title, subtitle und author stehen noch
-titlegraphic, addTitleBox, footerqrcode und footer zur Verfügung. Bis auf footerqrcode wird lediglich der Inhalt entsprechend platziert. Ein Beispiel für die Verwendung ist der Datei DEMO-TUDaPoster.tex gezeigt.
+	\subsection*{Titelei}
+	Die Titelerzeugung funktioniert wie bei Standard-\LaTeX{} über den maketitle-Mechanismus.
+	Neben der Makros \code{\title}, \code{\subtitle} und \code{\author} stehen noch \code{\titlegraphic}, \code{\addTitleBox}, \code{\footerqrcode} und \code{\footer} zur Verfügung.
+	Bis auf \code{\footerqrcode} wird lediglich der Inhalt entsprechend platziert.
+	Ein Beispiel für die Verwendung ist in der Datei DEMO-TUDaPoster.tex gezeigt.
 
-\subsection*{Längenangaben}
-Innerhalb des Posterinhaltes (Dazu zählt auch die titlegraphic) sind zwei Längenmaße vordefiniert.
-\texttt{\textbackslash{}contentwidth} und \texttt{\textbackslash{}contentheight}. Die Höhe entspricht dabei dem Abstand zwischen Titelblock und Fußzeile/Trennlinie.
+	\subsection*{Längenangaben}
+	Two length dimensions \texttt{\textbackslash{}contentwidth} and \texttt{\textbackslash{}contentheight} are predefined within the poster content (this also includes the title graphic).
+	The height here is the distance between the title block and the footer/divider line.
+
+	Innerhalb des Posterinhaltes (dazu zählt auch die titlegraphic) sind zwei Längenmaße \texttt{\textbackslash{}contentwidth} und \texttt{\textbackslash{}contentheight} vordefiniert.
+	Die Höhe entspricht dabei dem Abstand zwischen Titelblock und Fußzeile/Trennlinie.
 
 \subsection*{Dokumentenklassenoptionen}
 \begin{description}
@@ -106,3 +120,4 @@ Innerhalb des Posterinhaltes (Dazu zählt auch die titlegraphic) sind zwei Läng
 \end{multicols}
 
 \end{document}
+%% End of file `DEMO-TUDaPoster-de.tex'.

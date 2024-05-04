@@ -12,14 +12,13 @@ textfiles= {"README.md"}
 
 flatten=false
 
-typesetsuppfiles={"*.lco"}
-
 typesetexe="lualatex"
 typesetopts=""
 unpackexe="pdflatex"
 
 demofiles = {"examples-de/*.tex", "examples/*.tex"}
-typesetsuppfiles={"examples/*.lco", "examples/*.bib", "*.bib", "*.lco"}
+supportdir="examples"
+typesetsuppfiles={ "*.bib", "*.lco"}
 typesetdemofiles = demofiles
 
 tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "examples/*.tex", "examples/*.lco", "*.def", "examples/*.bib"}

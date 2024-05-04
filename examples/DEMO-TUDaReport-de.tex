@@ -1,9 +1,9 @@
-%% This is file `DEMO-TUDaReport-de.tex' version 3.37 (2024-04-21),
+%% This is file `DEMO-TUDaReport-de.tex' version 3.37 (2024-04-21)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%% Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 %%
 %% ============================================================================
 %% This work may be distributed and/or modified under the
@@ -39,21 +39,31 @@
 	marginpar=false
 	]{tudapub}
 
-\usepackage[english, main=ngerman]{babel}
-\usepackage[autostyle]{csquotes}
+%%%%%%%%%%%%%%%%%%%
+% Spracheinstellungen
+%%%%%%%%%%%%%%%%%%%
+\usepackage[german]{babel}
+\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
 
-%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+%%%%%%%%%%%%%%%%%%%
+% Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+%%%%%%%%%%%%%%%%%%%
 \let\file\texttt
 \let\code\texttt
 \let\pck\textsf
 \let\cls\textsf
+\let\tbs\textbackslash
 
-\begin{document}
+%%%%%%%%%%%%%%%%%%%
+% Ende der Demo-Formatierungseinstellungen
+%%%%%%%%%%%%%%%%%%%
 
 
 \title{TUDaReport -- Minimales Template für TUDa-CI}
 \author{Marei Peischl}
-%\date{} % Ohne Angabe wird automatisch das heutige Datum eingefügt
+%\date{}% Ohne Angabe wird automatisch das heutige Datum eingefügt
+
+\begin{document}
 
 \maketitle
 
@@ -65,3 +75,4 @@ Die Datei \file{DEMO-TUDaReport.tex} beziehungsweise ihre Ausgabe \file{DEMO-TUD
 
 Für Erläuterungen zur Funktionsweise und den Möglichkeiten zur Änderung sei auf DEMO-TUDaPub.pdf verwiesen.
 \end{document}
+%% End of file `DEMO-TUDaReport-de.tex'.
