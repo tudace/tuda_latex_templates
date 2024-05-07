@@ -1,4 +1,4 @@
-%% This is file `tudapub.cls' version 3.37 (2024-04-21),
+%% This is file `tudapub.cls' version 3.38 (2024-05-07),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.37}
-\def\filedate{2024-04-21}
+\def\fileversion{3.38}
+\def\filedate{2024-05-07}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplClass{tudapub}
