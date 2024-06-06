@@ -354,7 +354,7 @@
 \int_new:N \l_ptxcd_letter_lastpage_int
 \cs_new:Nn \ptxcd_letterpagemark: {
 	%get lastpage for this letter if not already done
-	\int_compare:nTF {\value{page} = 1} {
+	\int_compare:nNnTF {\value{page}} = {1} {
 			\bool_if:NTF \g__ptxcd_firstpagenumber_bool
 			{\bool_set_true:N \l_tmpa_bool}
 			{\bool_set_false:N \l_tmpa_bool}
@@ -362,16 +362,14 @@
 		{\bool_set_true:N \l_tmpa_bool}
 	\bool_if:NT \l_tmpa_bool {
 		\int_if_exist:cF {c_ptxcd_letter\thisletter _lastpage_int} {
-			\expandafter\ifx\csname r@\thisletter.lastpage\endcsname\relax
-			%warning -> rerun latex
-			\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {0}
-			\else
-			\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {
-				\cs_if_exist:NTF \hypersetup
-				{\exp_args:NNc \expandafter \@secondoffive { r@\thisletter.lastpage}}
-				{\exp_args:NNc \expandafter \use_ii:nn { r@\thisletter.lastpage}}
+			\cs_if_exist:cTF {r@\thisletter.lastpage} {
+				\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {
+					\exp_args:NNc \expandafter \@secondoffive { r@\thisletter.lastpage}
+				}
+			} {
+				%warning -> rerun latex
+				\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {0}
 			}
-			\fi
 		}
 		\usekomafont{pagenumber}\pagename\nobreakspace\thepage
 		\int_compare:nT {
