@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
- tuda-ci v3.38 (2024-05-07)
+ tuda-ci v3.39 (2024-06-27)
 
 ***************************************************************************
 
@@ -360,3 +360,6 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
     -  small layout adjustments and bugfixes
   * 3.38 (2024-05-07)
    - update PhD affidavit
+   * 3.39 (2024-06-27)
+    - update all templates to no longer use pdfx by default due to the pdfx bug
+    - fix letter last page reference

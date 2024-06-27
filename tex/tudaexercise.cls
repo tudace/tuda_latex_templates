@@ -1,4 +1,4 @@
-%% This is file `tudaexercise.cls' version 3.38 (2024-05-07),
+%% This is file `tudaexercise.cls' version 3.39 (2024-06-27),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.38}
-\def\filedate{2024-05-07}
+\def\fileversion{3.39}
+\def\filedate{2024-06-27}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplClass{tudaexercise}
