@@ -461,7 +461,16 @@
 %pdfa
 \if_bool:N \g_ptxcd_pdfx_bool
 	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
 	\RequirePackage{pdfx}
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
 	%%hyperref
 	\hypersetup{hidelinks, unicode}
 	\iow_new:N \ptxcd_xmpdata_stream

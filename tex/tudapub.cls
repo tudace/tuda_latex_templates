@@ -881,8 +881,16 @@
 	}
 	%only apply the hack if pdfx is older than the working version
 	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
 	\RequirePackage{pdfx}
-
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
 	\msg_new:nnnn{tudapub} {outdated-package-pdfa} {
 		Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
 		Either~update~your~TeX-distribution~or~switch~to~pdfa=false.

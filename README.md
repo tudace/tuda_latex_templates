@@ -363,3 +363,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    * 3.39 (2024-06-27)
     - update all templates to no longer use pdfx by default due to the pdfx bug
     - fix letter last page reference
+   * 3.40 (2024-07-01)
+    - implement workaround for the pdfx package bug. Thanks to Ulrike Fischer for the hint!
