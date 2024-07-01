@@ -25,16 +25,18 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.39}
-\def\filedate{2024-06-27}
-\ProvidesExplFile{tuda-a1paper.clo}{\filedate}{\fileversion}{tuda-ci~size~adjustments~for~a1paper}
+\ProvidesExplFile{tuda-a1paper.clo}{2024-06-27}{3.39}{tuda-ci~size~adjustments~for~a1paper}
 \cs_set:Nn \ptxcd_setup_title_sizes: {
-  \cs_set:Nn \ptxcd_title_fontsize: {{86pt}{120pt}}
-  \cs_set:Nn \ptxcd_titleinfo_fontsize: {{35pt}{42pt}}
-  \cs_set:Nn \ptxcd_titlethanks_fontsize: {{22pt}{26pt}}
+	\cs_set:Nn \ptxcd_title_fontsize: {{86pt}{120pt}}
+	\cs_set:Nn \ptxcd_titleinfo_fontsize: {{35pt}{42pt}}
+	\cs_set:Nn \ptxcd_titlethanks_fontsize: {{22pt}{26pt}}
 }
 \cs_set:Nn \ptxcd_setup_base_sizes: {
-  \tl_if_empty:NT \g_ptxcd_fontsize_tl {\tl_gset:Nn \g_ptxcd_fontsize_tl {25pt}}
-  \dim_gset:Nn \g_ptxcd_margin_dim {30mm}
+	\tl_if_empty:NT \g_ptxcd_fontsize_tl {
+		\tl_gset:Nn \g_ptxcd_fontsize_tl {25pt}
+	}
+	\dim_gset:Nn \g_ptxcd_margin_dim {30mm}
 }
 \endinput
+%%
+%% End of file `tuda-a1paper.clo'.
