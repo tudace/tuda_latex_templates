@@ -365,3 +365,4 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
     - fix letter last page reference
    * 3.40 (2024-07-01)
     - implement workaround for the pdfx package bug. Thanks to Ulrike Fischer for the hint!
+    - fix `ìn_department` strings for theses
