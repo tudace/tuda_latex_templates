@@ -1,4 +1,4 @@
-%% This is file `tuda-a4paper.clo' version 3.39 (2024-06-27),
+%% This is file `tuda-a4paper.clo' version 3.40 (2024-07-01),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,7 +25,7 @@
 %%
 %% ============================================================================
 %%
-\ProvidesExplFile{tuda-a4paper.clo}{2024-06-27}{3.39}{tuda-ci~size~adjustments~for~a4paper}
+\ProvidesExplFile{tuda-a4paper.clo}{2024-07-01}{3.40}{tuda-ci~size~adjustments~for~a4paper}
 \cs_set:Nn \ptxcd_setup_title_sizes: {
 	\cs_set:Nn \ptxcd_title_fontsize: {{36pt}{47pt}}
 	\cs_set:Nn \ptxcd_titleinfo_fontsize: {{12pt}{14pt}}
