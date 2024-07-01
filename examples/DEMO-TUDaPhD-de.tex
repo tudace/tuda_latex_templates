@@ -34,11 +34,12 @@
 % PDF/A über pdfmanagement und nicht über pdfx
 \DocumentMetadata{
 	pdfstandard=a-2b,
+	lang=de,
 	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das  noch nicht.
 }
 
 \documentclass[
-	german,% Hauptsprache als globale Option, früher war ngerman notwendig
+	german,% Hauptsprache als globale Option, früher war german notwendig
 	ruledheaders=chapter,% Ebene bis zu der die Überschriften mit Linien abgetrennt werden, vgl. DEMO-TUDaPub
 	class=book,% Basisdokumentenklasse. Wählt die korrespondierende KOMA-Script Klasse
 	thesis={% Dokumententyp PhD Thesis, für kleinere Abschlussarbeiten, siehe DEMO-TUDaThesis-de.tex
@@ -57,7 +58,7 @@
 %%%%%%%%%%%%%%%%%%%
 % Spracheinstellungen
 %%%%%%%%%%%%%%%%%%%
-\usepackage[english, main=ngerman]{babel}
+\usepackage[english, main=german]{babel}
 \usepackage[autostyle]{csquotes}% Sprachabhängig Anführungszeichen mit \enquote
 
 % Falls mit pdflatex kompiliert wird, wird microtype automatisch geladen, in diesem Fall muss diese Zeile entfernt werden, und falls weiter Optionen hinzugefügt werden sollen, muss dies über
@@ -173,16 +174,16 @@ TUDa-CI verwendet hierfür das babel-Paket.
 
 Dies wird jedoch nicht automatisch geladen, da hierfür die Konfiguration der Sprachen bekannt sein müsste. Die Demo-Dateien für Abschlussarbeiten (\file{DEMO-TUDaThesis.tex}/""\file{DEMO-TUDaPhD.tex}) laden hierfür die Konfiguration:
 \begin{verbatim}
-    \usepackage[english, main=ngerman]{babel}
+    \usepackage[english, main=german]{babel}
 \end{verbatim}
 Diese ist für ein Dokument mit Deutsch als Hauptsprache und Englischen Elementen.
 Die Hauptsprache wird als Wert der Option \verb+main=+ übergeben.
-Das Laden von \verb+ngerman+ wird in den Fällen, in denen es von TUDa-CI benötigt wird, automatisch ausgelöst.
+Das Laden von \verb+german+ wird in den Fällen, in denen es von TUDa-CI benötigt wird, automatisch ausgelöst.
 Für eine bessere Übersichtlichkeit ist es dennoch hilfreich es dort aufzuführen.
 
 Falls die Hauptsprache nicht Deutsch ist, wäre daher die folgende Konfiguration sinnvoll:
 \begin{verbatim}
-    \usepackage[ngerman, main=<Hauptsprache>]{babel}
+    \usepackage[german, main=<Hauptsprache>]{babel}
 \end{verbatim}
 
 \section{Übergabe der Titeldaten}

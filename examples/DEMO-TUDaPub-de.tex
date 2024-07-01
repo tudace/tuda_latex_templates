@@ -34,16 +34,17 @@
 % PDF/A über pdfmanagement und nicht über pdfx
 \DocumentMetadata{
 	pdfstandard=a-2b,
+	lang=de,
 	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das  noch nicht.
 }
 
 \documentclass[
-	ngerman,
+	german,
 	accentcolor=9c,% Farbe für Hervorhebungen auf Basis der Deklarationen in den Corporate Design Richtlinien
 %	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
 	]{tudapub}
 
-\usepackage[english, main=ngerman]{babel}
+\usepackage[english, main=german]{babel}
 \usepackage[autostyle]{csquotes}
 
 \usepackage{biblatex}
@@ -239,7 +240,7 @@ Die \code{abstract}-Umgebung wird für \cls{tudapub} um eine Option für die Spr
 \end{abstract}
 \end{verbatim}
 
-Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen geladen werden. Im Falle des Beispiels muss also sowohl \code{ngerman} als auch \code{english} an das \pck{babel}-Paket übergeben werden.
+Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen geladen werden. Im Falle des Beispiels muss also sowohl \code{german} als auch \code{english} an das \pck{babel}-Paket übergeben werden.
 
 
 \subsection{PDF/A Konformität}

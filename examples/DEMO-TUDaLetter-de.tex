@@ -33,11 +33,13 @@
 %%
 \DocumentMetadata{
 	pdfstandard=a-2b,
-	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+	lang=de,
+	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das  noch nicht.
 }
 
+
 \documentclass[
-	ngerman,
+	german,
 %	logo=false,%Schaltet das Logo für Folgeseiten ab
 	accentcolor=9c,%Akzentfarbe nach Tabelle aus den Corporate Design Richtlinien
 	premium=true,%Aktiviert die Färbung der Identitätsleiste
@@ -88,7 +90,7 @@ Zusätzliche Optionen sind im Folgenden aufgelistet:\\
 }
 
 Für Wiederverwendung der Absenderadresse wurde die Datei \enquote{DEMO"=TUDaFromaddress.lco} angelegt. Sie wird, wie bei \KOMAScript{} üblich, über 
-\verb+\LoadLetterOption+ geladen. Sämtliche dort gesetzten Werte können innerhalb der Briefdatei überschrieben werden.
+\verb+\LoadLett+\babelhyphen{empty}\verb+erOption+ geladen. Sämtliche dort gesetzten Werte können innerhalb der Briefdatei überschrieben werden.
 
 Die Adressdatei wird üblicherweise lokal im System installiert, um sie nicht immer mit allen anderen Dateien kopieren zu müssen. Falls Sie dies durchführen möchten, findet sich eine entsprechende Erklärung am Ende der DEMO"=TUDaFromaddress.lco"=Datei.
 

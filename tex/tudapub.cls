@@ -640,7 +640,7 @@
 	You~selected~an~unknown~language~#1.\\
 	The~Variable~#2~does~not~have~a~predefined~value.\\
 	Ensure~to~redefine~#2~to~match~your~language.\\
-	Otherwise~the~ngerman~vaue~#3~will~be~used.
+	Otherwise~the~german~vaue~#3~will~be~used.
 }
 
 \cs_new:Nn \ptxcd_define_captionFallback:Nn {
