@@ -171,30 +171,30 @@
 	\geometry{top=30mm}
 }
 
-\@setplength{firstheadhpos}{\c_ptxcd_HeadMargin_dim}
-\@setplength{firstheadvpos}{\c_ptxcd_HeadMargin_dim}
-\@setplength{firstheadwidth}{\dim_eval:n {\paperwidth - 2\c_ptxcd_HeadMargin_dim}}
+\setplength{firstheadhpos}{\c_ptxcd_HeadMargin_dim}
+\setplength{firstheadvpos}{\c_ptxcd_HeadMargin_dim}
+\setplength{firstheadwidth}{\dim_eval:n {\paperwidth - 2\c_ptxcd_HeadMargin_dim}}
 
-\@setplength{firstfootvpos}{\dim_eval:n {\paperheight -17mm}}
-\@setplength{firstfoothpos}{\useplength{firstheadhpos}}
-\@setplength{firstfootwidth}{\useplength{firstheadwidth}}
+\setplength{firstfootvpos}{\dim_eval:n {\paperheight -17mm}}
+\setplength{firstfoothpos}{\useplength{firstheadhpos}}
+\setplength{firstfootwidth}{\useplength{firstheadwidth}}
 
 
-\@setplength{toaddrhpos}{\c_ptxcd_LeftMargin_dim}
-\@setplength{toaddrvpos}{50mm}
-\@setplength{backaddrheight}{4mm}
-\@setplength{toaddrindent}{0mm}
+\setplength{toaddrhpos}{\c_ptxcd_LeftMargin_dim}
+\setplength{toaddrvpos}{50mm}
+\setplength{backaddrheight}{4mm}
+\setplength{toaddrindent}{0mm}
 
-\@setplength{refhpos}{\c_ptxcd_LeftMargin_dim}
-\@setplength{refvpos}{106mm}
+\setplength{refhpos}{\c_ptxcd_LeftMargin_dim}
+\setplength{refvpos}{106mm}
 
-\@setplength{subjectaftervskip}{2\baselineskip}
-\@setplength{lochpos}{\c_ptxcd_HeadMargin_dim}
-\@setplength{locvpos}{\dimexpr\useplength{refvpos}+\useplength{subjectaftervskip}+1.4\baselineskip\relax}
-\@setplength{refaftervskip}{0pt}
-\@setplength{subjectbeforevskip}{0pt}
-\@setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_ptxcd_HeadMargin_dim\relax}
-\@setplength{locheight}{\dimexpr\paperheight-\useplength{locvpos}-\c_ptxcd_BottomMargin_dim\relax}
+\setplength{subjectaftervskip}{2\baselineskip}
+\setplength{lochpos}{\c_ptxcd_HeadMargin_dim}
+\setplength{locvpos}{\dimexpr\useplength{refvpos}+\useplength{subjectaftervskip}+1.4\baselineskip\relax}
+\setplength{refaftervskip}{0pt}
+\setplength{subjectbeforevskip}{0pt}
+\setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_ptxcd_HeadMargin_dim\relax}
+\setplength{locheight}{\dimexpr\paperheight-\useplength{locvpos}-\c_ptxcd_BottomMargin_dim\relax}
 
 \RequirePackage[paper=a4]{tudarules}
 
