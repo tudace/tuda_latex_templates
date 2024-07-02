@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
- tuda-ci v3.40 (2024-07-01)
+ tuda-ci v3.41 (2024-07-02)
 
 ***************************************************************************
 
@@ -366,3 +366,5 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
    * 3.40 (2024-07-01)
     - implement workaround for the pdfx package bug. Thanks to Ulrike Fischer for the hint!
     - fix `ìn_department` strings for theses
+   * 3.41 (2024-07-01)
+    - change package loading order to support updated version of pdfx

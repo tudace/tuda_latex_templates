@@ -1,4 +1,4 @@
-%% This is file `tudasciposter.cls' version 3.40 (2024-07-01),
+%% This is file `tudasciposter.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.40}
-\def\filedate{2024-07-01}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplPackage{tudasciposter}{\filedate}{\fileversion}{Scientific Poster Layout for TU Darmstadt}
@@ -123,16 +123,36 @@
 \PassOptionsToPackage{DIV=10}{typearea}
 \LoadClass[parskip=full-]{scrartcl}
 \RequirePackage{tudafonts}
-\RequirePackage{tikz}
-\usetikzlibrary{calc}
+\RequirePackage{calc}
+\RequirePackage[margin=0pt]{geometry}
+\RequirePackage{tudacolors}
+
+\ExplSyntaxOn
+
+\if_bool:N \g_ptxcd_pdfa_bool
+\PassOptionsToPackage{a-2b}{pdfx}
+\IfFormatAtLeastTF{2020/10/01}{}{\endinput}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
+	\RequirePackage{pdfx}
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
+\fi:
+
+\ExplSyntaxOff
 
 \RequirePackage{tcolorbox}
 \tcbuselibrary{poster}
 
-\RequirePackage[margin=0pt]{geometry}
+\RequirePackage[mode=tikz]{tudarules}
+\RequirePackage{qrcode}
+
 \ExplSyntaxOn
-
-
 
 %Font adjusments
 \renewcommand*{\familydefault}{\sfdefault}
@@ -150,9 +170,7 @@
 
 % end of font adjustments
 
-\RequirePackage[mode=tikz]{tudarules}
-\RequirePackage{tudacolors}
-\RequirePackage{qrcode}
+
 
 \dim_const:Nn \c_ptxcd_headrule_ht_dim {\c_ptxcd_rulesep_dim +\c_ptxcd_largerule_dim + \c_ptxcd_smallrule_dim}
 %Setup title
@@ -231,18 +249,6 @@
 %%%%%%%%%%%%%%%%%%%
 %PDFA
 \if_bool:N \g_ptxcd_pdfa_bool
-\PassOptionsToPackage{a-2b}{pdfx}
-\IfFormatAtLeastTF{2020/10/01}{}{\endinput}
-% Workaround posted by David Carlisle on tex.stackexchange
-% Thanks to Ulrike Fischer for mentioning it in #472
-	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
-	\chardef\currentgrouplevel0
-	\ExplSyntaxOff
-	\RequirePackage{pdfx}
-	\ExplSyntaxOn
-	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
-% end of the workaround
 %%hyperref
 \hypersetup{hidelinks, unicode, hyperfootnotes=false}
 \iow_new:N \ptxcd_xmpdata_stream

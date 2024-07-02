@@ -1,4 +1,4 @@
-%% This is file `tudaleaflet.cls' version 3.40 (2024-07-01),
+%% This is file `tudaleaflet.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.40}
-\def\filedate{2024-07-01}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
@@ -88,7 +88,7 @@
 \RequirePackage{scrextend}
 \RequirePackage{scrlayer}
 \PassOptionsToPackage{cmyk}{tudacolors}
-\usepackage[paper=leaflet]{tudarules}
+\RequirePackage[paper=leaflet]{tudarules}
 
 
 \setlength{\headheight}{1cm}%to add headline

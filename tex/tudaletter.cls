@@ -1,4 +1,4 @@
-%% This is file `tudaletter.cls' version 3.40 (2024-07-01),
+%% This is file `tudaletter.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.40}
-\def\filedate{2024-07-01}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplClass{tudaletter}
@@ -121,6 +121,11 @@
 
 % Load the TUDa-colorscheme
 \RequirePackage{tudacolors}
+\RequirePackage{tudafonts}
+\RequirePackage{graphicx}
+\RequirePackage{afterpage}
+\RequirePackage{ragged2e}
+
 
 \bool_if:NTF \g__ptxcd_letter_premium_bool
 {	\cs_new:Nn \ptxcd_premiumcolor: {accentcolor}
@@ -132,10 +137,6 @@
 	\let\ptxcd_use_premiumcolor_text:\relax
 }
 
-\RequirePackage{tudafonts}
-\RequirePackage{graphicx}
-\RequirePackage{afterpage}
-\RequirePackage{ragged2e}
 
 
 %%%%%Briefbogen
@@ -171,6 +172,25 @@
 	\geometry{top=30mm}
 }
 
+\if_bool:N \g_ptxcd_pdfx_bool
+	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
+	\RequirePackage{pdfx}
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
+\else:
+	\PassOptionsToPackage{hidelinks, unicode}{hyperref}
+	\RequirePackage{hyperref}
+\fi:
+
+\RequirePackage[paper=a4]{tudarules}% might load pgfcore, so it has to be loaded after pdfx
+
 \setplength{firstheadhpos}{\c_ptxcd_HeadMargin_dim}
 \setplength{firstheadvpos}{\c_ptxcd_HeadMargin_dim}
 \setplength{firstheadwidth}{\dim_eval:n {\paperwidth - 2\c_ptxcd_HeadMargin_dim}}
@@ -196,7 +216,6 @@
 \setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_ptxcd_HeadMargin_dim\relax}
 \setplength{locheight}{\dimexpr\paperheight-\useplength{locvpos}-\c_ptxcd_BottomMargin_dim\relax}
 
-\RequirePackage[paper=a4]{tudarules}
 
 \bool_if:NTF \g__ptxcd_letter_headrule_bool {
 	\ptxcd_makeheadrule[width=\useplength{firstheadwidth},color=identbarcolor]{ptxcd_LetterheadRule}
@@ -530,8 +549,6 @@
 	} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
 
 \else:
-	\PassOptionsToPackage{hidelinks, unicode}{hyperref}
-	\RequirePackage{hyperref}
 	\hypersetup{pdfcreator=LaTeX~using~TUDa-CI}
 
 	\msg_new:nnnn {tudapub} {metadata-to-hypersetup} {

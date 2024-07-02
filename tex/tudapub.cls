@@ -1,4 +1,4 @@
-%% This is file `tudapub.cls' version 3.40 (2024-07-01),
+%% This is file `tudapub.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.40}
-\def\filedate{2024-07-01}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplClass{tudapub}
@@ -224,11 +224,6 @@
 	}
 }
 
-\bool_if:NT \g_ptxcd_pdfx_bool {
-	\PassOptionsToPackage{RGB}{xcolor}
-	\msg_info:nn {tudapub} {colors-to-rgb}
-}
-
 \exp_args:Nx \tl_if_eq:nnT {\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}} {9pt}
 	{
 	\prop_if_in:NnF \g_ptxcd_unknown_clsopts_prop {DIV}
@@ -254,6 +249,64 @@
 
 \LoadClass{\g_ptxcd_pub_class_tl}
 
+\RequirePackage{tudafonts}
+\RequirePackage{tudacolors}
+\RequirePackage[draft=false]{scrlayer-scrpage}
+\RequirePackage{graphicx}
+
+\bool_if:NTF \g_ptxcd_pdfx_bool {
+	\PassOptionsToPackage{RGB}{xcolor}
+	\msg_info:nn {tudapub} {colors-to-rgb}
+
+	%only apply the hack if pdfx is older than the working version
+	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
+	\RequirePackage{pdfx}
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
+
+	\msg_new:nnn{tudapub} {prefer-lualatex} {
+		You~use~pdfa-mode~in~#1.\\
+		This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
+		You~should~prefer~using~lualatex.
+	}
+	\msg_new:nnnn{tudapub} {outdated-package-pdfa} {
+		Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
+		Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
+	}{See~DEMO-tudapub~for~further~information.}
+
+
+	\sys_if_engine_pdftex:T {
+		\msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
+	}
+
+	\sys_if_engine_xetex:T {
+		\msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
+	}
+
+	\@ifpackagelater{xmpincl}{2021/09/22}{
+	}{
+		\msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
+	}
+
+	\@ifpackagelater{pdfx}{2018/12/01}{
+	}{
+		\msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
+	}
+} {
+	\PassOptionsToPackage{hidelinks, unicode}{hyperref}
+	\RequirePackage{hyperref}
+}
+
+\RequirePackage{tudarules}
+\RequirePackage{trimclip}
+\RequirePackage{bookmark}
 
 \prop_map_inline:Nn \g_ptxcd_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.\g_ptxcd_pub_class_tl.cls@#1} {
@@ -298,12 +351,6 @@
 	}}
 }
 
-
-\usepackage{tudarules}
-
-
-%,~ subsection,~
-\usepackage{tudafonts}
 
 %Margin & titlefontsize setup setup
 \bool_new:N \g_ptxcd_marginpar_bool
@@ -386,8 +433,7 @@
 
 %%%%%Anfang Randeinstellungen Geometry
 
-%Has to be loaded here due to headwidth options
-\usepackage[draft=false]{scrlayer-scrpage}
+
 
 \AddToHook{begindocument}[tudapub:BCOR-titlepage]{
 	\bool_if:NT  \g_ptxcd_BCOR_titlepage_bool
@@ -464,7 +510,6 @@
 
 
 
-
 \newcommand*{\institution}[1]{
 	\def\ptxcd_institution{#1}
 }
@@ -472,7 +517,6 @@
 
 \cs_new:Nn \ptxcd_titlerule_sep: {\the\dp\strutbox}
 
-\usepackage{tudacolors}
 
 \setkomafont{disposition}{\sffamily\bfseries}
 \setkomafont{pageheadfoot}{\sffamily\small}
@@ -600,7 +644,6 @@
 \newcommand{\titleimage}[1]{\tl_gset:Nn \g_ptxcd_titleimage_code_tl {#1}}
 \box_new:N \l__ptxcd_titlegraphic_box
 
-\RequirePackage{trimclip}
 
 \NewDocumentCommand{\titlegraphic}{sm}{
 	\IfBooleanTF{#1}{
@@ -870,51 +913,8 @@
 \DeclareNewPageStyleByLayers{title.TUDa}{title.TUDa.background,title.TUDa.rule,title.TUDa.image}
 
 %Logos
-\RequirePackage{graphicx}
 
 \if_bool:N \g_ptxcd_pdfx_bool
-
-	\msg_new:nnn{tudapub} {prefer-lualatex} {
-	You~use~pdfa-mode~in~#1.\\
-	This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
-	You~should~prefer~using~lualatex.
-	}
-	%only apply the hack if pdfx is older than the working version
-	\PassOptionsToPackage{a-2b}{pdfx}
-% Workaround posted by David Carlisle on tex.stackexchange
-% Thanks to Ulrike Fischer for mentioning it in #472
-	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
-	\chardef\currentgrouplevel0
-	\ExplSyntaxOff
-	\RequirePackage{pdfx}
-	\ExplSyntaxOn
-	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
-% end of the workaround
-	\msg_new:nnnn{tudapub} {outdated-package-pdfa} {
-		Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
-		Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
-	}{See~DEMO-tudapub~for~further~information.}
-
-
-	\sys_if_engine_pdftex:T {
-		\msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
-	}
-
-	\sys_if_engine_xetex:T {
-		\msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
-	}
-
-	\@ifpackagelater{xmpincl}{2021/09/22}{
-	}{
-		\msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
-	}
-
-	\@ifpackagelater{pdfx}{2018/12/01}{
-	}{
-		\msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
-	}
-
 	%%hyperref
 	\hypersetup{hidelinks, unicode}
 	\iow_new:N \ptxcd_xmpdata_stream

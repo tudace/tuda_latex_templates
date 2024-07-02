@@ -1,4 +1,4 @@
-%% This is file `tudaposter.cls' version 3.40 (2024-07-01),
+%% This is file `tudaposter.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.40}
-\def\filedate{2024-07-01}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplPackage{tudaposter}{\filedate}{\fileversion}{Poster Layouts for the Corporate Design of TU Darmstadt}

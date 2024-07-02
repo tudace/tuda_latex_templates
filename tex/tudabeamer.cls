@@ -1,4 +1,4 @@
-%% This is file `tudabeamer.cls' version 3.40 (2024-07-01),
+%% This is file `tudabeamer.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.40}
-\def\filedate{2024-07-01}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tudabeamer}
  [\filedate\space\fileversion\space]
@@ -124,9 +124,9 @@
 \bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
 
 \bool_if:NT  \g_ptxcd_pdfa_bool {
-\RequirePackage{scrlfile}
-\PreventPackageFromLoading{hyperref}
-\def\hypersetup#1{}
+	\RequirePackage{scrlfile}
+	\PreventPackageFromLoading{hyperref}
+	\def\hypersetup#1{}
 }
 \ExplSyntaxOff
 
@@ -251,7 +251,7 @@
 \let\accentfont\normalfont%
 
 \file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
-	{\usepackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
+	{\RequirePackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
 
 \ExplSyntaxOff
 
