@@ -276,3 +276,11 @@ TSWLatexianTemp*
 *.len
 *.pdf
 *.tcbtemp
+
+*.zip
+tuda-ci*
+*.orig
+
+
+# generated files by docstrip setup
+*.clo

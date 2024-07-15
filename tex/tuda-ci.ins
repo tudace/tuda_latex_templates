@@ -32,8 +32,9 @@
 
 \usedir{tex/latex/tuda-ci}
 
-\preamble
-
+\let\orig@ds@heading\ds@heading
+\let\ds@heading\@empty
+\declarepreamble\tudatop
 it is part of
 TUDa-CI -- Corporate Design for TU Darmstadt
 
@@ -42,7 +43,8 @@ TUDa-CI -- Corporate Design for TU Darmstadt
   Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 
 ============================================================================
-
+\endpreamble
+\declarepreamble\tudabottom
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either version 1.3c
 of this license or (at your option) any later version.
@@ -63,81 +65,27 @@ Please use the issue tracker for feedback!
 ============================================================================
 
 \endpreamble
+\ExplSyntaxOn
+\tl_replace_once:Nnn \tudatop{\ReferenceLines} {^^J}
+\tl_replace_once:Nnn \tudabottom {\ReferenceLines} {^^J}
+\ExplSyntaxOff
+
+\let\ds@heading\orig@ds@heading
+\declarepreamble\tudadefault\tudatop\tudabottom
+\endpreamble
+
+\usepreamble\tudadefault
 
 \askforoverwritefalse
 
-\ExplSyntaxOn
-\int_new:N \g_ptxcd_count_int
-
-% redefine module replacement to allow custom replacements for paper size
-\str_new:N \l_ptxcd__tmpa_str
-\str_new:N \l__ptxcd_customize_ins_str
-\cs_set_eq:NN \__ptxcd_customize_ins_prepareActiveModule:n \prepareActiveModule
-\cs_set:Npn \prepareActiveModule#1{
-	\__ptxcd_customize_ins_prepareActiveModule:n {#1}%
-	\tl_put_left:Nn \replaceModuleInLine{
-		\str_set:NV  \l_ptxcd__tmpa_str \inLine
-		\exp_args:NNxx \str_replace_all:Nnn \l_ptxcd__tmpa_str  {\tl_to_str:V \l__ptxcd_customize_ins_str} {\use:c {\l__ptxcd_customize_ins_str}}
-		\tl_set_rescan:NnV \inLine {} \l_ptxcd__tmpa_str
-		\int_gzero:N  \g_ptxcd_count_int
-	}
+\iffalse
+\generate{
+	\file{tudapub.cls}{\from{tudapub.dtx}{class,tudapub}}
+	\file{tudathesis.cfg}{\from{tudapub.dtx}{cfg,tudathesis}}
 }
+\fi
 
-
-\str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
-%\tl_set:cn {\str_use:N \l__ptxcd_customize_ins_str} {
-%	\int_gincr:N \g_ptxcd_count_int
-%	\clist_item:Nn \g_ptxcd_clist {\g_ptxcd_count_int}
-%}
-
-\clist_new:N \g_ptxcd_clist 
-
-\cs_set:Npn \generateTUDaPaperFiles #1 {
-%	\clist_gset:Nn  \g_ptxcd_clist  {#1}
-	\str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
-		\clist_map_inline:nn {#1} {
-			\generate{
-					\tl_set:cn {\str_use:N \l__ptxcd_customize_ins_str} {##1}
-					\file{tuda-##1paper.clo}{\from{tudasize.dtx}{##1,tudasize}}
-		}
-	}
-}
-\ExplSyntaxOff
-\generateTUDaPaperFiles {a0,a1,a2,a3,a4,a5}
-
-
-% \iffalse meta-comment
-%
-% TUDa-CI -- Corporate Design for TU Darmstadt
-% ----------------------------------------------------------------------------
-%
-%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
-%
-% ==========================================
-% 
-% This file is a slightly modified version of scrkernel-fonts.dtx and scrkernel-paragraphs.dtx 
-% Copyright (c) Markus Kohm, 2002-2024
-% modified by Marei Peischl <marei@peitex.de>
-%
-% This work may be distributed and/or modified under the conditions of
-% the LaTeX Project Public License, version 1.3c of the license.
-% The latest version of this license is in
-%   http://www.latex-project.org/lppl.txt
-% and version 1.3c or later is part of all distributions of LaTeX 
-% version 2005/12/01 or later and of this work.
-%
-% This work has the LPPL maintenance status `maintained'.
-%
-% The Current Maintainers of this work are Marei Peischl <kontakt@peitex.de>.
-%
-% This work consists of all files listed in MANIFEST.md.
-%
-% ==========================================
-% 
-% \fi
-
-
-\preamble
+\declarepreamble\tudakomasize
 it is part of
 TUDa-CI -- Corporate Design for TU Darmstadt
 
@@ -147,8 +95,8 @@ TUDa-CI -- Corporate Design for TU Darmstadt
 
 ============================================================================
 
-The source file includes parts of the files scrkernel-fonts.dtx  and  scrkernel-paragraphs.dtx 
-Copyright (c) 1994-2022 Markus Kohm [komascript at gmx info]
+The source file includes parts of the files scrkernel-fonts.dtx  and  scrkernel-paragraphs.dtx
+Copyright (c) 1994--2024 Markus Kohm [komascript at gmx info]
 which are part of the KOMA-Script bundle.
 
 The files were modified by Marei Peischl <marei@peitex.de>
@@ -174,14 +122,43 @@ Please use the issue tracker for feedback!
 
 \endpreamble
 
-\generate{
-  \file{tudasize9pt.clo}{%
-    \from{tudascrfonts.dtx}{9pt}%
-  }%
-  \file{tudalettersize10pt.clo}{%
-        \from{tudascrfonts.dtx}{tudaletter}%
-  }%
- }
+\generate{%
+	\file{tudasize9pt.clo}{\from{tudasize.dtx}{scrsize,9pt}}%
+	\file{tudalettersize10pt.clo}{\from{tudasize.dtx}{scrsize,tudaletter}}%
+}%
 
+\usepreamble\tudadefault
+
+\ExplSyntaxOn
+\int_new:N \g_ptxcd_count_int
+
+% redefine module replacement to allow custom replacements for paper size
+\str_new:N \l_ptxcd__tmpa_str
+\str_new:N \l__ptxcd_customize_ins_str
+\cs_set_eq:NN \__ptxcd_customize_ins_prepareActiveModule:n \prepareActiveModule
+\cs_set:Npn \prepareActiveModule#1{
+	\__ptxcd_customize_ins_prepareActiveModule:n {#1}%
+	\tl_put_left:Nn \replaceModuleInLine{
+		\str_set:NV  \l_ptxcd__tmpa_str \inLine
+		\exp_args:NNxx \str_replace_all:Nnn \l_ptxcd__tmpa_str  {\tl_to_str:V \l__ptxcd_customize_ins_str} {\use:c {\l__ptxcd_customize_ins_str}}
+		\tl_set_rescan:NnV \inLine {} \l_ptxcd__tmpa_str
+		\int_gzero:N  \g_ptxcd_count_int
+	}
+}
+
+
+\str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
+
+\cs_set:Npn \generateTUDaPaperFiles #1 {
+	\str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
+	\clist_map_inline:nn {#1} {
+		\generate{
+			\tl_set:cn {\str_use:N \l__ptxcd_customize_ins_str} {##1}
+			\file{tuda-##1paper.clo}{\from{tudasize.dtx}{##1,tudasize}}
+		}
+	}
+}
+\ExplSyntaxOff
+\generateTUDaPaperFiles {a0,a1,a2,a3,a4,a5}
 
 \endbatchfile
