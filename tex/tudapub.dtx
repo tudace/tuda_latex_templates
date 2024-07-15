@@ -1046,7 +1046,6 @@
 % Margin \& titlefontsize setup setup
 %    \begin{macrocode}
 \bool_new:N \g_ptxcd_marginpar_bool
-
 \dim_new:N \g_ptxcd_marginpar_dim
 \dim_new:N \g_ptxcd_innerMargin_dim
 \dim_new:N \g_ptxcd_outerMargin_dim
@@ -1653,8 +1652,9 @@
 %    \end{macrocode}
 %Logos
 %    \begin{macrocode}
+\if_bool:N \g_ptxcd_pdfx_bool
 %%hyperref
-\hypersetup{hidelinks, unicode,pdfa}
+\hypersetup{hidelinks, unicode}
 \iow_new:N \ptxcd_xmpdata_stream
 \tl_new:N \g_ptxcd_xmp_title_tl
 \tl_new:N \g_ptxcd_xmp_author_tl
@@ -2305,8 +2305,9 @@
   }
   {
     \ptxcd_declare_caption:Nnn \departmentname {Fachbereich} {department}
-    \ptxcd_declare_caption:Nnn \ptxcd_departmentprefix: {im~ \departmentname}{in~the~\departmentname{}~ of}
     \ptxcd_declare_caption:Nnn \departmentfullname {\departmentname{}~ \ptxcd_department:} { \ptxcd_department:{}~ \text_titlecase:n{\departmentname}}
+    \ptxcd_declare_caption:Nnn \ptxcd_departmentprefix: {im~ \departmentname}{in~the~\departmentname{}~ of}
+    \ptxcd_declare_caption:Nnn \ptxcd_in_department {\ptxcd_departmentprefix:{}~\ptxcd_department:}{\ptxcd_departmentprefix:{}~\ptxcd_department:}
   }
   {\bool_if:NTF \g_ptxcd_dr_bool
     {
@@ -2449,7 +2450,7 @@
   \IfBooleanTF{#1}{
     \tl_gset:Nn \ptxcd_department: {#3}
     \tl_gset:Nn \ptxcd_in_department{#3}
-    \IfNoValueTF {\tl_gset:Nn \ptxcd_box_department {#3}} {\tl_gset:Nn \ptxcd_box_department{#2}}
+    \IfNoValueTF {#2} {\tl_gset:Nn \ptxcd_box_department {#3}} {\tl_gset:Nn \ptxcd_box_department{#2}}
     \clist_remove_all:Nn \g_ptxcd_Required_title_data_clist {department}
   }{
     \tl_gset:Nn \g_ptxcd_department_choice_tl {#3}
@@ -2554,7 +2555,7 @@
     This~work~is~protected~by~copyright\newline
     \url{https://rightsstatements.org/page/InC/1.0/}
   },
-  license / inc-1.0 .code:n = \tl_if_in:NnTF \languagename: {german} {\keys_set:nn {ptxcd/thesis}{license=inc-1.0-de}}{\keys_set:nn {ptxcd/thesis}{license=inc-1.0-en}},
+  license / inc-1.0 .code:n = \tl_if_in:NnTF \languagename {german} {\keys_set:nn {ptxcd/thesis}{license=inc-1.0-de}}{\keys_set:nn {ptxcd/thesis}{license=inc-1.0-en}},
   license / initial .code:n = {\keys_set:nn {ptxcd/thesis} {license=cc-by-4.0}},
   license / unknown .code:n  = \tl_gset:Nn \g_ptxcd_license_info_tl {#1},
   license .initial:n = initial,
@@ -2703,6 +2704,14 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
     \ptxcd_check_title_data:cn {TUDa@##1} {##1}
   }
   \cs_if_exist_use:N \ptxcd_pass_TitleData:
+  \edef\titlepage@restore{%
+    \noexpand\endgroup
+    \noexpand\global\noexpand\@colht\the\@colht
+    \noexpand\global\noexpand\@colroom\the\@colroom
+    \noexpand\global\vsize\the\vsize
+    \noexpand\global\noexpand\@titlepageiscoverpagefalse
+   \noexpand\let\noexpand\titlepage@restore\noexpand\relax
+  }%
   \ptxcd_disable_marginpar:
   \cleardoublepage
   \begin{titlepage}
@@ -2711,18 +2720,6 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
     }%
     \def\thefootnote{\fnsymbol{footnote}}
     \if@titlepageiscoverpage
-      \def\titlepage@restore{%
-        \endgroup
-        \ptxcd_restore_typearea:
-        \bool_if:nT {! \g_ptxcd_geometry_bool && \g_ptxcd_marginpar_bool} {
-          \dim_sub:Nn \evensidemargin {\marginparwidth+\marginparsep}
-          \dim_add:Nn \textwidth   {\marginparwidth+\marginparsep}
-          \columnwidth=\textwidth
-          \hsize=\columnwidth
-        }
-        \global\@titlepageiscoverpagefalse
-        \let\titlepage@restore\relax
-      }%
       \begingroup
       \topmargin=\dimexpr \coverpagetopmargin-1in\relax
       \oddsidemargin=\dimexpr \coverpageleftmargin-1in\relax
@@ -2908,19 +2905,17 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
 
 \expandafter\def\csname g__ptxcd_affidavit_dr_tl\endcsname {%
   \section*{Erklärungen laut Promotionsordnung}
-  \subsection*{\S\,8 Abs. 1 lit. c PromO}
-  Ich versichere hiermit, dass die elektronische Version meiner Dissertation mit der schriftlichen Version übereinstimmt.
   \subsection*{\S\,8 Abs. 1 lit. d PromO}
   Ich versichere hiermit, dass zu einem vorherigen Zeitpunkt noch keine Promotion versucht wurde. In diesem Fall sind nähere Angaben über Zeitpunkt, Hochschule, Dissertationsthema und Ergebnis dieses Versuchs mitzuteilen.
 
   \subsection*{\S\,9 Abs. 1 PromO}
-  Ich versichere hiermit, dass die vorliegende Dissertation selbstständig und nur unter Verwendung der angegebenen Quellen verfasst wurde.
+  Ich versichere hiermit, dass die vorliegende Dissertation – abgesehen von den in ihr ausdrücklich genannten Hilfen – selbstständig verfasst wurde und dass die „Grundsätze zur Sicherung guter wissenschaftlicher Praxis an der Technischen Universität Darmstadt“ und die „Leitlinien zum Umgang mit digitalen Forschungsdaten an der TU Darmstadt“ in den jeweils aktuellen Versionen bei der Verfassung der Dissertation beachtet wurden.
 
   \subsection*{\S\,9 Abs. 2 PromO}
   Die Arbeit hat bisher noch nicht zu Prüfungszwecken gedient.
 }
 
-% Quelle: https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp
+%% Quelle: https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp
 \expandafter\def\csname g__ptxcd_affidavit_digital_tl\endcsname {%
   \subsection*{Erklärung zur Abschlussarbeit gemäß \S\,22~Abs.~7~APB TU~Darmstadt}
   \begin{sloppypar}%
