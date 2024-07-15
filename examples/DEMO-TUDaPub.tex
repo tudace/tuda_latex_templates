@@ -1,4 +1,4 @@
-%% This is file `DEMO-TUDaPub.tex' version 3.41 (2024-07-02)
+%% This is file `DEMO-TUDaPub.tex' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -16,7 +16,7 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainers of this work are
+%% The current maintainer of this work is
 %%   Marei Peischl <tuda-ci@peitex.de>
 %%
 %% The development respository can be found at
@@ -36,6 +36,7 @@
 \DocumentMetadata{
 	pdfstandard=a-2b,
 	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+	lang=en,
 }
 
 \documentclass[
@@ -44,10 +45,12 @@
 %	logofile=example-image,% In case logo files are not available
 ]{tudapub}
 
+
 %%%%%%%%%%%%%%%%%%%
 % Language setup
 %%%%%%%%%%%%%%%%%%%
-\usepackage[german,main=english]{babel}% german has to be loaded as the titlepage is always in German
+\usepackage[german,main=english]{babel}% load English and German to support a German abstract
+\usepackage[english]{babel}
 \usepackage{microtype}
 \usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
@@ -57,7 +60,7 @@
 \usepackage{biblatex}
 \addbibresource{DEMO-TUDaBibliography.bib}% File name of BibTeX database
 
-\hypersetup{% Metadata adjustments
+\hypersetup{% Metadata adjustments, in case these are not set, the data provided for \maketitle will be used
 	pdfauthor=Marei Peischl (peiTeX),
 	pdfcreationdate=2024-05-03,
 	pdfkeywords={TU Darmstadt; Corporate Design; LaTeX}
@@ -65,12 +68,14 @@
 
 \title{TUDaPub -- \LaTeX-Paper using TU Darmstadt's Corporate Design}
 \subtitle{The document class tudapub}
-\author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and Mr. Lion}
+\author{Marei Peischl\thanks{pei\TeX{} \TeX{}nical Solutions}\and der \TeX-Löwe}
 
-% Titlegraphic might also be set via \includegraphics
+
 \titlegraphic{
+%	Titlegraphic might also be set via \includegraphics
 	\color{black!30}\rule{\width}{\height}
 }
+
 % Alternative box layout:
 \addTitleBox{Text, e.g. Institute}
 %\addTitleBoxLogo{example-image}
@@ -91,11 +96,14 @@
 \tableofcontents
 % Additional lists like \listoffigures or acronyms might be added here
 
+
 \section{About this file}
 
-\enquote{DEMO-TUDaPub.tex} is an example file for the document class \enquote{tudapub.cls}.
-It is part of TUDa-CI, which is the official template bundle of TU Darmstadt.
-The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
+\enqoute{DEMO-TUDaPub.tex} is an example file for the document class \enqoute{tudapub.cls}.
+It is part of TUDa-CI, which is the official template bundle of TU Darmstadt. The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
+
+
+
 
 \printbibliography
 

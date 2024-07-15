@@ -1,4 +1,4 @@
-%% This is file `DEMO-TUDaThesis-en.tex' version 3.41 (2024-07-02)
+%% This is file `DEMO-TUDaThesis.tex' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -16,7 +16,7 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainers of this work are
+%% The current maintainer of this work is
 %%   Marei Peischl <tuda-ci@peitex.de>
 %%
 %% The development respository can be found at
@@ -36,10 +36,12 @@
 \DocumentMetadata{
 	pdfstandard=a-2b,
 	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+	lang=en,
 }
 
 \documentclass[
 	english,% Main language as global option
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
 	ruledheaders=section,% Section levels above this one will follow the ruled layout
 	class=report,% Choose the base document class. Will choose the matching KOMA-Script class
 	thesis={type=bachelor},% Thesis. For PhD thesis have a look at DEMO-TUDaPhd example file
@@ -48,7 +50,6 @@
 	custommargins=true,% Calculate margins using typearea
 	marginpar=false,% Disable marginpar
 %	BCOR=5mm,% Binding correction
-	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
 %	logofile=example-image,% In case logo files are not available
 ]{tudapub}
 
@@ -56,7 +57,7 @@
 %%%%%%%%%%%%%%%%%%%
 % Language setup
 %%%%%%%%%%%%%%%%%%%
-\usepackage[german,main=english]{babel}% german has to be loaded as the titlepage is always in German
+\usepackage[english]{babel}
 \usepackage{microtype}
 \usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
@@ -82,9 +83,7 @@
 %\usepackage{amssymb}% Additional symbols
 %\usepackage{siunitx}% Numbers and Units
 
-
-
-\hypersetup{% Metadata adjustments
+\hypersetup{% Metadata adjustments, in case these are not set, the data provided for \maketitle will be used
 	pdfauthor=Marei Peischl (peiTeX),
 	pdfcreationdate=2024-05-03,
 	pdfkeywords={TU Darmstadt; Corporate Design; LaTeX}
@@ -106,8 +105,6 @@
 
 %\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}% License information for TUprints
 
-
-
 \begin{document}
 
 \maketitle
@@ -119,8 +116,7 @@
 
 \addchap{About this file}
 
-\enquote{DEMO-TUDaThesis.tex} is a basic template for theses
-using the Corporate Design of TU Darmstadt.
+\enquote{DEMO-TUDaThesis.tex} is a basic template for theses using the Corporate Design of TU Darmstadt.
 It is part of TUDa-CI, which is the official template bundle of TU Darmstadt. The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
 
 
@@ -129,4 +125,4 @@ It is part of TUDa-CI, which is the official template bundle of TU Darmstadt. Th
 \printbibliography
 
 \end{document}
-%% End of file `DEMO-TUDaThesis-en.tex'.
+%% End of file `DEMO-TUDaThesis.tex'.

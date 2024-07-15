@@ -1,4 +1,4 @@
-%% This is file `DEMO-TUDaReport-de.tex' version 3.41 (2024-07-02),
+%% This is file `DEMO-TUDaFromaddress.lco' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -29,45 +29,28 @@
 %% <path to your LaTeX distribution>/doc/latex/tuda-ci
 %% ============================================================================
 %%
-% !TeX program = lualatex
-%%
 
-\documentclass[
-	german,% Hauptsprache als globale Option, früher war ngerman notwendig
-	accentcolor=9c,% Auswahl der Akzentfarbe
-	type=intern, % Minimales Setup ohne Akzentfarbe
-	marginpar=false,% Kopfzeile und Fußzeile erstrecken sich nicht über die Randnotizspalte
-%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
-]{tudapub}
+\ProvidesFile{DEMO-TUDaFromaddress.lco}[2024-07-02 Example letter configuration file for TUDa-CI]
 
+% Institute should be configured in German + English
+\setkomavar{frominstitution-en}{Institute for Research and Technology}
+\setkomavar{frominstitution}{Institut für Musterforschung}
 
-%%%%%%%%%%%%%%%%%%%
-% Spracheinstellungen
-%%%%%%%%%%%%%%%%%%%
-\usepackage[german]{babel}
-\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
+% Text element as a sublogo:
+\setkomavar{fromlogo}{\colorbox{blue!20}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{Sublogo}}}
+% Image as a sublogo with full width of the line:
+% \setkomavar{fromlogo}{\includegraphics[width=\linewidth]{example-image}}
 
-\title{TUDaReport -- Minimales Template für TUDa-CI}
-\author{Marei Peischl}
-%\date{}% Ohne Angabe wird automatisch das heutige Datum eingefügt
+% Address:
+\setkomavar{fromaddress}{Karolinenplatz 5\\64289 Darmstadt}
+% Optional setting for the backaddress. It's preconfigured to use:
 
+% Personal information:
+\setkomavar{fromname}{Prof. Dr. Max Mustermann}
+\setkomavar{fromfunction}{Dekan}
+\setkomavar{fromphone}{+49\,6151\,16\,-\,xxxx}
+\setkomavar{fromfax}{+49\,6151\,16\,-\,xxxx}
+\setkomavar{fromemail}{mustermann@tu-darmstadt.de}
+\setkomavar{fromurl}{https://www.tu-darmstadt.de/}
 
-\begin{document}
-
-\maketitle
-
-
-\tableofcontents
-% Ggf. weitere Verzeichnisse wie \listoffigures oder ein Abkürzungsverzeichnis
-
-
-\section{Über diese Datei}
-
-Die Datei \enqoute{DEMO-TUDaReport.tex} ist ein minimales Template für die Verwendung der Dokumentenklasse \enqoute{tudapub.cls}.
-Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
-
-
-
-
-\end{document}
-%% End of file `DEMO-TUDaReport-de.tex'.
+%% End of file `DEMO-TUDaFromaddress.lco'.

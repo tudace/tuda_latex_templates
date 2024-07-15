@@ -3,7 +3,7 @@
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
 %%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%% Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
 %%
 %% ============================================================================
 %% This work may be distributed and/or modified under the
@@ -16,7 +16,7 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainers of this work are
+%% The current maintainer of this work is
 %%   Marei Peischl <tuda-ci@peitex.de>
 %%
 %% The development respository can be found at
@@ -33,30 +33,39 @@
 %%
 
 \documentclass[
-	color=3c,
-%	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
-	]{tudaleaflet}
+	german,% Hauptsprache als globale Option, früher war ngerman notwendig
+	accentcolor=9c,% Auswahl der Akzentfarbe
+%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
+]{tudaleaflet}
 
-\usepackage[ngerman]{babel}
+%%%%%%%%%%%%%%%%%%%
+% Spracheinstellungen
+%%%%%%%%%%%%%%%%%%%
+\usepackage[german]{babel}
+\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
 
-\usepackage{blindtext}
-\usepackage[autostyle]{csquotes}
-
-%Literaturverweise
+%%%%%%%%%%%%%%%%%%%
+% Literaturverzeichnis
+%%%%%%%%%%%%%%%%%%%
 \usepackage{biblatex}
-\bibliography{DEMO-TUDaBibliography}
+\addbibresource{DEMO-TUDaBibliography.bib}% Dateiname der .bib-datei
 
-%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
-\let\file\texttt
-\let\code\texttt
-\let\pck\textsf
-\let\cls\textsf
-
+%%%%%%%%%%%%%%%%%%%
+% Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+%%%%%%%%%%%%%%%%%%%
+\newcommand*{\file}[1]{\texttt{#1}}
+\newcommand*{\code}[1]{\texttt{#1}}
+\newcommand*{\pck}[1]{\textsf{#1}}
+\newcommand*{\cls}[1]{\textsf{#1}}
+\let\tbs\textbackslash
+%%%%%%%%%%%%%%%%%%%
+% Ende der Demo-Formatierungseinstellungen
+%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
 \title{TUDaLeaflet}
-%\titleimage{\includegraphics[width=\width,height=\height]{example-image}}
+% \titleimage{\includegraphics[width=\width,height=\height]{example-image}}
 \subtitle{Flyer mit TUDa-CI}
 \addTitleBox{Institut}
 
@@ -67,9 +76,12 @@
 \maketitle
 
 \section{Grundlegende Funktionsweise}
-\cls{tudaleaflet} basiert auf der \cls{leaflet}-Klasse. Die Verwendung ähnelt der einer einfachen ArtikelKlasse lediglich die Seitemumbrüche sind auf ein Faltblatt ausgelegt. Es werden üblicherweise 6 Teil-Seiten erzeugt. Für weitere Informationen zur \cls{leaflet}-Klasse, kann \cite{leaflet} hilfreich sein. Optionen, die nicht durch \cls{tudaleaflet} definiert wurden, werden ggf. an die Basisklasse weitergereicht.
+\cls{tudaleaflet} basiert auf der \cls{leaflet}-Klasse.
+Die Verwendung ähnelt der einer einfachen Artikel Klasse. Lediglich die Seitemumbrüche sind auf ein Faltblatt ausgelegt. Es werden üblicherweise sechs Teil-Seiten erzeugt.
+Für weitere Informationen zur \cls{leaflet}-Klasse kann \cite{leaflet} hilfreich sein.
+Optionen, die nicht durch \cls{tudaleaflet} definiert wurden, werden ggf. an die Basisklasse weitergereicht.
 
-Diese ist keine \KOMAScript-Klasse. Dennoch wurde durch \pck{scrextend} einige Mechanismen zur besseren Kompatibilität eingebaut, allerdings sind nicht alle Mechanismen verfügbar \cite[vgl.][]{scrguide}.
+Diese ist keine \KOMAScript-Klasse. Dennoch wurden durch \pck{scrextend} einige Mechanismen zur besseren Kompatibilität eingebaut, allerdings sind nicht alle Mechanismen verfügbar \cite[vgl.][]{scrguide}.
 
 \section{Die Titelseite}
 Die Titelseite wird analog zu den übrigen TUDa-CI-Klassen erzeugt. Als Makros stehen hierbei die folgenden zur Verfügung:
@@ -78,58 +90,60 @@ Die Titelseite wird analog zu den übrigen TUDa-CI-Klassen erzeugt. Als Makros s
 	\item[subtitle] Untertitel, wird im Block zwischen Titel und Titelbild platziert.
 	\item[author] Autor, wird ggf. unter dem Untertitel platziert.
 	\item[date] Datum, wiederum unter dem ggf. platzierten Autor
-	\item[addTitleBox] Institutsboxen.
-	Die Institutsboxen werden mit vorgegebenem Abstand unter dem Logo platziert. Hier kann Text erscheinen oder auch ein Institutslogo. Der Hintergrund ist weiß.
-	
-	Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudaleaflet} analog zu \cls{tudapub} das Makro \code{\addTitleBoxLogo}. Als Argument akzeptiert es einen Bilddateipfad.
-	\begin{verbatim}
-	\addTitleBoxLogo{example-image}
-	\addTitleBoxLogo*{
-	  \includegraphics
-	    [width=\linewidth]
-	    {example-image}
-	}
-	\end{verbatim}
-	\item[titleimage] Titelbild. Das Makro \code{titleimage} akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
-	Üblicherweise wird dieses Makro zur Platzierung einer Grafik genutzt:
-	\begin{verbatim}
-	\titleimage{
-	  \includegraphics
-	  [width=\width]
-	  {example-image}
-	}
-	\end{verbatim}
-	Die Makros \verb+\height+ und \verb+\width+ sind hier lokal so definiert, dass es damit möglich ist, die Fläche zu füllen.
+	\item[addTitleBox] Institutsboxen
+	      Die Institutsboxen werden mit vorgegebenem Abstand unter dem Logo platziert. Hier kann Text erscheinen oder auch ein Institutslogo. Der Hintergrund ist weiß.
+
+	      Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudaleaflet} analog zu \cls{tudapub} das Makro \code{\addTitleBoxLogo}. Als Argument akzeptiert es einen Bilddateipfad.
+\begin{verbatim}
+\addTitleBoxLogo{example-image}
+\addTitleBoxLogo*{
+\includegraphics
+[width=\linewidth]
+{example-image}
+}
+\end{verbatim}
+	\item[titleimage] Titelbild. Das Makro \code{titleimage} akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert. Üblicherweise wird dieses Makro zur Platzierung einer Grafik genutzt:
+\begin{verbatim}
+\titleimage{
+\includegraphics
+[width=\width]
+{example-image}
+}
+\end{verbatim}
+	      Die Makros \verb+\height+ und \verb+\width+ sind hier lokal so definiert, dass es damit möglich ist, die Fläche zu füllen.
 \end{description}
 
 \subsection{Optionen zur Anpassung der Titelseite}
 \begin{description}
-	\item[colorback] aktiviert die Hintergrundfarbe der \verb+\titleimage+-Fläche. Voreingestellt ist \verb+color+""\verb+back=true+
-	\item[colorbacktitle] Analog für den Titelblock, Voreingestellt ist hier \verb+colorbacktitle=false+
+	\item[colorback] Aktiviert die Hintergrundfarbe der \verb+\titleimage+-Fläche. Voreingestellt ist \verb+color+""\verb+back=true+
+	\item[colorbacktitle] Analog für den Titelblock. Voreingestellt ist hier \verb+colorbacktitle=false+
 	\item[colorbacksubtitle] Diese Option funktioniert nur für \verb+colorbacktitle=true+. Damit ist es möglich, dass auch der Streifen zwischen Titelblock und Bildfläche in der Farbe der Identitätsleiste eingefärbt wird. Falls \verb+colorbacktitle=false+ erzeugt dies eine Fehlermeldung. Voreingestellt ist \verb+colorbacksubtitle=false+
 	\item[logofile] Alternatives Hauptlogo, z.\,B. falls das TUDa-Logo nicht vorliegt.
 \end{description}
 
-Die Textausrichtung des Titels ist durch das Makro \verb+\raggedtitle+ gesetzt. Dies ist auf \verb+\raggedright+ vorbelegt, um Umbrüche innerhalb des Titels zu Verhindern, ermöglicht aber auch andere Ausrichtungen. Eine Änderung ist mit \verb+\renewcommand+ möglich.
+Die Textausrichtung des Titels ist durch das Makro \verb+\raggedtitle+ gesetzt. Dies ist auf \verb+\raggedright+ vorbelegt, um Umbrüche innerhalb des Titels zu verhindern, ermöglicht aber auch andere Ausrichtungen. Eine Änderung ist mit \verb+\renewcommand+ möglich.
 
 \subsection{Sponsorenlogos}
 Sponsorenlogos werden üblicherweise über
 \begin{verbatim}
 \AddSponsor{<logo1>}
-\AddSponsor{<log2>}
+\AddSponsor{<logo2>}
 \end{verbatim}
-übergeben. Innerhalb des Arguments ist \verb+\height+ so gesetzt. Somit werden im Beispiel alle Logos auf die gleiche Höhe gesetzt. Der Abstand dazwischen wird entsprechend aufgefüllt, sodass der gesamte Block immer links und rechts mit dem Text abschließt.
+übergeben. Innerhalb des Arguments ist \verb+\height+ gesetzt. Somit werden im Beispiel alle Logos auf die gleiche Höhe gesetzt. Der Abstand dazwischen wird entsprechend aufgefüllt, sodass der gesamte Block immer links und rechts mit dem Text abschließt.
 
 Die zweite Variante ermöglicht die Platzierung mit manueller vertikaler Ausrichtung, wie es bei Logos mit unterschiedlicher Höhe notwendig sein könnte. Hierbei werden lediglich die Abstände und Trennlinien um die Logos ergänzt:
 
 \begin{verbatim}
 \sponsors{
- <logo1><logo2>
+<logo1><logo2>
 }
 \end{verbatim}
 
+
 Die Logos werden üblicherweise im unteren Teil der Titelseite platziert. Allerdings erlauben die Corporate Design Richtlinien auch, dass am Ende des Dokuments platziert werden.
+
 Um diese Unterscheidung zu ermöglichen stellt TUDaLeaflet die Option \verb+sponsor+ zur Verfügung. Sie akzeptiert die Werte \verb+title+, \verb+lastfoot+ oder \verb+manual+.
+
 \verb+title+ entspricht der Voreinstellung. Der Wert \verb+lastfoot+ platziert die Sponsoren mit einem \verb+\vfill+ auf der letzten Seite. \verb+manual+ ermöglicht es die Box manuell zu platzieren. Hierfür steht das Makro
 \begin{verbatim}
 \insertSponsors
@@ -137,6 +151,8 @@ Um diese Unterscheidung zu ermöglichen stellt TUDaLeaflet die Option \verb+spon
 zur Verfügung. Es fügt die Box an der entsprechenden Position ein. Allerdings nur, falls \verb+sponsor=manual+. Ist dies nicht der Fall, hat das Makro keine Wirkung.
 
 
+
 \printbibliography
 
 \end{document}
+%% End of file `DEMO-TUDaLeaflet-de.tex'.
