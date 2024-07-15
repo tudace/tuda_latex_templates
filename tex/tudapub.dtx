@@ -938,6 +938,67 @@
 
 \LoadClass{\g_ptxcd_pub_class_tl}
 
+%    \end{macrocode}
+% \changes{3.41}{2024-07-02}{Change package order to be more strict about the loading time of pdfx to avoid conflicts.}
+%    \begin{macrocode}
+\RequirePackage{tudafonts}
+\RequirePackage{tudacolors}
+\RequirePackage[draft=false]{scrlayer-scrpage}
+\RequirePackage{graphicx}
+
+\bool_if:NTF \g_ptxcd_pdfx_bool {
+	\PassOptionsToPackage{RGB}{xcolor}
+	\msg_info:nn {tudapub} {colors-to-rgb}
+	%only apply the hack if pdfx is older than the working version
+	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
+	\RequirePackage{pdfx}
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
+
+	\msg_new:nnn{tudapub} {prefer-lualatex} {
+		You~use~pdfa-mode~in~#1.\\
+		This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
+		You~should~prefer~using~lualatex.
+	}
+	\msg_new:nnnn{tudapub} {outdated-package-pdfa} {
+		Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
+		Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
+	}{See~DEMO-tudapub~for~further~information.}
+
+	\sys_if_engine_pdftex:T {
+		\msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
+	}
+
+	\sys_if_engine_xetex:T {
+		\msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
+	}
+
+	\@ifpackagelater{xmpincl}{2021/09/22}{
+	}{
+		\msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
+	}
+
+	\@ifpackagelater{pdfx}{2018/12/01}{
+	}{
+		\msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
+	}
+} {
+	\PassOptionsToPackage{hidelinks, unicode}{hyperref}
+	\RequirePackage{hyperref}
+}
+
+\RequirePackage{tudarules}
+\RequirePackage{trimclip}
+\RequirePackage{bookmark}
+
+
 \prop_map_inline:Nn \g_ptxcd_unknown_clsopts_prop {
   \cs_if_exist:cT {KV@KOMA.\g_ptxcd_pub_class_tl.cls@#1} {
     \tl_if_empty:nTF {#2}
@@ -981,12 +1042,6 @@
       \smash{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}
     }}
 }
-
-\usepackage{tudarules}
-%    \end{macrocode}
-%,~ subsection,~
-%    \begin{macrocode}
-\usepackage{tudafonts}
 %    \end{macrocode}
 % Margin \& titlefontsize setup setup
 %    \begin{macrocode}
@@ -1095,8 +1150,6 @@
 
 %Has to be loaded here due to headwidth options
 %    \begin{macrocode}
-\usepackage[draft=false]{scrlayer-scrpage}
-
 \AddToHook{begindocument}[tudapub:BCOR-titlepage]{
 	\bool_if:NT  \g_ptxcd_BCOR_titlepage_bool
 		{\xdef\coverpageleftmargin{\the\dimexpr\coverpageleftmargin+\the\ta@bcor}}
@@ -1179,9 +1232,6 @@
 %
 %    \begin{macrocode}
 \cs_new:Nn \ptxcd_titlerule_sep: {\the\dp\strutbox}
-
-\usepackage{tudacolors}
-
 \setkomafont{disposition}{\sffamily\bfseries}
 \setkomafont{pageheadfoot}{\sffamily\small}
 \setkomafont{pagenumber}{}
@@ -1323,9 +1373,6 @@
 %
 %    \begin{macrocode}
 \box_new:N \l__ptxcd_titlegraphic_box
-
-\RequirePackage{trimclip}
-
 \NewDocumentCommand{\titlegraphic}{sm}{
 	\IfBooleanTF{#1}{
 		\tl_gset:Nn  \g_ptxcd_titleimage_code_tl  {
@@ -1606,42 +1653,6 @@
 %    \end{macrocode}
 %Logos
 %    \begin{macrocode}
-\RequirePackage{graphicx}
-
-\if_bool:N \g_ptxcd_pdfx_bool
-
-\msg_new:nnn{tudapub} {prefer-lualatex} {
-  You~use~pdfa-mode~in~#1.\\
-  This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
-  You~should~prefer~using~lualatex.
-}
-%only apply the hack if pdfx is older than the working version
-\PassOptionsToPackage{a-2b}{pdfx}
-\RequirePackage{pdfx}
-
-\msg_new:nnnn{tudapub} {outdated-package-pdfa} {
-  Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
-  Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
-}{See~DEMO-tudapub~for~further~information.}
-
-\sys_if_engine_pdftex:T {
-  \msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
-}
-
-\sys_if_engine_xetex:T {
-  \msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
-}
-
-\@ifpackagelater{xmpincl}{2021/09/22}{
-}{
-  \msg_error:nn{tudapub} {outdated-package-pdfa} {xmpincl}
-}
-
-\@ifpackagelater{pdfx}{2018/12/01}{
-}{
-  \msg_error:nn{tudapub} {outdated-package-pdfa} {pdfx}
-}
-
 %%hyperref
 \hypersetup{hidelinks, unicode,pdfa}
 \iow_new:N \ptxcd_xmpdata_stream
@@ -1810,7 +1821,6 @@
 \str_if_eq:VnTF \g_ptxcd_pubType_tl  {thesis} {
   \input{tudathesis.cfg}
 } {
-
   \msg_new:nnnn {tudapub} {only-thesis} {You~tried~to~use~\use:c { #1}.~This~macro~is~only~available~for~publications~of~type~thesis}{See~tuda-ci~documentation~for~further~information}
 
   \clist_map_inline:nn {birthplace, group, examdate, submissiondate, tuprints, urn, reviewer} {
@@ -1818,16 +1828,24 @@
       \msg_error:nnn {tudapub} {only-thesis} {#1}
     }
   }
-  %    \end{macrocode}
-  %
-  % \begin{macro}{\maketitle}
-  %    \begin{macrocode}
-  %% The following macro is an adapted version of the corresponding KOMA-Script macro
-  %% Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
+%    \end{macrocode}
+%
+% \begin{macro}{\maketitle}
+%    \begin{macrocode}
+%% The following macro is an adapted version of the corresponding KOMA-Script macro
+%% Copyright (c) 1994-2019 Markus Kohm [komascript at gmx info]
   \renewcommand*{\maketitle}[1][1]{
     \def\and{,~ }
     \cs_if_exist_use:N \ptxcd_pass_TitleData:
     \if@titlepage
+	\edef\titlepage@restore{%
+		\noexpand\endgroup
+		\noexpand\global\noexpand\@colht\the\@colht
+		\noexpand\global\noexpand\@colroom\the\@colroom
+		\noexpand\global\vsize\the\vsize
+		\noexpand\global\noexpand\@titlepageiscoverpagefalse
+		\noexpand\let\noexpand\titlepage@restore\noexpand\relax
+	}%
       \ptxcd_disable_marginpar:
       \begin{titlepage}
         \setcounter{page}{%
@@ -1835,18 +1853,6 @@
         }%
         \def\thefootnote{\ptxcd_title_footnotestyle:n {\c@footnote}}
         \if@titlepageiscoverpage
-          \def\titlepage@restore{%
-            \endgroup
-            \ptxcd_restore_typearea:
-            \bool_if:nT {! \g_ptxcd_geometry_bool && \g_ptxcd_marginpar_bool} {
-              \dim_sub:Nn \evensidemargin {\marginparwidth+\marginparsep}
-              \dim_add:Nn \textwidth   {\marginparwidth+\marginparsep}
-              \columnwidth=\textwidth
-              \hsize=\columnwidth
-            }
-            \global\@titlepageiscoverpagefalse
-            \let\titlepage@restore\relax
-          }%
           \begingroup
           \topmargin=\dimexpr \coverpagetopmargin-1in\relax
           \oddsidemargin=\dimexpr \coverpageleftmargin-1in\relax
@@ -2017,10 +2023,10 @@
       \endgroup
     \fi
   }
-  %    \end{macrocode}
-  % \end{macro}
-  %
-  %    \begin{macrocode}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 }
 
 \newkomafont{paperid}{\sffamily}
