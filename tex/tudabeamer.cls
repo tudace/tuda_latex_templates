@@ -124,9 +124,9 @@
 \bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
 
 \bool_if:NT  \g_ptxcd_pdfa_bool {
-\RequirePackage{scrlfile}
-\PreventPackageFromLoading{hyperref}
-\def\hypersetup#1{}
+	\RequirePackage{scrlfile}
+	\PreventPackageFromLoading{hyperref}
+	\def\hypersetup#1{}
 }
 \ExplSyntaxOff
 
@@ -137,7 +137,16 @@
 \bool_if:NT \g_ptxcd_pdfa_bool {
 	\UnPreventPackageFromLoading{hyperref}
 	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
 	\RequirePackage{pdfx}
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
 }
 \hypersetup{hidelinks, unicode}
 
@@ -242,7 +251,7 @@
 \let\accentfont\normalfont%
 
 \file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
-	{\usepackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
+	{\RequirePackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
 
 \ExplSyntaxOff
 

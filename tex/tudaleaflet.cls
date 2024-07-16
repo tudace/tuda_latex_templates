@@ -25,11 +25,9 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.41}
-\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
+\ProvidesExplPackage{tudaleaflet}{2024-07-02}{3.41}{Leaflets using the Corporate Design of TU Darmstadt}
 
 \str_const:Nn \c__ptxcd_base_str {leaflet}
 
@@ -88,7 +86,7 @@
 \RequirePackage{scrextend}
 \RequirePackage{scrlayer}
 \PassOptionsToPackage{cmyk}{tudacolors}
-\usepackage[paper=leaflet]{tudarules}
+\RequirePackage[paper=leaflet]{tudarules}
 
 
 \setlength{\headheight}{1cm}%to add headline

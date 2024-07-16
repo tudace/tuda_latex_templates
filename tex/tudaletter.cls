@@ -48,6 +48,8 @@
 	raggedright .bool_gset:N = \g__ptxcd_letter_raggedright_bool,
 	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
 	pdfa .initial:n = true,
+	pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
+	pdfx .initial:n = true,
 	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
 	logofile .initial:n = tuda_logo,
 		department .choice:,
@@ -78,8 +80,38 @@
 
 \ProcessKeyOptions[ptxcd/letter]
 
-\bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
+\bool_if:NF \g_ptxcd_pdfa_bool {\bool_gset_false:N \g_ptxcd_pdfx_bool}
 
+\bool_if:NT \g_ptxcd_pdfa_bool {
+	\msg_new:nnn {tudapub} {colors-to-rgb} {
+			You~did~not~add~a~color~profile.\\
+			I~will~use~the~default~one~and~automatically~try~to~convert~internal~colors~to~RGB.\\
+			This~is~required~to~be~able~to~create~PDF/A~compliance.
+	}
+
+	\cs_if_exist:NT \pdfmeta_standard_get:nN {
+		\pdfmeta_standard_get:nN  {outputintent_A} \l_tmpa_tl
+		\quark_if_no_value:NF \l_tmpa_tl  {
+			\bool_gset_false:N \g_ptxcd_pdfx_bool
+			\msg_new:nnn{tudapub} {prefer-lualatex} {
+				I~detected~usage~of~l3pdfmeta~(\DocumentMetadata)~to~create~PDF/A.\\
+				tudapub~will~not~load~pdfx~to~avoid~conflicts.\\
+				To~disable this message use pdfx=false.
+			}
+			\msg_info:nn {tudapub} {prefer-lualatex}
+		}
+
+		\prop_if_in:NnF \g__pdfmeta_outputintents_prop {GTS_PDFA1} {
+			\PassOptionsToPackage{RGB}{xcolor}
+			\msg_info:nn {tudapub} {colors-to-rgb}
+		}
+	}
+}
+
+\bool_if:NT \g_ptxcd_pdfx_bool {
+	\PassOptionsToPackage{RGB}{xcolor}
+	\msg_info:nn {tudapub} {colors-to-rgb}
+}
 
 \newcommand*{\@fontsizefilebase}{tudalettersize}
 
@@ -89,6 +121,11 @@
 
 % Load the TUDa-colorscheme
 \RequirePackage{tudacolors}
+\RequirePackage{tudafonts}
+\RequirePackage{graphicx}
+\RequirePackage{afterpage}
+\RequirePackage{ragged2e}
+
 
 \bool_if:NTF \g__ptxcd_letter_premium_bool
 {	\cs_new:Nn \ptxcd_premiumcolor: {accentcolor}
@@ -100,10 +137,6 @@
 	\let\ptxcd_use_premiumcolor_text:\relax
 }
 
-\RequirePackage{tudafonts}
-\RequirePackage{graphicx}
-\RequirePackage{afterpage}
-\RequirePackage{ragged2e}
 
 
 %%%%%Briefbogen
@@ -139,32 +172,50 @@
 	\geometry{top=30mm}
 }
 
-\@setplength{firstheadhpos}{\c_ptxcd_HeadMargin_dim}
-\@setplength{firstheadvpos}{\c_ptxcd_HeadMargin_dim}
-\@setplength{firstheadwidth}{\dim_eval:n {\paperwidth - 2\c_ptxcd_HeadMargin_dim}}
+\if_bool:N \g_ptxcd_pdfx_bool
+	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
+	\RequirePackage{pdfx}
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
+\else:
+	\PassOptionsToPackage{hidelinks, unicode}{hyperref}
+	\RequirePackage{hyperref}
+\fi:
 
-\@setplength{firstfootvpos}{\dim_eval:n {\paperheight -17mm}}
-\@setplength{firstfoothpos}{\useplength{firstheadhpos}}
-\@setplength{firstfootwidth}{\useplength{firstheadwidth}}
+\RequirePackage[paper=a4]{tudarules}% might load pgfcore, so it has to be loaded after pdfx
+
+\setplength{firstheadhpos}{\c_ptxcd_HeadMargin_dim}
+\setplength{firstheadvpos}{\c_ptxcd_HeadMargin_dim}
+\setplength{firstheadwidth}{\dim_eval:n {\paperwidth - 2\c_ptxcd_HeadMargin_dim}}
+
+\setplength{firstfootvpos}{\dim_eval:n {\paperheight -17mm}}
+\setplength{firstfoothpos}{\useplength{firstheadhpos}}
+\setplength{firstfootwidth}{\useplength{firstheadwidth}}
 
 
-\@setplength{toaddrhpos}{\c_ptxcd_LeftMargin_dim}
-\@setplength{toaddrvpos}{50mm}
-\@setplength{backaddrheight}{4mm}
-\@setplength{toaddrindent}{0mm}
+\setplength{toaddrhpos}{\c_ptxcd_LeftMargin_dim}
+\setplength{toaddrvpos}{50mm}
+\setplength{backaddrheight}{4mm}
+\setplength{toaddrindent}{0mm}
 
-\@setplength{refhpos}{\c_ptxcd_LeftMargin_dim}
-\@setplength{refvpos}{106mm}
+\setplength{refhpos}{\c_ptxcd_LeftMargin_dim}
+\setplength{refvpos}{106mm}
 
-\@setplength{subjectaftervskip}{2\baselineskip}
-\@setplength{lochpos}{\c_ptxcd_HeadMargin_dim}
-\@setplength{locvpos}{\dimexpr\useplength{refvpos}+\useplength{subjectaftervskip}+1.4\baselineskip\relax}
-\@setplength{refaftervskip}{0pt}
-\@setplength{subjectbeforevskip}{0pt}
-\@setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_ptxcd_HeadMargin_dim\relax}
-\@setplength{locheight}{\dimexpr\paperheight-\useplength{locvpos}-\c_ptxcd_BottomMargin_dim\relax}
+\setplength{subjectaftervskip}{2\baselineskip}
+\setplength{lochpos}{\c_ptxcd_HeadMargin_dim}
+\setplength{locvpos}{\dimexpr\useplength{refvpos}+\useplength{subjectaftervskip}+1.4\baselineskip\relax}
+\setplength{refaftervskip}{0pt}
+\setplength{subjectbeforevskip}{0pt}
+\setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_ptxcd_HeadMargin_dim\relax}
+\setplength{locheight}{\dimexpr\paperheight-\useplength{locvpos}-\c_ptxcd_BottomMargin_dim\relax}
 
-\RequirePackage[paper=a4]{tudarules}
 
 \bool_if:NTF \g__ptxcd_letter_headrule_bool {
 	\ptxcd_makeheadrule[width=\useplength{firstheadwidth},color=identbarcolor]{ptxcd_LetterheadRule}
@@ -354,7 +405,7 @@
 \int_new:N \l_ptxcd_letter_lastpage_int
 \cs_new:Nn \ptxcd_letterpagemark: {
 	%get lastpage for this letter if not already done
-	\int_compare:nTF {\value{page} = 1} {
+	\int_compare:nNnTF {\value{page}} = {1} {
 			\bool_if:NTF \g__ptxcd_firstpagenumber_bool
 			{\bool_set_true:N \l_tmpa_bool}
 			{\bool_set_false:N \l_tmpa_bool}
@@ -362,16 +413,14 @@
 		{\bool_set_true:N \l_tmpa_bool}
 	\bool_if:NT \l_tmpa_bool {
 		\int_if_exist:cF {c_ptxcd_letter\thisletter _lastpage_int} {
-			\expandafter\ifx\csname r@\thisletter.lastpage\endcsname\relax
-			%warning -> rerun latex
-			\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {0}
-			\else
-			\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {
-				\cs_if_exist:NTF \hypersetup
-				{\exp_args:NNc \expandafter \@secondoffive { r@\thisletter.lastpage}}
-				{\exp_args:NNc \expandafter \use_ii:nn { r@\thisletter.lastpage}}
+			\cs_if_exist:cTF {r@\thisletter.lastpage} {
+				\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {
+					\exp_args:NNc \expandafter \@secondoffive { r@\thisletter.lastpage}
+				}
+			} {
+				%warning -> rerun latex
+				\int_const:cn {c_ptxcd_letter\thisletter _lastpage_int} {0}
 			}
-			\fi
 		}
 		\usekomafont{pagenumber}\pagename\nobreakspace\thepage
 		\int_compare:nT {
@@ -429,63 +478,135 @@
 \def\letterpagestyle{TUDaLetter}
 
 %pdfa
-\if_bool:N \g_ptxcd_pdfa_bool
+\if_bool:N \g_ptxcd_pdfx_bool
 	\PassOptionsToPackage{a-2b}{pdfx}
+% Workaround posted by David Carlisle on tex.stackexchange
+% Thanks to Ulrike Fischer for mentioning it in #472
+	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+	\chardef\currentgrouplevel0
+	\ExplSyntaxOff
 	\RequirePackage{pdfx}
-%%hyperref
-\hypersetup{hidelinks, unicode}
-\iow_new:N \ptxcd_xmpdata_stream
-\tl_new:N \g_ptxcd_xmp_title
-\tl_new:N \g_ptxcd_xmp_author
+	\ExplSyntaxOn
+	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+% end of the workaround
+	%%hyperref
+	\hypersetup{hidelinks, unicode}
+	\iow_new:N \ptxcd_xmpdata_stream
 
-\cs_new:Nn \ptxcd_pass_TitleData: {
-	\prop_if_empty:NF \g_ptxcd_MetaData_prop {
-	\iow_open:Nn \ptxcd_xmpdata_stream {\jobname.xmpdata}
-	\begingroup
-	\def\newline{}
-	\def\\{}
-	\let\thanks\use_none:n
-	\cs_set:Npn \and {\exp_not:N \sep}
-	\use:c {pdfx@localcommands}
-	\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
-	\endgroup
-	\iow_close:N  \ptxcd_xmpdata_stream
+	\cs_if_exist:NF \prop_gput_if_new:Nnx {
+		\cs_generate_variant:Nn \prop_gput_if_new:Nnn {Nnx}
 	}
-}
-\cs_new:Nn \ptxcd_write_xmp_line:nn {
-	%Fallback test for older kernels
-	\cs_if_exist:NTF \str_uppercase:f {
-		\tl_set:Nx \l_tmpa_tl {
-			\str_uppercase:f {\tl_head:n {#1}}
-			\str_lowercase:f { \tl_tail:n {#1}}
+	\cs_if_exist:NF \tl_to_str:V {\cs_generate_variant:Nn \tl_to_str:N {V}}
+
+	\cs_new:Nn \ptxcd_pass_TitleData: {
+		\prop_if_empty:NF \g_ptxcd_MetaData_prop {
+		\iow_open:Nn \ptxcd_xmpdata_stream {\jobname.xmpdata}
+		\begingroup
+		\def\newline{}
+		\def\\{}
+		\let\thanks\use_none:n
+		\cs_set:Npn \and {\exp_not:N \sep}
+		\use:c {pdfx@localcommands}
+		\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
+		\endgroup
+		\iow_close:N  \ptxcd_xmpdata_stream
 		}
-	} {
-		%may be removed in some time
-		\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
 	}
-	\cs_if_exist:cTF {\l_tmpa_tl}{
-		\iow_now:Nx \ptxcd_xmpdata_stream {
-			\c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
+	\cs_new:Nn \ptxcd_write_xmp_line:nn {
+		%Fallback test for older kernels
+		\cs_if_exist:NTF \str_uppercase:f {
+			\tl_set:Nx \l_tmpa_tl {
+				\str_uppercase:f {\tl_head:n {#1}}
+				\str_lowercase:f { \tl_tail:n {#1}}
+			}
+		} {
+			%may be removed in some time
+			\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
 		}
+		\cs_if_exist:cTF {\l_tmpa_tl}{
+			\iow_now:Nx \ptxcd_xmpdata_stream {
+				\c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
+			}
+		}{
+			\msg_error:nnn{tudaletter} {unknown-metadata} {#1}
+		}
+	}
+
+	\bool_new:N \g_ptxcd_pass_TitleData_bool
+	\bool_gset_true:N  \g_ptxcd_pass_TitleData_bool
+	\prop_new:N \g_ptxcd_MetaData_prop
+
+	\newcommand*{\Metadata}[1]{
+		\bool_gset_false:N \g_ptxcd_pass_TitleData_bool
+		\prop_gset_from_keyval:Nn \g_ptxcd_MetaData_prop {#1}
+	}
+
+	\msg_new:nnnn{tudaletter} {unknown-metadata} {
+		You~ used~ the~ #1~ metadata~ entry.\\
+		I~ don't~ know~ how~ to~ handle~ that.\\
+		It~ will~ be~ ignored.
+	} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
+
+\else:
+	\hypersetup{pdfcreator=LaTeX~using~TUDa-CI}
+
+	\msg_new:nnnn {tudapub} {metadata-to-hypersetup} {
+		You~don't~use~pdfx.~
+		Here~the~\string\Metadata\~command~only~exists~for~compatibility~reasons.\\
+		I~will~pass~the~data~to~ḩypersetup.
 	}{
-		\msg_error:nnn{tudaletter} {unknown-metadata} {#1}
+		If~possible~please~use~hyperref's~\strung\hypersetup~command~for~the~metadata~directly.\\
+		See~hyperref~documentation~for~details~on~usage.
 	}
-}
 
-\bool_new:N \g_ptxcd_pass_TitleData_bool
-\bool_gset_true:N  \g_ptxcd_pass_TitleData_bool
-\prop_new:N \g_ptxcd_MetaData_prop
+	\newcommand*{\Metadata}[1]{
+		\tl_set:Nn \l_tmpa_tl {#1}
+		\tl_replace_all:Nnn \l_tmpa_tl {\sep} {;~}% pdfx-Syntax compatibility
+		\clist_map_inline:Nn \l_tmpa_tl {
+			\exp_args:Nx \hypersetup{pdf\tl_trim_spaces:n {##1}}
+		}
+		\msg_warning:nn {tudapub} {metadata-to-hypersetup}
+	}
 
-\newcommand*{\Metadata}[1]{
-	\bool_gset_false:N \g_ptxcd_pass_TitleData_bool
-	\prop_gset_from_keyval:Nn \g_ptxcd_MetaData_prop {#1}
-}
 
-\msg_new:nnnn{tudaletter} {unknown-metadata} {
-	You~ used~ the~ #1~ metadata~ entry.\\
-	I~ don't~ know~ how~ to~ handle~ that.\\
-	It~ will~ be~ ignored.
-} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
+	\cs_new:Nn \ptxcd_pass_TitleData: {
+		% check if pdfmanagement is active
+		\prop_if_exist:NTF \g__pdfmanagement_documentproperties_prop {
+			\prop_set_eq:NN \l_tmpa_prop \g__pdfmanagement_documentproperties_prop
+		} {
+			\prop_set_eq:NN \l_tmpa_prop   \g__hyp_documentproperties_prop
+		}
+
+		% title
+		\prop_if_in:NnF \l_tmpa_prop {hyperref/pdftitle} {
+			\begingroup
+			\def\newline{}
+			\def\\{}
+			\let\thanks\use_none:n
+			\tl_gset:Nf \g_tmpa_tl {\@title}
+			\endgroup
+			\hypersetup{pdftitle={\tl_to_str:V \g_tmpa_tl}}
+		}
+
+		% author
+		\prop_if_in:NnF \l_tmpa_prop {hyperref/pdfauthor} {
+			\begingroup
+				\def\newline{}
+				\def\\{}
+				\let\thanks\use_none:n
+				\tl_gset:Nx \g_tmpa_tl {\seq_use:Nn \g_ptxcd_author_seq {\exp_not:N \and}}
+				\tl_gset:Nx \g_tmpa_tl  {\g_tmpa_tl }
+			\endgroup
+			\hypersetup{pdfauthor=\g_tmpa_tl}
+		}
+	}
+
+	\bool_if:NF \g_ptxcd_pdfa_bool {
+		\msg_new:nnn{tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
+		\msg_info:nn{tudapub} {no-pdfa}
+	}
+
 \fi:
 
 

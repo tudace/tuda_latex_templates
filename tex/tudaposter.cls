@@ -25,11 +25,9 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.41}
-\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesExplPackage{tudaposter}{\filedate}{\fileversion}{Poster Layouts for the Corporate Design of TU Darmstadt}
+\ProvidesExplPackage{tudaposter}{2024-07-02}{3.41}{Poster Layouts for the Corporate Design of TU Darmstadt}
 
 \bool_new:N \g_ptxcd_logo_inhead_bool
 \dim_new:N \g_ptxcd_margin_dim
