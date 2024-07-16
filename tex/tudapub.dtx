@@ -41,7 +41,7 @@
   pdfa=false,
   class=report,
   titlepage=true,
-]{tudapub}[2024-01-05]
+]{tudapub}
 \let\tudamaketitle\maketitle% avoid issues due to catcode changes
 \usepackage{doc}
 \let\maketitle\tudamaketitle% restore
@@ -902,14 +902,17 @@
       \msg_new:nnn{tudapub} {prefer-lualatex} {
         I~detected~usage~of~l3pdfmeta~(\DocumentMetadata)~to~create~PDF/A.\\
         tudapub~will~not~load~pdfx~to~avoid~conflicts.\\
-        To~disable this message use pdfx=false.
+        To~disable~this~message~use~pdfx=false.
       }
       \msg_info:nn {tudapub} {prefer-lualatex}
     }
     \prop_if_in:NnF \g__pdfmeta_outputintents_prop {GTS_PDFA1} {
-      \PassOptionsToPackage{RGB}{xcolor}
-      \msg_info:nn {tudapub} {colors-to-rgb}
+		\use_iii:nnn
     }
+  }
+  \bool_if:NT \g_ptxcd_pdfx_bool {
+    \PassOptionsToPackage{RGB}{xcolor}
+    \msg_info:nn {tudapub} {colors-to-rgb}
   }
 }
 
@@ -947,8 +950,6 @@
 \RequirePackage{graphicx}
 
 \bool_if:NTF \g_ptxcd_pdfx_bool {
-	\PassOptionsToPackage{RGB}{xcolor}
-	\msg_info:nn {tudapub} {colors-to-rgb}
 	%only apply the hack if pdfx is older than the working version
 	\PassOptionsToPackage{a-2b}{pdfx}
 % Workaround posted by David Carlisle on tex.stackexchange
