@@ -50,7 +50,6 @@
 % Spracheinstellungen
 %%%%%%%%%%%%%%%%%%%
 \usepackage[english,main=german]{babel}% English wird geladen, um eine Englische Zusammenfassung zu ermöglichen
-\usepackage[german]{babel}
 \usepackage{microtype}
 \usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
 
@@ -66,7 +65,7 @@
 \usepackage{hologo}
 \newcommand*{\file}[1]{\texttt{#1}}
 \newcommand*{\code}[1]{\texttt{#1}}
-\newcommand*{\pck}[1]{\textsf{#1}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
 \newcommand*{\cls}[1]{\textsf{#1}}
 %%%%%%%%%%%%%%%%%%%
 % Ende der Demo-Formatierungseinstellungen
@@ -134,7 +133,7 @@ Im folgenden werden die möglichen Optionen beschrieben.
 
 	      KOMA-Script ist eine Sammlung von Klassen und Paketen für \LaTeX, die neben den typografischen Anpassungen an den Europäischen Raum auch die Konfigurationsmöglichkeiten stark erweitert.
 
-	\item[color=<Farbe>] Wählt die Schmuckfarbe für die Nutzung in der Identitätsleiste aus. Die Farbcodes finden sich in der Farbübersicht in den Corporate Design Richtlinien. Neben diesen Farben kann prinzipiell jede beliebige Farbe übergeben werden. Die Optionen \code{accentcolor}, \code{textaccentcolor} und \code{identbarcolor} werden anlog direkt an \pck{tudacolors} übergeben. Auf diesem Weg können die Farben unabhängig voneinander gesetzt werden.
+	\item[color=<Farbe>] Wählt die Schmuckfarbe für die Nutzung in der Identitätsleiste aus. Die Farbcodes finden sich in der Farbübersicht in den Corporate Design Richtlinien. Neben diesen Farben kann prinzipiell jede beliebige Farbe übergeben werden. Die Optionen \code{accentcolor}, \code{textaccentcolor} und \code{identbarcolor} werden anlog direkt an \pkg{tudacolors} übergeben. Auf diesem Weg können die Farben unabhängig voneinander gesetzt werden.
 
 	\item[marginpar] Schaltet die Randnotizspalte um. Voreingestellt ist \code{auto}. Dies bedeutet, dass die Randnotizspalte wie im Corporate Design Handbuch \cite{TUDaGuideline} über die fünfte Spalte läuft.  \marginpar{Beispiel für eine Randnotiz}.
 	      Darüber werden auch die Werte \code{true} und \code{false} akzeptiert. \code{false} setzt die Breite der Randnotizspalte auf 0. Der Mechanismus selbst wird nicht deaktiviert.
@@ -257,7 +256,7 @@ Zusätzliche Zusammenfassung in englischer Sprache
 \end{abstract}
 \end{verbatim}
 
-Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen geladen werden. Im Falle des Beispiels muss also sowohl \code{german} als auch \code{english} an das \pck{babel}-Paket übergeben werden.
+Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen geladen werden. Im Falle des Beispiels muss also sowohl \code{german} als auch \code{english} an das \pkg{babel}-Paket übergeben werden.
 
 \subsection{PDF/A Konformität}
 Die Klasse TUDaPub unterstützt den Standard PDF/A 2b. Der PDF/A-Modus ist automatisch aktiviert. die zugehörige Option kann jedoch über \code{pdfa=false} ausgeschaltet werden.
@@ -265,7 +264,7 @@ Nun wird zusätzlich eine \code{\textbackslash.xmpdata}-Datei generiert. Üblich
 
 Dies kann jedoch bei der Verwendung einiger Makros innerhalb der Felder zu Problemen führen. Beispielsweise enthält der Titel für dieses Dokument das Makro \code{\LaTeX}. Es können daher nur Textelemente übernommen werden. Ähnlich den Linkbezeichnungen über PDF-Lesezeichen.
 
-Um dieses Problem zu umgehen stellt \cls{tudapub} hierfür das Makro \code{\textbackslash{}Metadata\{\}} zur Verfügung. Hier können sämtliche von \pck{pdfx} verarbeitbaren Variablen nach Schlüssel$=$Wert-Struktur gesetzt werden. Es ist zu beachten, dass dieses Makro nur dann funktioniert, wenn die \code{pdfa}-Ausgabe aktiviert ist. Ist dies nicht der Fall, so gibt \cls{tudapub} eine entsprechende Fehlermeldung zu diesem Widerspruch aus.
+Um dieses Problem zu umgehen stellt \cls{tudapub} hierfür das Makro \code{\textbackslash{}Metadata\{\}} zur Verfügung. Hier können sämtliche von \pkg{pdfx} verarbeitbaren Variablen nach Schlüssel$=$Wert-Struktur gesetzt werden. Es ist zu beachten, dass dieses Makro nur dann funktioniert, wenn die \code{pdfa}-Ausgabe aktiviert ist. Ist dies nicht der Fall, so gibt \cls{tudapub} eine entsprechende Fehlermeldung zu diesem Widerspruch aus.
 Zum Beispiel:
 \begin{verbatim}
 \Metadata{
@@ -317,11 +316,11 @@ Für die Druckausgabe ist dieser Modus ungeeignet. Ab Version 3.12 gibt \cls{tud
 \subsection{Auswahl des Dokumentenfarbmodus}
 Farben unterliegen je nachdem auf welchem Medium sie ausgegeben werden einer anderen Farbmischung. Für die Verwendung bei der Dokumentenerzeugung ist daher wichtig welches Ausgabemedium primär genutzt werden soll.
 
-Technisch zeigt sich dieser Unterschied in Farbmodellen. TUDa-CI unterstützt entsprechend der Richtlinien sowohl ein Farbmodell für die Druckausgabe (cmyk) und für die Bildschirmdarstellung (RGB). Die Umsetzung geschieht über das Paket \pck{xcolor} wobei die entsprechenden Farbwerte für beide Modelle über \pck{tudacolors} hinterlegt sind.
+Technisch zeigt sich dieser Unterschied in Farbmodellen. TUDa-CI unterstützt entsprechend der Richtlinien sowohl ein Farbmodell für die Druckausgabe (cmyk) und für die Bildschirmdarstellung (RGB). Die Umsetzung geschieht über das Paket \pkg{xcolor} wobei die entsprechenden Farbwerte für beide Modelle über \pkg{tudacolors} hinterlegt sind.
 
 Normalerweise wählt TUDa-CI automatisch ein passendes Modell. Allerdings sorgt die Voreinstellung von \code{pdfa-true} für eine Konvertierung zu RGB (vgl.~\ref{sec:pdfa-color}).
 
-Soll abseits dieser automatischen Abweichung ein bestimmter Farbmodus erzeugt werden, können die \pck{xcolor}-Optionen \code{cmyk} oder \code{RGB} direkt an \cls{tudapub} übergeben werden. Sie werden entsprechend an das Paket weitergereicht und entsprechend der \pck{xcolor}-Dokumentation verarbeitet.
+Soll abseits dieser automatischen Abweichung ein bestimmter Farbmodus erzeugt werden, können die \pkg{xcolor}-Optionen \code{cmyk} oder \code{RGB} direkt an \cls{tudapub} übergeben werden. Sie werden entsprechend an das Paket weitergereicht und entsprechend der \pkg{xcolor}-Dokumentation verarbeitet.
 
 \subsection{Anpassungen, die von den Corporate Design Richtlinien abweichen}
 
@@ -335,10 +334,10 @@ Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}. Sie verfügt über die Werte \code{true}, \code{false} und \code{geometry} mit folgender Bedeutung:
 
 \begin{description}
-	\item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pck{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
-	\item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pck{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des \pck{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
+	\item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pkg{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
+	\item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pkg{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des \pkg{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
 	\item[custommargins=geometry]  Diese Variante wurde auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führt.
-	      \pck{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
+	      \pkg{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
 
 	      Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
 \begin{verbatim}
@@ -358,7 +357,7 @@ Deswegen kann über
 \begin{verbatim}
 \pagestyle{TUDa.headings}
 \end{verbatim}
-ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pck{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
+ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pkg{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
 
 \minisec{Hinweis zur Bindekorrektur}
 Bei Verwendung einer Bindekorrektur (\code{BCOR=<Länge>}) wird diese nicht automatisch auch auf der Titelseite eingefügt. Für diesen Fall wurde mit Version 3.0 zusätzlich die Option \code{BCORtitlepage} hinzugefügt. Falls diese aktiviert wird, nimmt die Titelseite den Wert der Typearea Option \code{BCOR} auf der ersten Seite als Zusatz zum linken Rand hinzu.
@@ -439,14 +438,14 @@ Beispiele für typische Modifikationen, die auch im Rahmen des Corporate Design 
 \section{Bekannte Probleme}
 
 \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
-Das Paket \pck{pdfx}, über welches die PDF/A Kompatibilität erzeugt wird, hat nur einen begrenzten Support für \hologo{XeLaTeX}.
-Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hologo{XeLaTeX}-Versionen passieren, dass \pck{pdfx} bereits Fehlermeldungen erzeugt. Abhilfe wird in diesem Fall durch eine Compiler-Wechsel auf \hologo{LuaLaTeX} (welcher ohnehin empfohlen wird) oder durch Abschalten des PDF/A-Modus (\code{pdfa=false})  geschaffen.
+Das Paket \pkg{pdfx}, über welches die PDF/A Kompatibilität erzeugt wird, hat nur einen begrenzten Support für \hologo{XeLaTeX}.
+Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hologo{XeLaTeX}-Versionen passieren, dass \pkg{pdfx} bereits Fehlermeldungen erzeugt. Abhilfe wird in diesem Fall durch eine Compiler-Wechsel auf \hologo{LuaLaTeX} (welcher ohnehin empfohlen wird) oder durch Abschalten des PDF/A-Modus (\code{pdfa=false})  geschaffen.
 
 \subsection{DVI-Ausgabe}
 Aufgrund der Voreinstellung zur Erzeugung einer PDF/A-Datei ist es nicht möglich TUDa-CI in Standardeinstellungen zur Erzeugung einer DVI-Datei zu nutzen. Ein Großteil der Funktionalität kann jedoch durch Deaktivierung der \code{pdfa}-Option genutzt werden.
 
 \subsection{Geschachtelte Akzente (Inkompatibilität zwischen pdfx und amsmath)}
-Es ist nach aktuellem Paketstatus (v3.04) nicht möglich beide Pakete in Kombination ohne weitere Anpassungen so zu verwenden, dass eine Schachtelung von Akzenten möglich ist. Das folgende Beispiel wirft Fehler, sobald \pck{amsmath} direkt oder indirekt geladen wird.
+Es ist nach aktuellem Paketstatus (v3.04) nicht möglich beide Pakete in Kombination ohne weitere Anpassungen so zu verwenden, dass eine Schachtelung von Akzenten möglich ist. Das folgende Beispiel wirft Fehler, sobald \pkg{amsmath} direkt oder indirekt geladen wird.
 \begin{verbatim}
 $\dot{\hat{x}}$
 \end{verbatim}
@@ -454,9 +453,9 @@ $\dot{\hat{x}}$
 \noindent Die zugehörige Diskussion findet sich im tuda-ci Repository (\url{https://github.com/tudace/tuda_latex_templates/issues/78}). Da sich diese Problematik nicht direkt aus tuda-ci sondern aus der Konstruktion der beiden Pakete untereinander ergibt, ist es leider nicht möglich pauschal eine Anpassung in tuda-ci zu implementieren. Unter dem angegebenen Link findet sich jedoch ein möglicher Workaround, sobald beide Varianten benötigt werden.
 
 \subsection{Möglicher Option Clash mit microtype}
-Das Paket \pck{microtype} wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenen Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen, um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
+Das Paket \pkg{microtype} wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenen Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen, um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
 
-Falls es zwingend Notwendig ist die Type 1 Schriftart zu verwenden, ist es möglich weitere Optionen vor dem Laden der Dokumentenklasse an \pck{microtype} zu übergeben.
+Falls es zwingend Notwendig ist die Type 1 Schriftart zu verwenden, ist es möglich weitere Optionen vor dem Laden der Dokumentenklasse an \pkg{microtype} zu übergeben.
 
 \begin{verbatim}
 \PassOptionsToPackage{<microtype Optionen>}{microtype}

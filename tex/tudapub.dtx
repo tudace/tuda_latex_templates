@@ -59,10 +59,14 @@
   \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
 }
 
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}
+
 \usepackage{pifont}% Zapf-Dingbats Symbols
 \newcommand*{\FeatureTrue}{\ding{52}}
 \newcommand*{\FeatureFalse}{\ding{56}}
 \EnableCrossrefs
+\OnlyDescription
 \CodelineIndex
 \RecordChanges
 \begin{document}
@@ -86,14 +90,30 @@
 % The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt with \LaTeX.                                                                            
 % Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation.
 % Up to Version 4.00 the documentation was only included in the demo files. 
-% This document now sums up all features and includes references to other package documentations in required.
+% This document now sums up all features and includes references to other package documentations if required.
 % \end{abstract}
 %
 % \tableofcontents
 %
 % \section{Contents of the TUDa-CI Bundle}
-% In 2018 the first CTAN 
-% ^^A: Vorwort
+% The TUDa-CI Bundle currently contains template files for the following document types:
+%
+% \begin{tabularx}{\linewidth}{@{}llX@{}}
+% \toprule
+% Document Type & Name of the template file & use documentclass and config \\\midrule
+% minimal Template for internal reports	& DEMO-TUDaReport.tex 							& tudapub.cls \\
+% scientific paper     	      		& DEMO-TUDaPub.tex, using DEMO-TUDaBibliography.bib 			& tudapub.cls and tudasize9pt.clo \\
+% theses	   				& DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, using DEMO-TUDaBibliography.bib & tudapub.cls and tudathesis.cfg \\
+% scientific poster			& DEMO-TUDaSciPoster.tex 		      				& tudasciposter.cls \\
+% announcement poster			& DEMO-TUDaPoster.tex 							& tudaposter.cls \\
+% theses announcements	   		& DEMO-TUDaAnnouncement.tex 						& tudaposter.cls \\
+% presentation				& DEMO-TUDaBeamer.tex 							& tudabeamer.cls \\
+% letter					& DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			& tudaletter.cls and tudalettersize10pt.clo \\
+% exercise sheets/exams			& DEMO-TUDaExercise.tex      						& tudaexercise.cls \\
+% leaflets 				& DEMO-TUDaLeaflet.tex							& tudaleaflet.cls \\
+% \end{tabularx}
+%
+% The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort.
 %
 %<*thesis|phd>
 % \subsection{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}

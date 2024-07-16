@@ -88,7 +88,7 @@
 %%%%%%%%%%%%%%%%%%%
 \newcommand*{\file}[1]{\texttt{#1}}
 \newcommand*{\code}[1]{\texttt{#1}}
-\newcommand*{\pck}[1]{\textsf{#1}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
 \newcommand*{\cls}[1]{\textsf{#1}}
 \let\tbs\textbackslash
 \usepackage{tabularx,booktabs}%Tabellenpakete (siehe oben)
@@ -348,10 +348,10 @@ Die Zeilenlängen sind laut Corporate Design aus typografischer Sicht zu lang.
 Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument aktiviert wurde (Wert \code{true}). Sie verfügt über die Werte \code{true}, \code{false} und \code{geometry} mit folgender Bedeutung:
 
 \begin{description}
-	\item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pck{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
-	\item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pck{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des \pck{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
+	\item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pkg{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
+	\item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pkg{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des \pkg{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
 	\item[custommargins=geometry]  Diese Variante wurde auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führt.
-	      \pck{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
+	      \pkg{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
 
 	      Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
 \begin{verbatim}
@@ -371,7 +371,7 @@ Deswegen kann über
 \begin{verbatim}
 \pagestyle{TUDa.headings}
 \end{verbatim}
-ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pck{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
+ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pkg{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
 
 \minisec{Hinweis zur Bindekorrektur}
 Bei Verwendung einer Bindekorrektur (\code{BCOR=<Länge>}) wird diese nicht automatisch auch auf der Titelseite eingefügt. Für diesen Fall wurde mit Version 3.0 zusätzlich die Option \code{BCORtitlepage} hinzugefügt. Falls diese aktiviert wird, nimmt die Titelseite den Wert der Typearea Option \code{BCOR} auf der ersten Seite als Zusatz zum linken Rand hinzu.
