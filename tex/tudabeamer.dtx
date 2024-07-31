@@ -1,42 +1,121 @@
-%% This is file `tudabeamer.cls' version 3.41 (2024-07-02),
-%% it is part of
-%% TUDa-CI -- Corporate Design for TU Darmstadt
-%% ----------------------------------------------------------------------------
-%%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
-%%
-%% ============================================================================
-%% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3c
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%% http://www.latex-project.org/lppl.txt
-%% and version 1.3c or later is part of all distributions of LaTeX
-%% version 2008/05/04 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%%
-%% The Current Maintainers of this work are
-%%   Marei Peischl <tuda-ci@peitex.de>
-%%
-%% The development respository can be found at
-%% https://github.com/tudace/tuda_latex_templates
-%% Please use the issue tracker for feedback!
-%%
-%% ============================================================================
-%%
-\def\fileversion{3.41}
-\def\filedate{2024-07-02}
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tudabeamer}
- [\filedate\space\fileversion\space]
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainers of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+% ============================================================================
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{tudabeamer.dtx}
+%</driver>
+%<package|class>\NeedsTeXFormat{LaTeX2e}[2022/06/01]
+%<class>\ProvidesClass{tudabeamer}
+%<*class|driver>
+    [2024/07/31 4.0 Beamer wrapper class for TUDa-CI – Corporate Design Templates for TU Darmstadt]
+%</class|driver>
+%<main>\ProvidesExplPackage{beamerthemeTUDa}{2024-07-02}{3.41}{Beamer theme using the Corporate Design of TU Darmstadt}
+%<2023>\ProvidesExplPackage{beamerthemeTUDa2023}{2024-07-02}{3.41}{Beamer theme using the Corporate Design of TU Darmstadt Design of 2023}
+%<2008>\ProvidesPackage{beamerthemeTUDa2008}[\filedate\space\fileversion\space beamer theme using the Corporate Design of TU Darmstadt Design of 2008]
+%
+%<*driver>
+\documentclass[
+  pdfa=false,
+  class=report,
+  titlepage=true,
+]{tudapub}
+\let\tudamaketitle\maketitle% avoid issues due to catcode changes
+\usepackage{doc}
+\let\maketitle\tudamaketitle% restore
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{hologo}
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
 
+\IfFileExists{tuda_logo.pdf}{}{
+  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
+}
+
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}
+
+\usepackage{pifont}% Zapf-Dingbats Symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+\EnableCrossrefs
+\OnlyDescription
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{tudabeamer.dtx}
+\PrintChanges
+\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{4.0}{2024/07/31}{Converted to DTX file}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \GetFileInfo{tudabeamer.dtx}
+% \title{The \textsf{tudabeamer} package}
+% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
+% \date{\fileversion~from \filedate}
+%
+% \maketitle
+%
+% \MaybeStop{}
+%
+% \section{Implementation}
+%
+% \iffalse
+%<*class>
+% \fi
+%    \begin{macrocode}
 \PassOptionsToClass{10pt}{beamer}
-
 \ExplSyntaxOn
 \str_new:N \g_ptxcd_department_str
+%    \end{macrocode}
+% \iffalse
+%</class>
+%<main>\tl_if_exist:NF \g__ptxcd_design_tl {
+%<*main|class>
+% \fi
+%    \begin{macrocode}
 \tl_new:N \g__ptxcd_design_tl
 \keys_define:nn {ptxcd/beamer} {
+%    \end{macrocode}
+%</main|class>
+%<*class>
+%    \begin{macrocode}
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
 	colorframetitle .code:n = \exp_args:Nx \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
 	\exp_args:Nx \PassOptionsToPackage{\l_keys_key_tl=#1}{beamerouterthemeTUDa},
@@ -82,6 +161,10 @@
 		}
 	},
 	tudacolors .code:n = \PassOptionsToPackage{#1}{tudacolors},
+%    \end{macrocode}
+%</class>
+%<*main|class>
+%    \begin{macrocode}
 	design .choice:,
 	design / 2023 .code:n = {
 		\tl_gset:Nn  \g__ptxcd_design_tl {2023}
@@ -91,25 +174,30 @@
 		\tl_gset:Nn  \g__ptxcd_design_tl {2008}
 	},
 	design / default .code:n = {
-			\tl_gset:Nn  \g__ptxcd_design_tl {default}
+%<class>		\tl_gset:Nn  \g__ptxcd_design_tl {default}
+%<main>		\tl_gset:Nn  \g__ptxcd_design_tl {2023}
 	},
 	design .initial:n = default,
 	design2023 .meta:n = {design=2023},
 	design2008 .meta:n = {design=2008},
 	design .usage:n = load,
 }
+%    \end{macrocode}
+% \iffalse
+%</main|class>
+%<main>\ProcessKeyOptions[ptxcd/beamer]
+%<main>}
+%<*class>
+% \fi
+%    \begin{macrocode}
 \ExplSyntaxOff
-
 \PassOptionsToPackage{pdfpagelabels=false,plainpages=false}{hyperref}
 \PassOptionsToClass{t}{beamer}
-
 \DeclareOption*{%
 	\PassOptionsToClass{\CurrentOption}{beamer}
 }
-
 \ProcessKeyOptions[ptxcd/beamer]
 \ProcessOptions*
-
 \ExplSyntaxOn
 \tl_if_eq:NnT \g__ptxcd_design_tl  {default} {
 	\msg_new:nnn {tudabeamer} {default-design-changed} {
@@ -120,25 +208,25 @@
 	\msg_warning:nn {tudabeamer} {default-design-changed}
 	\keys_set:nn {ptxcd/beamer} {design=2023}
 }
-
 \bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
-
 \bool_if:NT  \g_ptxcd_pdfa_bool {
 	\RequirePackage{scrlfile}
 	\PreventPackageFromLoading{hyperref}
 	\def\hypersetup#1{}
 }
 \ExplSyntaxOff
-
+%    \end{macrocode}
 % Load the latex-beamer class
+%    \begin{macrocode}
 \LoadClass{beamer}
-
 \ExplSyntaxOn
 \bool_if:NT \g_ptxcd_pdfa_bool {
 	\UnPreventPackageFromLoading{hyperref}
 	\PassOptionsToPackage{a-2b}{pdfx}
+%    \end{macrocode}
 % Workaround posted by David Carlisle on tex.stackexchange
 % Thanks to Ulrike Fischer for mentioning it in #472
+%    \begin{macrocode}
 	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
 	\chardef\currentgrouplevel0
 	\ExplSyntaxOff
@@ -146,14 +234,23 @@
 	\ExplSyntaxOn
 	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
 	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+%    \end{macrocode}
 % end of the workaround
+%    \begin{macrocode}
 }
 \hypersetup{hidelinks, unicode}
-
-
+%    \end{macrocode}
+%
+% \begin{macro}{\department}
 %\department command
+%    \begin{macrocode}
 \def\department{\@dblarg\ptxcd_beamer_department}
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ptxcd}
+%    \begin{macrocode}
 \long\def\ptxcd_beamer_department[#1]#2{%
 	\def\beamer@temp{#2}%
 	\ifx\beamer@temp\@empty
@@ -163,20 +260,25 @@
 	\fi
 	\def\beamer@shortdepartment{#1}}
 \department{}
-
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\insertshortdepartment}
+%    \begin{macrocode}
 \newcommand\insertshortdepartment[1][]{%
 	{%
 		\let\thanks=\@gobble%
 		\beamer@setupshort{#1}%
 		\beamer@insertshort{\beamer@shortdepartment}%
 }}
+%    \end{macrocode}
 %end of \department command
+%    \begin{macrocode}
 \if_bool:N \g_ptxcd_pdfa_bool
 \iow_new:N \ptxcd_xmpdata_stream
 \iow_open:Nn \ptxcd_xmpdata_stream {\jobname.xmpdata}
 \tl_new:N \g_ptxcd_xmp_title
 \tl_new:N \g_ptxcd_xmp_author
-
 \cs_new:Nn \ptxcd_pass_TitleData: {
 	\begingroup
 	\def\newline{}
@@ -203,6 +305,10 @@
 	}
 	\endgroup
 }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \cs_new:Nn \ptxcd_write_xmp_line:nn {
 	%Fallback test for older kernels
 	\cs_if_exist:NTF \str_uppercase:f {
@@ -222,16 +328,21 @@
 		\msg_error:nnn{tudapub} {unknown-metadata} {#1}
 	}
 }
-
 \bool_new:N \g_ptxcd_pass_TitleData_bool
 \bool_gset_true:N  \g_ptxcd_pass_TitleData_bool
 \prop_new:N \g_ptxcd_MetaData_prop
-
+%    \end{macrocode}
+%
+% \begin{macro}{\Metadata}
+%    \begin{macrocode}
 \newcommand*{\Metadata}[1]{
 	\bool_gset_false:N \g_ptxcd_pass_TitleData_bool
 	\prop_gset_from_keyval:Nn \g_ptxcd_MetaData_prop {#1}
 }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \msg_new:nnnn{tudapub} {unknown-metadata} {
 	You~ used~ the~ #1~ metadata~ entry.\\
 	I~ don't~ know~ how~ to~ handle~ that.\\
@@ -241,18 +352,102 @@
 \msg_new:nnn{tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
 \msg_info:nn{tudapub} {no-pdfa}
 \fi:
-
 \str_if_empty:NF \g_ptxcd_department_str {}
-
+%    \end{macrocode}
 % Load the TUDa theme
+%    \begin{macrocode}
 \usetheme{TUDa\g__ptxcd_design_tl}%
 \@input{\jobname.len}%
 \@starttoc{len}%
 \let\accentfont\normalfont%
-
 \file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
 	{\RequirePackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
-
 \ExplSyntaxOff
-
+%    \end{macrocode}
+% \iffalse
+%</class>
+% \fi
+%
+% \iffalse
+%<*package>
+% \fi
+% \iffalse
+%<*main>
+% \fi
+%    \begin{macrocode}
+\RequirePackageWithOptions{beamerthemeTUDa\g__ptxcd_design_tl}
+%    \end{macrocode}
+% \iffalse
+%</main>
+% \fi
+% \subsection{Design specific options}
+% The design for 2023 removed a lot of options as the accentcolor is no longer used within the frames.
+%<*2023>
+%    \begin{macrocode}
+\msg_new:nnn {tudabeamer} {option-removed} {
+	The~design~you~selected~doesn't~support~the~option~`#1`.\\
+	It~will~be~ignored.
+}
+%    \end{macrocode}
+%</2023>
+%<*2023|2008>
+%    \begin{macrocode}
+%<2008>\ExplSyntaxOn
+\keys_define:nn {ptxcd/beamer} {
+	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
+	colortitle .code:n = 
+%<2008>    \PassOptionsToPackage{colortitle=#1}{beamercolorthemeTUDa},
+%<2023>     \msg_warning:nnn {tudabeamer} {option-removed} {colortitle},
+	colorbacktitle .code:n = 
+%<2008>    \PassOptionsToPackage{colorbacktitle=#1}{beamercolorthemeTUDa},
+%<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorbacktitle},
+	colorframetitle .code:n = 
+%<2008>    \PassOptionsToPackage{colorframetitle=#1}{beamerouterthemeTUDa},
+%<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
+	colorback .code:n = 
+%<2008>    \PassOptionsToPackage{colorback=#1}{beamercolorthemeTUDa},
+%<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorback},
+	logo .code:n = \PassOptionsToPackage{logo=#1}
+%<2008>{beamerouterthemeTUDa2008}
+%<2023>{beamerouterthemeTUDa}
+}
+\ProcessKeyOptions[ptxcd/beamer]
+\mode<presentation>
+%<2008>\ExplSyntaxOff
+%    \end{macrocode}
+% \subsection{Design 2023}
+% \iffalse
+%<*2023>
+% \fi
+%    \begin{macrocode}
+\usefonttheme{TUDa}
+\usecolortheme{TUDa}
+\useoutertheme{TUDa}
+\useinnertheme[design=2023]{TUDa}
+%    \end{macrocode}
+% \iffalse
+%</2023>
+%\fi
+% \subsection{Design 2008}
+% \iffalse
+%<*2008>
+%\fi
+%    \begin{macrocode}
+\usefonttheme{TUDa2008}
+\usecolortheme{TUDa2008}
+\useoutertheme{TUDa2008}
+\useinnertheme[design=2008]{TUDa}
+%    \end{macrocode}
+% \iffalse
+%</2008>
+%\fi
+%    \begin{macrocode}
+\setbeamertemplate{navigation symbols}{}
+\mode<all>
+%    \end{macrocode}
+% \iffalse
+%</2023|2008>
+%</package>
+% \fi
+% \Finale
 \endinput
