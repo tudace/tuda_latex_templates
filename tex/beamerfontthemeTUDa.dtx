@@ -1,0 +1,162 @@
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainers of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+% ============================================================================
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{beamerfontthemeTUDa.dtx}
+    [2024/07/31 4.0 Beamer font theme of tuda-ci]
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2022/06/01]
+%<!2008>\ProvidesExplPackage{beamerfontthemeTUDa}{2024-07-02}{3.41}{Beamer font theme of tuda-ci}
+%<2008>\ProvidesExplPackage{beamerfontthemeTUDa2008}{2024-07-02}{3.41}{Beamer font theme of tuda-ci, compatibility for design of 2008}
+%
+%<*driver>
+\documentclass[
+  pdfa=false,
+  class=report,
+  titlepage=true,
+]{tudapub}
+\let\tudamaketitle\maketitle% avoid issues due to catcode changes
+\usepackage{doc}
+\let\maketitle\tudamaketitle% restore
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{hologo}
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
+
+\IfFileExists{tuda_logo.pdf}{}{
+  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
+}
+
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}
+
+\usepackage{pifont}% Zapf-Dingbats Symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+\EnableCrossrefs
+\OnlyDescription
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{beamerfontthemeTUDa.dtx}
+\PrintChanges
+\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{4.0}{2024/07/31}{Converted to DTX file}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \GetFileInfo{beamerfontthemeTUDa.dtx}
+% \title{The \textsf{beamerfontthemeTUDa} package}
+% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
+% \date{\fileversion~from \filedate}
+%
+% \maketitle
+%
+
+%
+% \MaybeStop{}
+%
+% \section{Implementation}
+%
+% \iffalse
+%<*package>
+% \fi
+%    \begin{macrocode}
+\RequirePackage{tudafonts}
+\keys_define:nn {ptxcd/beamer/fonts} {
+	serif .bool_gset:N = \g_ptxcd_serif_bool,
+	serif .default:n = true,
+	serif .initial:n = false,
+	sans-serif .bool_gset_inverse:N = \g_ptxcd_serif_bool,
+	sans-serif .default:n = true,
+}
+\ProcessKeyOptions[ptxcd/beamer/fonts]
+\mode<presentation>
+\bool_if:NTF \g_ptxcd_serif_bool
+	{\usefonttheme{serif}}
+	{\renewcommand*{\familydefault}{\sfdefault}}
+\setbeamerfont{author}{size=\footnotesize, series=\bfseries}
+\setbeamerfont{institute}{size=\footnotesize, series=\mdseries}
+%    \end{macrocode}
+% \iffalse
+%<*main>
+% \fi
+%    \begin{macrocode}
+\ExplSyntaxOff
+\setbeamerfont{title}{family=\robotoblack,size=\huge}
+\setbeamerfont*{subtitle}{family=\normalfont,size=\small}
+\setbeamerfont*{frametitle}{size*={20}{20},family=\robotoblack}
+\setbeamerfont{footline}{size*={3.8}{5}}
+\setbeamerfont{author in head/foot}{parent=footline}
+\setbeamerfont{title in head/foot}{family=\robotoblackspaced}
+\setbeamerfont*{section title}{size=\huge,family=\robotoblack}
+\setbeamerfont*{section name}{size=\small}
+\setbeamerfont{section entry}{size=\footnotesize}
+\setbeamerfont{toc section number}{family=\robotoblack,size=\huge}
+\setbeamerfont{subsection in toc}{parent=section entry}
+\setbeamerfont{subsubsection in toc}{parent=section entry}
+\ExplSyntaxOn
+%    \end{macrocode}
+% \iffalse
+%</main>
+% \fi
+% \iffalse
+%<*2008>
+% \fi
+%    \begin{macrocode}
+\setbeamerfont{title}{size=\large,series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize,series=\bfseries}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{author~in~head/foot}{size=\tiny}
+%    \end{macrocode}
+% \iffalse
+%</2008>
+% \fi
+% \iffalse
+%<*package>
+% \fi
+%    \begin{macrocode}
+\mode<all>
+%    \end{macrocode}
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
+\endinput
