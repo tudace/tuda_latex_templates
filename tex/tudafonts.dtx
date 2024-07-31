@@ -1,0 +1,198 @@
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainers of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+% ============================================================================
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{tudafonts.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+%<package>\ProvidesPackage{tudafonts}
+%<*driver|package>
+	[2024-07-02 v3.41
+		font loading for TUDa-CI, TU Darmstadt's Corporate Design]
+%</driver|package>
+%
+%<*driver>
+\documentclass[
+  pdfa=false,
+  class=report,
+  titlepage=true,
+]{tudapub}
+\let\tudamaketitle\maketitle% avoid issues due to catcode changes
+\usepackage{doc}
+\let\maketitle\tudamaketitle% restore
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{hologo}
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
+
+\IfFileExists{tuda_logo.pdf}{}{
+  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
+}
+
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}
+
+\usepackage{pifont}% Zapf-Dingbats Symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+\EnableCrossrefs
+\OnlyDescription
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{tudafonts.dtx}
+\PrintChanges
+\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{4.0}{2024/07/31}{Converted to DTX file}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \GetFileInfo{tudafonts.dtx}
+% \title{The \textsf{tudafonts} package}
+% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
+% \date{\fileversion~from \filedate}
+%
+% \maketitle
+%
+%
+% \DescribeMacro{\fileversion}
+%
+%
+% \DescribeMacro{\filedate}
+%
+
+%
+% \MaybeStop{}
+%
+% \section{Implementation}
+%
+% \iffalse
+%<*package>
+% \fi
+%
+%    \begin{macrocode}
+\expandafter\newif\csname if@ptxcd@T1\endcsname
+\DeclareOption{T1}{\csname @ptxcd@T1true\endcsname}
+\ProcessOptions\relax
+\RequirePackage{iftex}
+\RequirePackage{anyfontsize}
+\ifPDFTeX
+	\csname @ptxcd@T1true\endcsname
+	%Fallback for older versions
+	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
+	\RequirePackage[utf8]{inputenc}
+	\fi
+	\expandafter\ifx\csname texteuro\endcsname\relax
+		\RequirePackage{textcomp}
+	\fi
+	\DeclareUnicodeCharacter{20AC}{\texteuro}
+\fi
+\csname if@ptxcd@T1\endcsname
+	\ifLuaTeX
+		\RequirePackage[utf8]{luainputenc}
+	\fi
+	\RequirePackage{XCharter}%activates T1
+	\PassOptionsToPackage{type1}{roboto}
+	\PassOptionsToPackage{type1}{roboto-mono}
+	%Workaround for missing ligature replacements with roboto in T1
+	\ifXeTeX
+	\else
+		\RequirePackage{microtype}
+		\DisableLigatures{encoding = *, family=\sfdefault,shape = sc }
+	\fi
+\else
+	\RequirePackage{fontspec}
+	\setmainfont{XCharter}
+\fi
+\RequirePackage{roboto}
+\csname if@ptxcd@T1\endcsname
+	\newcommand\robotoblackspaced{%
+		\robotoblack
+		\lsstyle
+	}
+\else
+	\newfontfamily\robotoblackspaced
+	   [ Numbers = {\roboto@figurealign,\roboto@figurestyle},
+		 UprightFont    = *-Black ,
+		 ItalicFont     = *-BlackItalic,
+		 LetterSpace=26,
+		 WordSpace=2.2
+	   ]
+	   {Roboto}
+\fi
+\IfFileExists{roboto-mono.sty}{
+	\RequirePackage{roboto-mono}
+}{
+	\PackageWarningNoLine{tudafonts}{
+	The font package roboto-mono.sty could not be found. Probably your TeX-distribution is outdated.\MessageBreak
+	For correct font setup either install it manually or update you distribution}
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\ptxcd@sffamily@lining}
+%    \begin{macrocode}
+\def\ptxcd@sffamily@lining{\robototlf}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\let\accentfont\robotoslab
+\DeclareTextFontCommand{\textaccent}{\accentfont}
+%    \end{macrocode}
+%adjust LaTeX kerning to font
+%    \begin{macrocode}
+\DeclareRobustCommand{\LaTeX}{%
+{L\setbox\z@\hbox{\check@mathfonts \fontsize\sf@size\z@
+ \math@fontsfalse\selectfont A}\kern-.57\wd\z@
+ \sbox\tw@ T\vbox to \ht\tw@{\copy\z@ \vss}\kern-.2\wd\z@}%
+{%
+ \ifdim\fontdimen1\font=\z@ \else \count\z@=\fontdimen5\font
+ \multiply\count\z@ by 64\relax\divide\count\z@ by\p@
+ \count\tw@=\fontdimen1\font \multiply\count\tw@ by\count\z@
+ \divide\count\tw@ by 64\relax\divide\count\tw@ by\tw@
+ \kern-\the\count\tw@ sp\relax\fi}%
+\TeX}
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
+\endinput

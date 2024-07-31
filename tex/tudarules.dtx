@@ -1,48 +1,112 @@
-%% This is file `tudarules.sty' version 3.41 (2024-07-02),
-%% it is part of
-%% TUDa-CI -- Corporate Design for TU Darmstadt
-%% ----------------------------------------------------------------------------
-%%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
-%%
-%% ============================================================================
-%% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3c
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%% http://www.latex-project.org/lppl.txt
-%% and version 1.3c or later is part of all distributions of LaTeX
-%% version 2008/05/04 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%%
-%% The Current Maintainers of this work are
-%%   Marei Peischl <tuda-ci@peitex.de>
-%%
-%% The development respository can be found at
-%% https://github.com/tudace/tuda_latex_templates
-%% Please use the issue tracker for feedback!
-%%
-%% ============================================================================
-%%
-\NeedsTeXFormat{LaTeX2e}
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainers of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+% ============================================================================
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{tudarules.dtx}
+    [2024/07/31 4.0 Creation of colored bars for tuda-ci bundle]
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+%<package>\ProvidesExplPackage{tudarules}{2024-07-02}{3.41}{Creation of colored bars for the tuda-ci bundle}
+%
+%<*driver>
+\documentclass[
+  pdfa=false,
+  class=report,
+  titlepage=true,
+]{tudapub}
+\let\tudamaketitle\maketitle% avoid issues due to catcode changes
+\usepackage{doc}
+\let\maketitle\tudamaketitle% restore
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{hologo}
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
 
-\ProvidesExplPackage{tudarules}{2024-07-02}{3.41}{Creation of colored bars for tuda-ci bundle}
+\IfFileExists{tuda_logo.pdf}{}{
+  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
+}
 
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}
+
+\usepackage{pifont}% Zapf-Dingbats Symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+\EnableCrossrefs
+\OnlyDescription
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{tudarules.dtx}
+\PrintChanges
+\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{4.0}{2024/07/31}{Converted to DTX file}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \GetFileInfo{tudarules.dtx}
+% \title{The \textsf{tudarules} package}
+% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
+% \date{\fileversion~from \filedate}
+%
+% \maketitle
+%
+
+%
+% \MaybeStop{}
+%
+% \section{Implementation}
+%
+% \iffalse
+%<*package>
+% \fi
+%    \begin{macrocode}
 \str_if_exist:NF \g_ptxcd_department_str {
 	\str_new:N \g_ptxcd_department_str
 	\str_gset:Nn \g_ptxcd_department_str {default}
 }
-
 \bool_new:N \g_ptxcd_simple_rules_bool
 \dim_new:N \g_ptxcd_titlerule_dim
-
 \seq_if_exist:NF \l_ptxcd_tmpa_seq {\seq_new:N \l_ptxcd_tmpa_seq}
 \tl_if_exist:NF \l_ptxcd_tmpa_tk {\tl_new:N \l_ptxcd_tmpa_tl}
-
 \cs_new:Nn \ptxcd_rules_set_values:n {
 	\seq_set_split:Nnn \l_ptxcd_tmpa_seq {|} {#1}
-
 	\int_step_inline:nnnn {1}  {1} {4} {
 		\tl_set:Nn \l_ptxcd_tmpa_tl {c_ptxcd_
 			\clist_item:nn {largerule, rulesep, smallrule, logoheight} {##1}
@@ -52,7 +116,6 @@
 	}
 	\dim_gset:Nn \g_ptxcd_titlerule_dim {.5\c_ptxcd_smallrule_dim}
 }
-
 \keys_define:nn {ptxcd/rules} {
 	color .tl_gset:N = \g_ptxcd_rules_color_tl,
 	blackrule .meta:n = {color=black},
@@ -80,15 +143,13 @@
 	},
 	mecheng .meta:n = {department=mecheng},
 }
-
 \ProcessKeyOptions[ptxcd/rules]
-
 \RequirePackage{tudacolors}
 \RequirePackage{xparse}
-
+%    \end{macrocode}
 %Switch between TikZ and box mode
+%    \begin{macrocode}
 \bool_new:N  \g_ptxcd_rule_TikZmode_bool
-
 \keys_define:nn {ptxcd/rules} {
 	width .dim_gset:N = \l_ptxcd_headrule_width_dim,
 	color .tl_gset:N = \l_ptxcd_headrule_color_tl,
@@ -97,16 +158,12 @@
 	mode / tikz .code:n = \bool_gset_true:N \g_ptxcd_rule_TikZmode_bool,
 	mode / TikZ  .code:n = \bool_gset_true:N \g_ptxcd_rule_TikZmode_bool,
 }
-
-
 \cs_if_exist_use:NF \str_case:Vn \str_case:on
 	\g_ptxcd_department_str {
 	{mecheng} {\bool_gset_true:N \g_ptxcd_simple_rules_bool}
 }
-
 \cs_new:Nn \__ptxcd_logowidth: {\dim_eval:n {2.2\c_ptxcd_logoheight_dim}}
 \cs_new:Nn \__ptxcd_logosep:{\dim_eval:n {0.3\c_ptxcd_logoheight_dim}}
-
 \NewDocumentCommand{\ptxcd_makeheadrule}{som}{
 	\keys_set:nn {ptxcd/rules} {
 		%TODO maybe package options for default
@@ -150,7 +207,6 @@
 	}
 	\IfBooleanF {#1} {\cs_set:cpn {#3} {\box_use:c {#3_box}}}
 }
-
 \NewDocumentCommand{\ptxcd_makefootrule}{som}{
 	\keys_set:nn {ptxcd/rules} {
 		width= \textwidth
@@ -162,5 +218,11 @@
 	}
 	\IfBooleanF{#1} {\cs_new:cpn {#3} {\box_use:c {#3_box}}}
 }
-
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
 \endinput
