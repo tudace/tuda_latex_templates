@@ -1,39 +1,103 @@
-%% This is file `tudacolors.sty' version 3.41 (2024-07-02),
-%% it is part of
-%% TUDa-CI -- Corporate Design for TU Darmstadt
-%% ----------------------------------------------------------------------------
-%%
-%%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
-%%
-%% ============================================================================
-%% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3c
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%% http://www.latex-project.org/lppl.txt
-%% and version 1.3c or later is part of all distributions of LaTeX
-%% version 2008/05/04 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%%
-%% The Current Maintainers of this work are
-%%   Marei Peischl <tuda-ci@peitex.de>
-%%
-%% The development respository can be found at
-%% https://github.com/tudace/tuda_latex_templates
-%% Please use the issue tracker for feedback!
-%%
-%% ============================================================================
-%%
-\NeedsTeXFormat{LaTeX2e}
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainers of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+% ============================================================================
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{tudacolors.dtx}[2024-07-02 v3.41 Color definition for TU Darmstadt's tuda-ci bundle]
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2020-10-01]
+%<package>\ProvidesExplPackage{tudacolors}{2024-07-02}{3.41}{Color definition for TU Darmstadt's tuda-ci bundle}
+%
+%<*driver>
+\documentclass[
+  pdfa=false,
+  class=report,
+  titlepage=true,
+]{tudapub}
+\let\tudamaketitle\maketitle% avoid issues due to catcode changes
+\usepackage{doc}
+\let\maketitle\tudamaketitle% restore
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{hologo}
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
 
-\ProvidesExplPackage{tudacolors}{2024-07-02}{3.41}{Color definition for TU Darmstadt's tuda-ci bundle}
+\IfFileExists{tuda_logo.pdf}{}{
+  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
+}
 
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}
+
+\usepackage{pifont}% Zapf-Dingbats Symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+\EnableCrossrefs
+\OnlyDescription
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{tudacolors.dtx}
+\PrintChanges
+\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{4.0}{2024/07/31}{Converted to DTX file}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \GetFileInfo{tudacolors.dtx}
+% \title{The \textsf{tudacolors} package}
+% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
+% \date{\fileversion~from \filedate}
+%
+% \maketitle
+%
+% \MaybeStop{}
+%
+% \section{Implementation}
+%
+% \iffalse
+%<*package>
+% \fi
+%    \begin{macrocode}
 \str_if_exist:NF \g_ptxcd_department_str {
 	\str_new:N \g_ptxcd_department_str
 	\str_gset:Nn \g_ptxcd_department_str {default}
 }
-
 \keys_define:nn {ptxcd/colors} {
 	accent .tl_gset:N = \g_ptxcd_color_accent_tl,
 	accent .initial:n = 0b,
@@ -62,13 +126,9 @@
 	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
 	mecheng .meta:n = {department=mecheng},
 }
-
 \ProcessKeyOptions[ptxcd/colors]
-
 \RequirePackage{xcolor}
-
 \input{tudacolors.def}
-
 \str_if_eq:VnT \g_ptxcd_department_str {mecheng} {
 	\colorlet{TUDa-Primary1}{TUDa-6b}
 	\colorlet{TUDa-Primary2}{TUDa-2d}
@@ -80,17 +140,14 @@
 	\colorlet{TUDa-Secondary6}{TUDa-5a}
 	\colorlet{TUDa-Arrow}{TUDa-Primary2}
 }
-
-
 \clist_const:Nn \c_ptxcd_color_forbid_textaccent_clist {TUDa-0a,TUDa-5a,TUDa-6a,TUDa-6b,TUDa-7a}
 \clist_const:Nn \c_ptxcd_color_allow_blacktext_clist {TUDa-0a,TUDa-0b,TUDa-0c,TUDa-1a,TUDa-2a,TUDa-3a,TUDa-4a,TUDa-4b,TUDa-4c,TUDa-5a,TUDa-5b,TUDa-5c,TUDa-6a,TUDa-6b,TUDa-6c,TUDa-7a,TUDa-7b,TUDa-7c,TUDa-8a,TUDa-8b,TUDa-8c,TUDa-9a,TUDa-9b,TUDa-10a}
 \clist_const:Nn \c_ptxcd_color_allow_whitetext_clist {TUDa-0b,TUDa-0c,TUDa-0d,black,TUDa-1a,TUDa-1b,TUDa-1c,TUDa-1d,TUDa-2a,TUDa-2b,TUDa-2c,TUDa-2d,TUDa-3a,TUDa-3b,TUDa-3c,TUDa-3d,TUDa-4b,TUDa-4c,TUDa-4d,TUDa-5b,TUDa-5c,TUDa-5d,TUDa-6c,TUDa-6d,TUDa-7b,TUDa-7c,TUDa-7d,TUDa-8a,TUDa-8b,TUDa-8c,TUDa-8d,TUDa-9a,TUDa-9b,TUDa-9c,TUDa-9d,TUDa-10a,TUDa-10b,TUDa-10c,TUDa-10d,TUDa-11a,TUDa-11b,TUDa-11c,TUDa-11d}
-
-
+%    \end{macrocode}
 %messages
+%    \begin{macrocode}
 \msg_new:nnnn{tudacolors} {undefined-color} {The~ color~ #1~ you~ selected~ is~ not~ defined.} {See~ the~ tuda-ci~ manual~ for~ a~ list~ of~ available~ colors.}
 \msg_new:nnnn{tudacolors} {unselectable-color} {The~ color~ you~ selected~ (#1)~ must~ not~ be~ choosen~ for~ #2.} {See~ the~ Corporate~ Design~ Guidelines~ for~ further~ information.}
-
 \hook_new:n {ptxcd/init-colors}
 \hook_gput_code:nnn {ptxcd/init-colors} {tudacolors} {
 	\clist_map_inline:nn {accent, textaccent, identbar} {
@@ -123,11 +180,14 @@
 		\colorlet{textaccentcolor}{\g_ptxcd_color_textaccent_tl}
 	}
 }
-
 \file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str-colors.def}
-
 \hook_use:n {ptxcd/init-colors}
-
 \colorlet{InfoBox}{white}
-
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
 \endinput
