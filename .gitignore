@@ -284,3 +284,9 @@ tuda-ci*
 
 # generated files by docstrip setup
 *.clo
+*.sty
+*.cls
+
+# specific tmp files
+*-DEPENDS.txt
+*-SAVE-ERROR
