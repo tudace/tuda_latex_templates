@@ -286,6 +286,7 @@ tuda-ci*
 *.clo
 *.sty
 *.cls
+*.cfg
 
 # specific tmp files
 *-DEPENDS.txt
