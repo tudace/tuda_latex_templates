@@ -1,0 +1,227 @@
+% \iffalse meta-comment
+%
+% TUDa-CI -- Corporate Design for TU Darmstadt
+% ----------------------------------------------------------------------------
+%
+%  Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%
+% ============================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainers of this work is
+%   Marei Peischl <tuda-ci@peitex.de>
+%
+% The development respository can be found at
+% https://github.com/tudace/tuda_latex_templates
+% Please use the issue tracker for feedback!
+%
+% ============================================================================
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{beamercolorthemeTUDa.dtx}
+	[2024/07/31 4.0 Beamer color theme of tuda-ci]
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2022/06/01]
+%<!2008>\ProvidesExplPackage{beamercolorthemeTUDa}{2024-07-02}{3.41}{Beamer color theme of tuda-ci}
+%<2008>\ProvidesExplPackage{beamercolorthemeTUDa2008}{2024-07-02}{3.41}{Beamer color theme of tuda-ci, compatibility for design of 2008}
+%<*driver>
+\documentclass[
+  pdfa=false,
+  class=report,
+  titlepage=true,
+]{tudapub}
+\let\tudamaketitle\maketitle% avoid issues due to catcode changes
+\usepackage{doc}
+\let\maketitle\tudamaketitle% restore
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{hologo}
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
+
+\IfFileExists{tuda_logo.pdf}{}{
+  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
+}
+
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}
+
+\usepackage{pifont}% Zapf-Dingbats Symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+\EnableCrossrefs
+\OnlyDescription
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{beamercolorthemeTUDa.dtx}
+\PrintChanges
+\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{4.0}{2024/07/31}{Converted to DTX file}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \GetFileInfo{beamercolorthemeTUDa.dtx}
+% \title{The \textsf{beamercolorthemeTUDa} package}
+% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
+% \date{\fileversion~from \filedate}
+%
+% \maketitle
+%
+
+%
+% \MaybeStop{}
+%
+% \section{Implementation}
+%
+% \iffalse
+%<*package>
+%<*main>
+% \fi
+%    \begin{macrocode}
+\ExplSyntaxOn
+\clist_map_inline:nn {
+	colortitle,
+	colorbacktitle,
+	colorframetitle,
+	colorback
+} {
+	\keys_define:nn {ptxcd/beamer/color} {#1 .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {#1}}
+}
+\keys_define:nn {ptxcd/beamer/color} {}
+\ExplSyntaxOff
+\ProcessKeyOptions[ptxcd/beamer/color]
+\RequirePackage{tudacolors}
+%    \end{macrocode}
+%    \begin{macrocode}
+\definecolorset{HTML}{TUDa-}{}{%
+	dark1,000000;%
+	dark2,44546A;%
+	light1,FFFFFF;%
+	light2,E7E6E6;%
+	accent1,E6001A;%
+	accent2,004E8A;%
+	accent3,009CDA;%
+	accent4,00689D;%
+	accent5,B5B5B5;%
+	accent5,535353;%
+	hyperlink,243572%
+}
+\mode<presentation>
+\setbeamercolor*{title}{parent=normal text}
+\setbeamercolor{subtitle}{parent=title}
+\setbeamercolor{author}{parent=title}
+\setbeamercolor{institute}{parent=title}
+\setbeamercolor{date}{parent=title}
+\setbeamercolor{titlelike}{parent=title}
+\setbeamercolor*{author}{parent=title}
+\setbeamercolor*{institute}{parent=title}
+\setbeamercolor*{normal text}{bg=,fg=black}
+\setbeamercolor*{background canvas}{parent=normal text}
+\setbeamercolor*{section in toc}{parent=normal text}
+\setbeamercolor*{footline}{parent=normal text}
+\setbeamercolor*{alerted text}{fg=textaccentcolor}
+\setbeamercolor*{structure}{fg=black}
+\setbeamercolor{bibliography item}{parent=item}
+\setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry title}{use=normal text,fg=normal text.fg}
+\setbeamercolor{bibliography entry location}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry note}{use=structure,fg=normal text.fg}
+\setbeamercolor*{block title}{fg=textonaccentcolor,bg=accentcolor}
+\setbeamercolor*{block body}{fg=black,bg=black!15}
+\setbeamercolor*{block title alerted}{fg=TUDa-accent1,bg=TUDa-light2}
+\setbeamercolor*{block body alerted}{use=normal text, bg=white}
+\setbeamercolor*{block frame alerted}{bg=TUDa-accent1}
+\setbeamercolor*{block title example}{fg=TUDa-accent2,bg=TUDa-light2}
+\setbeamercolor*{block body example}{use=normal text, bg=white}
+\setbeamercolor*{block frame example}{bg=TUDa-accent2}
+\setbeamercolor{footline}{fg=black!50}
+\mode<all>
+%    \end{macrocode}
+%</main>
+%<*2008>
+%    \begin{macrocode}
+\bool_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
+\keys_define:nn {ptxcd/beamer/color} {
+	colortitle .bool_gset:N = \g_ptxcd_beamer_colortitle_bool,
+	colortitle .default:n = true,
+	colortitle .initial:n = true,
+	colorbacktitle .meta:n = {colortitle=#1},
+	colorframetitle .code:n = \use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:,
+	colorframetitle .default:n = true,
+	colorback .meta:n = {colorframetitle=#1}
+}
+\ProcessKeyOptions[ptxcd/beamer/color]
+\ExplSyntaxOff
+\RequirePackage[RGB]{tudacolors}
+\mode<presentation>
+\setbeamercolor*{smallrule}{bg=black}
+\setbeamercolor*{identbar}{bg=identbarcolor}
+\ExplSyntaxOn
+\bool_if:NTF \g_ptxcd_beamer_colortitle_bool {
+	\setbeamercolor*{title}{fg=textonaccentcolor,bg=accentcolor}
+}{
+	\setbeamercolor*{title}{parent=normal~text}
+}
+\cs_new:Nn \__ptxcd_setup_frametitle_color: {
+	\bool_if:NTF \g__ptxcd_colorframetitle_bool {
+		\setbeamercolor*{frametitle}{fg=textonaccentcolor,bg=accentcolor}
+	} {
+		\setbeamercolor*{frametitle}{use=normal~text,fg=normal~text.fg,bg=}
+	}
+}
+\__ptxcd_setup_frametitle_color:
+\ExplSyntaxOff
+\setbeamercolor*{author}{parent=title}
+\setbeamercolor*{institute}{parent=title}
+\setbeamercolor*{normal text}{bg=,fg=black}
+\setbeamercolor*{background canvas}{parent=normal text}
+\setbeamercolor*{section in toc}{parent=normal text}
+\setbeamercolor*{footline}{parent=normal text}
+\setbeamercolor*{alerted text}{fg=textaccentcolor}
+\setbeamercolor*{structure}{fg=textaccentcolor}
+\setbeamercolor{bibliography item}{parent=item}
+\setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry title}{use=normal text,fg=normal text.fg}
+\setbeamercolor{bibliography entry location}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry note}{use=structure,fg=normal text.fg}
+\setbeamercolor{titlelike}{fg=textaccentcolor,bg=white}
+\setbeamercolor*{block title}{fg=textonaccentcolor,bg=accentcolor}
+\setbeamercolor*{block body}{fg=black,bg=black!15}
+\setbeamercolor*{block title alerted}{fg=TUDa-9b,bg=black!15}
+\setbeamercolor*{block body alerted}{use=normal text, bg=white}
+\setbeamercolor*{block frame alerted}{bg=TUDa-9b}
+\setbeamercolor*{block title example}{fg=TUDa-4d,bg=black!15}
+\setbeamercolor*{block body example}{use=normal text, bg=white}
+\setbeamercolor*{block frame example}{bg=TUDa-4d}
+\ExplSyntaxOn
+\mode<all>
+%    \end{macrocode}
+
+%
+% \iffalse
+%</2008>
+%</package>
+% \fi
+%
+% \Finale
+\endinput
