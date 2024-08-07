@@ -52,6 +52,52 @@
 \providecommand\pkg{\textsf}
 \let\cls\textsf
 
+\providecommand*{\codefamily}{\ttfamily}
+\DeclareTextFontCommand{\codefont}{\codefamily}
+
+\ExplSyntaxOn
+\makeatletter
+\cs_new:Npn \__ptxctools_parse_key_option:w #1 #2  #3 #4 = #5  \q_stop {
+	\noindent\DescribeOption{#4=}\noindent\makebox[\linewidth]{
+	\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}
+	\hfill
+		\IfBooleanTF{#1}
+			{#2}
+			{(default:~\codefont{#2})}
+	}
+}
+
+\NewDocumentCommand{\DescribeKeyOption}{smms}{
+	\__ptxctools_parse_key_option:w  #1 {#3} #4 #2 \q_stop
+}
+
+% run minted with pygments or not
+\sys_if_shell_unrestricted:TF {
+\usepackage{minted}
+\newminted[Syntax]{latex}{escapeinside=||}
+} {
+\usepackage[draft]{minted}
+	% Based on the definition from minted.sty to be able to support escapeinside if pygments cannot be used.
+	% Original Version taken from
+	% minted.dtx  – Copyright 2013--2022 Geoffrey M. Poore –  Copyright 2010--2011 Konrad Rudolph
+	\newenvironment{Syntax}{\VerbatimEnvironment
+	  \let\FVB@VerbatimOut\minted@FVB@VerbatimOut
+	  \let\FVE@VerbatimOut\minted@FVE@VerbatimOut
+	  \minted@configlang{latex}%
+	  \setkeys{minted@opt@cmd}{#1}%
+	  \minted@fvset
+	  \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
+	{\end{VerbatimOut}%
+	    \minted@langlinenoson
+	    \expandafter\minted@pygmentize\expandafter{\minted@lang}%
+	    \minted@langlinenosoff}
+}
+\setminted{escapeinside=||}
+\makeatother
+\ExplSyntaxOff
+
+\usepackage{minted}
+
 \IfFileExists{tuda_logo.pdf}{}{
   \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
 }
