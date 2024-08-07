@@ -38,6 +38,9 @@
 \documentclass[
   pdfa=false,
   titlepage=true,
+  custommargins=geometry,
+  parskip=half-,
+  textaccentcolor=black
 ]{tudapub}
 \let\tudamaketitle\maketitle% avoid issues due to catcode changes
 \usepackage{doc}
@@ -52,18 +55,18 @@
 \providecommand\pkg{\textsf}
 \let\cls\textsf
 
+\usepackage{xspace}
+\AddToHook{cmd/KOMAScript/after}{\xspace}
+
 \providecommand*{\codefamily}{\ttfamily}
 \DeclareTextFontCommand{\codefont}{\codefamily}
 \ProvideDocElement[idxtype = option, idxgroup = options]{Option}{optionenv}
-
-
-
-
-\ExplSyntaxOn
 \makeatletter
-\let\DescribeOption\PrintDescribeOption
+\ExplSyntaxOn
+\newcommand{\PrintDescribeKeyOption}[1]{{\MacroFont #1\rlap{=}}}
+
 \cs_new:Npn \__ptxctools_parse_key_option:w #1 #2  #3 #4 = #5  \q_stop {
-	\makebox[\linewidth]{\DescribeOption{#4=}
+	\noindent{\let\PrintDescribeOption\PrintDescribeKeyOption\DescribeOption{#4}}\makebox[\linewidth]{
 	\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}
 	\hfill
 		\IfBooleanTF{#1}
@@ -111,9 +114,13 @@
 		\begin{samepage}
 			\setlength{\parindent}{\c_zero_dim}
 			\ttfamily
+			\bool_set_true:N \l_tmpa_bool
 			\ior_str_map_variable:NNn \g_ptxcd_ior \l_tmpa_tl {
 			\regex_replace_all:NnN \c_ptxtools_escape_verb_regex {\c{ptxtools_escape_verb:w}\1\c{q_ptxtools_stop}} \l_tmpa_tl
-			\strut\tl_use:N \l_tmpa_tl \newline
+			\bool_if:NTF \l_tmpa_bool
+				{\bool_set_false:N \l_tmpa_bool}
+				{\newline}
+			\strut\tl_use:N \l_tmpa_tl
 			}
 		\end{samepage}
 		\par\smallskip
@@ -125,7 +132,6 @@
 		\tl_rescan:nn {\cctab_select:N \c_document_cctab} {#1}
 	}
 	\regex_const:Nn \c_ptxtools_escape_verb_regex {\|(.+?)\|}
-	\ExplSyntaxOff
 	% Based on the definition from minted.sty to be able to support escapeinside if pygments cannot be used.
 	% Original Version taken from
 	% minted.dtx  – Copyright 2013--2022 Geoffrey M. Poore –  Copyright 2010--2011 Konrad Rudolph
@@ -155,8 +161,24 @@
 			\minted@langlinenosoff}
 }
 \setminted{escapeinside=||}
-\makeatother
+
+\geometry{
+top=\g_ptxcd_topMargin_dim,
+inner=\g_ptxcd_innerMargin_dim,
+outer=\dim_eval:n {\g_ptxcd_outerMargin_dim},
+bottom=\g_ptxcd_bottomMargin_dim,
+columnsep= \g_ptxcd_columnSep_dim,
+includehead,
+includefoot,
+includemp,
+nomarginpar,
+includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim,
+headheight=\g_ptxcd_headheight_dim,
+reversemp
+}
+
 \ExplSyntaxOff
+\makeatother
 
 \usepackage{minted}
 
@@ -266,8 +288,13 @@
 % The shown default values apply only for the document class itself. The template files may use different settings.
 % An overview of these differences are shown in \autoref{tab:demo-options}.
 %
-% \begin{description}
-% \KeyOptionItem{class=\meta{article|report|book}}{article}*
+% \DescribeKeyOption{class=\meta{article|report|book}}{article}*
+% This option selects the base document class.
+% The values load the corresponding \KOMAScript class  \cite{scrguide-en}.
+% The article value thus loads scrartcl.
+%
+^^A% \begin{description}
+% \DescribeKeyOption{class=\meta{article|report|book}}{article}*
 % This option selects the base document class.
 % The values load the corresponding \KOMAScript class  \cite{scrguide-en}.
 % The article value thus loads scrartcl.
@@ -275,15 +302,16 @@
 % \KOMAScript is a collection of classes and packages for \LaTeX{} which, in addition to the typographical adaptations to the European area, also greatly extends the configuration options.
 % The documentation is also available in German \cite{scrguide-de}.
 %
-% \KeyOptionItem{accentcolor=\meta{Color}}{0b}*
+% \DescribeKeyOption{accentcolor=\meta{Color}}{0b}*
 % Selects the spot color for use within the identity bar. In addition to these colors, any defined can be used.
 % See \autoref{sec:color} for the list of predefined colors as well as additional options for a more detailed selection.
 % The Options \option{accentcolor}, \option{textaccentcolor} and \option{identbarcolor} will be passed to tudacolors.
 % Using those, the colors can even be set independently of each other.
 %
-% \KeyOptionItem{marginpar=\meta{true|false|auto}}{auto}*
+% \DescribeKeyOption{marginpar=\meta{true|false|auto}}{auto}*
 % Controlls the the marginpar. The default setting is auto.
-% This means that the marginpar column runs across the fifth column of the layout grid \cite{TUDaGuideline}.\marginpar{Marginpar example}
+% This means that the marginpar column runs across the fifth column of the layout grid \cite{TUDaGuideline}.
+^^A%\marginpar{Marginpar example}
 %  Above this, the option also accepts boolean values. False would set width of the column to 0.
 % The mechanism itself is not deactivated.
 %
@@ -297,60 +325,68 @@
 % \addtokomafont{marginpar}{\color{textaccentcolor}}
 % \end{example}
 % to the preamble.
-% \marginline{
-% \includegraphics[width=\marginparwidth]{example-image}\\
-% Marginpar example using ragged text made with \KOMAScript's marginline
-% }
+^^A% \marginline{
+^^A% \includegraphics[width=\marginparwidth]{example-image}\\
+^^A% Marginpar example using ragged text made with \KOMAScript's marginline
+^^A% }
 %
-% \KeyOptionItem{twocolumn=\meta{Boolean}}{false}*
+% \DescribeKeyOption{twocolumn=\meta{Boolean}}{false}*
 % Activates the two-column mode globally.
 % In this case, however, two margin columns are created due to their nature.
 % Use in combination with \code{marginpar=auto} is therefore questionable in most cases.
 % If the two-column mode is only activated locally, that behavior does not apply, but the margin notes are deactivated.
 %
-% \KeyOptionItem{ruledheaders=(all|none|chapter|section)}{all}*
+% \DescribeKeyOption{ruledheaders=(all|none|chapter|section)}{all}*
 % Selects the style of the headings.
 % \code{ruledheaders=all} selects the style framed with rules for all up to \cs{subsubsection}.
 % This style is limited accordingly for chapter or section.
 % False loads the \KOMAScript{} default setup instead.
 %
-% \KeyOptionItem{title=(defaul/small)}{default}*
+% \DescribeKeyOption{title=(defaul/small)}{default}*
 % The relatively large font size of the title can lead to spacing issues, especially with long titles for theses.
 % The \code{title} option prevents this by loading the font sizes set defined for the paper 1 size smaller (e.\,g. a5 font size if a4 paper is used).
 %
-% \KeyOptionItem{type=(publication/thesis/intern)}{publication}*
+% \DescribeKeyOption{type=(publication/thesis/intern)}{publication}*
 % Is used to load specific configuration for theses (\autoref{sec:thesis}) or internal documents (\autoref{sec:report}).
 %
-% \KeyOptionItem{headline=(true/false/automark)}{false}*
+% \DescribeKeyOption{headline=(true/false/automark)}{false}*
 % The CI guideline \cite{TUDaGuideline} allows headers to be used ruled below the identbar.
 % That may be confusing as the headers are typeset larger than subsection headings.
 % Because of that it's switched off by default, but users can enable this setting using the \code{headline} option.
 % \code{automark} will also be passed to \pkg{scrlayer-scrpage} and switch to running headers.
 %
-% \KeyOptionItem{logo=(head|body)}{body}*
+% \DescribeKeyOption{logo=(head|body)}{body}*
 % Sets the position of the logo on the titlepage, see \autoref{sec:title}.
 %
-% \KeyOptionItem{colorback=(true|false|title|body|head)}{true}*
+% \DescribeKeyOption{colorback=(true|false|title|body|head)}{true}*
 % Change the color setup of the title page, see \autoref{sec:title}.
 %
-% \KeyOptionItem{IMRAD=\meta{Boolean}}{true}*
+% \DescribeKeyOption{IMRAD=\meta{Boolean}}{true}*
 % Toggles the check for IMRAD labels, see \autoref{sec:IMRAD}.
 %
-% \item[logofile=\meta{file name/path}]
+% \DescribeKeyOption{logofile=\meta{file name/path}}{tuda\_logo}*
 % Allows an alternative logo to be used.
 % This option is available so that the templates can also be used without the TUDa logo.
 % The logos are reserved to be used by TUDa members and may therefore not be published with this template.
 ^^A% TODO Link!
-% \end{description}
+^^A% \end{description}
 %
 % \noindent Additionally all \KOMAScript{} options can be used. These are described within the documentation. Some more notes on the interaction between \KOMAScript{} and TUDa-CI can be found in \autoref{sec:KOMA}.
 %
-%
-% \subsection{Die Titelseite}
+% \def\maginpar\docmarginpar
+% \subsection{Title}
 % \label{sec:title}
 %
-% Die Titelseite wird von tudapub automatisch generiert. Die Verwendung hierfür entspricht größtenteils der klassischen Methode unter Verwendung von \code{maketitle}.
+% The title page is generated automatically by \cls{tudapub}.
+% The structure for this corresponds largely to the classic method using \cs{maketitle}.
 %
+% The \KOMAScript{} option \code{titlepage}\cite{scrguide-en} is supported to switch between separate title pages and a title head.
+% Due to the implementation, \code{titlepage=true} is treated identically to \code{titlepage=firstiscover}.
+%
+% The macros used to set the title data are described below.
+% They are used as with standard \LaTeX{} but there were a few added to support the additional features of the title page design.
+%
+% \DescribeMacro{\author} The author(s ). Multiple authors are separated by \and.
 % Die \KOMAScript-Option \code{titlepage} erlaubt es üblicherweise zwischen Titelseiten und dem Titelkopf umzuschalten. Bis Version 1.2 war diese Option deaktiviert. Mittlerweile gibt es jedoch einen Modus für einen Titelkopf. Dieser entspricht allerdings nicht den offiziellen Vorgaben und ist nur für die interne Verwendung gedacht. Aufgrund der Implementierung wird \code{titlepage=true} identisch zu \code{titlepage=firstiscover} behandelt.
 %
 %
