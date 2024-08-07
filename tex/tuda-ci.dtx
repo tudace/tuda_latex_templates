@@ -178,7 +178,19 @@ reversemp
 }
 
 \ExplSyntaxOff
+\newcommand{\docmarginpar}[1]{\frame{#1}}
+
 \makeatother
+
+\providecommand\marg[1]{%
+  {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
+\providecommand\oarg[1]{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}}
+\providecommand\parg[1]{%
+  {\ttfamily(}\meta{#1}{\ttfamily)}}
+
+
+
 
 \usepackage{minted}
 
@@ -293,12 +305,6 @@ reversemp
 % The values load the corresponding \KOMAScript class  \cite{scrguide-en}.
 % The article value thus loads scrartcl.
 %
-^^A% \begin{description}
-% \DescribeKeyOption{class=\meta{article|report|book}}{article}*
-% This option selects the base document class.
-% The values load the corresponding \KOMAScript class  \cite{scrguide-en}.
-% The article value thus loads scrartcl.
-%
 % \KOMAScript is a collection of classes and packages for \LaTeX{} which, in addition to the typographical adaptations to the European area, also greatly extends the configuration options.
 % The documentation is also available in German \cite{scrguide-de}.
 %
@@ -373,7 +379,6 @@ reversemp
 %
 % \noindent Additionally all \KOMAScript{} options can be used. These are described within the documentation. Some more notes on the interaction between \KOMAScript{} and TUDa-CI can be found in \autoref{sec:KOMA}.
 %
-% \def\maginpar\docmarginpar
 % \subsection{Title}
 % \label{sec:title}
 %
@@ -383,71 +388,135 @@ reversemp
 % The \KOMAScript{} option \code{titlepage}\cite{scrguide-en} is supported to switch between separate title pages and a title head.
 % Due to the implementation, \code{titlepage=true} is treated identically to \code{titlepage=firstiscover}.
 %
-% The macros used to set the title data are described below.
+%  \DescribeMacro{\titlehead}\DescribeMacro{\title}\DescribeMacro{\subtitle}\DescribeMacro{\subject}\DescribeMacro{\author}\DescribeMacro{\and}\DescribeMacro{\thanks}\DescribeMacro{\date}\DescribeMacro{publishers}
+% These macros are used to set the title data.
+% If not mentioned differently all need one mandatory argument which contains the data.
 % They are used as with standard \LaTeX{} but there were a few added to support the additional features of the title page design.
+% \begin{Syntax}
+% \title{|\meta{title}|}
+% \author{|\meta{Author1}|\thanks{Affiliation of Author1} \and |\meta{Author2}|}
+% % […other elements…]
+% \maketitle
+% \end{Syntax}
 %
-% \DescribeMacro{\author} The author(s ). Multiple authors are separated by \and.
-% Die \KOMAScript-Option \code{titlepage} erlaubt es üblicherweise zwischen Titelseiten und dem Titelkopf umzuschalten. Bis Version 1.2 war diese Option deaktiviert. Mittlerweile gibt es jedoch einen Modus für einen Titelkopf. Dieser entspricht allerdings nicht den offiziellen Vorgaben und ist nur für die interne Verwendung gedacht. Aufgrund der Implementierung wird \code{titlepage=true} identisch zu \code{titlepage=firstiscover} behandelt.
+% For theses there exist additional data fields \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
+% To use these and also learn about other specials of the title mechanism within theses, please refer to \autoref{sec:theses-title}.
 %
+% \subsubsection{TUDa-CI specific title elements: Additional logos, graphics or boxes}
+% \DescribeMacro{\titlegraphic}
+% Accepts any \LaTeX{} content, does not have to be an image.
+% This is placed flush with the top corner in the main part of the title page.
+% This macro is usually used to place a graphic:
+% \begin{example}
+% \titlegraphic{\includegraphics[width=\width]{example-image}}
+% \end{example}
+% \DescribeMacro{\width}\DescribeMacro{\height}
+% \cs{width} and \cs{height} can be used to select the appropriate size of the image.
+% From version 3.19, there also is a starred variant \cs{titlegraphic*}.
+% With this, scaling and any necessary cropping to fill the reserved area is done automatically using \pkg{trimclip}.
+% \begin{example}
+% \titlegraphic*{\includegraphics{example-image}}
+% \end{example}
 %
+% \DescribeMacro{\addTitleBox}\marg{Box Content}
+% \DescibeMacro{\addTitleBoxLogo}\sarg\marg{Logo}
+% The TUDa CI is using white boxes to place additional Information or logos on the title page.
+% These can be added using \cs{addTitleBox} or \cs{addTitleBoxLogo}.
 %
+% They are placed below each other with a specified distance and use a white background.
+% Text or an institute logo can appear here. The background is white.
 %
+% Whereas \cs{addTitleBox} will set the box to the same width and horizontal alignment as the TUDa logo the logo variants of this macro don't have a fixed width.
+% Here the default is to place scale the logo automtically and maual scaling has to be enforced using the starred variant:
 %
+% \begin{example}
+% \addTitleBox{Text, e.\,g. Institute}
+% \addTitleBoxLogo{example-image}
+% \addTitleBoxLogo*{\includegraphics[width=.3\linewidth]{example-image}}
+% \end{example}
 %
-% Im Folgenden werden die Makros beschrieben, die bei der Übergabe der Titeldaten verwendet werden können.
+% \DescribeMacro{\AddSponsor}
+% As of version 3.0, the sponsor mechanism of \cls{tudaleaflet} is also available in \cls{tudapub}.
+% This makes it possible to place sponsor logos below the title graphic.
+% Sponsor logos or names can be added using \cs{AddSponsor}
+% \begin{Syntax}
+% \AddSponsor{|\meta{Code to insert the Logo or just the name}|}
+% \end{Syntax}
+% \DescribeMacro{\height} \cs{height} is defined within the argument.
+% All sponsors added this way are aligned at their baseline.
+% This can be used to scale multiple logos to the same height.
+% The space between the sponsors will be horizontally filled.
 %
-% \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
-%	\item[author] Der Autor/ die Autoren. Mehrere Autoren werden durch \verb+\and+ getrennt.
-%	\item[date] Beliebiges Datum. Wird über \verb|datename| bezeichnet.
-%	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
-%	\item[publishers] Wird hier für die Ortsangabe verwendet und ist mit \enquote{Darmstadt}, bzw. \enquote{Darmstadt, Technische Universität Darmstadt} (bei Dissertationen) vorbelegt.
-%	\item[subtitle] Untertitel. Dieses Feld kann alternativ für eine Übersetzung genutzt werden.
-%	\item[title] Titel. Der Titel wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt, als bei anderen Publikationen.
-% \end{description}
+% \DescribeMacro{\sponsors}
+% The second variant enables manual placement with vertical alignment, as may be necessary for logos with different heights.
+% In this case, only the spacing and seperation rules are added around the logos:
+% \begin{Syntax}
+% \sponsors{\meta{logo1}\meta{logo2}}
+% \end{Syntax}
 %
-% \noindent Diese entsprechen der normalen Verwendung.
+% \subsubsection{Extra title material for theses}
+% For \option{mode=thesis} the title page works a little bit different.
+% Here some data elements are used to provide an interface to be overwritten and are prefilled using additional data fields.
 %
-% \subsubsection{thesis}
-% Ergänzend dazu gibt es noch speziellere Makros, wie für die \code{thesis}:
-% \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
-%	\item[birthplace] Geburtsort. Diese Angabe ist bei Dissertationen notwendig.
-%	\item[department] Fach-/Studienbereich. Die oben genannte Option ist zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
+% \DescribeMacro{\publishers}
+%  Is used here for the location and is preset with \enquote{Darmstadt} or \enquote{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
 %
-%	Dieses Makro verfügt zusätzlich über die Möglichkeit abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung zu der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
-%	\begin{verbatim}
-%	\department[Ersatztext]{Kürzel/Bezeichnung}
-%	\end{verbatim}
-%	Zusätzlich gibt es ab Version 2.01 auch die Möglichkeit den gesamten Text \enquote{im Fachbereich <Bereichsbezeichnung>} sowie die Angabe in der Infobox auf der Titelseite zu ersetzen. Dies geschieht über die gesternte Variante:
-%	\begin{verbatim}
-%	\department*[Text für die Box]{Text zwischen Typ und Autor}
-%	\end{verbatim}
-%	\item[examdate] Datum der Disputation
-%	\item[group] Arbeitsgruppe
-%	\item[reviewer] Gutachter. Mehrere Gutachter werden (wie Autoren) durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
+% \DescribeMacro{\subject}
+% Will be placed below the \cs{subtitle} as for the normal title page, but will hold all the additional information which can be provided using the additional data fields.
 %
-%	\minisec{Änderung des Bezeichners}
-%	Die Änderung des Bezeichners ist über ein optionales Argument möglich:
-%	\begin{verbatim}
-%	\reviewer[Ersatzbezeichner]{Name1 \and Name2}
-%	\end{verbatim}
-%	Um die numerische Benennung abzuändern ist es zusätzlich möglich statt dem Ersatzbezeichner eine Kommaliste zu übergeben:
-%	\begin{verbatim}
-%	\reviewer*[Bezeichner1, Bezeichner2]{Name1 \and Name2}
-%	\end{verbatim}
-%	In diesem Fall entfällt die Nummerierung vor dem Bezeichner. Soll z.\,B. den Formulierungen der Promotionsordnung entsprochen werden, gilt:
-%	\begin{verbatim}
-%	\reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
-%	\end{verbatim}
-%	Für die Erstellung fachbereichsspezifischer Templates existiert ebenfalls ein Makro. Dieses lässt ohne den Aufruf von \verb+\reviewer+ Änderungen zu.
-%	\begin{verbatim}
-%	\setupReviewName{Ersatzwort für „Gutachten“}
-%	\end{verbatim}
-%	Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+. Eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
+% \DescribeMacro{\birthplace} Place of birth. This information is required for dissertations
+% \DescribeMacro{\department}
+% Subject/field of study. It's prefered to set it via the class option.
+% However, the argument is processed in the same way.
+% This macro also provides the functionality of specifying entries that differ from the default entries.
+% Especially if a different text to the default \enquote{in the department of} and its variants is required.
+% For this purpose, \cs{department} provides an optional argument:
+% \begin{Syntax}
+% \department[|\meta{replacement text}|]{|\meta{abbreviation/name}|}
+% \end{Syntax}
+% In addition, from version 2.01 there is also the option of replacing the entire text \enquote{in the department \meta{department name}} as well as the information in the info box on the title page. This is done using the starred variant:
+% \begin{example}
+% \department*[text for the box]{text between type and author}
+% \end{example}
+% \DescribeMacro{\examdate} Will be added within the description block \cs{subject}.
 %
-%	Ab Version 3.26 werden die Gutachter nicht mehr auf der Titelrückseite genannt. Dies wird über die \verb+thesis+ Option \verb+reviewer-on-uppertitleback+ gesteuert. Voreingestellt ist der Wert \verb+false+.
-%	\item[studentID] Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
-%	\item[submissiondate] Datum der Einreichung.
-%	\item[titlegraphic] Akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
+% \DescribeMacro{institution}\DescribeMacro{department}\DescribeMacro{institute}\DescribeMacro{\group}
+% Will be added inside a title box as was described in \autoref{sec:title} below each other.
+%
+% \DescribeMacro{\reviewer} Gutachter. Mehrere Gutachter werden (wie Autoren) durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
+% Multiple reviewers are separated by \cs{and} as for authors.
+% The numbering runs from left to right.
+%
+% \minisec{Adjusting the reviewer labels}
+% The identifier can be changed using an optional argument:
+% \begin{Syntax}
+% \reviewer[|\meta{replacement identifier}|]{|\meta{name1}| \and |\meta{name2}|}
+% \end{Syntax}
+% To change the numerical designation, a comma list is used instead of a single label:
+% \begin{example}
+% \reviewer*[identifier1, identifier2]{name1 \and name2}
+% \end{example}
+% In this case, the automatic numbering before the identifier is omitted.
+% If, for example, the wording of the doctoral regulations is to be complied with, the following applies:
+% \begin{example}
+% \reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
+% \end{example}
+%
+% \DescribeMacro{\setupReviewName}There is also a macro for creating department-specific templates.
+% This allows changes to be made without calling \cs{reviewer}.
+% \begin{Syntax}
+% \setupReviewName{|\meta{Alternative label to replace \enquote{Review}}|}
+% \setupReviewName[1]{|\meta{Erstreferent}|}
+% \setupReviewName*{|\meta{label1}|,|\meta{label2}|}
+% \end{Syntax}
+%
+% \DescribeKeyOption{reviewer-on-uppertitleback=\meta{Boolean}}{false}
+% As of version 3.26, the reviewers are no longer named on the back of the title page.
+% This can be controlled using the thesis option \option{reviewer-on-uppertitleback}.
+%
+%	\DescribeMacro{\studentID} Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
+%	\DescribeMacro{\submissiondate} Datum der Einreichung.
+%	\DescribeMacro{\titlegraphic} Akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
 %	Üblicherweise wird dieses Makro zur Platzierung einer Grafik genutzt:
 %
 %	\begin{verbatim}
@@ -470,9 +539,9 @@ reversemp
 %	\addTitleBoxLogo{example-image}
 %	\addTitleBoxLogo*{\includegraphics[width=\linewidth]{example-image}}
 %	\end{verbatim}
-%	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
-%	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
-%	\item[tuprints] \label{page:tuprints}Übergabe der Daten. Sofern das Dokument über TUprints veröffentlicht werden soll.
+%	\DescribeMacro{\titleintro} Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
+%	\DescribeMacro{\titleaddendum} Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
+%	\DescribeMacro{\tuprints} \label{page:tuprints}Übergabe der Daten. Sofern das Dokument über TUprints veröffentlicht werden soll.
 %	\begin{verbatim}
 %	\tuprints{
 %	urn=1234,
@@ -500,24 +569,7 @@ reversemp
 %
 %
 %
-% \subsubsection{Sponsorenlogos}
-% Ab Version 3.0 steht in TUDaPub auch der Sponsorenmechanismus der TUDaLeaflet-Klasse zur Verfügung. Damit ist es möglich Sponsorenlogos unterhalb des Titelbildes zu platzieren.
-%
-% Sponsorenlogos werden üblicherweise über
-% \begin{verbatim}
-% \AddSponsor{<logo1>}
-% \AddSponsor{<log2>}
-% \end{verbatim}
-% übergeben. Innerhalb des Arguments ist \verb+\height+ gesetzt. Damit sind im Beispiel alle Logos auf der gleichen Höhe. Der Abstand zwischen ihnen wird entsprechend aufgefüllt, sodass der gesammte Block immer links und rechts mit dem Text abschließt.
-%
-% Die zweite Variante ermöglicht die manuelle Platzierung mit vertikaler Ausrichtung, wie es bei Logos mit unterschiedlicher Höhe notwendig sein könnte. Hierbei werden lediglich die Abstände und Trennlinien um die Logos ergänzt:
-%
-% \begin{verbatim}
-% \sponsors{
-%<logo1><logo2>
-% }
-% \end{verbatim}
-%
+
 %
 %
 % \subsubsection{Optionen für die Titelseite}
@@ -1378,7 +1430,7 @@ reversemp
 		headheight=\g_ptxcd_headheight_dim
 	}
 	\savegeometry{TUDa-nomarginpar}
-	\geometry{includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim}
+	\geometry{includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=1ex}
 	\KOMAoptions{mpinclude}
 	\savegeometry{TUDa-marginpar}
 
