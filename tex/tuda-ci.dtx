@@ -40,7 +40,9 @@
   titlepage=true,
   custommargins=geometry,
   parskip=half-,
-  textaccentcolor=black
+  textaccentcolor=black,
+  class=report,
+  IMRAD=false
 ]{tudapub}
 \let\tudamaketitle\maketitle% avoid issues due to catcode changes
 \usepackage{doc}
@@ -237,7 +239,7 @@ reversemp
 %
 % \tableofcontents
 %
-% \section{Contents of the TUDa-CI Bundle}
+% \chapter{Contents of the TUDa-CI Bundle}
 % The TUDa-CI Bundle currently contains template files for the following document types:
 %
 % \begin{description}
@@ -264,12 +266,12 @@ reversemp
 % Those are not officially supported.
 % In case you want to provide your own and add it to TUDa-CI, please have a look at \autoref{sec:department-config}.
 %
-% \section{tudapub – generic class for articles and theses}
+% \chapter{tudapub – generic class for articles and theses}
 % The TUDa-CI bundle uses a generic document class to be more flexible with the layout adjustments.
 % The setup is based on \KOMAScript and this section is listing the features.
 % Afterwards there will be specific information on the thesis modes.
 %
-% \subsection{Usage and class options}
+% \section{Usage and class options}
 %
 % \begin{table}
 % \captionabove[Differences between the demo files based on \cls{tudapub}]{Differences between the demo files based on \cls{tudapub}. The template files use different options depending on the actual purpose. This tabular gives an overview of the Features shown inside the tempaltes as well as the initial settings.}
@@ -363,10 +365,10 @@ reversemp
 % \code{automark} will also be passed to \pkg{scrlayer-scrpage} and switch to running headers.
 %
 % \DescribeKeyOption{logo=head/body}{body}
-% Sets the position of the logo on the titlepage, see \autoref{sec:title}.
+% Sets the position of the logo on the titlepage, see \autoref{sec:title-options}.
 %
 % \DescribeKeyOption{colorback=true/false/title/body/head}{true}
-% Change the color setup of the title page, see \autoref{sec:title}.
+% Change the color setup of the title page, see \autoref{sec:title-options}.
 %
 % \DescribeKeyOption{IMRAD=\meta{Boolean}}{true}*
 % Toggles the check for IMRAD labels, see \autoref{sec:IMRAD}.
@@ -380,8 +382,7 @@ reversemp
 %
 % \noindent Additionally all \KOMAScript{} options can be used. These are described within the documentation. Some more notes on the interaction between \KOMAScript{} and TUDa-CI can be found in \autoref{sec:KOMA}.
 %
-% \subsection{Title}
-% \label{sec:title}
+% \section{Title}\label{sec:title}
 %
 % The title page is generated automatically by \cls{tudapub}.
 % The structure for this corresponds largely to the classic method using \cs{maketitle}.
@@ -403,7 +404,7 @@ reversemp
 % For theses there exist additional data fields \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
 % To use these and also learn about other specials of the title mechanism within theses, please refer to \autoref{sec:theses-title}.
 %
-% \subsubsection{TUDa-CI specific title elements: Additional logos, graphics or boxes}
+% \subsection{TUDa-CI specific title elements: Additional logos, graphics or boxes}
 % \DescribeMacro{\titlegraphic}
 % Accepts any \LaTeX{} content, does not have to be an image.
 % This is placed flush with the top corner in the main part of the title page.
@@ -459,31 +460,36 @@ reversemp
 % \sponsors{|\meta{logo1}\meta{logo2}|}
 % \end{Syntax}
 %
-% \subsubsection{Extra title material for theses}
+
+% \subsection{Options for titlepage modification}
+% \label{sec:title-options}
+% \DescribeKeyOption{logo=head/body}{body}
+% The position of the logo can be switched. This is done via the class option \option{logo};
+% \begin{description}
+% \item[logo=head]
+% The logo is placed in the header directly next to the title, which is reduced in width.
+% The background of the title is colored in the color of the identity bar.
+% This setting also will move the boxes below the logo to the page head.
+%
+% \item[logo=body] y The logo including the info boxes is placed in the body of the front page.
+% \end{description}
+%
+% \DescribeKeyOption{colorback=\meta{Boolean}/title/head/body}{true}
+% Similar to the logo position the color structure can be adjusted.
+% \option{colorback} toggles between the colored block on the title page and the white background.
+%
+% The other values will enable the colored area but allow to switch between positions.
+% \begin{description}
+% \item[colorback=title] Only the title background (without subtitle) is colored.
+% \item[colorback=head] Background of the total title block inlcuding subtitles is colored.
+% \item[colorback=body] Only the background of the area used for the \cs{titlegraphic} is colored.
+% \end{description}
+%
+% \subsection{Extra title material for theses}
 % For \option{mode=thesis} the title page works a little bit different.
 % Here some data elements are used to provide an interface to be overwritten and are prefilled using additional data fields.
-% The fields only existing in theses mode are: birthplace, group, examdate, submissiondate, tuprints, urn, reviewer.
+% The fields only existing in theses mode are:  \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
 % For more information on their use and other settings for theses have a look at \autoref{sec:theses}.
-%
-% \subsubsection{Optionen für die Titelseite}
-% Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/""body}.
-% \begin{description}
-% \item[logo=head] Das Logo wird im Kopf direkt neben dem Titel platziert. Der Titel wird in der Breite reduziert. Der Hintergrund des Titels wird in der Farbe der Identitätsleiste eingefärbt. Zusätzliche Infoboxen (s.u.) werden ebenfalls im Kopf platziert.
-% \item[logo=body] Das Logo samt der Infoboxen wird im Körper der Titelseite platziert.
-% \end{description}
-%
-% Darüber hinaus lässt sich die Farbgebung umschalten.
-% Die Option \code{colorback} schaltet zwischen dem farbigen Block auf der Titelseite und dem weißen Hintergrund um. Sie ist in der Voreinstellung aktiviert, sodass ein farbiger Block erzeugt wird.
-%
-% Mit Version 3.08 werden zusätzlich zu den \code{true}/\code{false} Werten auch die Werte \code{title}, \code{head} und \code{body} für die Option \code{colorback} ergänzt.
-% Mit diesen ist es möglich nach der Auswahl der Logoposition eine Korrektur an der Farbgebung durchzuführen. Alle drei neuen Werte aktivieren die Hintergrundfarbe und schalten deren Position um:
-% \begin{description}
-% \item[colorback=true/false] Aktiviert/Deaktiviert die Farbfläche auf der Titelseite. Dieser Schalter ist unabhängig von der aktuellen Position der farbigen Fläche. Die übrigen Optionen aktivieren zusätzlich noch die Ausgabe der Farbfläche, falls diese zuvor deaktiviert war.
-% \item[colorback=title] Der Titel (ohne Untertitel) wird hinterlegt.
-% \item[colorback=head] Der komplette Titelblock, inklusive Untertitel wird hinterlegt.
-% \item[colorback=body] Es wird nur der Bildbereich eingefärbt.
-% \end{description}
-%
 %
 % \subsection{Strukturierungselemente}
 % \minisec{Die abstract-Umgebung}
@@ -558,8 +564,96 @@ reversemp
 %
 % Für die Druckausgabe ist dieser Modus ungeeignet. Ab Version 3.12 gibt \cls{tudapub} eine entsprechende Infomeldung aus, um über diese Umwandlung zu informieren.
 %
-% \section{Theses}
+% \section{(PhD) Theses – Special options and elements used in these templates}
 % \label{sec:theses}
+%
+% As mentioned before the these templates \file{DEMO-TUDaThesis} and \file{DEMO-TUDaPhD} are based on \cls{tudapub}.
+% Therefore they support all options as described before but provide some additional mechanisms.
+% To load the thesis specific config the option \option{type=thesis} has to be used.
+% As there are additional thesis specific options it's also possible to use the \option{thesis} key directly and add the specific options within braces:
+%
+% \begin{example}
+% \documentclass[
+% 	english,
+% 	class=report,
+%	 thesis={type=master}
+% 	|[…]|
+% ]{tudapub}
+% \end{example}
+%
+% \DescribeKeyOption{type=bachelor/pp/master/dr/drfinal/\meta{text}}{initially unset}*
+% Selection of the type.
+% This is printed on the title page and also selects which data is mandatory.
+% Possible values are listed below including their impact. The items in parenthesis list the required data for that type.
+% \begin{description}
+% \item[sta] \enquote{Studienarbeit}: Student research project. (\cs{title}, \cs{author}, \cs{date})
+% \item[bachelor] \enquote{Bachelor thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
+% \item[master] \enquote{Master thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
+% \item[pp] \enquote{Project proposal}. (\cs{title}, \cs{author}, \cs{date}, \cs{department})
+% \item[dr] submitted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{birthplace}, \cs{department}, \cs{reviewer})
+% \item[drfinal] accepted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{examdate}, \cs{birthplace}, \cs{department}, \cs{reviewer})
+%\end{description}
+%If a type is specified that was not listed the text is directly used as type.
+%In this case, there are no mandatory title fields except the title.
+%
+% \DescribeKeyOption{dr=rernat/rerpol/ing/phil}{initially unset}
+% Loads one of the predefined texts for the title page.
+%
+% For example, the value phil would use:
+% \enquote{Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)}
+% Please be aware that the titlepage is enforced to use German.
+%
+% \DescribeMacro{\drtext}If none of these values correspond to the desired title, a text can be transferred directly.
+% \begin{example}
+% \drtext{To obtain the degree …}
+% \end{example}
+%
+%
+% \DescribeKeyOption{department=\meta{shorthand or text}}{initially unset}
+% The departments are permanently stored as text modules in German and English.
+% This option enables selection as a document class option.
+% For compatibility reasons, however, the department macro can also be used for this.
+% The following shorthands are predefined:
+% \begin{tabular}{@{}l@{${}\to{}$}l@{}}
+%	arch & Architecture \\
+%	bauing & Civil and environmental engineering \\
+%	bio & Biology \\
+%	chem & Chemistry \\
+%	etit & Electrical Engineering and Information Technology \\
+%	gugw & History and Social Sciences \\
+%	humanw & Human Sciences \\
+%	inf & Computer Science \\
+%	mb & Mechanical Engineering \\
+%	matgeo & Materials and Earth Sciences \\
+%	math & Mathematics \\
+%	phys & Physics \\
+%	wi & Law and Economics
+% \end{tabular}
+%
+% In addition to the departments, there are also \enquote{fields or study}.
+% These are not available for doctoral theses.
+% If the given value is not found in the departments the fields of study will be checked afterwards.
+% The study areas have the following shorthands:
+% \begin{tabular}{@{}l@{${}\to{}$}l@{}}
+% ce&Computational Engineering\\
+% ese&Energy Science and Engineering\\
+% ist&Information Systems Engineering\\
+% mech&Mechanics\\
+% metro&Mechatronics
+% \end{tabular}
+%
+% If anything other than one of these shorthands is found, the provided text is used directly and a corresponding warning is issued.
+%
+% \subsection{Thesis specific title page settings and customisation}
+%
+% \DescribeKeyOption{instbox=\meta{Boolean}}{true}*
+% Selecting the department also creates a box on the title page below the logo.
+% I some cases this setting does not match the requiremerents.
+% Therefore the option \option{instbox} can be deactived.
+%
+% \DescribeKeyOption{ignore-missing-data=\meta{Boolean}}{false}
+%  This option is a switch that makes it possible to disable the error message about title data that has not been transferred.
+% In this case, only a warning is created if the specified data does not match the requirements.
 %
 % \DescribeMacro{\publishers}
 %  Is used here for the location and is preset with \enquote{Darmstadt} or \enquote{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
@@ -717,16 +811,16 @@ reversemp
 % Soll abseits dieser automatischen Abweichung ein bestimmter Farbmodus erzeugt werden, können die \pkg{xcolor}-Optionen \code{cmyk} oder \code{RGB} direkt an \cls{tudapub} übermittelt werden. Sie werden an das Paket weitergereicht und entsprechend der \pkg{xcolor}-Dokumentation verarbeitet.
 %
 %
-% \subsection{Anpassungen, die von den Corporate Design Richtlinien abweichen}
+% \section{Anpassungen, die von den Corporate Design Richtlinien abweichen}
 %
 %
-% \subsubsection{Schriftgröße}
+% \subsection{Schriftgröße}
 % \cls{tudapub} kann entgegen der Corporate Design Richtlinien auch andere Schriftgrößen verarbeiten. Hierfür wird die \code{fontsize}-Option aus \KOMAScript{} genutzt (z.\,B. \code{fontsize=11pt}). Sofern keine spezielle Schriftgrößendatei für TUDa-CI vorliegt, wird die mit \KOMAScript{} ausgelieferte Datei gewählt.
 %
 % Beispiele für Abweichungen aus typografischen Gründen sind unter anderem auch in den Demo-Dateien für Abschlussarbeiten gezeigt.
 %
 %
-% \subsubsection{Seitenränder}
+% \subsection{Seitenränder}
 % Laut Corporate Design sind die Zeilenlängen aus typografischer Sicht zu lang.
 % Daher existiert die Klassenoption \code{custommargins}. Sie verfügt über die Werte \code{true}, \code{false} und \code{geometry}:
 %
@@ -831,136 +925,7 @@ reversemp
 %
 %
 %<*thesis|phd>
-% \section{Spezielle Optionen für Abschlussarbeiten}
-% Die Klasse unterstützt alle Optionen der \file{tudapub}-Klasse. Darüber hinaus besteht über Wertzuweisung der Option \code{thesis} die Möglichkeit spezielle Einstellungen zu wählen.
-% Es ist prinzipiell möglich die Optionen auch direkt als Optionen zur \file{tudapub}-Klasse zu übergeben. Allerdings ist dies aufgrund der schlechteren Übersicht nicht zu empfehlen.
-%
-% Für dieses Dokument wurden beispielsweise die Optionen als
-% \begin{verbatim}
-% thesis={type=dr,dr=rernat}
-% \end{verbatim}
-% übergeben.
-%
-% Im Folgenden findet sich die Bedeutung der einzelnen Optionen:
-% \begin{description}
-% \item[type=<Wert>] Auswahl des Typus. Dieser wird auf die Titelseite gesetzt und wählt zudem aus, welche Daten für die Titelseite zwingend übergeben werden müssen.
-% Es stehen die folgenden Werte zur Verfügung (die Werte in Klammern sind die notwendigen Titeldaten):
-% \begin{itemize}
-% \item \code{sta}: Studienarbeit (title, author, date)
-% \item \code{diplom}: Diplomarbeit (title, author, submissiondate, reviewer, department)
-% \item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
-% \item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
-% \item \code{pp}: Project-Proposal (title, author, date, department)
-% \item \code{dr}: vorgelegte Dissertation (title, author, submissiondate, birthplace, department, reviewer)
-% \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate, examdate, birthplace, department, reviewer)
-% \end{itemize}
-% Wird ein Typus angegeben der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
-% \item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{rerpol}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
-% \begin{quote}
-% Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
-% \end{quote}
-% Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden.
-% \begin{verbatim}
-% \drtext{Zur Erlangung des Grades \ldots}
-% \end{verbatim}
-% \item[department=<Kürzel>] Die Fachbereiche sind fest als Textbausteine in deutscher sowie englischer Sprache hinterlegt. Diese Option ermöglicht die Auswahl als Dokumentenklassenoption. Aus Kompatibilitätsgründen kann jedoch auch das Makro \code{department}-Makro hierfür genutzt werden. Zur Verfügung stehen:\par
-% \begin{tabular}{@{}l@{${}\to{}$}l@{}}
-% arch  & Architektur\\
-% bauing& Bau- und Umweltingenieurwissenschaften\\
-% bio   &Biologie\\
-% chem  &Chemie\\
-% etit  &Elektrotechnik und Informationstechnik\\
-% gugw  &Gesellschafts- und Geschichtswissenschaften\\
-% humanw&Humanwissenschaften\\
-% inf   &Informatik\\
-% mb    &Maschinenbau\\
-% matgeo&Material- und Geowissenschaften\\
-% math  &Mathematik\\
-% phys  &Physik\\
-% wi    &Rechts- und Wirtschaftswissenschaften
-% \end{tabular}
-%
-% ^^A Teilung des Absatzes in jeweils:
-%<*phd>
-% Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
-%</phd>
-%
-% ^^A oder
-%<*thesis>
-% Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche.
-% Falls das Kürzel nicht als Fachbereich hinterlegt ist, wird automatisch auf die Studienbereiche geprüft. Die Studienbereiche haben die folgenden Kürzel:
-%
-% \begin{tabular}{@{}l@{${}\to{}$}l@{}}
-% ce&Computational Engineering\\
-% ese&Energy Science and Engineering\\
-% ist&Information Systems Engineering\\
-% mech&Mechanik\\
-% metro&Mechatronik
-% \end{tabular}
-%</thesis>
-%
-% Falls etwas anderes, als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
-%
-% Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Wenn diese automatische Erstellung nicht gewünscht ist, dann kann dies mit \code{instbox=false} deaktiviert werden.
-% \item[ignore-missing-data] Diese Option ist ein Schalter, der es ermöglicht die Fehlermeldung über nicht übergebene Titeldaten auszuschalten. In diesem Fall wird lediglich eine Warnung erzeugt, falls die angegeben Daten nicht mit den Anforderungen übereinstimmen.
-% \end{description}
-%
-% \minisec{Abweichung von den Vorgaben für die Titelseite}
-% Da es möglich sein kann von dieser Vorgabe abzuweichen, existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weitere Informationen zur Konstruktion der Boxen finden sich in den Verwendungshinweisen der Basisklasse TUDaPub. Zusätzlich sei auf die Möglichkeiten des \code{\textbackslash{}department}-Makros verwiesen, sofern die Abweichung sich auf den Text beschränkt.
-%</thesis|phd>
-%
-%
-%
-%
-%
-% \subsection{Selbstständigkeitserklärung}
-% Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
-% In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
-%
-% Ab Version 3.06 verfügt \verb+\affidavit+ zusätzlich über ein optionales Argument, über das der Modus eingestellt werden kann.
-% Es besteht die Unterscheidung zwischen \verb+digital+ und \verb+print+. Hier wird entsprechend der Vorgabe unter \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} der entsprechende Text automatisch ausgewählt.
-%
-% \begin{verbatim}
-% \affidavit[digital]
-% \end{verbatim}
-%
-% Da für Dissertationen bisher keine Option der rein digitalen Abgabe besteht, entfällt dort diese Unterscheidungsmöglichkeit. Intern wird dafür der Schlüssel \verb+dr+ verwendet.
-%
-% Version 3.20 ermöglicht zusätzlich die Übergabe weiterer Optionen für den Signatur-Namen, ein Signatur-Bild oder die Ortsangabe.
-% Inwieweit diese Optionen verwendet werden dürfen ist jeweils vor der Verwendung abzuklären.
-% TUDa-CI kann hierfür keine gesicherte Aussage treffen.
-% In diesem Fall muss der Varianten-Option der Optionsschlüssel \verb+affidavit+ vorangestellt werden.
-%
-% \begin{verbatim}
-% \affidavit[affidavit=digital,signature=Signaturname,signature-image={\includegraphics[width=\width]{signaturbild}}]
-% \end{verbatim}
-% Eine vertikale Verschiebung des Signaturbildes ist nicht direkt implementiert, ist jedoch mit der Verwendung des \LaTeX-Makros \verb+\raisebox{<Verschiebung>}{<Inhalt>}+ problemlos möglich.
-%
-% Es besteht zusätzlich die Möglichkeit ein anderssprachiges Affidavit als Ergänzung mit abzudrucken. Um die Struktur und die ggf. notwendige Sprachumschaltung zu erledigen, existiert hierfür ab Version 2.03 eine Umgebung:
-%
-% \begin{verbatim}
-% \begin{affidavit*}[Babel-Sprachoption]{Überschrift}
-% Text
-% \end{affidavit*}
-% \end{verbatim}
-%
-% Diese Variante verfügt bewusst über keine Unterschriftenzeile, da diese Version laut Verständnis der Entwickler keine rechtliche Verbindlichkeit besitzt.
-%
-% Die Umgebung kann jedoch auch für besondere Formen der Erklärung genutzt werden. In diesem Fall kann eine zusätzliche Signaturzeile hinzugefügt werden:
-% \begin{verbatim}
-% \AffidavitSignature[Stadt]
-% \end{verbatim}
-% Die Vorbelegung für Stadt ist hierbei \enquote{Darmstadt}.
-% Ab Version 3.20 ist die Übergabe einer zusätzlichen Option für den Ort der Signatur auch als Option möglich.
-%
-% \begin{verbatim}
-% \affidavit[signature-location=Stadt]
-% \end{verbatim}
-%
-%
-%
-%
-%
+
 %
 % \section{Weitere Konfigurationsmöglichkeiten: Standard-KOMA-Script}
 % \label{sec:KOMA}
