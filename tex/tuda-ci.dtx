@@ -317,6 +317,11 @@ reversemp
 % The Options \option{accentcolor}, \option{textaccentcolor} and \option{identbarcolor} will be passed to tudacolors.
 % Using those, the colors can even be set independently of each other.
 %
+% \DescribeKeyOption{custommargins=\meta{Boolean}/geometry}{false}
+% According to the corporate design, the line lengths are too long from a typographical point of view.
+% This is why the custommargins class option exists.
+% Details are described within \autoref{sec:margins}.
+%
 % \DescribeKeyOption{marginpar=true/false/auto}{auto}
 % Controlls the the marginpar. The default setting is auto.
 % This means that the marginpar column runs across the fifth column of the layout grid \cite{TUDaGuideline}.
@@ -588,17 +593,17 @@ reversemp
 % \DescribeKeyOption{IMRAD=\meta{boolean}}{true}*
 % The check mechanism is activated by default at the request of the library.
 % If you are not planning to use these labels or this structure just don't match your document, the warning can be deactivated using the \option{IMRAD=false}.
-% 
+%
 % \subsection{Colors models}
 % \label{sec:pdfa-color}
 % PDF/A can only use one color model within a document.
 % By default if no specific profile is selected TUDa-CI will convert the colors to RGB.
 % However, as there is no clear conversion, CMYK elements should not be used in \option{pdfa=true} mode.
-% 
+%
 % This mode is not suitable for print output.
 % There will be a warning if the conversion is triggered.
 % To use CMYK colors with PDF/A it's necessary to use PDF/A via the pdfmanagement (\autoref{sec:pdfmanagement}) and select a specific color profile as described in \cite{l3pdfmeta}.
-% 
+%
 % \section{(PhD) Theses – Special options and elements used in these templates}
 % \label{sec:theses}
 %
@@ -855,70 +860,91 @@ reversemp
 % Beispiele für Abweichungen aus typografischen Gründen sind unter anderem auch in den Demo-Dateien für Abschlussarbeiten gezeigt.
 %
 %
-% \subsection{Seitenränder}
-% Laut Corporate Design sind die Zeilenlängen aus typografischer Sicht zu lang.
-% Daher existiert die Klassenoption \code{custommargins}. Sie verfügt über die Werte \code{true}, \code{false} und \code{geometry}:
+% \subsection{Margins}
+% \label{sec:margins}
+% According to the corporate design, the line lengths are too long from a typographical point of view.
+% This is why the custommargins class option exists.
 %
 % \begin{description}
-% \item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pkg{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
-% \item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pkg{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Die Ränder werden dadurch nicht fest definiert, sondern auf Basis des \pkg{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
-% \item[custommargins=geometry]  Diese Variante wurde auf Wunsch zur Verfügung gestellt. Allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
-% \pkg{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten, werden gespeichert und nach der Titelseite wiederhergestellt.
+% \item[custommargins=false]
+% Default setting of \cls{tudapub}.
+% The margins correspond to the specifications of the Corporate Design Guidelines\cite{TUDaGuideline}.
+% The setting is made using \pkg{geometry}.
+% Customizations are overwritten by executing \cs{maketitle}.
+% To allow personal adjustments one of the other settings is required.
 %
-% Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit
-% \begin{verbatim}
+% \item[custommargins=true] The settings of the Corporate Design Guidelines are not activated.
+% pkg{geometry} is not loaded.
+% This mode corresponds to the default setting of \KOMAScript.
+% The margins are not explicitly defined, but calculated on the basis of the typearea package \cite[see][]{scrguide-en}.
+%
+% \item[custommargins=geometry]
+% This variant was created based on user requests.
+% It allows to use \cls{tudapub} with support for manual adjustments.
+% \pkg{geometry} is loaded and preconfigured as with \option{custommargins=false}.
+% However, it is possible to make minor adjustments by using the \cs{geometry} command.
+% The settings that apply at the start of the document are saved and restored after the title pages.
+%
+% Please note that the settings use the preset type area as a starting point (with or without a margin column, depending on the option).
+% It is possible to reset all options before adding your own:
+% \begin{Syntax}
 % \geometry{
 % reset,
-%<Eigene Anpassungen>
+%|\meta{Now it's reset to the default geometry settings and here can be the own adjustments}|
 % }
-% \end{verbatim}
-% zurückzusetzen.
-% Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
+% \end{Syntax}
+% This applies in particular to the options \code{includehead}, \code{includefoot} and \code{includemp}.
 % \end{description}
 %
-% \minisec{Hinweis zu den Kopf-/Fußzeilen}
-% Wenn die Option \code{marginpar=true} gesetzt bleibt, ragen die Kopf- und Fußzeile über die Marginalspalte hinaus. Aus ästhetischen Gründen wird daher empfohlen in diesem Fall die Kopf- und Fußzeile  mit \code{marginpar=false} auf den Textbereich zu beschränken.
-%
-% Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit lokal größer sein können, als die eigentliche Überschrift. (\code{headline=automark})
-% Deswegen kann über
-% \begin{verbatim}
-% \pagestyle{TUDa.headings}
-% \end{verbatim}
-% ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pkg{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
-%
-% \minisec{Hinweis zur Bindekorrektur}
-% Bei Verwendung einer Bindekorrektur (\code{BCOR=<Länge>}) wird diese nicht automatisch auch auf der Titelseite eingefügt. Für diesen Fall wurde mit Version 3.0 die Option \code{BCORtitlepage} hinzugefügt. Falls diese aktiviert wird, nimmt die Titelseite den Wert der Typearea Option \code{BCOR} auf der ersten Seite als Zusatz zum linken Rand.
+\minisec{Remark on the headers/footers}
+If the option \option{marginpar=true} remains set, the header and footer protrude beyond the margin column.
+For aesthetic reasons, it is therefore recommended in this case to limit the header and footer to the text area with marginpar=false.
+
+The standard layout of the column titles is also not very advantageous, as the column titles can be locally larger than the actual headline. (\option{headline=automark})
+
+For this reason, \cls{tudapub} provides a simpler page style, which considerably simplifies use with living column titles.
+The structure is realized using \pkg{scrlayer-scrpage} and can be adapted according to the \KOMAScript documentation \cite{scrguide-en}.
+\begin{example}
+\pagestyle{TUDa.headings}
+\end{example}
+
+% \minisec{Remark on binding correction}
+% \DescribeKeyOption{BCOR=\meta{length}}{0pt}
+% \DescribeKeyOption{BCORtitlepage=\meta{Boolean}}{false}
+% If a binding correction (\option{BCOR=\meta{length}}) is used, this is not automatically inserted on the title page.
+% For this case, the \option{BCORtitlepage}option was added with version 3.0. If this is activated, the title page uses the value of the typearea option \option{BCOR} on the first page as an addition to the left margin.
 %
 %
 % \subsection{Frontmatter/Mainmatter/Backmatter}
-% Üblicherweise gibt es die Makros \verb+\frontmatter+, \verb+\mainmatter+ und \verb+\backmatter+ lediglich bei der Basisklasse \cls{scrbook}.
-% Auf Wunsch wurden diese Makros auch bei \cls{scrartcl} und \cls{scrreprt} als Basis bereitgestellt.
+% The macros \cs{frontmatter}, \cs{mainmatter} and \cs{backmatter} are usually only available for the class scrbook.
+% On request, these macros have also been provided as a basis for scrartcl and scrreprt.
+% It is therefore possible to switch to Roman numerals for the opening credits.
+% Arabic numerals are then used from \cs{mainmatter}.
 %
 % Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet.
 %
 %
-% \subsection{Mathematikschriften}
-% Da es keine Compiler-unanbhängige universelle Mathematikschrift gibt und die Corporate Design Richtlinien auch keinerlei Empfehlung berücksichtigen, wurden hierfür einige mögliche Varianten diskutiert. Die Voreinstellung entspricht immer dem Standard der Installation. Es werden keine spezifischen Einstellungen geladen.
-%
-% Die Diskussion hierzu findet sich unter:\\
+% \subsection{Math fonts}
+% As there is no compiler-independent universal math font and the corporate design guidelines do not take any recommendations into account, several possible variants were discussed.
+% The default setting always corresponds to the installation standard.
+% No specific settings are loaded.
+% The discussion on this can be found at:
 % \url{https://github.com/tudace/tuda_latex_templates/issues/19}
 %
-% Im Folgenden werden ein paar Beispielkonfigurationen gezeigt. Grundsätzlich ist die Mathematikschriftart jedoch -- abgesehen durch Einschränkungen des Compilers -- frei wählbar.
+% A few example configurations are shown below.
+% In principle, however, the math type is freely selectable – apart from the restrictions of the compiler.
+% In many cases, the \enquote{\TeX{} Font Catalogue} is helpful for selection and use: \url{https://tug.org/FontCatalogue/mathfonts.html}
 %
-% Bei der Auswahl und Verwendung ist in vielen Fällen der \enquote{\TeX{} Font Catalogue hilfreich}: \url{https://tug.org/FontCatalogue/mathfonts.html}
-%
-%
-% \subsection{\hologo{pdfLaTeX}}
+% \subsubsection{\hologo{pdfLaTeX}}
 % Hier existiert eine Variante, die die Buchstaben der Basisschriftart \enquote{Charter} mit Mathematiksymbolen aus unterschiedlichen Zeichensätzen möglichst passend kombiniert.
 %
 % \begin{verbatim}
 % \usepackage[charter,expert]{mathdesign}
 % \end{verbatim}
 %
-% Es gibt ähnliche Ansätze für ein paar weitere Kombinationen. Einige Beispiele finden sich in der XCharter Dokumentation. \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
-%
-%
-%
+% There are similar approaches for a few other combinations.
+% Some examples can be found in the XCharter documentation \cite{xcharter}.
+% \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
 %
 % \section{Fachbereichsspezifische Anpassungen}
 % Einige Fachbereiche haben spezielle Anforderungen. Dieser Abschnitt betrachtet die speziellen Anpassungen. Bisher (Juli 2020) existieren diese Modifikationen lediglich für den Fachbereich Maschinenbau. Der Mechanismus ist jedoch erweiterungsfähig.
