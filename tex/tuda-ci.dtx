@@ -515,6 +515,9 @@ reversemp
 % PDF/A mode is automatically activated within tudapub.
 % Depending on the document it's using an implementation via the \pkg{pdfx} package or the \LaTeX{} kernels own pdfmanagement.
 %
+% \LaTeX{} is not validating the file in any way, it is just using compatible settings for all elements processed by the compiler.
+% As \LaTeX{} is not doing any processing on image files the user has to ensure the font settings match the requirements for PDF/A.
+%
 % \DescribeKeyOption{pdfx=\meta{Boolean}}{true}\cls{tudapub} will try to automatically select the best method.
 % This is done using \option{pdfx} option.
 % This should only be toggled manually if the user is totally sure to understand the impact.
@@ -559,12 +562,6 @@ reversemp
 %
 % For a full list of the available metadata fields have a look at the \pkg{pdfx} documentation \cite{pdfx}.
 %
-% Um mehrere Einträge zu trennen, wird das Makro \code{\textbackslash{}sep} genutzt.
-% \begin{verbatim}
-% keywords={TU Darmstadt \sep Corporate Design \sep LaTeX}
-% \end{verbatim}
-% Wenn der Eintrag selber jedoch Kommata enthält, dann ist eine Gruppierung um den Eintrag notwendig. Der Text wird sonst nach dem Komma als nächstes Keyword interpretiert.
-%
 % \minisec{Mögliche Probleme mit älteren Systemen:}
 %
 % Bei älteren \TeX-Distributionen kann es vorkommen, dass die Farbprofile nicht vorinstalliert sind. In diesem Fall wird eine Fehlermeldung im folgenden Sinn erzeugt:
@@ -575,29 +572,33 @@ reversemp
 %
 % Darüber hinaus werden bei \hologo{XeLaTeX} einige Features nicht unterstützt. In diesem Fall erzeugt \code{pdfa=""false} ein kompilierbares Dokument. Für validierbare PDF/A-Dateien in \hologo{LuaLaTeX} sollte auf eine möglichst aktuelle Version umgestiegen werden.
 %
-%
-% \subsection{Zusätzliche Metadaten nach Wunsch der Universitätsbibliothek}
+% \subsection{Additional metadata as requested by the university library}
 % \label{sec:IMRAD}
-% Um das Strukturierungsmodell IMRaD \cite{imrad} zu kennzeichnen, gibt es einen weiteren Mechanismus.
-% Im Stil der einzelnen Teilbereiche können so über den Aufruf von
-%
-% \begin{verbatim}
+% There is a  mechanism for identifying the IMRaD \cite{imrad} structuring model.
+% In the style of the individual sub-areas, the call of
+% \begin{example}
 % \IMRADlabel{introduction}
 % \IMRADlabel{methods}
 % \IMRADlabel{results}
 % \IMRADlabel{discussion}
-% \end{verbatim}
-% entsprechende Labels generiert werden. Sie haben den Namen \code{IMRAD:<Schlüssel>}.
+% \end{example}
+% would generate the corresponding labels.
+% They have the name \codefont{IMRAD:\meta{key}}.
 %
-% Der Prüfmechanismus ist auf Wunsch der Bibliothek standardmäßig aktiviert, kann jedoch durch die Option \code{IMRAD=false} deaktiviert werden.
-%
-%
-% \subsection{Farbdarstellung}
+% \DescribeKeyOption{IMRAD=\meta{boolean}}{true}*
+% The check mechanism is activated by default at the request of the library.
+% If you are not planning to use these labels or this structure just don't match your document, the warning can be deactivated using the \option{IMRAD=false}.
+% 
+% \subsection{Colors models}
 % \label{sec:pdfa-color}
-% Der PDF/A-Modus konvertiert automatisch eingegebene CMYK-Farben in RGB. Da es jedoch keine eindeutige Umwandlung gibt, sollte im Modus \code{pdfa=true} auf CMYK-Elemente verzichtet werden.
-%
-% Für die Druckausgabe ist dieser Modus ungeeignet. Ab Version 3.12 gibt \cls{tudapub} eine entsprechende Infomeldung aus, um über diese Umwandlung zu informieren.
-%
+% PDF/A can only use one color model within a document.
+% By default if no specific profile is selected TUDa-CI will convert the colors to RGB.
+% However, as there is no clear conversion, CMYK elements should not be used in \option{pdfa=true} mode.
+% 
+% This mode is not suitable for print output.
+% There will be a warning if the conversion is triggered.
+% To use CMYK colors with PDF/A it's necessary to use PDF/A via the pdfmanagement (\autoref{sec:pdfmanagement}) and select a specific color profile as described in \cite{l3pdfmeta}.
+% 
 % \section{(PhD) Theses – Special options and elements used in these templates}
 % \label{sec:theses}
 %
