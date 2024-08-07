@@ -181,7 +181,7 @@ reversemp
 \newcommand{\docmarginpar}[1]{\frame{#1}}
 
 \makeatother
-\ShowCommand{\meta}
+
 \providecommand*{\sarg}{\codefont{*}}
 \providecommand\marg[1]{%
   {\codefamily\char`\{}\meta{#1}{\codefamily\char`\}}}
@@ -462,119 +462,8 @@ reversemp
 % \subsubsection{Extra title material for theses}
 % For \option{mode=thesis} the title page works a little bit different.
 % Here some data elements are used to provide an interface to be overwritten and are prefilled using additional data fields.
-%
-% \DescribeMacro{\publishers}
-%  Is used here for the location and is preset with \enquote{Darmstadt} or \enquote{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
-%
-% \DescribeMacro{\subject}
-% Will be placed below the \cs{subtitle} as for the normal title page, but will hold all the additional information which can be provided using the additional data fields.
-%
-% \DescribeMacro{\birthplace} Place of birth. This information is required for dissertations
-% \DescribeMacro{\department}
-% Subject/field of study. It's prefered to set it via the class option.
-% However, the argument is processed in the same way.
-% This macro also provides the functionality of specifying entries that differ from the default entries.
-% Especially if a different text to the default \enquote{in the department of} and its variants is required.
-% For this purpose, \cs{department} provides an optional argument:
-% \begin{Syntax}
-% \department[|\meta{replacement text}|]{|\meta{abbreviation/name}|}
-% \end{Syntax}
-% In addition, from version 2.01 there is also the option of replacing the entire text \enquote{in the department \meta{department name}} as well as the information in the info box on the title page. This is done using the starred variant:
-% \begin{example}
-% \department*[text for the box]{text between type and author}
-% \end{example}
-% \DescribeMacro{\examdate} Will be added within the description block \cs{subject}.
-%
-% \DescribeMacro{\institution}\DescribeMacro{\department}\DescribeMacro{\institute}\DescribeMacro{\group}
-% Will be added inside a title box as was described in \autoref{sec:title} below each other.
-%
-% \DescribeMacro{\reviewer} Gutachter. Mehrere Gutachter werden (wie Autoren) durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
-% Multiple reviewers are separated by \cs{and} as for authors.
-% The numbering runs from left to right.
-%
-% \minisec{Adjusting the reviewer labels}
-% The identifier can be changed using an optional argument:
-% \begin{Syntax}
-% \reviewer[|\meta{replacement identifier}|]{|\meta{name1}| \and |\meta{name2}|}
-% \end{Syntax}
-% To change the numerical designation, a comma list is used instead of a single label:
-% \begin{example}
-% \reviewer*[identifier1, identifier2]{name1 \and name2}
-% \end{example}
-% In this case, the automatic numbering before the identifier is omitted.
-% If, for example, the wording of the doctoral regulations is to be complied with, the following applies:
-% \begin{example}
-% \reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
-% \end{example}
-%
-% \DescribeMacro{\setupReviewName}There is also a macro for creating department-specific templates.
-% This allows changes to be made without calling \cs{reviewer}.
-% \begin{Syntax}
-% \setupReviewName{|\meta{Alternative label to replace \enquote{Review}}|}
-% \setupReviewName[1]{|\meta{Erstreferent}|}
-% \setupReviewName*{|\meta{label1}|,|\meta{label2}|}
-% \end{Syntax}
-%
-% \DescribeKeyOption{reviewer-on-uppertitleback=\meta{Boolean}}{false}*
-% As of version 3.26, the reviewers are no longer named on the back of the title page.
-% This can be controlled using the thesis option \option{reviewer-on-uppertitleback}.
-%
-%	\DescribeMacro{\studentID} Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
-%	\DescribeMacro{\submissiondate} Datum der Einreichung.
-%	\DescribeMacro{\titlegraphic} Akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
-%	Üblicherweise wird dieses Makro zur Platzierung einer Grafik genutzt:
-%
-%	\begin{verbatim}
-%	\titlegraphic{\includegraphics[width=\width]{example-image}}
-%	\end{verbatim}
-%
-%	Um die Größe des Bildes passend zu wählen, können die Makros \code{width} und \code{height} verwendet werden. Darüber hinaus ist ab Version 3.19 auch die Variante \code{titlegraphic*} anwendbar. Mit der geschieht die Skalierung und ein ggf. notwendiger Beschnitt für das Füllen des reservierten Bereichs automatisch.
-%
-% TODO: Makro \code{addTitleBoxLogo} als alleiniges Makro oder so stehen lassen?
-%	Zusätzliche Logos und Informationen können über Boxen ergänzt werden.
-%
-%	\begin{verbatim}
-%	\addTitleBox{Institut 1}
-%	\end{verbatim}
-%	Die Institutsboxen werden mit vorgegebenem Abstand unter dem Logo platziert. Hier kann Text erscheinen oder auch ein Institutslogo. Der Hintergrund ist weiß.
-%
-%	Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \code{addTitleBoxLogo}. Als Argument akzeptiert es einen Bilddateipfad.
-%
-%	\begin{verbatim}
-%	\addTitleBoxLogo{example-image}
-%	\addTitleBoxLogo*{\includegraphics[width=\linewidth]{example-image}}
-%	\end{verbatim}
-%	\DescribeMacro{\titleintro} Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
-%	\DescribeMacro{\titleaddendum} Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
-%	\DescribeMacro{\tuprints} \label{page:tuprints}Übergabe der Daten. Sofern das Dokument über TUprints veröffentlicht werden soll.
-%	\begin{verbatim}
-%	\tuprints{
-%	urn=1234,
-%	printid=12345,
-%	year=2022
-%	}
-%	\end{verbatim}
-%	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
-%
-%	Ab Version 2.07 ist es möglich einen eigenen Lizenztext über den Schlüssel \verb|license| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
-%
-%	Um eine einfachere Anpassung zu ermöglichen, existieren ab Version 3.08 vorgefertigte Werte für die Option \verb|license|.
-%	Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, die durch die Universitätsbibliothek angepasst wurde.
-%	Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
-%
-%	Die vorgefertigten Lizenzschlüssel lauten: \verb+cc-by-nc-nd-2.0-de+ (noch aktuelle Voreinstellung), \verb+cc-by-4.0+, \verb+cc-by-sa-4.0+, \verb+cc-by-nc-sa-4.0+, \verb+cc-by-nc-4.0+, \verb+cc-by-nd-4.0+, \verb+cc-by-nc-nd-4.0+.
-%	Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet das Projekt über seinen Lizenzfinder unter \url{https://creativecommons.org/choose/}.
-%	Ab Version 3.10 werden alle (Stand: Januar 2021) dort vorgeschlagenen Lizenzen von tuda-ci unterstützt.
-%
-%	Falls ein davon abweichender Wert gewählt wird, wird dieser direkt an der Stelle des Lizenztextes verwendet. Wenn der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
-%
-%
-%
-%
-%
-%
-
-%
+% The fields only existing in theses mode are: birthplace, group, examdate, submissiondate, tuprints, urn, reviewer.
+% For more information on their use and other settings for theses have a look at \autoref{sec:theses}.
 %
 % \subsubsection{Optionen für die Titelseite}
 % Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/""body}.
@@ -669,8 +558,152 @@ reversemp
 %
 % Für die Druckausgabe ist dieser Modus ungeeignet. Ab Version 3.12 gibt \cls{tudapub} eine entsprechende Infomeldung aus, um über diese Umwandlung zu informieren.
 %
+% \section{Theses}
+% \label{sec:theses}
 %
+% \DescribeMacro{\publishers}
+%  Is used here for the location and is preset with \enquote{Darmstadt} or \enquote{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
 %
+% \DescribeMacro{\subject}
+% Will be placed below the \cs{subtitle} as for the normal title page, but will hold all the additional information which can be provided using the additional data fields.
+%
+% \DescribeMacro{\birthplace} Place of birth. This information is required for dissertations
+% \DescribeMacro{\department}
+% Subject/field of study. It's prefered to set it via the class option.
+% However, the argument is processed in the same way.
+% This macro also provides the functionality of specifying entries that differ from the default entries.
+% Especially if a different text to the default \enquote{in the department of} and its variants is required.
+% For this purpose, \cs{department} provides an optional argument:
+% \begin{Syntax}
+% \department[|\meta{replacement text}|]{|\meta{abbreviation/name}|}
+% \end{Syntax}
+% In addition, from version 2.01 there is also the option of replacing the entire text \enquote{in the department \meta{department name}} as well as the information in the info box on the title page. This is done using the starred variant:
+% \begin{example}
+% \department*[text for the box]{text between type and author}
+% \end{example}
+% \DescribeMacro{\examdate}% \DescribeMacro{\submissiondate} Will be added within the description block \cs{subject}.
+
+% \DescribeMacro{\institution}\DescribeMacro{\department}\DescribeMacro{\institute}\DescribeMacro{\group}
+% Will be added inside a title box as was described in \autoref{sec:title} below each other.
+%
+% \DescribeMacro{\reviewer} Gutachter. Mehrere Gutachter werden (wie Autoren) durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
+% Multiple reviewers are separated by \cs{and} as for authors.
+% The numbering runs from left to right.
+%
+% \minisec{Adjusting the reviewer labels}
+% The identifier can be changed using an optional argument:
+% \begin{Syntax}
+% \reviewer[|\meta{replacement identifier}|]{|\meta{name1}| \and |\meta{name2}|}
+% \end{Syntax}
+% To change the numerical designation, a comma list is used instead of a single label:
+% \begin{example}
+% \reviewer*[identifier1, identifier2]{name1 \and name2}
+% \end{example}
+% In this case, the automatic numbering before the identifier is omitted.
+% If, for example, the wording of the doctoral regulations is to be complied with, the following applies:
+% \begin{example}
+% \reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
+% \end{example}
+%
+% \DescribeMacro{\setupReviewName}There is also a macro for creating department-specific templates.
+% This allows changes to be made without calling \cs{reviewer}.
+% \begin{Syntax}
+% \setupReviewName{|\meta{Alternative label to replace \enquote{Review}}|}
+% \setupReviewName[1]{|\meta{Erstreferent}|}
+% \setupReviewName*{|\meta{label1}|,|\meta{label2}|}
+% \end{Syntax}
+%
+% \DescribeKeyOption{reviewer-on-uppertitleback=\meta{Boolean}}{false}*
+% As of version 3.26, the reviewers are no longer named on the back of the title page.
+% This can be controlled using the thesis option \option{reviewer-on-uppertitleback}.
+%
+% \DescribeMacro{\studentID} Matriculation number. According to the template specifications, this information is always optional.
+%
+% \DescribeMacro{\titleintro}\DescribeMacro{\titleaddendum} From version 2.03, these hooks can be used to add any text directly in front or after the automatic generated subject block holding the thesis data.
+%
+% \DescribeMacro{\tuprints}\label{page:tuprints}  Publication via TUprints requires this setting.
+% The data should be provided by the TUprints submission process.
+% \begin{example}
+%     \tuprints{
+%         printid=12345,
+%         urn=123456,
+%         year=2022
+%     }
+% \end{example}
+%
+% \DescribeKeyOption{printid=\meta{TUprints print ID}}{\meta{initially unset}}*
+% \DescribeKeyOption{urn=\meta{TUprints URN}}{\meta{initially unset}}*
+% If the argument does not contain an equals sign, the value is set as \option{printid} and no \option{urn} is specified.
+%
+% The printid is the ID number of the TUprints entry. The urn is a permanently unique resource identifier for the document. In TUprints, the number corresponds to the \option{printid} with the addition of a check digit.
+% Both dates can be found in the details of the TUprints entry.
+%
+% \minisec{License information}
+% \DescribeKeyOption{license=\meta{License key or license text}}{cc-by-4.0}*
+% From version 3.08 there are predefined values for \option{license} simplify customization. These are as follows:
+%
+% \parbox[t]{.5\linewidth}{%
+% \codefamily
+% \href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0} \textnormal{default since version 4.0}\par
+% \href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
+% \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
+% \href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
+% }%
+% \parbox[t]{.5\linewidth}{
+% \codefamily
+% \href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
+% \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
+% \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (From version 3.36)}
+% \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-en}\par
+% }
+%
+% The introduction of this option was part of the preparation for adapting the standard license.
+% The corresponding discussion can be found at \url{https://github.com/tudace/tuda_latex_templates/issues/251}.
+% The adjustment of the default setting for TUDa-CI was made with version 4.0.
+%
+% The ULB of TUDa offers support in choosing a suitable Creative Commons license at \url{https://www.ulb.tu-darmstadt.de/dpub} or the CC project itself via its license finder at \url{http://creativecommons.org/choose/}.
+% TU Darmstadt recommends use of the open CC BY 4.0 license in its Publication Guidelines and Open Access Policy.
+%
+% If a value different from the keys listed above is found, this value is used directly in place of the license text.
+% If it itself contains an equals signs or commas, grouping is necessary.
+%
+% \section{Affidavit}
+% \DescribeMacro{\affidavit}
+% The macro \cs{affidavit} creates a declaration of authorship with a signature line.
+% The name/signature could be set via optios or the Information provided with \cs{author} is used.
+% In the demo documents, the affidavit is located directly after the title.
+%
+% From version 3.32, the distinction between an affidavit for digital or printed submissions, which has been supported since version 3.06, no longer applies.
+% For compatibility reasons, the options are still understood, but both now have the same effect. The text comes from \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} (as of 2023-06-19).
+% It is imperative that students check whether the text corresponds to the required version before submitting a thesis.
+%
+% PhD theses use a different text here; the affidavit option \option{affidavit=dr} is used internally to differentiate between them.
+%
+% Version 3.20 also allows the transfer of further options for the signature name, a signature image or the location.
+% The extent to which these options may be used must be clarified by the user before submission.
+% TUDa-CI cannot make a reliable statement on this.
+% \begin{verbatim}
+%     \affidavit[
+%         signature=Signature name,
+%         signature-image={\includegraphics[width=\width]{signatureimage}}
+%     ]
+% \end{verbatim}
+% A vertical shift of the signature image is not implemented directly, but is easily possible by using the \LaTeX macro \cs{raisebox}\marg{shift}\marg{content}.
+%
+% It is also possible to print an affidavit in another language as a supplement.
+% In order to handle the structure and any necessary language switching, there is an environment:
+% \begin{Syntax}
+% \begin{affidavit*}[|\meta{Babel language option}]{\meta{heading}}
+% 	\meta{Text}
+% \end{affidavit*}
+% \end{Syntax}
+% This version deliberately does not have a signature line, as the developers do not consider this version to be legally binding.
+% However, the environment can also be used for special forms of explanation.
+% In this case, an additional signature line can be added:
+% \DescribeMacro{\AffidavitSignature}\DescribeKeyOption{signature-location=\meta{Location}}{Darmstadt}*
+% \begin{Syntax}
+% \AffidavitSignature[\meta{city}]
+% \end{Syntax}
 %
 % \section{Erweiterte Konfigurationsmöglichkeiten}
 %
