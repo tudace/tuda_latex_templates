@@ -233,41 +233,38 @@
 % The TUDa-CI bundle uses a generic document class to be more flexible with the layout adjustments.
 % The setup is based on \KOMAScript and this section is listing the features.
 % Afterwards there will be specific information on the thesis modes.
-% \iffalse
-%<*thesis|phd>
-% \fi
-% \subsection{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}
-% Although all three demo files are based on \cls{tudapub}, the basic settings are adapted to the document type.
-% As the base class is identical, every option can be changed. The following list only shows the features with default settings.
-%
-% \noindent\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}*3{>{\centering\arraybackslash}X}@{}}
-% \toprule
-% Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub\\
-% \midrule
-% twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-% parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
-% colophone&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-% dedication&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-% font size&11pt&11pt&9pt\\\midrule
-% ruledheaders&section&chapter&all\\\midrule
-% class&scrreprt&scrbook&scrartcl\\\midrule
-% thesis&\ttfamily type=bachelor&\ttfamily type=dr, dr=rernat &\FeatureFalse\\\midrule
-% marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue\\\midrule
-% Affidavit\newline\rlap{(\enquote{Selbstständigkeitserklärung})}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
-% abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
-% custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse\\
-% \bottomrule
-% \end{tabularx}
-%</thesis|phd>
-%
 %
 % \subsection{Usage and class options}
 %
-% The class is loaded as usual:
+% \begin{table}
+% \captionabove[Differences between the demo files based on \cls{tudapub}]{Differences between the demo files based on \cls{tudapub}. The template files use different options depending on the actual purpose. This tabular gives an overview of the Features shown inside the tempaltes as well as the initial settings.}
+% \label{tab:demo-options}
+% \noindent\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}c>{\centering\arraybackslash}Xcc@{}}
+% \toprule
+% Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub&DEMO-TUDaReport\\
+% \midrule
+% twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
+% parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+% colophone&\FeatureFalse&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
+% dedication&\FeatureFalse&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
+% font size&11pt&11pt&9pt&9pt\\\midrule
+% ruledheaders&section&chapter&all&all\\\midrule
+% class&scrreprt&scrbook&scrartcl&scrartcl\\\midrule
+% thesis&\ttfamily type=bachelor&\ttfamily type=dr, dr=rernat &\FeatureFalse&\FeatureFalse\\\midrule
+% marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+% Affidavit\newline\rlap{(\enquote{Selbstständigkeitserklärung})}&\FeatureTrue&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
+% abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
+% custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse&\FeatureFalse\\
+% \bottomrule
+% \end{tabularx}
+% \end{table}
+% The class is loaded using
 % \begin{Syntax}
 % \documentclass[|\meta{Options}|]{tudapub}
 % \end{Syntax}
 % \noindent TUDa-CI defines some  additional options to be used. These are described below.
+% The shown default values apply only for the document class itself. The template files may use different settings.
+% An overview of these differences are shown in \autoref{tab:demo-options}.
 %
 % \begin{description}
 % \KeyOptionItem{class=\meta{article|report|book}}{article}*
@@ -347,9 +344,6 @@
 % \end{description}
 %
 % \noindent Additionally all \KOMAScript{} options can be used. These are described within the documentation. Some more notes on the interaction between \KOMAScript{} and TUDa-CI can be found in \autoref{sec:KOMA}.
-%
-%
-%
 %
 %
 % \subsection{Die Titelseite}
