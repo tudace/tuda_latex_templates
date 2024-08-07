@@ -73,7 +73,7 @@
 }
 
 \cs_new:Npn \__ptxctools_parse_key_option_item:w #1 #2  #3 #4 = #5  \q_stop {
-	\item[\DescribeOption{#4=}\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}]
+	\item[\let\MacroFont\codefamily\DescribeOption{#4=}\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}]
 	\hfill
 		\IfBooleanTF{#1}
 			{#2}
@@ -166,10 +166,10 @@
 % \date{\fileversion~from \filedate}
 % \maketitle
 %
-% \begin{abstract}                                 
-% The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt with \LaTeX.                                                                            
+% \begin{abstract}
+% The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt with \LaTeX.
 % Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation.
-% Up to Version 4.00 the documentation was only included in the demo files. 
+% Up to Version 4.00 the documentation was only included in the demo files.
 % This document now sums up all features and includes references to other package documentations if required.
 % \end{abstract}
 %
@@ -178,30 +178,40 @@
 % \section{Contents of the TUDa-CI Bundle}
 % The TUDa-CI Bundle currently contains template files for the following document types:
 %
-% \begin{tabularx}{\linewidth}{@{}llX@{}}
-% \toprule
-% Document Type & Name of the template file & use documentclass and config \\\midrule
-% minimal Template for internal reports	& DEMO-TUDaReport.tex 							& tudapub.cls \\
-% scientific paper     	      		& DEMO-TUDaPub.tex, using DEMO-TUDaBibliography.bib 			& tudapub.cls and tudasize9pt.clo \\
-% theses	   				& DEMO-TUDaThesis.tex/DEMO-TUDaPhD.tex, using DEMO-TUDaBibliography.bib & tudapub.cls and tudathesis.cfg \\
-% scientific poster			& DEMO-TUDaSciPoster.tex 		      				& tudasciposter.cls \\
-% announcement poster			& DEMO-TUDaPoster.tex 							& tudaposter.cls \\
-% theses announcements	   		& DEMO-TUDaAnnouncement.tex 						& tudaposter.cls \\
-% presentation				& DEMO-TUDaBeamer.tex 							& tudabeamer.cls and all beamertheme files, see \autoref{sec:beamer} for details.\\
-% letter					& DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			& tudaletter.cls and tudalettersize10pt.clo \\
-% exercise sheets/exams			& DEMO-TUDaExercise.tex      						& tudaexercise.cls \\
-% leaflets 				& DEMO-TUDaLeaflet.tex							& tudaleaflet.cls \\
-% \end{tabularx}
+% \begin{description}
+% \item[Print publications] generic document class which provides modes for more specific documents.
+% The basic documentation applies to all types and can be found in \autoref{sec:tudapub}.
+% \begin{itemize}
+% \item scientific paper
+% \item minimal Template for internal reports, \autoref{sec:report}
+% \item (PhD) theses, \autoref{sec:theses}
+% \end{itemize}
+% \item[Scientific Posters] based on the \pkg{tcolorbox} poster library, \autoref{sec:sciposter}.
+% \item[Presentation Slides] beamer theme. This includes the old design of 2008 as well as the redesign of 2023, \autoref{sec:beamer}.
+% \item[Announcement Posters] for event or job annoucements, \autoref{sec:poster}
+% \item[Leaflets]  \autoref{sec:leaflet}
+% \item[Exercise Sheets/Exams] \autoref{sec:exercise}
+% \item[Letters] \autoref{sec:letter}
+% \end{description}
 %
 % The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort. These are called by the elements they define: \pkg{tudacolors}, \pkg{tudafonts}, \pkg{tudarules} as well as the pgfplots color schemes defined by \pkg{tuda-pgfplots}.
 %
-% Additionally the setup is defined to support department specific configuration files. Officially there currently is only one for the department of mechanicam engineering.
-% This is provided within the files \file{beamerthemeTUDa-mecheng.sty} and \file{tudamecheng.cfg}.
+% Additionally the setup is defined to support department specific configuration files.
+% Officially we currently only support the setup of the department of mechanical engineering, see \autoref{sec:mecheng}.
+% There may be unofficial custom setups within the departments.
+% Those are not officially supported.
+% In case you want to provide your own and add it to TUDa-CI, please have a look at \autoref{sec:department-config}.
 %
+% \section{tudapub – generic class for articles and theses}
+% The TUDa-CI bundle uses a generic document class to be more flexible with the layout adjustments.
+% The setup is based on \KOMAScript and this section is listing the features.
+% Afterwards there will be specific information on the thesis modes.
+% \iffalse
 %<*thesis|phd>
+% \fi
 % \subsection{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}
-% Zwar basieren alle drei DEMO-Dateien auf der Klasse \code{tudapub}, jedoch sind die Basiseinstellungen dem Dokumententyp angepasst.
-% Da die Basisklasse identisch ist, kann jede Option abgeändert werden. Die folgende Liste zeigt lediglich die Features bei Standardeinstellungen.
+% Although all three demo files are based on \cls{tudapub}, the basic settings are adapted to the document type.
+% As the base class is identical, every option can be changed. The following list only shows the features with default settings.
 %
 % \noindent\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}*3{>{\centering\arraybackslash}X}@{}}
 % \toprule
@@ -223,45 +233,59 @@
 % \end{tabularx}
 %</thesis|phd>
 %
-%	
-% \section{Verwendung}
 %
-% Die Klasse wird wie gewohnt geladen:
+% \subsection{Usage and class options}
+%
+% The class is loaded as usual:
+% \begin{Syntax}
+% \documentclass[|\meta{Options}|]{tudapub}
+% \end{Syntax}
 % \begin{verbatim}
 % \documentclass[<Optionen>]{tudapub}
 % \end{verbatim}
-% Im Folgenden werden die möglichen Optionen beschrieben.
-% 
+% The options mostly are Key-Value options.
 %
-%
-%
-% \subsection{Klassenoptionen}
-%	
 % \begin{description}
-% \item[class=<article|report|book>] Diese Option legt die Basisdokumentenklasse fest. Die Werte laden die entsprechende KOMA-Script-Klasse \cite{scrguide}. Der Wert \code{article} lädt somit die Klasse \code{scrartcl}.
+% \KeyOptionItem{class=\meta{article|report|book}}{article}*
+% This option selects the base document class.
+% The values load the corresponding \KOMAScript class  \cite{scrguide-en}.
+% The article value thus loads scrartcl.
 %
-% KOMA-Script ist eine Sammlung von Klassen und Paketen für \LaTeX, die neben den typografischen Anpassungen an den europäischen Raum auch die Konfigurationsmöglichkeiten stark erweitert.
-% \item[color=<Farbe>] Wählt die Schmuckfarbe für die Nutzung in der Identitätsleiste aus. Die Farbcodes finden sich in der Farbübersicht in den Corporate Design Richtlinien. Neben diesen Farben kann prinzipiell jede beliebige Farbe übergeben werden. Die Optionen \code{accentcolor}, \code{textaccentcolor} und \code{identbarcolor} werden anlog direkt an \pkg{tudacolors} übergeben. Auf diesem Weg können die Farben unabhängig voneinander gesetzt werden.
-% \item[marginpar] Schaltet die Randnotizspalte um. Voreingestellt ist \code{auto}. Das bedeutet, dass die Randnotizspalte wie im Corporate Design Handbuch \cite{TUDaGuideline} über die fünfte Spalte läuft.  \marginpar{Beispiel für eine Randnotiz}.
-% Darüber werden auch die Werte \code{true} und \code{false} akzeptiert. \code{false} setzt die Breite der Randnotizspalte auf 0. Der Mechanismus selber wird nicht deaktiviert.
+% \KOMAScript is a collection of classes and packages for \LaTeX{} which, in addition to the typographical adaptations to the European area, also greatly extends the configuration options.
+% The documentation is also available in German \cite{scrguide-de}.
 %
-% Randnotizen werden über den komafont-Mechanismus \cite[vgl.][]{scrguide} im Element \code{marginpar} gesetzt. Seine Voreinstellung entspricht:
+% \KeyOptionItem{accentcolor=\meta{Color}}{0b}*
+% Selects the spot color for use within the identity bar. In addition to these colors, any defined can be used.
+% See \autoref{sec:color} for the list of predefined colors as well as additional options for a more detailed selection.
+% The Options \option{accentcolor}, \option{textaccentcolor} and \option{identbarcolor} will be passed to tudacolors.
+% Using those, the colors can even be set independently of each other.
+%
+% \KeyOptionItem{marginpar=\meta{true|false|auto}}{auto}*
+% Controlls the the marginpar. The default setting is auto.
+% This means that the marginpar column runs across the fifth column of the layout grid \cite{TUDaGuideline}.\marginpar{Marginpar example}
+%  Above this, the option also accepts boolean values. False would set width of the column to 0.
+% The mechanism itself is not deactivated.
+%
+% The font inside the marginpars are controlled using the komafont mechanism \cite{scrguide-en} using the \code{marginpar} element.
+% It is defined as
 % \begin{verbatim}
 % \setkomafont{marginpar}{\accentfont}
 % \end{verbatim}
-% Um zusätzlich farbige Randnotizen zu setzen, kann dies geändert werden über
+% to extend this setting, e.\,g. by adding a color one can add 
 % \begin{verbatim}
 % \addtokomafont{marginpar}{\color{textaccentcolor}}
 % \end{verbatim}
+% to the preamble.
 % \marginline{
 % \includegraphics[width=\marginparwidth]{example-image}\\
-% Flattersatz in der marginline aus \KOMAScript
+% Marginpar example using ragged text made with \KOMAScript's marginline
 % }
+%
 % \item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann die Randnotizen deaktiviert.
 % \item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} Wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend beschränkt. False lädt den Standardstil aus \KOMAScript.
 % \item[title=default/small/large] Die relativ große Schriftgröße des Titels kann – insbesondere bei langen Titeln für Abschlussarbeiten – zu Platzproblemen führen. Die Option \code{title} verhindert dies, indem die für das jeweils kleinere Papierformat eingestellten Schriftgrößen geladen werden. Die Voreinstellung ist \code{default} und entspricht dem Wert \code{large}.
 % \item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung.
-% Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert. 
+% Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert.
 % Voreingestellt ist \code{publication}.
 % Ab Version 1.2 existiert zusätzlich der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten sowie die TUDaPub-Optionen \code{pdfa=""false} und \code{IMRAD=false}. Dieser Modus ist für kurze interne Berichte gedacht.
 % \item[headline] Die Kopfzeile verfügt über die im Corporate Design beschriebenen Layoutmöglichkeiten mit dem Wert \code{automark}. Da diese Lösung typografisch nicht sonderlich sinnvoll ist, ist es möglich diese abzuschalten. Voreingestellt ist ein Stil ohne Kolumnentitel.
@@ -272,14 +296,14 @@
 % \end{description}
 %
 % \noindent Der Rest der Dokumentenklasse entspricht dem Standard von \KOMAScript, vgl. Abschnitt \ref{sec:KOMA}.
-%	
 %
 %
 %
-%	
+%
+%
 % \subsection{Die Titelseite}
 % \label{sec:title}
-%	
+%
 % Die Titelseite wird von tudapub automatisch generiert. Die Verwendung hierfür entspricht größtenteils der klassischen Methode unter Verwendung von \code{maketitle}.
 %
 % Die \KOMAScript-Option \code{titlepage} erlaubt es üblicherweise zwischen Titelseiten und dem Titelkopf umzuschalten. Bis Version 1.2 war diese Option deaktiviert. Mittlerweile gibt es jedoch einen Modus für einen Titelkopf. Dieser entspricht allerdings nicht den offiziellen Vorgaben und ist nur für die interne Verwendung gedacht. Aufgrund der Implementierung wird \code{titlepage=true} identisch zu \code{titlepage=firstiscover} behandelt.
@@ -292,7 +316,7 @@
 % Im Folgenden werden die Makros beschrieben, die bei der Übergabe der Titeldaten verwendet werden können.
 %
 % \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
-%	\item[author] Der Autor/ die Autoren. Mehrere Autoren werden durch \verb+\and+ getrennt.		
+%	\item[author] Der Autor/ die Autoren. Mehrere Autoren werden durch \verb+\and+ getrennt.
 %	\item[date] Beliebiges Datum. Wird über \verb|datename| bezeichnet.
 %	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
 %	\item[publishers] Wird hier für die Ortsangabe verwendet und ist mit \enquote{Darmstadt}, bzw. \enquote{Darmstadt, Technische Universität Darmstadt} (bei Dissertationen) vorbelegt.
@@ -303,11 +327,11 @@
 % \noindent Diese entsprechen der normalen Verwendung.
 %
 % \subsubsection{thesis}
-% Ergänzend dazu gibt es noch speziellere Makros, wie für die \code{thesis}: 
+% Ergänzend dazu gibt es noch speziellere Makros, wie für die \code{thesis}:
 % \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
 %	\item[birthplace] Geburtsort. Diese Angabe ist bei Dissertationen notwendig.
 %	\item[department] Fach-/Studienbereich. Die oben genannte Option ist zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
-%	
+%
 %	Dieses Makro verfügt zusätzlich über die Möglichkeit abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung zu der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
 %	\begin{verbatim}
 %	\department[Ersatztext]{Kürzel/Bezeichnung}
@@ -319,7 +343,7 @@
 %	\item[examdate] Datum der Disputation
 %	\item[group] Arbeitsgruppe
 %	\item[reviewer] Gutachter. Mehrere Gutachter werden (wie Autoren) durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
-%	
+%
 %	\minisec{Änderung des Bezeichners}
 %	Die Änderung des Bezeichners ist über ein optionales Argument möglich:
 %	\begin{verbatim}
@@ -338,29 +362,29 @@
 %	\setupReviewName{Ersatzwort für „Gutachten“}
 %	\end{verbatim}
 %	Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+. Eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
-%	
+%
 %	Ab Version 3.26 werden die Gutachter nicht mehr auf der Titelrückseite genannt. Dies wird über die \verb+thesis+ Option \verb+reviewer-on-uppertitleback+ gesteuert. Voreingestellt ist der Wert \verb+false+.
 %	\item[studentID] Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
 %	\item[submissiondate] Datum der Einreichung.
 %	\item[titlegraphic] Akzeptiert beliebigen Inhalt. Dieser wird bündig mit der oberen Ecke im Hauptteil der Titelseite platziert.
 %	Üblicherweise wird dieses Makro zur Platzierung einer Grafik genutzt:
-%	
+%
 %	\begin{verbatim}
 %	\titlegraphic{\includegraphics[width=\width]{example-image}}
 %	\end{verbatim}
-%	
+%
 %	Um die Größe des Bildes passend zu wählen, können die Makros \code{width} und \code{height} verwendet werden. Darüber hinaus ist ab Version 3.19 auch die Variante \code{titlegraphic*} anwendbar. Mit der geschieht die Skalierung und ein ggf. notwendiger Beschnitt für das Füllen des reservierten Bereichs automatisch.
-%	
+%
 % TODO: Makro \code{addTitleBoxLogo} als alleiniges Makro oder so stehen lassen?
 %	Zusätzliche Logos und Informationen können über Boxen ergänzt werden.
-%	
+%
 %	\begin{verbatim}
 %	\addTitleBox{Institut 1}
 %	\end{verbatim}
 %	Die Institutsboxen werden mit vorgegebenem Abstand unter dem Logo platziert. Hier kann Text erscheinen oder auch ein Institutslogo. Der Hintergrund ist weiß.
-%	
+%
 %	Um die Institutsboxen für Logos zu verwenden, liefert \cls{tudapub} das Makro \code{addTitleBoxLogo}. Als Argument akzeptiert es einen Bilddateipfad.
-%	
+%
 %	\begin{verbatim}
 %	\addTitleBoxLogo{example-image}
 %	\addTitleBoxLogo*{\includegraphics[width=\linewidth]{example-image}}
@@ -376,17 +400,17 @@
 %	}
 %	\end{verbatim}
 %	Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
-%	
+%
 %	Ab Version 2.07 ist es möglich einen eigenen Lizenztext über den Schlüssel \verb|license| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
-%	
+%
 %	Um eine einfachere Anpassung zu ermöglichen, existieren ab Version 3.08 vorgefertigte Werte für die Option \verb|license|.
 %	Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, die durch die Universitätsbibliothek angepasst wurde.
 %	Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
-%	
+%
 %	Die vorgefertigten Lizenzschlüssel lauten: \verb+cc-by-nc-nd-2.0-de+ (noch aktuelle Voreinstellung), \verb+cc-by-4.0+, \verb+cc-by-sa-4.0+, \verb+cc-by-nc-sa-4.0+, \verb+cc-by-nc-4.0+, \verb+cc-by-nd-4.0+, \verb+cc-by-nc-nd-4.0+.
 %	Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet das Projekt über seinen Lizenzfinder unter \url{https://creativecommons.org/choose/}.
 %	Ab Version 3.10 werden alle (Stand: Januar 2021) dort vorgeschlagenen Lizenzen von tuda-ci unterstützt.
-%	
+%
 %	Falls ein davon abweichender Wert gewählt wird, wird dieser direkt an der Stelle des Lizenztextes verwendet. Wenn der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
 % \end{description}
 %
@@ -397,23 +421,23 @@
 %
 % \subsubsection{Sponsorenlogos}
 % Ab Version 3.0 steht in TUDaPub auch der Sponsorenmechanismus der TUDaLeaflet-Klasse zur Verfügung. Damit ist es möglich Sponsorenlogos unterhalb des Titelbildes zu platzieren.
-% 
+%
 % Sponsorenlogos werden üblicherweise über
 % \begin{verbatim}
 % \AddSponsor{<logo1>}
 % \AddSponsor{<log2>}
 % \end{verbatim}
 % übergeben. Innerhalb des Arguments ist \verb+\height+ gesetzt. Damit sind im Beispiel alle Logos auf der gleichen Höhe. Der Abstand zwischen ihnen wird entsprechend aufgefüllt, sodass der gesammte Block immer links und rechts mit dem Text abschließt.
-% 
+%
 % Die zweite Variante ermöglicht die manuelle Platzierung mit vertikaler Ausrichtung, wie es bei Logos mit unterschiedlicher Höhe notwendig sein könnte. Hierbei werden lediglich die Abstände und Trennlinien um die Logos ergänzt:
-% 
+%
 % \begin{verbatim}
 % \sponsors{
 %<logo1><logo2>
 % }
 % \end{verbatim}
-%	
-%	
+%
+%
 %
 % \subsubsection{Optionen für die Titelseite}
 % Die Position des Logos ist umschaltbar. Dies geschieht über die Dokumentenklassenoption \code{logo=head/""body}.
@@ -421,10 +445,10 @@
 % \item[logo=head] Das Logo wird im Kopf direkt neben dem Titel platziert. Der Titel wird in der Breite reduziert. Der Hintergrund des Titels wird in der Farbe der Identitätsleiste eingefärbt. Zusätzliche Infoboxen (s.u.) werden ebenfalls im Kopf platziert.
 % \item[logo=body] Das Logo samt der Infoboxen wird im Körper der Titelseite platziert.
 % \end{description}
-% 
+%
 % Darüber hinaus lässt sich die Farbgebung umschalten.
 % Die Option \code{colorback} schaltet zwischen dem farbigen Block auf der Titelseite und dem weißen Hintergrund um. Sie ist in der Voreinstellung aktiviert, sodass ein farbiger Block erzeugt wird.
-% 
+%
 % Mit Version 3.08 werden zusätzlich zu den \code{true}/\code{false} Werten auch die Werte \code{title}, \code{head} und \code{body} für die Option \code{colorback} ergänzt.
 % Mit diesen ist es möglich nach der Auswahl der Logoposition eine Korrektur an der Farbgebung durchzuführen. Alle drei neuen Werte aktivieren die Hintergrundfarbe und schalten deren Position um:
 % \begin{description}
@@ -434,31 +458,31 @@
 % \item[colorback=body] Es wird nur der Bildbereich eingefärbt.
 % \end{description}
 %
-%	
+%
 % \subsection{Strukturierungselemente}
 % \minisec{Die abstract-Umgebung}
 % Die \code{abstract}-Umgebung wird für \cls{tudapub} um eine Option für die Sprache erweitert. Somit ist es möglich mehrere Zusammenfassungen in einem Dokument zu nutzen.
-% 
+%
 % \begin{verbatim}
 % \begin{abstract}
 % Zusammenfassung entsprechend der Dokumentensprache. In diesem Fall Deutsch.
 % \end{abstract}
-% 
+%
 % \begin{abstract}[english]
 % Zusätzliche Zusammenfassung in englischer Sprache.
 % \end{abstract}
 % \end{verbatim}
-% 
+%
 % Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen geladen werden. Im Falle des Beispiels muss also sowohl \code{german} als auch \code{english} an das \pkg{babel}-Paket übergeben werden.
-% 
-% 
-% 
+%
+%
+%
 % \subsection{PDF/A Konformität}
 % Die Klasse TUDaPub unterstützt den Standard PDF/A 2b. Der PDF/A-Modus ist automatisch aktiviert. Die zugehörige Option kann über \code{pdfa=false} ausgeschaltet werden.
 % Nun wird zusätzlich eine \code{\textbackslash.xmpdata}-Datei generiert. Üblicherweise werden die Titeldaten direkt übernommen.
-% 
+%
 % Dies kann jedoch bei der Verwendung einiger Makros innerhalb der Felder zu Problemen führen. Beispielsweise enthält der Titel für dieses Dokument das Makro \code{\LaTeX}. Es können daher nur Textelemente übernommen werden. Ähnlich den Linkbezeichnungen über PDF-Lesezeichen.
-% 
+%
 % Um dieses Problem zu umgehen, stellt \cls{tudapub} das Makro \code{\textbackslash{}Metadata\{\}} zur Verfügung. Hier können sämtliche von \pkg{pdfx} verarbeitbaren Variablen nach Schlüssel$=$Wert-Struktur gesetzt werden. Es ist zu beachten, dass dieses Makro nur dann funktioniert, wenn die \code{pdfa}-Ausgabe aktiviert ist. Ist dies nicht der Fall, so gibt \cls{tudapub} eine entsprechende Fehlermeldung zu diesem Widerspruch aus.
 % Zum Beispiel:
 % \begin{verbatim}
@@ -468,29 +492,29 @@
 % }
 % \end{verbatim}
 % Das Feld \code{publisher} ist mit \enquote{TU Darmstadt} vorbelegt, kann aber überschrieben werden.
-% 
+%
 % Um mehrere Einträge zu trennen, wird das Makro \code{\textbackslash{}sep} genutzt.
 % \begin{verbatim}
 % keywords={TU Darmstadt \sep Corporate Design \sep LaTeX}
 % \end{verbatim}
 % Wenn der Eintrag selber jedoch Kommata enthält, dann ist eine Gruppierung um den Eintrag notwendig. Der Text wird sonst nach dem Komma als nächstes Keyword interpretiert.
-% 
+%
 % \minisec{Mögliche Probleme mit älteren Systemen:}
-% 
+%
 % Bei älteren \TeX-Distributionen kann es vorkommen, dass die Farbprofile nicht vorinstalliert sind. In diesem Fall wird eine Fehlermeldung im folgenden Sinn erzeugt:
 % \begin{verbatim}
 % No color profile found to use for RGB screen colors
 % \end{verbatim}
 % Um diesen Fehler zu beheben, können die notwendigen *.icc-Dateien unter \url{http://mirror.ctan.org/support/colorprofiles} heruntergeladen und entweder installiert oder im Projektordner mit abgelegt werden. Die einfachste Lösung ist jedoch das eigene \TeX-System zu aktualisieren.
-% 
+%
 % Darüber hinaus werden bei \hologo{XeLaTeX} einige Features nicht unterstützt. In diesem Fall erzeugt \code{pdfa=""false} ein kompilierbares Dokument. Für validierbare PDF/A-Dateien in \hologo{LuaLaTeX} sollte auf eine möglichst aktuelle Version umgestiegen werden.
-% 
-% 
+%
+%
 % \subsection{Zusätzliche Metadaten nach Wunsch der Universitätsbibliothek}
 % \label{sec:IMRAD}
-% Um das Strukturierungsmodell IMRaD \cite{imrad} zu kennzeichnen, gibt es einen weiteren Mechanismus. 
+% Um das Strukturierungsmodell IMRaD \cite{imrad} zu kennzeichnen, gibt es einen weiteren Mechanismus.
 % Im Stil der einzelnen Teilbereiche können so über den Aufruf von
-% 
+%
 % \begin{verbatim}
 % \IMRADlabel{introduction}
 % \IMRADlabel{methods}
@@ -498,50 +522,50 @@
 % \IMRADlabel{discussion}
 % \end{verbatim}
 % entsprechende Labels generiert werden. Sie haben den Namen \code{IMRAD:<Schlüssel>}.
-% 
+%
 % Der Prüfmechanismus ist auf Wunsch der Bibliothek standardmäßig aktiviert, kann jedoch durch die Option \code{IMRAD=false} deaktiviert werden.
-% 
-% 
+%
+%
 % \subsection{Farbdarstellung}
 % \label{sec:pdfa-color}
 % Der PDF/A-Modus konvertiert automatisch eingegebene CMYK-Farben in RGB. Da es jedoch keine eindeutige Umwandlung gibt, sollte im Modus \code{pdfa=true} auf CMYK-Elemente verzichtet werden.
-% 
+%
 % Für die Druckausgabe ist dieser Modus ungeeignet. Ab Version 3.12 gibt \cls{tudapub} eine entsprechende Infomeldung aus, um über diese Umwandlung zu informieren.
-% 
-% 
-% 
-% 
+%
+%
+%
+%
 % \section{Erweiterte Konfigurationsmöglichkeiten}
-% 
+%
 % \subsection{Auswahl des Dokumentenfarbmodus}
 % Farben unterliegen, je nachdem auf welchem Medium sie ausgegeben werden, einer anderen Farbmischung. Für die Verwendung bei der Dokumentenerzeugung ist daher wichtig, welches Ausgabemedium primär genutzt werden soll.
-% 
+%
 % Technisch zeigt sich dieser Unterschied in Farbmodellen. TUDa-CI unterstützt entsprechend der Richtlinien sowohl ein Farbmodell für die Druckausgabe (cmyk), als auch für die Bildschirmdarstellung (RGB). Die Umsetzung geschieht über das Paket \pkg{xcolor} wobei die entsprechenden Farbwerte für beide Modelle über \pkg{tudacolors} hinterlegt sind.
-% 
+%
 % Normalerweise wählt TUDa-CI automatisch ein passendes Modell. Die Voreinstellung von \code{pdfa-true} sorgt allerdings für eine Konvertierung zu RGB (vgl.~\ref{sec:pdfa-color}).
-% 
+%
 % Soll abseits dieser automatischen Abweichung ein bestimmter Farbmodus erzeugt werden, können die \pkg{xcolor}-Optionen \code{cmyk} oder \code{RGB} direkt an \cls{tudapub} übermittelt werden. Sie werden an das Paket weitergereicht und entsprechend der \pkg{xcolor}-Dokumentation verarbeitet.
-% 
-% 
+%
+%
 % \subsection{Anpassungen, die von den Corporate Design Richtlinien abweichen}
-% 
-% 
+%
+%
 % \subsubsection{Schriftgröße}
 % \cls{tudapub} kann entgegen der Corporate Design Richtlinien auch andere Schriftgrößen verarbeiten. Hierfür wird die \code{fontsize}-Option aus \KOMAScript{} genutzt (z.\,B. \code{fontsize=11pt}). Sofern keine spezielle Schriftgrößendatei für TUDa-CI vorliegt, wird die mit \KOMAScript{} ausgelieferte Datei gewählt.
-% 
+%
 % Beispiele für Abweichungen aus typografischen Gründen sind unter anderem auch in den Demo-Dateien für Abschlussarbeiten gezeigt.
-% 
-% 
+%
+%
 % \subsubsection{Seitenränder}
 % Laut Corporate Design sind die Zeilenlängen aus typografischer Sicht zu lang.
 % Daher existiert die Klassenoption \code{custommargins}. Sie verfügt über die Werte \code{true}, \code{false} und \code{geometry}:
-% 
+%
 % \begin{description}
 % \item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pkg{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
 % \item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pkg{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Die Ränder werden dadurch nicht fest definiert, sondern auf Basis des \pkg{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
 % \item[custommargins=geometry]  Diese Variante wurde auf Wunsch zur Verfügung gestellt. Allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führen.
 % \pkg{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten, werden gespeichert und nach der Titelseite wiederhergestellt.
-% 
+%
 % Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit
 % \begin{verbatim}
 % \geometry{
@@ -552,74 +576,74 @@
 % zurückzusetzen.
 % Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
 % \end{description}
-% 
+%
 % \minisec{Hinweis zu den Kopf-/Fußzeilen}
 % Wenn die Option \code{marginpar=true} gesetzt bleibt, ragen die Kopf- und Fußzeile über die Marginalspalte hinaus. Aus ästhetischen Gründen wird daher empfohlen in diesem Fall die Kopf- und Fußzeile  mit \code{marginpar=false} auf den Textbereich zu beschränken.
-% 
+%
 % Auch ist das Standard-Layout der Kolumnentitel wenig vorteilhaft, da die Kolumnentitel damit lokal größer sein können, als die eigentliche Überschrift. (\code{headline=automark})
 % Deswegen kann über
 % \begin{verbatim}
 % \pagestyle{TUDa.headings}
 % \end{verbatim}
 % ein einfacherer Seitenstil ausgewählt werden, der die Nutzung mit lebenden Kolumnentitel erheblich vereinfacht. Dieser Stil ist über \pkg{scrlayer-scrpage} realisiert und kann entsprechend der \KOMAScript{}-Dokumentation angepasst werden.
-% 
+%
 % \minisec{Hinweis zur Bindekorrektur}
 % Bei Verwendung einer Bindekorrektur (\code{BCOR=<Länge>}) wird diese nicht automatisch auch auf der Titelseite eingefügt. Für diesen Fall wurde mit Version 3.0 die Option \code{BCORtitlepage} hinzugefügt. Falls diese aktiviert wird, nimmt die Titelseite den Wert der Typearea Option \code{BCOR} auf der ersten Seite als Zusatz zum linken Rand.
-% 
-% 
+%
+%
 % \subsection{Frontmatter/Mainmatter/Backmatter}
 % Üblicherweise gibt es die Makros \verb+\frontmatter+, \verb+\mainmatter+ und \verb+\backmatter+ lediglich bei der Basisklasse \cls{scrbook}.
 % Auf Wunsch wurden diese Makros auch bei \cls{scrartcl} und \cls{scrreprt} als Basis bereitgestellt.
-% 
+%
 % Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet.
-% 
-% 
+%
+%
 % \subsection{Mathematikschriften}
 % Da es keine Compiler-unanbhängige universelle Mathematikschrift gibt und die Corporate Design Richtlinien auch keinerlei Empfehlung berücksichtigen, wurden hierfür einige mögliche Varianten diskutiert. Die Voreinstellung entspricht immer dem Standard der Installation. Es werden keine spezifischen Einstellungen geladen.
-% 
+%
 % Die Diskussion hierzu findet sich unter:\\
 % \url{https://github.com/tudace/tuda_latex_templates/issues/19}
-% 
+%
 % Im Folgenden werden ein paar Beispielkonfigurationen gezeigt. Grundsätzlich ist die Mathematikschriftart jedoch -- abgesehen durch Einschränkungen des Compilers -- frei wählbar.
-% 
+%
 % Bei der Auswahl und Verwendung ist in vielen Fällen der \enquote{\TeX{} Font Catalogue hilfreich}: \url{https://tug.org/FontCatalogue/mathfonts.html}
-% 
-% 
+%
+%
 % \subsection{\hologo{pdfLaTeX}}
 % Hier existiert eine Variante, die die Buchstaben der Basisschriftart \enquote{Charter} mit Mathematiksymbolen aus unterschiedlichen Zeichensätzen möglichst passend kombiniert.
-% 
+%
 % \begin{verbatim}
 % \usepackage[charter,expert]{mathdesign}
 % \end{verbatim}
-% 
+%
 % Es gibt ähnliche Ansätze für ein paar weitere Kombinationen. Einige Beispiele finden sich in der XCharter Dokumentation. \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
-% 
-% 
-% 
-% 
+%
+%
+%
+%
 % \section{Fachbereichsspezifische Anpassungen}
 % Einige Fachbereiche haben spezielle Anforderungen. Dieser Abschnitt betrachtet die speziellen Anpassungen. Bisher (Juli 2020) existieren diese Modifikationen lediglich für den Fachbereich Maschinenbau. Der Mechanismus ist jedoch erweiterungsfähig.
-% 
-% 
+%
+%
 % \subsection{Fachbereich Maschinenbau}
-% Der entsprechende Modus wird über die Option \code{department=mecheng} oder kurz \code{mecheng} aktiviert. Die Farbgebung passt sich automatisch an und die Trennlinie der Fußzeile erhält die geforderte Form des Zeitstrahls. 
-% 
+% Der entsprechende Modus wird über die Option \code{department=mecheng} oder kurz \code{mecheng} aktiviert. Die Farbgebung passt sich automatisch an und die Trennlinie der Fußzeile erhält die geforderte Form des Zeitstrahls.
+%
 % Darüber hinaus erfordern manche Stellen dieses Fachbereichs die Übergabe einer ID zur Kennzeichnung des Dokuments. Hierfür wurde der Mechanismus
 % \begin{verbatim}
 % \SetPaperID{<Buchstabe>}{<tiefgestelle Nummer>}}
 % \end{verbatim}
 % eingeführt.
 % Dieser funktioniert auch ohne die Aktivierung des \code{mecheng}-Modus. Die Option ergänzt allerdings einige zusätzliche Parameter für angepasste Abstände.
-% 
+%
 % Darüber hinaus aktiviert der Modus die Optionen:
 % \code{colorback=false} und \code{ruledheaders=section}.
-% 
+%
 % \minisec{Logo}
 % Das Fachbereichslogo wird über die Option \verb+departmentlogofile=tuda_maschinenbau_logo+ übergeben. Über diese Option kann auch eine abweichende Datei genutzt werden. Falls der Wert leer bleibt, wird kein Bild eingefügt.
-% 
+%
 % \minisec{Farbanpassungen}
 % Der Fachbereich untergliedert die im Corporate Design Handbuch beschriebenen Farben. Daher existieren, wenn \code{mecheng} aktiviert wurde, zusätzlich die folgenden Farbnamen:
-% 
+%
 % \begin{verbatim}
 % \colorlet{TUDa-Primary1}{TUDa-6b}
 % \colorlet{TUDa-Primary2}{TUDa-2d}
@@ -631,22 +655,22 @@
 % \colorlet{TUDa-Secondary6}{TUDa-5a}
 % \colorlet{TUDa-Arrow}{TUDa-Primary2}
 % \end{verbatim}
-% 
+%
 % \minisec{Zeitstrahl}
 % Des Design-Element des Zeitstrahls kann über das Makro \verb+\MechEngArrow{<Länge>}+ erzeugt werden. Die Farbe entspricht dabei der Farbe \code{TUDaArrow}, die mit der zweiten Primärfarbe (blau) vorbelegt ist.
-% 
-% 
+%
+%
 %<*thesis|phd>
 % \section{Spezielle Optionen für Abschlussarbeiten}
 % Die Klasse unterstützt alle Optionen der \file{tudapub}-Klasse. Darüber hinaus besteht über Wertzuweisung der Option \code{thesis} die Möglichkeit spezielle Einstellungen zu wählen.
 % Es ist prinzipiell möglich die Optionen auch direkt als Optionen zur \file{tudapub}-Klasse zu übergeben. Allerdings ist dies aufgrund der schlechteren Übersicht nicht zu empfehlen.
-% 
+%
 % Für dieses Dokument wurden beispielsweise die Optionen als
 % \begin{verbatim}
 % thesis={type=dr,dr=rernat}
 % \end{verbatim}
 % übergeben.
-% 
+%
 % Im Folgenden findet sich die Bedeutung der einzelnen Optionen:
 % \begin{description}
 % \item[type=<Wert>] Auswahl des Typus. Dieser wird auf die Titelseite gesetzt und wählt zudem aus, welche Daten für die Titelseite zwingend übergeben werden müssen.
@@ -685,17 +709,17 @@
 % phys  &Physik\\
 % wi    &Rechts- und Wirtschaftswissenschaften
 % \end{tabular}
-% 
+%
 % ^^A Teilung des Absatzes in jeweils:
 %<*phd>
 % Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
 %</phd>
 %
-% ^^A oder	
+% ^^A oder
 %<*thesis>
 % Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche.
 % Falls das Kürzel nicht als Fachbereich hinterlegt ist, wird automatisch auf die Studienbereiche geprüft. Die Studienbereiche haben die folgenden Kürzel:
-% 
+%
 % \begin{tabular}{@{}l@{${}\to{}$}l@{}}
 % ce&Computational Engineering\\
 % ese&Energy Science and Engineering\\
@@ -704,13 +728,13 @@
 % metro&Mechatronik
 % \end{tabular}
 %</thesis>
-% 
+%
 % Falls etwas anderes, als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
-% 
+%
 % Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Wenn diese automatische Erstellung nicht gewünscht ist, dann kann dies mit \code{instbox=false} deaktiviert werden.
 % \item[ignore-missing-data] Diese Option ist ein Schalter, der es ermöglicht die Fehlermeldung über nicht übergebene Titeldaten auszuschalten. In diesem Fall wird lediglich eine Warnung erzeugt, falls die angegeben Daten nicht mit den Anforderungen übereinstimmen.
 % \end{description}
-% 
+%
 % \minisec{Abweichung von den Vorgaben für die Titelseite}
 % Da es möglich sein kann von dieser Vorgabe abzuweichen, existiert für Sonderfälle die Dokumentenklassenoption \code{instbox=false}. Damit wird die automatische Verarbeitung der Daten für die Boxen auf der Titelseite unterdrückt. In diesem Fall ist der Autor jedoch selbst für die Einhaltung der Vorschriften verantwortlich. Weitere Informationen zur Konstruktion der Boxen finden sich in den Verwendungshinweisen der Basisklasse TUDaPub. Zusätzlich sei auf die Möglichkeiten des \code{\textbackslash{}department}-Makros verwiesen, sofern die Abweichung sich auf den Text beschränkt.
 %</thesis|phd>
@@ -766,54 +790,54 @@
 %
 %
 %
-% 
-% 
+%
+%
 % \section{Weitere Konfigurationsmöglichkeiten: Standard-KOMA-Script}
 % \label{sec:KOMA}
 % Da die Klasse bis auf ein paar erzwungene Einstellungen die das Layout betreffen vollständig \KOMAScript"=kompatibel ist, ist für sämtliche Modifikationen ein Blick in die \KOMAScript-Dokumentation hilfreich. Für den Großteil bietet \KOMAScript{} eigene Lösungen, wodurch Ergänzungspakete oft hinfällig sind.
-% 
+%
 % Beispiele für typische Modifikationen die auch im Rahmen des Corporate Design zulässig sind:
 % \begin{itemize}
 % \item Umstellung der Absatzkennzeichnungsmethode von Einzug auf Abstand (Klassenoption \verb+parskip+)
 % \item Elementnummerierung mit oder ohne Endpunkt (Klassenoption \verb+numbers=enddot/noenddot+)
 % \item Positionierung, Ausrichtung und Abstände bei \code{captions} (Die Makros \verb+\captionsabove+, \verb+\captionbelow+, \verb+\captionof+ und die Option \verb+captions+)
 % \end{itemize}
-% 
-% 
-% 
+%
+%
+%
 % \section{Bekannte Probleme}
-% 
-% 
+%
+%
 % \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
 % Das Paket \pkg{pdfx} (über welches die PDF/A Kompatibilität erzeugt wird) hat nur einen begrenzten Support für \hologo{XeLaTeX}.
 % Es wird eine entsprechende Warnung ausgegeben. Bei älteren \hologo{XeLaTeX}-Versionen kann es allerdings passieren, dass \pkg{pdfx} bereits Fehlermeldungen erzeugt. Abhilfe wird in diesem Fall durch einen Compiler-Wechsel auf \hologo{LuaLaTeX} (welcher ohnehin empfohlen wird) oder durch Abschalten des PDF/A-Modus (\code{pdfa=false}) geschaffen.
-% 
-% 
+%
+%
 % \subsection{DVI-Ausgabe}
 % Aufgrund der Voreinstellung zur Erzeugung einer PDF/A-Datei ist es nicht möglich TUDa-CI in Standardeinstellungen zur Erzeugung einer DVI-Datei zu nutzen. Ein Großteil der Funktionalität kann jedoch durch die Deaktivierung der \code{pdfa}-Option genutzt werden.
-% 
-% 
+%
+%
 % \subsection{Geschachtelte Akzente (Inkompatibilität zwischen pdfx und amsmath)}
 % Es ist nach aktuellem Paketstatus (v3.04) nicht möglich beide Pakete in Kombination ohne weitere Anpassungen so zu verwenden, dass eine Schachtelung von Akzenten möglich ist. Das folgende Beispiel wirft Fehler, sobald \pkg{amsmath} direkt oder indirekt geladen wird.
 % \begin{verbatim}
 % $\dot{\hat{x}}$
 % \end{verbatim}
-% 
+%
 % \noindent Die zugehörige Diskussion findet sich im tuda-ci Repository (\url{https://github.com/tudace/tuda_latex_templates/issues/78}). Da sich diese Problematik nicht direkt aus tuda-ci, sondern aus der Konstruktion der beiden Pakete untereinander ergibt, ist es leider nicht möglich pauschal eine Anpassung in tuda-ci zu implementieren. Unter dem angegebenen Link findet sich jedoch ein möglicher Workaround, sobald beide Varianten benötigt werden.
-% 
-% 
+%
+%
 % \subsection{Möglicher Option Clash mit microtype}
 % Das Paket \pkg{microtype} wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenen Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
-% 
+%
 % Falls es zwingend notwendig ist die Type1 Schriftarten zu verwenden, ist es möglich weitere Optionen vor dem Laden der Dokumentenklasse an \pkg{microtype} zu übergeben.
-% 
+%
 % \begin{verbatim}
 % \PassOptionsToPackage{<microtype Optionen>}{microtype}
 % \documentclass{…}
 % \end{verbatim}
 %
 %
-% 
+%
 %
 % \StopEventually{}
 %
