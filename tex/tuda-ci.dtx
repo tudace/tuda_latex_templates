@@ -397,7 +397,7 @@ reversemp
 % \begin{Syntax}
 % \title{|\meta{title}|}
 % \author{|\meta{Author1}|\thanks{Affiliation of Author1} \and |\meta{Author2}|}
-% % […other elements…]
+% % |\textnormal{[…other elements…]}|
 % \maketitle
 % \end{Syntax}
 %
@@ -471,14 +471,14 @@ reversemp
 % The background of the title is colored in the color of the identity bar.
 % This setting also will move the boxes below the logo to the page head.
 %
-% \item[logo=body] y The logo including the info boxes is placed in the body of the front page.
+% \item[logo=body] The logo including the info boxes is placed in the body of the front page.
 % \end{description}
 %
 % \DescribeKeyOption{colorback=\meta{Boolean}/title/head/body}{true}
 % Similar to the logo position the color structure can be adjusted.
 % \option{colorback} toggles between the colored block on the title page and the white background.
 %
-% The other values will enable the colored area but allow to switch between positions.
+% The other values will enfable the colored area but allow to switch between positions.
 % \begin{description}
 % \item[colorback=title] Only the title background (without subtitle) is colored.
 % \item[colorback=head] Background of the total title block inlcuding subtitles is colored.
@@ -491,11 +491,12 @@ reversemp
 % The fields only existing in theses mode are:  \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
 % For more information on their use and other settings for theses have a look at \autoref{sec:theses}.
 %
-% \subsection{Strukturierungselemente}
-% \minisec{Die abstract-Umgebung}
-% Die \code{abstract}-Umgebung wird für \cls{tudapub} um eine Option für die Sprache erweitert. Somit ist es möglich mehrere Zusammenfassungen in einem Dokument zu nutzen.
+% \subsection{Abstract}
+% \cls{tudapub} extends the availability of the \environment{abstract} environment to scrbook.
+% Additionally it add's an optional argument to select the language.
+% This should be used to use multiple abstracts of different languages within one document.
 %
-% \begin{verbatim}
+% \begin{example}
 % \begin{abstract}
 % Zusammenfassung entsprechend der Dokumentensprache. In diesem Fall Deutsch.
 % \end{abstract}
@@ -503,27 +504,60 @@ reversemp
 % \begin{abstract}[english]
 % Zusätzliche Zusammenfassung in englischer Sprache.
 % \end{abstract}
-% \end{verbatim}
+% \end{example}
 %
-% Für die Verwendung ist wichtig, dass alle im Dokument genutzten Sprachen geladen werden. Im Falle des Beispiels muss also sowohl \code{german} als auch \code{english} an das \pkg{babel}-Paket übergeben werden.
+% It is important that all languages used in the document are loaded.
+% In the case of the example, both options, \option{english} and \option{german} must be passed to the babel package.
 %
+% \section{PDF/A}
+% \DescribeKeyOption{pdfa=\meta{Boolean}}{true}
+% The TUDaPub class supports the PDF/A 2b standard.
+% PDF/A mode is automatically activated within tudapub.
+% Depending on the document it's using an implementation via the \pkg{pdfx} package or the \LaTeX{} kernels own pdfmanagement.
 %
+% \DescribeKeyOption{pdfx=\meta{Boolean}}{true}\cls{tudapub} will try to automatically select the best method.
+% This is done using \option{pdfx} option.
+% This should only be toggled manually if the user is totally sure to understand the impact.
 %
-% \subsection{PDF/A Konformität}
-% Die Klasse TUDaPub unterstützt den Standard PDF/A 2b. Der PDF/A-Modus ist automatisch aktiviert. Die zugehörige Option kann über \code{pdfa=false} ausgeschaltet werden.
-% Nun wird zusätzlich eine \code{\textbackslash.xmpdata}-Datei generiert. Üblicherweise werden die Titeldaten direkt übernommen.
+% \subsection{Creating PDF/A using the pdfmanagement}
+% The template files which use PDF/A by default now include the settings for the pdfmanagement:
+% \begin{example}
+% \DocumentMetadata{
+% 	pdfstandard=a-2b,
+% 	pdfversion=1.7,
+% 	lang=en,% or de or …
+% }
+% \end{example}
+% This can also be used within other documents. More Information on this structure can be foud in the documentation of the pdfmangement-testphase \cite{pdfmanagement-testphase} as well as l3pdfmeta \cite{l3pdfmeta}.
 %
-% Dies kann jedoch bei der Verwendung einiger Makros innerhalb der Felder zu Problemen führen. Beispielsweise enthält der Titel für dieses Dokument das Makro \code{\LaTeX}. Es können daher nur Textelemente übernommen werden. Ähnlich den Linkbezeichnungen über PDF-Lesezeichen.
+% If this setting is used \cls{tudapub} will automatically disable the loading for \pkg{pdfx}.
+% \cls{tudapub} will automatically try to pass the title data to the metadata.
+% In case the title contains more complex material which can not be expanded into text it's possible to overwrite these settings using \pkg{hyperref}'s \cs{hypersetup}.
+% The demo files include examples.
 %
-% Um dieses Problem zu umgehen, stellt \cls{tudapub} das Makro \code{\textbackslash{}Metadata\{\}} zur Verfügung. Hier können sämtliche von \pkg{pdfx} verarbeitbaren Variablen nach Schlüssel$=$Wert-Struktur gesetzt werden. Es ist zu beachten, dass dieses Makro nur dann funktioniert, wenn die \code{pdfa}-Ausgabe aktiviert ist. Ist dies nicht der Fall, so gibt \cls{tudapub} eine entsprechende Fehlermeldung zu diesem Widerspruch aus.
-% Zum Beispiel:
-% \begin{verbatim}
+% \subsection{Creating PDF/A using the pdfx}
+% In older versions of this bundle we used \pkg{pdfx} to create PDF/A compliant output files.
+% If the \cs{DocumentMetadata} as shown before is not used, \cls{tudapub} will still try to use this mechanism.
+% The metadata setup for the xmp metadata is differently using this mechaism.
+%
+% The compiler is creating an additional \file{\cs{jobname}.xmpdata} file.
+% It is tried to insert the title data directly.  The title data is usually transferred directly.
+% However, this can lead to problems if there are macros used within title material.
+% For example, the subtitle for this document contains the \LaTeX{} macro but only text elements can be used.
+% Similar to the link labels within the PDF bookmarks.
+%
+% \DescribeMacro{\Metadata}To avoid this issue, tudapub provides the macro \cs{Metadata}.
+% All variables that can be processed by pdfx can be set here according to the key=value structure.
+% \begin{example}
 % \Metadata{
 % author=Marei Peischl (peiTeX),
 % title=LaTeX im Corporate Design der TU Darmstadt,
 % }
-% \end{verbatim}
-% Das Feld \code{publisher} ist mit \enquote{TU Darmstadt} vorbelegt, kann aber überschrieben werden.
+% \end{example}
+% Please note that this macro only works if pdfa output is activated, and no pdfmanagement is used.
+% If this is not the case, tudapub issues a corresponding error message or warning.
+%
+% For a full list of the available metadata fields have a look at the \pkg{pdfx} documentation \cite{pdfx}.
 %
 % Um mehrere Einträge zu trennen, wird das Makro \code{\textbackslash{}sep} genutzt.
 % \begin{verbatim}
