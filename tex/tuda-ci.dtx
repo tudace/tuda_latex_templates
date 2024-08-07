@@ -91,18 +91,32 @@
 % run minted with pygments or not
 \sys_if_shell_unrestricted:TF {
 	\usepackage{minted}
-	\newminted[Syntax]{latex}{escapeinside=||}
+	\newenvironment{Syntax}{
+	  \VerbatimEnvironment
+	  \begin{VerbatimOut}[gobble=1, tabsize=4]{minted.doc.out}}
+	  {\end{VerbatimOut}
+	  \inputminted[autogobble, escapeinside=||,tabsize=4]{latex}{minted.doc.out}
+	}
+	\newenvironment{example}{
+	 \VerbatimEnvironment
+	 \begin{VerbatimOut}[gobble=1, tabsize=4]{minted.doc.out}}
+	 {\end{VerbatimOut}
+	 \inputminted[autogobble, escapeinside=||,tabsize=4]{latex}{minted.doc.out}
+	}
 } {
 	\usepackage[draft]{minted}
 	\newcommand \InputEscapedVerbatim [1] {
-		  \ior_open:Nn \g_ptxcd_ior   {#1}
-		  \begingroup
+		\ior_open:Nn \g_ptxcd_ior   {#1}
+		\par\smallskip
+		\begin{samepage}
+			\setlength{\parindent}{\c_zero_dim}
 			\ttfamily
 			\ior_str_map_variable:NNn \g_ptxcd_ior \l_tmpa_tl {
-				\regex_replace_all:NnN \c_ptxtools_escape_verb_regex {\c{ptxtools_escape_verb:w}\1\c{q_ptxtools_stop}} \l_tmpa_tl
-				\strut\tl_use:N \l_tmpa_tl \newline
+			\regex_replace_all:NnN \c_ptxtools_escape_verb_regex {\c{ptxtools_escape_verb:w}\1\c{q_ptxtools_stop}} \l_tmpa_tl
+			\strut\tl_use:N \l_tmpa_tl \newline
 			}
-		\endgroup
+		\end{samepage}
+		\par\smallskip
 		\ior_close:N  \g_ptxcd_ior
 	}
 
@@ -120,12 +134,25 @@
 	    \let\FVB@VerbatimOut\minted@FVB@VerbatimOut%
 	    \let\FVE@VerbatimOut\minted@FVE@VerbatimOut%
 	    \minted@configlang{latex}%
+	    \setminted{gobble=2}
 	    \minted@fvset
 	    \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
 	  {\end{VerbatimOut}%
 	      \minted@langlinenoson
 		\InputEscapedVerbatim{\minted@jobname.pyg}
 	    \minted@langlinenosoff}
+		\newenvironment{example}
+			{\VerbatimEnvironment%
+			\let\FVB@VerbatimOut\minted@FVB@VerbatimOut%
+			\let\FVE@VerbatimOut\minted@FVE@VerbatimOut%
+			\minted@configlang{latex}%
+			\setminted{gobble=2}
+			\minted@fvset
+			\begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
+			{\end{VerbatimOut}%
+			\minted@langlinenoson
+			\InputEscapedVerbatim{\minted@jobname.pyg}
+			\minted@langlinenosoff}
 }
 \setminted{escapeinside=||}
 \makeatother
@@ -240,10 +267,7 @@
 % \begin{Syntax}
 % \documentclass[|\meta{Options}|]{tudapub}
 % \end{Syntax}
-% \begin{verbatim}
-% \documentclass[<Optionen>]{tudapub}
-% \end{verbatim}
-% The options mostly are Key-Value options.
+% \noindent TUDa-CI defines some  additional options to be used. These are described below.
 %
 % \begin{description}
 % \KeyOptionItem{class=\meta{article|report|book}}{article}*
@@ -268,34 +292,61 @@
 %
 % The font inside the marginpars are controlled using the komafont mechanism \cite{scrguide-en} using the \code{marginpar} element.
 % It is defined as
-% \begin{verbatim}
+% \begin{example}
 % \setkomafont{marginpar}{\accentfont}
-% \end{verbatim}
-% to extend this setting, e.\,g. by adding a color one can add 
-% \begin{verbatim}
+% \end{example}
+% to extend this setting, e.\,g. by adding a color one can add
+% \begin{example}
 % \addtokomafont{marginpar}{\color{textaccentcolor}}
-% \end{verbatim}
+% \end{example}
 % to the preamble.
 % \marginline{
 % \includegraphics[width=\marginparwidth]{example-image}\\
 % Marginpar example using ragged text made with \KOMAScript's marginline
 % }
 %
-% \item[twocolumn] Aktiviert den zweispaltigen Modus global. In diesem Fall werden jedoch aufgrund ihrer Natur zwei Randnotizspalten erzeugt. Eine Nutzung in Kombination mit \code{marginpar=auto} ist daher in den meisten Fällen fragwürdig. Falls der zweispaltige Modus lediglich lokal aktiviert wird, entfällt dieses Verhalten, allerdings werden dann die Randnotizen deaktiviert.
-% \item[ruledheaders] Wählt den Stil der Überschriften aus. \code{ruledheaders=all} Wählt den mit Linien eingerahmten Stil für alle bis zur \verb+\subsubsection+. Bei \code{chapter} beziehungsweise \code{section} ist dieser Stil entsprechend beschränkt. False lädt den Standardstil aus \KOMAScript.
-% \item[title=default/small/large] Die relativ große Schriftgröße des Titels kann – insbesondere bei langen Titeln für Abschlussarbeiten – zu Platzproblemen führen. Die Option \code{title} verhindert dies, indem die für das jeweils kleinere Papierformat eingestellten Schriftgrößen geladen werden. Die Voreinstellung ist \code{default} und entspricht dem Wert \code{large}.
-% \item[type] Als Typ stehen im Moment \code{publication} und \code{thesis} zur Verfügung.
-% Die besonderen Möglichkeiten im Typ thesis sind in der Datei DEMO-TUDaThesis.tex/.pdf geschildert.
-% Voreingestellt ist \code{publication}.
-% Ab Version 1.2 existiert zusätzlich der Modus \code{intern}. Dieser wählt die Optionen \code{titlepage=false} für einen Titelkopf statt Titelseiten sowie die TUDaPub-Optionen \code{pdfa=""false} und \code{IMRAD=false}. Dieser Modus ist für kurze interne Berichte gedacht.
-% \item[headline] Die Kopfzeile verfügt über die im Corporate Design beschriebenen Layoutmöglichkeiten mit dem Wert \code{automark}. Da diese Lösung typografisch nicht sonderlich sinnvoll ist, ist es möglich diese abzuschalten. Voreingestellt ist ein Stil ohne Kolumnentitel.
-% \item[logo] Eine Option für die Titelseite, siehe \ref{sec:title}.
-% \item[colorback] Eine Option für die Titelseite, siehe \ref{sec:title}.
-% \item[IMRAD=true/false] Deaktiviert die Prüfung auf IMRAD-Labels, siehe Abschnitt \ref{sec:IMRAD}.
-% \item[logofile=<Dateipfad>] Erlaubt es ein alternatives Logo zu übergeben. Diese Option steht zur Verfügung, damit die Templates auch ohne das TUDa-Logo genutzt werden können. Die Logos sind der internen Verwendung vorbehalten und dürfen daher nicht mit diesem Template veröffentlicht werden.
+% \KeyOptionItem{twocolumn=\meta{Boolean}}{false}*
+% Activates the two-column mode globally.
+% In this case, however, two margin columns are created due to their nature.
+% Use in combination with \code{marginpar=auto} is therefore questionable in most cases.
+% If the two-column mode is only activated locally, that behavior does not apply, but the margin notes are deactivated.
+%
+% \KeyOptionItem{ruledheaders=(all|none|chapter|section)}{all}*
+% Selects the style of the headings.
+% \code{ruledheaders=all} selects the style framed with rules for all up to \cs{subsubsection}.
+% This style is limited accordingly for chapter or section.
+% False loads the \KOMAScript{} default setup instead.
+%
+% \KeyOptionItem{title=(defaul/small)}{default}*
+% The relatively large font size of the title can lead to spacing issues, especially with long titles for theses.
+% The \code{title} option prevents this by loading the font sizes set defined for the paper 1 size smaller (e.\,g. a5 font size if a4 paper is used).
+%
+% \KeyOptionItem{type=(publication/thesis/intern)}{publication}*
+% Is used to load specific configuration for theses (\autoref{sec:thesis}) or internal documents (\autoref{sec:report}).
+%
+% \KeyOptionItem{headline=(true/false/automark)}{false}*
+% The CI guideline \cite{TUDaGuideline} allows headers to be used ruled below the identbar.
+% That may be confusing as the headers are typeset larger than subsection headings.
+% Because of that it's switched off by default, but users can enable this setting using the \code{headline} option.
+% \code{automark} will also be passed to \pkg{scrlayer-scrpage} and switch to running headers.
+%
+% \KeyOptionItem{logo=(head|body)}{body}*
+% Sets the position of the logo on the titlepage, see \autoref{sec:title}.
+%
+% \KeyOptionItem{colorback=(true|false|title|body|head)}{true}*
+% Change the color setup of the title page, see \autoref{sec:title}.
+%
+% \KeyOptionItem{IMRAD=\meta{Boolean}}{true}*
+% Toggles the check for IMRAD labels, see \autoref{sec:IMRAD}.
+%
+% \item[logofile=\meta{file name/path}]
+% Allows an alternative logo to be used.
+% This option is available so that the templates can also be used without the TUDa logo.
+% The logos are reserved to be used by TUDa members and may therefore not be published with this template.
+^^A% TODO Link!
 % \end{description}
 %
-% \noindent Der Rest der Dokumentenklasse entspricht dem Standard von \KOMAScript, vgl. Abschnitt \ref{sec:KOMA}.
+% \noindent Additionally all \KOMAScript{} options can be used. These are described within the documentation. Some more notes on the interaction between \KOMAScript{} and TUDa-CI can be found in \autoref{sec:KOMA}.
 %
 %
 %
