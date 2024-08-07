@@ -29,17 +29,14 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tudapub.dtx}
+\ProvidesFile{tudapub.dtx}[2024-07-02 v3.41 The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
 %</driver>
-%<package|class>\def\fileversion{3.41}
-%<package|class>\def\filedate{2024-07-02}
 %<package|class>\NeedsTeXFormat{LaTeX2e}[2022-06-01]
-%<tudapub>\ProvidesExplClass{tudapub}{\filedate}{\fileversion}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
+%<tudapub>\ProvidesExplClass{tudapub}{2024-07-02}{3.41}{ublications using TU Darmstadt's Corporate Design (TUDa-CI)}
 %<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2024-07-02}{3.41}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
 %<*driver>
 \documentclass[
   pdfa=false,
-  class=report,
   titlepage=true,
 ]{tudapub}
 \let\tudamaketitle\maketitle% avoid issues due to catcode changes
@@ -107,13 +104,16 @@
 % scientific poster			& DEMO-TUDaSciPoster.tex 		      				& tudasciposter.cls \\
 % announcement poster			& DEMO-TUDaPoster.tex 							& tudaposter.cls \\
 % theses announcements	   		& DEMO-TUDaAnnouncement.tex 						& tudaposter.cls \\
-% presentation				& DEMO-TUDaBeamer.tex 							& tudabeamer.cls \\
+% presentation				& DEMO-TUDaBeamer.tex 							& tudabeamer.cls and all beamertheme files, see \autoref{sec:beamer} for details.\\
 % letter					& DEMO-TUDaLetter.tex, using DEMO-TUDaFromaddress.lco  			& tudaletter.cls and tudalettersize10pt.clo \\
 % exercise sheets/exams			& DEMO-TUDaExercise.tex      						& tudaexercise.cls \\
 % leaflets 				& DEMO-TUDaLeaflet.tex							& tudaleaflet.cls \\
 % \end{tabularx}
 %
-% The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort.
+% The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort. These are called by the elements they define: \pkg{tudacolors}, \pkg{tudafonts}, \pkg{tudarules} as well as the pgfplots color schemes defined by \pkg{tuda-pgfplots}.
+%
+% Additionally the setup is defined to support department specific configuration files. Officially there currently is only one for the department of mechanicam engineering.
+% This is provided within the files \file{beamerthemeTUDa-mecheng.sty} and \file{tudamecheng.cfg}.
 %
 %<*thesis|phd>
 % \subsection{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}
@@ -126,14 +126,14 @@
 % \midrule
 % twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
 % parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
-% Kolophon&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-% Widmung&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-% Schriftgröße&11pt&11pt&9pt\\\midrule
+% colophone&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+% dedication&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
+% font size&11pt&11pt&9pt\\\midrule
 % ruledheaders&section&chapter&all\\\midrule
-% Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
+% class&scrreprt&scrbook&scrartcl\\\midrule
 % thesis&\ttfamily type=bachelor&\ttfamily type=dr, dr=rernat &\FeatureFalse\\\midrule
 % marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue\\\midrule
-% Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
+% Affidavit\newline\rlap{(\enquote{Selbstständigkeitserklärung})}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
 % abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
 % custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse\\
 % \bottomrule
