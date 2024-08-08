@@ -267,6 +267,7 @@ reversemp
 % In case you want to provide your own and add it to TUDa-CI, please have a look at \autoref{sec:department-config}.
 %
 % \chapter{tudapub – generic class for articles and theses}
+% \label{sec:tudapub}
 % The TUDa-CI bundle uses a generic document class to be more flexible with the layout adjustments.
 % The setup is based on \KOMAScript and this section is listing the features.
 % Afterwards there will be specific information on the thesis modes.
@@ -630,8 +631,8 @@ reversemp
 % \item[bachelor] \enquote{Bachelor thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
 % \item[master] \enquote{Master thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
 % \item[pp] \enquote{Project proposal}. (\cs{title}, \cs{author}, \cs{date}, \cs{department})
-% \item[dr] submitted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{birthplace}, \cs{department}, \cs{reviewer})
-% \item[drfinal] accepted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{examdate}, \cs{birthplace}, \cs{department}, \cs{reviewer})
+% \item[dr] submitted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
+% \item[drfinal] accepted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{examdate}, \cs{department}, \cs{reviewer})
 %\end{description}
 %If a type is specified that was not listed the text is directly used as type.
 %In this case, there are no mandatory title fields except the title.
@@ -701,7 +702,7 @@ reversemp
 % \DescribeMacro{\subject}
 % Will be placed below the \cs{subtitle} as for the normal title page, but will hold all the additional information which can be provided using the additional data fields.
 %
-% \DescribeMacro{\birthplace} Place of birth. This information is required for dissertations
+% \DescribeMacro{\birthplace} Place of birth.
 % \DescribeMacro{\department}
 % Subject/field of study. It's prefered to set it via the class option.
 % However, the argument is processed in the same way.
@@ -2700,8 +2701,8 @@ The structure is realized using \pkg{scrlayer-scrpage} and can be adapted accord
   type/pp  .code:n = { \ptxcd_declare_caption:Nnn \ptxcd_thesisType {Project-Proposal}{project~ proposal}\def\@ThesisTypeArticle{das}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, date, department}\bool_gset_false:N \g_ptxcd_dr_bool},
   type/msc  .meta:n = {type=master},
   type/master  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType{Masterarbeit}{master~ thesis}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate, department, reviewer}\bool_gset_false:N \g_ptxcd_dr_bool,
-  type/dr  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType{Dissertation}{doctoral~ thesis}\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus{vorgelegte}{submitted}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate , birthplace, department, reviewer}\bool_gset_true:N \g_ptxcd_dr_bool,
-  type/drfinal  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType {Dissertation}{doctoral~ thesis}\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus{genehmigte}{accepted}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate,examdate, birthplace, department, reviewer}\bool_gset_true:N \g_ptxcd_dr_bool,
+  type/dr  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType{Dissertation}{doctoral~ thesis}\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus{vorgelegte}{submitted}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate , department, reviewer}\bool_gset_true:N \g_ptxcd_dr_bool,
+  type/drfinal  .code:n = \ptxcd_declare_caption:Nnn \ptxcd_thesisType {Dissertation}{doctoral~ thesis}\ptxcd_declare_caption:Nnn\ptxcd_thesisStatus{genehmigte}{accepted}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate,examdate, department, reviewer}\bool_gset_true:N \g_ptxcd_dr_bool,
   type/unknown  .code:n = \def\ptxcd_thesisType{#1}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {}\def\@ThesisTypeArticle{die}\bool_gset_false:N \g_ptxcd_dr_bool,
   ignore-missing-data .bool_gset:N = \g_ptxcd_missing_data_warning_bool,
   ignore-missing-data .initial:n = false,
