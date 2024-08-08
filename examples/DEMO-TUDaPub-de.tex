@@ -444,14 +444,6 @@ Es wird eine entsprechende Warnung erzeugt, allerdings kann es bei älteren \hol
 \subsection{DVI-Ausgabe}
 Aufgrund der Voreinstellung zur Erzeugung einer PDF/A-Datei ist es nicht möglich TUDa-CI in Standardeinstellungen zur Erzeugung einer DVI-Datei zu nutzen. Ein Großteil der Funktionalität kann jedoch durch Deaktivierung der \code{pdfa}-Option genutzt werden.
 
-\subsection{Geschachtelte Akzente (Inkompatibilität zwischen pdfx und amsmath)}
-Es ist nach aktuellem Paketstatus (v3.04) nicht möglich beide Pakete in Kombination ohne weitere Anpassungen so zu verwenden, dass eine Schachtelung von Akzenten möglich ist. Das folgende Beispiel wirft Fehler, sobald \pkg{amsmath} direkt oder indirekt geladen wird.
-\begin{verbatim}
-$\dot{\hat{x}}$
-\end{verbatim}
-
-\noindent Die zugehörige Diskussion findet sich im tuda-ci Repository (\url{https://github.com/tudace/tuda_latex_templates/issues/78}). Da sich diese Problematik nicht direkt aus tuda-ci sondern aus der Konstruktion der beiden Pakete untereinander ergibt, ist es leider nicht möglich pauschal eine Anpassung in tuda-ci zu implementieren. Unter dem angegebenen Link findet sich jedoch ein möglicher Workaround, sobald beide Varianten benötigt werden.
-
 \subsection{Möglicher Option Clash mit microtype}
 Das Paket \pkg{microtype} wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenen Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen, um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
 
