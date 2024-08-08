@@ -407,10 +407,7 @@ reversemp
 % \maketitle
 % \end{Syntax}
 %
-% For theses there exist additional data fields \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
-% To use these and also learn about other specials of the title mechanism within theses, please refer to \autoref{sec:theses-title}.
-%
-% \subsection{TUDa-CI specific title elements: Additional logos, graphics or boxes}
+% \subsection{TUDa-CI specific title elements}
 % \DescribeMacro{\titlegraphic}
 % Accepts any \LaTeX{} content, does not have to be an image.
 % This is placed flush with the top corner in the main part of the title page.
@@ -466,7 +463,9 @@ reversemp
 % \sponsors{|\meta{logo1}\meta{logo2}|}
 % \end{Syntax}
 %
-
+% For theses there exist additional data fields \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
+% To use these and also learn about other specials of the title mechanism within theses, please refer to \autoref{sec:theses-title}.
+%
 % \subsection{Options for titlepage modification}
 % \label{sec:title-options}
 % \DescribeKeyOption{logo=head/body}{body}
@@ -504,11 +503,11 @@ reversemp
 %
 % \begin{example}
 % \begin{abstract}
-% Zusammenfassung entsprechend der Dokumentensprache. In diesem Fall Deutsch.
+% 	Abstract using the document main languge (here English)
 % \end{abstract}
 %
-% \begin{abstract}[english]
-% Zusätzliche Zusammenfassung in englischer Sprache.
+% \begin{abstract}[german]
+% 	Weitere Zusammenfassung in einer anderen Sprache (hier Deutsch), sofern benötigt.
 % \end{abstract}
 % \end{example}
 %
@@ -529,6 +528,7 @@ reversemp
 % This should only be toggled manually if the user is totally sure to understand the impact.
 %
 % \subsection{Creating PDF/A using the pdfmanagement}
+% \label{sec:pdfmanagement}
 % The template files which use PDF/A by default now include the settings for the pdfmanagement:
 % \begin{example}
 % \DocumentMetadata{
@@ -686,7 +686,7 @@ reversemp
 % If anything other than one of these shorthands is found, the provided text is used directly and a corresponding warning is issued.
 %
 % \subsection{Thesis specific title page settings and customisation}
-%
+% \label{sec:theses-title}
 % \DescribeKeyOption{instbox=\meta{Boolean}}{true}*
 % Selecting the department also creates a box on the title page below the logo.
 % I some cases this setting does not match the requiremerents.
