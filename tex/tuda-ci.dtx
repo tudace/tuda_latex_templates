@@ -830,22 +830,25 @@ reversemp
 % \AffidavitSignature[\meta{city}]
 % \end{Syntax}
 %
-% \section{Erweiterte Konfigurationsmöglichkeiten}
+% \section{Further configuration options}
 %
-% \subsection{Auswahl des Dokumentenfarbmodus}
-% Farben unterliegen, je nachdem auf welchem Medium sie ausgegeben werden, einer anderen Farbmischung. Für die Verwendung bei der Dokumentenerzeugung ist daher wichtig, welches Ausgabemedium primär genutzt werden soll.
+% \subsection{Select the color model}
+% Colors are subject to a different colorimetry depending on the medium on which they are output.
+% For use in documents, it is therefore important which output medium is to be used primarily.
+% Technically, this difference is reflected in color models.
+% In accordance with the guidelines, TUDa-CI supports both a color model for print output (cmyk) and for screen display (RGB).
+% The implementation is done via the \pkg{xcolor} package, whereby the corresponding color values for both models are stored withing \pkg{tudacolors}.
 %
-% Technisch zeigt sich dieser Unterschied in Farbmodellen. TUDa-CI unterstützt entsprechend der Richtlinien sowohl ein Farbmodell für die Druckausgabe (cmyk), als auch für die Bildschirmdarstellung (RGB). Die Umsetzung geschieht über das Paket \pkg{xcolor} wobei die entsprechenden Farbwerte für beide Modelle über \pkg{tudacolors} hinterlegt sind.
+% Normally, TUDa-CI automatically selects a suitable model.
+% The default setting of pdfa-true ensures a conversion to RGB (vgl.~\ref{sec:pdfa-color}).
 %
-% Normalerweise wählt TUDa-CI automatisch ein passendes Modell. Die Voreinstellung von \code{pdfa-true} sorgt allerdings für eine Konvertierung zu RGB (vgl.~\ref{sec:pdfa-color}).
+% If a specific color profile should be used, the xcolor options \option{cmyk} or \option{RGB} can be transmitted directly to tudapub.
+% They are passed on to the package and will be processed according to the xcolor documentation \cite{xcolor}.
 %
-% Soll abseits dieser automatischen Abweichung ein bestimmter Farbmodus erzeugt werden, können die \pkg{xcolor}-Optionen \code{cmyk} oder \code{RGB} direkt an \cls{tudapub} übermittelt werden. Sie werden an das Paket weitergereicht und entsprechend der \pkg{xcolor}-Dokumentation verarbeitet.
+% \section{Customizations that deviate from the corporate design guidelines}
 %
-%
-% \section{Anpassungen, die von den Corporate Design Richtlinien abweichen}
-%
-%
-% \subsection{Fontsize}
+% \subsection{Font size}
+% \DescribeKeyOption{fontsize=\meta{Length}}{9pt}
 % Contrary to the corporate design guidelines, \cls{tudapub} can also process other font sizes.
 % The fontsize option of \KOMAScript is supported (e.\,g. \option{fontsize=11pt}).
 % If no special font size configuration file is available for TUDa-CI, the file supplied with KOMA- Script is selected.
@@ -853,6 +856,7 @@ reversemp
 %
 % \subsection{Margins}
 % \label{sec:margins}
+% \DescribeKeyOption{custommargins=true/false/geometry}{false}
 % According to the corporate design, the line lengths are too long from a typographical point of view.
 % This is why the custommargins class option exists.
 %
