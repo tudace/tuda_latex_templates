@@ -585,7 +585,7 @@ reversemp
 % The check mechanism is activated by default at the request of the library.
 % If you are not planning to use these labels or this structure just don't match your document, the warning can be deactivated using the \option{IMRAD=false}.
 %
-% \subsection{Colors models}
+% \subsection{Colors conversion and profile}
 % \label{sec:pdfa-color}
 % PDF/A can only use one color model within a document.
 % By default if no specific profile is selected TUDa-CI will convert the colors to RGB.
@@ -937,6 +937,39 @@ reversemp
 % Some examples can be found in the XCharter documentation \cite{xcharter}.
 % \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
 %
+% \section{Customization using \KOMAScript}
+% \label{sec:KOMA}
+% As the class is fully \KOMAScript-compatible apart from a few forced settings that affect the layout, a look at the \KOMAScript documentation \cite{scrguide-en} is helpful for any kind of modifications.
+% For most of the possible modifications \KOMAScript offers its own solutions, which often makes supplementary packages superfluous.
+% Examples of typical modifications that are also permitted as part of the corporate design:
+% \begin{itemize}
+% \item Change paragraphs to use a skip instead of an indent of the first line (option \option{parskip})
+% \item Element numbering with or without end dot (option \option{numbers=enddot/noenddot})
+% \item Caption positioning, alignment and spacing (The macros \cs{captionabove}, \cs{captionbelow}, \cs{captionof} and the \option{captions} option)
+% \end{itemize}
+%
+% \section{Known issues and incompatibilities}
+%
+% \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} and PDF/A}
+% If the \pkg{pdfx} package is used together with \hologo{XeLaTeX} for the creation of PDF/A the support is limited.
+% There will be a corresponding warning.
+% With some \hologo{XeLaTeX} versions it's possible that there even may be errors.
+% \hologo{LuaLaTeX} should be prefered anyways, but in worst case switching to the pdfmanagement mechanism could also help.
+%
+% \subsection{DVI Output}
+% Due to the default setting for creating a PDF/A file, it is not possible to use TUDa-CI in standard settings to create a DVI file.
+% However, a large part of the functionality can be used when \option{pdfa} mode is deactivated.
+%
+% \subsection{Possible option clash for microtype}
+% The \pkg{microtype} package is loaded automatically if \hologo{pdfLaTeX} is used, as the ligatures for small caps must be deactivated in the font to avoid problems (see \url{https://github.com/tudace/tuda_ latex_templates/issues/144}).
+% It is possible to pass further options to microtype before loading the document class:
+% \begin{Syntax}
+% \PassOptionsToPackage{|\meta{microtype options}|}{microtype}
+% \documentclass{tudapub}
+% \end{Syntax}
+%
+%
+
 % \chapter{Department-specific adaptations}
 % \label{sec:department-config}
 % Some departments have special requirements.
@@ -945,8 +978,10 @@ reversemp
 % However, the mechanism can be expanded.
 %
 % \subsection{Department of Mechanical Engineering}
+% \label{sec:mecheng}
 % The corresponding mode is activated via the option \option{department=mecheng}.
-% The coloring adjusts automatically and the separator line of the footer is given the required shape of the timeline.
+% Coloring is adjusted automatically and additional layout elements like the \enquote{Zeitstrahl} are introduced.
+% The modifications exist for all document types provided by TUDa-CI.
 %
 % \DescribeMacro{\SetPaperID}
 % In addition, some documents require the placement of document identifier on the titlepage.
@@ -985,38 +1020,6 @@ reversemp
 % \DescribeMacro{\MechEngArrow}
 % The design element of the timeline can be created using the macro \cs{MechEngArrow\marg{length}}.
 % The color corresponds to the color \code{TUDaArrow}, which is pre-assigned with the second primary color (blue).
-%
-% \chapter{Customization using \KOMAScript}
-% \label{sec:KOMA}
-% As the class is fully \KOMAScript-compatible apart from a few forced settings that affect the layout, a look at the \KOMAScript documentation \cite{scrguide-en} is helpful for any kind of modifications.
-% For most of the possible modifications \KOMAScript offers its own solutions, which often makes supplementary packages superfluous.
-% Examples of typical modifications that are also permitted as part of the corporate design:
-% \begin{itemize}
-% \item Change paragraphs to use a skip instead of an indent of the first line (option \option{parskip})
-% \item Element numbering with or without end dot (option \option{numbers=enddot/noenddot})
-% \item Caption positioning, alignment and spacing (The macros \cs{captionabove}, \cs{captionbelow}, \cs{captionof} and the \option{captions} option)
-% \end{itemize}
-%
-% \chapter{Known issues and incompatibilities}
-%
-% \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
-% If the \pkg{pdfx} package is used together with \hologo{XeLaTeX} for the creation of PDF/A the support is limited.
-% There will be a corresponding warning.
-% With some \hologo{XeLaTeX} versions it's possible that there even may be errors.
-% \hologo{LuaLaTeX} should be prefered anyways, but in worst case switching to the pdfmanagement mechanism could also help.
-%
-% \subsection{DVI Output}
-% Due to the default setting for creating a PDF/A file, it is not possible to use TUDa-CI in standard settings to create a DVI file.
-% However, a large part of the functionality can be used when \option{pdfa} mode is deactivated.
-%
-% \subsection{Possible option clash for microtype}
-% The \pkg{microtype} package is loaded automatically if \hologo{pdfLaTeX} is used, as the ligatures for small caps must be deactivated in the font to avoid problems (see \url{https://github.com/tudace/tuda_ latex_templates/issues/144}).
-% It is possible to pass further options to microtype before loading the document class:
-% \begin{Syntax}
-% \PassOptionsToPackage{|\meta{microtype options}|}{microtype}
-% \documentclass{tudapub}
-% \end{Syntax}
-%
 %
 %
 %
