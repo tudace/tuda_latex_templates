@@ -968,7 +968,7 @@ reversemp
 % The mode also sets the options: \option{colorback=false} and \option{ruledheaders=section}.
 %
 % \subsubsection{Department logo}
-% \DescribeKeyOption{departmentlogofile=\meta{filename}}{tuda_maschinenbau_logo}*
+% \DescribeKeyOption{departmentlogofile=\meta{filename}}{tuda\_maschinenbau\_logo}*
 % The department logo can be downloaded and installed the same way as the TUDa logo.
 % A different file can also be selected using the option.
 % If the value remains empty, no image is inserted.
@@ -991,18 +991,18 @@ reversemp
 %
 % \minisec{\enquote{Zeitstrahl} arrow}
 % \DescribeMacro{\MechEngArrow}
-% The design element of the timeline can be created using the macro \cs{MechEngArrow\mrg{length}}.
+% The design element of the timeline can be created using the macro \cs{MechEngArrow\marg{length}}.
 % The color corresponds to the color \code{TUDaArrow}, which is pre-assigned with the second primary color (blue).
 %
 % \chapter{Customization using \KOMAScript}
 % \label{sec:KOMA}
 % As the class is fully \KOMAScript-compatible apart from a few forced settings that affect the layout, a look at the \KOMAScript documentation \cite{scrguide-en} is helpful for any kind of modifications.
-% For most of the possible modifications \KOMA-Script offers its own solutions, which often makes supplementary packages superfluous.
+% For most of the possible modifications \KOMAScript offers its own solutions, which often makes supplementary packages superfluous.
 % Examples of typical modifications that are also permitted as part of the corporate design:
 % \begin{itemize}
 % \item Change paragraphs to use a skip instead of an indent of the first line (option \option{parskip})
 % \item Element numbering with or without end dot (option \option{numbers=enddot/noenddot})
-% \item Caption positioning, alignment and spacing (The macros \¢s{captionsabove}, \cs{captionbelow}, \cs{captionof} and the \option{captions} option)
+% \item Caption positioning, alignment and spacing (The macros \cs{captionabove}, \cs{captionbelow}, \cs{captionof} and the \option{captions} option)
 % \end{itemize}
 %
 % \chapter{Known issues and incompatibilities}
@@ -1018,7 +1018,7 @@ reversemp
 % However, a large part of the functionality can be used when \option{pdfa} mode is deactivated.
 %
 % \subsection{Possible option clash for microtype}
-% The \pgk{microtype} package is loaded automatically if \hologo{pdfLaTeX} is used, as the ligatures for small caps must be deactivated in the font to avoid problems (see \url{https://github.com/tudace/tuda_ latex_templates/issues/144}).
+% The \pkg{microtype} package is loaded automatically if \hologo{pdfLaTeX} is used, as the ligatures for small caps must be deactivated in the font to avoid problems (see \url{https://github.com/tudace/tuda_ latex_templates/issues/144}).
 % It is possible to pass further options to microtype before loading the document class:
 % \begin{Syntax}
 % \PassOptionsToPackage{|\meta{microtype options}|}{microtype}
