@@ -923,7 +923,6 @@ reversemp
 %
 % Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet.
 %
-%
 % \subsection{Math fonts}
 % As there is no compiler-independent universal math font and the corporate design guidelines do not take any recommendations into account, several possible variants were discussed.
 % The default setting always corresponds to the installation standard.
@@ -946,30 +945,39 @@ reversemp
 % Some examples can be found in the XCharter documentation \cite{xcharter}.
 % \url{http://mirrors.ctan.org/fonts/xcharter/doc/xcharter-doc.pdf}
 %
-% \section{Fachbereichsspezifische Anpassungen}
-% Einige Fachbereiche haben spezielle Anforderungen. Dieser Abschnitt betrachtet die speziellen Anpassungen. Bisher (Juli 2020) existieren diese Modifikationen lediglich für den Fachbereich Maschinenbau. Der Mechanismus ist jedoch erweiterungsfähig.
+% \chapter{Department-specific adaptations}
+% \label{sec:department-config}
+% Some departments have special requirements.
+% TUDa-CI includes an interface to be extended in that way.
+% Currently the only official extension is the one for the department of mechanical engineering.
+% However, the mechanism can be expanded.
 %
+% \subsection{Department of Mechanical Engineering}
+% The corresponding mode is activated via the option \option{department=mecheng}.
+% The coloring adjusts automatically and the separator line of the footer is given the required shape of the timeline.
 %
-% \subsection{Fachbereich Maschinenbau}
-% Der entsprechende Modus wird über die Option \code{department=mecheng} oder kurz \code{mecheng} aktiviert. Die Farbgebung passt sich automatisch an und die Trennlinie der Fußzeile erhält die geforderte Form des Zeitstrahls.
+% \DescribeMacro{\SetPaperID}
+% In addition, some documents require the placement of document identifier on the titlepage.
+% For this purpose \cs{SetPaperID} was introduced.
+% \begin{Syntax}
+% \SetPaperID{|\meta{Letter}|}{|\meta{ID}|}
+% \end{Syntax}
+% This also works without activating mecheng mode.
+% However, the option adds some additional parameters for customized distances.
 %
-% Darüber hinaus erfordern manche Stellen dieses Fachbereichs die Übergabe einer ID zur Kennzeichnung des Dokuments. Hierfür wurde der Mechanismus
-% \begin{verbatim}
-% \SetPaperID{<Buchstabe>}{<tiefgestelle Nummer>}}
-% \end{verbatim}
-% eingeführt.
-% Dieser funktioniert auch ohne die Aktivierung des \code{mecheng}-Modus. Die Option ergänzt allerdings einige zusätzliche Parameter für angepasste Abstände.
+% The mode also sets the options: \option{colorback=false} and \option{ruledheaders=section}.
 %
-% Darüber hinaus aktiviert der Modus die Optionen:
-% \code{colorback=false} und \code{ruledheaders=section}.
+% \subsubsection{Department logo}
+% \DescribeKeyOption{departmentlogofile=\meta{filename}}{tuda_maschinenbau_logo}*
+% The department logo can be downloaded and installed the same way as the TUDa logo.
+% A different file can also be selected using the option.
+% If the value remains empty, no image is inserted.
 %
-% \minisec{Logo}
-% Das Fachbereichslogo wird über die Option \verb+departmentlogofile=tuda_maschinenbau_logo+ übergeben. Über diese Option kann auch eine abweichende Datei genutzt werden. Falls der Wert leer bleibt, wird kein Bild eingefügt.
+% \subsubsection{Colors}
+% The department subdivides the colors described in the corporate design manual.
+% Therefore, if mecheng has been activated, the following color names also exist:
 %
-% \minisec{Farbanpassungen}
-% Der Fachbereich untergliedert die im Corporate Design Handbuch beschriebenen Farben. Daher existieren, wenn \code{mecheng} aktiviert wurde, zusätzlich die folgenden Farbnamen:
-%
-% \begin{verbatim}
+% \begin{example}
 % \colorlet{TUDa-Primary1}{TUDa-6b}
 % \colorlet{TUDa-Primary2}{TUDa-2d}
 % \colorlet{TUDa-Secondary1}{TUDa-9a}
@@ -979,39 +987,35 @@ reversemp
 % \colorlet{TUDa-Secondary5}{TUDa-4a}
 % \colorlet{TUDa-Secondary6}{TUDa-5a}
 % \colorlet{TUDa-Arrow}{TUDa-Primary2}
-% \end{verbatim}
+% \end{example}
 %
-% \minisec{Zeitstrahl}
-% Des Design-Element des Zeitstrahls kann über das Makro \verb+\MechEngArrow{<Länge>}+ erzeugt werden. Die Farbe entspricht dabei der Farbe \code{TUDaArrow}, die mit der zweiten Primärfarbe (blau) vorbelegt ist.
+% \minisec{\enquote{Zeitstrahl} arrow}
+% \DescribeMacro{\MechEngArrow}
+% The design element of the timeline can be created using the macro \cs{MechEngArrow\mrg{length}}.
+% The color corresponds to the color \code{TUDaArrow}, which is pre-assigned with the second primary color (blue).
 %
-%
-%<*thesis|phd>
-
-%
-% \section{Weitere Konfigurationsmöglichkeiten: Standard-KOMA-Script}
+% \chapter{Customization using \KOMAScript}
 % \label{sec:KOMA}
-% Da die Klasse bis auf ein paar erzwungene Einstellungen die das Layout betreffen vollständig \KOMAScript"=kompatibel ist, ist für sämtliche Modifikationen ein Blick in die \KOMAScript-Dokumentation hilfreich. Für den Großteil bietet \KOMAScript{} eigene Lösungen, wodurch Ergänzungspakete oft hinfällig sind.
-%
-% Beispiele für typische Modifikationen die auch im Rahmen des Corporate Design zulässig sind:
+% As the class is fully \KOMAScript-compatible apart from a few forced settings that affect the layout, a look at the \KOMAScript documentation \cite{scrguide-en} is helpful for any kind of modifications.
+% For most of the possible modifications \KOMA-Script offers its own solutions, which often makes supplementary packages superfluous.
+% Examples of typical modifications that are also permitted as part of the corporate design:
 % \begin{itemize}
-% \item Umstellung der Absatzkennzeichnungsmethode von Einzug auf Abstand (Klassenoption \verb+parskip+)
-% \item Elementnummerierung mit oder ohne Endpunkt (Klassenoption \verb+numbers=enddot/noenddot+)
-% \item Positionierung, Ausrichtung und Abstände bei \code{captions} (Die Makros \verb+\captionsabove+, \verb+\captionbelow+, \verb+\captionof+ und die Option \verb+captions+)
+% \item Change paragraphs to use a skip instead of an indent of the first line (option \option{parskip})
+% \item Element numbering with or without end dot (option \option{numbers=enddot/noenddot})
+% \item Caption positioning, alignment and spacing (The macros \¢s{captionsabove}, \cs{captionbelow}, \cs{captionof} and the \option{captions} option)
 % \end{itemize}
 %
-%
-%
-% \section{Bekannte Probleme}
-%
+% \chapter{Known issues and incompatibilities}
 %
 % \subsection{\texorpdfstring{\hologo{XeLaTeX}}{XeLaTeX} und PDF/A}
-% Das Paket \pkg{pdfx} (über welches die PDF/A Kompatibilität erzeugt wird) hat nur einen begrenzten Support für \hologo{XeLaTeX}.
-% Es wird eine entsprechende Warnung ausgegeben. Bei älteren \hologo{XeLaTeX}-Versionen kann es allerdings passieren, dass \pkg{pdfx} bereits Fehlermeldungen erzeugt. Abhilfe wird in diesem Fall durch einen Compiler-Wechsel auf \hologo{LuaLaTeX} (welcher ohnehin empfohlen wird) oder durch Abschalten des PDF/A-Modus (\code{pdfa=false}) geschaffen.
+% If the \pkg{pdfx} package is used together with \hologo{XeLaTeX} for the creation of PDF/A the support is limited.
+% There will be a corresponding warning.
+% With some \hologo{XeLaTeX} versions it's possible that there even may be errors.
+% \hologo{LuaLaTeX} should be prefered anyways, but in worst case switching to the pdfmanagement mechanism could also help.
 %
-%
-% \subsection{DVI-Ausgabe}
-% Aufgrund der Voreinstellung zur Erzeugung einer PDF/A-Datei ist es nicht möglich TUDa-CI in Standardeinstellungen zur Erzeugung einer DVI-Datei zu nutzen. Ein Großteil der Funktionalität kann jedoch durch die Deaktivierung der \code{pdfa}-Option genutzt werden.
-%
+% \subsection{DVI Output}
+% Due to the default setting for creating a PDF/A file, it is not possible to use TUDa-CI in standard settings to create a DVI file.
+% However, a large part of the functionality can be used when \option{pdfa} mode is deactivated.
 %
 % \subsection{Geschachtelte Akzente (Inkompatibilität zwischen pdfx und amsmath)}
 % Es ist nach aktuellem Paketstatus (v3.04) nicht möglich beide Pakete in Kombination ohne weitere Anpassungen so zu verwenden, dass eine Schachtelung von Akzenten möglich ist. Das folgende Beispiel wirft Fehler, sobald \pkg{amsmath} direkt oder indirekt geladen wird.
