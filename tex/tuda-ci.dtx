@@ -897,24 +897,23 @@ reversemp
 % This applies in particular to the options \code{includehead}, \code{includefoot} and \code{includemp}.
 % \end{description}
 %
-\minisec{Remark on the headers/footers}
-If the option \option{marginpar=true} remains set, the header and footer protrude beyond the margin column.
-For aesthetic reasons, it is therefore recommended in this case to limit the header and footer to the text area with marginpar=false.
-
-The standard layout of the column titles is also not very advantageous, as the column titles can be locally larger than the actual headline. (\option{headline=automark})
-
-For this reason, \cls{tudapub} provides a simpler page style, which considerably simplifies use with living column titles.
-The structure is realized using \pkg{scrlayer-scrpage} and can be adapted according to the \KOMAScript documentation \cite{scrguide-en}.
-\begin{example}
-\pagestyle{TUDa.headings}
-\end{example}
-
+% \minisec{Remark on the headers/footers}
+% If the option \option{marginpar=true} remains set, the header and footer protrude beyond the margin column.
+% For aesthetic reasons, it is therefore recommended in this case to limit the header and footer to the text area with marginpar=false.
+%
+%The standard layout of the column titles is also not very advantageous, as the column titles can be locally larger than the actual headline. (\option{headline=automark})
+%
+% For this reason, \cls{tudapub} provides a simpler page style, which considerably simplifies use with living column titles.
+% The structure is realized using \pkg{scrlayer-scrpage} and can be adapted according to the \KOMAScript documentation \cite{scrguide-en}.
+% \begin{example}
+% \pagestyle{TUDa.headings}
+% \end{example}
+%
 % \minisec{Remark on binding correction}
 % \DescribeKeyOption{BCOR=\meta{length}}{0pt}
 % \DescribeKeyOption{BCORtitlepage=\meta{Boolean}}{false}
 % If a binding correction (\option{BCOR=\meta{length}}) is used, this is not automatically inserted on the title page.
 % For this case, the \option{BCORtitlepage}option was added with version 3.0. If this is activated, the title page uses the value of the typearea option \option{BCOR} on the first page as an addition to the left margin.
-%
 %
 % \subsection{Frontmatter/Mainmatter/Backmatter}
 % The macros \cs{frontmatter}, \cs{mainmatter} and \cs{backmatter} are usually only available for the class scrbook.
