@@ -845,11 +845,11 @@ reversemp
 % \section{Anpassungen, die von den Corporate Design Richtlinien abweichen}
 %
 %
-% \subsection{Schriftgröße}
-% \cls{tudapub} kann entgegen der Corporate Design Richtlinien auch andere Schriftgrößen verarbeiten. Hierfür wird die \code{fontsize}-Option aus \KOMAScript{} genutzt (z.\,B. \code{fontsize=11pt}). Sofern keine spezielle Schriftgrößendatei für TUDa-CI vorliegt, wird die mit \KOMAScript{} ausgelieferte Datei gewählt.
-%
-% Beispiele für Abweichungen aus typografischen Gründen sind unter anderem auch in den Demo-Dateien für Abschlussarbeiten gezeigt.
-%
+% \subsection{Fontsize}
+% Contrary to the corporate design guidelines, \cls{tudapub} can also process other font sizes.
+% The fontsize option of \KOMAScript is supported (e.\,g. \option{fontsize=11pt}).
+% If no special font size configuration file is available for TUDa-CI, the file supplied with KOMA- Script is selected.
+% Examples of deviations for typographical reasons are also shown in the demo files for theses.
 %
 % \subsection{Margins}
 % \label{sec:margins}
@@ -910,8 +910,6 @@ reversemp
 % On request, these macros have also been provided as a basis for scrartcl and scrreprt.
 % It is therefore possible to switch to Roman numerals for the opening credits.
 % Arabic numerals are then used from \cs{mainmatter}.
-%
-% Somit ist es möglich, für den Vorspann auf römische Ziffern zu wechseln. Ab \verb+\mainmatter+ werden dann arabische Ziffern verwendet.
 %
 % \subsection{Math fonts}
 % As there is no compiler-independent universal math font and the corporate design guidelines do not take any recommendations into account, several possible variants were discussed.
