@@ -108,7 +108,6 @@
 \title{TUDaThesis -- Abschlussarbeiten im Corporate Design der TU Darmstadt}
 \subtitle{\LaTeX{} using TU Darmstadt's CI}
 \author{Marei Peischl}
-%\birthplace{}% Geburtsort. Bei Dissertationen zwingend notwendig
 \reviewer{Gutachter*in 1 \and Gutachter*in 2 \and …}
 
 % Die folgenden Felder werden untereinander auf der Titelseite platziert
@@ -220,7 +219,7 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	\item[subtitle] Untertitel. Dieses Feld kann alternativ für eine Übersetzung genutzt werden.
 	\item[author] Der Autor/dir Autoren. Mehere Autoren werden durch \verb+\and+ getrennt.
 	\item[studentID] Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
-	\item[birthplace] Geburtsort. Angabe ist bei Dissertationen notwendig.
+	\item[birthplace] Geburtsort.
 	\item[reviewer] Gutachter. Mehrere Gutachter werden, wie Autoren durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
 	      \minisec{Änderung des Bezeichners}
 	      Die Änderung des Bezeichners ist über ein optionales Argument möglich:
@@ -396,8 +395,8 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 		      \item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
 		      \item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
 		      \item \code{pp}: Project-Proposal  (title, author, date, department)
-		      \item \code{dr}: vorgelegte Dissertation (title, author, submissiondate , birthplace, department, reviewer)
-		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate,examdate, birthplace, department, reviewer)
+		      \item \code{dr}: vorgelegte Dissertation (title, author, submissiondate, department, reviewer)
+		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate ,examdate, department, reviewer)
 	      \end{itemize}
 	      Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
 	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{rerpol}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
