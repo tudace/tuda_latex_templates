@@ -1017,15 +1017,13 @@ reversemp
 % Due to the default setting for creating a PDF/A file, it is not possible to use TUDa-CI in standard settings to create a DVI file.
 % However, a large part of the functionality can be used when \option{pdfa} mode is deactivated.
 %
-% \subsection{Möglicher Option Clash mit microtype}
-% Das Paket \pkg{microtype} wird im Falle der Nutzung von \hologo{pdfLaTeX} oder einer erzwungenen Nutzung von Type1 Schriftarten automatisch geladen, da in der verwendeten Schriftart die Ligaturen für Kapitälchen deaktiviert werden müssen um Probleme zu vermeiden (vgl. \url{https://github.com/tudace/tuda_latex_templates/issues/144}).
-%
-% Falls es zwingend notwendig ist die Type1 Schriftarten zu verwenden, ist es möglich weitere Optionen vor dem Laden der Dokumentenklasse an \pkg{microtype} zu übergeben.
-%
-% \begin{verbatim}
-% \PassOptionsToPackage{<microtype Optionen>}{microtype}
-% \documentclass{…}
-% \end{verbatim}
+% \subsection{Possible option clash for microtype}
+% The \pgk{microtype} package is loaded automatically if \hologo{pdfLaTeX} is used, as the ligatures for small caps must be deactivated in the font to avoid problems (see \url{https://github.com/tudace/tuda_ latex_templates/issues/144}).
+% It is possible to pass further options to microtype before loading the document class:
+% \begin{Syntax}
+% \PassOptionsToPackage{|\meta{microtype options}|}{microtype}
+% \documentclass{tudapub}
+% \end{Syntax}
 %
 %
 %
