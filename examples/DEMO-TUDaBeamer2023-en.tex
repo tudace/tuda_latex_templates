@@ -77,98 +77,97 @@
 \sectionpage
 
 \begin{frame}{The tudabeamer class}
-\begin{itemize}
-	\item Basic usage identical to beamer
-	\item No special syntax required
-\end{itemize}
+	\begin{itemize}
+		\item Basic usage identical to beamer
+		\item No special syntax required
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Additional Features for titlegraphic/logos}
-\begin{itemize}
-	\item \code{\textbackslash{}partnerlogo} additional logo next to TUDa logo
-	\item \code{\textbackslash{}sublogo} additional logo below TUDa logo
-	\item \code{\textbackslash{}titlegraphic} place image as a background for title slide
-\end{itemize}
+	\begin{itemize}
+		\item \code{\textbackslash{}partnerlogo} additional logo next to TUDa logo
+		\item \code{\textbackslash{}sublogo} additional logo below TUDa logo
+		\item \code{\textbackslash{}titlegraphic} place image as a background for title slide
+	\end{itemize}
 	The additional option \code{authorontitle=true/false} allows to place author/institue below the title.
 \end{frame}
 
 \begin{frame}{Scaling logos/titlegraphic}
-\begin{itemize}
-\item The commands shown on previous slide support \code{\textbackslash{}height}/\code{\textbackslash{}width} to adjust the size to be used for graphic scaling.
-\item All have a starred variant (e.\,g. \code{\textbackslash{}sublogo*\{\textbackslash{}includegraphics\{example-image\}\}}). This will automaticcaly scale/clip the logo/image to desired size.
+	\begin{itemize}
+		\item The commands shown on previous slide support \code{\textbackslash{}height}/\code{\textbackslash{}width} to adjust the size to be used for graphic scaling.
+		\item All have a starred variant (e.\,g. \code{\textbackslash{}sublogo*\{\textbackslash{}includegraphics\{example-image\}\}}). This will automaticcaly scale/clip the logo/image to desired size.
 
-To align the sublogo together with the visible part of the TUDa logo there also exists the possibility to add a second star behind the mandatory argument. This will move the logo to the left to match. This variant is only available for the sublogo.
-\end{itemize}
+			To align the sublogo together with the visible part of the TUDa logo there also exists the possibility to add a second star behind the mandatory argument. This will move the logo to the left to match. This variant is only available for the sublogo.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Table of Contents}
-By design the toc is structured in two columns. This layout doesn't really support subsections or subsubsections.
+	By design the toc is structured in two columns. This layout doesn't really support subsections or subsubsections.
 
-To be able to use the new design with old content, the mechanism was extended to support those. This will automatically switch to a single columns toc.
+	To be able to use the new design with old content, the mechanism was extended to support those. This will automatically switch to a single columns toc.
 
-In case you want to disable that mechanism there is the class option \code{toc-columns=one/two/auto} which can also be adjusted locally be directly setting it with the command: \code{\textbackslash{}tableofcontents[columns=two]}.
+	In case you want to disable that mechanism there is the class option \code{toc-columns=one/two/auto} which can also be adjusted locally be directly setting it with the command: \code{\textbackslash{}tableofcontents[columns=two]}.
 
-Please be also aware of beamer's mechanism to filter the toc, e.g. by \code{\textbackslash{}tableofcontents[hideallsubsections]}, see the beamer documentation for details.
+	Please be also aware of beamer's mechanism to filter the toc, e.g. by \code{\textbackslash{}tableofcontents[hideallsubsections]}, see the beamer documentation for details.
 \end{frame}
 
 \section{Slide examples}
 
 \begin{frame}{Frame with a subtitle}
-\framesubtitle{Subtitle}
-An example.
+	\framesubtitle{Subtitle}
+	An example.
 \end{frame}
 
 \begin{frame}[fragile,uppercase=false]{Please be aware of uppercase frametitles}
-The mechanism to provide uppercase frame titles might have strange side effects.
-It's aware of macros, so those usually should work, but there are issues with arguments. e.g. using \verb+\color{dark2}+ will throw an error message.
+	The mechanism to provide uppercase frame titles might have strange side effects.
+	It's aware of macros, so those usually should work, but there are issues with arguments. e.g. using \verb+\color{dark2}+ will throw an error message.
 
-You can avoic this by either locally disabling the case change:
+	You can avoic this by either locally disabling the case change:
 
-\begin{verbatim}
+	\begin{verbatim}
 \frameztitle{Test \NoCaseChange{\textcolor{dark2}{\MakeUppercase{Test}}}}
 \end{verbatim}
-or use the frame option \verb+uppercase=false+ as for this frame or the class option \verb+uppercase-frametitle=false+
+	or use the frame option \verb+uppercase=false+ as for this frame or the class option \verb+uppercase-frametitle=false+
 \end{frame}
 
 \textcolor{TUDa-dark1}{test}
 
 \begin{frame}{Color Scheme}
-The new design introduces new colors to be used to highlight content.
+	The new design introduces new colors to be used to highlight content.
 
-The additional colors are:
-\par
-\UseName{clist_map_inline:nn} {
-	dark1,
-	dark2,
-	light1,
-	light2,
-	accent1,
-	accent2,
-	accent3,
-	accent4,
-	accent5,
-	accent5,
-	hyperlink,
-} {TUDa-####1: \textcolor{TUDa-####1}{\rule{1cm}{\ht\strutbox}}\par}
+	The additional colors are:
+	\par
+	\UseName{clist_map_inline:nn} {
+		dark1,
+		dark2,
+		light1,
+		light2,
+		accent1,
+		accent2,
+		accent3,
+		accent4,
+		accent5,
+		accent5,
+		hyperlink,
+	} {TUDa-####1: \textcolor{TUDa-####1}{\rule{1cm}{\ht\strutbox}}\par}
 \end{frame}
 
 \begin{frame}{Remark on vertical alignment (especially columns)}
 	The default alignment has been changed from \code{c} to \code{t} in contrast to beamers default setting.
-	This means frame content will be aligned top inside the frame. 
+	This means frame content will be aligned top inside the frame.
 	This is required by the design but might have side effects with the columns environment:
-	
+
 	To resolve this one can either globally add the \code{c} option or pass the option to the columns environment, e.\,g.:
 
-\begin{columns}[onlytextwidth,c]
-	\column{.8\linewidth}
-	\begin{itemize}
-		\item one
-		\item two
-	\end{itemize}
-	\column{.2\linewidth}
-	\includegraphics[width=\linewidth]{example-image}
-\end{columns}
+	\begin{columns}[onlytextwidth,c]
+		\column{.8\linewidth}
+		\begin{itemize}
+			\item one
+			\item two
+		\end{itemize}
+		\column{.2\linewidth}
+		\includegraphics[width=\linewidth]{example-image}
+	\end{columns}
 \end{frame}
 
 \end{document}
-

@@ -72,105 +72,103 @@
 }
 
 \begin{tcbposter}[
-	poster={
-		columns=4,
-		rows=7,
-		spacing=1cm,
-%		showframe, %Gitter einblenden. Für Platzierung häufig hilfreich
-	},]
+		poster={
+			columns=4,
+			rows=7,
+			spacing=1cm,
+			%		showframe, %Gitter einblenden. Für Platzierung häufig hilfreich
+		},]
 
-\begin{posterboxenv}[title=Zusammenfassung]{name=intro,column=1,row=1,span=4}
-	Die \cls{tudasciposter}-Klasse basiert auf dem \pck{tcolorbox} Paket von Thomas F. Sturm.
-	Sie versucht einen einfachen Weg zu bieten, wissenschaftliche Poster im Corporate Design der TU Darmstadt zu erstellen. Dieses Dokument dient zur Dokumentation und als Verwendungsbeispiel.
+	\begin{posterboxenv}[title=Zusammenfassung]{name=intro,column=1,row=1,span=4}
+		Die \cls{tudasciposter}-Klasse basiert auf dem \pck{tcolorbox} Paket von Thomas F. Sturm.
+		Sie versucht einen einfachen Weg zu bieten, wissenschaftliche Poster im Corporate Design der TU Darmstadt zu erstellen. Dieses Dokument dient zur Dokumentation und als Verwendungsbeispiel.
 
-	Dieses Dokument verwendet unterschiedliche Boxentypen. Dies ist selbstverständlich für die praktische Verwendung nicht empfehlenswert. Dieser Modus dient lediglich Demonstrationszwecken.
-\end{posterboxenv}
+		Dieses Dokument verwendet unterschiedliche Boxentypen. Dies ist selbstverständlich für die praktische Verwendung nicht empfehlenswert. Dieser Modus dient lediglich Demonstrationszwecken.
+	\end{posterboxenv}
 
-% Titelei
-\begin{posterboxenv}[title=Titelei]{name=title, row=2, span=2, rowspan=2}
-	Die Definition des Titelblockes lehnt sich an die Standard-\LaTeX{}-Strukturierung  mit Hilfe von \macro{maketitle} an.
+	% Titelei
+	\begin{posterboxenv}[title=Titelei]{name=title, row=2, span=2, rowspan=2}
+		Die Definition des Titelblockes lehnt sich an die Standard-\LaTeX{}-Strukturierung  mit Hilfe von \macro{maketitle} an.
 
-	Für die Datenübergabe stehen die Makros \macro{title}, \macro{author}, \macro{institute} und \macro{titlegraphic} zur Verfügung. Letztere wird rechtsbündig  unterhalb des TUDa-Logos platziert. Der Wert von \macro{linewidth} zu diesem Zeitpunkt entspricht der Breite des TUDa-Logos.
+		Für die Datenübergabe stehen die Makros \macro{title}, \macro{author}, \macro{institute} und \macro{titlegraphic} zur Verfügung. Letztere wird rechtsbündig  unterhalb des TUDa-Logos platziert. Der Wert von \macro{linewidth} zu diesem Zeitpunkt entspricht der Breite des TUDa-Logos.
 
-	Zusätzlich zu den Titeldaten stehen über \macro{setqrcode} und \macro{setfoot} Makros zur Verfügung, die die Fußzeile füllen.
-	Ein Beispiel ist in der Datei \file{DEMO"=TUDaSciPoster.tex} gezeigt
-\end{posterboxenv}
+		Zusätzlich zu den Titeldaten stehen über \macro{setqrcode} und \macro{setfoot} Makros zur Verfügung, die die Fußzeile füllen.
+		Ein Beispiel ist in der Datei \file{DEMO"=TUDaSciPoster.tex} gezeigt
+	\end{posterboxenv}
 
-% Fußzeile
-\begin{posterboxenv}[title=Fußzeile]{name=footer,below=title, span=2, rowspan=2 }
-	Die Fußzeile ist grundsätzlich aktiviert, kann jedoch mit Hilfe der Klassenoption \code{footer=false} ausgeschaltet werden. In diesem Fall werden jedoch mit \macro{thanks} übergebene zusätzliche Titeldaten nicht angezeigt.
+	% Fußzeile
+	\begin{posterboxenv}[title=Fußzeile]{name=footer,below=title, span=2, rowspan=2 }
+		Die Fußzeile ist grundsätzlich aktiviert, kann jedoch mit Hilfe der Klassenoption \code{footer=false} ausgeschaltet werden. In diesem Fall werden jedoch mit \macro{thanks} übergebene zusätzliche Titeldaten nicht angezeigt.
 
-	Für die Übergabe weiterer Daten stehen die Makros \macro{footer}, \macro{footergraphics} und \macro{footerqrcode} zur Verfügung.
+		Für die Übergabe weiterer Daten stehen die Makros \macro{footer}, \macro{footergraphics} und \macro{footerqrcode} zur Verfügung.
 
-	\macro{footergraphics} ist für die Übergabe von Logos gedacht und \macro{footerqrcode} übernimmt einen URL die anschließend in der rechten unteren Ecke als QRCode platziert wird.
+		\macro{footergraphics} ist für die Übergabe von Logos gedacht und \macro{footerqrcode} übernimmt einen URL die anschließend in der rechten unteren Ecke als QRCode platziert wird.
 
-	Die Fußzeile selbst erhält die Daten aus \macro{thanks}, kann jedoch ergänzt werden. Sie hat die Breite des Satzspiegels abzüglich der Logos/QRcode.
-\end{posterboxenv}
+		Die Fußzeile selbst erhält die Daten aus \macro{thanks}, kann jedoch ergänzt werden. Sie hat die Breite des Satzspiegels abzüglich der Logos/QRcode.
+	\end{posterboxenv}
 
-% Platzierung der Boxen
-\begin{posterboxenv}[title=Platzierung der Boxen]{name=positioning, below=footer, span=2}
-	Bei der \pck{poster}-Bibliothek des \pck{tcolorbox} Paketes, werden die Boxen manuell positioniert.
+	% Platzierung der Boxen
+	\begin{posterboxenv}[title=Platzierung der Boxen]{name=positioning, below=footer, span=2}
+		Bei der \pck{poster}-Bibliothek des \pck{tcolorbox} Paketes, werden die Boxen manuell positioniert.
 
-	Dies benötigt zwar einen zusätzlichen Arbeitsschritt, erlaubt jedoch einer feinere Ausrichtung der Boxen, auch relativ zueinander.
+		Dies benötigt zwar einen zusätzlichen Arbeitsschritt, erlaubt jedoch einer feinere Ausrichtung der Boxen, auch relativ zueinander.
 
-	Diese Mechanismen ermöglichen auch, Querverweise einfacher zu positionieren. Hierfür ist ein Blick in die \pck{tcolorbox}-Dokumentation hilfreich.
-\end{posterboxenv}
+		Diese Mechanismen ermöglichen auch, Querverweise einfacher zu positionieren. Hierfür ist ein Blick in die \pck{tcolorbox}-Dokumentation hilfreich.
+	\end{posterboxenv}
 
-% Eine Box im Stil TUDa-boxed
-\begin{posterboxenv}[title=Eine Box im Stil TUDa-boxed, TUDa-boxed]{name=boxed, column=3, row=2, span=2}
-	Die Boxen können in verschiedenen Varianten gestaltet werden. Die Voreinstellung entspricht den offiziellen Vorgaben, jedoch kann es aus unterschiedlichen Gründen notwendig sein, eine klarere Abgrenzung zu setzen (lobale Klassenoption \code{boxstyle=boxed} oder lokaler Stil \code{TUDa-boxed}).
-\end{posterboxenv}
+	% Eine Box im Stil TUDa-boxed
+	\begin{posterboxenv}[title=Eine Box im Stil TUDa-boxed, TUDa-boxed]{name=boxed, column=3, row=2, span=2}
+		Die Boxen können in verschiedenen Varianten gestaltet werden. Die Voreinstellung entspricht den offiziellen Vorgaben, jedoch kann es aus unterschiedlichen Gründen notwendig sein, eine klarere Abgrenzung zu setzen (lobale Klassenoption \code{boxstyle=boxed} oder lokaler Stil \code{TUDa-boxed}).
+	\end{posterboxenv}
 
-% Eine Box im Stil TUDa-colored
-\begin{posterboxenv}[title=Eine Box im Stil TUDa-colored, TUDa-colored]{name=colored, column=3, row=3, span=2}
-	Boxentyp zwischen dem Stil \code{boxed} und dem Stil \code{official}.
+	% Eine Box im Stil TUDa-colored
+	\begin{posterboxenv}[title=Eine Box im Stil TUDa-colored, TUDa-colored]{name=colored, column=3, row=3, span=2}
+		Boxentyp zwischen dem Stil \code{boxed} und dem Stil \code{official}.
 
-	Einstellung dieser Option ist sowohl über die Nutzung der globalen Klassenoption \code{style=colored} als auch durch die Verwendung des lokalen Stils\code{TUDa-colored} möglich.
+		Einstellung dieser Option ist sowohl über die Nutzung der globalen Klassenoption \code{style=colored} als auch durch die Verwendung des lokalen Stils\code{TUDa-colored} möglich.
 
-\end{posterboxenv}
+	\end{posterboxenv}
 
-% Box ohne Titel mit Abbildung
-\begin{posterboxenv}[TUDa-colored]{name=colored-notitle,column=3,row=4, rowspan=2}
-	\includegraphics[width=\linewidth]{example-image}
-	\captionof{figure}{Ein Beispielbild, in einer Box ohne Titel (\code{boxed-notitle}). In diesem Fall sind der Stil {TUDa} und TUDa-colored identisch}
-\end{posterboxenv}
+	% Box ohne Titel mit Abbildung
+	\begin{posterboxenv}[TUDa-colored]{name=colored-notitle,column=3,row=4, rowspan=2}
+		\includegraphics[width=\linewidth]{example-image}
+		\captionof{figure}{Ein Beispielbild, in einer Box ohne Titel (\code{boxed-notitle}). In diesem Fall sind der Stil {TUDa} und TUDa-colored identisch}
+	\end{posterboxenv}
 
-% Box ohne Titel
-\begin{posterboxenv}[TUDa-boxed]{name=notitle, column=4, below=colored}
-	Ein Beispiel für den Stil \code{boxed} ohne einen eigenen Titel.
-\end{posterboxenv}
+	% Box ohne Titel
+	\begin{posterboxenv}[TUDa-boxed]{name=notitle, column=4, below=colored}
+		Ein Beispiel für den Stil \code{boxed} ohne einen eigenen Titel.
+	\end{posterboxenv}
 
-% Box mit Verweis
-\begin{posterboxenv}[title=Box mit Verweis,TUDa-boxed]{name=verweis,column=4, above=row6}
-	Beispielbox mit Pfeil, um zwei Boxen miteinander zu verknüpfen oder Leseabzweigungen zu generieren.
-\end{posterboxenv}
+	% Box mit Verweis
+	\begin{posterboxenv}[title=Box mit Verweis,TUDa-boxed]{name=verweis,column=4, above=row6}
+		Beispielbox mit Pfeil, um zwei Boxen miteinander zu verknüpfen oder Leseabzweigungen zu generieren.
+	\end{posterboxenv}
 
-%Zwischen den Boxen kann direkt TikZ-Code eingegeben werden. Das Namensschema der Boxen als Koordinaten lautet
-% TCBPOSTER@<boxname>.ankerpunkt
-% Für genauere Erläuterungen zur Syntax, bietet die tikz-Anleitung genauere Angaben, weitere benannte Koordinaten finden sich in der tcolorbox-Dokumentation
-\draw[accentcolor,line width=4pt,->] ([yshift=-1cm]TCBPOSTER@verweis.east) -|  ([xshift=1cm]TCBPOSTER@colored.east) -- (TCBPOSTER@colored.east);
+	%Zwischen den Boxen kann direkt TikZ-Code eingegeben werden. Das Namensschema der Boxen als Koordinaten lautet
+	% TCBPOSTER@<boxname>.ankerpunkt
+	% Für genauere Erläuterungen zur Syntax, bietet die tikz-Anleitung genauere Angaben, weitere benannte Koordinaten finden sich in der tcolorbox-Dokumentation
+	\draw[accentcolor,line width=4pt,->] ([yshift=-1cm]TCBPOSTER@verweis.east) -|  ([xshift=1cm]TCBPOSTER@colored.east) -- (TCBPOSTER@colored.east);
 
-% Relative Positionierung
-\begin{posterboxenv}[title=Relative Positionierung,TUDa-boxed]{name=relative, column=4, between=notitle and verweis}
-	Diese Box wird zwischen den beiden Boxen \code{notitle} und \code{verweis} platziert.
-\end{posterboxenv}
+	% Relative Positionierung
+	\begin{posterboxenv}[title=Relative Positionierung,TUDa-boxed]{name=relative, column=4, between=notitle and verweis}
+		Diese Box wird zwischen den beiden Boxen \code{notitle} und \code{verweis} platziert.
+	\end{posterboxenv}
 
-% Papierformat
-\begin{posterboxenv}[title=Papierformat]{name=paper,column=3,span=2,below=row5}
-	Die Klasse \cls{tudasciposter} unterstützt die Papierformate A0, A1, A2 und A3. Der Wert wird über die Klassenoption \code{paper} ausgewählt:
-	\begin{verbatim}
+	% Papierformat
+	\begin{posterboxenv}[title=Papierformat]{name=paper,column=3,span=2,below=row5}
+		Die Klasse \cls{tudasciposter} unterstützt die Papierformate A0, A1, A2 und A3. Der Wert wird über die Klassenoption \code{paper} ausgewählt:
+		\begin{verbatim}
 	paper=a0
 	\end{verbatim}
-	Die Voreinstellung entspricht \code{a0}.
-	Die Änderung des Papierformates ist keine Skalierung, da Schriftgrößen nicht direkt skalieren.
+		Die Voreinstellung entspricht \code{a0}.
+		Die Änderung des Papierformates ist keine Skalierung, da Schriftgrößen nicht direkt skalieren.
 
-	Zusätzlich kann die Option \code{paper} wie bei \KOMAScript{} üblich auch einen Wert für die Ausrichtung verarbeiten. Querformat erhält man somit über \code{paper=landscape}.
+		Zusätzlich kann die Option \code{paper} wie bei \KOMAScript{} üblich auch einen Wert für die Ausrichtung verarbeiten. Querformat erhält man somit über \code{paper=landscape}.
 
-	Um eine Skalierung eines größeren auf ein kleineres Design zu erreichen, empfiehlt es sich, das Ausgangsformat beim Druck zu skalieren (Drucken in eine Datei mit Skalierung) oder ggf. die PDF-Datei mit Paketen wie \pck{pdfpages} umzurechnen.
-\end{posterboxenv}
+		Um eine Skalierung eines größeren auf ein kleineres Design zu erreichen, empfiehlt es sich, das Ausgangsformat beim Druck zu skalieren (Drucken in eine Datei mit Skalierung) oder ggf. die PDF-Datei mit Paketen wie \pck{pdfpages} umzurechnen.
+	\end{posterboxenv}
 
 \end{tcbposter}
 
 \end{document}
-
-

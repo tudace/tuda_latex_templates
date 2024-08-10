@@ -33,7 +33,7 @@
 
 \tl_if_empty:NT \g_ptxcd_departmentlogo_tl {
 	\keys_set:nn {ptxcd/beamer}{departmentlogofile=tuda_maschinenbau_logo_rgb}
-} 
+}
 
 
 \mode<presentation>
@@ -85,15 +85,15 @@
 
 %innertheme adjustments
 \defbeamertemplate*{title~ page}{TUDa-mecheng}[1][]
-{	
+{
 	\nointerlineskip
 	\vspace{\dimexpr.5\c_ptxcd_logoheight_dim-\ht\strutbox+
-	\box_dp:N \ptxcd_beamer_headrule_box + \box_ht:N \ptxcd_beamer_headrule_box
+		\box_dp:N \ptxcd_beamer_headrule_box + \box_ht:N \ptxcd_beamer_headrule_box
 	}
 	\hbox_set:Nn \l__ptxcd_titlehead_box {
 		\parbox{\__ptxcd_beamer_linewidth:}{%
 			\begin{beamercolorbox}[
-				wd=\linewidth,
+					wd=\linewidth,
 				]{title}
 				\raggedright
 				\usebeamerfont{title}
@@ -110,33 +110,33 @@
 				\raisebox{\dimexpr-.5\height+.5\ht\strutbox-.5\dp\strutbox\relax}{\box_use:N \g__ptxcd_logo_box}\hspace*{\dimexpr-\beamer@rightmargin+\g__ptxcd_beamer_logosep_dim}
 				\ifx\insertsubtitle\@empty
 				\else
-				\par\vspace{\c_ptxcd_largerule_dim}
-				\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box\relax}{
-					\usebeamerfont{subtitle}\insertsubtitle
-				}
+					\par\vspace{\c_ptxcd_largerule_dim}
+					\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box\relax}{
+						\usebeamerfont{subtitle}\insertsubtitle
+					}
 				\fi
-			\bool_if:NT \g_ptxcd_authorontitle_bool {
-				\par
+				\bool_if:NT \g_ptxcd_authorontitle_bool {
+					\par
 					\parbox[t]{\dimexpr\linewidth-2ex\relax}{
 						\ifx\insertauthor\@empty
 						\else
-						\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
+							\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
 						\fi
 						\ifx\insertauthor\@empty
 						\else
-						\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute
+							\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute
 						\fi
 					}
-			}
+				}
 			\end{beamercolorbox}
 		}
 	}
 	\box_use:N \l__ptxcd_titlehead_box
 	\par\skip_vertical:n {\textheight-\box_ht:N\l__ptxcd_titlehead_box-\box_dp:N \l__ptxcd_titlehead_box+.5\c_ptxcd_smallrule_dim}
 	\begin{beamercolorbox}[
-		rightskip=.07\linewidth,%place image left of arrow tip
-		ht=\c_ptxcd_smallrule_dim,%dp=1mm,
-		wd=\dimexpr\textwidth]{footline}
+			rightskip=.07\linewidth,%place image left of arrow tip
+			ht=\c_ptxcd_smallrule_dim,%dp=1mm,
+			wd=\dimexpr\textwidth]{footline}
 		\setbeamertemplate{departmentlogo}[TUDa-mecheng][width=\dimexpr2\linewidth/11\relax]
 		\insertdepartmentlogo
 		\hfill
@@ -147,13 +147,13 @@
 			\clist_map_variable:nNn {department, institute, author,date} \l_tmpa_tl {
 				\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
 					\bool_if:NTF \l_ptxcd_tmpa_bool
-						{\space|\space}
-						{\bool_set_true:N \l_ptxcd_tmpa_bool}
+					{\space|\space}
+					{\bool_set_true:N \l_ptxcd_tmpa_bool}
 					\use:c {insert\l_tmpa_tl}
 				}
 			}
 			\endgroup
-		\quad
+			\quad
 		}
 		\insertlogo
 		\par\nointerlineskip\skip_vertical:n {2\c_ptxcd_smallrule_dim}
@@ -182,18 +182,18 @@
 
 \defbeamertemplate*{departmentlogo}{TUDa-mecheng}[1][height=1.7\baselineskip]{
 	\str_set:Nx \l_tmpa_str {\str_range:Nnn \beamer@thc@fg {1} {-4}}
-		\file_if_exist:nTF {\g_ptxcd_departmentlogo_tl-\l_tmpa_str.pdf} {
-			\includegraphics[#1]{\g_ptxcd_departmentlogo_tl-\l_tmpa_str}
-		} {
-			\includegraphics[#1]{\g_ptxcd_departmentlogo_tl}
-		}
+	\file_if_exist:nTF {\g_ptxcd_departmentlogo_tl-\l_tmpa_str.pdf} {
+		\includegraphics[#1]{\g_ptxcd_departmentlogo_tl-\l_tmpa_str}
+	} {
+		\includegraphics[#1]{\g_ptxcd_departmentlogo_tl}
+	}
 }
 
 \defbeamertemplate*{footline}{TUDa-mecheng}
 {
 	\begin{beamercolorbox}[
-		wd=\linewidth,
-		leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin,
+			wd=\linewidth,
+			leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin,
 		]{footline}
 		\MechEngArrow*{\linewidth}
 		\par\skip_vertical:n {.5\g__ptxcd_beamer_logosep_dim}
@@ -226,10 +226,10 @@
 \defbeamertemplate{frametitle}{TUDa-mecheng.logo}{%
 	\nointerlineskip%
 	\begin{beamercolorbox}[
-		sep=\g__ptxcd_beamer_logosep_dim,
-		wd=\__ptxcd_beamer_linewidth:,
-		rightskip=-\g__ptxcd_beamer_logosep_dim,
-		leftskip=\dimexpr-\g__ptxcd_beamer_logosep_dim\relax,
+			sep=\g__ptxcd_beamer_logosep_dim,
+			wd=\__ptxcd_beamer_linewidth:,
+			rightskip=-\g__ptxcd_beamer_logosep_dim,
+			leftskip=\dimexpr-\g__ptxcd_beamer_logosep_dim\relax,
 		]{frametitle}
 		\hbox_set:Nn \l__ptxcd_frametitle_box {
 			\parbox[t]
@@ -237,12 +237,12 @@
 				\usebeamerfont{frametitle}\strut\insertframetitle
 				\ifx\insertframesubtitle\@empty
 				\else
-				\par
-				\usebeamercolor[fg]{framesubtitle}
-				\usebeamerfont{framesubtitle}
-				\insertframesubtitle
+					\par
+					\usebeamercolor[fg]{framesubtitle}
+					\usebeamerfont{framesubtitle}
+					\insertframesubtitle
 				\fi
-		}}
+			}}
 		\leavevmode
 		\bool_if:NTF \g_ptxcd_centerframetitle_bool
 		{\raisebox{\dimexpr-.5\height+.5\depth}}
@@ -254,12 +254,12 @@
 	\end{beamercolorbox}%
 	\nointerlineskip
 	\begin{beamercolorbox}[
-		sep=\g__ptxcd_beamer_logosep_dim,
-		wd=\__ptxcd_beamer_linewidth:,
-		rightskip=-\g__ptxcd_beamer_logosep_dim,
-		leftskip=\dimexpr-\g__ptxcd_beamer_logosep_dim\relax,
-		ht=\c_ptxcd_smallrule_dim.
-		dp=0
+			sep=\g__ptxcd_beamer_logosep_dim,
+			wd=\__ptxcd_beamer_linewidth:,
+			rightskip=-\g__ptxcd_beamer_logosep_dim,
+			leftskip=\dimexpr-\g__ptxcd_beamer_logosep_dim\relax,
+			ht=\c_ptxcd_smallrule_dim.
+			dp=0
 		]{smallrule}
 	\end{beamercolorbox}
 }
@@ -272,13 +272,13 @@
 	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__ptxcd_save_background_canvas:
 	\cs_undefine:N \__ptxcd_save_background_canvas:
 	\cs_if_exist:NT \__ptxcd_save_department_textaccentcolor:
-		{\cs_set_eq:cN {\string\color@textaccentcolor} \__ptxcd_save_department_textaccentcolor:}
+	{\cs_set_eq:cN {\string\color@textaccentcolor} \__ptxcd_save_department_textaccentcolor:}
 	\cs_undefine:N \__ptxcd_save_department_textaccentcolor:
 	\__ptxcd_setup_frametitle_color:
 }
 
 \cs_set:Nn \__ptxcd_set_framebgcolor:n {
-	
+
 	\str_case:nnTF {#1} {
 		{Primary1} {\tl_set:Nn \l_tmpa_tl {Primary2}}
 		{Primary2} {\tl_set:Nn \l_tmpa_tl {Primary1}}

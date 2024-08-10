@@ -250,12 +250,12 @@
 	voffset=\paperheight-\g_ptxcd_margin_dim,
 	mode=picture,
 	contents={%
-			\tl_if_empty:NF \g_ptxcd_poster_qrcode_tl {
-				\let\width\g_ptxcd_qrcode_dim
-				\let\height\g_ptxcd_qrcode_dim
-				\g_ptxcd_poster_qrcode_tl
-			}
+		\tl_if_empty:NF \g_ptxcd_poster_qrcode_tl {
+			\let\width\g_ptxcd_qrcode_dim
+			\let\height\g_ptxcd_qrcode_dim
+			\g_ptxcd_poster_qrcode_tl
 		}
+	}
 ]{TUDa.poster.qrcode}
 
 
@@ -267,14 +267,14 @@
 	width=\paperwidth-2\g_ptxcd_margin_dim,
 	height=\g_ptxcd_footheight_dim,
 	contents={
-			\bool_if:NTF \g_ptxcd_poster_foot_bool {
-				\putUL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
-				\put(0,0) {\parbox[b][\g_ptxcd_footheight_dim][c]{\layerwidth}{\strut\g_ptxcd_poster_foot_tl\strut}}
-				\putLL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
-			}{
-				\smash{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
-			}
+		\bool_if:NTF \g_ptxcd_poster_foot_bool {
+			\putUL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
+			\put(0,0) {\parbox[b][\g_ptxcd_footheight_dim][c]{\layerwidth}{\strut\g_ptxcd_poster_foot_tl\strut}}
+			\putLL{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
+		}{
+			\smash{\rule{\layerwidth}{\g_ptxcd_titlerule_dim}}
 		}
+	}
 ]{TUDa.poster.footer}
 
 \DeclareNewLayer[
@@ -323,7 +323,7 @@
 	\begingroup
 	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
 	\bool_if:NT \g_ptxcd_marginpar_bool
-		{\setlength{\linewidth}{\dim_eval:n  {\textwidth+\g_ptxcd_marginpar_dim + \marginparsep}}}
+	{\setlength{\linewidth}{\dim_eval:n  {\textwidth+\g_ptxcd_marginpar_dim + \marginparsep}}}
 	\vbox_gset:Nn \g_ptxcd_title_box
 	{
 		\usesizeofkomafont{title}
@@ -392,7 +392,7 @@
 	\bool_if:NF \g_ptxcd_logo_inhead_bool {
 		\ModifyLayer[
 			addvoffset=
-					\bool_if:NF \g_ptxcd_colorsubtitle_bool {\box_dp:N \g_ptxcd_title_box}+\g_ptxcd_titleback_dim+\c_ptxcd_smallrule_dim
+			\bool_if:NF \g_ptxcd_colorsubtitle_bool {\box_dp:N \g_ptxcd_title_box}+\g_ptxcd_titleback_dim+\c_ptxcd_smallrule_dim
 		]{TUDa.poster.logo}
 	}
 	\leavevmode\box_use:N \g_ptxcd_title_box\par

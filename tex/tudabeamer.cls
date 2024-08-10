@@ -29,7 +29,7 @@
 \def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tudabeamer}
- [\filedate\space\fileversion\space]
+[\filedate\space\fileversion\space]
 
 \PassOptionsToClass{10pt}{beamer}
 
@@ -91,7 +91,7 @@
 		\tl_gset:Nn  \g__ptxcd_design_tl {2008}
 	},
 	design / default .code:n = {
-			\tl_gset:Nn  \g__ptxcd_design_tl {default}
+		\tl_gset:Nn  \g__ptxcd_design_tl {default}
 	},
 	design .initial:n = default,
 	design2023 .meta:n = {design=2023},
@@ -113,9 +113,9 @@
 \ExplSyntaxOn
 \tl_if_eq:NnT \g__ptxcd_design_tl  {default} {
 	\msg_new:nnn {tudabeamer} {default-design-changed} {
-			With~version~4.0~tudabeamer~switched~to~the~new~corporate~design~layout.\\
-			In~case~this~is~not~intended,~it's~possible~switch~back~using~`design=2008`~option.\\
-			`design=2023`~will~disable~this~warning.
+		With~version~4.0~tudabeamer~switched~to~the~new~corporate~design~layout.\\
+		In~case~this~is~not~intended,~it's~possible~switch~back~using~`design=2008`~option.\\
+		`design=2023`~will~disable~this~warning.
 	}
 	\msg_warning:nn {tudabeamer} {default-design-changed}
 	\keys_set:nn {ptxcd/beamer} {design=2023}
@@ -137,8 +137,8 @@
 \bool_if:NT \g_ptxcd_pdfa_bool {
 	\UnPreventPackageFromLoading{hyperref}
 	\PassOptionsToPackage{a-2b}{pdfx}
-% Workaround posted by David Carlisle on tex.stackexchange
-% Thanks to Ulrike Fischer for mentioning it in #472
+	% Workaround posted by David Carlisle on tex.stackexchange
+	% Thanks to Ulrike Fischer for mentioning it in #472
 	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
 	\chardef\currentgrouplevel0
 	\ExplSyntaxOff
@@ -146,7 +146,7 @@
 	\ExplSyntaxOn
 	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
 	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
-% end of the workaround
+	% end of the workaround
 }
 \hypersetup{hidelinks, unicode}
 
@@ -157,9 +157,9 @@
 \long\def\ptxcd_beamer_department[#1]#2{%
 	\def\beamer@temp{#2}%
 	\ifx\beamer@temp\@empty
-	\def\insertdepartment{}
+		\def\insertdepartment{}
 	\else
-	\def\insertdepartment{\def\inst{\beamer@instinst}\def\and{\qquad}#2}%
+		\def\insertdepartment{\def\inst{\beamer@instinst}\def\and{\qquad}#2}%
 	\fi
 	\def\beamer@shortdepartment{#1}}
 \department{}
@@ -169,7 +169,7 @@
 		\let\thanks=\@gobble%
 		\beamer@setupshort{#1}%
 		\beamer@insertshort{\beamer@shortdepartment}%
-}}
+	}}
 %end of \department command
 \if_bool:N \g_ptxcd_pdfa_bool
 \iow_new:N \ptxcd_xmpdata_stream
@@ -178,41 +178,41 @@
 \tl_new:N \g_ptxcd_xmp_author
 
 \cs_new:Nn \ptxcd_pass_TitleData: {
-	\begingroup
-	\def\newline{}
-	\def\\{}
-	\let\thanks\use_none:n
-	\cs_set:Npn \and {\exp_not:n {\exp_not:N \sep}}
-	\bool_if:NTF \g_ptxcd_pass_TitleData_bool {
-		\tl_gset:Nx \g_ptxcd_xmp_title {\insertshorttitle}
-		\tl_gset:Nx \g_ptxcd_xmp_author {\insertshortauthor}
-		\iow_now:Nx \ptxcd_xmpdata_stream
-		{
-			\exp_not:N \Title{\tl_to_str:V \g_ptxcd_xmp_title}
-			^^J
-			\exp_not:N \Author{\tl_to_str:V \g_ptxcd_xmp_author}
-			^^J
-			\exp_not:N \Creator{LaTeX~ using~ the~ TUDa-CI~ Bundle}
-		}
-	}{
-		\begingroup
-		\use:c {pdfx@localcommands}
-		\prop_if_in:NnF \g_ptxcd_MetaData_prop {Creator} {\prop_gput:Nnn \g_ptxcd_MetaData_prop {Creator} {LaTeX~ using~ the~ TUDa-CI~ Bundle}}
-		\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
-		\endgroup
+\begingroup
+\def\newline{}
+\def\\{}
+\let\thanks\use_none:n
+\cs_set:Npn \and {\exp_not:n {\exp_not:N \sep}}
+\bool_if:NTF \g_ptxcd_pass_TitleData_bool {
+	\tl_gset:Nx \g_ptxcd_xmp_title {\insertshorttitle}
+	\tl_gset:Nx \g_ptxcd_xmp_author {\insertshortauthor}
+	\iow_now:Nx \ptxcd_xmpdata_stream
+	{
+		\exp_not:N \Title{\tl_to_str:V \g_ptxcd_xmp_title}
+		^^J
+		\exp_not:N \Author{\tl_to_str:V \g_ptxcd_xmp_author}
+		^^J
+		\exp_not:N \Creator{LaTeX~ using~ the~ TUDa-CI~ Bundle}
 	}
+}{
+	\begingroup
+	\use:c {pdfx@localcommands}
+	\prop_if_in:NnF \g_ptxcd_MetaData_prop {Creator} {\prop_gput:Nnn \g_ptxcd_MetaData_prop {Creator} {LaTeX~ using~ the~ TUDa-CI~ Bundle}}
+	\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
 	\endgroup
+}
+\endgroup
 }
 \cs_new:Nn \ptxcd_write_xmp_line:nn {
 	%Fallback test for older kernels
 	\cs_if_exist:NTF \str_uppercase:f {
-	\tl_set:Nx \l_tmpa_tl {
-		\str_uppercase:f {\tl_head:n {#1}}
-		\str_lowercase:f { \tl_tail:n {#1}}
-	}
+		\tl_set:Nx \l_tmpa_tl {
+			\str_uppercase:f {\tl_head:n {#1}}
+			\str_lowercase:f { \tl_tail:n {#1}}
+		}
 	} {
-	%may be removed in some time
-	\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
+		%may be removed in some time
+		\tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
 	}
 	\cs_if_exist:cTF {\l_tmpa_tl}{
 		\iow_now:Nx \ptxcd_xmpdata_stream {
@@ -251,7 +251,7 @@
 \let\accentfont\normalfont%
 
 \file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
-	{\RequirePackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
+{\RequirePackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
 
 \ExplSyntaxOff
 

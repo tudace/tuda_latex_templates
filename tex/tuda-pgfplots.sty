@@ -35,124 +35,124 @@
 \RequirePackage{tudacolors}
 
 \pgfplotscreateplotcyclelist{tudabarplot cycle}{%
-  draw=TUDa-1a,  fill=TUDa-1b \\
-  draw=TUDa-9b,  fill=TUDa-9c \\
-  draw=TUDa-3b,  fill=TUDa-3c \\
-  draw=TUDa-10b, fill=TUDa-10c\\
-  draw=TUDa-5c,  fill=TUDa-5d \\
-  draw=TUDa-6d,  fill=TUDa-6a \\
+	draw=TUDa-1a,  fill=TUDa-1b \\
+	draw=TUDa-9b,  fill=TUDa-9c \\
+	draw=TUDa-3b,  fill=TUDa-3c \\
+	draw=TUDa-10b, fill=TUDa-10c\\
+	draw=TUDa-5c,  fill=TUDa-5d \\
+	draw=TUDa-6d,  fill=TUDa-6a \\
 }
 
 \pgfplotscreateplotcyclelist{tudalineplot cycle}{%
-  TUDa-1b,  mark=*,        \\
-  TUDa-9c,  mark=diamond*, \\
-  TUDa-3c,  mark=square*,  \\
-  TUDa-10c, mark=triangle* \\
-  TUDa-5d,  mark=*,         \\
-  TUDa-6a,  mark=diamond*,  \\
+	TUDa-1b,  mark=*,        \\
+	TUDa-9c,  mark=diamond*, \\
+	TUDa-3c,  mark=square*,  \\
+	TUDa-10c, mark=triangle* \\
+	TUDa-5d,  mark=*,         \\
+	TUDa-6a,  mark=diamond*,  \\
 }
 
 
 \pgfplotsset{
-  tuda3dplot/.style={
-    axis line style = thin,
-    axis x line*=box,
-    axis y line*=box,
-    tudabaseplot,
-    xmajorgrids=true,
-    ymajorgrids=true,
-    major grid style={dotted},
-  },
-  tudalineplot/.style={
-    tudabaseplot,
-    grid,
-    legend style={cells={anchor=west}},
-    thick,
-    mark size=1.5pt,
-    cycle list name=tudalineplot cycle,
-  },
-  tudabarplot base/.style={
-    tudabaseplot,
-    bar width=6pt,
-    cycle list name=tudabarplot cycle,
-  },
-  tudabarplot/.style={
-    ybar,
-    tudabarplot base,
-    xmajorgrids=false,
-    ymajorgrids=true,
-  },
-  horizontal tudabarplot/.style={
-    xbar stacked,
-    tudabarplot base,
-    xmajorgrids=true,
-    ymajorgrids=false,
-  },
-  colormap={tudaa}{rgb255=(93,133,195)
-    rgb255=(0,156,218)
-    rgb255=(80,182,149)
-    rgb255=(175,204,80)
-    rgb255=(221,223,72)
-    rgb255=(255,224,92)
-    rgb255=(248,186,60)
-    rgb255=(238,122,52)
-    rgb255=(233,80,62)
-    rgb255=(201,48,142)
-    rgb255=(128,69,151)
-  },
-  colormap={tudab}{%
-    rgb255=(0,90,169)
-    rgb255=(0,131,204)
-    rgb255=(0,157,129)
-    rgb255=(153,192,0)
-    rgb255=(201,212,0)
-    rgb255=(253,202,0)
-    rgb255=(245,163,0)
-    rgb255=(236,101,0)
-    rgb255=(230,0,26)
-    rgb255=(166,0,132)
-    rgb255=(114,16,133)
-    rgb255=(0,78,138)
-  },
-  colormap={tudac}{
-    rgb255=(0,78,138)
-    rgb255=(0,104,157)
-    rgb255=(0,136,119)
-    rgb255=(127,171,22)
-    rgb255=(177,189,0)
-    rgb255=(215,172,0)
-    rgb255=(210,135,0)
-    rgb255=(204,76,3)
-    rgb255=(185,15,34)
-    rgb255=(149,17,10)
-    rgb255=(97,28,115)
-  },
-  colormap={tudad}{
-    rgb255=(36,53,114)
-    rgb255=(0,78,115)
-    rgb255=(0,113,94)
-    rgb255=(106,139,55)
-    rgb255=(153,166,4)
-    rgb255=(174,142,0)
-    rgb255=(190,111,0)
-    rgb255=(169,73,19)
-    rgb255=(156,28,38)
-    rgb255=(115,32,84)
-    rgb255=(76,34,106)
-  },
-  tudabaseplot/.style={
-    colormap name=viridis,
-    legend style={fill=white,cells={anchor=west}},
-    ticklabel style={font=\footnotesize},
-    legend style={font=\footnotesize},
-    major grid style={dotted},
-    axis x line=bottom,axis y line=left,
-  },
-  colormap={tuda}{
-    rgb255=(115,32,84)
-    rgb255=(0,157,129)
-    rgb255=(255,224,92)
-  }
+	tuda3dplot/.style={
+		axis line style = thin,
+		axis x line*=box,
+		axis y line*=box,
+		tudabaseplot,
+		xmajorgrids=true,
+		ymajorgrids=true,
+		major grid style={dotted},
+	},
+	tudalineplot/.style={
+		tudabaseplot,
+		grid,
+		legend style={cells={anchor=west}},
+		thick,
+		mark size=1.5pt,
+		cycle list name=tudalineplot cycle,
+	},
+	tudabarplot base/.style={
+		tudabaseplot,
+		bar width=6pt,
+		cycle list name=tudabarplot cycle,
+	},
+	tudabarplot/.style={
+		ybar,
+		tudabarplot base,
+		xmajorgrids=false,
+		ymajorgrids=true,
+	},
+	horizontal tudabarplot/.style={
+		xbar stacked,
+		tudabarplot base,
+		xmajorgrids=true,
+		ymajorgrids=false,
+	},
+	colormap={tudaa}{rgb255=(93,133,195)
+		rgb255=(0,156,218)
+		rgb255=(80,182,149)
+		rgb255=(175,204,80)
+		rgb255=(221,223,72)
+		rgb255=(255,224,92)
+		rgb255=(248,186,60)
+		rgb255=(238,122,52)
+		rgb255=(233,80,62)
+		rgb255=(201,48,142)
+		rgb255=(128,69,151)
+	},
+	colormap={tudab}{%
+		rgb255=(0,90,169)
+		rgb255=(0,131,204)
+		rgb255=(0,157,129)
+		rgb255=(153,192,0)
+		rgb255=(201,212,0)
+		rgb255=(253,202,0)
+		rgb255=(245,163,0)
+		rgb255=(236,101,0)
+		rgb255=(230,0,26)
+		rgb255=(166,0,132)
+		rgb255=(114,16,133)
+		rgb255=(0,78,138)
+	},
+	colormap={tudac}{
+		rgb255=(0,78,138)
+		rgb255=(0,104,157)
+		rgb255=(0,136,119)
+		rgb255=(127,171,22)
+		rgb255=(177,189,0)
+		rgb255=(215,172,0)
+		rgb255=(210,135,0)
+		rgb255=(204,76,3)
+		rgb255=(185,15,34)
+		rgb255=(149,17,10)
+		rgb255=(97,28,115)
+	},
+	colormap={tudad}{
+		rgb255=(36,53,114)
+		rgb255=(0,78,115)
+		rgb255=(0,113,94)
+		rgb255=(106,139,55)
+		rgb255=(153,166,4)
+		rgb255=(174,142,0)
+		rgb255=(190,111,0)
+		rgb255=(169,73,19)
+		rgb255=(156,28,38)
+		rgb255=(115,32,84)
+		rgb255=(76,34,106)
+	},
+	tudabaseplot/.style={
+		colormap name=viridis,
+		legend style={fill=white,cells={anchor=west}},
+		ticklabel style={font=\footnotesize},
+		legend style={font=\footnotesize},
+		major grid style={dotted},
+		axis x line=bottom,axis y line=left,
+	},
+	colormap={tuda}{
+		rgb255=(115,32,84)
+		rgb255=(0,157,129)
+		rgb255=(255,224,92)
+	}
 }
 
 \endinput

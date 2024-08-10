@@ -3,10 +3,10 @@
 module="tuda-ci"
 
 sourcefiledir="tex"
-sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"} 
+sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 docfiledir="examples"
-typesetfiles={"*.tex"} 
+typesetfiles={"*.tex"}
 
 excludefiles={"Examples-*"}
 

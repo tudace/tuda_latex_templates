@@ -36,43 +36,43 @@
 %%
 %%
 \ProvidesFile{%
-  tudasize9pt.clo%
+	tudasize9pt.clo%
 }[TUDa-CI \space font size class option %
-  (9pt)%
+	(9pt)%
 ]
 \def\normalsize{%
-  \@setfontsize\normalsize\@ixpt\@xipt%
-  \abovedisplayskip 8\p@ \@plus4\p@ \@minus4\p@
-  \abovedisplayshortskip \z@ \@plus3\p@
-  \belowdisplayshortskip 5\p@ \@plus3\p@ \@minus3\p@
-  \belowdisplayskip \abovedisplayskip
-  \let\@listi\@listI
+	\@setfontsize\normalsize\@ixpt\@xipt%
+	\abovedisplayskip 8\p@ \@plus4\p@ \@minus4\p@
+	\abovedisplayshortskip \z@ \@plus3\p@
+	\belowdisplayshortskip 5\p@ \@plus3\p@ \@minus3\p@
+	\belowdisplayskip \abovedisplayskip
+	\let\@listi\@listI
 }
 \def\datasize{%
-  \normalsize
-  \@setfontsize\normalsize\@ixpt\@xipt
+	\normalsize
+	\@setfontsize\normalsize\@ixpt\@xipt
 }
 \def\small{%
-   \@setfontsize\small\@viiipt\@ixpt%
-   \abovedisplayskip 5\p@ \@plus2\p@ \@minus2\p@
-   \abovedisplayshortskip \z@ \@plus1\p@
-   \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 3\p@ \@plus\p@ \@minus\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip
+	\@setfontsize\small\@viiipt\@ixpt%
+	\abovedisplayskip 5\p@ \@plus2\p@ \@minus2\p@
+	\abovedisplayshortskip \z@ \@plus1\p@
+	\belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
+	\def\@listi{\leftmargin\leftmargini
+		\topsep 3\p@ \@plus\p@ \@minus\p@
+		\parsep 2\p@ \@plus\p@ \@minus\p@
+		\itemsep \parsep}%
+	\belowdisplayskip \abovedisplayskip
 }
 \def\footnotesize{%
-   \@setfontsize\footnotesize\@viipt\@viiipt
-   \abovedisplayskip 4\p@ \@plus2\p@ \@minus2\p@
-   \abovedisplayshortskip \z@ \@plus1\p@
-   \belowdisplayshortskip 2.5\p@ \@plus\p@ \@minus\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 3\p@ \@plus\p@ \@minus\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip
+	\@setfontsize\footnotesize\@viipt\@viiipt
+	\abovedisplayskip 4\p@ \@plus2\p@ \@minus2\p@
+	\abovedisplayshortskip \z@ \@plus1\p@
+	\belowdisplayshortskip 2.5\p@ \@plus\p@ \@minus\p@
+	\def\@listi{\leftmargin\leftmargini
+		\topsep 3\p@ \@plus\p@ \@minus\p@
+		\parsep 2\p@ \@plus\p@ \@minus\p@
+		\itemsep \parsep}%
+	\belowdisplayskip \abovedisplayskip
 }
 \def\scriptsize{\@setfontsize\scriptsize\@vipt\@viipt}
 \def\tiny{\@setfontsize\tiny\@vpt\@vipt}
@@ -97,41 +97,41 @@
 \setlength\@dblfpbot      {0\p@ \@plus 1fil}
 \setlength\partopsep      {2\p@ \@plus 1\p@ \@minus 1\p@}
 \def\@listi{\leftmargin\leftmargini
-            \parsep 4\p@ \@plus2\p@ \@minus\p@
-            \topsep 8\p@ \@plus2\p@ \@minus3\p@
-            \itemsep \parsep}
+	\parsep 4\p@ \@plus2\p@ \@minus\p@
+	\topsep 8\p@ \@plus2\p@ \@minus3\p@
+	\itemsep \parsep}
 \let\@listI\@listi
 \def\@listii {\leftmargin\leftmarginii
-              \labelwidth\leftmarginii
-              \advance\labelwidth-\labelsep
-              \topsep    4\p@ \@plus2\p@ \@minus\p@
-              \parsep    2\p@ \@plus\p@  \@minus\p@
-              \itemsep   \parsep}
+	\labelwidth\leftmarginii
+	\advance\labelwidth-\labelsep
+	\topsep    4\p@ \@plus2\p@ \@minus\p@
+	\parsep    2\p@ \@plus\p@  \@minus\p@
+	\itemsep   \parsep}
 \def\@listiii{\leftmargin\leftmarginiii
-              \labelwidth\leftmarginiii
-              \advance\labelwidth-\labelsep
-              \topsep    2\p@ \@plus\p@\@minus\p@
-              \parsep    \z@
-              \partopsep \p@ \@plus\z@ \@minus\p@
-              \itemsep   \topsep}
+	\labelwidth\leftmarginiii
+	\advance\labelwidth-\labelsep
+	\topsep    2\p@ \@plus\p@\@minus\p@
+	\parsep    \z@
+	\partopsep \p@ \@plus\z@ \@minus\p@
+	\itemsep   \topsep}
 \def\@listiv {\leftmargin\leftmarginiv
-              \labelwidth\leftmarginiv
-              \advance\labelwidth-\labelsep}
+	\labelwidth\leftmarginiv
+	\advance\labelwidth-\labelsep}
 \def\@listv  {\leftmargin\leftmarginv
-              \labelwidth\leftmarginv
-              \advance\labelwidth-\labelsep}
+	\labelwidth\leftmarginv
+	\advance\labelwidth-\labelsep}
 \def\@listvi {\leftmargin\leftmarginvi
-              \labelwidth\leftmarginvi
-              \advance\labelwidth-\labelsep}
+	\labelwidth\leftmarginvi
+	\advance\labelwidth-\labelsep}
 %%% From File: $Id: scrkernel-paragraphs.dtx 2680 2017-09-28 05:45:12Z kohm $
 \@ifundefined{@list@extra}{}{%
-  \expandafter\ifnum\scr@v@is@ge{3.17}\par@updaterelative\fi
-  \l@addto@macro{\@listi}{\@list@extra}%
-  \let\@listI=\@listi
-  \l@addto@macro{\@listii}{\@list@extra}%
-  \l@addto@macro{\@listiii}{\@list@extra}%
-  \l@addto@macro{\footnotesize}{\protect\add@extra@listi{ftns}}%
-  \l@addto@macro{\small}{\protect\add@extra@listi{sml}}%
+	\expandafter\ifnum\scr@v@is@ge{3.17}\par@updaterelative\fi
+	\l@addto@macro{\@listi}{\@list@extra}%
+	\let\@listI=\@listi
+	\l@addto@macro{\@listii}{\@list@extra}%
+	\l@addto@macro{\@listiii}{\@list@extra}%
+	\l@addto@macro{\footnotesize}{\protect\add@extra@listi{ftns}}%
+	\l@addto@macro{\small}{\protect\add@extra@listi{sml}}%
 }
 \@listi
 \endinput

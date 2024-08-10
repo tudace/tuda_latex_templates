@@ -78,7 +78,7 @@
 \RequirePackage{graphicx}
 
 \bool_if:NT \g__ptxcd_colorframetitle_bool
-	{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
+{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
 
 \setbeamersize{
 	text~margin~left=\dim_eval:n {\paperwidth/34},
@@ -98,23 +98,23 @@
 
 \defbeamertemplate*{footline}{TUDa2023}{
 	\begin{beamercolorbox}[leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin]{footline}
-	\usebeamerfont{footline}
-	\rlap{\insertshortdate}
-	\hfill
-	\makebox[0pt][c]{
-		\bool_set_false:N \l_ptxcd_separate_bool
-		\clist_map_variable:nNn {department, institute, author} \l_tmpa_tl {
-			\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
-				\bool_if:NTF \l_ptxcd_separate_bool
-					 {\usebeamertemplate{footline~sep}}
+		\usebeamerfont{footline}
+		\rlap{\insertshortdate}
+		\hfill
+		\makebox[0pt][c]{
+			\bool_set_false:N \l_ptxcd_separate_bool
+			\clist_map_variable:nNn {department, institute, author} \l_tmpa_tl {
+				\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
+					\bool_if:NTF \l_ptxcd_separate_bool
+					{\usebeamertemplate{footline~sep}}
 					{\bool_set_true:N  \l_ptxcd_separate_bool}
-				\use:c {insertshort\l_tmpa_tl}
+					\use:c {insertshort\l_tmpa_tl}
+				}
 			}
 		}
-	}
-	\hfill
-	\llap{\insertframenumber}
-	\par\vspace{-\dp\strutbox}
+		\hfill
+		\llap{\insertframenumber}
+		\par\vspace{-\dp\strutbox}
 	\end{beamercolorbox}
 	\skip_vertical:n {\dimexpr\paperheight/32-\dp\strutbox}
 }
@@ -123,9 +123,9 @@
 
 \RenewDocumentCommand{\logo}{sm}{
 	\IfBooleanTF{#1}{
-	\setbeamertemplate{logo}{\resizebox{!}{.06\beamer@paperheight}{\mbox{#2}}}
+		\setbeamertemplate{logo}{\resizebox{!}{.06\beamer@paperheight}{\mbox{#2}}}
 	}{
-	\setbeamertemplate{logo}{#2}
+		\setbeamertemplate{logo}{#2}
 	}
 }
 
@@ -148,24 +148,24 @@
 		\hspace*{\beamer@leftmargin}\rlap{\usebeamertemplate***{title~in~head/foot}}
 	}
 	\hspace*{\fill}
-	
+
 	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
-	%partnerlogo
-	\bool_if:NT \g__ptxcd_extended_space_bool \smash {
-		\raisebox{\dimexpr-\height+\ht\strutbox}{
-			\box_use:N \g__ptxcd_partnerlogo_box
+		%partnerlogo
+		\bool_if:NT \g__ptxcd_extended_space_bool \smash {
+			\raisebox{\dimexpr-\height+\ht\strutbox}{
+				\box_use:N \g__ptxcd_partnerlogo_box
+			}
 		}
-	}
-	
-	\skip_horizontal:n {\dimexpr\paperheight/38}
-	%logo
-	\bool_if:NTF \g__ptxcd_headrule_bool {
-		\raisebox{2mm}[0pt][0pt]{\setlength{\fboxsep}{\z@}\colorbox{white}{\rule{\z@}{\dim_eval:n {\box_ht:N \g__ptxcd_logo_box+\box_ht:N \ptxcd_beamer_headrule_box + \box_dp:N \ptxcd_beamer_headrule_box+1pt}}\box_use:N \g__ptxcd_logo_box}}
+
+		\skip_horizontal:n {\dimexpr\paperheight/38}
+		%logo
+		\bool_if:NTF \g__ptxcd_headrule_bool {
+			\raisebox{2mm}[0pt][0pt]{\setlength{\fboxsep}{\z@}\colorbox{white}{\rule{\z@}{\dim_eval:n {\box_ht:N \g__ptxcd_logo_box+\box_ht:N \ptxcd_beamer_headrule_box + \box_dp:N \ptxcd_beamer_headrule_box+1pt}}\box_use:N \g__ptxcd_logo_box}}
 			\hspace*{10pt}
-	} {
-		\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
-		\hspace*{.7pt}
-	}
+		} {
+			\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
+			\hspace*{.7pt}
+		}
 	}
 	\par
 }
@@ -195,22 +195,22 @@
 \defbeamertemplate*{frametitle}{TUDa2023}[1][left]{%
 	\nointerlineskip%
 	\bool_if:NF \g__ptxcd_extended_space_bool
-		{\vskip.55ex}
+	{\vskip.55ex}
 	\begin{beamercolorbox}[
-		wd=\dim_eval:n {\bool_if:NT \g__ptxcd_extended_space_bool {-\box_wd:N \g__ptxcd_logo_box } \box_if_empty:NF \g__ptxcd_sublogo_box {-\box_wd:N \g__ptxcd_sublogo_box - 1em}+ \textwidth},
+			wd=\dim_eval:n {\bool_if:NT \g__ptxcd_extended_space_bool {-\box_wd:N \g__ptxcd_logo_box } \box_if_empty:NF \g__ptxcd_sublogo_box {-\box_wd:N \g__ptxcd_sublogo_box - 1em}+ \textwidth},
 		]{frametitle}
-	    \usebeamerfont{frametitle}%
-	    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
-	    \vphantom{Ü}
-	    \bool_if:NT \g__ptxcd_uppercase_frametitle_bool \text_uppercase:n {\insertframetitle}\strut
-	    \par%
-	    {%
-	      \ifx\insertframesubtitle\@empty%
-	      \else%
-	      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\strut\text_uppercase:n {\insertframesubtitle}\strut\par}%
-	      \fi
-	    }%
-	    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+		\usebeamerfont{frametitle}%
+		\if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+		\vphantom{Ü}
+		\bool_if:NT \g__ptxcd_uppercase_frametitle_bool \text_uppercase:n {\insertframetitle}\strut
+		\par%
+		{%
+			\ifx\insertframesubtitle\@empty%
+				\else%
+				{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\strut\text_uppercase:n {\insertframesubtitle}\strut\par}%
+			\fi
+		}%
+		\if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
 	\end{beamercolorbox}
 	\vskip.5ex
 }

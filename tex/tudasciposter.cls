@@ -82,7 +82,7 @@
 		\keys_set:nn {ptxcd/poster} {colorback=false, departmentlogofile=tuda_maschinenbau_logo,titlesepline=false}
 	},
 	department .initial:n = default,
-  department / unknown .code:n = {
+	department / unknown .code:n = {
 		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
 	},,
 	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
@@ -134,13 +134,13 @@
 \IfFormatAtLeastTF{2020/10/01}{}{\endinput}
 % Workaround posted by David Carlisle on tex.stackexchange
 % Thanks to Ulrike Fischer for mentioning it in #472
-	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
-	\chardef\currentgrouplevel0
-	\ExplSyntaxOff
-	\RequirePackage{pdfx}
-	\ExplSyntaxOn
-	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+\chardef\currentgrouplevel0
+\ExplSyntaxOff
+\RequirePackage{pdfx}
+\ExplSyntaxOn
+\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
 % end of the workaround
 \fi:
 
@@ -257,34 +257,34 @@
 \tl_new:N \g_ptxcd_xmp_author
 
 \cs_new:Nn \ptxcd_pass_TitleData: {
-	\begingroup
-	\def\newline{}
-	\def\\{}
-	\cs_set_eq:NN \thanks \use_none:n
-	\cs_set_eq:NN \inst \use_none:n
-	\cs_set:Npn \and {\sep}
-	\bool_if:NTF \g_ptxcd_pass_TitleData_bool {
-		\tl_gset:Nx \g_ptxcd_xmp_title {\@title}
-		\seq_clear:N \l_tmpa_seq
-		\seq_map_inline:Nn \g_ptxcd_author_seq {
-			\seq_put_right:Nx \l_tmpa_seq {##1}
-		}
-		\tl_gset:Nx \g_ptxcd_xmp_author {\seq_use:Nn \l_tmpa_seq {\sep}}
-		\iow_now:Nx \ptxcd_xmpdata_stream
-		{
-			\exp_not:N \Title{\tl_to_str:V \g_ptxcd_xmp_title}
-			^^J
-			\exp_not:N \Author{\tl_to_str:V \g_ptxcd_xmp_author}
-			^^J
-			\exp_not:N \Creator{LaTeX~ using~ the~ TUDa-CI~ Bundle}
-		}
-	}{
-		\begingroup
-		\use:c {pdfx@localcommands}
-		\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
-		\endgroup
+\begingroup
+\def\newline{}
+\def\\{}
+\cs_set_eq:NN \thanks \use_none:n
+\cs_set_eq:NN \inst \use_none:n
+\cs_set:Npn \and {\sep}
+\bool_if:NTF \g_ptxcd_pass_TitleData_bool {
+	\tl_gset:Nx \g_ptxcd_xmp_title {\@title}
+	\seq_clear:N \l_tmpa_seq
+	\seq_map_inline:Nn \g_ptxcd_author_seq {
+		\seq_put_right:Nx \l_tmpa_seq {##1}
 	}
+	\tl_gset:Nx \g_ptxcd_xmp_author {\seq_use:Nn \l_tmpa_seq {\sep}}
+	\iow_now:Nx \ptxcd_xmpdata_stream
+	{
+		\exp_not:N \Title{\tl_to_str:V \g_ptxcd_xmp_title}
+		^^J
+		\exp_not:N \Author{\tl_to_str:V \g_ptxcd_xmp_author}
+		^^J
+		\exp_not:N \Creator{LaTeX~ using~ the~ TUDa-CI~ Bundle}
+	}
+}{
+	\begingroup
+	\use:c {pdfx@localcommands}
+	\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
 	\endgroup
+}
+\endgroup
 }
 
 \cs_new:Nn \ptxcd_write_xmp_line:nn {
@@ -389,9 +389,9 @@
 \newlength{\contentheight}
 
 \cs_new:Nn \__ptxcd_logo_code:n {
-		\node[anchor=north~east,inner~sep=0pt,minimum~width=\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}](#1) at ([xshift=\__ptxcd_logosep:,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
-					\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}
-		};
+	\node[anchor=north~east,inner~sep=0pt,minimum~width=\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}](#1) at ([xshift=\__ptxcd_logosep:,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
+		\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}
+	};
 }
 
 
@@ -408,7 +408,7 @@
 		before= {\ptxcd_poster_setup_title_box:},
 		top= \dim_eval:n {
 			\bool_if:NF \g_ptxcd_colorback_bool {1.5}
-				\g_ptxcd_margin_dim
+			\g_ptxcd_margin_dim
 			+\box_ht:N \ptxcd_headrule_box
 			+\box_dp:N \ptxcd_headrule_box
 			+\g_ptxcd_titleblock_dim
@@ -434,22 +434,22 @@
 			\node[inner~sep=0pt,text~width=\__ptxcd_logowidth:,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_ptxcd_rulesep_dim]TUDalogo.south~west){\box_use:N \g_ptxcd_titlegraphic_box};
 
 			\node[anchor=north~west,inner~sep=0pt,]  (title) at ([
-			xshift=\g_ptxcd_titleindent_dim,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~west) {\box_use:N \g_ptxcd_title_box};
+				xshift=\g_ptxcd_titleindent_dim,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~west) {\box_use:N \g_ptxcd_title_box};
 
 			\bool_if:NT \g_ptxcd_titlesepline_bool
-				{\draw[line~ width=.5\c_ptxcd_smallrule_dim](bottomlefttitleblock)--++(\contentwidth,0);}
+			{\draw[line~ width=.5\c_ptxcd_smallrule_dim](bottomlefttitleblock)--++(\contentwidth,0);}
 
 			\node[anchor=north~west, inner~xsep=0pt, inner~ ysep=\c_ptxcd_rulesep_dim] (author) at ([xshift=\g_ptxcd_titleindent_dim]bottomlefttitleblock) {\box_use:N \g_ptxcd_author_box};
 
 			\draw[line~ width=.5\c_ptxcd_smallrule_dim](author.south-|identbar.west)--++(\contentwidth,0);
 
 
-		\bool_if:NT \g_ptxcd_poster_foot_bool {\__ptxcd_typeset_footer:}
-	}}
+			\bool_if:NT \g_ptxcd_poster_foot_bool {\__ptxcd_typeset_footer:}
+		}}
 }
 
 \cs_new:Nn \__ptxcd_typeset_footer: {
-			\coordinate(lastpos) at (bottomright);
+	\coordinate(lastpos) at (bottomright);
 	\tl_if_empty:NF \g_ptxcd_poster_qrcode_tl
 	{
 		\node[anchor=south~east, inner~sep=\z@] (qrcode)at (lastpos)
@@ -468,7 +468,7 @@
 		\parbox{\dim_eval:n {\contentwidth
 				-\box_wd:N \g_ptxcd_footergraphics_box
 				\tl_if_empty:NF \g_ptxcd_poster_qrcode_tl {-\g_ptxcd_footheight_dim-\c_ptxcd_rulesep_dim}
-		}}{
+			}}{
 			\rule{\linewidth}{.5\c_ptxcd_smallrule_dim}\\
 			\accentfont\small\g_ptxcd_poster_foot_tl
 			\par\medskip
@@ -479,8 +479,8 @@
 
 \hook_gput_code:nnn {ptxcd/init-colors} {tudasciposter} {
 	\bool_if:NTF \g_ptxcd_colorback_bool
-		{\colorlet{titlefgcolor}{textonaccentcolor}}
-		{\colorlet{titlefgcolor}{black}}
+	{\colorlet{titlefgcolor}{textonaccentcolor}}
+	{\colorlet{titlefgcolor}{black}}
 	\colorlet{titlebgcolor}{accentcolor}
 	% Block Colors
 	\colorlet{blocktitlebgcolor}{accentcolor}
@@ -506,25 +506,25 @@
 
 \cs_new:Nn \ptxcd_poster_setup_title_box: {
 	\hbox_gset:Nn \g_ptxcd_title_box {
-	\parbox{.65\paperwidth}{
-		\raggedright
-		\usekomafont{disposition}\usekomafont{title}\leavevmode\@title \par
-	}
+		\parbox{.65\paperwidth}{
+			\raggedright
+			\usekomafont{disposition}\usekomafont{title}\leavevmode\@title \par
+		}
 	}
 	\hbox_gset:Nn \g_ptxcd_author_box {
 		\parbox{\dimexpr\contentwidth-6\c_ptxcd_rulesep_dim\relax}{
-		\ptxcd_def_footnotelabel:
-		\cs_set_eq:NN \inst\__ptxcd_inst:n
-		{\usekomafont{author}\@author\\}
-		\tl_gset:No \g_ptxcd_thanks_tl {\@thanks}
-		\@institute
+			\ptxcd_def_footnotelabel:
+			\cs_set_eq:NN \inst\__ptxcd_inst:n
+			{\usekomafont{author}\@author\\}
+			\tl_gset:No \g_ptxcd_thanks_tl {\@thanks}
+			\@institute
 		}
 	}
 	\tl_if_empty:NF \@titlegraphic {
 		\hbox_gset:Nn \g_ptxcd_titlegraphic_box {
 			\parbox{\__ptxcd_logowidth:}{
-			\raggedleft
-			\@titlegraphic
+				\raggedleft
+				\@titlegraphic
 			}
 		}
 	}
@@ -559,10 +559,10 @@
 		bottom=\c_ptxcd_rulesep_dim,
 		frame~code={
 			\iftcb@hasTitle
-			\fill[tcbcolframe](frame.north~west)rectangle(title.north~east);
-			\fill[tcbcolframe](title.south~west)rectangle(interior.north~east);
+				\fill[tcbcolframe](frame.north~west)rectangle(title.north~east);
+				\fill[tcbcolframe](title.south~west)rectangle(interior.north~east);
 			\else
-			\fill[tcbcolframe](frame.north~west)rectangle(interior.north~east);
+				\fill[tcbcolframe](frame.north~west)rectangle(interior.north~east);
 			\fi
 			\fill[tcbcolframe](interior.south~west)rectangle(frame.south~east);
 		},
@@ -626,8 +626,8 @@
 %Select default box styles according to style option
 \tcbposterset{boxes ={\g_ptxcd_boxstyle_tl}, poster={spacing=5cm}}
 \tcbset{
-	every~ box~ on~ layer~ 3/.style={reset,\g_ptxcd_boxstyle_tl -inner},
-	every~ box~ on~ layer~ 4/.style={reset,\g_ptxcd_boxstyle_tl -inner},
+every~ box~ on~ layer~ 3/.style={reset,\g_ptxcd_boxstyle_tl -inner},
+every~ box~ on~ layer~ 4/.style={reset,\g_ptxcd_boxstyle_tl -inner},
 }
 
 %Adjust caption indent
