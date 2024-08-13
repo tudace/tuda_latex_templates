@@ -246,9 +246,9 @@ reversemp
 % \item[Print publications] generic document class which provides modes for more specific documents.
 % The basic documentation applies to all types and can be found in \autoref{sec:tudapub}.
 % \begin{itemize}
-% \item scientific paper
-% \item minimal Template for internal reports, \autoref{sec:report}
-% \item (PhD) theses, \autoref{sec:theses}
+% \item \file{DEMO-TUDaPub.tex}: default document matching the CI guideline
+% \item minimal Template for internal reports \file{DEMO-TUDaReport.tex} using \option{type=intern} (see description of \option{type} in \autoref{sec:options} on \pageref{option:type})
+% \item (PhD) theses, using \option{type=thesis}. This also extends the functionality and adds some thesis specific mechanisms, see \autoref{sec:theses} \file{DEMO-TUDaThesis.tex} and \file{DEMO-TUDaPhD.tex}
 % \end{itemize}
 % \item[Scientific Posters] based on the \pkg{tcolorbox} poster library, \autoref{sec:sciposter}.
 % \item[Presentation Slides] beamer theme. This includes the old design of 2008 as well as the redesign of 2023, \autoref{sec:beamer}.
@@ -258,7 +258,9 @@ reversemp
 % \item[Letters] \autoref{sec:letter}
 % \end{description}
 %
-% The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort. These are called by the elements they define: \pkg{tudacolors}, \pkg{tudafonts}, \pkg{tudarules} as well as the pgfplots color schemes defined by \pkg{tuda-pgfplots}.
+% The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort.
+% These are called by the elements they define:
+% \pkg{tudacolors}, \pkg{tudafonts}, \pkg{tudarules} as well as the pgfplots color schemes defined by \pkg{tuda-pgfplots}.
 %
 % Additionally the setup is defined to support department specific configuration files.
 % Officially we currently only support the setup of the department of mechanical engineering, see \autoref{sec:mecheng}.
@@ -273,9 +275,13 @@ reversemp
 % Afterwards there will be specific information on the thesis modes.
 %
 % \section{Usage and class options}
-%
+% \label{sec:options}
 % \begin{table}
-% \captionabove[Differences between the demo files based on \cls{tudapub}]{Differences between the demo files based on \cls{tudapub}. The template files use different options depending on the actual purpose. This tabular gives an overview of the Features shown inside the tempaltes as well as the initial settings.}
+% \captionabove[Differences between the demo files based on \cls{tudapub}]{
+%   Differences between the demo files based on \cls{tudapub}.
+%   The template files use different options depending on the actual purpose.
+%   This tabular gives an overview of the Features shown inside the tempaltes as well as the initial settings.
+% }
 % \label{tab:demo-options}
 % \noindent\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}c>{\centering\arraybackslash}Xcc@{}}
 % \toprule
@@ -515,6 +521,8 @@ reversemp
 % In the case of the example, both options, \option{english} and \option{german} must be passed to the babel package.
 %
 % \section{PDF/A}
+%
+% The university library requires submissions to be compliant to the PDF/A standard.
 % \DescribeKeyOption{pdfa=\meta{Boolean}}{true}
 % The TUDaPub class supports the PDF/A 2b standard.
 % PDF/A mode is automatically activated within tudapub.
@@ -792,7 +800,7 @@ reversemp
 % If a value different from the keys listed above is found, this value is used directly in place of the license text.
 % If it itself contains an equals signs or commas, grouping is necessary.
 %
-% \section{Affidavit}
+% \subsection{Affidavit}
 % \DescribeMacro{\affidavit}
 % The macro \cs{affidavit} creates a declaration of authorship with a signature line.
 % The name/signature could be set via optios or the Information provided with \cs{author} is used.
@@ -807,18 +815,18 @@ reversemp
 % Version 3.20 also allows the transfer of further options for the signature name, a signature image or the location.
 % The extent to which these options may be used must be clarified by the user before submission.
 % TUDa-CI cannot make a reliable statement on this.
-% \begin{verbatim}
-%     \affidavit[
-%         signature=Signature name,
-%         signature-image={\includegraphics[width=\width]{signatureimage}}
-%     ]
-% \end{verbatim}
+% \begin{example}
+%  \affidavit[
+%    signature=Signature name,
+%    signature-image={\includegraphics[width=\width]{signatureimage}}
+%  ]
+% \end{example}
 % A vertical shift of the signature image is not implemented directly, but is easily possible by using the \LaTeX macro \cs{raisebox}\marg{shift}\marg{content}.
 %
 % It is also possible to print an affidavit in another language as a supplement.
 % In order to handle the structure and any necessary language switching, there is an environment:
 % \begin{Syntax}
-% \begin{affidavit*}[|\meta{Babel language option}]{\meta{heading}}
+% \begin{affidavit*}[|\meta{Babel language option}]|{|\meta{heading}|}
 % 	\meta{Text}
 % \end{affidavit*}
 % \end{Syntax}
@@ -827,8 +835,9 @@ reversemp
 % In this case, an additional signature line can be added:
 % \DescribeMacro{\AffidavitSignature}\DescribeKeyOption{signature-location=\meta{Location}}{Darmstadt}*
 % \begin{Syntax}
-% \AffidavitSignature[\meta{city}]
+% \AffidavitSignature[|\meta{city}|]
 % \end{Syntax}
+%
 %
 % \section{Further configuration options}
 %
@@ -929,9 +938,9 @@ reversemp
 % \subsubsection{\hologo{pdfLaTeX}}
 % Hier existiert eine Variante, die die Buchstaben der Basisschriftart \enquote{Charter} mit Mathematiksymbolen aus unterschiedlichen Zeichensätzen möglichst passend kombiniert.
 %
-% \begin{verbatim}
+% \begin{example}
 % \usepackage[charter,expert]{mathdesign}
-% \end{verbatim}
+% \end{example}
 %
 % There are similar approaches for a few other combinations.
 % Some examples can be found in the XCharter documentation \cite{xcharter}.
@@ -969,7 +978,6 @@ reversemp
 % \end{Syntax}
 %
 %
-
 % \chapter{Department-specific adaptations}
 % \label{sec:department-config}
 % Some departments have special requirements.
@@ -977,7 +985,7 @@ reversemp
 % Currently the only official extension is the one for the department of mechanical engineering.
 % However, the mechanism can be expanded.
 %
-% \subsection{Department of Mechanical Engineering}
+% \section{Department of Mechanical Engineering}
 % \label{sec:mecheng}
 % The corresponding mode is activated via the option \option{department=mecheng}.
 % Coloring is adjusted automatically and additional layout elements like the \enquote{Zeitstrahl} are introduced.
