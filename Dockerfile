@@ -13,5 +13,6 @@ RUN mkdir -p "$(kpsewhich -var-value=TEXMFDIST)/tex/latex/local" \
 # Install tudace
 WORKDIR /tudace
 COPY . .
-RUN l3build install --full
+RUN l3build install --full --texmfhome="$(kpsewhich -var-value=TEXMFDIST)"
+RUN texhash --verbose
 WORKDIR /
