@@ -66,11 +66,24 @@ Die verwendeten Logos sind nicht Bestandteil dieses Bundles und können von Mitg
 
 https://download.hrz.tu-darmstadt.de/protected/ULB/tuda_logo.pdf
 
-Für die permanente Installation der Logodateien findet sich unter
-https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp
+Für die permanente Installation der Logodateien muss das Logo in den lokalen LaTeX-Baum gelegt werden. Den Pfad dieses Ordners (meist `~/texmf/` oder `~/texmf-local/`) kann mit den folgenden Befehl ermittelt werden:
+```powershell
+kpsewhich -var-value TEXMFHOME
+```
+Dann kann die Logodatei in einen beliebigen Unterordner von `<TEXMFHOME>/tex/latex/` abgelegt werden (es wird rekursiv in allen Unterordnern von `<TEXMFHOME>/tex/latex/` nach Dateien gesucht). Also beispielsweise `<TEXMFHOME>/tex/latex/local/tuda_logo.pdf`. 
+
+Statt `TEXMFHOME` kann auch `TEXMFLOCAL` verwendet werden, um das Logo für alle Nutzer des Systems zu installieren. Dieser kann mit dem Befehl
+```powershell
+kpsewhich -var-value TEXMFLOCAL
+```
+ermittelt werden.
+
+Dazu findet sich unter https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp
 ein Paket mit entsprechenden Hinweisen.
 
 Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos dokumentiert.
+
+Für Arch-Linux-Nutzer gibt es ein inoffizielles AUR-Paket, welches die Installation automatisiert: [latex-tuda-ci-logos-sanity](https://aur.archlinux.org/packages/latex-tuda-ci-logos-sanity/)
 
 ## Enthaltene Templatedateien
 
