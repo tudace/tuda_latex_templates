@@ -78,6 +78,17 @@ kpsewhich -var-value TEXMFLOCAL
 ```
 ermittelt werden.
 
+Anschließend muss der LaTeX-Ordnerindex aktualisiert werden. Dies kann mit dem folgenden Befehl erfolgen (ggf. mit sudo/als Administrator ausführen):
+```powershell
+texhash --verbose
+```
+
+Nun sollte das Logo in allen LaTeX-Dokumenten verfügbar sein. Dies lässt sich überprüfen, indem man aus einem Ordner, indem die Logodatei nicht vorhanden ist, den Befehl
+```powershell
+kpsewhich tuda_logo.pdf
+```
+ausführt. Falls das Logo gefunden wird, ist die Installation erfolgreich.
+
 Dazu findet sich unter https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp
 ein Paket mit entsprechenden Hinweisen.
 
