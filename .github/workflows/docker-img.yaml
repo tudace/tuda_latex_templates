@@ -2,7 +2,7 @@ name: Build and publish container
 
 on:
   release:
-    types: 
+    types:
       - published
   push:
     branches:
@@ -42,6 +42,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Dockerfile.logo
+        run: docker buildx build --output . -f Dockerfile.logo .
 
       - name: Extract metadata for Docker
         id: meta
