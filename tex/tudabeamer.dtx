@@ -395,6 +395,7 @@
 %<2008>\ExplSyntaxOn
 \keys_define:nn {ptxcd/beamer} {
 	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
+%<2008>	centerframetitle .code:n = \PassOptionsToPackage{centerframetitle=#1}{beamerouterthemeTUDa},
 	colortitle .code:n = 
 %<2008>    \PassOptionsToPackage{colortitle=#1}{beamercolorthemeTUDa},
 %<2023>     \msg_warning:nnn {tudabeamer} {option-removed} {colortitle},
@@ -407,6 +408,7 @@
 	colorback .code:n = 
 %<2008>    \PassOptionsToPackage{colorback=#1}{beamercolorthemeTUDa},
 %<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorback},
+%<2008>	headsepline .code:n = \PassOptionsToPackage{headsepline=#1}{beamerouterthemeTUDa},
 	logo .code:n = \PassOptionsToPackage{logo=#1}
 %<2008>{beamerouterthemeTUDa2008}
 %<2023>{beamerouterthemeTUDa}
