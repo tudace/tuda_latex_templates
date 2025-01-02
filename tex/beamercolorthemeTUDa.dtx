@@ -98,7 +98,6 @@
 %<*main>
 % \fi
 %    \begin{macrocode}
-\ExplSyntaxOn
 \clist_map_inline:nn {
 	colortitle,
 	colorbacktitle,
@@ -107,11 +106,29 @@
 } {
 	\keys_define:nn {ptxcd/beamer/color} {#1 .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {#1}}
 }
+%    \end{macrocode}
+%</main>
+%<*2008>
+%    \begin{macrocode}
+\bool_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
+\keys_define:nn {ptxcd/beamer/color} {
+	colortitle .bool_gset:N = \g_ptxcd_beamer_colortitle_bool,
+	colortitle .default:n = true,
+	colortitle .initial:n = true,
+	colorbacktitle .meta:n = {colortitle=#1},
+	colorframetitle .code:n = \use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:,
+	colorframetitle .default:n = true,
+	colorback .meta:n = {colorframetitle=#1}
+}
+%</2008>
 \ExplSyntaxOff
 \ProcessKeyOptions[ptxcd/beamer/color]
 \mode<presentation>{\PassOptionsToPackage{RGB}{tudacolors}}
 \RequirePackage{tudacolors}
 %    \end{macrocode}
+% \iffalse
+%<*main>
+% \fi
 %    \begin{macrocode}
 \definecolorset{HTML}{TUDa-}{}{%
 	dark1,000000;%
@@ -133,14 +150,24 @@
 \setbeamercolor{institute}{parent=title}
 \setbeamercolor{date}{parent=title}
 \setbeamercolor{titlelike}{parent=title}
+%    \end{macrocode}
+% \iffalse
+%</main>
+% \fi
+%    \begin{macrocode}
+%<2008>\setbeamercolor{titlelike}{fg=textaccentcolor,bg=white}
 \setbeamercolor*{author}{parent=title}
 \setbeamercolor*{institute}{parent=title}
 \setbeamercolor*{normal text}{bg=,fg=black}
 \setbeamercolor*{background canvas}{parent=normal text}
 \setbeamercolor*{section in toc}{parent=normal text}
-\setbeamercolor*{footline}{parent=normal text}
+\setbeamercolor*{footline}{
+%<2008>parent=normal text
+%<main>fg=black!50
+}
 \setbeamercolor*{alerted text}{fg=textaccentcolor}
-\setbeamercolor*{structure}{fg=black}
+%<main>\setbeamercolor*{structure}{fg=black}
+%<2008>\setbeamercolor*{structure}{fg=textaccentcolor}
 \setbeamercolor{bibliography item}{parent=item}
 \setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
 \setbeamercolor{bibliography entry title}{use=normal text,fg=normal text.fg}
@@ -148,35 +175,36 @@
 \setbeamercolor{bibliography entry note}{use=structure,fg=normal text.fg}
 \setbeamercolor*{block title}{fg=textonaccentcolor,bg=accentcolor}
 \setbeamercolor*{block body}{fg=black,bg=black!15}
-\setbeamercolor*{block title alerted}{fg=TUDa-accent1,bg=TUDa-light2}
+\setbeamercolor*{block title alerted}{
+%<main>fg=TUDa-accent1,bg=TUDa-light2
+%<2008>fg=TUDa-9b,bg=black!15
+}
 \setbeamercolor*{block body alerted}{use=normal text, bg=white}
-\setbeamercolor*{block frame alerted}{bg=TUDa-accent1}
-\setbeamercolor*{block title example}{fg=TUDa-accent2,bg=TUDa-light2}
+\setbeamercolor*{block frame alerted}{
+%<main>bg=TUDa-accent1
+%<2008>bg=TUDa-9b
+}
+\setbeamercolor*{block title example}{
+%<main>fg=TUDa-accent2,bg=TUDa-light2
+%<2008>fg=TUDa-4d,bg=black!15
+}
 \setbeamercolor*{block body example}{use=normal text, bg=white}
-\setbeamercolor*{block frame example}{bg=TUDa-accent2}
-\setbeamercolor{footline}{fg=black!50}
-\mode<all>
+\setbeamercolor*{block frame example}{
+%<main>bg=TUDa-accent2
+%<2008>bg=TUDa-4d
+}
 %    \end{macrocode}
-%</main>
 %<*2008>
 %    \begin{macrocode}
-\bool_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
-\keys_define:nn {ptxcd/beamer/color} {
-	colortitle .bool_gset:N = \g_ptxcd_beamer_colortitle_bool,
-	colortitle .default:n = true,
-	colortitle .initial:n = true,
-	colorbacktitle .meta:n = {colortitle=#1},
-	colorframetitle .code:n = \use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:,
-	colorframetitle .default:n = true,
-	colorback .meta:n = {colorframetitle=#1}
-}
-\ProcessKeyOptions[ptxcd/beamer/color]
-\ExplSyntaxOff
-\RequirePackage[RGB]{tudacolors}
-\mode<presentation>
 \setbeamercolor*{smallrule}{bg=black}
 \setbeamercolor*{identbar}{bg=identbarcolor}
+%    \end{macrocode}
+%</2008>
+%    \begin{macrocode}
 \ExplSyntaxOn
+%    \end{macrocode}
+%<*2008>
+%    \begin{macrocode}
 \bool_if:NTF \g_ptxcd_beamer_colortitle_bool {
 	\setbeamercolor*{title}{fg=textonaccentcolor,bg=accentcolor}
 }{
@@ -190,36 +218,11 @@
 	}
 }
 \__ptxcd_setup_frametitle_color:
-\ExplSyntaxOff
-\setbeamercolor*{author}{parent=title}
-\setbeamercolor*{institute}{parent=title}
-\setbeamercolor*{normal text}{bg=,fg=black}
-\setbeamercolor*{background canvas}{parent=normal text}
-\setbeamercolor*{section in toc}{parent=normal text}
-\setbeamercolor*{footline}{parent=normal text}
-\setbeamercolor*{alerted text}{fg=textaccentcolor}
-\setbeamercolor*{structure}{fg=textaccentcolor}
-\setbeamercolor{bibliography item}{parent=item}
-\setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
-\setbeamercolor{bibliography entry title}{use=normal text,fg=normal text.fg}
-\setbeamercolor{bibliography entry location}{use=structure,fg=structure.fg}
-\setbeamercolor{bibliography entry note}{use=structure,fg=normal text.fg}
-\setbeamercolor{titlelike}{fg=textaccentcolor,bg=white}
-\setbeamercolor*{block title}{fg=textonaccentcolor,bg=accentcolor}
-\setbeamercolor*{block body}{fg=black,bg=black!15}
-\setbeamercolor*{block title alerted}{fg=TUDa-9b,bg=black!15}
-\setbeamercolor*{block body alerted}{use=normal text, bg=white}
-\setbeamercolor*{block frame alerted}{bg=TUDa-9b}
-\setbeamercolor*{block title example}{fg=TUDa-4d,bg=black!15}
-\setbeamercolor*{block body example}{use=normal text, bg=white}
-\setbeamercolor*{block frame example}{bg=TUDa-4d}
-\ExplSyntaxOn
-\mode<all>
 %    \end{macrocode}
-
 %
 % \iffalse
 %</2008>
+\mode<all>
 %</package>
 % \fi
 %
