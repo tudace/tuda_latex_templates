@@ -214,6 +214,7 @@ reversemp
 %\DisableImplementation
 \DocInput{tuda-ci.dtx}
 \PrintChanges
+\printbibliography
 \PrintIndex
 \end{document}
 %</driver>
@@ -248,12 +249,12 @@ reversemp
 % \item minimal Template for internal reports \file{DEMO-TUDaReport.tex} using \option{type=intern} (see description of \option{type} in \autoref{sec:options} on \pageref{option:type})
 % \item (PhD) theses, using \option{type=thesis}. This also extends the functionality and adds some thesis specific mechanisms, see \autoref{sec:theses} \file{DEMO-TUDaThesis.tex} and \file{DEMO-TUDaPhD.tex}
 % \end{itemize}
-% \item[Scientific Posters] based on the \pkg{tcolorbox} poster library, \autoref{sec:sciposter}.
-% \item[Presentation Slides] beamer theme. This includes the old design of 2008 as well as the redesign of 2023, \autoref{sec:beamer}.
-% \item[Announcement Posters] for event or job annoucements, \autoref{sec:poster}
-% \item[Leaflets]  \autoref{sec:leaflet}
-% \item[Exercise Sheets/Exams] \autoref{sec:exercise}
-% \item[Letters] \autoref{sec:letter}
+% \item[Scientific Posters] based on the \pkg{tcolorbox} poster library, \cite{TUDaSciPoster}
+% \item[Presentation Slides] beamer theme. This includes the old design of 2008 as well as the redesign of 2023,  \cite{TUDaBeamer}
+% \item[Announcement Posters] for event or job annoucements, \cite{TUDaPoster}
+% \item[Leaflets]  \cite{TUDaLeaflet}
+% \item[Exercise Sheets/Exams] \cite{TUDaExercise}
+% \item[Letters] \cite{TUDaLetter}
 % \end{description}
 %
 % The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort.
@@ -530,7 +531,8 @@ reversemp
 % \end{abstract}
 %
 % \begin{abstract}[german]
-% 	Weitere Zusammenfassung in einer anderen Sprache (hier Deutsch), sofern benötigt.
+% 	Weitere Zusammenfassung in einer anderen Sprache (hier Deutsch),
+%   sofern benötigt.
 % \end{abstract}
 % \end{example}
 %
