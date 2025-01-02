@@ -107,9 +107,9 @@
 } {
 	\keys_define:nn {ptxcd/beamer/color} {#1 .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {#1}}
 }
-\keys_define:nn {ptxcd/beamer/color} {}
 \ExplSyntaxOff
 \ProcessKeyOptions[ptxcd/beamer/color]
+\mode<presentation>{\PassOptionsToPackage{RGB}{tudacolors}}
 \RequirePackage{tudacolors}
 %    \end{macrocode}
 %    \begin{macrocode}
