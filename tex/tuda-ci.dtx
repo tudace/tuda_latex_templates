@@ -192,9 +192,6 @@ reversemp
 \providecommand\parg[1]{%
   {\codefamily(}\meta{#1}{\codefamily)}}
 
-
-
-
 \usepackage{minted}
 
 \IfFileExists{tuda_logo.pdf}{}{
@@ -214,6 +211,7 @@ reversemp
 \CodelineIndex
 \RecordChanges
 \begin{document}
+%\DisableImplementation
 \DocInput{tuda-ci.dtx}
 \PrintChanges
 \PrintIndex
@@ -268,6 +266,26 @@ reversemp
 % Those are not officially supported.
 % In case you want to provide your own and add it to TUDa-CI, please have a look at \autoref{sec:department-config}.
 %
+% \chapter{Getting Started}
+% The TUDa-CI bundle is available via CTAN\cite{ctan} and therefore no manual installation should be required. 
+% Additionally the HRZ provides an on-premise Overleaf instance which also contains a release including all necessary files.
+% In case you are a member of TU Darmstadt you can access the server via \url{https://sharelatex.tu-darmstadt.de/}.
+% 
+% \section{Logo installation}
+% Sadly the logo files may not be published together with this template.
+% So it is necessary to either disable the loading or install the files.
+% The easiest way to do so is by placing a copy of the required logos in your working directory.
+% But this will be required for every document you want to use these templates for. 
+% 
+% A better alternative would be a local installation of the logo file.
+% This can be done by moving the file info your \verb+TEXMFHOME+ directory.
+% On standard \TeX{} Live Installations this would be called \path{texmf/} in your users home directory.
+% Inside this one the logo files have to be placed according to the TDS (\TeX{} Directory Structure), which means it has to be copied into
+% \path{texmf/tex/latex/tuda-ci-logos}.
+%
+% Alternativly there are scripts to be run inside a terminal to automatically detect the correct location. 
+% These can be found inside the \path{tools} directory of TUDa-CI's GitHub Repository (\citeurl{tuda-ci-github}).
+
 % \chapter{tudapub – generic class for articles and theses}
 % \label{sec:tudapub}
 % The TUDa-CI bundle uses a generic document class to be more flexible with the layout adjustments.
@@ -294,7 +312,7 @@ reversemp
 % font size&11pt&11pt&9pt&9pt\\\midrule
 % ruledheaders&section&chapter&all&all\\\midrule
 % class&scrreprt&scrbook&scrartcl&scrartcl\\\midrule
-% thesis&\ttfamily type=bachelor&\ttfamily type=dr, dr=rernat &\FeatureFalse&\FeatureFalse\\\midrule
+% thesis&\ttfamily thesistype=bachelor&\ttfamily thesistype=dr, dr=rernat &\FeatureFalse&\FeatureFalse\\\midrule
 % marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
 % Affidavit\newline\rlap{(\enquote{Selbstständigkeitserklärung})}&\FeatureTrue&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
 % abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
@@ -389,8 +407,7 @@ reversemp
 % Allows an alternative logo to be used.
 % This option is available so that the templates can also be used without the TUDa logo.
 % The logos are reserved to be used by TUDa members and may therefore not be published with this template.
-^^A% TODO Link!
-^^A% \end{description}
+% In case you want to install the logo files locally you can find further information at \citeurl{TUDa-CI-Info}.
 %
 % \noindent Additionally all \KOMAScript{} options can be used. These are described within the documentation. Some more notes on the interaction between \KOMAScript{} and TUDa-CI can be found in \autoref{sec:KOMA}.
 %
@@ -531,7 +548,8 @@ reversemp
 % \LaTeX{} is not validating the file in any way, it is just using compatible settings for all elements processed by the compiler.
 % As \LaTeX{} is not doing any processing on image files the user has to ensure the font settings match the requirements for PDF/A.
 %
-% \DescribeKeyOption{pdfx=\meta{Boolean}}{true}\cls{tudapub} will try to automatically select the best method.
+% \DescribeKeyOption{pdfx=\meta{Boolean}}{true}
+% \cls{tudapub} will try to automatically select the best method.
 % This is done using \option{pdfx} option.
 % This should only be toggled manually if the user is totally sure to understand the impact.
 %
@@ -567,8 +585,8 @@ reversemp
 % All variables that can be processed by pdfx can be set here according to the key=value structure.
 % \begin{example}
 % \Metadata{
-% author=Marei Peischl (peiTeX),
-% title=LaTeX im Corporate Design der TU Darmstadt,
+%   author=Marei Peischl (peiTeX),
+%   title=LaTeX im Corporate Design der TU Darmstadt,
 % }
 % \end{example}
 % Please note that this macro only works if pdfa output is activated, and no pdfmanagement is used.
@@ -653,6 +671,7 @@ reversemp
 % This option enables selection as a document class option.
 % For compatibility reasons, however, the department macro can also be used for this.
 % The following shorthands are predefined:
+%
 % \begin{tabular}{@{}l@{${}\to{}$}l@{}}
 %	arch & Architecture \\
 %	bauing & Civil and environmental engineering \\
@@ -673,6 +692,7 @@ reversemp
 % These are not available for doctoral theses.
 % If the given value is not found in the departments the fields of study will be checked afterwards.
 % The study areas have the following shorthands:
+%
 % \begin{tabular}{@{}l@{${}\to{}$}l@{}}
 % ce&Computational Engineering\\
 % ese&Energy Science and Engineering\\
@@ -768,7 +788,7 @@ reversemp
 % \DescribeKeyOption{urn=\meta{TUprints URN}}{\meta{initially unset}}*
 % If the argument does not contain an equals sign, the value is set as \option{printid} and no \option{urn} is specified.
 %
-% The printid is the ID number of the TUprints entry. The urn is a permanently unique resource identifier for the document. In TUprints, the number corresponds to the \option{printid} with the addition of a check digit.
+% \option{printid} is the ID number of the TUprints entry. The urn is a permanently unique resource identifier for the document. In TUprints, the number corresponds to the \option{printid} with the addition of a check digit.
 % Both dates can be found in the details of the TUprints entry.
 %
 % \minisec{License information}
@@ -849,7 +869,7 @@ reversemp
 % The implementation is done via the \pkg{xcolor} package, whereby the corresponding color values for both models are stored withing \pkg{tudacolors}.
 %
 % Normally, TUDa-CI automatically selects a suitable model.
-% The default setting of pdfa-true ensures a conversion to RGB (vgl.~\ref{sec:pdfa-color}).
+% The default setting of \option{pdfa=true} ensures a conversion to RGB (vgl.~\ref{sec:pdfa-color}).
 %
 % If a specific color profile should be used, the xcolor options \option{cmyk} or \option{RGB} can be transmitted directly to tudapub.
 % They are passed on to the package and will be processed according to the xcolor documentation \cite{xcolor}.
@@ -894,7 +914,7 @@ reversemp
 % \begin{Syntax}
 % \geometry{
 % reset,
-%|\meta{Now it's reset to the default geometry settings and here can be the own adjustments}|
+% |\meta{Adjustments starting from geometry's defaults}|
 % }
 % \end{Syntax}
 % This applies in particular to the options \code{includehead}, \code{includefoot} and \code{includemp}.
@@ -1031,7 +1051,7 @@ reversemp
 %
 %
 %
-% \StopEventually{}
+% \MaybeStop{}
 %
 % \section{Implementation}
 %
