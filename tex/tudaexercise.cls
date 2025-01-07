@@ -190,7 +190,7 @@
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
 	match-task-subtask-syntax .bool_gset:N = \g_ptxcd_match_task_subtask_bool,
-	match-task-subtask-syntax .initial:n = false, 
+	match-task-subtask-syntax .initial:n = false,
 	match-task-subtask-syntax .default:n = true,
 	solution .code:n = {
 		\bool_set_eq:Nc \l_ptxcd_ex_solution_bool {c_#1_bool}
@@ -204,7 +204,7 @@
 	points / auto .code:n = \bool_set_true:N \l__ptxcd_points_auto_bool\bool_gset_true:N \g__ptxcd_points_bool,
 	points .initial:n = false,
 	subtask .choice:,
-	subtask / ruled .code:n = 
+	subtask / ruled .code:n =
 		\bool_gset_true:N \g__ptxcd_ruled_subtask_bool
 		\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
 	subtask / runin .code:n =
@@ -243,7 +243,7 @@
 	solution .meta:nn ={ptxcd/exercise}{solution=#1},
 }
 
-\fp_new:N \l_ptxcd_ex_subtask_points_fp 
+\fp_new:N \l_ptxcd_ex_subtask_points_fp
 \keys_define:nn {ptxcd/subtask} {
 	credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
 	credit .initial:n =,
@@ -320,7 +320,7 @@
 		\hskip #2#3}{
 		\tl_if_eq:nnT {#1} {task} {
 			\exp_args:No \tl_if_empty:nF {#4}
-				{:~}	
+				{:~}
 			\bool_if:NT \l__ptxcd_points_auto_bool {
 				\exp_args:NNx \prop_get:NnN \g__ptxcd_loaded_points_prop {\thetask} \l_ptxcd_tmp_tl
 				\quark_if_no_value:NF \l_ptxcd_tmp_tl {
@@ -444,14 +444,14 @@
 
 \bool_if:NT \g_ptxcd_ex_compatibility_bool {
 	\cs_new:Npn \ptxcd_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_ptxcd_ex_headline_oneside_tl {#1} }
-	
+
 	\NewEnviron{examheader}{
 	  \tl_gset:No \g_ptxcd_ex_headline_oneside_tl {\BODY}
 	  \tl_gset:No \g_ptxcd_ex_headline_odd_tl {\BODY}
 	  \tl_gset:No \g_ptxcd_ex_headline_even_tl {\BODY}
 	  \ptxcd_ConfigureHeadline:n {}
 	}
-	
+
 	  \newcommand*{\examheaderdefault}{\par\StudentName\StudentID}
 }
 
@@ -756,7 +756,7 @@
 \providecommand{\creditformatsum}[1]{\creditformat{#1}}
 \newcommand*{\pointformat}[1]{
 	\fp_compare:nF {#1 = 0} {
-		\bool_if:NTF \l__ptxcd_points_auto_bool 
+		\bool_if:NTF \l__ptxcd_points_auto_bool
 			\creditformatsum
 			\creditformat
 		{
@@ -961,7 +961,7 @@
 
 \msg_new:nnn {tudaexercise} {point-referencing-disabled} {
 	You~try~to~use~#1.\\
-	This~function~is~only~available~with~points=true~or~points=auto.\\	
+	This~function~is~only~available~with~points=true~or~points=auto.\\
 	Please~activate~referencing~to~use~it.
 }
 
@@ -987,7 +987,7 @@
 			\exp_not:N \ptxcd@LoadPoints[\thetask][\fp_use:N \l_tmpa_fp]{\l_tmpa_tl}
 		}
 	}
-	
+
 	\cs_new:Nn \__ptxcd_getPoints:n {
 			\prop_if_in:NnTF \g__ptxcd_loaded_points_prop {#1}
 				{\prop_item:Nn \g__ptxcd_loaded_points_prop {#1}}
@@ -1024,8 +1024,8 @@
 	\int_gset:Nn \g_ptxcd_tmp_int {\value{task}}
 	\setcounter{task}{#2}
 	\tl_gclear:N \g_ptxcd_tmp_tl
-	\bool_gset_true:N \g_tmpa_bool 
-	\bool_while_do:Nn \g_tmpa_bool 
+	\bool_gset_true:N \g_tmpa_bool
+	\bool_while_do:Nn \g_tmpa_bool
 	{
 			\exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
 			{
@@ -1039,7 +1039,7 @@
 		\stepcounter{task}
 	}
 	\setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
-	\g_ptxcd_tmp_tl 
+	\g_ptxcd_tmp_tl
 	}
         }
 

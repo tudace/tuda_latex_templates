@@ -254,7 +254,7 @@ contents={
 	\dim_compare:nT  {\box_ht:N \g_ptxcd_title_box < \l_tmpa_dim} {
 		\skip_set:Nn \g_ptxcd_title_fill_skip {\dim_eval:n {\l_tmpa_dim -  \box_ht:N \g_ptxcd_title_box}}
 	}
-	
+
 	\dim_set:Nn \l_tmpa_dim {
 		+\box_ht:N \g_ptxcd_title_box
 		+.5\c_ptxcd_logoheight_dim
@@ -287,7 +287,7 @@ contents={
 		\headheight -\box_ht:N \ptxcd_headrule_box-\box_dp:N \ptxcd_headrule_box
 	}
 	]{title.TUDa.background}
-	
+
 	\AddLayersToPageStyle{title.TUDa}{title.TUDa.background}
 	\thispagestyle{title.TUDa}
 	\nointerlineskip

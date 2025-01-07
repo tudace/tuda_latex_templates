@@ -236,7 +236,7 @@
 		\hspace*{\beamer@leftmargin}\rlap{\usebeamertemplate***{title~in~head/foot}}
 	}
 	\hspace*{\fill}
-	
+
 	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
 	%partnerlogo
 	\bool_if:NT \g__ptxcd_extended_space_bool \smash {
@@ -244,7 +244,7 @@
 			\box_use:N \g__ptxcd_partnerlogo_box
 		}
 	}
-	
+
 	\skip_horizontal:n {\dimexpr\paperheight/38}
 	%logo
 	\bool_if:NTF \g__ptxcd_headrule_bool {
@@ -338,7 +338,7 @@
 	centerframetitle .initial:n = false,
 	centerframetitle .default:n = true,
 	framebgcolor .choice:,
-	framebgcolor / reset .code:n = 
+	framebgcolor / reset .code:n =
 		\__ptxcd_reset_framebgcolor:
 	,
 	framebgcolor / unknown .code:n = {

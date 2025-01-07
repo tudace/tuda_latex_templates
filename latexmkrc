@@ -8,7 +8,7 @@ $pdf_mode = 4; #lualatex
 $MSWin_back_slash = 0;
 $do_cd=1; # run inside example dir
 
-$bibtex_use = 2; 
+$bibtex_use = 2;
 
 
 $lualatex = 'lualatex %O %P';

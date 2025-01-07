@@ -5,6 +5,8 @@ module="tuda-ci"
 sourcefiledir="tex"
 sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
+docfiledir="examples"
+typesetfiles={"*.tex"}
 
 excludefiles={"Examples-*"}
 
@@ -18,12 +20,11 @@ unpackexe="pdflatex"
 
 demofiles = {"examples-de/*.tex", "examples/*.tex"}
 supportdir="examples"
+
 typesetsuppfiles={ "*.bib", "*.lco"}
 typesetdemofiles = demofiles
 
 tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "examples/*.tex", "examples/*.lco", "*.def", "examples/*.bib"}
---
-
 
 function update_tag(file,content,tagname,tagdate)
 	local packagedate=tagdate

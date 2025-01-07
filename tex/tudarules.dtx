@@ -177,7 +177,7 @@
 	\IfBooleanF {#1} {\box_if_exist:cF {#3_box} {\box_new:c {#3_box}}}
 	\bool_if:NTF \g_ptxcd_simple_rules_bool {
 		\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
-			{#3_box} 
+			{#3_box}
 			{
 				\color{\l_ptxcd_headrule_color_tl}
 				\raisebox{-\height}{\rule{\l_ptxcd_headrule_width_dim}{.5\c_ptxcd_largerule_dim}}
@@ -193,7 +193,7 @@
 			}
 		}{
 			\IfBooleanTF {#1} \use_none:n \hbox_gset:cn
-			{#3_box} 
+			{#3_box}
 			{
 				\parbox[t]{\l_ptxcd_headrule_width_dim}{
 					\setlength{\baselineskip}{\z@}

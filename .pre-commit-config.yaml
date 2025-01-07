@@ -10,10 +10,3 @@ repos:
         args: [--fix=lf]
         exclude: '\.bat'
       - id: trailing-whitespace
-  - repo: https://github.com/cmhughes/latexindent.pl.git
-    rev: V3.24.2
-    hooks:
-      - id: latexindent
-        args: ["--overwriteIfDifferent", "-r",  "--silent", "-l=.latexindent.yaml"]
-        types: [file]
-        files: '\.(tex|sty|cls|bib|cfg|def|clo)$'

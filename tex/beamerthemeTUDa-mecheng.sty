@@ -33,7 +33,7 @@
 
 \tl_if_empty:NT \g_ptxcd_departmentlogo_tl {
 	\keys_set:nn {ptxcd/beamer}{departmentlogofile=tuda_maschinenbau_logo_rgb}
-} 
+}
 
 
 \mode<presentation>
@@ -85,7 +85,7 @@
 
 %innertheme adjustments
 \defbeamertemplate*{title~ page}{TUDa-mecheng}[1][]
-{	
+{
 	\nointerlineskip
 	\vspace{\dimexpr.5\c_ptxcd_logoheight_dim-\ht\strutbox+
 	\box_dp:N \ptxcd_beamer_headrule_box + \box_ht:N \ptxcd_beamer_headrule_box
@@ -278,7 +278,7 @@
 }
 
 \cs_set:Nn \__ptxcd_set_framebgcolor:n {
-	
+
 	\str_case:nnTF {#1} {
 		{Primary1} {\tl_set:Nn \l_tmpa_tl {Primary2}}
 		{Primary2} {\tl_set:Nn \l_tmpa_tl {Primary1}}

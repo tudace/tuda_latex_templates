@@ -147,7 +147,7 @@
 \bool_if:NTF \g__ptxcd_adjust_textwidth_bool
 	{
 		\dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim}
-		
+
 	}{
 		\dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim-\c__ptxcd_firstpage_extraindent_dim}
 	}
