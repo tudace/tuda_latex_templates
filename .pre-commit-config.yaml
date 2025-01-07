@@ -10,3 +10,13 @@ repos:
         args: [--fix=lf]
         exclude: '\.bat'
       - id: trailing-whitespace
+  - repo: local
+    hooks:
+    -   id: l3build-tag
+        name: ensure to run l3build tag
+        description: run l3build tag to mark \changes
+        entry: l3build
+        pass_filenames: false
+        args: ["tag"]
+        language: system
+        always_run: true

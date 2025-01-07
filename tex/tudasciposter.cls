@@ -1,4 +1,4 @@
-%% This is file `tudasciposter.cls' version 3.41 (2024-07-02),
+%% This is file `tudasciposter.cls' version 3.42-dev (2025-01-07),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -27,7 +27,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesExplPackage{tudasciposter}{2024-07-02}{3.41}{Scientific Poster Layout for TU Darmstadt}
+\ProvidesExplPackage{tudasciposter}{2025-01-07}{3.42-dev}{Scientific Poster Layout for TU Darmstadt}
 
 \prop_new:N \g_ptxcd_clsopts_prop
 \tl_new:N \g_ptxcd_boxstyle_tl

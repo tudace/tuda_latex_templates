@@ -1,4 +1,4 @@
-%% This is file `tudaleaflet.cls' version 3.41 (2024-07-02),
+%% This is file `tudaleaflet.cls' version 3.42-dev (2025-01-07),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -27,7 +27,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesExplPackage{tudaleaflet}{2024-07-02}{3.41}{Leaflets using the Corporate Design of TU Darmstadt}
+\ProvidesExplPackage{tudaleaflet}{2025-01-07}{3.42-dev}{Leaflets using the Corporate Design of TU Darmstadt}
 
 \str_const:Nn \c__ptxcd_base_str {leaflet}
 

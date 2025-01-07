@@ -1,4 +1,4 @@
-%% This is file `tudaletter.cls' version 3.41 (2024-07-02),
+%% This is file `tudaletter.cls' version 3.42-dev (2025-01-07),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.41}
-\def\filedate{2024-07-02}
+\def\fileversion{3.42-dev}
+\def\filedate{2025-01-07}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplClass{tudaletter}
