@@ -95,7 +95,8 @@ $RECYCLE.BIN/
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-*.pdf
+# only ignore *.pdf directly inside repository root
+/*.pdf
 
 ## Generated if empty string is given at "Please type another file name for output:"
 .pdf
@@ -278,6 +279,7 @@ pythontex-files-*/
 
 # tcolorbox
 *.listing
+*.tcbtemp
 
 # thmtools
 *.loe
@@ -359,12 +361,17 @@ TSWLatexianTemp*
 #PDF/A
 *.xmpdata
 
+# scrlayer-notecolumn
+*.slnc
+
 # TUDa-CI specific
 *.zip
 tuda-ci*
 *.orig
 
+# l3build + dtx
 # generated files by docstrip setup
+/build
 *.clo
 *.sty
 *.cls
@@ -372,7 +379,3 @@ tuda-ci*
 
 # Latexindent
 *.bak[0-9]*
-
-*.slnc
-*.len
-*.tcbtemp
