@@ -3,7 +3,7 @@
 module="tuda-ci"
 
 sourcefiledir="tex"
-sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"} 
+sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 
 excludefiles={"Examples-*"}
@@ -52,6 +52,6 @@ function update_tag(file,content,tagname,tagdate)
 	                  "date{Version "..packageversion..", released ".. packagedate)
 	replaced = string.gsub (replaced,
 	                  "Copyright %(C%) 2019%-%d%d%d%d",
-	                  "Copyright (C) 2019-"..os.date("%Y"))       
+	                  "Copyright (C) 2019-"..os.date("%Y"))
 	return replaced
 end
