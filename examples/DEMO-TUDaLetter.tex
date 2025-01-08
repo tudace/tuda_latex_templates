@@ -1,0 +1,108 @@
+%% This is file `DEMO-TUDaLetter.tex' version 3.42-dev (2025-01-07),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%% Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The current maintainer of this work is
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% If you need a compiled version of this document, have a look at
+%% http://mirror.ctan.org/macros/latex/contrib/tuda-ci/doc
+%% or at the documentation directory of this package (if installed)
+%% <path to your LaTeX distribution>/doc/latex/tuda-ci
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+
+% Enable PDF/A via pdfmanagement and no longer via pdfx
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+	lang=en,
+}
+
+\documentclass[
+	english,% Main language as global option
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+%	logo=false,% Disable logo for all pages but first
+	premium=true,%  enable coloring
+%	firstpagenumber=false,% disable pagenumbering on first page
+%	textwidth=narrow,% disable change of text width after the first page
+%	logofile=example-image,% In case logo files are not available
+]{tudaletter}
+
+%%%%%%%%%%%%%%%%%%%
+% Language setup
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
+
+
+\LoadLetterOption{DEMO-TUDaFromaddress}% Load address data from lco-file
+
+\begin{document}
+
+
+\begin{letter}{%
+	Technische Universität Darmstadt\\%
+	Referat Kommunikation\\%
+	Karolinenplatz 5\\%
+	64289 Darmstadt}
+
+% \setkomavar{subject}{\LaTeX letters using TU Darmstadt CI}
+% \setkomavar{date}{2024-02-26}% In case \today should not be used
+\setkomavar{yourmail}{yyyy-mm-dd}
+\setkomavar{myref}{Demo-xx}
+\setkomavar{frombank}{IBAN: 1234 5678 9123 4567 89}
+
+\opening{Hello,}
+this is a template file to show the usage of the tudaletter class.
+
+The most important options can be found within the source file of this document. Other options or layout adjustments may comply CI regulations and therefore  should not be used.
+
+Supported options:\\
+\parbox{\linewidth}{
+	\begin{description}
+		\item[premium=true/false] Enable coloring of the headline. Disabled by default.
+		\item[firstpagenumber=true/false] Disable pagenumbering for the first page. Enabled by default.
+		\item[raggedright=true/false] Set all text ragged right. Default setting is false and uses justified text.
+		\item[logo=true/false] Disable logo in the headline for all pages but first one.
+		\item[texwidth=narrow/wide] The design requires the text width to change between the first page and the rest of the letter.
+		\item[texwidth=narrow/wide] This setting is corresponds to the value “wide”.
+		      I case this change happens within a paragraph the mechanism to do this adjustment is quite complex and might not work in all cases.
+		      If you face any other special case it would be great to receive a report, so we can try to improve the used methods.
+	\end{description}
+}
+
+To reuse the sender's address the template provides an example lco-file.
+See the \KOMAScript{} documentation on details about these files and how to use them.
+
+\closing{Happy \TeX{}ing}
+
+\encl{Sources for this document:\\
+	\texttt{DEMO-TUDaLetter.tex} (Letter),\\
+	\texttt{DEMO-TUDaFromaddress.lco} (Address data)}
+
+\end{letter}
+
+
+\end{document}
+%% End of file `DEMO-TUDaLetter.tex'.

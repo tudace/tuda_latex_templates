@@ -1,0 +1,165 @@
+%% This is file `DEMO-TUDaLeaflet.tex' version 3.42-dev (2025-01-07),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%% Copyright (C) 2018--2024 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The current maintainer of this work is
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% If you need a compiled version of this document, have a look at
+%% http://mirror.ctan.org/macros/latex/contrib/tuda-ci/doc
+%% or at the documentation directory of this package (if installed)
+%% <path to your LaTeX distribution>/doc/latex/tuda-ci
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+
+\documentclass[
+	english,% Main language as global option
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+%	logofile=example-image,% In case logo files are not available
+]{tudaleaflet}
+
+%%%%%%%%%%%%%%%%%%%
+% Language setup
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
+
+%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}% File name of BibTeX database
+
+%%%%%%%%%%%%%%%%%%%
+% Document specific setup for demonstration, generally not needed!
+%%%%%%%%%%%%%%%%%%%
+\newcommand*{\file}[1]{\texttt{#1}}
+\newcommand*{\code}[1]{\texttt{#1}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cls}[1]{\textsf{#1}}
+\let\tbs\textbackslash
+%%%%%%%%%%%%%%%%%%%
+% End of demo specific setup
+%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{TUDaLeaflet}
+% \titleimage{\includegraphics[width=\width,height=\height]{example-image}}
+\subtitle{Leaflet using TUDa-CI}
+\addTitleBox{Institute}
+
+\AddSponsor{\includegraphics[height=\height ]{example-image}}
+\AddSponsor{\includegraphics[height=\height ]{example-image}}
+\AddSponsor{\includegraphics[height=\height ]{example-image}}
+
+\maketitle
+
+\section{Basic usage}
+\cls{tudaleaflet} is based on the \cls{leaflet} class.
+The usage is similar to the article class, only the page breaks are those of a leaflet and are normally divided into six partial pages.
+Options not defined by \cls{tudaleaflet} may be passed to the base class.
+See \cite{leaflet} for more information about the \cls{leaflet} class.
+
+\pkg{scrextend} has added some mechanisms for better compatibility. However, this is not a \KOMAScript class, which is why not all mechanisms are available \cite[see][]{scrguide}.
+
+\section{title page}
+The title page is like the other TUDa CI classes and contains the following macros:
+\begin{description}
+	\item[title] Title
+	\item[subtitle] Is placed in the block between the title and cover image
+	\item[author] Can be placed under the subtitle if necessary
+	\item[date] Can be placed under the author
+	\item[addTitleBox] Title box
+	      The title box is placed below the logo at a specified distance. The background is white and can be filled with text or institute logo.
+
+	      With \code{\addTitleBoxLogo} logos can be used in the title box.
+	      It accepts an image file path as an argument.
+\begin{verbatim}
+\addTitleBoxLogo{example-image}
+\addTitleBoxLogo*{
+\includegraphics
+[width=\linewidth]
+{example-image}
+}
+\end{verbatim}
+	\item[titleimage] \code{titleimage} is usually for placing a graphic, but also accepts any content. The content is placed flush with the top corner in the body of the front page.
+\begin{verbatim}
+\titleimage{
+\includegraphics
+[width=\width]
+{example-image}
+}
+\end{verbatim}
+	      To fill the area there, these locally defined macros \verb+\height+ and \verb+\width+ will help.
+\end{description}
+
+\subsection{Title page customization options}
+\begin{description}
+	\item[colorback] Activates backround color of the \verb+\titleimage+ area. Default is \verb+color+""\verb+back=true+
+	\item[colorbacktitle] Similar to title block. Default is \verb+colorbacktitle=false+
+	\item[colorbacksubtitle] This option can only be used if \verb+colorbacktitle=true+. If \verb+colorbacktitle=false+ an error message occurs. The strip between the title block and the image area will be colored the same color as the identity bar. The default is \verb+colorbacksubtitle=false+
+	\item[logofile] Alternate main logo, e.\,g. in case the TUDa logo is not available.
+\end{description}
+
+Text alignment of the title is done with \verb+\raggedtitle+.
+To prevent breaks within the title, the default is \verb+\raggedright+.
+Other alignments can be done with \verb+\renewcommand+.
+
+\subsection{Sponsor logos}
+\begin{verbatim}
+\AddSponsor{<logo1>}
+\AddSponsor{<logo2>}
+\end{verbatim}
+is available for sponsor logos.
+In the example, all logos are at the same height. This can be done with \verb+\height+ within the argument.
+The block always ends with the text on the sides. The space between the logos is automatically filled.
+
+The second variant can be particularly helpful for logos with different heights.
+It enables manual vertical alignment, where only the spacing and separating lines are added to the logos:
+
+\begin{verbatim}
+\sponsors{
+<logo1><logo2>
+}
+\end{verbatim}
+
+Usually the logos are at the bottom of the title page. However, the CI guidelines also offer the option to place them at the end of the document.
+
+TUDaLeaflet provides \verb+sponsor+ with the values \verb+title+, \verb+lastfoot+ or \verb+manual+.
+The default is \verb+title+.
+\verb+lastfoot+ places the sponsors on the last page. This is done with \verb+\vfill+.
+\verb+manual+ in turn allows the box to be placed manually.
+
+\begin{verbatim}
+\insertSponsors
+\end{verbatim}
+Is the corresponding macro for this and inserts the box at the appropriate position.
+But this only works if \verb+sponsor=manual+.
+Otherwise it has no effect.
+
+
+\printbibliography
+
+\end{document}
+%% End of file `DEMO-TUDaLeaflet.tex'.

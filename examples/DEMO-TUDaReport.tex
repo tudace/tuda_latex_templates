@@ -1,4 +1,4 @@
-%% This is file `DEMO-TUDaReport-de.tex' version 3.42-dev (2025-01-07),
+%% This is file `DEMO-TUDaReport.tex' version 3.42-dev (2025-01-07),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -33,23 +33,23 @@
 %%
 
 \documentclass[
-	german,% Hauptsprache als globale Option, früher war ngerman notwendig
-	accentcolor=9c,% Auswahl der Akzentfarbe
-	type=intern, % Minimales Setup ohne Akzentfarbe
-	marginpar=false,% Kopfzeile und Fußzeile erstrecken sich nicht über die Randnotizspalte
-%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
+	english,% Main language as global option
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+	type=intern, % Minimal setup without accent color
+	marginpar=false,% Disable marginpar
+%	logofile=example-image,% In case logo files are not available
 ]{tudapub}
 
 
 %%%%%%%%%%%%%%%%%%%
-% Spracheinstellungen
+% Language setup
 %%%%%%%%%%%%%%%%%%%
-\usepackage[german]{babel}
-\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
-\title{TUDaReport -- Minimales Template für TUDa-CI}
+\title{TUDaReport -- Minimal template for TUDa-CI}
 \author{Marei Peischl}
-%\date{}% Ohne Angabe wird automatisch das heutige Datum eingefügt
+%\date{}% If not specified, today's date is automatically inserted
 
 
 \begin{document}
@@ -58,14 +58,14 @@
 
 
 \tableofcontents
-% Ggf. weitere Verzeichnisse wie \listoffigures oder ein Abkürzungsverzeichnis
+% Additional lists like \listoffigures or acronyms might be added here
 
 
-\section{Über diese Datei}
+\section{About this file}
 
-Die Datei \enquote{DEMO-TUDaReport.tex} ist ein minimales Template für die Verwendung der Dokumentenklasse \enquote{tudapub.cls}.
-Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
+\enquote{DEMO-TUDaReport.tex} is a minimal template for using the document class \enquote{tudapub.cls}.
+It is part of TUDa-CI, which is the official template bundle of TU Darmstadt. The original version was inspired by the \enquote{tuddesign} bundle by C.~v.~Loewenich and J.~Werner.
 
 
 \end{document}
-%% End of file `DEMO-TUDaReport-de.tex'.
+%% End of file `DEMO-TUDaReport.tex'.

@@ -1,4 +1,4 @@
-%% This is file `DEMO-TUDaAnnouncement-de.tex' version 3.42-dev (2025-01-07),
+%% This is file `DEMO-TUDaAnnouncement.tex' version 3.42-dev (2025-01-07),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -33,31 +33,31 @@
 %%
 
 \documentclass[
-	german,% Hauptsprache als globale Option, früher war ngerman notwendig
-	paper=a4,% Voreingestellt ist Papierformat a4
-	accentcolor=9c,% Auswahl der Akzentfarbe
+	english,% Main language as global option
+	paper=a4,% The default paper format is a4
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
 	type=announcement,
 	footer=true,
-%	logofile=example-image,% Falls die Logo Dateien nicht vorliegen
+%	logofile=example-image,% In case logo files are not available
 ]{tudaposter}
 
 %%%%%%%%%%%%%%%%%%%
-% Spracheinstellungen
+% Language setup
 %%%%%%%%%%%%%%%%%%%
-\usepackage[german]{babel}
-\usepackage[autostyle]{csquotes}% Sprachabhängige Anführungszeichen mit \enquote
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
 
 %%%%%%%%%%%%%%%%%%%
-% Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+% Document specific setup for demonstration, generally not needed!
 %%%%%%%%%%%%%%%%%%%
 \newcommand*{\file}[1]{\texttt{#1}}
 \newcommand*{\code}[1]{\texttt{#1}}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%
-% Ende der Demo-Formatierungseinstellungen
+% End of demo specific setup
 %%%%%%%%%%%%%%%%%%%
 
-% Setzt die Box in der Marginalspalte. Alternativ auch \marginpar nutzbar.
+% Will place a text Box within the margin.
 \SetMarginpar{
 	\begin{flushright}
 		\infofont
@@ -67,29 +67,28 @@
 		\url{www.peitex.de}
 	\end{flushright}
 	\vfill
-	\minisec{Voraussetzungen}
-	Beschreibung
+	\minisec{Requirements}
+	Description
 }
 
 \begin{document}
 
-\title{\LaTeX{} im Corporate Design der TU~Darmstadt}
-\subtitle{Aushänge mit tudaposter}
-\titleinfo{Zusätzliche Information. Wird unterhalb des Untertitels eingefügt.}
+\title{\LaTeX{} using TU Darmstadt's Corporate Design}
+\subtitle{Poster with tudaposter}
+\titleinfo{Additional information can be added below the subtitle.}
 % \addTitleBoxLogo*{\includegraphics[width=.5\linewidth]{example-image}}
 \footerqrcode{https://peitex.de}
-\footer{Inhalt der Fußzeile}% Falls aktiviert
+\footer{Footer content}% If activated
 
 \maketitle
 
-\section*{Grundlegende Hinweise}
+\section*{General information}
 
-Die Dokumentenklasse tudaposter dient der Erstellung von Aushängen und Nicht"=wissenschaftlichen Plakaten im Stil der TU-Darmstadt. Sie ist Teil des TUDa-CI-Bundles.
+The document class tudaposter is part of the TUDa-CI bundle. It is for posters and non-scientific posters using TU Darmstadts Corporate Design.
 
-Für dieses Dokument gelten die in DEMO-TUDaPoster beschriebenen Mechanismen. Zusätzlich wird jedoch ein Modus aktiviert, der überwiegend für Aushänge zur Bekanntgabe von Abschlussarbeiten verwendet wird: \code{type=announcement}.
-
-Dieser entspricht den Einzeloptionen: \code{marginpar=true}, \code{title=small}, \code{indenttext=false}, \code{logo=head}, \code{colorsubtitle=true}
+This document is based on DEMO-TUDaPoster with the addition \code{type=announcement}.
+It is mainly for notices announcing final theses and consists of the individual options: \code{marginpar=true}, \code{title=small}, \code{indenttext=false}, \code{logo=head}, \code{colorsubtitle=true}
 
 
 \end{document}
-%% End of file `DEMO-TUDaAnnouncement-de.tex'.
+%% End of file `DEMO-TUDaAnnouncement.tex'.
