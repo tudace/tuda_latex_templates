@@ -106,8 +106,6 @@
 % \DescribeMacro{\insertsmalllogo}
 %
 %
-% \DescribeMacro{\setupTUDaFrame}
-%
 
 %
 % \MaybeStop{}
@@ -116,11 +114,12 @@
 %
 % \iffalse
 %<*package>
-%<*main>
+%<*initialize>
 % \fi
 %    \begin{macrocode}
 \PassOptionsToPackage{paper=slide}{tudarules}
 \RequirePackage{tudarules}
+\bool_if_exist:NF \l_ptxcd_tmpa_bool {\bool_new:N \l_ptxcd_tmpa_bool}
 \dim_new:N \l__ptxcd_beamer_extraindent_dim
 \dim_new:N {\g__ptxcd_beamer_sep_dim}
 \dim_gset:Nn \g__ptxcd_beamer_sep_dim {.3\c_ptxcd_logoheight_dim}
@@ -171,11 +170,19 @@
 \ProcessKeyOptions[ptxcd/beamer/outer]
 \mode<presentation>
 \RequirePackage{graphicx}
+%<*2008>
 \bool_if:NT \g__ptxcd_colorframetitle_bool
 	{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
+%</2008>
 \setbeamersize{
-	text~margin~left=\dim_eval:n {\paperwidth/34},
-	text~margin~right=\dim_eval:n {\paperwidth/38}
+	text~margin~left=\dim_eval:n {
+%<2023>	\paperwidth/34,
+%<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
+},
+	text~margin~right=\dim_eval:n {
+%<2023>	\paperwidth/38
+%<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
+	}
 }
 \cs_new:Nn \__ptxcd_beamer_linewidth: {\dim_eval:n {\paperwidth-\beamer@leftmargin-\beamer@rightmargin}}
 %    \end{macrocode}
@@ -184,9 +191,31 @@
 %    \begin{macrocode}
 \box_new:N \g__ptxcd_logo_box
 \hbox_gset:Nn \g__ptxcd_logo_box {%
-	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
+%<2023>	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}
+%<2008>  \makebox[\__ptxcd_logowidth:][l]
+{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
 }
-\bool_if_exist:NF \l_ptxcd_tmpa_bool {\bool_new:N \l_ptxcd_tmpa_bool}
+
+% \begin{macro}{\logo}
+%    \begin{macrocode}
+\RenewDocumentCommand{\logo}{sm}{
+\IfBooleanTF{#1}{
+\setbeamertemplate{logo}{\resizebox{!}{.06\beamer@paperheight}{\mbox{#2}}}
+}{
+\setbeamertemplate{logo}{#2}
+}
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\setupTUDaFrame}
+%    \begin{macrocode}
+\newcommand*{\setupTUDaFrame}[1]{
+	\keys_set:nn {ptxcd/beamer/outer} {#1}
+%<2008>\ptxcd_setup_frame:
+}
+%    \end{macrocode}
+% \end{macro}
+%<*main>
 \defbeamertemplate*{footline}{TUDa2023}{
 	\begin{beamercolorbox}[leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin]{footline}
 	\usebeamerfont{footline}
@@ -210,13 +239,7 @@
 	\skip_vertical:n {\dimexpr\paperheight/32-\dp\strutbox}
 }
 \setbeamertemplate{footline~sep}{\space\smash{\rule[-.5\dp\strutbox]{.25pt}{\ht\strutbox}}\space}
-\RenewDocumentCommand{\logo}{sm}{
-	\IfBooleanTF{#1}{
-	\setbeamertemplate{logo}{\resizebox{!}{.06\beamer@paperheight}{\mbox{#2}}}
-	}{
-	\setbeamertemplate{logo}{#2}
-	}
-}
+
 \defbeamertemplate*{headline}{TUDa2023}{
 	\bool_if:NT \g__ptxcd_headrule_bool {
 		\cs_if_exist:NF \ptxcd_beamer_headrule {
@@ -300,289 +323,13 @@
 }
 %    \end{macrocode}
 %
-% \begin{macro}{\setupTUDaFrame}
-%    \begin{macrocode}
-\newcommand*{\setupTUDaFrame}[1]{
-	\keys_set:nn {ptxcd/beamer/outer} {#1}
-}
-%    \end{macrocode}
-% \end{macro}
+
 %
 %    \begin{macrocode}
 \mode
 <all>
 %    \end{macrocode}
 %</main>
-%<*2008>
-%    \begin{macrocode}
-\PassOptionsToPackage{paper=slide}{tudarules}
-\RequirePackage{tudarules}
-\dim_new:N \l__ptxcd_beamer_extraindent_dim
-\dim_new:N {\g__ptxcd_beamer_sep_dim}
-\dim_gset:Nn \g__ptxcd_beamer_sep_dim {.3\c_ptxcd_logoheight_dim}
-\dim_new:N \g__ptxcd_beamer_logosep_dim
-\dim_gset:Nn \g__ptxcd_beamer_logosep_dim{2mm}
-\cs_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
-\keys_define:nn {ptxcd/beamer/outer} {
-	logo .bool_gset:N = \g_ptxcd_headlinelogo_bool,
-	logo .default:n =true,
-	logo .initial:n =true,
-	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
-	logofile .initial:n = tuda_logo,
-	colorframetitle .code:n =  {
-		\use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool
-		\cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:
-		},
-	colorframetitle .default:n = true,
-	centerframetitle .bool_gset:N = \g_ptxcd_centerframetitle_bool,
-	centerframetitle .initial:n = false,
-	centerframetitle .default:n = true,
-	framebgcolor .choice:,
-	framebgcolor / reset .code:n =
-		\__ptxcd_reset_framebgcolor:
-	,
-	framebgcolor / unknown .code:n = {
-		\__ptxcd_set_framebgcolor:n {#1}
-	},
-	singleframebgcolor .code:n = {
-		\cs_gset_eq:Nc \__ptxcd_save_background_canvas: {beamer@thcbg@normal~text}
-		\keys_set:nn {ptxcd/beamer/outer} {
-			framebgcolor = #1
-		}
-	},
-	headsepline .bool_gset:N = \g_ptxcd_headsepline_bool,
-	headsepline .initial:n = true,
-	headsepline .default:n = true,
-}
-%    \end{macrocode}
-%
-% \begin{key}{beamerframe}{bgcolor}
-%    \begin{macrocode}
-\define@key{beamerframe}{bgcolor}{
-	\keys_set:nn {ptxcd/beamer/outer} {
-		singleframebgcolor=#1
-	}
-}
-%    \end{macrocode}
-% \end{key}
-%
-%    \begin{macrocode}
-\cs_new:Nn \__ptxcd_reset_framebgcolor: {
-	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__ptxcd_save_background_canvas:
-	\cs_undefine:N \__ptxcd_save_background_canvas:
-}
-\cs_new:Nn \__ptxcd_set_framebgcolor:n {
-		\cs_if_exist:cTF {\string\color@#1}
-		{\setbeamercolor{normal~text}{bg=#1}}
-		{\setbeamercolor{normal~text}{bg=TUDa-#1}}
-}
-\BeforeBeginEnvironment{frame}{
-	\cs_if_exist:NT \__ptxcd_save_background_canvas: {
-	\__ptxcd_reset_framebgcolor:
-	}
-}
-\ProcessKeyOptions[ptxcd/beamer/outer]
-\mode<presentation>
-\RequirePackage{graphicx}
-\bool_if:NT \g__ptxcd_colorframetitle_bool
-	{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
-\setbeamersize{
-  text~margin~left=\dimexpr\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim \relax,
-  text~margin~right=\dimexpr\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim \relax,
-}
-\cs_new:Nn \__ptxcd_beamer_linewidth: {\dim_eval:n {\paperwidth-\beamer@leftmargin-\beamer@rightmargin}}
-%    \end{macrocode}
-%Logo
-%
-%    \begin{macrocode}
-\box_new:N \g__ptxcd_logo_box
-\hbox_gset:Nn \g__ptxcd_logo_box {%
-	\makebox[\__ptxcd_logowidth:][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
-}
-\ptxcd_makeheadrule[color=identbarcolor,width=\paperwidth-2\g__ptxcd_beamer_sep_dim]{ptxcd_beamer_headrule}
-\ptxcd_makefootrule[width=\paperwidth-2\g__ptxcd_beamer_sep_dim]{ptxcd_beamer_rule}
-%    \end{macrocode}
-%
-% \begin{macro}{\insertsmalllogo}
-%    \begin{macrocode}
-\newcommand\insertsmalllogo{\setbeamertemplate{logo}[small]\usebeamertemplate{logo}}
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\defbeamertemplate*{sidebar~left}{TUDa}{}
-\defbeamertemplate*{sidebar~right}{TUDa}{}
-\bool_if_exist:NF \l_ptxcd_tmpa_bool {\bool_new:N \l_ptxcd_tmpa_bool}
-\defbeamertemplate*{footline}{TUDa}
-{
-	\begin{beamercolorbox}[leftskip=\g__ptxcd_beamer_sep_dim,rightskip=\g__ptxcd_beamer_sep_dim,
-		ht=\csname c_ptxcd_smallrule_dim\endcsname,dp=1mm]{footline}
-	\ptxcd_beamer_rule
-	\end{beamercolorbox}
-	\begin{beamercolorbox}[
-	leftskip=\g__ptxcd_beamer_sep_dim,
-	rightskip=\g__ptxcd_beamer_sep_dim, ht=2.75mm,dp=2.75mm]{footline}
-	\usebeamerfont{author~ in~ head/foot}%
-	\bool_set_false:N \l_ptxcd_tmpa_bool
-	\clist_map_variable:nNn {date, department, institute, author} \l_tmpa_tl {
-		\tl_if_empty:cF {beamer@short\l_tmpa_tl} {
-			\bool_if:NTF \l_ptxcd_tmpa_bool {~|~}
-			{\bool_set_true:N \l_ptxcd_tmpa_bool}
-			\use:c {insertshort\l_tmpa_tl}
-		}
-	}
-	\bool_if:NT \l_ptxcd_tmpa_bool {~|~}
-	\insertframenumber
-	\hfill\raisebox{\dimexpr-.5\height+\dp\strutbox\relax}{\insertlogo}
-	\end{beamercolorbox}
-}
-\RenewDocumentCommand{\logo}{sm}{
-	\IfBooleanTF{#1}{
-	\setbeamertemplate{logo}{\resizebox{!}{.06\beamer@paperheight}{\mbox{#2}}}
-	}{
-	\setbeamertemplate{logo}{#2}
-	}
-}
-\defbeamertemplate{headline}{TUDa.logo} {%
-	\begin{beamercolorbox}[
-		leftskip=\g__ptxcd_beamer_sep_dim,rightskip=\g__ptxcd_beamer_sep_dim,
-		ht=.75\g__ptxcd_beamer_sep_dim,dp=\box_dp:N \ptxcd_beamer_headrule_box]{headline}
-		\ptxcd_beamer_headrule
-	\end{beamercolorbox}
-}
-\box_new:N \l__ptxcd_frametitle_box
-\defbeamertemplate{frametitle}{TUDa.logo}{%
-\nointerlineskip%
-\begin{beamercolorbox}[
-  sep=\g__ptxcd_beamer_logosep_dim,
-  wd=\dim_eval:n {\__ptxcd_beamer_linewidth:+2\l__ptxcd_beamer_extraindent_dim},
-  rightskip=-\g__ptxcd_beamer_logosep_dim,
-  leftskip=\dim_eval:n {-\g__ptxcd_beamer_logosep_dim+\l__ptxcd_beamer_extraindent_dim},
-	]{frametitle}
-	\hbox_set:Nn \l__ptxcd_frametitle_box {
-	\parbox[t]
-		{\dim_eval:n {\linewidth- \box_wd:N \g__ptxcd_logo_box-1em}}{%
-		\usebeamerfont{frametitle}\strut\insertframetitle
-		\ifx\insertframesubtitle\@empty
-		\else
-		\par
-		\usebeamercolor[fg]{framesubtitle}
-		\usebeamerfont{framesubtitle}
-		\insertframesubtitle
-		\fi
-	}}
-	\leavevmode
-	\bool_if:NTF \g_ptxcd_centerframetitle_bool
-		{\raisebox{\dimexpr-.5\height+.5\depth}}
-		{\use:n}
-			{\box_use:N \l__ptxcd_frametitle_box}
-	\hfill%
-	\bool_if:NTF \g_ptxcd_centerframetitle_bool
-		{\raisebox{\dimexpr-.5\height+.5\depth}}
-		{\raisebox{\dimexpr-\height+\ht\strutbox}}
-		{\box_use:N \g__ptxcd_logo_box}
-\end{beamercolorbox}%
-\bool_if:NT \g_ptxcd_headsepline_bool {
-	\nointerlineskip
-	\begin{beamercolorbox}[
-		wd=\dim_eval:n {\textwidth+2\l__ptxcd_beamer_extraindent_dim},
-		ht=\c_ptxcd_smallrule_dim,
-		dp=0pt
-		]{smallrule}
-	\end{beamercolorbox}
-}
-}
-\defbeamertemplate*{headline}{TUDa.nologo}
-{%
-	\vspace{.75\g__ptxcd_beamer_sep_dim}
-	\begin{beamercolorbox}[
-		leftskip=\g__ptxcd_beamer_sep_dim,rightskip=\g__ptxcd_beamer_sep_dim]{headline}
-		\ptxcd_beamer_headrule
-	\end{beamercolorbox}
-	}
-\defbeamertemplate*{headline}{TUDa.simple}
-{
-	\ifbeamercolorempty[bg]{background~canvas}{
-		\vspace{\dimexpr.5\c_ptxcd_logoheight_dim-\c_ptxcd_rulesep_dim}
-		\skip_horizontal:n {\beamer@leftmargin}
-		\color{identbarcolor}
-		\vrule width\dimexpr\textwidth-\beamer@leftmargin-\beamer@rightmargin height\c_ptxcd_rulesep_dim
-	}{
-		\vspace{\dimexpr.5\c_ptxcd_logoheight_dim}
-	}
-}
-\defbeamertemplate*{frametitle}{TUDa.nologo}{%
-	\nointerlineskip%
-\begin{beamercolorbox}[
-  sep=\g__ptxcd_beamer_logosep_dim,
-  wd=\dim_eval:n {\__ptxcd_beamer_linewidth:+2\l__ptxcd_beamer_extraindent_dim},
-  leftskip=\dim_eval:n {-\g__ptxcd_beamer_logosep_dim+\l__ptxcd_beamer_extraindent_dim},
-	]{frametitle}
-	\hbox_set:Nn \l__ptxcd_frametitle_box {
-	\parbox[t]
-	{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-1em\relax\relax}{%
-		\usebeamerfont{frametitle}\strut\insertframetitle
-		\ifx\insertframesubtitle\@empty
-		\else
-		\par
-		\usebeamercolor[fg]{framesubtitle}
-		\usebeamerfont{framesubtitle}
-		\insertframesubtitle
-		\fi
-}}
-\leavevmode
-\bool_if:NTF \g_ptxcd_centerframetitle_bool
-{\raisebox{\dimexpr-.5\height+.5\depth}}
-{\use:n}
-{\box_use:N \l__ptxcd_frametitle_box}
-%    \end{macrocode}
-%	Rule for voffset similar to logo
-%    \begin{macrocode}
-	\rule[\dim_eval:n {
-		\bool_if:NTF \g_ptxcd_centerframetitle_bool
-			{-.5\box_ht:N \g__ptxcd_logo_box+.5\box_dp:N \g__ptxcd_logo_box}
-			{-\box_ht:N \g__ptxcd_logo_box+\ht\strutbox}
-	}]{0pt}{\dim_eval:n {
-		\box_ht:N \g__ptxcd_logo_box+\box_dp:N \g__ptxcd_logo_box
-	}}
-\end{beamercolorbox}
-\bool_if:NT \g_ptxcd_headsepline_bool {
-	\nointerlineskip
-	\begin{beamercolorbox}[
-		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim \relax,
-		ht=\c_ptxcd_smallrule_dim,
-		dp=0pt
-		]{smallrule}
-	\end{beamercolorbox}
-}
-}
-\cs_new:Nn \ptxcd_setup_frame: {
-	\bool_if:NTF \g_ptxcd_headlinelogo_bool {
-		\setbeamertemplate{frametitle}[TUDa.logo]
-		\setbeamertemplate{headline}[TUDa.logo]
-	}{
-		\setbeamertemplate{frametitle}[TUDa.nologo]
-		\setbeamertemplate{headline}[TUDa.nologo]
-	}
-}
-\ptxcd_setup_frame:
-%    \end{macrocode}
-%
-% \begin{macro}{\setupTUDaFrame}
-%    \begin{macrocode}
-\newcommand*{\setupTUDaFrame}[1]{
-	\keys_set:nn {ptxcd/beamer/outer} {#1}
-	\ptxcd_setup_frame:
-}
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\mode
-<all>
-%    \end{macrocode}
-% \iffalse
-%</2008>
 %</package>
 % \fi
 %
