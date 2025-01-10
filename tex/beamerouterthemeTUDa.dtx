@@ -194,7 +194,17 @@
 \hbox_gset:Nn \g__ptxcd_logo_box {%
 %<main>	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}
 %<2008>  \makebox[\__ptxcd_logowidth:][l]
-{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
+{
+	\bool_if:NTF \g_ptxcd_logo_workaround_bool {
+		\file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
+			use_ii:nn
+			\use_i:nn
+	} {
+		\use_ii:nn
+	}
+		{\rule{0pt}{\c_ptxcd_logoheight_dim}\makebox[2.5\c_ptxcd_logoheight_dim][c]{\rule[.1\c_ptxcd_logoheight_dim]{2.05\c_ptxcd_logoheight_dim}{.8\c_ptxcd_logoheight_dim}}}
+		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
+}%
 }
 
 % \begin{macro}{\logo}
