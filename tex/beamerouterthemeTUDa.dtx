@@ -32,12 +32,13 @@
 \ProvidesFile{beamerouterthemeTUDa.dtx}
     [2024/08/01 4.0 Outer~beamer~theme~of~tuda-ci]
 %</driver>
+%<*initialize>
 %<package>\NeedsTeXFormat{LaTeX2e}[2022/06/01]
 %<*package>
 %<!2008>\ProvidesExplPackage{beamerouterthemeTUDa}{2024-07-02}{3.41}{Outer~beamer~theme~of~tuda-ci~design~of~2023}
 %<2008>\ProvidesExplPackage{beamerouterthemeTUDa2008}{2024-07-02}{3.41}{Outer~beamer~theme~of~tuda-ci, compatibility for design of 2008}
 %</package>
-%
+%</initialize>
 %<*driver>
 \documentclass[
   pdfa=false,
@@ -125,8 +126,6 @@
 	logo .bool_gset:N = \g_ptxcd_headlinelogo_bool,
 	logo .default:n =true,
 	logo .initial:n =true,
-	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
-	logofile .initial:n = tuda_logo,
 	colorframetitle .code:n =  \msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
 	centerframetitle .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {centerframetitle},
 	framebgcolor .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {framebgcolor},
@@ -137,6 +136,13 @@
 	uppercase-frametitle .bool_gset:N = \g__ptxcd_uppercase_frametitle_bool,
 	uppercase-frametitle .default:n = true,
 	uppercase-frametitle .initial:n = true,
+%    \end{macrocode}
+% \iffalse
+%</initialize>
+%<*body>
+% \fi
+% General options
+%    \begin{macrocode}
 }
 %    \end{macrocode}
 %
@@ -171,11 +177,11 @@
 %</2008>
 \setbeamersize{
 	text~margin~left=\dim_eval:n {
-%<2023>	\paperwidth/34,
+%<main>	\paperwidth/34,
 %<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
 },
 	text~margin~right=\dim_eval:n {
-%<2023>	\paperwidth/38
+%<main>	\paperwidth/38
 %<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
 	}
 }
@@ -186,7 +192,7 @@
 %    \begin{macrocode}
 \box_new:N \g__ptxcd_logo_box
 \hbox_gset:Nn \g__ptxcd_logo_box {%
-%<2023>	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}
+%<main>	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}
 %<2008>  \makebox[\__ptxcd_logowidth:][l]
 {\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}%
 }
@@ -210,7 +216,6 @@
 }
 %    \end{macrocode}
 % \end{macro}
-%<*main>
 \defbeamertemplate*{footline}{TUDa2023}{
 	\begin{beamercolorbox}[leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin]{footline}
 	\usebeamerfont{footline}
@@ -324,7 +329,7 @@
 \mode
 <all>
 %    \end{macrocode}
-%</main>
+%</body>
 %</package>
 % \fi
 %

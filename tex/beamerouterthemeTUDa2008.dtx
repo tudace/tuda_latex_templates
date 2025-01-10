@@ -14,8 +14,7 @@
 	logo .bool_gset:N = \g_ptxcd_headlinelogo_bool,
 	logo .default:n =true,
 	logo .initial:n =true,
-	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
-	logofile .initial:n = tuda_logo,
+% logofile
 	colorframetitle .code:n =  {
 		\use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool
 		\cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:

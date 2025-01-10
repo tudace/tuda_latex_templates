@@ -1268,15 +1268,16 @@ reversemp
   BCORtitlepage .bool_gset:N = \g_ptxcd_BCOR_titlepage_bool,
   BCORtitlepage .initial:n = false,
   BCORtitlepage .default:n = true,
+%</class>
 }
 %    \end{macrocode}
-%</class>
 % Allow to add options via l3build |typesetcmds|.
 %    \begin{macrocode}
 \cs_if_exist:NT \TUDaDefaultBuildOptions {
 	\exp_args:Nno \keys_set:nn { ptxcd /
 %<pub>	pub
 %<beamer> beamer
+%<beamer-outer> beamer/outer
 	} {
 		\TUDaDefaultBuildOptions
 	}

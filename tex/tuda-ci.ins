@@ -87,6 +87,15 @@ Please use the issue tracker for feedback!
 	}
 	%tudapub
 	\file{tudapub.cls}{\from{tuda-ci.dtx}{class,tudapub,options}}
+}
+
+\generate{
+	\file{beamerouterthemeTUDa.sty}{
+		\from{beamerouterthemeTUDa.dtx}{package,initialize,main}
+		\from{tuda-ci.dtx}{options,beamer-outer}
+		\from{beamerouterthemeTUDa.dtx}{package,main,body}
+	}
+}
 	\file{tudathesis.cfg}{\from{tuda-ci.dtx}{cfg,tudathesis}}
 	\file{tudacolors.sty}{\from{tudacolors.dtx}{package}}
 	\file{tudafonts.sty}{\from{tudafonts.dtx}{package}}
@@ -101,8 +110,6 @@ Please use the issue tracker for feedback!
 % beamer color theme
 	\file{beamercolorthemeTUDa.sty}{\from{beamercolorthemeTUDa.dtx}{package,main}}
 	\file{beamercolorthemeTUDa2008.sty}{\from{beamercolorthemeTUDa.dtx}{package,2008}}
-% beamer outer theme
-	\file{beamerouterthemeTUDa.sty}{\from{beamerouterthemeTUDa.dtx}{package,main}}
 	\file{beamerouterthemeTUDa2008.sty}{\from{beamerouterthemeTUDa.dtx}{package,2008}}
 % beamer inner theme
 	\file{beamerinnerthemeTUDa.sty}{\from{beamerinnerthemeTUDa.dtx}{package,main}}
