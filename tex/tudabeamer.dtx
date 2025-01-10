@@ -31,6 +31,7 @@
 %<*driver>
 \ProvidesFile{tudabeamer.dtx}
 %</driver>
+%<*initialize>
 %<package|class>\NeedsTeXFormat{LaTeX2e}[2022/06/01]
 %<class>\ProvidesClass{tudabeamer}
 %<*class|driver>
@@ -39,7 +40,7 @@
 %<main>\ProvidesExplPackage{beamerthemeTUDa}{2024-07-02}{3.41}{Beamer theme using the Corporate Design of TU Darmstadt}
 %<2023>\ProvidesExplPackage{beamerthemeTUDa2023}{2024-07-02}{3.41}{Beamer theme using the Corporate Design of TU Darmstadt Design of 2023}
 %<2008>\ProvidesPackage{beamerthemeTUDa2008}[2024-07-02 v3.41 beamer theme using the Corporate Design of TU Darmstadt Design of 2008]
-%
+%</initialize>
 %<*driver>
 \documentclass[
   pdfa=false,
@@ -97,6 +98,7 @@
 % \section{Implementation}
 %
 % \iffalse
+%<*initialize>
 %<*class>
 % \fi
 %    \begin{macrocode}
@@ -111,42 +113,13 @@
 % \fi
 %    \begin{macrocode}
 \tl_new:N \g__ptxcd_design_tl
+%<main>}
 \keys_define:nn {ptxcd/beamer} {
 %    \end{macrocode}
 %</main|class>
+%<*options>
 %<*class>
 %    \begin{macrocode}
-	accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-	colorframetitle .code:n = \exp_args:Nx \PassOptionsToPackage{\l_keys_key_tl=#1}{beamercolorthemeTUDa}
-	\exp_args:Nx \PassOptionsToPackage{\l_keys_key_tl=#1}{beamerouterthemeTUDa},
-	colorframetitle .default:n = true,
-	logo .code:n = \PassOptionsToPackage{logo=#1}{beamerouterthemeTUDa},
-	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
-	pdfa .initial:n = false,
-	logofile .code:n = \PassOptionsToPackage{logofile=#1}{beamerouterthemeTUDa},
-	serif .code:n = \PassOptionsToPackage{serif=#1}{beamerfontthemeTUDa},
-	serif .default:n = true,
-	sans-serif .code:n = \PassOptionsToPackage{sans-serif=#1}{beamerfontthemeTUDa},
-	sans-serif .default:n = true,
-	department .choice:,
-	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
-	department / mecheng .code:n = {
-		\keys_set:nn {ptxcd/beamer} {
-			colorframetitle=false,
-			centerframetitle,
-			headsepline=false
-		}
-		\str_gset:Nn \g_ptxcd_department_str {mecheng}
-	},
-	department .initial:n = default,
-	department / unknown .code:n = {
-		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
-	},
-	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
-	departmentconfigprefix .initial:n = ,
-	mecheng .meta:n = {department=mecheng},
-	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
-	departmentlogofile .initial:n =,
 	color .code:n = {
 		\tl_if_in:nnTF {#1} {=} {
 			\msg_new:nnn {tudabeamer} {color-option-warning} {
@@ -163,7 +136,6 @@
 	tudacolors .code:n = \PassOptionsToPackage{#1}{tudacolors},
 %    \end{macrocode}
 %</class>
-%<*main|class>
 %    \begin{macrocode}
 	design .choice:,
 	design / 2023 .code:n = {
@@ -181,12 +153,14 @@
 	design2023 .meta:n = {design=2023},
 	design2008 .meta:n = {design=2008},
 	design .usage:n = load,
-}
+%<gobble>}
 %    \end{macrocode}
+%
+%
 % \iffalse
-%</main|class>
-%<main>\ProcessKeyOptions[ptxcd/beamer]
-%<main>}
+%</options>
+%</initialize>
+%<*body>
 %<*class>
 % \fi
 %    \begin{macrocode}
@@ -196,7 +170,9 @@
 \DeclareOption*{%
 	\PassOptionsToClass{\CurrentOption}{beamer}
 }
-\ProcessKeyOptions[ptxcd/beamer]
+%</class>
+%<main|class>\ProcessKeyOptions[ptxcd/beamer]
+%<*class>
 \ProcessOptions*
 \ExplSyntaxOn
 \tl_if_eq:NnT \g__ptxcd_design_tl  {default} {
@@ -390,7 +366,8 @@
 }
 %    \end{macrocode}
 %</2023>
-%<*2023|2008>
+%</package>
+%<*options>
 %    \begin{macrocode}
 %<2008>\ExplSyntaxOn
 \keys_define:nn {ptxcd/beamer} {
@@ -414,6 +391,8 @@
 %<2023>{beamerouterthemeTUDa}
 }
 \ProcessKeyOptions[ptxcd/beamer]
+%</options>
+%<*package>
 \mode<presentation>
 %<2008>\ExplSyntaxOff
 %    \end{macrocode}
@@ -448,8 +427,8 @@
 \mode<all>
 %    \end{macrocode}
 % \iffalse
-%</2023|2008>
 %</package>
+%</body>
 % \fi
 % \Finale
 \endinput

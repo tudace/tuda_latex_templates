@@ -286,7 +286,7 @@ reversemp
 %
 % Alternativly there are scripts to be run inside a terminal to automatically detect the correct location.
 % These can be found inside the \path{tools} directory of TUDa-CI's GitHub Repository (\citeurl{tuda-ci-github}).
-
+%
 % \chapter{tudapub – generic class for articles and theses}
 % \label{sec:tudapub}
 % The TUDa-CI bundle uses a generic document class to be more flexible with the layout adjustments.
@@ -737,7 +737,7 @@ reversemp
 % \department*[text for the box]{text between type and author}
 % \end{example}
 % \DescribeMacro{\examdate}% \DescribeMacro{\submissiondate} Will be added within the description block \cs{subject}.
-
+%
 % \DescribeMacro{\institution}\DescribeMacro{\department}\DescribeMacro{\institute}\DescribeMacro{\group}
 % Will be added inside a title box as was described in \autoref{sec:title} below each other.
 %
@@ -1088,9 +1088,10 @@ reversemp
 \bool_new:N \g_ptxcd_colorbacktitle_bool
 \bool_new:N \g_ptxcd_colorbacksubtitle_bool
 
-%<*options>
 \keys_define:nn {ptxcd/pub} {
 %    \end{macrocode}
+%</class>%^^A
+%<*options>%^^A
 %<*class|beamer-outer>%^^A logo file and accept missing logos
 %    \begin{macrocode}
   logofile .tl_gset:N = \g_ptxcd_logofile_tl,
@@ -1104,12 +1105,26 @@ reversemp
   accept-missing-logos .default:n = true,
 %    \end{macrocode}
 %</class|beamer-outer>%^^A Logo
+%<*tudabeamer|class>
 %    \begin{macrocode}
   department .choice:,
   department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
   department / mecheng .code:n = {
       \str_gset:Nn \g_ptxcd_department_str {mecheng}
-      \keys_set:nn {ptxcd/pub}{colorback=false,ruledheaders=section,departmentlogofile=tuda_maschinenbau_logo}
+%<*tudapub>
+	\keys_set:nn {ptxcd/pub} {
+		colorback=false,
+		ruledheaders=section,
+		departmentlogofile=tuda_maschinenbau_logo
+	}
+%</tudapub>
+%<*tudabeamer>
+	\keys_set:nn {ptxcd/beamer} {
+		colorframetitle=false,
+		centerframetitle,
+		headsepline=false
+	}
+%</tudabeamer>
   },
   department .initial:n = default,
   department / unknown .code:n = {
@@ -1131,6 +1146,8 @@ reversemp
       pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
       pdfx .initial:n = true,
 %    \end{macrocode}
+%</tudabeamer|class>
+%<*class>
 %    \begin{macrocode}
   logo .choice:,
   logo / head .code:n = {
@@ -1253,21 +1270,26 @@ reversemp
   BCORtitlepage .default:n = true,
 }
 %    \end{macrocode}
+%</class>
+% Allow to add options via l3build |typesetcmds|.
+%    \begin{macrocode}
+\cs_if_exist:NT \TUDaDefaultBuildOptions {
+	\exp_args:Nno \keys_set:nn { ptxcd /
+%<pub>	pub
+%<beamer> beamer
+	} {
+		\TUDaDefaultBuildOptions
+	}
+}
+%    \end{macrocode}
 %</options>
+%<*class>
 %    \begin{macrocode}
 %%special option handling grouped values
 %    \begin{macrocode}
 \Module@DefineSpecialKey[ptxcd/pub]{thesis}{
   \keys_set:nn {ptxcd/pub}{type=thesis}
   \tl_gput_right:No \g_ptxcd_thesis_options_tl {#1}
-}
-%    \end{macrocode}
-% Allow to add options via l3build |typesetcmds|.
-%    \begin{macrocode}
-\cs_if_exist:NT \TUDaDefaultBuildOptions {
-	\exp_args:Nno \keys_set:nn {ptxcd/pub} {
-		\TUDaDefaultBuildOptions
-	}
 }
 
 \Module@Process@SpecialOptions[ptxcd/pub]
