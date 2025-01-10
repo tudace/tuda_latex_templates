@@ -21,6 +21,7 @@ sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 docfiledir="examples"
 typesetfiles={"*.tex"}
+typesetcmds="\\def\\TUDaDefaultBuildOptions{accept-missing-logos}"
 
 textfiles= {"README.md"}
 
@@ -69,8 +70,10 @@ function update_tag(file,content,tagname,tagdate)
 		"(Copyright %(C%) 20%d%d)%-*%d%d%d%d by "..uploadconfig["author"],
 		"%1--"..os.date("%Y").." by "..uploadconfig["author"])
 	-- tagging \changes
-	content = string.gsub(content,"\\changes{v?0*%.0*}{"..datepattern, "\\changes{v"..tagname.."}{"..tagdate)
-	content = string.gsub(content,"\\changes{v3.41-dev}{2025-01-07", "\\changes{v"..tagname.."}{"..tagdate)
+	if file ~= "build.lua" then
+		content = string.gsub(content,"\\changes{v?0*%.0*}{"..datepattern, "\\changes{v"..tagname.."}{"..tagdate)
+		content = string.gsub(content,"\\changes{version}{date", "\\changes{v"..tagname.."}{"..tagdate)
+	end
 	-- don't tag fileversion to not change all dates
 	if tag_only_changes then
 		return content

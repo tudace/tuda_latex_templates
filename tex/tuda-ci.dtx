@@ -1191,6 +1191,13 @@ reversemp
   noinstbox .code:n = {\tl_gput_right:Nn \g_ptxcd_thesis_options_tl {,noinstbox=#1}},
   logofile .tl_gset:N = \g_ptxcd_logofile_tl,
   logofile .initial:n = tuda_logo,
+% \end{macrocode}
+% \changes{v3.42-dev}{2025-01-10}{Added accept-missing-logos option for public testing workflows.}
+% \begin{macrocode}
+  accept-missing-logos .bool_gset:N = \g_ptxcd_logo_workaround_bool,
+  accept-missing-logos .initial:n = false,
+  accept-missing-logos .usage:n = load,
+  accept-missing-logos .default:n = true,
   title .choice:,
   title / default .meta:n = {title=large},
   title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
@@ -1221,6 +1228,14 @@ reversemp
 \Module@DefineSpecialKey[ptxcd/pub]{thesis}{
   \keys_set:nn {ptxcd/pub}{type=thesis}
   \tl_gput_right:No \g_ptxcd_thesis_options_tl {#1}
+}
+%    \end{macrocode}
+% Allow to add options via l3build |typesetcmds|.
+%    \begin{macrocode}
+\cs_if_exist:NT \TUDaDefaultBuildOptions {
+	\exp_args:Nno \keys_set:nn {ptxcd/pub} {
+		\TUDaDefaultBuildOptions
+	}
 }
 
 \Module@Process@SpecialOptions[ptxcd/pub]
@@ -1915,8 +1930,20 @@ reversemp
     }
   }
 }
-
-\addTitleBoxLogo*{\makebox[\linewidth][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}}
+%    \end{macrocode}
+% \changes{v3.42-dev}{2025-01-10}{Added accept-missing-logos option for public testing workflows.}
+%    \begin{macrocode}
+\addTitleBoxLogo*{\makebox[\linewidth][l]{
+	\bool_if:NTF \g_ptxcd_logo_workaround_bool {
+		\file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
+			\use_ii:nn
+			\use_i:nn
+	} {
+		\use_ii:nn
+	}
+		{\rule{0pt}{\c_ptxcd_logoheight_dim}\makebox[2.5\c_ptxcd_logoheight_dim][c]{\rule[.1\c_ptxcd_logoheight_dim]{2.05\c_ptxcd_logoheight_dim}{.8\c_ptxcd_logoheight_dim}}}
+		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
+}}
 
 \DeclareNewLayer[textarea,background,mode=picture,
   contents={
