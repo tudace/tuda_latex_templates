@@ -89,13 +89,6 @@
 \ptxcd_makeheadrule[color=identbarcolor,width=\paperwidth-2\g__ptxcd_beamer_sep_dim]{ptxcd_beamer_headrule}
 \ptxcd_makefootrule[width=\paperwidth-2\g__ptxcd_beamer_sep_dim]{ptxcd_beamer_rule}
 %    \end{macrocode}
-%
-% \begin{macro}{\insertsmalllogo}
-%    \begin{macrocode}
-\newcommand\insertsmalllogo{\setbeamertemplate{logo}[small]\usebeamertemplate{logo}}
-%    \end{macrocode}
-% \end{macro}
-%
 %    \begin{macrocode}
 \defbeamertemplate*{sidebar~left}{TUDa}{}
 \defbeamertemplate*{sidebar~right}{TUDa}{}
@@ -123,6 +116,7 @@
 	\hfill\raisebox{\dimexpr-.5\height+\dp\strutbox\relax}{\insertlogo}
 	\end{beamercolorbox}
 }
+
 \defbeamertemplate{headline}{TUDa.logo} {%
 	\begin{beamercolorbox}[
 		leftskip=\g__ptxcd_beamer_sep_dim,rightskip=\g__ptxcd_beamer_sep_dim,

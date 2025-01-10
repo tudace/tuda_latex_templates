@@ -1189,6 +1189,10 @@ reversemp
   IMRAD .default:n = true,
   instbox .code:n = {\tl_gput_right:Nn \g_ptxcd_thesis_options_tl {,instbox=#1}},
   noinstbox .code:n = {\tl_gput_right:Nn \g_ptxcd_thesis_options_tl {,noinstbox=#1}},
+%    \end{macrocode}
+%</class>
+%<*class|beamer-outer>%^^A logo file and accept missing logos
+%    \begin{macrocode}
   logofile .tl_gset:N = \g_ptxcd_logofile_tl,
   logofile .initial:n = tuda_logo,
 % \end{macrocode}
@@ -1198,6 +1202,10 @@ reversemp
   accept-missing-logos .initial:n = false,
   accept-missing-logos .usage:n = load,
   accept-missing-logos .default:n = true,
+%    \end{macrocode}
+%</class|beamer-outer>%^^A Logo
+%<*class>
+%    \begin{macrocode}
   title .choice:,
   title / default .meta:n = {title=large},
   title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
