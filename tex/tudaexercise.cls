@@ -540,15 +540,6 @@
 \renewcommand{\titlepagestyle}{plain.TUDa}
 \pagestyle{TUDa}
 
-%Titelseite
-\tl_new:N  \g_ptxcd_titleimage_code_tl
-\tl_gset_eq:NN  \g_ptxcd_titleimage_code_tl \c_empty_tl
-\newcommand{\titleimage}[1]{\tl_gset:Nn \g_ptxcd_titleimage_code_tl {#1}}
-
-\box_new:N  \g_ptxcd_title_box
-\skip_new:N \g_ptxcd_title_fill_skip
-
-
 
 
 \seq_new:N \g_ptxcd_author_seq
