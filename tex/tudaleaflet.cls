@@ -33,23 +33,10 @@
 
 \tl_new:N \g_ptxcd_sponsor_pos_tl
 \keys_define:nn {ptxcd/leaflet} {
-	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
-	logofile .initial:n = tuda_logo,
-	color .meta:n = {accentcolor=#1},
-	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
-	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
-	identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
-	colorback .bool_gset:N = \g_ptxcd_colorback_bool,
-	colorback .initial:n = true,
-	colorback .default:n = true,
-	colorbacktitle .bool_gset:N = \g_ptxcd_colorbacktitle_bool,
-	colorbacktitle .initial:n = false,
-	colorbacktitle .default:n = true,
-	colorbacksubtitle .bool_set:N = \g_ptxcd_colorbacksubtitle_bool,
-	colorbacksubtitle .initial:n = false,
-	colorbacksubtitle .default:n = true,
 	sponsor .choices:nn = {title,lastfoot,manual}{\tl_gset_eq:NN \g_ptxcd_sponsor_pos_tl \l_keys_choice_tl},
 	sponsor .initial:n = title,
+	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
+	logofile .initial:n = tuda_logo,
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
 	department / mecheng .code:n = {
@@ -62,9 +49,34 @@
 	},
 	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
 	departmentconfigprefix .initial:n = tuda,
-	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	mecheng .meta:n = {department=mecheng},
+	color .meta:n = {accentcolor=#1},
+	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
+	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
+	identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
+	colorback .bool_gset:N = \g_ptxcd_colorback_bool,
+	colorback .default:n = true,
+	colorback .initial:n = true,
+	colorbacktitle .bool_gset:N = \g_ptxcd_colorbacktitle_bool,
+	colorbacktitle .initial:n = false,
+	colorbacktitle .default:n = true,
+	colorbacksubtitle .bool_set:N = \g_ptxcd_colorbacksubtitle_bool,
+	colorbacksubtitle .initial:n = false,
+	colorbacksubtitle .default:n = true,
+	colorback / title .code:n =
+		\bool_gset_true:N \g_ptxcd_colorbacktitle_bool
+		\bool_gset_true:N \g_ptxcd_colorback_bool
+		\bool_gset_false:N \g_ptxcd_colorbacksubtitle_bool,
+	colorback / body .code:n =
+		\bool_gset_false:N \g_ptxcd_colorbacktitle_bool
+		\bool_gset_false:N \g_ptxcd_colorbacksubtitle_bool
+		\bool_gset_true:N \g_ptxcd_colorback_bool,
+	colorback / head .code:n =
+		\bool_gset_true:N \g_ptxcd_colorbacktitle_bool
+		\bool_gset_true:N \g_ptxcd_colorback_bool
+		\bool_gset_true:N \g_ptxcd_colorbacksubtitle_bool,
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{leaflet}}
