@@ -25,9 +25,8 @@
 %%
 %% ============================================================================
 %%
-\NeedsTeXFormat{LaTeX2e}
-
-\ProvidesExplPackage{tudasciposter}{2025-01-07}{3.42-dev}{Scientific Poster Layout for TU Darmstadt}
+\NeedsTeXFormat{LaTeX2e}[2020/01/01]
+\ProvidesExplClass{tudasciposter}{2025-01-07}{3.42-dev}{Scientific Poster Layout for TU Darmstadt}
 
 \prop_new:N \g_ptxcd_clsopts_prop
 \tl_new:N \g_ptxcd_boxstyle_tl
@@ -36,18 +35,12 @@
 \str_const:Nn \c__ptxcd_base_str {sciposter}
 
 \keys_define:nn {ptxcd/poster} {
-	accentcolor .code:n = {\PassOptionsToPackage{accent =#1}{tudacolors}},
-	color .meta:n = {accentcolor = #1},
-	textaccentcolor .code:n = {\PassOptionsToPackage{textaccent =#1}{tudacolors}},
-	identbarcolor .code:n = {\PassOptionsToPackage{identbar =#1}{tudacolors}},
 	titletext .code:n = {\PassOptionsToPackage{text =#1}{tudacolors}},
 	footer .bool_gset:N = \g_ptxcd_poster_foot_bool,
 	footer .default:n = true,
 	footer .initial:n = true,
 	thanks .tl_gset:N = \g_ptxcd_footnote_label_tl,
 	thanks .initial:n = arabic*,
-	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
-	pdfa .initial:n = false,
 	boxstyle .choice:,
 	boxstyle / official .code:n = \tl_gset:Nn \g_ptxcd_boxstyle_tl {TUDa},
 	boxstyle / colored .code:n= \tl_gset:Nn \g_ptxcd_boxstyle_tl {TUDa-colored},
@@ -55,24 +48,11 @@
 	boxstyle /default .meta:n = {boxstyle=official},
 	boxstyle .initial:n = default,
 	unknown .code:n = {\prop_gput:NVn \g_ptxcd_clsopts_prop \l_keys_key_tl {#1}},
-	paper .choices:nn = {a0,a1,a2,a3}{
-		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
-		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
-		\exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
-	},
-	paper / landscape .code:n = \PassOptionsToPackage{landscape}{geometry},
-	paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
-	paper .initial:n = a0,
 	fontsize .tl_gset:N = \g_ptxcd_fontsize_tl,
+	titlesepline .bool_gset:N = \g_ptxcd_titlesepline_bool,
+	titlesepline .initial:n = true,
 	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
 	logofile .initial:n = tuda_logo,
-	title .choice:,
-	title / default .meta:n = {title=large},
-	title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
-	title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
-	title .initial:n = default,
-	colorback .bool_gset:N = \g_ptxcd_colorback_bool,
-	colorback .initial:n = true,
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
 	department / mecheng .code:n = {
@@ -82,14 +62,34 @@
 	department .initial:n = default,
   department / unknown .code:n = {
 		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
-	},,
+	},
 	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
 	departmentconfigprefix .initial:n = tuda,
-	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
-	titlesepline .bool_gset:N = \g_ptxcd_titlesepline_bool,
-	titlesepline .initial:n = true,
+	mecheng .meta:n = {department=mecheng},
+	pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
+	pdfa .initial:n = false,
+	color .meta:n = {accentcolor = #1},
+	accentcolor .code:n = {\PassOptionsToPackage{accent =#1}{tudacolors}},
+	textaccentcolor .code:n = {\PassOptionsToPackage{textaccent =#1}{tudacolors}},
+	identbarcolor .code:n = {\PassOptionsToPackage{identbar =#1}{tudacolors}},
+	colorback .bool_gset:N = \g_ptxcd_colorback_bool,
+	colorback .default:n = true,
+	colorback .initial:n = true,
+	paper .choices:nn = {a0,a1,a2,a3}{
+		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
+		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
+		\exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
+	},
+	paper / landscape .code:n = \PassOptionsToPackage{landscape}{geometry},
+	paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
+	paper .initial:n = a0,
+	title .choice:,
+	title / default .meta:n = {title=large},
+	title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
+	title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
+	title .initial:n = default,
 }
 
 \ProcessKeyOptions[ptxcd/poster]

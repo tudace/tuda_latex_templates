@@ -1085,8 +1085,6 @@ reversemp
 
 \bool_new:N \g_ptxcd_geometry_bool
 \bool_new:N \g_ptxcd_custommargins_bool
-\bool_new:N \g_ptxcd_colorbacktitle_bool
-\bool_new:N \g_ptxcd_colorbacksubtitle_bool
 
 \keys_define:nn {ptxcd/pub} {
 %    \end{macrocode}
@@ -1111,16 +1109,25 @@ reversemp
   department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
   department / mecheng .code:n = {
       \str_gset:Nn \g_ptxcd_department_str {mecheng}
-%<*tudapub|print>
+%<*tudapub|print|letter>
 %<tudapub>	\keys_set:nn {ptxcd/pub} {
 %<exercise> 	\keys_set:nn {ptxcd/exercise} {
 %<leaflet> 	\keys_set:nn {ptxcd/leaflet} {
-		colorback=false,
+%<letter>  \keys_set:nn {ptxcd/letter} {
+%<sciposter>		\keys_set:nn {ptxcd/poster} {
+%<!letter>      colorback=false,
 %<tudapub>		ruledheaders=section,
-		departmentlogofile=tuda_maschinenbau_logo,
+      departmentlogofile=tuda_maschinenbau_logo,
 %<exercise>		color=Primary1,
+%<sciposter> titlesepline=false
+%<*letter>
+      headrule=false,
+      logo=false,
+      textwidth=narrow,
+%</letter>
 	}
-%</tudapub|print>
+%</tudapub|print|letter>
+%<letter>	\PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
 %<*tudabeamer>
 	\keys_set:nn {ptxcd/beamer} {
 		colorframetitle=false,
@@ -1144,14 +1151,16 @@ reversemp
 %    \end{macrocode}
 %</beamer|class|print>
 %%^^A Logo pdfa / pdfx
-%<*beamer|class>
+%<*beamer|class|letter|sciposter>
 %    \begin{macrocode}
       pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
-      pdfa .initial:n = true,
+      pdfa .initial:n =
+%<!sciposter>      true,
+%<sciposter>      false,
       pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
       pdfx .initial:n = true,
 %    \end{macrocode}
-%</beamer|class>
+%</beamer|class|letter|sciposter>
 %<*class>
 %    \begin{macrocode}
   logo .choice:,
@@ -1188,13 +1197,23 @@ reversemp
   accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
   textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
   identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
+%    \end{macrocode}
+%</class|print>
+%<*class|(print&!letter)>
+%    \begin{macrocode}
   colorback .bool_gset:N = \g_ptxcd_colorback_bool,
   colorback .default:n = true,
   colorback .initial:n = true,
 %    \end{macrocode}
-%</class|print>
-%<*class>
+%</class|(print&!letter)>
+%<*class|leaflet>
 %    \begin{macrocode}
+  colorbacktitle .bool_gset:N = \g_ptxcd_colorbacktitle_bool,
+  colorbacktitle .initial:n = false,
+  colorbacktitle .default:n = true,
+  colorbacksubtitle .bool_set:N = \g_ptxcd_colorbacksubtitle_bool,
+  colorbacksubtitle .initial:n = false,
+  colorbacksubtitle .default:n = true,
   colorback / title .code:n =
   \bool_gset_true:N \g_ptxcd_colorbacktitle_bool
   \bool_gset_true:N \g_ptxcd_colorback_bool
@@ -1207,7 +1226,11 @@ reversemp
   \bool_gset_true:N \g_ptxcd_colorbacktitle_bool
   \bool_gset_true:N \g_ptxcd_colorback_bool
   \bool_gset_true:N \g_ptxcd_colorbacksubtitle_bool,
-  colortitleback .code:n =  \msg_error:nnx {tudapub} {compatibility-only} {\l_keys_key_tl},
+%<tudapub>  colortitleback .code:n =  \msg_error:nnx {tudapub} {compatibility-only} {\l_keys_key_tl},
+%    \end{macrocode}
+%</class|leaflet>
+%<*class>
+%    \begin{macrocode}
   marginpar .tl_gset:N = \g_ptxcd_marginpar_tl,
   marginpar .default:n = auto,
   marginpar .initial:n = auto,
@@ -1215,7 +1238,7 @@ reversemp
 %</class>
 % color options
 %*coloroptions>
-%<*class|(print&!leaflet)>
+%<*class|(print&!(leaflet|letter|sciposter))>
 %/coloroptions>
 % margin
 %    \begin{macrocode}
@@ -1242,7 +1265,7 @@ reversemp
 %<!exercise>{9pt},
 %<exercise>{10pt},
 %    \end{macrocode}
-%</class|(print&!leaflet)>
+%</class|(print&!(leaflet|letter|sciposter))>
 % color options
 %*coloroptions>
 %<*class>
@@ -1286,17 +1309,25 @@ reversemp
 %    \end{macrocode}
 %</class>
 
-%<*class|exercise>
+%<*class|exercise|sciposter>
 %    \begin{macrocode}
-  paper .choices:nn = {a0,a1,a2,a3,a4,a5,a6}{
+  paper .choices:nn = {a0,a1,a2,a3
+%<!sciposter>  	,a4,a5,a6
+  	}{
       \int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
       \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
-      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
+%<!sciposter>      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
       \exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
     },
-  paper .initial:n = a4,
+%<*sciposter>
+   	paper / landscape .code:n = \PassOptionsToPackage{landscape}{geometry},
+ 	paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
+%</sciposter>
+  paper .initial:n =
+ %<!sciposter>       a4,
+  %<sciposter>       a0,
 %    \end{macrocode}
-%</class|exercise>
+%</class|exercise|sciposter>
 
 %<*class>
 %    \begin{macrocode}
@@ -1308,14 +1339,14 @@ reversemp
 %    \end{macrocode}
 %</class>
 
-%<*class|exercise>
+%<*class|exercise|sciposter>
 %    \begin{macrocode}
   title .choice:,
   title / default .meta:n = {title=large},
   title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
   title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
   title .initial:n = default,
-%</class|exercise>
+%</class|exercise|sciposter>
 %<*class>
   BCORtitlepage .bool_gset:N = \g_ptxcd_BCOR_titlepage_bool,
   BCORtitlepage .initial:n = false,
