@@ -742,7 +742,7 @@ reversemp
 % \codefamily
 % \href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
 % \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
-% \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (From version 3.36)}
+% \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (From version 3.36)}\par
 % \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-en}\par
 % }
 %
@@ -1310,6 +1310,22 @@ reversemp
 	}
 }
 %    \end{macrocode}
+%<*!beamer>
+% Define a macro to insert the logo workaround to only need this definition once.
+%    \begin{macrocode}
+\cs_new:Nn \__ptxcd_insert_logo: {
+	\bool_if:NTF \g_ptxcd_logo_workaround_bool {
+		\file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
+			\use_ii:nn
+			\use_i:nn
+	} {
+		\use_ii:nn
+	}
+		{\rule{0pt}{\c_ptxcd_logoheight_dim}\makebox[2.5\c_ptxcd_logoheight_dim][c]{\rule[.1\c_ptxcd_logoheight_dim]{2.05\c_ptxcd_logoheight_dim}{.8\c_ptxcd_logoheight_dim}}}
+		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
+}
+%    \end{macrocode}
+%</!beamer>
 %</options|body>
 %<*class>
 %    \begin{macrocode}
@@ -1581,15 +1597,14 @@ reversemp
 	\dim_gset:Nn \g_ptxcd_marginpar_dim {\g_ptxcd_marginpar_tl}
 }
 %</class>
-%<*class|margin>
-\dim_new:N \g_ptxcd_headheight_dim
-\dim_new:N \g_ptxcd_headwidth_dim
-%</class|margin>
+%<class|margin|exercise>\dim_new:N \g_ptxcd_headheight_dim
+
 %<exercise>\dim_gset:Nn \g_ptxcd_headheight_dim {\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}
 %<*class>
 \bool_if:NTF \g_ptxcd_headline_bool
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {20pt +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {1.25\baselineskip +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
+\dim_new:N \g_ptxcd_headwidth_dim
 
 
 %%%%%Anfang Randeinstellungen Geometry
@@ -2023,17 +2038,7 @@ reversemp
 %    \end{macrocode}
 % \changes{v3.42-dev}{2025-01-10}{Added accept-missing-logos option for public testing workflows.}
 %    \begin{macrocode}
-\addTitleBoxLogo*{\makebox[\linewidth][l]{
-	\bool_if:NTF \g_ptxcd_logo_workaround_bool {
-		\file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
-			\use_ii:nn
-			\use_i:nn
-	} {
-		\use_ii:nn
-	}
-		{\rule{0pt}{\c_ptxcd_logoheight_dim}\makebox[2.5\c_ptxcd_logoheight_dim][c]{\rule[.1\c_ptxcd_logoheight_dim]{2.05\c_ptxcd_logoheight_dim}{.8\c_ptxcd_logoheight_dim}}}
-		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
-}}
+\addTitleBoxLogo*{\makebox[\linewidth][l]{\__ptxcd_insert_logo:}}
 
 \DeclareNewLayer[textarea,background,mode=picture,
   contents={

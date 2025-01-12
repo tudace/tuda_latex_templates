@@ -82,35 +82,72 @@ Please use the issue tracker for feedback!
 	%tudabeamer
 	\file{tudabeamer.cls}{
 		\from{tudabeamer.dtx}{class,initialize,options}
-		\from{tuda-ci.dtx}{options,tudabeamer}
+		\from{tuda-ci.dtx}{options,tudabeamer,beamer}
 		\from{tudabeamer.dtx}{class,body}
 	}
 	%tudapub
 	\file{tudapub.cls}{\from{tuda-ci.dtx}{class,tudapub,options}}
 }
 
+\generate{%
+	\file{tudaexercise.cls}{%
+		\from{tudaexercise.dtx}{class,initialization}%
+		\from{tuda-ci.dtx}{options,exercise,print}%
+		\from{tudaexercise.dtx}{class,body}
+	}%
+}
+\generate{\file{tudaleaflet.cls}{%
+		\from{tudaleaflet.dtx}{class,initialization}%
+		\from{tuda-ci.dtx}{options,leaflet,print}%
+		\from{tudaleaflet.dtx}{class,body}%
+	}%
+}
+\generate{\file{tudaletter.cls}{%
+		\from{tudaletter.dtx}{class,initialization}%
+		\from{tuda-ci.dtx}{options,letter,print}%
+		\from{tudaletter.dtx}{class,body}%
+	}%
+}
+\generate{\file{tudasciposter.cls}{%
+		\from{tudasciposter.dtx}{class,initialization}%
+		\from{tuda-ci.dtx}{options,sciposter,print}%
+		\from{tudasciposter.dtx}{class,body}%
+	}%
+}
+\generate{\file{tudaposter.cls}{%
+		\from{tudaposter.dtx}{class,initialization}%
+		\from{tuda-ci.dtx}{options,poster,print}%
+		\from{tudaposter.dtx}{class,body}%
+	}%
+}
 \generate{
 	\file{beamerouterthemeTUDa.sty}{
 		\from{beamerouterthemeTUDa.dtx}{package,initialize,main}
 		\from{tuda-ci.dtx}{options,beamer-outer}
 		\from{beamerouterthemeTUDa.dtx}{package,main,body}
 	}
-}
 	\file{tudathesis.cfg}{\from{tuda-ci.dtx}{cfg,tudathesis}}
 	\file{tudacolors.sty}{\from{tudacolors.dtx}{package}}
 	\file{tudafonts.sty}{\from{tudafonts.dtx}{package}}
 	\file{tudarules.sty}{\from{tudarules.dtx}{package}}
+}
+\generate{
 % tudabeamer
-	\file{beamerthemeTUDa.sty}{\from{tudabeamer.dtx}{package,main}}
-	\file{beamerthemeTUDa2008.sty}{\from{tudabeamer.dtx}{package,2008}}
-	\file{beamerthemeTUDa2023.sty}{\from{tudabeamer.dtx}{package,2023}}
+	\file{beamerthemeTUDa.sty}{\from{tudabeamer.dtx}{package,main,initialize,body,options}}
+	\file{beamerthemeTUDa2008.sty}{\from{tudabeamer.dtx}{package,2008,initialize,body,options}}
+	\file{beamerthemeTUDa2023.sty}{\from{tudabeamer.dtx}{package,2023,initialize,body,options}}
 % beamer font theme
 	\file{beamerfontthemeTUDa.sty}{\from{beamerfontthemeTUDa.dtx}{package,main}}
 	\file{beamerfontthemeTUDa2008.sty}{\from{beamerfontthemeTUDa.dtx}{package,2008}}
 % beamer color theme
 	\file{beamercolorthemeTUDa.sty}{\from{beamercolorthemeTUDa.dtx}{package,main}}
 	\file{beamercolorthemeTUDa2008.sty}{\from{beamercolorthemeTUDa.dtx}{package,2008}}
-	\file{beamerouterthemeTUDa2008.sty}{\from{beamerouterthemeTUDa.dtx}{package,2008}}
+%	\file{beamerouterthemeTUDa2008.sty}{\from{beamerouterthemeTUDa.dtx}{package,2008}}
+	\file{beamerouterthemeTUDa.sty}{%
+		\from{beamerouterthemeTUDa.dtx}{package,initialize,2008}%
+		\from{tuda-ci.dtx}{options,beamer-outer}%
+		\from{beamerouterthemeTUDa.dtx}{package,2008,body}%
+	}%
 % beamer inner theme
 	\file{beamerinnerthemeTUDa.sty}{\from{beamerinnerthemeTUDa.dtx}{package,main}}
 	\file{beamerinnerthemeTUDa2008.sty}{\from{beamerinnerthemeTUDa.dtx}{package,2008}}
