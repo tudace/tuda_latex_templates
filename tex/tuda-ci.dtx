@@ -35,6 +35,7 @@
 %<tudapub>\ProvidesExplClass{tudapub}{2024-07-02}{3.41}{ublications using TU Darmstadt's Corporate Design (TUDa-CI)}
 %<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2024-07-02}{3.41}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
 %<*driver>
+\PassOptionsToPackage{hyperindex=false}{hyperref}
 \documentclass[
   pdfa=false,
   titlepage=true,
@@ -49,6 +50,7 @@
 \let\maketitle\tudamaketitle% restore
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{minted}
 \usepackage{csquotes}
 \usepackage{hologo}
 \let\file\texttt
@@ -93,75 +95,9 @@
 	\__ptxctools_parse_key_option_item:w  #1 {#3} #4 #2 \q_stop
 }
 
-% run minted with pygments or not
-\sys_if_shell_unrestricted:TF {
-	\usepackage{minted}
-	\newenvironment{Syntax}{
-	  \VerbatimEnvironment
-	  \begin{VerbatimOut}[gobble=1, tabsize=4]{minted.doc.out}}
-	  {\end{VerbatimOut}
-	  \inputminted[autogobble, escapeinside=||,tabsize=4]{latex}{minted.doc.out}
-	}
-	\newenvironment{example}{
-	 \VerbatimEnvironment
-	 \begin{VerbatimOut}[gobble=1, tabsize=4]{minted.doc.out}}
-	 {\end{VerbatimOut}
-	 \inputminted[autogobble, escapeinside=||,tabsize=4]{latex}{minted.doc.out}
-	}
-} {
-	\usepackage[draft]{minted}
-	\newcommand \InputEscapedVerbatim [1] {
-		\ior_open:Nn \g_ptxcd_ior   {#1}
-		\par\smallskip
-		\begin{samepage}
-			\setlength{\parindent}{\c_zero_dim}
-			\ttfamily
-			\bool_set_true:N \l_tmpa_bool
-			\ior_str_map_variable:NNn \g_ptxcd_ior \l_tmpa_tl {
-			\regex_replace_all:NnN \c_ptxtools_escape_verb_regex {\c{ptxtools_escape_verb:w}\1\c{q_ptxtools_stop}} \l_tmpa_tl
-			\bool_if:NTF \l_tmpa_bool
-				{\bool_set_false:N \l_tmpa_bool}
-				{\newline}
-			\strut\tl_use:N \l_tmpa_tl
-			}
-		\end{samepage}
-		\par\smallskip
-		\ior_close:N  \g_ptxcd_ior
-	}
-
-	\ior_new:N \g_ptxcd_ior
-	\cs_new:Npn \ptxtools_escape_verb:w #1 \q_ptxtools_stop {
-		\tl_rescan:nn {\cctab_select:N \c_document_cctab} {#1}
-	}
-	\regex_const:Nn \c_ptxtools_escape_verb_regex {\|(.+?)\|}
-	% Based on the definition from minted.sty to be able to support escapeinside if pygments cannot be used.
-	% Original Version taken from
-	% minted.dtx  – Copyright 2013--2022 Geoffrey M. Poore –  Copyright 2010--2011 Konrad Rudolph
-	\newenvironment{Syntax}
-	  {\VerbatimEnvironment%
-	    \let\FVB@VerbatimOut\minted@FVB@VerbatimOut%
-	    \let\FVE@VerbatimOut\minted@FVE@VerbatimOut%
-	    \minted@configlang{latex}%
-	    \setminted{gobble=2}
-	    \minted@fvset
-	    \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
-	  {\end{VerbatimOut}%
-	      \minted@langlinenoson
-		\InputEscapedVerbatim{\minted@jobname.pyg}
-	    \minted@langlinenosoff}
-		\newenvironment{example}
-			{\VerbatimEnvironment%
-			\let\FVB@VerbatimOut\minted@FVB@VerbatimOut%
-			\let\FVE@VerbatimOut\minted@FVE@VerbatimOut%
-			\minted@configlang{latex}%
-			\setminted{gobble=2}
-			\minted@fvset
-			\begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
-			{\end{VerbatimOut}%
-			\minted@langlinenoson
-			\InputEscapedVerbatim{\minted@jobname.pyg}
-			\minted@langlinenosoff}
-}
+\usepackage{minted}
+\newminted[Syntax]{latex}{gobble=2, tabsize=4}
+\newminted[example]{latex}{gobble=2, tabsize=4}
 \setminted{escapeinside=||}
 
 \geometry{
@@ -191,8 +127,6 @@ reversemp
   {\codefamily[}\meta{#1}{\codefamily]}}
 \providecommand\parg[1]{%
   {\codefamily(}\meta{#1}{\codefamily)}}
-
-\usepackage{minted}
 
 \IfFileExists{tuda_logo.pdf}{}{
   \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
