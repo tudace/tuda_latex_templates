@@ -105,6 +105,7 @@
 \PassOptionsToClass{10pt}{beamer}
 \ExplSyntaxOn
 \str_new:N \g_ptxcd_department_str
+\str_const:Nn \c__ptxcd_base_str {beamer}
 %    \end{macrocode}
 % \iffalse
 %</class>
@@ -136,6 +137,7 @@
 	tudacolors .code:n = \PassOptionsToPackage{#1}{tudacolors},
 %    \end{macrocode}
 %</class>
+%<*!(2023|2008)>
 %    \begin{macrocode}
 	design .choice:,
 	design / 2023 .code:n = {
@@ -155,6 +157,7 @@
 	design .usage:n = load,
 %<gobble>}
 %    \end{macrocode}
+%</!(2023|2008)>
 %
 %
 % \iffalse
@@ -171,7 +174,7 @@
 	\PassOptionsToClass{\CurrentOption}{beamer}
 }
 %</class>
-%<main|class>\ProcessKeyOptions[ptxcd/beamer]
+%<main|class|wrapper>\ProcessKeyOptions[ptxcd/beamer]
 %<*class>
 \ProcessOptions*
 \ExplSyntaxOn

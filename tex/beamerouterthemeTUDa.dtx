@@ -143,7 +143,7 @@
 % \fi
 % General options
 %    \begin{macrocode}
-}
+%<gobble>}
 %    \end{macrocode}
 %
 % \begin{key}{beamerframe}{bgcolor}
@@ -177,7 +177,7 @@
 %</2008>
 \setbeamersize{
 	text~margin~left=\dim_eval:n {
-%<main>	\paperwidth/34,
+%<main>	\paperwidth/34
 %<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
 },
 	text~margin~right=\dim_eval:n {
@@ -197,7 +197,7 @@
 {
 	\bool_if:NTF \g_ptxcd_logo_workaround_bool {
 		\file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
-			use_ii:nn
+			\use_ii:nn
 			\use_i:nn
 	} {
 		\use_ii:nn
@@ -206,7 +206,6 @@
 		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
 }%
 }
-
 % \begin{macro}{\logo}
 %    \begin{macrocode}
 \RenewDocumentCommand{\logo}{sm}{

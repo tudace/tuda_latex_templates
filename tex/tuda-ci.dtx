@@ -1095,6 +1095,7 @@ reversemp
   logofile .tl_gset:N = \g_ptxcd_logofile_tl,
   logofile .initial:n = tuda_logo,
 % \end{macrocode}
+%</!beamer>%^^A Logo
 % \changes{v3.42-dev}{2025-01-10}{Added accept-missing-logos option for public testing workflows.}
 % \begin{macrocode}
   accept-missing-logos .bool_gset:N = \g_ptxcd_logo_workaround_bool,
@@ -1102,7 +1103,6 @@ reversemp
   accept-missing-logos .usage:n = load,
   accept-missing-logos .default:n = true,
 %    \end{macrocode}
-%</!beamer>%^^A Logo
 %<*beamer|class|print>
 %    \begin{macrocode}
   department .choice:,
@@ -1155,8 +1155,8 @@ reversemp
 %    \begin{macrocode}
       pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
       pdfa .initial:n =
-%<!sciposter>      true,
-%<sciposter>      false,
+%<!(sciposter|beamer)>      true,
+%<sciposter|beamer>      false,
       pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
       pdfx .initial:n = true,
 %    \end{macrocode}
@@ -1367,18 +1367,17 @@ reversemp
 % Allow to add options via l3build |typesetcmds|.
 %    \begin{macrocode}
 \cs_if_exist:NT \TUDaDefaultBuildOptions {
-	\exp_args:Nno \keys_set:nn { ptxcd /
-%<pub>	pub
-%<beamer> beamer
-%<exercise> exercise
+	\exp_args:Ne \keys_set:no { ptxcd /
+%<!(beamer-outer|sciposter)> 		\c__ptxcd_base_str
 %<beamer-outer> beamer/outer
+%<sciposter> poster
 	} {
 		\TUDaDefaultBuildOptions
 	}
 }
 %    \end{macrocode}
 %</options|body>
-%<*body&class>
+%<*class>
 %    \begin{macrocode}
 %%special option handling grouped values
 %    \begin{macrocode}
@@ -1554,7 +1553,7 @@ reversemp
 \bool_new:N \g_ptxcd_marginpar_bool
 \dim_new:N \g_ptxcd_marginpar_dim
 %    \end{macrocode}
-%</body&class>
+%</class>
 %<*class|margin>
 %    \begin{macrocode}
 \dim_new:N \g_ptxcd_innerMargin_dim
