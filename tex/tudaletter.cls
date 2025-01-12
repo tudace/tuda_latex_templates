@@ -25,12 +25,9 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.42-dev}
-\def\filedate{2025-01-07}
-\NeedsTeXFormat{LaTeX2e}
-
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
 \ProvidesExplClass{tudaletter}
-	{\filedate}{\fileversion}{Letters for TUDa-CI, Corporate Design of TU Darmstadt}
+	{2025-01-07}{3.42-dev}{Letters for TUDa-CI, Corporate Design of TU Darmstadt}
 
 \str_const:Nn \c__ptxcd_base_str {letter}
 \str_new:N  \g_ptxcd_department_str
