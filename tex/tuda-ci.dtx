@@ -1105,21 +1105,22 @@ reversemp
   accept-missing-logos .default:n = true,
 %    \end{macrocode}
 %</!beamer>%^^A Logo
-%<*beamer|class|exercise>
+%<*beamer|class|print>
 %    \begin{macrocode}
   department .choice:,
   department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
   department / mecheng .code:n = {
       \str_gset:Nn \g_ptxcd_department_str {mecheng}
-%<*tudapub|exercise>
+%<*tudapub|print>
 %<tudapub>	\keys_set:nn {ptxcd/pub} {
 %<exercise> 	\keys_set:nn {ptxcd/exercise} {
+%<leaflet> 	\keys_set:nn {ptxcd/leaflet} {
 		colorback=false,
 %<tudapub>		ruledheaders=section,
 		departmentlogofile=tuda_maschinenbau_logo,
 %<exercise>		color=Primary1,
 	}
-%</tudapub|exercise>
+%</tudapub|print>
 %<*tudabeamer>
 	\keys_set:nn {ptxcd/beamer} {
 		colorframetitle=false,
@@ -1141,7 +1142,7 @@ reversemp
   % predefined department configs
     mecheng .meta:n = {department=mecheng},
 %    \end{macrocode}
-%</beamer|class|exercise>
+%</beamer|class|print>
 %%^^A Logo pdfa / pdfx
 %<*beamer|class>
 %    \begin{macrocode}
@@ -1181,7 +1182,7 @@ reversemp
 %</class>
 % color options
 %*coloroptions>
-%<*class|exercise>
+%<*class|print>
 %    \begin{macrocode}
   color .meta:n = {accentcolor=#1},
   accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
@@ -1191,7 +1192,7 @@ reversemp
   colorback .default:n = true,
   colorback .initial:n = true,
 %    \end{macrocode}
-%</class|exercise>
+%</class|print>
 %<*class>
 %    \begin{macrocode}
   colorback / title .code:n =
@@ -1214,7 +1215,7 @@ reversemp
 %</class>
 % color options
 %*coloroptions>
-%<*class|exercise>
+%<*class|(print&!leaflet)>
 %/coloroptions>
 % margin
 %    \begin{macrocode}
@@ -1241,7 +1242,7 @@ reversemp
 %<!exercise>{9pt},
 %<exercise>{10pt},
 %    \end{macrocode}
-%</class|exercise>
+%</class|(print&!leaflet)>
 % color options
 %*coloroptions>
 %<*class>
