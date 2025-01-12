@@ -1091,9 +1091,8 @@ reversemp
 \keys_define:nn {ptxcd/pub} {
 %    \end{macrocode}
 %</class>%^^A
-%</body>
 %<*options|body>%^^A
-%<*class|beamer-outer>%^^A logo file and accept missing logos
+%<*!beamer>%^^A logo file and accept missing logos
 %    \begin{macrocode}
   logofile .tl_gset:N = \g_ptxcd_logofile_tl,
   logofile .initial:n = tuda_logo,
@@ -1105,20 +1104,22 @@ reversemp
   accept-missing-logos .usage:n = load,
   accept-missing-logos .default:n = true,
 %    \end{macrocode}
-%</class|beamer-outer>%^^A Logo
-%<*tudabeamer|class>
+%</!beamer>%^^A Logo
+%<*beamer|class|exercise>
 %    \begin{macrocode}
   department .choice:,
   department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
   department / mecheng .code:n = {
       \str_gset:Nn \g_ptxcd_department_str {mecheng}
-%<*tudapub>
-	\keys_set:nn {ptxcd/pub} {
+%<*tudapub|exercise>
+%<tudapub>	\keys_set:nn {ptxcd/pub} {
+%<exercise> 	\keys_set:nn {ptxcd/exercise} {
 		colorback=false,
-		ruledheaders=section,
-		departmentlogofile=tuda_maschinenbau_logo
+%<tudapub>		ruledheaders=section,
+		departmentlogofile=tuda_maschinenbau_logo,
+%<exercise>		color=Primary1,
 	}
-%</tudapub>
+%</tudapub|exercise>
 %<*tudabeamer>
 	\keys_set:nn {ptxcd/beamer} {
 		colorframetitle=false,
@@ -1140,14 +1141,16 @@ reversemp
   % predefined department configs
     mecheng .meta:n = {department=mecheng},
 %    \end{macrocode}
+%</beamer|class|exercise>
 %%^^A Logo pdfa / pdfx
+%<*beamer|class>
 %    \begin{macrocode}
       pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
       pdfa .initial:n = true,
       pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
       pdfx .initial:n = true,
 %    \end{macrocode}
-%</tudabeamer|class>
+%</beamer|class>
 %<*class>
 %    \begin{macrocode}
   logo .choice:,
@@ -1175,14 +1178,22 @@ reversemp
   class/scrbook .code:n  = \tl_gset:Nn \g_ptxcd_pub_class_tl {scrbook},
   class .initial:n = scrartcl,
 %    \end{macrocode}
+%</class>
 % color options
+%*coloroptions>
+%<*class|exercise>
 %    \begin{macrocode}
   color .meta:n = {accentcolor=#1},
   accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
   textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
   identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
   colorback .bool_gset:N = \g_ptxcd_colorback_bool,
+  colorback .default:n = true,
   colorback .initial:n = true,
+%    \end{macrocode}
+%</class|exercise>
+%<*class>
+%    \begin{macrocode}
   colorback / title .code:n =
   \bool_gset_true:N \g_ptxcd_colorbacktitle_bool
   \bool_gset_true:N \g_ptxcd_colorback_bool
@@ -1196,12 +1207,17 @@ reversemp
   \bool_gset_true:N \g_ptxcd_colorback_bool
   \bool_gset_true:N \g_ptxcd_colorbacksubtitle_bool,
   colortitleback .code:n =  \msg_error:nnx {tudapub} {compatibility-only} {\l_keys_key_tl},
-%    \end{macrocode}
-% margin
-%    \begin{macrocode}
   marginpar .tl_gset:N = \g_ptxcd_marginpar_tl,
   marginpar .default:n = auto,
   marginpar .initial:n = auto,
+%    \end{macrocode}
+%</class>
+% color options
+%*coloroptions>
+%<*class|exercise>
+%/coloroptions>
+% margin
+%    \begin{macrocode}
   custommargins .choice:,
   custommargins / true .code:n ={
       \bool_gset_true:N \g_ptxcd_custommargins_bool
@@ -1221,7 +1237,17 @@ reversemp
 % print document specific options
 %    \begin{macrocode}
   fontsize .code:n = \prop_gput:Nnn \g_ptxcd_clsopts_prop {fontsize} {#1},
-  fontsize .initial:n = {9pt},
+  fontsize .initial:n =
+%<!exercise>{9pt},
+%<exercise>{10pt},
+%    \end{macrocode}
+%</class|exercise>
+% color options
+%*coloroptions>
+%<*class>
+%/coloroptions>
+% margin
+%    \begin{macrocode}
   ruledheaders .choices:nn = {false, none, chapter, section, true,  all}{
       \int_gset:Nn \g_ptxcd_ruledheaders_int {\l_keys_choice_int}
     },
@@ -1239,13 +1265,28 @@ reversemp
   twocolumn .bool_gset:N = \g_ptxcd_twocolumn_bool,
   twocolumn .default:n = true,
   twocolumn .initial:n = false,
+%    \end{macrocode}
+%</class>
+%
+%<*class|exercise>
+%    \begin{macrocode}
   BCOR .code:n = \PassOptionsToPackage{bindingoffset=#1}{geometry},
   bindingoffset .meta:n = {BCOR=#1},
   captions .code:n = {\prop_gput:Nnx \g_ptxcd_clsopts_prop {captions} {
         \use:n {\prop_item:Nn \g_ptxcd_clsopts_prop {captions}}, #1}
     },
+%    \end{macrocode}
+%</class|exercise>
+%
+%<*class>
+%    \begin{macrocode}
   abstract .code:n = \prop_gput:Nnn \g_ptxcd_unknown_clsopts_prop {abstract} {#1},
   abstract .initial:n =true,
+%    \end{macrocode}
+%</class>
+
+%<*class|exercise>
+%    \begin{macrocode}
   paper .choices:nn = {a0,a1,a2,a3,a4,a5,a6}{
       \int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
       \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
@@ -1253,19 +1294,28 @@ reversemp
       \exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
     },
   paper .initial:n = a4,
+%    \end{macrocode}
+%</class|exercise>
+
+%<*class>
+%    \begin{macrocode}
   IMRAD .bool_gset:N = \g_ptxcd_IMRAD_bool,
   IMRAD .initial:n = true,
   IMRAD .default:n = true,
   instbox .code:n = {\tl_gput_right:Nn \g_ptxcd_thesis_options_tl {,instbox=#1}},
   noinstbox .code:n = {\tl_gput_right:Nn \g_ptxcd_thesis_options_tl {,noinstbox=#1}},
 %    \end{macrocode}
-%
+%</class>
+
+%<*class|exercise>
 %    \begin{macrocode}
   title .choice:,
   title / default .meta:n = {title=large},
   title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
   title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
   title .initial:n = default,
+%</class|exercise>
+%<*class>
   BCORtitlepage .bool_gset:N = \g_ptxcd_BCOR_titlepage_bool,
   BCORtitlepage .initial:n = false,
   BCORtitlepage .default:n = true,
@@ -1278,6 +1328,7 @@ reversemp
 	\exp_args:Nno \keys_set:nn { ptxcd /
 %<pub>	pub
 %<beamer> beamer
+%<exercise> exercise
 %<beamer-outer> beamer/outer
 	} {
 		\TUDaDefaultBuildOptions
@@ -1285,8 +1336,7 @@ reversemp
 }
 %    \end{macrocode}
 %</options|body>
-%<*body>
-%<*class>
+%<*body&class>
 %    \begin{macrocode}
 %%special option handling grouped values
 %    \begin{macrocode}
@@ -1461,6 +1511,10 @@ reversemp
 %    \begin{macrocode}
 \bool_new:N \g_ptxcd_marginpar_bool
 \dim_new:N \g_ptxcd_marginpar_dim
+%    \end{macrocode}
+%</body&class>
+%<*class|margin>
+%    \begin{macrocode}
 \dim_new:N \g_ptxcd_innerMargin_dim
 \dim_new:N \g_ptxcd_outerMargin_dim
 \dim_new:N \g_ptxcd_bottomMargin_dim
@@ -1503,7 +1557,8 @@ reversemp
 \dim_new:N \g_ptxcd_columnSep_dim
 \dim_gset:Nn \g_ptxcd_columnSep_dim {10pt}
 %    \end{macrocode}
-%
+%</class|margin>
+%<*class>
 % \begin{macro}{\coverpageleftmargin}
 %coverpage
 %    \begin{macrocode}
@@ -1550,14 +1605,17 @@ reversemp
 	\bool_gset_true:N \g_ptxcd_marginpar_bool
 	\dim_gset:Nn \g_ptxcd_marginpar_dim {\g_ptxcd_marginpar_tl}
 }
-
-
+%</class>
+%<*class|margin>
 \dim_new:N \g_ptxcd_headheight_dim
 \dim_new:N \g_ptxcd_headwidth_dim
-
+%</class|margin>
+%<exercise>\dim_gset:Nn \g_ptxcd_headheight_dim {\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}
+%<*class>
 \bool_if:NTF \g_ptxcd_headline_bool
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {20pt +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {1.25\baselineskip +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
+
 
 %%%%%Anfang Randeinstellungen Geometry
 
@@ -1583,7 +1641,7 @@ reversemp
 		headheight=\g_ptxcd_headheight_dim
 	}
 	\savegeometry{TUDa-nomarginpar}
-	\geometry{includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=1ex}
+	\geometry{includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim}
 	\KOMAoptions{mpinclude}
 	\savegeometry{TUDa-marginpar}
 
