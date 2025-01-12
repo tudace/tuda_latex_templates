@@ -1114,7 +1114,7 @@ reversemp
 %<exercise> 	\keys_set:nn {ptxcd/exercise} {
 %<leaflet> 	\keys_set:nn {ptxcd/leaflet} {
 %<letter>  \keys_set:nn {ptxcd/letter} {
-%<sciposter>		\keys_set:nn {ptxcd/poster} {
+%<sciposter|poster>		\keys_set:nn {ptxcd/poster} {
 %<!letter>      colorback=false,
 %<tudapub>		ruledheaders=section,
       departmentlogofile=tuda_maschinenbau_logo,
@@ -1161,22 +1161,25 @@ reversemp
       pdfx .initial:n = true,
 %    \end{macrocode}
 %</beamer|class|letter|sciposter>
-%<*class>
+%<*class|poster>
 %    \begin{macrocode}
   logo .choice:,
   logo / head .code:n = {
       \bool_gset_true:N \g__ptxcd_LogoInHead_bool
-      \bool_gset_true:N \g_ptxcd_colorbacktitle_bool
+%<class>      \bool_gset_true:N \g_ptxcd_colorbacktitle_bool
     },
   logo / body .code:n = {
       \bool_gset_false:N \g__ptxcd_LogoInHead_bool
-      \bool_gset_false:N \g_ptxcd_colorbacktitle_bool
+%<class>      \bool_gset_false:N \g_ptxcd_colorbacktitle_bool
     },
   logo / top .meta:n = {logo=head},
   logo / bottom .code:n = {\bool_gset_false:N \g__ptxcd_LogoInHead_bool},
-  logo .initial:n = {body},
+%<class> logo .initial:n = {body},
+%<poster> logo .initial:n = {head},
 %    \end{macrocode}
+%</class|poster>
 % color options
+%<*class>
 %    \begin{macrocode}
   %twoside -> geometry + class
   class .choice:,
@@ -1229,16 +1232,20 @@ reversemp
 %<tudapub>  colortitleback .code:n =  \msg_error:nnx {tudapub} {compatibility-only} {\l_keys_key_tl},
 %    \end{macrocode}
 %</class|leaflet>
-%<*class>
+%<*class|poster>
 %    \begin{macrocode}
-  marginpar .tl_gset:N = \g_ptxcd_marginpar_tl,
+  marginpar
+%<!poster>    .tl_gset:N = \g_ptxcd_marginpar_tl,
+%<poster>    .bool_gset:N = \g_ptxcd_marginpar_bool,
+%<poster>  marginpar / auto .meta:n = {marginpar = true} ,
   marginpar .default:n = auto,
-  marginpar .initial:n = auto,
+%<!poster>  marginpar .initial:n = auto,
+%<poster>  marginpar .initial:n = false,
 %    \end{macrocode}
-%</class>
+%</class|poster>
 % color options
 %*coloroptions>
-%<*class|(print&!(leaflet|letter|sciposter))>
+%<*class|(print&!(leaflet|letter|sciposter|poster))>
 %/coloroptions>
 % margin
 %    \begin{macrocode}
@@ -1265,7 +1272,7 @@ reversemp
 %<!exercise>{9pt},
 %<exercise>{10pt},
 %    \end{macrocode}
-%</class|(print&!(leaflet|letter|sciposter))>
+%</class|(print&!(leaflet|letter|sciposter|poster))>
 % color options
 %*coloroptions>
 %<*class>
@@ -1309,14 +1316,17 @@ reversemp
 %    \end{macrocode}
 %</class>
 
-%<*class|exercise|sciposter>
+%<*class|exercise|sciposter|poster>
 %    \begin{macrocode}
-  paper .choices:nn = {a0,a1,a2,a3
-%<!sciposter>  	,a4,a5,a6
+  paper .choices:nn = {
+%<sciposter>    a0,a1,a2,a3
+%<poster>    a0,a1,a2,a3,a4
+%<!(sciposter|poster)>    a0,a1,a2,a3,a4,a5,a6
   	}{
       \int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
+%%%%%poster>      \tl_gset_eq:NN \g_ptxcd_paper_tl \l_keys_choice_tl
       \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
-%<!sciposter>      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
+%<!(sciposter|poster)>      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
       \exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
     },
 %<*sciposter>
@@ -1324,10 +1334,10 @@ reversemp
  	paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
 %</sciposter>
   paper .initial:n =
- %<!sciposter>       a4,
-  %<sciposter>       a0,
+%<!(sciposter|poster)>       a4,
+%<sciposter|poster>       a0,
 %    \end{macrocode}
-%</class|exercise|sciposter>
+%</class|exercise|sciposter|poster>
 
 %<*class>
 %    \begin{macrocode}
@@ -1339,14 +1349,14 @@ reversemp
 %    \end{macrocode}
 %</class>
 
-%<*class|exercise|sciposter>
+%<*class|exercise|sciposter|poster>
 %    \begin{macrocode}
   title .choice:,
   title / default .meta:n = {title=large},
   title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
   title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
   title .initial:n = default,
-%</class|exercise|sciposter>
+%</class|exercise|sciposter|poster>
 %<*class>
   BCORtitlepage .bool_gset:N = \g_ptxcd_BCOR_titlepage_bool,
   BCORtitlepage .initial:n = false,
