@@ -25,9 +25,9 @@
 %%
 %% ============================================================================
 %%
-\NeedsTeXFormat{LaTeX2e}
 
-\ProvidesExplPackage{tudaposter}{2025-01-07}{3.42-dev}{Poster Layouts for the Corporate Design of TU Darmstadt}
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesExplPackage{tudaposter}{2025-01-07}{3.42-dev}{Announcement poster Layouts for the Corporate Design of TU Darmstadt}
 
 \bool_new:N \g_ptxcd_logo_inhead_bool
 \dim_new:N \g_ptxcd_margin_dim
@@ -38,30 +38,15 @@
 \str_const:Nn \c__ptxcd_base_str {poster}
 
 \keys_define:nn {ptxcd/poster} {
-	accentcolor .code:n = {\PassOptionsToPackage{accent=#1}{tudacolors}},
-	color .code:n = {\PassOptionsToPackage{color=#1}{tudacolors}},
-	textaccentcolor .code:n = {\PassOptionsToPackage{textaccent=#1}{tudacolors}},
-	identbarcolor .code:n = {\PassOptionsToPackage{identbar=#1}{tudacolors}},
-	logo .choice:,
-	logo / head .code:n = {\bool_gset_true:N \g_ptxcd_logo_inhead_bool},
-	logo / body .code:n = {\bool_gset_false:N \g_ptxcd_logo_inhead_bool},
-	logo / top .code:n = {\bool_gset_true:N \g_ptxcd_logo_inhead_bool},
-	logo / bottom .code:n = {\bool_gset_false:N \g_ptxcd_logo_inhead_bool},
-	logo .initial:n = {head},
 	footer .bool_gset:N = \g_ptxcd_poster_foot_bool,
 	footer .default:n = true,
 	footer .initial:n = false,
 	footheight .dim_gset:N = \g_ptxcd_footheight_dim,
-	paper .choices:nn = {a0,a1,a2,a3,a4}{
-		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
-		\tl_gset_eq:NN \g_ptxcd_paper_tl \l_keys_choice_tl
-	},
+
 	fontsize .choice:,
 	fontsize / auto .code:n = \tl_gclear:N \g_ptxcd_fontsize_tl,
 	fontsize / unknown .code:n = {\@defaultunits\@tempdima#1pt\relax\@nnil \tl_gset:Nx \g_ptxcd_fontsize_tl {\the\@tempdima}},
 	fontsize .initial:n = auto,
-	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
-	logofile .initial:n = tuda_logo,
 	type .choice:,
 	type / default .code:n = {
 		\int_gset:Nn \g_ptxcd_postertype_int {1}
@@ -80,20 +65,11 @@
 	indenttext .bool_gset:N = \g_ptxcd_indenttext_bool,
 	indenttext .initial:n = false,
 	indenttext .default:n = true,
-	marginpar .bool_gset:N = \g_ptxcd_marginpar_bool,
-	marginpar / auto .meta:n = {marginpar = true} ,
-	marginpar .default:n = true,
-	marginpar .initial:n = false,
-	title .choice:,
-	title / default .meta:n = {title=large},
-	title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
-	title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
-	title .initial:n = default,
-	colorback .bool_gset:N = \g_ptxcd_colorback_bool,
-	colorback .initial:n = true,
 	colorsubtitle .bool_gset:N = \g_ptxcd_colorsubtitle_bool,
 	colorsubtitle .default:n = true,
 	colorsubtitle .initial:n = false,
+	logofile .tl_gset:N = \g_ptxcd_logofile_tl,
+	logofile .initial:n = tuda_logo,
 	department .choice:,
 	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
 	department / mecheng .code:n = {
@@ -106,9 +82,37 @@
 	},
 	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
 	departmentconfigprefix .initial:n = tuda,
-	mecheng .meta:n = {department=mecheng},
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
+	mecheng .meta:n = {department=mecheng},
+	logo .choice:,
+	logo / head .code:n = {\bool_gset_true:N \g_ptxcd_logo_inhead_bool},
+	logo / body .code:n = {\bool_gset_false:N \g_ptxcd_logo_inhead_bool},
+	logo / top .meta:n = {logo=head},
+	logo / bottom .code:n = {\bool_gset_false:N \g_ptxcd_logo_inhead_bool},
+	logo .initial:n = {head},
+	color .meta:n = {accentcolor=#1},
+	accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
+	textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
+	identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
+	colorback .bool_gset:N = \g_ptxcd_colorback_bool,
+	colorback .default:n = true,
+	colorback .initial:n = true,
+	marginpar .bool_gset:N = \g_ptxcd_marginpar_bool,
+	marginpar / auto .meta:n = {marginpar = true} ,
+	marginpar .default:n = true,
+	marginpar .initial:n = false,
+	paper .choices:nn = {a0,a1,a2,a3,a4}{
+		\int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
+		\exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
+		\exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
+	},
+	paper .initial:n = a0,
+	title .choice:,
+	title / default .meta:n = {title=large},
+	title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
+	title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
+	title .initial:n = default,
 }
 
 \ProcessKeyOptions[ptxcd/poster]
@@ -118,8 +122,6 @@
 \RequirePackage{scrlayer}
 \RequirePackage{scrlayer-notecolumn}
 \ExplSyntaxOn
-
-\tl_if_empty:NT \g_ptxcd_paper_tl {\keys_set:nn {ptxcd/poster} {paper=a0}}
 
 \bool_if:NTF \g_ptxcd_smalltitle_bool {
 	\file_input:n {tuda-a\int_use:N \g_ptxcd_paper_int paper.clo}
@@ -150,7 +152,7 @@
 \RequirePackage{tudafonts}
 \renewcommand*{\familydefault}{\sfdefault}
 
-\exp_args:Nx \PassOptionsToPackage{paper=\g_ptxcd_paper_tl , mode=tikz}{tudarules}
+\exp_args:Nx \PassOptionsToPackage{mode=tikz}{tudarules}
 \RequirePackage{tudarules}
 
 \RequirePackage{tudacolors}
