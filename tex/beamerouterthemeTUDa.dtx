@@ -126,16 +126,53 @@
 	logo .bool_gset:N = \g_ptxcd_headlinelogo_bool,
 	logo .default:n =true,
 	logo .initial:n =true,
-	colorframetitle .code:n =  \msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
-	centerframetitle .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {centerframetitle},
-	framebgcolor .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {framebgcolor},
-	singleframebgcolor .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {singleframebgcolor},
-	headsepline .code:n = \msg_warning:nnn {tudabeamer} {option-removed} {headsepline},
+	colorframetitle .code:n =
+%<main>    \msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
+%<*2008>
+		\use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool
+		\cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:,
+	colorframetitle .default:n = true,
+%</2008>
+	centerframetitle
+%<main>		 .code:n = \msg_warning:nnn {tudabeamer} {option-removed},
+%<*2008>
+		.bool_gset:N = \g_ptxcd_centerframetitle_bool,
+	centerframetitle .initial:n = false,
+	centerframetitle .default:n = true,
+%</2008>
+	framebgcolor
+%<main>		.code:n = \msg_warning:nnn {tudabeamer} {option-removed} {framebgcolor},
+%<*2008>
+		.choice:,
+	framebgcolor / reset .code:n =
+		\__ptxcd_reset_framebgcolor:
+	,
+	framebgcolor / unknown .code:n = {
+		\__ptxcd_set_framebgcolor:n {#1}
+	},
+%</2008>
+	singleframebgcolor .code:n =
+%<main>		\msg_warning:nnn {tudabeamer} {option-removed} {singleframebgcolor},
+%<*2008>
+		\cs_gset_eq:Nc \__ptxcd_save_background_canvas: {beamer@thcbg@normal~text}
+		\keys_set:nn {ptxcd/beamer/outer} {
+			framebgcolor = #1
+		},
+%</2008>
+	headsepline
+%<main>		.code:n = \msg_warning:nnn {tudabeamer} {option-removed} {headsepline},
+%<*2008>
+		.bool_gset:N = \g_ptxcd_headsepline_bool,
+	headsepline .initial:n = true,
+	headsepline .default:n = true,
+%</2008>
+%<*main>
 	extendedspace .bool_gset:N = \g__ptxcd_extended_space_bool,
 	headrule .bool_gset:N = \g__ptxcd_headrule_bool,
 	uppercase-frametitle .bool_gset:N = \g__ptxcd_uppercase_frametitle_bool,
 	uppercase-frametitle .default:n = true,
 	uppercase-frametitle .initial:n = true,
+%</main>
 %    \end{macrocode}
 % \iffalse
 %</initialize>
@@ -145,8 +182,19 @@
 %    \begin{macrocode}
 %<gobble>}
 %    \end{macrocode}
-%
+%<*main>
+% \begin{key}{beamerframe}{uppercase}
+%    \begin{macrocode}
+\define@key{beamerframe}{uppercase}{
+	\keys_set:nn {ptxcd/beamer/outer} {
+		uppercase-frametitle=#1
+	}
+}
+%    \end{macrocode}
+%</main>
+% \end{key}
 % \begin{key}{beamerframe}{bgcolor}
+%<*2008>
 %    \begin{macrocode}
 \define@key{beamerframe}{bgcolor}{
 	\keys_set:nn {ptxcd/beamer/outer} {
@@ -156,17 +204,25 @@
 %    \end{macrocode}
 % \end{key}
 %
-%
-% \begin{key}{beamerframe}{uppercase}
 %    \begin{macrocode}
-\define@key{beamerframe}{uppercase}{
-	\keys_set:nn {ptxcd/beamer/outer} {
-		uppercase-frametitle=#1
+\cs_new:Nn \__ptxcd_reset_framebgcolor: {
+	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__ptxcd_save_background_canvas:
+	\cs_undefine:N \__ptxcd_save_background_canvas:
+}
+
+\cs_new:Nn \__ptxcd_set_framebgcolor:n {
+		\cs_if_exist:cTF {\string\color@#1}
+		{\setbeamercolor{normal~text}{bg=#1}}
+		{\setbeamercolor{normal~text}{bg=TUDa-#1}}
+}
+
+\BeforeBeginEnvironment{frame}{
+	\cs_if_exist:NT \__ptxcd_save_background_canvas: {
+	\__ptxcd_reset_framebgcolor:
 	}
 }
 %    \end{macrocode}
-% \end{key}
-%
+%</2008>
 %    \begin{macrocode}
 \ProcessKeyOptions[ptxcd/beamer/outer]
 \mode<presentation>
@@ -194,17 +250,7 @@
 \hbox_gset:Nn \g__ptxcd_logo_box {%
 %<main>	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}
 %<2008>  \makebox[\__ptxcd_logowidth:][l]
-{
-	\bool_if:NTF \g_ptxcd_logo_workaround_bool {
-		\file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
-			\use_ii:nn
-			\use_i:nn
-	} {
-		\use_ii:nn
-	}
-		{\rule{0pt}{\c_ptxcd_logoheight_dim}\makebox[2.5\c_ptxcd_logoheight_dim][c]{\rule[.1\c_ptxcd_logoheight_dim]{2.05\c_ptxcd_logoheight_dim}{.8\c_ptxcd_logoheight_dim}}}
-		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
-}%
+    {\__ptxcd_insert_logo:}%
 }
 % \begin{macro}{\logo}
 %    \begin{macrocode}
@@ -225,6 +271,8 @@
 }
 %    \end{macrocode}
 % \end{macro}
+%<*main>
+%    \begin{macrocode}
 \defbeamertemplate*{footline}{TUDa2023}{
 	\begin{beamercolorbox}[leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin]{footline}
 	\usebeamerfont{footline}
@@ -338,6 +386,7 @@
 \mode
 <all>
 %    \end{macrocode}
+%</main>
 %</body>
 %</package>
 % \fi

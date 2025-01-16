@@ -1597,11 +1597,8 @@ reversemp
 	\bool_gset_true:N \g_ptxcd_marginpar_bool
 	\dim_gset:Nn \g_ptxcd_marginpar_dim {\g_ptxcd_marginpar_tl}
 }
-%</class>
-%<class|margin|exercise>\dim_new:N \g_ptxcd_headheight_dim
 
-%<exercise>\dim_gset:Nn \g_ptxcd_headheight_dim {\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}
-%<*class>
+\dim_new:N \g_ptxcd_headheight_dim
 \bool_if:NTF \g_ptxcd_headline_bool
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {20pt +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
 	{\dim_gset:Nn \g_ptxcd_headheight_dim {1.25\baselineskip +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
