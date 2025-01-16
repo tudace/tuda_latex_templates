@@ -271,47 +271,7 @@
 }
 \keys_define:nn {ptxcd/exercise} {
 %    \end{macrocode}
-%<*omit>
-%    \begin{macrocode}
-  color .code:n = {\PassOptionsToPackage{color=#1}{tudacolors}},
-  accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
-  textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
-  textonaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
-  identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
-  color .initial:n = 0b,
-  custommargins .choice:,
-  custommargins / true .code:n ={
-      \bool_gset_true:N \g_ptxcd_custommargins_bool
-      \bool_gset_false:N \g_ptxcd_geometry_bool
-    },
-  custommargins / false .code:n ={
-      \bool_gset_false:N \g_ptxcd_custommargins_bool
-      \bool_gset_true:N \g_ptxcd_geometry_bool
-    },
-  custommargins / geometry .code:n = {
-      \bool_gset_true:N \g_ptxcd_custommargins_bool
-      \bool_gset_true:N \g_ptxcd_geometry_bool
-    },
-  custommargins .initial:n = false,
-  custommargins .default:n = true,
-  fontsize .code:n = \prop_gput:Nnn \g_ptxcd_clsopts_prop {fontsize} {#1},
-  fontsize .initial:n = {10pt},
-  BCOR .code:n = \PassOptionsToPackage{bindingoffset=#1}{geometry},
-  bindingoffset .meta:n = {BCOR=#1},
-  captions .code:n = {\prop_gput:Nnx \g_ptxcd_clsopts_prop {captions} {
-        \use:n {\prop_item:Nn \g_ptxcd_clsopts_prop {captions}}, #1}
-    },
-  paper .choices:nn = {a0,a1,a2,a3,a4,a5,a6}{
-      \int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
-      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
-      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
-      \exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
-    },
-  paper .initial:n = a4,
-  logofile .tl_gset:N = \g_ptxcd_logofile_tl,
-  logofile .initial:n = tuda_logo,
-%    \end{macrocode}
-%</omit>
+%
 %    \begin{macrocode}
   compat .bool_gset:N = \g_ptxcd_ex_compatibility_bool,
   compat .initial:n = false,
@@ -322,35 +282,6 @@
   headontitle .bool_gset:N = \g_ptxcd_headontitle_bool,
   headontitle .initial:n = false,
   headontitle .default:n =true,
-%    \end{macrocode}
-%<*omit>
-%    \begin{macrocode}
-  colorback .bool_gset:N  = \g_ptxcd_colorback_bool,
-  colorback .default:n = true,
-  colorback .initial:n  = true,
-  title .choice:,
-  title / default .meta:n = {title=large},
-  title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
-  title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
-  title .initial:n = default,
-  department .choice:,
-  department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
-  department / mecheng .code:n = {
-      \str_gset:Nn \g_ptxcd_department_str {mecheng}
-      \keys_set:nn {ptxcd/exercise}{colorback=false,departmentlogofile=tuda_maschinenbau_logo,color=Primary1}
-    },
-  department .initial:n = default,
-  department / unknown .code:n = {
-      \str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
-    },
-  departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
-  departmentconfigprefix .initial:n = tuda,
-  mecheng .meta:n = {department=mecheng},
-  departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
-  departmentlogofile .initial:n =,
-%    \end{macrocode}
-%</omit>
-%    \begin{macrocode}
   titlepage .code:n = {\msg_warning:nnn {tudapub} {titlepage-option-disabled} {#1}},
   match-task-subtask-syntax .bool_gset:N = \g_ptxcd_match_task_subtask_bool,
   match-task-subtask-syntax .initial:n = false,
