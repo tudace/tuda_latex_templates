@@ -333,19 +333,20 @@
     \bool_set_false:N \l__ptxcd_points_auto_bool,
     solution .meta:nn ={ptxcd/exercise}{solution=#1},
   }
-  \fp_new:N \l_ptxcd_ex_subtask_points_fp
-  \keys_define:nn {ptxcd/subtask} {
-    credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
-    credit .initial:n =,
-    points .code:n = \fp_set:Nn \l_ptxcd_ex_subtask_points_fp {#1}
+\fp_new:N \l_ptxcd_ex_subtask_points_fp
+\keys_define:nn {ptxcd/subtask} {
+  credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
+  credit .initial:n =,
+  points .code:n = \fp_set:Nn \l_ptxcd_ex_subtask_points_fp {#1}
     \bool_set_false:N \l__ptxcd_points_auto_bool,
-    title .tl_set:N = \l_ptxcd_ex_title_tl,
-    title .initial:n =,
-    unknown .code:n = {
-      \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool
-      \tl_clear:N \l_ptxcd_ex_subtask_credit_tl
-      \fp_zero:N \l_ptxcd_ex_subtask_points_fp,
-    }
+  title .tl_set:N = \l_ptxcd_ex_title_tl,
+  title .initial:n =,
+  unknown .code:n = {
+    \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool
+    \tl_clear:N \l_ptxcd_ex_subtask_credit_tl
+    \fp_zero:N \l_ptxcd_ex_subtask_points_fp,
+  }
+}
 \keys_define:nn {ptxcd/exercise/headline} {
   headline .code:n = {
     \if@twoside
