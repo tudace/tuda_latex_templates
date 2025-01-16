@@ -96,7 +96,6 @@
 %
 % \DescribeMacro{\filedate}
 %
-
 %
 % \MaybeStop{}
 %
@@ -113,55 +112,56 @@
 \RequirePackage{iftex}
 \RequirePackage{anyfontsize}
 \ifPDFTeX
-	\csname @ptxcd@T1true\endcsname
-	%Fallback for older versions
-	\expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
-	\RequirePackage[utf8]{inputenc}
-	\fi
-	\expandafter\ifx\csname texteuro\endcsname\relax
-		\RequirePackage{textcomp}
-	\fi
-	\DeclareUnicodeCharacter{20AC}{\texteuro}
+  \csname @ptxcd@T1true\endcsname
+  %Fallback for older versions
+  \expandafter\ifx\csname DeclareUnicodeCharacter\endcsname\relax
+    \RequirePackage[utf8]{inputenc}
+  \fi
+  \expandafter\ifx\csname texteuro\endcsname\relax
+    \RequirePackage{textcomp}
+  \fi
+  \DeclareUnicodeCharacter{20AC}{\texteuro}
 \fi
 \csname if@ptxcd@T1\endcsname
-	\ifLuaTeX
-		\RequirePackage[utf8]{luainputenc}
-	\fi
-	\RequirePackage{XCharter}%activates T1
-	\PassOptionsToPackage{type1}{roboto}
-	\PassOptionsToPackage{type1}{roboto-mono}
-	%Workaround for missing ligature replacements with roboto in T1
-	\ifXeTeX
-	\else
-		\RequirePackage{microtype}
-		\DisableLigatures{encoding = *, family=\sfdefault,shape = sc }
-	\fi
+  \ifLuaTeX
+    \RequirePackage[utf8]{luainputenc}
+  \fi
+  \RequirePackage{XCharter}%activates T1
+  \PassOptionsToPackage{type1}{roboto}
+  \PassOptionsToPackage{type1}{roboto-mono}
+  %   Workaround for missing ligature replacements with roboto in T1
+  \ifXeTeX
+  \else
+    \RequirePackage{microtype}
+    \DisableLigatures{encoding = *, family=\sfdefault,shape = sc }
+  \fi
 \else
-	\RequirePackage{fontspec}
-	\setmainfont{XCharter}
+  \RequirePackage{fontspec}
+  \setmainfont{XCharter}
 \fi
 \RequirePackage{roboto}
 \csname if@ptxcd@T1\endcsname
-	\newcommand\robotoblackspaced{%
-		\robotoblack
-		\lsstyle
-	}
+  \newcommand\robotoblackspaced{%
+    \robotoblack
+    \lsstyle
+  }
 \else
-	\newfontfamily\robotoblackspaced
-	   [ Numbers = {\roboto@figurealign,\roboto@figurestyle},
-		 UprightFont    = *-Black ,
-		 ItalicFont     = *-BlackItalic,
-		 LetterSpace=26,
-		 WordSpace=2.2
-	   ]
-	   {Roboto}
+  \newfontfamily\robotoblackspaced
+  [ Numbers = {\roboto@figurealign,\roboto@figurestyle},
+    UprightFont    = *-Black ,
+    ItalicFont     = *-BlackItalic,
+    LetterSpace=26,
+    WordSpace=2.2
+  ]
+  {Roboto}
 \fi
 \IfFileExists{roboto-mono.sty}{
-	\RequirePackage{roboto-mono}
+  \RequirePackage{roboto-mono}
 }{
-	\PackageWarningNoLine{tudafonts}{
-	The font package roboto-mono.sty could not be found. Probably your TeX-distribution is outdated.\MessageBreak
-	For correct font setup either install it manually or update you distribution}
+    \PackageWarningNoLine{tudafonts}{%
+      The font package roboto-mono.sty could not be found.
+      Probably your TeX-distribution is outdated.\MessageBreak
+      For correct font setup either install it manually or update you distribution}
 }
 %    \end{macrocode}
 %
@@ -175,19 +175,19 @@
 \let\accentfont\robotoslab
 \DeclareTextFontCommand{\textaccent}{\accentfont}
 %    \end{macrocode}
-%adjust LaTeX kerning to font
+% adjust LaTeX Logo kerning to font
 %    \begin{macrocode}
 \DeclareRobustCommand{\LaTeX}{%
-{L\setbox\z@\hbox{\check@mathfonts \fontsize\sf@size\z@
- \math@fontsfalse\selectfont A}\kern-.57\wd\z@
- \sbox\tw@ T\vbox to \ht\tw@{\copy\z@ \vss}\kern-.2\wd\z@}%
-{%
- \ifdim\fontdimen1\font=\z@ \else \count\z@=\fontdimen5\font
- \multiply\count\z@ by 64\relax\divide\count\z@ by\p@
- \count\tw@=\fontdimen1\font \multiply\count\tw@ by\count\z@
- \divide\count\tw@ by 64\relax\divide\count\tw@ by\tw@
- \kern-\the\count\tw@ sp\relax\fi}%
-\TeX}
+  {L\setbox\z@\hbox{\check@mathfonts \fontsize\sf@size\z@
+        \math@fontsfalse\selectfont A}\kern-.57\wd\z@
+      \sbox\tw@ T\vbox to \ht\tw@{\copy\z@ \vss}\kern-.2\wd\z@}%
+    {%
+      \ifdim\fontdimen1\font=\z@ \else \count\z@=\fontdimen5\font
+        \multiply\count\z@ by 64\relax\divide\count\z@ by\p@
+        \count\tw@=\fontdimen1\font \multiply\count\tw@ by\count\z@
+        \divide\count\tw@ by 64\relax\divide\count\tw@ by\tw@
+        \kern-\the\count\tw@ sp\relax\fi}%
+  \TeX}
 %    \end{macrocode}
 %
 % \iffalse

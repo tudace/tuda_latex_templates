@@ -271,157 +271,162 @@ reversemp
 % \fi
 %
 % \begin{implementation}
-% \section{Implementation}
+%   \section{Implementation}
 %
-% \iffalse
+%   \iffalse
 %<*package>
 % \fi
 %    \begin{macrocode}
 \str_if_exist:NF \g_ptxcd_department_str {
-	\str_new:N \g_ptxcd_department_str
-	\str_gset:Nn \g_ptxcd_department_str {default}
+  \str_new:N \g_ptxcd_department_str
+  \str_gset:Nn \g_ptxcd_department_str {default}
 }
 \keys_define:nn {ptxcd/colors} {
 %    \end{macrocode}
 % \end{implementation}
 % \begin{documentation}
-% \DescribeKeyOption{accent=\meta{color}}{0b}\DescribeOption{accentcolor=}
+%   \DescribeKeyOption{accent=\meta{color}}{0b}\DescribeOption{accentcolor=}
 % \end{documentation}
 % \begin{implementation}
-% \begin{optionenv}{accent=}
+%   \begin{optionenv}{accent=}
 %    \begin{macrocode}
-	accent .tl_gset:N = \g_ptxcd_color_accent_tl,
-	accent .initial:n = 0b,
-	accentcolor .meta:n = {accent =#1},
+  accent .tl_gset:N = \g_ptxcd_color_accent_tl,
+  accent .initial:n = 0b,
+  accentcolor .meta:n = {accent =#1},
 %    \end{macrocode}
-% \end{optionenv}^^A accent
+%   \end{optionenv}^^A accent
 % \end{implementation}
 % \begin{documentation}
-% \DescribeKeyOption{textaccent=\meta{color}}{\g_ptxcd_color_accent_tl}
+%   \DescribeKeyOption{textaccent=\meta{color}}{\g_ptxcd_color_accent_tl}
 % \end{documentation}
 % \begin{implementation}
-% \begin{optionenv}{textaccent=\meta{color}}
+%   \begin{optionenv}{textaccent=\meta{color}}
 %    \begin{macrocode}
-	textaccent .tl_gset:N = \g_ptxcd_color_textaccent_tl,
-	textaccent .initial:n = \g_ptxcd_color_accent_tl,
-	textaccentcolor .meta:n = {textaccent = #1},
+  textaccent .tl_gset:N = \g_ptxcd_color_textaccent_tl,
+  textaccent .initial:n = \g_ptxcd_color_accent_tl,
+  textaccentcolor .meta:n = {textaccent = #1},
 %    \end{macrocode}
-% \end{optionenv}^^A textaccent
+%   \end{optionenv}^^A textaccent
 % \end{implementation}
 % \begin{documentation}
-% \DescribeKeyOption{identbar=\meta{color}}{\g_ptxcd_color_accent_tl}
+%   \DescribeKeyOption{identbar=\meta{color}}{\g_ptxcd_color_accent_tl}
 % \end{documentation}
 % \begin{implementation}
-% \begin{optionenv}{identbar=\meta{color}}
+%   \begin{optionenv}{identbar=\meta{color}}
 %    \begin{macrocode}
-	identbar .tl_gset:N = \g_ptxcd_color_identbar_tl,
-	identbar .initial:n = \g_ptxcd_color_accent_tl,
-	identbarcolor .meta:n = {identbar = #1},
+  identbar .tl_gset:N = \g_ptxcd_color_identbar_tl,
+  identbar .initial:n = \g_ptxcd_color_accent_tl,
+  identbarcolor .meta:n = {identbar = #1},
 %    \end{macrocode}
-% \end{optionenv}^^A identbar
-% compatibility only
+%   \end{optionenv}^^A identbar
+%   compatibility only
 %    \begin{macrocode}
-	color .code:n = \keys_set:nn {ptxcd/colors} {accent=#1, textaccent=#1, identbar=#1}\PassOptionsToPackage{color=}{siunitx},
+  color .code:n = \keys_set:nn {ptxcd/colors} {accent=#1, textaccent=#1, identbar=#1}\PassOptionsToPackage{color=}{siunitx},
 %    \end{macrocode}
 % \end{implementation}
 % \begin{documentation}
-% \DescribeKeyOption{text=preferblack/preferwhite}{preferwhite}
+%   \DescribeKeyOption{text=preferblack/preferwhite}{preferwhite}
 % \end{documentation}
 % \begin{implementation}
-% \begin{optionenv}{text}
+%   \begin{optionenv}{text}
 %    \begin{macrocode}
-	text .choice:,
-	text/preferblack .code:n = \bool_gset_false:N \g_ptxcd_color_whitetext_bool,
-	text/preferwhite .code:n = \bool_gset_true:N  \g_ptxcd_color_whitetext_bool,
-	text .initial:n = {preferwhite},
-	text/black .meta:n = {text=preferblack},
-	text/white .meta:n = {text=preferwhite},
+  text .choice:,
+  text/preferblack .code:n = \bool_gset_false:N \g_ptxcd_color_whitetext_bool,
+  text/preferwhite .code:n = \bool_gset_true:N  \g_ptxcd_color_whitetext_bool,
+  text .initial:n = {preferwhite},
+  text/black .meta:n = {text=preferblack},
+  text/white .meta:n = {text=preferwhite},
 %    \end{macrocode}
-% \end{optionenv}^^A text
-% \begin{documentation}
-% \DescribeKeyOption{colormode=cmyk/RGB}{Depends on document type}
-% \end{documentation}
-% \begin{optionenv}{cmyk, RGB}
+%   \end{optionenv}^^A text
+%   \begin{documentation}
+%     \DescribeKeyOption{colormode=cmyk/RGB}{Depends on document type}
+%   \end{documentation}
+%   \begin{optionenv}{cmyk, RGB}
 %    \begin{macrocode}
-	cmyk .code:n = \PassOptionsToPackage{cmyk}{xcolor},
-	RGB .code:n = \PassOptionsToPackage{RGB}{xcolor},
+  cmyk .code:n = \PassOptionsToPackage{cmyk}{xcolor},
+  RGB .code:n = \PassOptionsToPackage{RGB}{xcolor},
 %    \end{macrocode}
-% \end{optionenv}
+%   \end{optionenv}
 % \end{implementation}
 % \begin{documentation}
-% \DescribeKeyOption{department=default/mecheng/\meta{department}}{default}
-% Within \pkg{tudacolors} it's only checked if the department was set to \option{mecheng}. In that case the additional color configuration will be enbled (\autoref{sec:mecheng}).
+%   \DescribeKeyOption{department=default/mecheng/\meta{department}}{default}
+%   Within \pkg{tudacolors} it's only checked if the department was set to \option{mecheng}. In that case the additional color configuration will be enbled (\autoref{sec:mecheng}).
 % \end{documentation}
 % \begin{implementation}
-% \begin{optionenv}{department=}
+%   \begin{optionenv}{department=}
 %    \begin{macrocode}
-	department .choice:,
-	department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
-	department / mecheng .code:n = \str_gset:Nn \g_ptxcd_department_str {mecheng}\keys_set:nn {ptxcd/colors}{accent=TUDa-2d,identbar=TUDa-6b},
-	department / unknown .code:n = {
-		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
-	},
+  department .choice:,
+  department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
+  department / mecheng .code:n = \str_gset:Nn \g_ptxcd_department_str {mecheng}\keys_set:nn {ptxcd/colors}{accent=TUDa-2d,identbar=TUDa-6b},
+  department / unknown .code:n = {
+      \str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
+    },
 %    \end{macrocode}
-% \end{optionenv}^^A department
+%   \end{optionenv}^^A department
 % \end{implementation}
 % \begin{implementation}
 %    \begin{macrocode}
-	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
-	mecheng .meta:n = {department=mecheng},
+  departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
+  mecheng .meta:n = {department=mecheng},
 }
 \ProcessKeyOptions[ptxcd/colors]
 \RequirePackage{xcolor}
 \input{tudacolors.def}
 \str_if_eq:VnT \g_ptxcd_department_str {mecheng} {
-	\colorlet{TUDa-Primary1}{TUDa-6b}
-	\colorlet{TUDa-Primary2}{TUDa-2d}
-	\colorlet{TUDa-Secondary1}{TUDa-9a}
-	\colorlet{TUDa-Secondary2}{TUDa-8a}
-	\colorlet{TUDa-Secondary3}{TUDa-6a}
-	\colorlet{TUDa-Secondary4}{TUDa-3a}
-	\colorlet{TUDa-Secondary5}{TUDa-4a}
-	\colorlet{TUDa-Secondary6}{TUDa-5a}
-	\colorlet{TUDa-Arrow}{TUDa-Primary2}
+  \colorlet{TUDa-Primary1}{TUDa-6b}
+  \colorlet{TUDa-Primary2}{TUDa-2d}
+  \colorlet{TUDa-Secondary1}{TUDa-9a}
+  \colorlet{TUDa-Secondary2}{TUDa-8a}
+  \colorlet{TUDa-Secondary3}{TUDa-6a}
+  \colorlet{TUDa-Secondary4}{TUDa-3a}
+  \colorlet{TUDa-Secondary5}{TUDa-4a}
+  \colorlet{TUDa-Secondary6}{TUDa-5a}
+  \colorlet{TUDa-Arrow}{TUDa-Primary2}
 }
 \clist_const:Nn \c_ptxcd_color_forbid_textaccent_clist {TUDa-0a,TUDa-5a,TUDa-6a,TUDa-6b,TUDa-7a}
 \clist_const:Nn \c_ptxcd_color_allow_blacktext_clist {TUDa-0a,TUDa-0b,TUDa-0c,TUDa-1a,TUDa-2a,TUDa-3a,TUDa-4a,TUDa-4b,TUDa-4c,TUDa-5a,TUDa-5b,TUDa-5c,TUDa-6a,TUDa-6b,TUDa-6c,TUDa-7a,TUDa-7b,TUDa-7c,TUDa-8a,TUDa-8b,TUDa-8c,TUDa-9a,TUDa-9b,TUDa-10a}
 \clist_const:Nn \c_ptxcd_color_allow_whitetext_clist {TUDa-0b,TUDa-0c,TUDa-0d,black,TUDa-1a,TUDa-1b,TUDa-1c,TUDa-1d,TUDa-2a,TUDa-2b,TUDa-2c,TUDa-2d,TUDa-3a,TUDa-3b,TUDa-3c,TUDa-3d,TUDa-4b,TUDa-4c,TUDa-4d,TUDa-5b,TUDa-5c,TUDa-5d,TUDa-6c,TUDa-6d,TUDa-7b,TUDa-7c,TUDa-7d,TUDa-8a,TUDa-8b,TUDa-8c,TUDa-8d,TUDa-9a,TUDa-9b,TUDa-9c,TUDa-9d,TUDa-10a,TUDa-10b,TUDa-10c,TUDa-10d,TUDa-11a,TUDa-11b,TUDa-11c,TUDa-11d}
 %    \end{macrocode}
-%messages
+%   messages
 %    \begin{macrocode}
 \msg_new:nnnn{tudacolors} {undefined-color} {The~ color~ #1~ you~ selected~ is~ not~ defined.} {See~ the~ tuda-ci~ manual~ for~ a~ list~ of~ available~ colors.}
 \msg_new:nnnn{tudacolors} {unselectable-color} {The~ color~ you~ selected~ (#1)~ must~ not~ be~ choosen~ for~ #2.} {See~ the~ Corporate~ Design~ Guideline~ for~ further~ information.}
 \hook_new:n {ptxcd/init-colors}
 \hook_gput_code:nnn {ptxcd/init-colors} {tudacolors} {
-	\clist_map_inline:nn {accent, textaccent, identbar} {
-		\cs_if_exist:cF {\string\color@\tl_use:c {g_ptxcd_color_#1_tl}} {
-			\cs_if_exist:cT {\string\color@TUDa-\tl_use:c {g_ptxcd_color_#1_tl}} {
-				\tl_gset:cx {g_ptxcd_color_#1_tl} {TUDa-\tl_use:c {g_ptxcd_color_#1_tl}}
-		}}
-	}
-	\exp_args:Nnx \colorlet{accentcolor}{\g_ptxcd_color_accent_tl}
-	\bool_if:NTF \g_ptxcd_color_whitetext_bool {
-		\clist_if_in:NVTF \c_ptxcd_color_allow_whitetext_clist \g_ptxcd_color_accent_tl {
-			\colorlet{textonaccentcolor}{white}
-		} {
-			\colorlet{textonaccentcolor}{black}
-			\tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {\msg_warning:nnxx{tudacolors} {unselectable-color} {white} {textonaccentcolor}}
-		}
-	} {
-		\clist_if_in:NVTF \c_ptxcd_color_allow_blacktext_clist \g_ptxcd_color_accent_tl {
-			\colorlet{textonaccentcolor}{black}
-		} {
-			\colorlet{textonaccentcolor}{white}
-			\tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {msg_warning:nnxx{tudacolors} {unselectable-color} {black} {textonaccentcolor}}
-		}
-	}
-	\colorlet{identbarcolor}{\g_ptxcd_color_identbar_tl}
-	\exp_args:NNx \clist_if_in:NnTF \c_ptxcd_color_forbid_textaccent_clist {\g_ptxcd_color_textaccent_tl} {
-		\msg_warning:nnxx{tudacolors} {unselectable-color} {\g_ptxcd_color_textaccent_tl} {textaccentcolor}
-		\colorlet{textaccentcolor}{black}
-	} {
-		\colorlet{textaccentcolor}{\g_ptxcd_color_textaccent_tl}
-	}
+  \clist_map_inline:nn {accent, textaccent, identbar} {
+    \cs_if_exist:cF {\string\color@\tl_use:c {g_ptxcd_color_#1_tl}} {
+      \cs_if_exist:cT {\string\color@TUDa-\tl_use:c {g_ptxcd_color_#1_tl}} {
+        \tl_gset:cx {g_ptxcd_color_#1_tl} {TUDa-\tl_use:c {g_ptxcd_color_#1_tl}}
+      }
+    }
+  }
+  \exp_args:Nnx \colorlet{accentcolor}{\g_ptxcd_color_accent_tl}
+  \bool_if:NTF \g_ptxcd_color_whitetext_bool {
+    \clist_if_in:NVTF \c_ptxcd_color_allow_whitetext_clist \g_ptxcd_color_accent_tl {
+      \colorlet{textonaccentcolor}{white}
+    } {
+      \colorlet{textonaccentcolor}{black}
+      \tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {
+        \msg_warning:nnxx{tudacolors} {unselectable-color} {white} {textonaccentcolor}
+      }
+    }
+  } {
+    \clist_if_in:NVTF \c_ptxcd_color_allow_blacktext_clist \g_ptxcd_color_accent_tl {
+      \colorlet{textonaccentcolor}{black}
+    } {
+      \colorlet{textonaccentcolor}{white}
+      \tl_if_in:NnT \g_ptxcd_color_accent_tl {TUDa} {
+        msg_warning:nnxx{tudacolors} {unselectable-color} {black} {textonaccentcolor}
+      }
+    }
+  }
+  \colorlet{identbarcolor}{\g_ptxcd_color_identbar_tl}
+  \exp_args:NNx \clist_if_in:NnTF \c_ptxcd_color_forbid_textaccent_clist {\g_ptxcd_color_textaccent_tl} {
+    \msg_warning:nnxx{tudacolors} {unselectable-color} {\g_ptxcd_color_textaccent_tl} {textaccentcolor}
+    \colorlet{textaccentcolor}{black}
+  } {
+    \colorlet{textaccentcolor}{\g_ptxcd_color_textaccent_tl}
+  }
 }
 \file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str-colors.def}
 \hook_use:n {ptxcd/init-colors}
