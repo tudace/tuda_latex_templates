@@ -118,34 +118,9 @@
   logo .initial:n = true,
   premium .bool_gset:N = \g__ptxcd_letter_premium_bool,
   premium .default:n = true,
-%<gobble>  accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
   firstpagenumber .bool_gset:N = \g__ptxcd_firstpagenumber_bool,
   firstpagenumber .initial:n = true,
   raggedright .bool_gset:N = \g__ptxcd_letter_raggedright_bool,
-%<*gobble>
-  pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
-  pdfa .initial:n = true,
-  pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
-  pdfx .initial:n = true,
-  logofile .tl_gset:N = \g_ptxcd_logofile_tl,
-  logofile .initial:n = tuda_logo,
-  department .choice:,
-  department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
-  department / mecheng .code:n = {
-    \str_gset:Nn \g_ptxcd_department_str {mecheng}
-    \keys_set:nn {ptxcd/letter}{departmentlogofile=tuda_maschinenbau_logo,headrule=false,logo=false,textwidth=narrow}
-    \PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
-  },
-  department .initial:n = default,
-  department / unknown .code:n = {
-      \str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
-    },
-  departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
-  departmentconfigprefix .initial:n = tuda,
-  mecheng .meta:n = {department=mecheng},
-  departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
-  departmentlogofile .initial:n =,
-%</gobble>
   headrule .bool_gset:N = \g__ptxcd_letter_headrule_bool,
   headrule .initial:n = true,
   headrule .default:n = true,

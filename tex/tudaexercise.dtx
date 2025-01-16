@@ -434,49 +434,6 @@
 }
 \RequirePackage{tudafonts}
 %</center>
-%<*omit>
-\dim_new:N \g_ptxcd_innerMargin_dim
-\dim_new:N \g_ptxcd_outerMargin_dim
-\dim_new:N \g_ptxcd_bottomMargin_dim
-\dim_new:N \g_ptxcd_topMargin_dim
-%a3,a4
-\int_compare:nTF {4<=\g_ptxcd_paper_int<=5}
-{
-  \dim_gset:Nn \g_ptxcd_bottomMargin_dim {20mm}
-  \dim_gset:Nn \g_ptxcd_outerMargin_dim {15mm}
-  \dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
-  \dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-}{
-  %a0, a1, a2
-  \int_compare:nT {1<=\g_ptxcd_paper_int<=3}
-  {
-    \dim_gset:Nn \g_ptxcd_bottomMargin_dim {35mm}
-    \dim_gset:Nn \g_ptxcd_outerMargin_dim {30mm}
-    \dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
-    \dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-  }
-  %a5
-  \int_compare:nT {\g_ptxcd_paper_int<=6}
-  {
-    \dim_gset:Nn \g_ptxcd_bottomMargin_dim {16mm}
-    \dim_gset:Nn \g_ptxcd_outerMargin_dim {12mm}
-    \dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
-    \dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-  }
-  %a6
-  \int_compare:nT {\g_ptxcd_paper_int<=7}
-  {
-    \dim_gset:Nn \g_ptxcd_bottomMargin_dim {15mm}
-    \dim_gset:Nn \g_ptxcd_outerMargin_dim {10mm}
-    \dim_gset_eq:NN	 \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
-    \dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-  }
-}
-\dim_new:N \g_ptxcd_columnSep_dim
-\dim_gset:Nn \g_ptxcd_columnSep_dim {10pt}
-
-%%%%%Anfang Randeinstellungen Geometry
-%</omit>
 %<*body>
 \dim_new:N \g_ptxcd_headheight_dim
 \dim_gset:Nn \g_ptxcd_headheight_dim {\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}
@@ -490,9 +447,6 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{implementation}
-%
-% %%%%%%%
-% Ende Randeinstellungen klassisch
 %
 % \begin{documentation}
 % \DescribeMacro{\institution}
