@@ -43,8 +43,10 @@ kvdefinekeys# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
 kvoptions# only Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
 kvsetkeys# only Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
 l3backend
+l3build# binary
 l3kernel
 l3packages
+latex-bin# binary
 latex
 latex-fonts
 latex-lab# only Letter PhD Pub Thesis
