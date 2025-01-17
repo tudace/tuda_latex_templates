@@ -40,13 +40,13 @@
 	colorframetitle=true,% Akzentfarbe auch im Frametitle
 %	logofile=example-image, % Falls die Logo Dateien nicht vorliegen
 	design=2008,  %Um das alte Design zu aktivieren
-	]{tudabeamer}
+]{tudabeamer}
 \usepackage[main=german]{babel}
 
 % Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig:
 \usepackage{iftex}
 \ifPDFTeX
-\usepackage[utf8]{inputenc}% Kompatibilität mit TeX Versionen vor April 2018
+	\usepackage[utf8]{inputenc}% Kompatibilität mit TeX Versionen vor April 2018
 \fi
 
 
@@ -75,73 +75,73 @@
 
 \section{Dokumentation}
 \begin{frame}{Die Dokumentenklasse tudabeamer}
-\begin{itemize}
-	\item Verwendung wie beamer
-	\item Keine besondere Syntax notwendig
-	\item Klassenoption accentcolor wählt Akzentfarbe
-	\item Option serif=true für Serifen
-\end{itemize}
+	\begin{itemize}
+		\item Verwendung wie beamer
+		\item Keine besondere Syntax notwendig
+		\item Klassenoption accentcolor wählt Akzentfarbe
+		\item Option serif=true für Serifen
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Zusätzliche Features der Titelfolie}
-\begin{itemize}
-	\item \code{\textbackslash{}logo} wählt Fremdlogo für Fußzeile
-	\item \code{\textbackslash{}titlegraphic} ersetzt den unteren Teil der Titelfolie. Zusätzlich existiert \code{\textbackslash{}titlegraphic*{Inhalt}}.
-	In diesem Fall wird der Inhalt in eine Box gesetzt, die so skaliert wird, dass sie den Bereich des Titelbildes überdeckt und entsprechend mittig ausgeschnitten ist.
-\end{itemize}
+	\begin{itemize}
+		\item \code{\textbackslash{}logo} wählt Fremdlogo für Fußzeile
+		\item \code{\textbackslash{}titlegraphic} ersetzt den unteren Teil der Titelfolie. Zusätzlich existiert \code{\textbackslash{}titlegraphic*{Inhalt}}.
+		      In diesem Fall wird der Inhalt in eine Box gesetzt, die so skaliert wird, dass sie den Bereich des Titelbildes überdeckt und entsprechend mittig ausgeschnitten ist.
+	\end{itemize}
 	Über die Option \code{authorontitle=true/false} kann zu den offiziellen Vorgaben auch der Autor und das Institut groß auf der Titelfolie gezeigt werden.
 \end{frame}
 
 \setupTUDaFrame{logo=true}
 \begin{frame}[fragile]{Logo im Frametitle}
-Das Logo innerhalb des Frametitle kann mit der Klassenoption \code{logo=false} abgeschaltet werden.
+	Das Logo innerhalb des Frametitle kann mit der Klassenoption \code{logo=false} abgeschaltet werden.
 
-Soll das Logo später für ein Folie oder einen Bereich wieder aktiviert werden, steht das Makro
+	Soll das Logo später für ein Folie oder einen Bereich wieder aktiviert werden, steht das Makro
 \begin{verbatim}
 \setupTUDaFrame{logo=true}
 \end{verbatim}
-zur Verfügung. Dort kann die globale Einstellung lokal überschrieben werden.
+	zur Verfügung. Dort kann die globale Einstellung lokal überschrieben werden.
 \end{frame}
 
 \begin{frame}{Frame mit Untertitel}
-\framesubtitle{Untertitel}
-Ein Beispiel.
+	\framesubtitle{Untertitel}
+	Ein Beispiel.
 \end{frame}
 
 \begin{frame}{Blöcke}
-\begin{block}{Standardblock mit Titel}
-	Blockinhalt
-\end{block}
-\begin{block}{}
-	Ohne Titel
-\end{block}
+	\begin{block}{Standardblock mit Titel}
+		Blockinhalt
+	\end{block}
+	\begin{block}{}
+		Ohne Titel
+	\end{block}
 \end{frame}
 
 \begin{frame}{Spezielle Blöcke}
-\begin{exampleblock}{Exampleblock}
-	Blockinhalt
-\end{exampleblock}
-\begin{alertblock}{Alertblock}
-	Blockinhalt
-\end{alertblock}
-\begin{example}[Für die example-Umgebung]
-	Inhalt
-\end{example}
+	\begin{exampleblock}{Exampleblock}
+		Blockinhalt
+	\end{exampleblock}
+	\begin{alertblock}{Alertblock}
+		Blockinhalt
+	\end{alertblock}
+	\begin{example}[Für die example-Umgebung]
+		Inhalt
+	\end{example}
 \end{frame}
 
 \begin{frame}{Hinweis zur Ausrichtung (insbesondere columns)}
 	Die Standardausrichtung wurde gegenüber den Beamer-Voreinstellungen von \code{c} zu \code{t} geändert. Dies bedeutet, dass Inhalt auf der Folie oben ausgerichtet wird. Dies entspricht den Vorgaben. Es hat allerdings den Nachteil, dass die \code{columns}-Umgebung in diesem Fall bei der Positionierung von Bildern ungewohnte Ergebnisse erzeugt.
 
 	Die Ausrichtung kann in diesem Fall entweder global mit der Option \code{c} wieder zum Standard geändert werden oder aber das \code{c} wird direkt an die \code{columns}-Umgebung übergeben. Zum Beispiel:
-\begin{columns}[onlytextwidth,c]% Ohne das c ist die Ausrichtung verschoben
-	\column{.8\linewidth}
-	\begin{itemize}
-		\item eins
-		\item zwei
-	\end{itemize}
-	\column{.2\linewidth}
-	\includegraphics[width=\linewidth]{example-image}
-\end{columns}
+	\begin{columns}[onlytextwidth,c]% Ohne das c ist die Ausrichtung verschoben
+		\column{.8\linewidth}
+		\begin{itemize}
+			\item eins
+			\item zwei
+		\end{itemize}
+		\column{.2\linewidth}
+		\includegraphics[width=\linewidth]{example-image}
+	\end{columns}
 \end{frame}
 
 
@@ -149,13 +149,13 @@ Ein Beispiel.
 	Es gibt keine feste Vorgabe zur Verwendung einer Mathematikschrift.
 
 	In der Diskussion (\url{https://github.com/tudace/tuda_latex_templates/issues/30}) hat sich folgendes als hinreiche Lösung herausgestellt. Jedoch funktioniert diese Lösung nicht in pdflatex!
-	\begin{verbatim}
+\begin{verbatim}
 	\usepackage{unicode-math}
 	\setmathfont{Fira Math}
 	\setmathfont[range=up]{Roboto}
 	\setmathfont[range=it]{Roboto-Italic}
 	\setmathfont[range=\int]{Fira Math}
-	\end{verbatim}
+\end{verbatim}
 	Allgemein kann die Mathematikschriftart natürlich auch durch Pakete angepasst werden.
 \end{frame}
 
@@ -163,40 +163,40 @@ Ein Beispiel.
 \begin{frame}[fragile]{Spezielle Anpassungen des Fachbereichs Maschinenbau}
 	Mit Version 3.0 wird TUDa-CI um die Anpassungen des Corporate Designs des Fachbereichs Maschinenbau ergänzt.
 	Daher verfügt tudabeamer nun ebenfalls über die Option
-	\begin{verbatim}
+\begin{verbatim}
 	department=mecheng
-	\end{verbatim}
+\end{verbatim}
 	oder kurz
-	\begin{verbatim}
+\begin{verbatim}
 	mecheng
-	\end{verbatim}
+\end{verbatim}
 	Dieser Modus setzt automatisch alle notwendigen Änderungen, benötigt jedoch die zusätzlichen Logos.
 
 	Falls das Logo des Fachbereichs nicht vorliegt, kann durch die Option
-	\begin{verbatim}
+\begin{verbatim}
 	departmentlogo=example-image
-	\end{verbatim} ein Beispielbild statt des Logos verwendet werden.
+\end{verbatim} ein Beispielbild statt des Logos verwendet werden.
 \end{frame}
 
 \begin{frame}[fragile]{mecheng: Hintergrundfarbe}
 	Diese Variante des Corporate Designs erlaubt es die Hintergrundfarbe der einzelnen Folien zu verändern. Hierfür wurden die Frames um die Option \code{bgcolor} erweitert. Um in die beiden voreingestellten Modi zu wechseln, gibt es die Konfiguration
-	\begin{verbatim}
+\begin{verbatim}
 	bgcolor=Primary1
-	\end{verbatim}
+\end{verbatim}
 	oder
-	\begin{verbatim}
+\begin{verbatim}
 	bgcolor=Primary2
-	\end{verbatim}
+\end{verbatim}
 	Damit wird auch die Textfarbe entsprechend der Vorgaben gewählt. Bei Auswahl einer abweichenden Farbe bleibt die Textfarbe unverändert und muss ggf. manuell angepasst werden.
 \end{frame}
 
 \begin{frame}[fragile]{Änderung an der Option color in Version 3.33.}
-Bis version 3.33 konnte tudabeamer mit der Option \verb+color={Optionen}+ Optionen an das Paket tudacolors übergeben.
+	Bis version 3.33 konnte tudabeamer mit der Option \verb+color={Optionen}+ Optionen an das Paket tudacolors übergeben.
 
-Aufgrund eines Konflikts mit dem siunitx Paketes, welches jedoch weiter verbreitet ist als TUDa-CI wurde für Version 3.33 die Option so umbenannt, dass nun der Optionsschlüssel \verb+tudacolors={Optionen}+ notwendig ist.
-Siehe auch \url{https://github.com/tudace/tuda_latex_templates/issues/435}
+	Aufgrund eines Konflikts mit dem siunitx Paketes, welches jedoch weiter verbreitet ist als TUDa-CI wurde für Version 3.33 die Option so umbenannt, dass nun der Optionsschlüssel \verb+tudacolors={Optionen}+ notwendig ist.
+	Siehe auch \url{https://github.com/tudace/tuda_latex_templates/issues/435}
 
-Die Funktion funktioniert weiterhin wie gewohnt, allerdings wird eine Warnung erzeugt. Falls siunitx geladen und das Problem tatsächlich auftritt, wird diese Warnung vor der erzeugten Fehlermeldung ausgegeben.
+	Die Funktion funktioniert weiterhin wie gewohnt, allerdings wird eine Warnung erzeugt. Falls siunitx geladen und das Problem tatsächlich auftritt, wird diese Warnung vor der erzeugten Fehlermeldung ausgegeben.
 \end{frame}
 
 \end{document}

@@ -80,85 +80,85 @@
 \section{Dokumentation}
 
 \begin{frame}{Die Dokumentenklasse beamer}
-\begin{itemize}
-	\item Grundlegende Verwendung ist wie bei beamer
-	\item Keine spezielle Syntax erforderlich
-\end{itemize}
+	\begin{itemize}
+		\item Grundlegende Verwendung ist wie bei beamer
+		\item Keine spezielle Syntax erforderlich
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Zusätzliche Funktionen für Titelgrafiken/Logos}
-\begin{itemize}
-	\item \code{\textbackslash{}partnerlogo} zusätzliches Logo neben dem TUDa-Logo
-	\item \code{\textbackslash{}sublogo} zusätzliches Logo unter dem TUDa-Logo
-	\item \code{\textbackslash{}titlegraphic} platziert das Bild als Hintergrund der Titelfolie
-\end{itemize}
-Die zusätzliche Option \code{authorontitle=true/false} ermöglicht es, den Autor/das Institut unterhalb des Titels zu platzieren.
+	\begin{itemize}
+		\item \code{\textbackslash{}partnerlogo} zusätzliches Logo neben dem TUDa-Logo
+		\item \code{\textbackslash{}sublogo} zusätzliches Logo unter dem TUDa-Logo
+		\item \code{\textbackslash{}titlegraphic} platziert das Bild als Hintergrund der Titelfolie
+	\end{itemize}
+	Die zusätzliche Option \code{authorontitle=true/false} ermöglicht es, den Autor/das Institut unterhalb des Titels zu platzieren.
 \end{frame}
 
 \begin{frame}{Skalierung von Logos/Titelgrafiken}
-\begin{itemize}
-	\item Die auf der vorherigen Folie gezeigten Befehle helfen \code{\textbackslash{}height}/\code{\textbackslash{}width} bei der Anpassung der Größe, die für die Grafikskalierung verwendet werden soll.
-	\item Alle haben eine Variante mit Sternchen (z.\,B. \code{\textbackslash{}sublogo*\{\textbackslash{}includegraphics\{example-image\}\}}). Dadurch wird das Logo bzw. die Grafik automatisch auf die gewünschte Größe skaliert.
+	\begin{itemize}
+		\item Die auf der vorherigen Folie gezeigten Befehle helfen \code{\textbackslash{}height}/\code{\textbackslash{}width} bei der Anpassung der Größe, die für die Grafikskalierung verwendet werden soll.
+		\item Alle haben eine Variante mit Sternchen (z.\,B. \code{\textbackslash{}sublogo*\{\textbackslash{}includegraphics\{example-image\}\}}). Dadurch wird das Logo bzw. die Grafik automatisch auf die gewünschte Größe skaliert.
 
-	      Damit das Sublogo an den sichtbaren Teil des TUDa-Logos angepasst werden kann, kann hinter dem Pflichtargument ein zweiter Stern hinzugefügt werden. Dies verschiebt das Logo entsprechend nach links. Diese Variante existiert nur für das Sublogo.
-\end{itemize}
+		      Damit das Sublogo an den sichtbaren Teil des TUDa-Logos angepasst werden kann, kann hinter dem Pflichtargument ein zweiter Stern hinzugefügt werden. Dies verschiebt das Logo entsprechend nach links. Diese Variante existiert nur für das Sublogo.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Inhaltsverzeichnis}
-Das Inhaltsverzeichnis ist in zwei Spalten unterteilt. Dieses Layout unterstützt keine subsections oder subsubsections.
+	Das Inhaltsverzeichnis ist in zwei Spalten unterteilt. Dieses Layout unterstützt keine subsections oder subsubsections.
 
-Um das neue Design mit alten Inhalten nutzen zu können wurde der Mechanismus erweitert. Dieser schaltet automatisch auf ein einspaltiges Inhaltsverzeichnis um.
+	Um das neue Design mit alten Inhalten nutzen zu können wurde der Mechanismus erweitert. Dieser schaltet automatisch auf ein einspaltiges Inhaltsverzeichnis um.
 
-Falls dieser Mechanismus deaktiviert werden soll, dann gibt es die Klassenoption \code{toc-columns=one/two/auto}. Diese kann auch lokal angepasst werden mit dem Befehl:
-\code{\textbackslash{}tableofcontents[columns=two]}.
+	Falls dieser Mechanismus deaktiviert werden soll, dann gibt es die Klassenoption \code{toc-columns=one/two/auto}. Diese kann auch lokal angepasst werden mit dem Befehl:
+	\code{\textbackslash{}tableofcontents[columns=two]}.
 
-Hierzu kann auch der beamer Mechanismus zum Filtern des Inhaltsverzeichnisses, z.\,B. \code{\textbackslash{}tableofcontents[hideallsubsections]} genutzt werden. Weitere Informationen dazu sind in der beamer Dokumentation.
+	Hierzu kann auch der beamer Mechanismus zum Filtern des Inhaltsverzeichnisses, z.\,B. \code{\textbackslash{}tableofcontents[hideallsubsections]} genutzt werden. Weitere Informationen dazu sind in der beamer Dokumentation.
 \end{frame}
 
 \section{Beispiele für Folien}
 
 \begin{frame}{Folie mit Untertitel}
-\framesubtitle{Untertitel}
-Ein Beispiel.
+	\framesubtitle{Untertitel}
+	Ein Beispiel.
 \end{frame}
 
 \begin{frame}[fragile,uppercase=false]{Die Titel der Folien werden in Großbuchstaben gesetzt}
-Der Mechanismus kann unerwartete Nebenwirkungen haben.
-Makros sollten normalerweise funktionieren, aber es gibt Probleme mit Argumenten, zum Beispiel bei der Verwendung von \verb+\color{dark2}+ wird eine Fehlermeldung erzeugt, weil die Farbe in Kleinbuchstaben definiert wurde.
+	Der Mechanismus kann unerwartete Nebenwirkungen haben.
+	Makros sollten normalerweise funktionieren, aber es gibt Probleme mit Argumenten, zum Beispiel bei der Verwendung von \verb+\color{dark2}+ wird eine Fehlermeldung erzeugt, weil die Farbe in Kleinbuchstaben definiert wurde.
 
-Dies kann vermieden werden, indem entweder die Groß-/Kleinschreibung lokal deaktiviert wird
+	Dies kann vermieden werden, indem entweder die Groß-/Kleinschreibung lokal deaktiviert wird
 \begin{verbatim}
 \frameztitle{Test \NoCaseChange{\textcolor{dark2}{\MakeUppercase{Test}}}}
 \end{verbatim}
-oder aber die Folienoption \verb+uppercase=false+ wie er für diese Folie  verwendet wird.
-Es ist auch möglich die Einstellung global zu ändern, hierfür wurde die Klassenoption \verb+uppercase-frametitle=false+ definiert.
+	oder aber die Folienoption \verb+uppercase=false+ wie er für diese Folie  verwendet wird.
+	Es ist auch möglich die Einstellung global zu ändern, hierfür wurde die Klassenoption \verb+uppercase-frametitle=false+ definiert.
 \end{frame}
 
 \begin{frame}{Farbschema}
-Das neue Design wurde um einige neue Farben ergänzt. Diese können zur Hervorhebung von Inhalten verwendet werden.
+	Das neue Design wurde um einige neue Farben ergänzt. Diese können zur Hervorhebung von Inhalten verwendet werden.
 
-Die zusätzlichen Farben sind:
+	Die zusätzlichen Farben sind:
 
-\renewcommand*{\do}[1]{TUDa-####1: \textcolor{TUDa-####1}{\rule{1cm}{\ht\strutbox}}\par}
-\docsvlist{dark1,dark2,light1,light2,accent1,accent2,accent3,accent4,accent5,accent5,hyperlink}
+	\renewcommand*{\do}[1]{TUDa-####1: \textcolor{TUDa-####1}{\rule{1cm}{\ht\strutbox}}\par}
+	\docsvlist{dark1,dark2,light1,light2,accent1,accent2,accent3,accent4,accent5,accent5,hyperlink}
 \end{frame}
 
 \begin{frame}{Hinweise zur vertikalen Ausrichtung (insbesondere mit columns)}
-Die Standardausrichtung wurde im Gegensatz zur Standardeinstellung von beamer von \code{c} auf \code{t} geändert.
-Das neue Design verlangt, dass der Inhalt auf den Folien von oben nach unten platziert wird.
-Allerdings hat diese Änderung den Nebeneffekt, dass sich die vertikale Ausrichtung aller Objekte verändert.
+	Die Standardausrichtung wurde im Gegensatz zur Standardeinstellung von beamer von \code{c} auf \code{t} geändert.
+	Das neue Design verlangt, dass der Inhalt auf den Folien von oben nach unten platziert wird.
+	Allerdings hat diese Änderung den Nebeneffekt, dass sich die vertikale Ausrichtung aller Objekte verändert.
 
-Um auftrendende Probleme zu vermeiden, kann entweder die Option \code{c} für einen frame global gesetzt werden, oder bei der Spaltenumgebung direkt.
+	Um auftrendende Probleme zu vermeiden, kann entweder die Option \code{c} für einen frame global gesetzt werden, oder bei der Spaltenumgebung direkt.
 
-\begin{columns}[onlytextwidth,c]
-	\column{.8\linewidth}
-	\begin{itemize}
-		\item Eins
-		\item Zwei
-	\end{itemize}
-	\column{.2\linewidth}
-	\includegraphics[width=\linewidth]{example-image}
-\end{columns}
+	\begin{columns}[onlytextwidth,c]
+		\column{.8\linewidth}
+		\begin{itemize}
+			\item Eins
+			\item Zwei
+		\end{itemize}
+		\column{.2\linewidth}
+		\includegraphics[width=\linewidth]{example-image}
+	\end{columns}
 \end{frame}
 
 \end{document}

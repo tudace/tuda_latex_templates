@@ -33,19 +33,19 @@
 %%
 
 \documentclass[
-	ngerman,%globale Übergabe der Hauptsprache
+	german,%globale Übergabe der Hauptsprache
 	aspectratio=169,%Beamer eigene Option zum Umschalten des Formates
 	accentcolor=2d,
 	logo=false,%Kein Logo auf Folgeseiten
 	colorframetitle=true,%Akzentfarbe auch im Frametitle
 %	logofile=example-image, %Falls die Logo Dateien nicht vorliegen
-	]{tudabeamer}
-\usepackage[main=ngerman]{babel}
+]{tudabeamer}
+\usepackage[main=german]{babel}
 
 % Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
 \usepackage{iftex}
 \ifPDFTeX
-\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
+	\usepackage[utf8]{inputenc}% Kompatibilität mit TeX Versionen vor April 2018
 \fi
 
 
@@ -76,11 +76,11 @@
 
 \begin{frame}
 
-The package tuda-pgfplots provides color settings for pgfplots to use to the Corporate Design colors of TU Darmstadt. It is part of the tuda-ci bundle.
+	The package tuda-pgfplots provides color settings for pgfplots to use to the Corporate Design colors of TU Darmstadt. It is part of the tuda-ci bundle.
 
-It's usage requires knowlege of the pgfplots package, see the documentation using texdoc or via \url{https://ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/}.
+	It's usage requires knowlege of the pgfplots package, see the documentation using texdoc or via \url{https://ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/}.
 
-The rest of this documents shows some easy exambles of usage.
+	The rest of this documents shows some easy exambles of usage.
 
 \end{frame}
 
@@ -92,40 +92,40 @@ The rest of this documents shows some easy exambles of usage.
 \end{frame}
 
 \begin{frame}{Bar charts: tudabarplot}
-\begin{figure}
-	\begin{tikzpicture}
-	\begin{axis}[tudabarplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=0.7\textheight,xtick={1,2,3,4}]
-	\addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
-	\addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
-	\addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
-	\addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
-	\addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
-	\addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
-	\legend{lorem, ipsum, dolor,lorem, ipsum, dolor}
-	\end{axis}
-	\end{tikzpicture}
-\end{figure}
-\tiny \texttt{tudabarplot} uses automatically the TU colors, e.g. \texttt{{\textbackslash}tud1a}, \texttt{{\textbackslash}tud1b}, from the corporate guide, \url{https://www.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf}
+	\begin{figure}
+		\begin{tikzpicture}
+			\begin{axis}[tudabarplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=0.7\textheight,xtick={1,2,3,4}]
+				\addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
+				\addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
+				\addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
+				\addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
+				\addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
+				\addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
+				\legend{lorem, ipsum, dolor,lorem, ipsum, dolor}
+			\end{axis}
+		\end{tikzpicture}
+	\end{figure}
+	\tiny \texttt{tudabarplot} uses automatically the TU colors, e.g. \texttt{{\textbackslash}tud1a}, \texttt{{\textbackslash}tud1b}, from the corporate guide, \url{https://www.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf}
 \end{frame}
 
 \begin{frame}{Line plots}
 	\begin{figure}
 		\begin{tikzpicture}
-		\begin{axis}[tudalineplot,width=0.9\textwidth,height=6cm,xlabel={Foo},ylabel={Bar}]
-		\addplot {sin(deg(x))};
-		\addplot+[samples=100] {sin(deg(2*x))};
-		\addplot+[samples=30] {tan(0.2*deg(x))};
-		\addplot {x};
-		\addplot table [x=a, y=c,row sep=\\] {
-				a 	b 	c 	d\\
-				-5 	4 	5 	1\\
-				-3 	3 	-3 	5\\
-				0 	5 	-2 	1\\
-				3 	1 	-2 	9\\
-				5 	3 	-4 	7\\
-		};
-		\legend{sin(x),sin(2x),tan(0.2x),x,csv}
-		\end{axis}
+			\begin{axis}[tudalineplot,width=0.9\textwidth,height=6cm,xlabel={Foo},ylabel={Bar}]
+				\addplot {sin(deg(x))};
+				\addplot+[samples=100] {sin(deg(2*x))};
+				\addplot+[samples=30] {tan(0.2*deg(x))};
+				\addplot {x};
+				\addplot table [x=a, y=c,row sep=\\] {
+					a 	b 	c 	d\\
+					-5 	4 	5 	1\\
+					-3 	3 	-3 	5\\
+					0 	5 	-2 	1\\
+					3 	1 	-2 	9\\
+					5 	3 	-4 	7\\
+				};
+				\legend{sin(x),sin(2x),tan(0.2x),x,csv}
+			\end{axis}
 		\end{tikzpicture}
 	\end{figure}
 \end{frame}
@@ -134,11 +134,11 @@ The rest of this documents shows some easy exambles of usage.
 	\frametitle{More plots: 3d visualization with colormar viridis}
 	\begin{figure}
 		\begin{tikzpicture}
-		\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
-			colormap name=tudab,
-	]
-		\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
-		\end{axis}
+			\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
+					colormap name=tudab,
+				]
+				\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
+			\end{axis}
 		\end{tikzpicture}
 	\end{figure}
 \end{frame}
@@ -147,10 +147,10 @@ The rest of this documents shows some easy exambles of usage.
 	\frametitle{More plots: 3d visualization with colormar viridis}
 	\begin{figure}
 		\begin{tikzpicture}
-		\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
-		]
-		\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
-		\end{axis}
+			\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
+				]
+				\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
+			\end{axis}
 		\end{tikzpicture}
 	\end{figure}
 \end{frame}
@@ -159,48 +159,48 @@ The rest of this documents shows some easy exambles of usage.
 	\frametitle{More plots: 3d visualization with colormar viridis}
 	\begin{figure}
 		\begin{tikzpicture}
-		\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
-		]
-		\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
-		\end{axis}
+			\begin{axis}[tuda3dplot,xlabel={Foo},ylabel={Bar},width=0.9\textwidth,height=6cm,
+				]
+				\addplot3[surf,samples=30,domain=0:1]{5*x*sin(2*deg(x)) * y};
+			\end{axis}
 		\end{tikzpicture}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Colormaps}
-\pgfplotscolorbardrawstandalone[
-	colormap={example}{
-		samples of colormap=(10 of tudaa)
-	},
-	colorbar horizontal,
-	colormap access=map,
-]
+	\pgfplotscolorbardrawstandalone[
+		colormap={example}{
+			samples of colormap=(10 of tudaa)
+		},
+		colorbar horizontal,
+		colormap access=map,
+	]
 
-\pgfplotscolorbardrawstandalone[
-colormap={example}{
-	samples of colormap=(4 of tudab)
-},
-colorbar horizontal,
-colormap access=map,
-]
+	\pgfplotscolorbardrawstandalone[
+		colormap={example}{
+			samples of colormap=(4 of tudab)
+		},
+		colorbar horizontal,
+		colormap access=map,
+	]
 
-\pgfplotscolorbardrawstandalone[
-colormap name=tudac,
-colorbar horizontal,
-colormap access=map,
-]
+	\pgfplotscolorbardrawstandalone[
+		colormap name=tudac,
+		colorbar horizontal,
+		colormap access=map,
+	]
 
-\pgfplotscolorbardrawstandalone[
-colormap name=tudad,
-colorbar horizontal,
-colormap access=map,
-]
+	\pgfplotscolorbardrawstandalone[
+		colormap name=tudad,
+		colorbar horizontal,
+		colormap access=map,
+	]
 
-\pgfplotscolorbardrawstandalone[
-colormap name=tuda,
-colorbar horizontal,
-colormap access=map,
-]
+	\pgfplotscolorbardrawstandalone[
+		colormap name=tuda,
+		colorbar horizontal,
+		colormap access=map,
+	]
 
 \end{frame}
 

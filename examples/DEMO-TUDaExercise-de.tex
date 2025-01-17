@@ -35,7 +35,7 @@
 \documentclass[
 	german,
 	points=true,% für die Aktivierung der Punktereferenzen funktioniert nicht für TeX Versionen vor 2020
-	]{tudaexercise}
+]{tudaexercise}
 
 \usepackage[english, main=german]{babel}
 \usepackage[autostyle]{csquotes}
@@ -67,7 +67,7 @@
 \maketitle
 
 \begin{task}{Titelei}
-Im Gegensatz zu den ganzen Titelseiten bei TUDaPub benötigt TUDaExercise eine platzsparende Möglichkeit für die Titelerzeugung. Daher verfügt TUDaexercise nur über einen Titelkopf. Für die Übergabe der Daten werden die folgenden Makros ausgewertet:
+	Im Gegensatz zu den ganzen Titelseiten bei TUDaPub benötigt TUDaExercise eine platzsparende Möglichkeit für die Titelerzeugung. Daher verfügt TUDaexercise nur über einen Titelkopf. Für die Übergabe der Daten werden die folgenden Makros ausgewertet:
 \begin{verbatim}
 \title[Kurztitel für die Kopfzeile]{Titel}
 \subtitle{Untertitel}
@@ -76,7 +76,7 @@ Im Gegensatz zu den ganzen Titelseiten bei TUDaPub benötigt TUDaExercise eine p
 \date{Datum}
 \sheetnumber{Nummer des Übungsblatts}
 \end{verbatim}
-Mit Ausnahme des Titels können alle Felder auch leer bleiben . Sofern keine Blattnummer übergeben wird, werden die Übungsaufgaben beginnend mit 1, fortlaufend nummeriert.
+	Mit Ausnahme des Titels können alle Felder auch leer bleiben . Sofern keine Blattnummer übergeben wird, werden die Übungsaufgaben beginnend mit 1, fortlaufend nummeriert.
 \end{task}
 
 \begin{task}{Farbgebung}
@@ -84,7 +84,7 @@ Mit Ausnahme des Titels können alle Felder auch leer bleiben . Sofern keine Bla
 \end{task}
 
 \begin{task}{Eine Aufgabe erstellen}
-Aufgaben werden bei \cls{tudaexercise.cls} durch die Umgebung \code{task} definiert. Das Notwendige Argument übernimmt dabei eine Überschrift. Es kann leer bleiben.
+	Aufgaben werden bei \cls{tudaexercise.cls} durch die Umgebung \code{task} definiert. Das Notwendige Argument übernimmt dabei eine Überschrift. Es kann leer bleiben.
 
 \begin{verbatim}
 	\begin{task}[<Optionen>]{Überschrift}
@@ -92,39 +92,39 @@ Aufgaben werden bei \cls{tudaexercise.cls} durch die Umgebung \code{task} defini
 	\end{task}
 \end{verbatim}
 
-Querverweise zwischen den Aufgaben sind wie üblich mit \code{\tbs{}label} und \code{\tbs{}ref} möglich.
+	Querverweise zwischen den Aufgaben sind wie üblich mit \code{\tbs{}label} und \code{\tbs{}ref} möglich.
 
 
-\minisec{Die Verwendung des Makros \code{\tbs{}task}}
-Neben der Umgebungsstruktur, verfügt \cls{tudaexercise} auch über die Möglichkeit eine Aufgabe nur mit \code{\tbs{}task} einzuleiten. Dieser Mechanismus existiert um zu älteren Versionen Kompatibel zu bleiben. Sie sollte jedoch nach Möglichkeit nicht mehr verwendet werden!
+	\minisec{Die Verwendung des Makros \code{\tbs{}task}}
+	Neben der Umgebungsstruktur, verfügt \cls{tudaexercise} auch über die Möglichkeit eine Aufgabe nur mit \code{\tbs{}task} einzuleiten. Dieser Mechanismus existiert um zu älteren Versionen Kompatibel zu bleiben. Sie sollte jedoch nach Möglichkeit nicht mehr verwendet werden!
 
 \end{task}
 
 \begin{task}{Teilaufgaben}
-\begin{subtask}[title=Grundsturktur]
-	\cls{tudaexercise} unterstützt mit der \code{subtask}-Umgebung Aufgaben in Teilaufgaben zu untergliedern. Es wird derzeit nur eine Ebene unterstützt. Für weitere Untergliederung ist es möglich das Dokument zusätzlich mit \code{\tbs{}section} in Abschnitte zu unterteilen.
+	\begin{subtask}[title=Grundsturktur]
+		\cls{tudaexercise} unterstützt mit der \code{subtask}-Umgebung Aufgaben in Teilaufgaben zu untergliedern. Es wird derzeit nur eine Ebene unterstützt. Für weitere Untergliederung ist es möglich das Dokument zusätzlich mit \code{\tbs{}section} in Abschnitte zu unterteilen.
 
-	\begin{verbatim}
+\begin{verbatim}
 		\begin{subtask}[title=Titel,points=5]
 
 		\end{subtask}
-	\end{verbatim}
+\end{verbatim}
 
-	Teilaufgaben benötigen – im Gegensatz zu Aufgaben – keine Überschrift. Daher unterscheidet sich die Syntax für die Übergabe von der der \code{task}-Umgebung. Es gibt jedoch eine Variante um diese Unterscheidung zu umgehen, vergleiche Aufgabe \ref{task-subtask-syntax}.
-\end{subtask}
+		Teilaufgaben benötigen – im Gegensatz zu Aufgaben – keine Überschrift. Daher unterscheidet sich die Syntax für die Übergabe von der der \code{task}-Umgebung. Es gibt jedoch eine Variante um diese Unterscheidung zu umgehen, vergleiche Aufgabe \ref{task-subtask-syntax}.
+	\end{subtask}
 
-\begin{subtask}[title=Anpassung der Überschriften]
-	Ab Version 3.13 unterstützt \cls{tudaexercise} zusätzlich eine Umschaltung bezüglich des Layouts der Subtask-Überschriften. Es existieren drei Optionswerte für die Dokumentenklasse:
-	\begin{description}
-		\item[subtask=ruled] Voreinstellung, die Überschriften sind durch Linien vom Fließtext abgetrennt. (vgl. dieses Dokument)
-		\item[subtask=plain] Keine Linien um die Überschrift.
-		\item[subtask=runin] Falls sehr kleine Aufgaben gesetzt werden, kann der Umbruch nach der Überschrift unterbunden werden. In diesem Fall ist die Nutzer:in selbst dafür verantwortlich, dass eine ggf. notwendige Optische Abtrennung zwischen Titel und Aufgabentext stattfindet, z.B. durch Hervorhebung des Titeltextes.
-	\end{description}
-\end{subtask}
+	\begin{subtask}[title=Anpassung der Überschriften]
+		Ab Version 3.13 unterstützt \cls{tudaexercise} zusätzlich eine Umschaltung bezüglich des Layouts der Subtask-Überschriften. Es existieren drei Optionswerte für die Dokumentenklasse:
+		\begin{description}
+			\item[subtask=ruled] Voreinstellung, die Überschriften sind durch Linien vom Fließtext abgetrennt. (vgl. dieses Dokument)
+			\item[subtask=plain] Keine Linien um die Überschrift.
+			\item[subtask=runin] Falls sehr kleine Aufgaben gesetzt werden, kann der Umbruch nach der Überschrift unterbunden werden. In diesem Fall ist die Nutzer:in selbst dafür verantwortlich, dass eine ggf. notwendige Optische Abtrennung zwischen Titel und Aufgabentext stattfindet, z.B. durch Hervorhebung des Titeltextes.
+		\end{description}
+	\end{subtask}
 \end{task}
 
 \begin{task}{Kopfzeilenanpassungen}
-Der Mechanismus für die Kopfzeilen wurde angepasst, sodass sein Inhalt frei wählbar ist.
+	Der Mechanismus für die Kopfzeilen wurde angepasst, sodass sein Inhalt frei wählbar ist.
 
 \begin{verbatim}
 \ConfigureHeadline{
@@ -132,7 +132,7 @@ Der Mechanismus für die Kopfzeilen wurde angepasst, sodass sein Inhalt frei wä
 }
 \end{verbatim}
 
-Es existiert nun eine Unterscheidung zwischen linken und rechten Seiten, sofern \code{twoside=true}.
+	Es existiert nun eine Unterscheidung zwischen linken und rechten Seiten, sofern \code{twoside=true}.
 
 \begin{verbatim}
 \ConfigureHeadline{
@@ -142,41 +142,41 @@ Es existiert nun eine Unterscheidung zwischen linken und rechten Seiten, sofern 
 }
 \end{verbatim}
 
-Einstellungen, die gleiche Felder betreffen, überschreiben sich gegenseitig.
+	Einstellungen, die gleiche Felder betreffen, überschreiben sich gegenseitig.
 
-\begin{subtask}[Freie Inhalte]
-Die Inhalte sind frei wählbar und werden automatisch in einer Box mit der gleichen Breite, wie der Text gesetzt. Der Inhalt wird linksbündig platziert. Es ist möglich Grafiken oder Tabellen innerhalb dieser Box zu platzieren.
-\end{subtask}
+	\begin{subtask}[Freie Inhalte]
+		Die Inhalte sind frei wählbar und werden automatisch in einer Box mit der gleichen Breite, wie der Text gesetzt. Der Inhalt wird linksbündig platziert. Es ist möglich Grafiken oder Tabellen innerhalb dieser Box zu platzieren.
+	\end{subtask}
 
-\begin{subtask}[Vorgefertigte Elemente]
-Für die Kopfzeilen existieren einige vorgefertigte Elemente, die dort platziert werden können.
+	\begin{subtask}[Vorgefertigte Elemente]
+		Für die Kopfzeilen existieren einige vorgefertigte Elemente, die dort platziert werden können.
 \begin{verbatim}
 	\ShortTitle
 	\StudentID
 	\StudentName
 \end{verbatim}
-Darüber hinaus kann auch jeglicher \LaTeX-Content dort eingefügt werden.
+		Darüber hinaus kann auch jeglicher \LaTeX-Content dort eingefügt werden.
 
-Zusätzlich sind einige Werte vorbelegt und platzieren die Einträge nach dem selbsterklärenden Namensschema:
-\code{title-name-id}, \code{title-name}, \code{title}, \code{name-id}, \code{name}
-\end{subtask}
+		Zusätzlich sind einige Werte vorbelegt und platzieren die Einträge nach dem selbsterklärenden Namensschema:
+		\code{title-name-id}, \code{title-name}, \code{title}, \code{name-id}, \code{name}
+	\end{subtask}
 
-\begin{subtask}[Kopfzeile auch auf der Titelseite]
-Da die Kopfzeile häufig für die Angabe von Studentendaten genutzt wird, ist es mit der Klassenoption \code{headontitle} auch möglich die Kopfzeile ebenfalls auf der Titelseite einzufügen.
-\end{subtask}
+	\begin{subtask}[Kopfzeile auch auf der Titelseite]
+		Da die Kopfzeile häufig für die Angabe von Studentendaten genutzt wird, ist es mit der Klassenoption \code{headontitle} auch möglich die Kopfzeile ebenfalls auf der Titelseite einzufügen.
+	\end{subtask}
 \end{task}
 
 
 \begin{task}[solution=true]{Lösungen}
-tudaexercise verfügt über einen Mechanismus um Lösungsvorschläge innerhalb der Dateien mit zu verwalten. Hierfür existiert die Umgebung \code{solution}.
+	tudaexercise verfügt über einen Mechanismus um Lösungsvorschläge innerhalb der Dateien mit zu verwalten. Hierfür existiert die Umgebung \code{solution}.
 
-Die Ausgabe der Lösungen wird entweder global
+	Die Ausgabe der Lösungen wird entweder global
 \begin{verbatim}
 \documentclass[...,
    solution=true,
 ]{tudaexercise}
 \end{verbatim}
-oder lokal für einzelne Aufgaben konfiguriert:
+	oder lokal für einzelne Aufgaben konfiguriert:
 
 \begin{verbatim}
 \begin{task}[solution=true]{Überschrift}
@@ -186,16 +186,16 @@ Aufgabentext
    \end{solution}
 \end{task}
 \end{verbatim}
-Die Voreinstellung ist \code{solution=false}.
-\begin{solution}
-Beispiel für einen Lösungsvorschlag
-\end{solution}
+	Die Voreinstellung ist \code{solution=false}.
+	\begin{solution}
+		Beispiel für einen Lösungsvorschlag
+	\end{solution}
 \end{task}
 
 \begin{task}{Abfrage der Einstellung \enquote{solution}}
-Ab Version 3.04 existiert zusätzlich die Möglichkeit die Einstellung \code{solution} abzufragen.
+	Ab Version 3.04 existiert zusätzlich die Möglichkeit die Einstellung \code{solution} abzufragen.
 
-Die Umgebung \code{solution*} verhält sich wie \code{solution} ohne die Beschriftung. Darüber Hinaus wurden die Makros \code{\IfSolutionTF} ergänzt.
+	Die Umgebung \code{solution*} verhält sich wie \code{solution} ohne die Beschriftung. Darüber Hinaus wurden die Makros \code{\IfSolutionTF} ergänzt.
 
 \begin{verbatim}
 \IfSolutionT{<falls solution=true>}
@@ -203,88 +203,88 @@ Die Umgebung \code{solution*} verhält sich wie \code{solution} ohne die Beschri
 \IfSolutionTF{<falls solution=true>}{<falls solution=false>}
 \end{verbatim}
 
-In der aktuellen Einstellung (\code{solution=false}) erzeugt der obige Block die folgende Ausgabe:
+	In der aktuellen Einstellung (\code{solution=false}) erzeugt der obige Block die folgende Ausgabe:
 
-\IfSolutionT{<falls solution=true>}
-\IfSolutionF{<falls solution=false>}
-\IfSolutionTF{<falls solution=true>}{<falls solution=false>}
+	\IfSolutionT{<falls solution=true>}
+	\IfSolutionF{<falls solution=false>}
+	\IfSolutionTF{<falls solution=true>}{<falls solution=false>}
 
 \end{task}
 
 \begin{task}[credit=10]{Punkte}
-Punkteangaben sind über den Optionsschlüssel \code{credit} möglich. Der Wert wird hinter den Aufgabentitel in runde Klammern gesetzt. Dies geschieht mithilfe des Makros \code{\tbs{}creditformat}
+	Punkteangaben sind über den Optionsschlüssel \code{credit} möglich. Der Wert wird hinter den Aufgabentitel in runde Klammern gesetzt. Dies geschieht mithilfe des Makros \code{\tbs{}creditformat}
 
-Alternativ existiert der Schlüssel \code{points} dieser ergänzt zusätzlich zur Angabe auch den Text \code{\tbs{}PointName} bzw. \code{\tbs{PointsName}} je nachdem ob der Wert gleich 1. Der Schlüssel \code{points} akzeptiert daher nur numerische Werte ab Version 3.13 werden Gleitkommazahlen unterstützt. Das Dazimaltrennzeichen ist hierbei ein Punkt. Korrektur auf ein Komma ist über eine Umdefinition von \code{\tbs{}pointformat} möglich.
+	Alternativ existiert der Schlüssel \code{points} dieser ergänzt zusätzlich zur Angabe auch den Text \code{\tbs{}PointName} bzw. \code{\tbs{PointsName}} je nachdem ob der Wert gleich 1. Der Schlüssel \code{points} akzeptiert daher nur numerische Werte ab Version 3.13 werden Gleitkommazahlen unterstützt. Das Dazimaltrennzeichen ist hierbei ein Punkt. Korrektur auf ein Komma ist über eine Umdefinition von \code{\tbs{}pointformat} möglich.
 
-\begin{subtask}[points=1,title=Beispiel für den Schlüssel points]
-Da ältere Versionen von TUDaExercise keine Optionsverarbeitung für subtask erlaubten, ist hier ein zusätzlicher Mechanismus enthalten. Falls sowohl ein Titel, als auch spezifische Angaben notwendig sind, existiert hier zusätzlich der Schlüssel \code{title}.
-Geprüft wird darauf, ob das Argument ein Gleichheitszeichen enthält, ist dies der Fall, so wird davon ausgegangen, dass Optionen nach Schlüssel=Wert-Struktur übergeben werden.
-\end{subtask}
+	\begin{subtask}[points=1,title=Beispiel für den Schlüssel points]
+		Da ältere Versionen von TUDaExercise keine Optionsverarbeitung für subtask erlaubten, ist hier ein zusätzlicher Mechanismus enthalten. Falls sowohl ein Titel, als auch spezifische Angaben notwendig sind, existiert hier zusätzlich der Schlüssel \code{title}.
+		Geprüft wird darauf, ob das Argument ein Gleichheitszeichen enthält, ist dies der Fall, so wird davon ausgegangen, dass Optionen nach Schlüssel=Wert-Struktur übergeben werden.
+	\end{subtask}
 
-\begin{subtask}[Fallback-Modus, falls ein = im Titel detektiert wird, aber keine Zuweisung möglich ist.]
-Falls bei der Optionsverarbeitung Unstimmigkeiten festgestellt werden, so wird das gesamte Argument als Titel verarbeitet.
-\end{subtask}
+	\begin{subtask}[Fallback-Modus, falls ein = im Titel detektiert wird, aber keine Zuweisung möglich ist.]
+		Falls bei der Optionsverarbeitung Unstimmigkeiten festgestellt werden, so wird das gesamte Argument als Titel verarbeitet.
+	\end{subtask}
 \end{task}
 
 \begin{task}[points=auto]{Automatismen für Punktetabellen}
-\label{task:refPoints}
-Mit Version 3.13 erhält  \cls{tudaexercise} die Funktionalität für automatische Punktetabellen und Referenzen auf die Punkteangaben.
+	\label{task:refPoints}
+	Mit Version 3.13 erhält  \cls{tudaexercise} die Funktionalität für automatische Punktetabellen und Referenzen auf die Punkteangaben.
 
-\begin{subtask}[points=3,title=Referenzen aktivieren]
-\cls{tudaexercise} hat diese Funktionalität grundsätzlich deaktiviert, sie kann jedoch über die Klassenoption \code{points=true} eingeschaltet werden.
+	\begin{subtask}[points=3,title=Referenzen aktivieren]
+		\cls{tudaexercise} hat diese Funktionalität grundsätzlich deaktiviert, sie kann jedoch über die Klassenoption \code{points=true} eingeschaltet werden.
 
-Der Mechanismus für die Referenzierung funktioniert ähnlich, wie die Objektreferenzen bei \LaTeX{}. Dadurch ist es notwendig das Dokument zweimal zu kompilieren. Falls \cls{tudaexercise} im Durchlauf feststellt, dass sich die Werte des letztes Durchlaufes von den aktuellen unterscheiden, wird eine entsprechende Warnung erzeugt.
+		Der Mechanismus für die Referenzierung funktioniert ähnlich, wie die Objektreferenzen bei \LaTeX{}. Dadurch ist es notwendig das Dokument zweimal zu kompilieren. Falls \cls{tudaexercise} im Durchlauf feststellt, dass sich die Werte des letztes Durchlaufes von den aktuellen unterscheiden, wird eine entsprechende Warnung erzeugt.
 
-Für die Referenz stehen zwei Makros zur Verfügung. Eines funktioniert über den Aufruf der Aufgabennummer, der andere über labels:
-
-
-\verb+\getPoints{+\thetask\verb+}+\\
-\verb+\refPoints{task:refPoints}% benötigt das \label{task:refPoints}, vgl. Quellcode+
+		Für die Referenz stehen zwei Makros zur Verfügung. Eines funktioniert über den Aufruf der Aufgabennummer, der andere über labels:
 
 
-Beide Makros geben in diesem Fall den gleichen Wert: \refPoints{task:refPoints}. Da die Variante code{\tbs{}refPoints} dynamisch von den Aufgabennummern abhängig ist diese Variante im Allgemeinen zu bevorzugen.
+		\verb+\getPoints{+\thetask\verb+}+\\
+		\verb+\refPoints{task:refPoints}% benötigt das \label{task:refPoints}, vgl. Quellcode+
 
-Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}getPointsTotal} die Summe der aller Aufgaben im letzten \LaTeX-Lauf zurück.
 
-\end{subtask}
+		Beide Makros geben in diesem Fall den gleichen Wert: \refPoints{task:refPoints}. Da die Variante code{\tbs{}refPoints} dynamisch von den Aufgabennummern abhängig ist diese Variante im Allgemeinen zu bevorzugen.
 
-\begin{subtask}[points=2,title=Punkte aus Teilaufgaben aufsummieren]
-	Der neue Mechanismus ermöglicht auch, dass der Punktewert einer Aufgabe aus der Summe der Punkte der enthaltenen Teilaufgaben berechnet wird.
+		Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}getPointsTotal} die Summe der aller Aufgaben im letzten \LaTeX-Lauf zurück.
 
-	Hierfür ist die Verwendung der Umgebungen zwingend notwendig. \code{\tbs{}task} erlaubt es nicht die Teilaufgaben entsprechend einzugrenzen. Selbiges gilt für die Subtask-Umgebung.
+	\end{subtask}
 
-	Die Summe der Punkte wird nicht automatisch bei der Aufgabenbezeichnung eingetragen, jedoch existiert mit dem Optionswert \code{points=auto} eine entsprechende Funktionalität.
-	Falls die Klassenoption \code{points=auto} gesetzt ist, wird diese automatisch für alle Aufgaben aktiviert. Der automatische Wert kann jedoch über eine manuelle Angabe eines Wertes überschrieben werden, z.\,B. falls eine Aufgabe nicht aus Teilaufgaben besteht.
+	\begin{subtask}[points=2,title=Punkte aus Teilaufgaben aufsummieren]
+		Der neue Mechanismus ermöglicht auch, dass der Punktewert einer Aufgabe aus der Summe der Punkte der enthaltenen Teilaufgaben berechnet wird.
 
-	Es erfolgt derzeit keine automatische Prüfung auf die Übereinstimmung zwischen der Summe der Teilaufgaben und der Gesamtpunktzahl.
+		Hierfür ist die Verwendung der Umgebungen zwingend notwendig. \code{\tbs{}task} erlaubt es nicht die Teilaufgaben entsprechend einzugrenzen. Selbiges gilt für die Subtask-Umgebung.
 
-	Um die Unterscheidung der Angabe zwischen aufsummierten Werten und manuell gesetzten Werten zu ermöglich existiert intern eine weitere Variante des Makros \code{\tbs{}creditformat}.
+		Die Summe der Punkte wird nicht automatisch bei der Aufgabenbezeichnung eingetragen, jedoch existiert mit dem Optionswert \code{points=auto} eine entsprechende Funktionalität.
+		Falls die Klassenoption \code{points=auto} gesetzt ist, wird diese automatisch für alle Aufgaben aktiviert. Der automatische Wert kann jedoch über eine manuelle Angabe eines Wertes überschrieben werden, z.\,B. falls eine Aufgabe nicht aus Teilaufgaben besteht.
 
-	\begin{verbatim}
+		Es erfolgt derzeit keine automatische Prüfung auf die Übereinstimmung zwischen der Summe der Teilaufgaben und der Gesamtpunktzahl.
+
+		Um die Unterscheidung der Angabe zwischen aufsummierten Werten und manuell gesetzten Werten zu ermöglich existiert intern eine weitere Variante des Makros \code{\tbs{}creditformat}.
+
+\begin{verbatim}
 		\newcommand*{\creditformatsum}[1]{\creditformat{#1}}
-	\end{verbatim}
+\end{verbatim}
 
-	Es ruft intern lediglich das Makro \code{\tbs{}creditformat} auf. Für dieses Beispieldokument wurde jedoch die Bedeutung überschrieben, sodass im Titel dieser Aufgabe gekennzeichnet wird, dass der Punktewerte eine Summe der Teilaufgaben entspricht:
+		Es ruft intern lediglich das Makro \code{\tbs{}creditformat} auf. Für dieses Beispieldokument wurde jedoch die Bedeutung überschrieben, sodass im Titel dieser Aufgabe gekennzeichnet wird, dass der Punktewerte eine Summe der Teilaufgaben entspricht:
 
-	\begin{verbatim}
+\begin{verbatim}
 		\renewcommand*{\creditformatsum}[1]{\creditformat{Gesamt: #1}}
-	\end{verbatim}
-\end{subtask}
+\end{verbatim}
+	\end{subtask}
 
-\begin{subtask}[points=3,title=Automatische Punktetabellen]
-	\cls{tudaexercise} stellt mit der Möglichkeit der Referenz auf die Aufgabenwerte auch die Auflistung aller Punkte zur Verfügung.
+	\begin{subtask}[points=3,title=Automatische Punktetabellen]
+		\cls{tudaexercise} stellt mit der Möglichkeit der Referenz auf die Aufgabenwerte auch die Auflistung aller Punkte zur Verfügung.
 
-	Da die Struktur einer Punktetabelle nach persönlichen Vorlieben stark variiert ist das Makro sehr abstrakt konstruiert.
+		Da die Struktur einer Punktetabelle nach persönlichen Vorlieben stark variiert ist das Makro sehr abstrakt konstruiert.
 
-	\begin{verbatim}
+\begin{verbatim}
 		\mapPoints{<Code, der für jede Aufgabe ausgeführt werden soll>}
-	\end{verbatim}
+\end{verbatim}
 
-	\code{\tbs{}mapPoints} iteriert über alle Aufgaben und erlaubt als Argument beliebige Code-Elemente. Innerhalb des Codes können \code{\#1} (Nummer der Aufgabe) und \code{\#2} (zugehöriger Punktwert) verwendet werden.
-	Aufgaben, deren Wert Null beträgt werden übersprungen.
+		\code{\tbs{}mapPoints} iteriert über alle Aufgaben und erlaubt als Argument beliebige Code-Elemente. Innerhalb des Codes können \code{\#1} (Nummer der Aufgabe) und \code{\#2} (zugehöriger Punktwert) verwendet werden.
+		Aufgaben, deren Wert Null beträgt werden übersprungen.
 
-	Zum Beispiel erzeugt:
-	\begin{verbatim}
+		Zum Beispiel erzeugt:
+\begin{verbatim}
 	\begin{tabular}{@{}lr@{}}
 	  \toprule
 	  \mapPoints{Aufgabe #1&#2 Punkte\\}
@@ -292,17 +292,17 @@ Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}getPointsTotal} die Su
 	  Gesamt&\getPointsTotal{} Punkte\\
 	  \bottomrule
 	\end{tabular}
-	\end{verbatim}
-	die Ausgabe:\\
-	\begin{tabular}{@{}lr@{}}
-		\toprule
-		\mapPoints{Aufgabe #1&#2 Punkte\\}
-		\midrule
-		Gesamt&\getPointsTotal{} Punkte\\
-		\bottomrule
-	\end{tabular}
+\end{verbatim}
+		die Ausgabe:\\
+		\begin{tabular}{@{}lr@{}}
+			\toprule
+			\mapPoints{Aufgabe #1&#2 Punkte\\}
+			\midrule
+			Gesamt&\getPointsTotal{} Punkte\\
+			\bottomrule
+		\end{tabular}
 
-	Falls auch Aufgaben mit einem Wert von 0 verarbeitet werden sollen, existiert noch eine gesternte Version \code{\tbs{}mapPoints*}.
+		Falls auch Aufgaben mit einem Wert von 0 verarbeitet werden sollen, existiert noch eine gesternte Version \code{\tbs{}mapPoints*}.
 	\end{subtask}
 \end{task}
 
@@ -327,21 +327,21 @@ Neben der Referenz auf einzelne Aufgaben gibt \code{\tbs{}getPointsTotal} die Su
 \end{task*}
 \end{verbatim}
 
-\end{subtask*}
+	\end{subtask*}
 
-\begin{subtask*}{Vertauschen der beiden Varianten}
-Zusätzlich erlaubt die Klassenoption \code{match-task-subtask-syntax} das Vertauschen von \code{subtask} und \code{subtask*}.
+	\begin{subtask*}{Vertauschen der beiden Varianten}
+		Zusätzlich erlaubt die Klassenoption \code{match-task-subtask-syntax} das Vertauschen von \code{subtask} und \code{subtask*}.
 
-Die Umgebungen \code{task*} und \code{task} sind identisch.
-\end{subtask*}
+		Die Umgebungen \code{task*} und \code{task} sind identisch.
+	\end{subtask*}
 \end{task*}
 
 \begin{task}{Kompatibilitätsmodus}
-Die Klasse \cls{tudaexercise} verfügt über einen Kompatibilitätsmodus, um den Umstieg von zuvor existierenden Templates, wie TUDexercise zu erleichtern.
-Um den Kompatibilitätsmodus zu aktivieren, existiert die Option \code{compat=true}.
+	Die Klasse \cls{tudaexercise} verfügt über einen Kompatibilitätsmodus, um den Umstieg von zuvor existierenden Templates, wie TUDexercise zu erleichtern.
+	Um den Kompatibilitätsmodus zu aktivieren, existiert die Option \code{compat=true}.
 
-Damit können Strukturen wie \code{examheader}, \code{examheaderdefault} und die Erzeugung von Aufgaben mitilfe von \code{\tbs{}subsection} wie gewohnt verwendet werden. Da einige dieser Mechanismen jedoch der Philosophie der semantischen Auszeichnung widersprechen wird ihre Verwendung hier nicht genauer erklärt. Nutzer, denen diese Mechanismen nicht vertraut sind, wird empfohlen die durch TUDaExercise zur Verfügung gestellten Varianten zu nutzen.
+	Damit können Strukturen wie \code{examheader}, \code{examheaderdefault} und die Erzeugung von Aufgaben mitilfe von \code{\tbs{}subsection} wie gewohnt verwendet werden. Da einige dieser Mechanismen jedoch der Philosophie der semantischen Auszeichnung widersprechen wird ihre Verwendung hier nicht genauer erklärt. Nutzer, denen diese Mechanismen nicht vertraut sind, wird empfohlen die durch TUDaExercise zur Verfügung gestellten Varianten zu nutzen.
 
-Beim zugehörigen Release im Development Repository findet sich auch eine Beispieldatei, die die alten Mechanismen verwendet und spezielle Hinweise für Umsteiger enthält: \url{https://github.com/tudace/tuda_latex_templates/blob/master/example/Examples-TUDexercise-compat.tex}
+	Beim zugehörigen Release im Development Repository findet sich auch eine Beispieldatei, die die alten Mechanismen verwendet und spezielle Hinweise für Umsteiger enthält: \url{https://github.com/tudace/tuda_latex_templates/blob/master/example/Examples-TUDexercise-compat.tex}
 \end{task}
 \end{document}
