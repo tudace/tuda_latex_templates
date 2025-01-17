@@ -1,0 +1,3 @@
+[submodule "tools/TUDa-logos"]
+	path = tools/logo-installation/TUDa-logos
+	url = ../TUDa-logos.git
