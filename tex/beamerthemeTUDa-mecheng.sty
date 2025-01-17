@@ -94,11 +94,11 @@
 		\parbox{\__ptxcd_beamer_linewidth:}{%
 			\begin{beamercolorbox}[
 				wd=\linewidth,
-				]{title}
+			]{title}
 				\raggedright
 				\usebeamerfont{title}
 				\hbox_set:Nn \l__ptxcd_frametitle_box {
-					\parbox[c]{\dimexpr\linewidth-\box_wd:N \g__ptxcd_logo_box-1em\relax}{
+					\parbox[c]{\dimexpr\linewidth-\box_wd:N \g__ptxcd_logo_box-1em}{
 						\raggedright{}
 						\inserttitle
 						\par
@@ -107,17 +107,17 @@
 				\dim_compare:nT {\box_ht:N \l__ptxcd_frametitle_box > \baselineskip} {\raisebox{\dimexpr-\height+.5\c_ptxcd_logoheight_dim}}
 				{\box_use:N \l__ptxcd_frametitle_box}
 				\hspace{\fill}
-				\raisebox{\dimexpr-.5\height+.5\ht\strutbox-.5\dp\strutbox\relax}{\box_use:N \g__ptxcd_logo_box}\hspace*{\dimexpr-\beamer@rightmargin+\g__ptxcd_beamer_logosep_dim}
+				\raisebox{\dimexpr-.5\height+.5\ht\strutbox-.5\dp\strutbox}{\box_use:N \g__ptxcd_logo_box}\hspace*{\dimexpr-\beamer@rightmargin+\g__ptxcd_beamer_logosep_dim}
 				\ifx\insertsubtitle\@empty
 				\else
 				\par\vspace{\c_ptxcd_largerule_dim}
-				\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box\relax}{
+				\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box}{
 					\usebeamerfont{subtitle}\insertsubtitle
 				}
 				\fi
 			\bool_if:NT \g_ptxcd_authorontitle_bool {
 				\par
-					\parbox[t]{\dimexpr\linewidth-2ex\relax}{
+					\parbox[t]{\dimexpr\linewidth-2ex}{
 						\ifx\insertauthor\@empty
 						\else
 						\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
@@ -136,7 +136,7 @@
 	\begin{beamercolorbox}[
 		rightskip=.07\linewidth,%place image left of arrow tip
 		ht=\c_ptxcd_smallrule_dim,%dp=1mm,
-		wd=\dimexpr\textwidth]{footline}
+		wd=\textwidth]{footline}
 		\setbeamertemplate{departmentlogo}[TUDa-mecheng][width=\dimexpr2\linewidth/11\relax]
 		\insertdepartmentlogo
 		\hfill
@@ -193,8 +193,9 @@
 {
 	\begin{beamercolorbox}[
 		wd=\linewidth,
-		leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin,
-		]{footline}
+		leftskip=\beamer@leftmargin,
+    rightskip=\beamer@rightmargin,
+	]{footline}
 		\MechEngArrow*{\linewidth}
 		\par\skip_vertical:n {.5\g__ptxcd_beamer_logosep_dim}
 		\makebox[\linewidth][s]{
@@ -229,8 +230,8 @@
 		sep=\g__ptxcd_beamer_logosep_dim,
 		wd=\__ptxcd_beamer_linewidth:,
 		rightskip=-\g__ptxcd_beamer_logosep_dim,
-		leftskip=\dimexpr-\g__ptxcd_beamer_logosep_dim\relax,
-		]{frametitle}
+		leftskip=-\g__ptxcd_beamer_logosep_dim,
+	]{frametitle}
 		\hbox_set:Nn \l__ptxcd_frametitle_box {
 			\parbox[t]
 			{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-1em\relax\relax}{%
@@ -257,7 +258,7 @@
 		sep=\g__ptxcd_beamer_logosep_dim,
 		wd=\__ptxcd_beamer_linewidth:,
 		rightskip=-\g__ptxcd_beamer_logosep_dim,
-		leftskip=\dimexpr-\g__ptxcd_beamer_logosep_dim\relax,
+		leftskip=-\g__ptxcd_beamer_logosep_dim,
 		ht=\c_ptxcd_smallrule_dim.
 		dp=0
 		]{smallrule}
@@ -278,7 +279,6 @@
 }
 
 \cs_set:Nn \__ptxcd_set_framebgcolor:n {
-
 	\str_case:nnTF {#1} {
 		{Primary1} {\tl_set:Nn \l_tmpa_tl {Primary2}}
 		{Primary2} {\tl_set:Nn \l_tmpa_tl {Primary1}}

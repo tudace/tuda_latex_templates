@@ -103,6 +103,7 @@
 %
 % \DescribeKey{\beamerframe}{\bgcolor}
 %
+
 %
 % \MaybeStop{}
 %
@@ -296,7 +297,6 @@
 	\skip_vertical:n {\dimexpr\paperheight/32-\dp\strutbox}
 }
 \setbeamertemplate{footline~sep}{\space\smash{\rule[-.5\dp\strutbox]{.25pt}{\ht\strutbox}}\space}
-
 \defbeamertemplate*{headline}{TUDa2023}{
 	\bool_if:NT \g__ptxcd_headrule_bool {
 		\cs_if_exist:NF \ptxcd_beamer_headrule {
@@ -316,7 +316,6 @@
 		\hspace*{\beamer@leftmargin}\rlap{\usebeamertemplate***{title~in~head/foot}}
 	}
 	\hspace*{\fill}
-
 	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
 	%partnerlogo
 	\bool_if:NT \g__ptxcd_extended_space_bool \smash {
@@ -324,7 +323,6 @@
 			\box_use:N \g__ptxcd_partnerlogo_box
 		}
 	}
-
 	\skip_horizontal:n {\dimexpr\paperheight/38}
 	%logo
 	\bool_if:NTF \g__ptxcd_headrule_bool {
@@ -380,7 +378,6 @@
 }
 %    \end{macrocode}
 %
-
 %
 %    \begin{macrocode}
 \mode
