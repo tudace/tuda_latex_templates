@@ -26,7 +26,7 @@ geometry# only Announcement Beamer Exercise Letter Poster Pub Report SciPoster
 gettitlestring# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
 graphics
 graphics-cfg
-graphicsf
+graphics-def
 grfext# only Beamer Letter Report
 hycolor# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
 hyperref# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
