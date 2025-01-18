@@ -1424,33 +1424,28 @@
     }
   }
 %    \end{macrocode}
-%
 % \changes{v3.42-dev}{2025-01-18}{Add mapping Mechanismus including subtasks based on Pull-request 316}
 %    \begin{macrocode}
-  \NewDocumentCommand{\mapPointsSubtask}{sO{1}m}{
+  \NewDocumentCommand{\mapPointsSubtask}{sO{\thetask}m}{
       \cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
       \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
           \msg_warning:nn {tudaexercise} {empty-point-mapping}
-          \__ptxcd_map_points_helper:nn {?task?} {?points?}
+          \__ptxcd_map_points_helper:nn {?subtask?} {?points?}
       }{
-          \int_gset:Nn \g_ptxcd_tmp_int {\value{task}}
-          \setcounter{task}{#2}
-          \tl_gclear:N \g_ptxcd_tmp_tl
-          \bool_gset_true:N \g_tmpa_bool
-          \bool_while_do:Nn \g_tmpa_bool
-          {
-              \exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
-              {
-                  \fp_compare:nF {\l_tmpa_tl = 0}
-                  {
-                      \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
-                      \tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
-                  }
-              }
-              {\bool_gset_false:N \g_tmpa_bool}
-              \stepcounter{task}
-          }
-          \setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
+        \bool_gset_true:N \g_tmpa_bool
+        \tl_gclear:N \g_ptxcd_tmp_tl
+        \int_gset:Nn \g_ptxcd_tmp_int {\value{subtask}}
+        \setcounter{subtask}{#2}
+        \bool_while_do:Nn \g_tmpa_bool {
+            \prop_get:NeNTF \g__ptxcd_loaded_points_prop {#2\thesubtask} \l_tmpa_tl {
+                \fp_compare:nF {\l_tmpa_tl = 0} {
+                \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
+                \tl_gput_right:Nx \g_ptxcd_tmp_tl {{#2\thesubtask} {\l_tmpa_tl}}
+                }
+                \stepcounter{subtask}
+            } {\bool_gset_false:N \g_tmpa_bool}
+        }
+          \setcounter{subtask}{\int_use:N \g_ptxcd_tmp_int}
           \g_ptxcd_tmp_tl
       }
   }
