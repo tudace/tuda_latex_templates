@@ -185,6 +185,7 @@
 \prop_gput:Nnn \g_ptxcd_clsopts_prop {parskip} {half-}
 \prop_new:N \g__ptxcd_points_collector_prop
 \prop_new:N \g__ptxcd_subtask_points_collector_prop
+\prop_new:N \g__ptxcd_property_collector_prop
 \bool_new:N \l__ptxcd_points_auto_bool
 \bool_new:N \g__ptxcd_points_bool
 \prop_new:N \g__ptxcd_loaded_points_prop
@@ -1062,19 +1063,58 @@
 \NewDocumentEnvironment{task}{om}{
   \IfNoValueF{#1}{\keys_set:nn {ptxcd/task}{#1}}
   \@task{#2}
-  \bool_if:NF \l__ptxcd_points_auto_bool {
-    \cs_if_exist_use:NF \prop_gput:Nxx
-    {\exp_args:NNx \prop_gput:Nnx}
-    \g__ptxcd_points_collector_prop
-    {\thetask} {\fp_to_decimal:N \l_ptxcd_ex_task_points_fp}
-  }
 }{
-  \bool_if:NT \l__ptxcd_points_auto_bool {
-    \cs_if_exist_use:NF \prop_gput:Nxx
-    {\exp_args:NNx \prop_gput:Nnx}
-    \g__ptxcd_points_collector_prop
-    {\thetask} {\fp_to_decimal:N \g__ptxcd_ex_collected_points_fp}
+    \_@@_save_task_properties:nnnn {} {\thetask} {#2} {
+      \bool_if:NTF \l__ptxcd_points_auto_bool {
+          \fp_to_decimal:N \l_ptxcd_ex_task_points_fp
+        }{
+          \fp_to_decimal:N \g__ptxcd_ex_collected_points_fp
+        }
+    }
     \fp_gzero:N \g__ptxcd_ex_collected_points_fp
+}
+%    \end{macrocode}
+% \changes{v3.42-dev}{2025-01-18}{Write task properties diractly per task/subtask}
+%    \begin{macrocode}
+\cs_new:Nn \_@@_save_task_properties:nnnn {
+    \iow_now:Ne \@auxout {
+            \exp_not:N \ptxcd@TaskProperties {#1} {#2} {
+                \tl_if_empty:cF  {l_ptxcd_ex_#1credit_tl} {credit=\tl_to_str:v  {l_ptxcd_#1credit_tl},}
+                \tl_if_blank:nF {#3} {title=#3,}
+            } {#4}
+     }
+     \prop_gput:cee {g__ptxcd_#1points_collector_prop}
+        {#2} {#4}
+}
+\cs_generate_variant:Nn \_@@_save_task_properties:nnnn {nnon}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\iffalse
+\newcommand*{\addsubtasktocentry}[4]{
+    \show\subtaskentry
+    %%    {Dateierweiterung }{Ebene }{Gliederungsnummer }{Eintrag }
+    %\IfArgIsEmpty {#3}{\addcontentsline {#1}{#2}{\protect \nonumberline #4}}{\addcontentsline {#1}{#2}{\protect \numberline {#3}#4}}
+    \tocbasic@addxcontentsline{#1}{#2}{#3}{#4}
+    \iow_now:Ne \@auxout {
+        \exp_not:N \ptxcd@TaskProperties {\the\c@task} {\the\c@subtask} {\tl_to_str:n {#2}} {
+            \bool_if:NTF \l__ptxcd_points_auto_bool {
+                \fp_to_decimal:N \l_ptxcd_ex_task_points_fp
+            }{
+                \fp_to_decimal:N \g__ptxcd_ex_collected_points_fp
+            }
+        }
+    }
+}
+\fi
+
+%\ptxcd@TaskProperties {}{5.10}{Einheitliche Syntax für Task/Subtask}{0}
+\newcommand* \ptxcd@TaskProperties [4]{
+  \prop_gput:cnn {g__ptxcd_#1points_collector_prop}
+    {#2} {#4}
+  \prop_gput_from_keyval:Nn \g__ptxcd_property_collector_prop {
+    #2-points=#4,
+    #3
   }
 }
 %    \end{macrocode}
@@ -1147,10 +1187,7 @@
     }{
       \@subtask{\l_ptxcd_ex_title_tl}
     }
-    \cs_if_exist_use:NF \prop_gput:Nxx
-     {\exp_args:NNx \prop_gput:Nnx}
-      \g__ptxcd_subtask_points_collector_prop
-      {\thetask\thesubtask} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp }
+    \_@@_save_task_properties:nnon {subtask_} {\thetask\thesubtask} {\l_ptxcd_ex_title_tl} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp}
     \bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
     \tl_gset_eq:NN \g_tmpa_tl \@currentlabel
   \endgroup
@@ -1299,7 +1336,7 @@
       \msg_warning:nn {tudaexercise} {points-differ}
     }
     \iow_now:Nx \@auxout{
-      \exp_not:N \ptxcd@LoadPoints[\thetask][\fp_use:N \l_tmpa_fp]{\l_tmpa_tl}
+      \exp_not:N \ptxcd@LoadPoints[\the\c@task][\fp_use:N \l_tmpa_fp]{\l_tmpa_tl}
     }
   }
   \cs_new:Nn \__ptxcd_getPoints:n {
@@ -1352,6 +1389,37 @@
       \g_ptxcd_tmp_tl
     }
   }
+%    \end{macrocode}
+%
+% \changes{v3.42-dev}{2025-01-18}{Add mapping Mechanismus including subtasks based on Pull-request 316}
+%    \begin{macrocode}
+    \NewDocumentCommand{\mapPointsSubtask}{sO{1}m}{
+      \cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
+      \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
+          \msg_warning:nn {tudaexercise} {empty-point-mapping}
+          \__ptxcd_map_points_helper:nn {?task?} {?points?}
+      }{
+          \int_gset:Nn \g_ptxcd_tmp_int {\value{task}}
+          \setcounter{task}{#2}
+          \tl_gclear:N \g_ptxcd_tmp_tl
+          \bool_gset_true:N \g_tmpa_bool
+          \bool_while_do:Nn \g_tmpa_bool
+          {
+              \exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
+              {
+                  \fp_compare:nF {\l_tmpa_tl = 0}
+                  {
+                      \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
+                      \tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
+                  }
+              }
+              {\bool_gset_false:N \g_tmpa_bool}
+              \stepcounter{task}
+          }
+          \setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
+          \g_ptxcd_tmp_tl
+      }
+  }
 } {
   \newcommand{\getPoints}[1]{
     \msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPoints}
@@ -1375,10 +1443,12 @@
 % \begin{implementation}
 % \begin{macro}{\ptxcd@LoadPoints}
 %    \begin{macrocode}
+\int_new:N \g_@@_max_task_int
 \NewDocumentCommand{\ptxcd@LoadPoints}{oO{0}m}{
-  \prop_gset_from_keyval:Nn \g__ptxcd_loaded_points_prop {
-    #3
-  }
+    \IfNoValueF{#1}{\int_gset:Nn \g_@@_max_task_int {#1}}
+      \prop_gset_from_keyval:Nn \g__ptxcd_loaded_points_prop {
+      #3
+    }
   \fp_gset:Nn \g__ptxcd_points_total_fp {#2}
 }
 %    \end{macrocode}
