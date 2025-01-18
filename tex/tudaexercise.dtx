@@ -203,7 +203,6 @@
   \bool_gset_true:c {g__ptxcd_ruled_#1_bool}
 }
 \bool_new:N \g__ptxcd_runin_subtask_bool
-\RequirePackage{environ}
 %    \end{macrocode}
 % \begin{documentation}
 % \DescribeEnv{solution}
@@ -226,7 +225,7 @@
 %    \end{macrocode}
 % \end{environment}
 % \end{implementation}
-%
+% \changes{v3.42-dev}{2025-01-18}{Remove obsolete use of environ}
 %    \begin{macrocode}
 \cs_new:Nn \ptxcd_setup_solution: {
   \bool_if:NTF \l_ptxcd_ex_solution_bool {
@@ -235,16 +234,8 @@
     \expandafter\def\csname solution*\endcsname{\ignorespaces}
     \expandafter\let\csname endsolution*\endcsname\endsolution
   }{
-    \RenewEnviron{solution}{
-      \if_false:
-       \BODY
-      \fi:
-    }
-    \RenewEnviron{solution*}{
-      \if_false:
-       \BODY
-      \fi:
-    }
+    \RenewDocumentEnvironment{solution}{+b}{}{}
+    \RenewDocumentEnvironment{solution*}{+b}{}{}
   }
 }
 \ptxcd_setup_solution:
@@ -319,7 +310,6 @@
       \clist_map_inline:nn {#2} {\PassOptionsToClass  {#1=##1} {scrartcl}}
     }
 }
-  \RequirePackage{environ}
   \bool_new:N \l_ptxcd_ex_subtask_fallback_bool
   \fp_new:N \l_ptxcd_ex_task_points_fp
   \fp_new:N \g__ptxcd_ex_collected_points_fp
@@ -491,7 +481,6 @@
 \setkomafont{disposition}{\sffamily\bfseries}
 \cs_new:Nn \ptxcd_titlerule_sep: {\the\dp\strutbox}
 \RequirePackage{tudacolors}
-\RequirePackage{environ}
 \setkomafont{pageheadfoot}{\sffamily\small}
 \setkomafont{pagenumber}{}
 \addtokomafont{captionlabel}{\sffamily}
