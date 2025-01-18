@@ -264,10 +264,16 @@
   This option is not supported by tudaexercise.cls.\\
   The~KOMA-Script~option~titlepage~is~forced~to~"false".
 }
+%    \end{macrocode}
+% \changes{v3.42-dev}{2025-01-18}{add bookmarksnumbered option and enable by default}
+% The options have to be passed before the package options to allow being changed by the user.
+%    \begin{macrocode}
+\PassOptionsToPackage{pdfusetitle,bookmarksnumbered=true}{hyperref}
 \keys_define:nn {ptxcd/exercise} {
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+  bookmarksnumbered  .code:n = \PassOptionsToPackage{bookmarksnumbered=#1}{hyperref},
   compat .bool_gset:N = \g_ptxcd_ex_compatibility_bool,
   compat .initial:n = false,
   compatilibity .meta:n = {compat=#1},
@@ -305,14 +311,14 @@
 %</initialization>
 %   ^AA}
 %<*center>
-  \ProcessKeyOptions[ptxcd/exercise]
-  \prop_map_inline:Nn \g_ptxcd_clsopts_prop {
+\ProcessKeyOptions[ptxcd/exercise]
+\prop_map_inline:Nn \g_ptxcd_clsopts_prop {
     \tl_if_empty:nTF {#2}
     {\PassOptionsToClass  {#1} {scrartcl}}
     {
       \clist_map_inline:nn {#2} {\PassOptionsToClass  {#1=##1} {scrartcl}}
     }
-  }
+}
   \RequirePackage{environ}
   \bool_new:N \l_ptxcd_ex_subtask_fallback_bool
   \fp_new:N \l_ptxcd_ex_task_points_fp
@@ -845,7 +851,6 @@
 %    \end{macrocode}
 % %hyperref
 %    \begin{macrocode}
-\PassOptionsToPackage{pdfusetitle}{hyperref}
 \RequirePackage{hyperref}
 \hypersetup{hidelinks, unicode}
 \providecaptionname{ngerman, german}{\sheetname}{Übungsblatt}
