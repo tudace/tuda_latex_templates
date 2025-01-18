@@ -1063,15 +1063,16 @@
 \NewDocumentEnvironment{task}{om}{
   \IfNoValueF{#1}{\keys_set:nn {ptxcd/task}{#1}}
   \@task{#2}
+  \edef\@currenttasklabel{\thetask\thesubtask}
 }{
-    \_@@_save_task_properties:nnnn {} {\thetask} {#2} {
-      \bool_if:NTF \l__ptxcd_points_auto_bool {
-          \fp_to_decimal:N \l_ptxcd_ex_task_points_fp
-        }{
-          \fp_to_decimal:N \g__ptxcd_ex_collected_points_fp
-        }
+  \_@@_save_task_properties:nnnn {} {\thetask} {#2} {
+    \bool_if:NTF \l__ptxcd_points_auto_bool {
+      \fp_to_decimal:N \g__ptxcd_ex_collected_points_fp
+    }{
+      \fp_to_decimal:N \l_ptxcd_ex_task_points_fp
     }
-    \fp_gzero:N \g__ptxcd_ex_collected_points_fp
+  }
+  \fp_gzero:N \g__ptxcd_ex_collected_points_fp
 }
 %    \end{macrocode}
 % \changes{v3.42-dev}{2025-01-18}{Write task properties diractly per task/subtask}
@@ -1109,13 +1110,15 @@
 \fi
 
 %\ptxcd@TaskProperties {}{5.10}{Einheitliche Syntax für Task/Subtask}{0}
-\newcommand* \ptxcd@TaskProperties [4]{
-  \prop_gput:cnn {g__ptxcd_#1points_collector_prop}
-    {#2} {#4}
-  \prop_gput_from_keyval:Nn \g__ptxcd_property_collector_prop {
-    #2-points=#4,
-    #3
-  }
+\newcommand*\ptxcd@TaskProperties [4]{
+    \prop_gput:cnn {g__ptxcd_#1points_collector_prop}
+        {#2} {#4}
+    \clist_map_inline:nn {#3} {
+        \prop_gput_from_keyval:Nn \g__ptxcd_property_collector_prop {
+            #2-##1
+        }
+    }
+    \prop_gput:Nnn \g__ptxcd_property_collector_prop {#2-points} {#4}
 }
 %    \end{macrocode}
 % \end{environment}
@@ -1178,6 +1181,7 @@
 % \begin{environment}{subtask}
 %    \begin{macrocode}
 \NewDocumentEnvironment{subtask}{o}{
+  \edef\@currenttasklabel{\thetask\thesubtask}
   \begingroup
     \tl_if_in:nnT {#1} {=} {
       \keys_set:nn {ptxcd/subtask} {#1}
@@ -1187,11 +1191,13 @@
     }{
       \@subtask{\l_ptxcd_ex_title_tl}
     }
-    \_@@_save_task_properties:nnon {subtask_} {\thetask\thesubtask} {\l_ptxcd_ex_title_tl} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp}
+    \_@@_save_task_properties:nnon {subtask_} {\@currenttasklabel}
+      {\l_ptxcd_ex_title_tl} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp}
     \bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
     \tl_gset_eq:NN \g_tmpa_tl \@currentlabel
   \endgroup
-  \tl_set_eq:NN \@currentlabel \g_tmpa_tl
+  \edef\@currentcounter{subtask}
+  \protected@edef\@currentlabel{\p@subtask\thesubtask}
 }{}
 %    \end{macrocode}
 % \end{environment}
@@ -1362,6 +1368,18 @@
   \newcommand{\getPointsTotal}{
     \fp_use:N \g__ptxcd_points_total_fp
   }
+%    \end{macrocode}
+% Suggested in PR \# 316 \url{https://github.com/tudace/tuda_latex_templates/pull/316}
+%    \begin{macrocode}
+
+\NewDocumentCommand{\getTaskProperty}{O{\@currenttasklabel}m}{
+    \exp_args:Ne \tl_show:n {#1-#2}
+    \prop_show:N \g__ptxcd_property_collector_prop
+    \prop_if_in:NnTF \g__ptxcd_property_collector_prop {#1-#2}
+        {\prop_item:Nn \g__ptxcd_property_collector_prop {#1-#2}}
+        {{\nfss@text{\reset@font\bfseries??}}}
+}
+
   \NewDocumentCommand{\mapPoints}{sO{1}m}{
     \cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
     \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
