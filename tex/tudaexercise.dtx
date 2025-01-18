@@ -1369,9 +1369,10 @@
     \fp_use:N \g__ptxcd_points_total_fp
   }
 %    \end{macrocode}
+% \DescribeMacro{\getTaskProperty}\oarg{Task Number}{title/credit/points}
 % Suggested in PR \# 316 \url{https://github.com/tudace/tuda_latex_templates/pull/316}
+% \changes{v3.42-dev}{2025-01-18}{Add Interface to access task title}
 %    \begin{macrocode}
-
 \NewDocumentCommand{\getTaskProperty}{O{\@currenttasklabel}m}{
     \exp_args:Ne \tl_show:n {#1-#2}
     \prop_show:N \g__ptxcd_property_collector_prop
@@ -1380,7 +1381,12 @@
         {{\nfss@text{\reset@font\bfseries??}}}
 }
 
+  \bool_new:N \l_@@_subtask_bool
+
   \NewDocumentCommand{\mapPoints}{sO{1}m}{
+    \IfBooleanTF{#1}
+      {\bool_set_true:N \l_@@_subtask_bool}
+      {\bool_set_false:N \l_@@_subtask_bool}
     \cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
     \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
       \msg_warning:nn {tudaexercise} {empty-point-mapping}
@@ -1390,18 +1396,28 @@
       \setcounter{task}{#2}
       \tl_gclear:N \g_ptxcd_tmp_tl
       \bool_gset_true:N \g_tmpa_bool
-      \bool_while_do:Nn \g_tmpa_bool
-      {
-        \exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
-        {
-          \fp_compare:nF {\l_tmpa_tl = 0}
-          {
-            \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
-            \tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
+      \bool_while_do:Nn \g_tmpa_bool {
+        \int_compare:nNnTF {\c@subtask} = {0} {
+            \prop_get:NeNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl {
+              \fp_compare:nNnF {\l_tmpa_tl} = {0} {
+                \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
+                \tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
+              }
+            }
+            {\bool_gset_false:N \g_tmpa_bool}
+            \stepcounter{subtask}
+        } {
+          \prop_get:NeNTF \g__ptxcd_loaded_points_prop {\thetask\thesubtask} \l_tmpa_tl {
+          \fp_compare:nF {\l_tmpa_tl = 0} {
+              \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
+              \tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask\thesubtask} {\l_tmpa_tl}}
+            }
+            \stepcounter{subtask}
+          } {
+            \stepcounter{task}
           }
         }
-        {\bool_gset_false:N \g_tmpa_bool}
-        \stepcounter{task}
+        \bool_if:NF \l_@@_subtask_bool {\stepcounter{task}}
       }
       \setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
       \g_ptxcd_tmp_tl
@@ -1411,7 +1427,7 @@
 %
 % \changes{v3.42-dev}{2025-01-18}{Add mapping Mechanismus including subtasks based on Pull-request 316}
 %    \begin{macrocode}
-    \NewDocumentCommand{\mapPointsSubtask}{sO{1}m}{
+  \NewDocumentCommand{\mapPointsSubtask}{sO{1}m}{
       \cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
       \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
           \msg_warning:nn {tudaexercise} {empty-point-mapping}
@@ -1450,6 +1466,9 @@
   }
   \NewDocumentCommand{\mapPoints}{som} {
     \msg_error:nnn {tudaexercise} {point-referencing-disabled} {\mapPoints}
+  }
+  \NewDocumentCommand{\getTaskProperty}{om}{
+    \msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getTaskProperty}
   }
 }
 \cs_new:Nn \__ptxcd_map_points_helper:nn {#1-#2}
