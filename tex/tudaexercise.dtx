@@ -1430,12 +1430,17 @@
   \setcounter{#1}{#2}
 	\bool_while_do:cn  {l_@@_#1_bool} {
           \prop_get:NeNTF \g__ptxcd_loaded_points_prop {\use:c {#1label}} \l_tmpa_tl {
-    % ONLY IF POINTS?!
-      \fp_compare:nF {\l_tmpa_tl = 0} {
-				\tl_build_put_right:Ne \l_ptxcd_tmp_tl {
-          \exp_not:c {_@@_map_points_#1:nn} {\use:c {#1label}} {\l_tmpa_tl}
-        }
-      }
+%    \end{macrocode}
+% mechanism to skip item if it doesn't have points
+%    \begin{macrocode}
+      \bool_if:NT \l_@@_skip_zero_points_bool
+        {\fp_compare:nF {\l_tmpa_tl = 0}}
+        \use:n
+          {
+            \tl_build_put_right:Ne \l_ptxcd_tmp_tl {
+             \exp_not:c {_@@_map_points_#1:nn} {\use:c {#1label}} {\l_tmpa_tl}
+            }
+          }
       #3
       \stepcounter{#1}
     } {\bool_set_false:c {l_@@_#1_bool}}
@@ -1463,12 +1468,14 @@
   task .bool_set:N = \l_@@_task_bool,
   task .initial:n = false,
   subtask .bool_set:N = \l_@@_subtask_bool,
-  subtask .initial:n = false
+  subtask .initial:n = false,
+  skip-zero-points .bool_set:N = \l_@@_skip_zero_points_bool,
+  skip-zero-points .initial:n = false,
 }
 
 \NewDocumentCommand{\mapTasks}{O{}+m+m}{
   \group_begin:
-    \keys_set:nn {ptxcd/task-mapping} {
+    \keys_set:ne {ptxcd/task-mapping} {
       task = true,
       subtask=true,
       #1
