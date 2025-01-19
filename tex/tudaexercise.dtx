@@ -1383,41 +1383,9 @@
         {{\nfss@text{\reset@font\bfseries??}}}
 }
 
-  \bool_new:N \l_@@_subtask_bool
-
   \NewDocumentCommand{\mapPoints}{sO{1}m}{
-    \IfBooleanTF{#1}
-      {\bool_set_true:N \l_@@_subtask_bool}
-      {\bool_set_false:N \l_@@_subtask_bool}
-    \cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
-    \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
-      \msg_warning:nn {tudaexercise} {empty-point-mapping}
-      \__ptxcd_map_points_helper:nn {?task?} {?points?}
-    }{
-      \int_gset:Nn \g_ptxcd_tmp_int {\value{task}}
-      \setcounter{task}{#2}
-      \tl_gclear:N \g_ptxcd_tmp_tl
-      \bool_gset_true:N \g_tmpa_bool
-      \bool_while_do:Nn \g_tmpa_bool {
-        \int_compare:nNnTF {\c@subtask} = {0} {
-            \prop_get:NeNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl {
-              \fp_compare:nNnF {\l_tmpa_tl} = {0} {
-                \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
-                \tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
-              }
-            }
-            {\bool_gset_false:N \g_tmpa_bool}
-            \stepcounter{subtask}
-        } {
-          \prop_get:NeNTF \g__ptxcd_loaded_points_prop {\thetask\thesubtask} \l_tmpa_tl {
-          \fp_compare:nF {\l_tmpa_tl = 0} {
-              \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
-              \tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask\thesubtask} {\l_tmpa_tl}}
-            }
-            \stepcounter{subtask}
-          } {
-            \stepcounter{task}
-          }
+    \mapTasks[skip-zero-points=true,\IfBooleanF{#1}{subtask=false},start-task=#2]{#3}{#3}
+  }
 %    \end{macrocode}
 % \changes{v3.42-dev}{2025-01-18}{Add mapping Mechanismus including subtasks based on Pull-request 316}
 % \begin{Syntax}
@@ -1447,20 +1415,6 @@
   }
   \setcounter{#1}{\use:c {_@@_cached_#1_counter:}}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %    \end{macrocode}
 % \changes{v3.42-dev}{2025-01-18}{Add generic mechanism to iterate over tasks}
 %    \begin{macrocode}
@@ -1506,9 +1460,6 @@
   \cs_gset_eq:NN \g_ptxcd_tmp_tl \l_ptxcd_tmp_tl
   \group_end:
 	\g_ptxcd_tmp_tl
-  \exp_args:NV
-  \group_end:
-	\g_ptxcd_tmp_tl
  }
 } {
   \newcommand{\getPoints}[1]{
@@ -1527,7 +1478,6 @@
     \msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getTaskProperty}
   }
 }
-\cs_new:Nn \__ptxcd_map_points_helper:nn {#1-#2}
 %    \end{macrocode}
 % \begin{documentation}
 % \DescribeMacro{\ptxcd@LoadPoints}
