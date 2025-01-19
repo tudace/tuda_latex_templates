@@ -56,6 +56,7 @@ lm
 logreq# only Exercise Leaflet PhD Pub SciPoster Thesis
 ltxcmds# only Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
 microtype# only PhD Pub Thesis
+mwe# example-image for demo files
 pdfcol# only SciPoster
 pdfescape# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
 pdfmanagement-testphase# only Letter PhD Pub Thesis
