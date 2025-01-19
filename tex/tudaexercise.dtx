@@ -1471,6 +1471,8 @@
   subtask .initial:n = false,
   skip-zero-points .bool_set:N = \l_@@_skip_zero_points_bool,
   skip-zero-points .initial:n = false,
+  start-task .int_set:N = \l_@@_start_task_int,
+  start-task .initial:n = 1,
 }
 
 \NewDocumentCommand{\mapTasks}{O{}+m+m}{
@@ -1490,7 +1492,7 @@
       \tl_build_begin:N \l_ptxcd_tmp_tl
       \exp_args:Nne \use:n {
         \bool_if:NTF \l_@@_task_bool \use:n \use_ii:nn
-          {\_@@_point_mapping_aux:nnn  {task} {1}}
+          {\_@@_point_mapping_aux:nnn  {task} {\int_use:N \l_@@_start_task_int}}
       }{
         \bool_if:NT \l_@@_subtask_bool {
           \exp_not:n {
@@ -1499,11 +1501,14 @@
           }
         }
       }
-    	\tl_build_end:N \l_ptxcd_tmp_tl
+    \tl_build_end:N \l_ptxcd_tmp_tl
   }
+  \cs_gset_eq:NN \g_ptxcd_tmp_tl \l_ptxcd_tmp_tl
+  \group_end:
+	\g_ptxcd_tmp_tl
   \exp_args:NV
   \group_end:
-  \l_ptxcd_tmp_tl
+	\g_ptxcd_tmp_tl
  }
 } {
   \newcommand{\getPoints}[1]{
