@@ -1045,7 +1045,8 @@
 % \begin{implementation}
 % \begin{macro}{\taskformat}
 %    \begin{macrocode}
-\renewcommand*{\taskformat}{\taskname\tasksep\thetask{}}
+\newcommand*{\tasklabel}{\thetask}
+\renewcommand*{\taskformat}{\taskname\tasksep\tasklabel{}}
 %    \end{macrocode}
 % \end{macro}
 % \end{implementation}
@@ -1063,7 +1064,7 @@
 \NewDocumentEnvironment{task}{om}{
   \IfNoValueF{#1}{\keys_set:nn {ptxcd/task}{#1}}
   \@task{#2}
-  \edef\@currenttasklabel{\thetask\thesubtask}
+  \edef\@currenttasklabel{\tasklabel}
 }{
   \_@@_save_task_properties:nnnn {} {\thetask} {#2} {
     \bool_if:NTF \l__ptxcd_points_auto_bool {
@@ -1164,7 +1165,8 @@
 % \begin{implementation}
 % \begin{macro}{\subtaskformat}
 %    \begin{macrocode}
-\renewcommand*{\subtaskformat}{\thetask{}\thesubtask\enskip}
+\newcommand*{\subtasklabel}{\thetask\thesubtask}
+\renewcommand*{\subtaskformat}{\subtasklabel\enskip}
 %    \end{macrocode}
 % \end{macro}
 % \end{implementation}
@@ -1181,7 +1183,6 @@
 % \begin{environment}{subtask}
 %    \begin{macrocode}
 \NewDocumentEnvironment{subtask}{o}{
-  \edef\@currenttasklabel{\thetask\thesubtask}
   \begingroup
     \tl_if_in:nnT {#1} {=} {
       \keys_set:nn {ptxcd/subtask} {#1}
@@ -1191,6 +1192,7 @@
     }{
       \@subtask{\l_ptxcd_ex_title_tl}
     }
+  \edef\@currenttasklabel{\subtasklabel}
     \_@@_save_task_properties:nnon {subtask_} {\@currenttasklabel}
       {\l_ptxcd_ex_title_tl} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp}
     \bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
