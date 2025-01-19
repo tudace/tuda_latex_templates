@@ -374,6 +374,10 @@ reversemp
 		\str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
 	},
 %    \end{macrocode}
+% Necessary to apply the option if it was processed before.
+%    \begin{macrocode}
+	department .initial:V = \g_ptxcd_department_str,
+%    \end{macrocode}
 % \end{optionenv}^^A department
 % \end{implementation}
 % \begin{implementation}

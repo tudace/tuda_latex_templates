@@ -338,8 +338,12 @@
 %    \begin{macrocode}
 \usetheme{TUDa\g__ptxcd_design_tl}%
 \let\accentfont\normalfont%
-\file_if_exist:nT {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
+\file_if_exist:nTF {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
   {\RequirePackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
+  {
+    \file_if_exist:nT {beamerthemeTUDa-\g_ptxcd_department_str.sty}
+      {\RequirePackage{beamerthemeTUDa-\g_ptxcd_department_str}}
+  }
 \ExplSyntaxOff
 %    \end{macrocode}
 % \iffalse
@@ -374,20 +378,20 @@
 %<2008>\ExplSyntaxOn
 \keys_define:nn {ptxcd/beamer} {
   accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-%<2008>    centerframetitle .code:n = \PassOptionsToPackage{centerframetitle=#1}{beamerouterthemeTUDa},
+%<2008>    centerframetitle .code:n = \PassOptionsToPackage{centerframetitle=#1}{beamerouterthemeTUDa2008},
   colortitle .code:n =
-%<2008>    \PassOptionsToPackage{colortitle=#1}{beamercolorthemeTUDa},
+%<2008>    \PassOptionsToPackage{colortitle=#1}{beamercolorthemeTUDa2008},
 %<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colortitle},
   colorbacktitle .code:n =
-%<2008>    \PassOptionsToPackage{colorbacktitle=#1}{beamercolorthemeTUDa},
+%<2008>    \PassOptionsToPackage{colorbacktitle=#1}{beamercolorthemeTUDa2008},
 %<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorbacktitle},
   colorframetitle .code:n =
-%<2008>    \PassOptionsToPackage{colorframetitle=#1}{beamerouterthemeTUDa},
+%<2008>    \PassOptionsToPackage{colorframetitle=#1}{beamerouterthemeTUDa2008}\PassOptionsToPackage{colorframetitle=#1}{beamercolorthemeTUDa2008},
 %<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
   colorback .code:n =
-%<2008>    \PassOptionsToPackage{colorback=#1}{beamercolorthemeTUDa},
+%<2008>    \PassOptionsToPackage{colorback=#1}{beamercolorthemeTUDa2008},
 %<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorback},
-%<2008>    headsepline .code:n = \PassOptionsToPackage{headsepline=#1}{beamerouterthemeTUDa},
+%<2008>    headsepline .code:n = \PassOptionsToPackage{headsepline=#1}{beamerouterthemeTUDa2008},
   logo .code:n = \PassOptionsToPackage{logo=#1}
 %<2008>    {beamerouterthemeTUDa2008}
 %<2023>    {beamerouterthemeTUDa}
