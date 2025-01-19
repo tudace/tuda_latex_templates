@@ -1418,39 +1418,86 @@
           } {
             \stepcounter{task}
           }
-        }
-        \bool_if:NF \l_@@_subtask_bool {\stepcounter{task}}
-      }
-      \setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
-      \g_ptxcd_tmp_tl
-    }
-  }
 %    \end{macrocode}
 % \changes{v3.42-dev}{2025-01-18}{Add mapping Mechanismus including subtasks based on Pull-request 316}
+% \begin{Syntax}
+% \_@@_point_mapping_aux:nnn \marg{task/subtask} \marg{start value} \marg{action to do before continuing the loop}
+% \end{Syntax}
 %    \begin{macrocode}
-  \NewDocumentCommand{\mapPointsSubtask}{sO{\thetask}m}{
-      \cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
-      \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
-          \msg_warning:nn {tudaexercise} {empty-point-mapping}
-          \__ptxcd_map_points_helper:nn {?subtask?} {?points?}
-      }{
-        \bool_gset_true:N \g_tmpa_bool
-        \tl_gclear:N \g_ptxcd_tmp_tl
-        \int_gset:Nn \g_ptxcd_tmp_int {\value{subtask}}
-        \setcounter{subtask}{#2}
-        \bool_while_do:Nn \g_tmpa_bool {
-            \prop_get:NeNTF \g__ptxcd_loaded_points_prop {#2\thesubtask} \l_tmpa_tl {
-                \fp_compare:nF {\l_tmpa_tl = 0} {
-                \tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
-                \tl_gput_right:Nx \g_ptxcd_tmp_tl {{#2\thesubtask} {\l_tmpa_tl}}
-                }
-                \stepcounter{subtask}
-            } {\bool_gset_false:N \g_tmpa_bool}
+\cs_new:Nn \_@@_point_mapping_aux:nnn {
+  \bool_set_true:c {l_@@_#1_bool}
+  \cs_set:ce {_@@_cached_#1_counter:} {\int_eval:n {\value{#1}}}
+  \setcounter{#1}{#2}
+	\bool_while_do:cn  {l_@@_#1_bool} {
+          \prop_get:NeNTF \g__ptxcd_loaded_points_prop {\use:c {#1label}} \l_tmpa_tl {
+    % ONLY IF POINTS?!
+      \fp_compare:nF {\l_tmpa_tl = 0} {
+				\tl_build_put_right:Ne \l_ptxcd_tmp_tl {
+          \exp_not:c {_@@_map_points_#1:nn} {\use:c {#1label}} {\l_tmpa_tl}
         }
-          \setcounter{subtask}{\int_use:N \g_ptxcd_tmp_int}
-          \g_ptxcd_tmp_tl
       }
+      #3
+      \stepcounter{#1}
+    } {\bool_set_false:c {l_@@_#1_bool}}
   }
+  \setcounter{#1}{\use:c {_@@_cached_#1_counter:}}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%    \end{macrocode}
+% \changes{v3.42-dev}{2025-01-18}{Add generic mechanism to iterate over tasks}
+%    \begin{macrocode}
+\keys_define:nn {ptxcd/task-mapping} {
+  task .bool_set:N = \l_@@_task_bool,
+  task .initial:n = false,
+  subtask .bool_set:N = \l_@@_subtask_bool,
+  subtask .initial:n = false
+}
+
+\NewDocumentCommand{\mapTasks}{O{}+m+m}{
+  \group_begin:
+    \keys_set:nn {ptxcd/task-mapping} {
+      task = true,
+      subtask=true,
+      #1
+    }
+    \cs_gset:Nn \_@@_map_points_task:nn {#2}
+    \cs_gset:Nn \_@@_map_points_subtask:nn {#3}
+
+  \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
+    \msg_warning:nn {tudaexercise} {empty-point-mapping}
+    \tl_set:Nn \l_ptxcd_tmp_tl {\_@@_map_points_task:nn {?task?} {?points?}}
+  } {
+      \tl_build_begin:N \l_ptxcd_tmp_tl
+      \exp_args:Nne \use:n {
+        \bool_if:NTF \l_@@_task_bool \use:n \use_ii:nn
+          {\_@@_point_mapping_aux:nnn  {task} {1}}
+      }{
+        \bool_if:NT \l_@@_subtask_bool {
+          \exp_not:n {
+            \bool_set_true:N \l_@@_subtask_bool
+            \_@@_point_mapping_aux:nnn  {subtask} {1} {}
+          }
+        }
+      }
+    	\tl_build_end:N \l_ptxcd_tmp_tl
+  }
+  \exp_args:NV
+  \group_end:
+  \l_ptxcd_tmp_tl
+ }
 } {
   \newcommand{\getPoints}[1]{
     \msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPoints}
