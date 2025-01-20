@@ -1064,11 +1064,12 @@ reversemp
 %</tudapub|print|letter>
 %<letter>	\PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
 %<*tudabeamer>
-	\keys_set:nn {ptxcd/beamer} {
+	\keys_set:nn {ptxcd/beamer} {design=2008}
+	\PassOptionsToPackage{
 		colorframetitle=false,
-		centerframetitle,
+		centerframetitle=true,
 		headsepline=false
-	}
+	}{beamerthemeTUDa2008}
 %</tudabeamer>
   },
   department .initial:n = default,

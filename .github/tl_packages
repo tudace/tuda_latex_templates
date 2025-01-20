@@ -8,6 +8,7 @@ babel
 babel-english
 babel-german
 beamer# only Beamer
+biber# binary
 biblatex# only Exercise Leaflet PhD Pub SciPoster Thesis
 bigintcalc# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
 bitset# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
