@@ -73,29 +73,29 @@
 \newcommand{\PrintDescribeKeyOption}[1]{\parbox[b]{\linewidth}{\raggedleft\MacroFont #1}\rlap{=}}
 
 \cs_new:Npn \__ptxctools_parse_key_option:w #1 #2  #3 #4 = #5  \q_stop {
-	\noindent{\let\PrintDescribeOption\PrintDescribeKeyOption\DescribeOption{#4}}\makebox[\linewidth]{
-	\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}
-	\hfill
-		\IfBooleanTF{#1}
-			{#2}
-			{(default:~\codefont{#2})}
-	}
+  \noindent{\let\PrintDescribeOption\PrintDescribeKeyOption\DescribeOption{#4}}\makebox[\linewidth]{
+    \IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}
+    \hfill
+    \IfBooleanTF{#1}
+    {#2}
+    {(default:~\codefont{#2})}
+  }
 }
 
 \cs_new:Npn \__ptxctools_parse_key_option_item:w #1 #2  #3 #4 = #5  \q_stop {
-	\item[\let\MacroFont\codefamily\DescribeOption{#4=}\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}]
-	\hfill
-		\IfBooleanTF{#1}
-			{#2}
-			{(default:~\codefont{#2})}\newline
+  \item[\let\MacroFont\codefamily\DescribeOption{#4=}\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}]
+  \hfill
+  \IfBooleanTF{#1}
+  {#2}
+  {(default:~\codefont{#2})}\newline
 }
 
 \NewDocumentCommand{\DescribeKeyOption}{smms}{
-	\__ptxctools_parse_key_option:w  #1 {#3} #4 #2 \q_stop
+  \__ptxctools_parse_key_option:w  #1 {#3} #4 #2 \q_stop
 }
 
 \NewDocumentCommand{\KeyOptionItem}{smms}{
-	\__ptxctools_parse_key_option_item:w  #1 {#3} #4 #2 \q_stop
+  \__ptxctools_parse_key_option_item:w  #1 {#3} #4 #2 \q_stop
 }
 
 \usepackage{minted}
@@ -104,18 +104,18 @@
 \setminted{escapeinside=||}
 
 \geometry{
-top=\g_ptxcd_topMargin_dim,
-inner=\g_ptxcd_innerMargin_dim,
-outer=\dim_eval:n {\g_ptxcd_outerMargin_dim},
-bottom=\g_ptxcd_bottomMargin_dim,
-columnsep= \g_ptxcd_columnSep_dim,
-includehead,
-includefoot,
-includemp,
-nomarginpar,
-includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim,
-headheight=\g_ptxcd_headheight_dim,
-reversemp
+  top=\g_ptxcd_topMargin_dim,
+  inner=\g_ptxcd_innerMargin_dim,
+  outer=\dim_eval:n {\g_ptxcd_outerMargin_dim},
+  bottom=\g_ptxcd_bottomMargin_dim,
+  columnsep= \g_ptxcd_columnSep_dim,
+  includehead,
+  includefoot,
+  includemp,
+  nomarginpar,
+  includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim,
+  headheight=\g_ptxcd_headheight_dim,
+  reversemp
 }
 
 \ExplSyntaxOff
@@ -1054,58 +1054,57 @@ reversemp
   department / mecheng .code:n = {
       \str_gset:Nn \g_ptxcd_department_str {mecheng}
 %<*tudapub|print|letter>
-%<tudapub>	\keys_set:nn {ptxcd/pub} {
-%<exercise> 	\keys_set:nn {ptxcd/exercise} {
-%<leaflet> 	\keys_set:nn {ptxcd/leaflet} {
-%<letter>  \keys_set:nn {ptxcd/letter} {
-%<sciposter|poster>		\keys_set:nn {ptxcd/poster} {
-%<!letter>      colorback=false,
-%<tudapub>		ruledheaders=section,
-      departmentlogofile=tuda_maschinenbau_logo,
-%<exercise>		color=Primary1,
-%<sciposter> titlesepline=false
+      \keys_set:ne {
+%<!sciposter>        ptxcd / \c__ptxcd_base_str
+%<sciposter>        ptxcd / poster
+      }{
+%<!letter>        colorback=false,
+%<tudapub>        ruledheaders=section,
+        departmentlogofile=tuda_maschinenbau_logo,
+%<exercise>        color=Primary1,
+%<sciposter>        titlesepline=false
 %<*letter>
-      headrule=false,
-      logo=false,
-      textwidth=narrow,
+        headrule=false,
+        logo=false,
+        textwidth=narrow,
 %</letter>
-	}
+      }
 %</tudapub|print|letter>
-%<letter>	\PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
+%<letter>      \PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
 %<*tudabeamer>
-	\keys_set:nn {ptxcd/beamer} {
-			design=2008,
-			colorframetitle=false,
-			centerframetitle=true,
-			headsepline=false,
-	}
+      \keys_set:nn {ptxcd/beamer} {
+        design=2008,
+        colorframetitle=false,
+        centerframetitle=true,
+        headsepline=false,
+      }
 %</tudabeamer>
-  },
+    },
   department .initial:n = default,
   department / unknown .code:n = {
       \str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
     },
-   %
+%
   departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
   departmentconfigprefix .initial:n = tuda,
-	%
+%
   departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
   departmentlogofile .initial:n =,
-  % predefined department configs
-    mecheng .meta:n = {department=mecheng},
+% predefined department configs
+  mecheng .meta:n = {department=mecheng},
 %    \end{macrocode}
 % \iffalse
 %</beamer|class|print>
-%%^^A Logo pdfa / pdfx
+% %^^A Logo pdfa / pdfx
 %<*beamer|class|letter|sciposter>
 % \fi
 %    \begin{macrocode}
-      pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
-      pdfa .initial:n =
-%<!(sciposter|beamer)>      true,
-%<sciposter|beamer>      false,
-      pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
-      pdfx .initial:n = true,
+  pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
+  pdfa .initial:n =
+%<!(sciposter|beamer)>  true,
+%<sciposter|beamer>  false,
+  pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
+  pdfx .initial:n = true,
 %    \end{macrocode}
 % \iffalse
 %</beamer|class|letter|sciposter>
@@ -1123,8 +1122,8 @@ reversemp
     },
   logo / top .meta:n = {logo=head},
   logo / bottom .code:n = {\bool_gset_false:N \g__ptxcd_LogoInHead_bool},
-%<class> logo .initial:n = {body},
-%<poster> logo .initial:n = {head},
+%<class>  logo .initial:n = {body},
+%<poster>  logo .initial:n = {head},
 %    \end{macrocode}
 % \iffalse
 %</class|poster>
@@ -1134,7 +1133,7 @@ reversemp
 %<*class>
 % \fi
 %    \begin{macrocode}
-  %twoside -> geometry + class
+% twoside -> geometry + class
   class .choice:,
   class/report .meta:n = {class=scrreprt},
   class/scrreprt .code:n  = \tl_gset:Nn \g_ptxcd_pub_class_tl {scrreprt},
@@ -1148,7 +1147,7 @@ reversemp
 %</class>
 % \fi
 % color options
-%*coloroptions>
+% *coloroptions>
 % \iffalse
 %<*class|print>
 % \fi
@@ -1198,8 +1197,8 @@ reversemp
 % \fi
 %    \begin{macrocode}
   marginpar
-%<!poster>    .tl_gset:N = \g_ptxcd_marginpar_tl,
-%<poster>    .bool_gset:N = \g_ptxcd_marginpar_bool,
+%<!poster>  .tl_gset:N = \g_ptxcd_marginpar_tl,
+%<poster>  .bool_gset:N = \g_ptxcd_marginpar_bool,
 %<poster>  marginpar / auto .meta:n = {marginpar = true} ,
   marginpar .default:n = auto,
 %<!poster>  marginpar .initial:n = auto,
@@ -1207,11 +1206,11 @@ reversemp
 %    \end{macrocode}
 % \iffalse
 %</class|poster>
-% \fi
 % color options
-%*coloroptions>
+% *coloroptions>
 %<*class|(print&!(leaflet|letter|sciposter|poster))>
-%/coloroptions>
+% /coloroptions>
+% \fi
 % margin
 %    \begin{macrocode}
   custommargins .choice:,
@@ -1234,16 +1233,16 @@ reversemp
 %    \begin{macrocode}
   fontsize .code:n = \prop_gput:Nnn \g_ptxcd_clsopts_prop {fontsize} {#1},
   fontsize .initial:n =
-%<!exercise>{9pt},
-%<exercise>{10pt},
+%<!exercise>    {9pt},
+%<exercise>  {10pt},
 %    \end{macrocode}
 % \iffalse
 %</class|(print&!(leaflet|letter|sciposter|poster))>
-% \fi
 % color options
-%*coloroptions>
+% *coloroptions>
 %<*class>
-%/coloroptions>
+% /coloroptions>
+% \fi
 % margin
 %    \begin{macrocode}
   ruledheaders .choices:nn = {false, none, chapter, section, true,  all}{
@@ -1266,7 +1265,6 @@ reversemp
 %    \end{macrocode}
 % \iffalse
 %</class>
-%
 %<*class|exercise>
 % \fi
 %    \begin{macrocode}
@@ -1278,7 +1276,6 @@ reversemp
 %    \end{macrocode}
 % \iffalse
 %</class|exercise>
-%
 %<*class>
 % \fi
 %    \begin{macrocode}
@@ -1291,23 +1288,22 @@ reversemp
 % \fi
 %    \begin{macrocode}
   paper .choices:nn = {
-%<sciposter>    a0,a1,a2,a3
-%<poster>    a0,a1,a2,a3,a4
-%<!(sciposter|poster)>    a0,a1,a2,a3,a4,a5,a6
-  	}{
-      \int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
-%%%%%poster>      \tl_gset_eq:NN \g_ptxcd_paper_tl \l_keys_choice_tl
-      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
+%<sciposter>      a0,a1,a2,a3
+%<poster>      a0,a1,a2,a3,a4
+%<!(sciposter|poster)>      a0,a1,a2,a3,a4,a5,a6
+  }{
+  \int_gset_eq:NN \g_ptxcd_paper_int  \l_keys_choice_int
+  \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{tudarules}
 %<!(sciposter|poster)>      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
       \exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
-    },
+  },
 %<*sciposter>
-   	paper / landscape .code:n = \PassOptionsToPackage{landscape}{geometry},
- 	paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
+  paper / landscape .code:n = \PassOptionsToPackage{landscape}{geometry},
+  paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
 %</sciposter>
   paper .initial:n =
-%<!(sciposter|poster)>       a4,
-%<sciposter|poster>       a0,
+%<!(sciposter|poster)>  a4,
+%<sciposter|poster>  a0,
 %    \end{macrocode}
 % \iffalse
 %</class|exercise|sciposter|poster>
@@ -1341,13 +1337,13 @@ reversemp
 % Allow to add options via l3build |typesetcmds|.
 %    \begin{macrocode}
 \cs_if_exist:NT \TUDaDefaultBuildOptions {
-	\exp_args:Ne \keys_set:no { ptxcd /
-%<!(beamer-outer|sciposter)> 		\c__ptxcd_base_str
-%<beamer-outer> beamer/outer
-%<sciposter> poster
-	} {
-		\TUDaDefaultBuildOptions
-	}
+  \exp_args:Ne \keys_set:no { ptxcd /
+%<!(beamer-outer|sciposter)>    \c__ptxcd_base_str
+%<beamer-outer>    beamer/outer
+%<sciposter>    poster
+  } {
+    \TUDaDefaultBuildOptions
+  }
 }
 %    \end{macrocode}
 % \iffalse
@@ -1356,15 +1352,15 @@ reversemp
 % Define a macro to insert the logo workaround to only need this definition once.
 %    \begin{macrocode}
 \cs_new:Nn \__ptxcd_insert_logo: {
-	\bool_if:NTF \g_ptxcd_logo_workaround_bool {
-		\file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
-			\use_ii:nn
-			\use_i:nn
-	} {
-		\use_ii:nn
-	}
-		{\rule{0pt}{\c_ptxcd_logoheight_dim}\makebox[2.5\c_ptxcd_logoheight_dim][c]{\rule[.1\c_ptxcd_logoheight_dim]{2.05\c_ptxcd_logoheight_dim}{.8\c_ptxcd_logoheight_dim}}}
-		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
+  \bool_if:NTF \g_ptxcd_logo_workaround_bool {
+    \file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
+    \use_ii:nn
+    \use_i:nn
+  } {
+    \use_ii:nn
+  }
+  {\rule{0pt}{\c_ptxcd_logoheight_dim}\makebox[2.5\c_ptxcd_logoheight_dim][c]{\rule[.1\c_ptxcd_logoheight_dim]{2.05\c_ptxcd_logoheight_dim}{.8\c_ptxcd_logoheight_dim}}}
+  {\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
 }
 %    \end{macrocode}
 % \iffalse
@@ -1373,7 +1369,7 @@ reversemp
 %<*class>
 % \fi
 %    \begin{macrocode}
-%%special option handling grouped values
+% special option handling grouped values
 %    \begin{macrocode}
 \Module@DefineSpecialKey[ptxcd/pub]{thesis}{
   \keys_set:nn {ptxcd/pub}{type=thesis}
@@ -1405,7 +1401,7 @@ reversemp
       \msg_info:nn {tudapub} {prefer-lualatex}
     }
     \prop_if_in:NnF \g__pdfmeta_outputintents_prop {GTS_PDFA1} {
-		\use_iii:nnn
+      \use_iii:nnn
     }
   }
   \bool_if:NT \g_ptxcd_pdfx_bool {
@@ -1432,7 +1428,7 @@ reversemp
   }
 }
 %    \end{macrocode}
-%Load tudasize clo file if available
+% Load tudasize clo file if available
 %    \begin{macrocode}
 \file_if_exist:nT {tudasize\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}.clo}
 {\providecommand*{\@fontsizefilebase}{tudasize}}
@@ -1448,49 +1444,49 @@ reversemp
 \RequirePackage{graphicx}
 
 \bool_if:NTF \g_ptxcd_pdfx_bool {
-	%only apply the hack if pdfx is older than the working version
-	\PassOptionsToPackage{a-2b}{pdfx}
-% Workaround posted by David Carlisle on tex.stackexchange
-% Thanks to Ulrike Fischer for mentioning it in #472
-	\let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
-	\chardef\currentgrouplevel0
-	\ExplSyntaxOff
-	\RequirePackage{pdfx}
-	\ExplSyntaxOn
-	\let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-	\cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
-% end of the workaround
+%% only apply the hack if pdfx is older than the working version
+  \PassOptionsToPackage{a-2b}{pdfx}
+%% Workaround posted by David Carlisle on tex.stackexchange
+%% Thanks to Ulrike Fischer for mentioning it in #472
+  \let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+  \chardef\currentgrouplevel0
+  \ExplSyntaxOff
+  \RequirePackage{pdfx}
+  \ExplSyntaxOn
+  \let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
+  \cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+%% end of the workaround
 
-	\msg_new:nnn{tudapub} {prefer-lualatex} {
-		You~use~pdfa-mode~in~#1.\\
-		This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
-		You~should~prefer~using~lualatex.
-	}
-	\msg_new:nnnn{tudapub} {outdated-package-pdfa} {
-		Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
-		Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
-	}{See~DEMO-tudapub~for~further~information.}
+  \msg_new:nnn{tudapub} {prefer-lualatex} {
+    You~use~pdfa-mode~in~#1.\\
+    This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
+    You~should~prefer~using~lualatex.
+  }
+  \msg_new:nnnn{tudapub} {outdated-package-pdfa} {
+    Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
+    Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
+  }{See~DEMO-tudapub~for~further~information.}
 
-	\sys_if_engine_pdftex:T {
-		\msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
-	}
+  \sys_if_engine_pdftex:T {
+    \msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
+  }
 
-	\sys_if_engine_xetex:T {
-		\msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
-	}
+  \sys_if_engine_xetex:T {
+    \msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
+  }
 
-	\@ifpackagelater{xmpincl}{2021/09/22}{
-	}{
-		\msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
-	}
+  \@ifpackagelater{xmpincl}{2021/09/22}{
+  }{
+    \msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
+  }
 
-	\@ifpackagelater{pdfx}{2018/12/01}{
-	}{
-		\msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
-	}
+  \@ifpackagelater{pdfx}{2018/12/01}{
+  }{
+    \msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
+  }
 } {
-	\PassOptionsToPackage{hidelinks, unicode}{hyperref}
-	\RequirePackage{hyperref}
+  \PassOptionsToPackage{hidelinks, unicode}{hyperref}
+  \RequirePackage{hyperref}
 }
 
 \RequirePackage{tudarules}
@@ -1506,7 +1502,7 @@ reversemp
   }
 }
 %    \end{macrocode}
-%ruled headers
+% ruled headers
 %    \begin{macrocode}
 \int_compare:nT {\g_ptxcd_ruledheaders_int>=3} {
   \cs_if_exist:NT \chapterlinesformat {
@@ -1557,7 +1553,7 @@ reversemp
 \dim_new:N \g_ptxcd_bottomMargin_dim
 \dim_new:N \g_ptxcd_topMargin_dim
 
-%a3,a4
+% a3,a4
 \int_compare:nTF {4<=\g_ptxcd_paper_int<=5}
 	{
 		\dim_gset:Nn \g_ptxcd_bottomMargin_dim {20mm}
@@ -1565,7 +1561,7 @@ reversemp
 		\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
 		\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
 	}{
-	%a0, a1, a2
+% a0, a1, a2
 		\int_compare:nT {1<=\g_ptxcd_paper_int<=3}
 		{
 			\dim_gset:Nn \g_ptxcd_bottomMargin_dim {35mm}
@@ -1573,7 +1569,7 @@ reversemp
 			\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
 			\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
 		}
-		%a5
+% a5
 		\int_compare:nT {\g_ptxcd_paper_int<=6}
 		{
 			\dim_gset:Nn \g_ptxcd_bottomMargin_dim {16mm}
@@ -1581,7 +1577,7 @@ reversemp
 			\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
 			\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
 		}
-		%a6
+% a6
 		\int_compare:nT {\g_ptxcd_paper_int<=7}
 		{
 			\dim_gset:Nn \g_ptxcd_bottomMargin_dim {15mm}
@@ -1599,7 +1595,7 @@ reversemp
 %<*class>
 % \fi
 % \begin{macro}{\coverpageleftmargin}
-%coverpage
+% coverpage
 %    \begin{macrocode}
 \edef\coverpageleftmargin{\dim_eval:n {\g_ptxcd_outerMargin_dim}}
 %    \end{macrocode}
@@ -1749,7 +1745,7 @@ reversemp
 \setlength{\footheight}{\dimexpr\baselineskip+\c_ptxcd_rulesep_dim}
 \bool_if:NT \g_ptxcd_headline_bool {\KOMAoptions{headsepline=.5\c_ptxcd_smallrule_dim}}
 %    \end{macrocode}
-%Adjust headheight
+% Adjust headheight
 %    \begin{macrocode}
 \AddToHook{begindocument}[tudapub:adjust-headheight]{
 \bool_if:NTF \g_ptxcd_marginpar_bool
@@ -1825,9 +1821,6 @@ reversemp
 	}
 ]{plain.TUDa.pub.head.above.line}
 
-%\dim_set:Nn \l_tmpa_dim {\topmargin+1in+\headheight+\headsep+\textheight
-%   +\footskip+\dp\strutbox-\footheight +\c_ptxcd_rulesep_dim}
-
 \ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.even}
 \ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.odd}
 \ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.pub.foot.oneside}
@@ -1865,7 +1858,7 @@ reversemp
 	+1in\relax
 }
 %    \end{macrocode}
-%Titelseite
+% Titelseite
 %    \begin{macrocode}
 \tl_new:N  \g_ptxcd_titleimage_code_tl
 \tl_gset_eq:NN  \g_ptxcd_titleimage_code_tl \c_empty_tl
@@ -2159,10 +2152,10 @@ reversemp
 
 \DeclareNewPageStyleByLayers{title.TUDa}{title.TUDa.background,title.TUDa.rule,title.TUDa.image}
 %    \end{macrocode}
-%Logos
+% Logos
 %    \begin{macrocode}
 \if_bool:N \g_ptxcd_pdfx_bool
-%%hyperref
+% %hyperref
 \hypersetup{hidelinks, unicode}
 \iow_new:N \ptxcd_xmpdata_stream
 \tl_new:N \g_ptxcd_xmp_title_tl
@@ -2218,7 +2211,7 @@ reversemp
 }
 
 \cs_set:Nn \ptxcd_set_metadata_prop:nn {
-  %Fallback test for older kernels doesn't support mixed case eintries
+% Fallback test for older kernels doesn't support mixed case eintries
   \cs_if_exist:NTF \text_titlecase_first:n {
     \exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\text_titlecase_first:n {#1}} {#2}
   } {
@@ -2347,14 +2340,14 @@ reversemp
     \def\and{,~ }
     \cs_if_exist_use:N \ptxcd_pass_TitleData:
     \if@titlepage
-	\edef\titlepage@restore{%
-		\noexpand\endgroup
-		\noexpand\global\noexpand\@colht\the\@colht
-		\noexpand\global\noexpand\@colroom\the\@colroom
-		\noexpand\global\vsize\the\vsize
-		\noexpand\global\noexpand\@titlepageiscoverpagefalse
-		\noexpand\let\noexpand\titlepage@restore\noexpand\relax
-	}%
+      \edef\titlepage@restore{%
+        \noexpand\endgroup
+        \noexpand\global\noexpand\@colht\the\@colht
+        \noexpand\global\noexpand\@colroom\the\@colroom
+        \noexpand\global\vsize\the\vsize
+        \noexpand\global\noexpand\@titlepageiscoverpagefalse
+        \noexpand\let\noexpand\titlepage@restore\noexpand\relax
+      }%
       \ptxcd_disable_marginpar:
       \begin{titlepage}
         \setcounter{page}{%
@@ -2684,7 +2677,7 @@ reversemp
   \endgroup
 }
 %    \end{macrocode}
-%Anpassungen marginpar
+% Anpassungen marginpar
 %    \begin{macrocode}
 \cs_set_eq:NN\ptxcd_orig@marginpar:w \marginpar
 \newkomafont{marginpar}{\accentfont\color{textaccentcolor}}
@@ -2735,7 +2728,7 @@ reversemp
 %    \end{macrocode}
 % \end{macro}
 %
-%IMRAD:Introduction
+% IMRAD:Introduction
 %    \begin{macrocode}
 \seq_if_exist:NTF \seq_const_from_clist:Nn {
   \seq_const_from_clist:Nn \c_ptxcd_IMRAD_seq {introduction, methods, results, discussion}
@@ -2777,7 +2770,7 @@ reversemp
   Either~you~need~to~recompile~your~document~or~add~a~label~using~\string\IMRADlabel.
 }
 %    \end{macrocode}
-%backwards compatibility for KOMA-Script
+% backwards compatibility for KOMA-Script
 %    \begin{macrocode}
 \cs_if_exist:NF \Iftocfeature{
   \let\Iftocfeature\iftocfeature
@@ -2795,7 +2788,7 @@ reversemp
 \tl_new:N \g_ptxcd_thesis_drtext_tl
 \clist_if_exist:NF \g_ptxcd_Required_title_data_clist {\clist_new:N \g_ptxcd_Required_title_data_clist}
 
-%Declare macros for department
+% Declare macros for department
 \cs_new:Nn \ptxcd_select_department:n {
   \str_case:nnTF {#1} {
     {arch}   {\ptxcd_declare_caption:Nnn \ptxcd_department: {Architektur} {Architecture}}
@@ -2861,7 +2854,7 @@ reversemp
 \ptxcd_declare_caption:Nnn \ptxcd_submissiondatename {Tag~ der~ Einreichung}{Date~ of~ submission}
 \ptxcd_declare_caption:Nnn \ptxcd_studentIDname {Matrikelnummer} {Student\nobreakspace ID}
 
-%Fallback content for box if not overwritten
+% Fallback content for box if not overwritten
 \newcommand*\ptxcd_box_department {\cs_if_exist_use:NF \departmentfullname {\ptxcd_department:}}
 \newcommand*\ptxcd_in_department {}
 \newcommand*{\ptxcd_thesisStatus}{}
@@ -2879,7 +2872,7 @@ reversemp
       \clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, date}
       \bool_gset_false:N \g_ptxcd_dr_bool
     },
-  %   type/diplom  .code:n = {\def\ptxcd_thesisType{Diplomarbeit}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate, reviewer, department}},
+%   type/diplom  .code:n = {\def\ptxcd_thesisType{Diplomarbeit}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate, reviewer, department}},
   type/bsc  .meta:n = {type=bachelor},
   type/bachelor  .code:n = {\ptxcd_declare_caption:Nnn \ptxcd_thesisType{Bachelorarbeit}{bachelor~ thesis}\def\@ThesisTypeArticle{die}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, submissiondate, department, reviewer}\bool_gset_false:N \g_ptxcd_dr_bool},
   type/pp  .code:n = { \ptxcd_declare_caption:Nnn \ptxcd_thesisType {Project-Proposal}{project~ proposal}\def\@ThesisTypeArticle{das}\clist_gset:Nn \g_ptxcd_Required_title_data_clist {title, author, date, department}\bool_gset_false:N \g_ptxcd_dr_bool},
@@ -2953,7 +2946,7 @@ reversemp
 \gdef\ptxcd_institution{}
 \gdef\ptxcd_institute{}
 \gdef\ptxcd_department:{}
-%\gdef\ptxcd_studentID{}
+% \gdef\ptxcd_studentID{}
 
 \NewDocumentCommand{\department}{som}{%
   \IfBooleanTF{#1}{
@@ -3154,7 +3147,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
   \raggedright
   \@title\par\@subtitle
   \par\vspace*{\baselineskip}
-  %ignore birthplace on english subject
+% ignore birthplace on english subject
   \let\ptxcd_birthplace\@empty
   \@subject
   \bool_if:NT \g__ptxcd_reviewer_on_uppertitleback_bool
@@ -3219,7 +3212,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
     \noexpand\global\noexpand\@colroom\the\@colroom
     \noexpand\global\vsize\the\vsize
     \noexpand\global\noexpand\@titlepageiscoverpagefalse
-   \noexpand\let\noexpand\titlepage@restore\noexpand\relax
+    \noexpand\let\noexpand\titlepage@restore\noexpand\relax
   }%
   \ptxcd_disable_marginpar:
   \cleardoublepage
@@ -3473,7 +3466,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
     \rule{\linewidth}{.3pt}\\\makebox[0pt][c]{#2}}
 }
 
-%messages:
+% messages:
 \msg_new:nnn{tudapub/thesis} {dr-field-only} {
   You~submitted~#1~data~for~title~information.\\
   This~field~is~only~used~for~type=dr/drfinal.\\
