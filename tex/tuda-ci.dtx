@@ -148,7 +148,7 @@ reversemp
 \CodelineIndex
 \RecordChanges
 \begin{document}
-%\DisableImplementation
+% \DisableImplementation
 \DocInput{tuda-ci.dtx}
 \PrintChanges
 \printbibliography
@@ -167,10 +167,10 @@ reversemp
 % \maketitle
 %
 % \begin{abstract}
-% The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt with \LaTeX.
-% Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation.
-% Up to Version 4.00 the documentation was only included in the demo files.
-% This document now sums up all features and includes references to other package documentations if required.
+%   The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt with \LaTeX.
+%   Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation.
+%   Up to Version 4.00 the documentation was only included in the demo files.
+%   This document now sums up all features and includes references to other package documentations if required.
 % \end{abstract}
 %
 % \tableofcontents
@@ -179,19 +179,19 @@ reversemp
 % The TUDa-CI Bundle currently contains template files for the following document types:
 %
 % \begin{description}
-% \item[Print publications] generic document class which provides modes for more specific documents.
-% The basic documentation applies to all types and can be found in \autoref{sec:tudapub}.
-% \begin{itemize}
-% \item \file{DEMO-TUDaPub.tex}: default document matching the CI guideline
-% \item minimal Template for internal reports \file{DEMO-TUDaReport.tex} using \option{type=intern} (see description of \option{type} in \autoref{sec:options} on \pageref{option:type})
-% \item (PhD) theses, using \option{type=thesis}. This also extends the functionality and adds some thesis specific mechanisms, see \autoref{sec:theses} \file{DEMO-TUDaThesis.tex} and \file{DEMO-TUDaPhD.tex}
-% \end{itemize}
-% \item[Scientific Posters] based on the \pkg{tcolorbox} poster library, \cite{TUDaSciPoster}
-% \item[Presentation Slides] beamer theme. This includes the old design of 2008 as well as the redesign of 2023,  \cite{TUDaBeamer}
-% \item[Announcement Posters] for event or job annoucements, \cite{TUDaPoster}
-% \item[Leaflets]  \cite{TUDaLeaflet}
-% \item[Exercise Sheets/Exams] \cite{TUDaExercise}
-% \item[Letters] \cite{TUDaLetter}
+%   \item[Print publications] generic document class which provides modes for more specific documents.
+%         The basic documentation applies to all types and can be found in \autoref{sec:tudapub}.
+%         \begin{itemize}
+%           \item \file{DEMO-TUDaPub.tex}: default document matching the CI guideline
+%           \item minimal Template for internal reports \file{DEMO-TUDaReport.tex} using \option{type=intern} (see description of \option{type} in \autoref{sec:options} on \pageref{option:type})
+%           \item (PhD) theses, using \option{type=thesis}. This also extends the functionality and adds some thesis specific mechanisms, see \autoref{sec:theses} \file{DEMO-TUDaThesis.tex} and \file{DEMO-TUDaPhD.tex}
+%         \end{itemize}
+%   \item[Scientific Posters] based on the \pkg{tcolorbox} poster library, \cite{TUDaSciPoster}
+%   \item[Presentation Slides] beamer theme. This includes the old design of 2008 as well as the redesign of 2023,  \cite{TUDaBeamer}
+%   \item[Announcement Posters] for event or job annoucements, \cite{TUDaPoster}
+%   \item[Leaflets]  \cite{TUDaLeaflet}
+%   \item[Exercise Sheets/Exams] \cite{TUDaExercise}
+%   \item[Letters] \cite{TUDaLetter}
 % \end{description}
 %
 % The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort.
@@ -233,31 +233,31 @@ reversemp
 % \section{Usage and class options}
 % \label{sec:options}
 % \begin{table}
-% \captionabove[Differences between the demo files based on \cls{tudapub}]{
-%   Differences between the demo files based on \cls{tudapub}.
-%   The template files use different options depending on the actual purpose.
-%   This tabular gives an overview of the Features shown inside the tempaltes as well as the initial settings.
-% }
-% \label{tab:demo-options}
-% \noindent\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}c>{\centering\arraybackslash}Xcc@{}}
-% \toprule
-% Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub&DEMO-TUDaReport\\
-% \midrule
-% twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
-% parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-% colophone&\FeatureFalse&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
-% dedication&\FeatureFalse&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
-% font size&11pt&11pt&9pt&9pt\\\midrule
-% ruledheaders&section&chapter&all&all\\\midrule
-% class&scrreprt&scrbook&scrartcl&scrartcl\\\midrule
-% thesis&\ttfamily thesistype=bachelor&\ttfamily thesistype=dr, dr=rernat &\FeatureFalse&\FeatureFalse\\\midrule
-% marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-% Affidavit\newline
-% \rlap{(\enquote{Selbstständigkeitserklärung})}&\FeatureTrue&\FeatureTrue&\FeatureFalse&\FeatureFalse\\\midrule
-% abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
-% custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse&\FeatureFalse\\
-% \bottomrule
-% \end{tabularx}
+%   \captionabove[Differences between the demo files based on \cls{tudapub}]{
+%     Differences between the demo files based on \cls{tudapub}.
+%     The template files use different options depending on the actual purpose.
+%     This tabular gives an overview of the Features shown inside the tempaltes as well as the initial settings.
+%   }
+%   \label{tab:demo-options}
+%   \noindent\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}c>{\centering\arraybackslash}Xcc@{}}
+%     \toprule
+%     Option                                         & DEMO-TUDaThesis               & DEMO-TUDaPhD                       & DEMO-TUDapub  & DEMO-TUDaReport \\
+%     \midrule
+%     twoside                                        & \FeatureFalse                 & \FeatureTrue                       & \FeatureFalse & \FeatureFalse   \\\midrule
+%     parskip                                        & \FeatureTrue                  & \FeatureFalse                      & \FeatureTrue  & \FeatureFalse   \\\midrule
+%     colophone                                      & \FeatureFalse                 & \FeatureTrue                       & \FeatureFalse & \FeatureFalse   \\\midrule
+%     dedication                                     & \FeatureFalse                 & \FeatureTrue                       & \FeatureFalse & \FeatureFalse   \\\midrule
+%     font size                                      & 11pt                          & 11pt                               & 9pt           & 9pt             \\\midrule
+%     ruledheaders                                   & section                       & chapter                            & all           & all             \\\midrule
+%     class                                          & scrreprt                      & scrbook                            & scrartcl      & scrartcl        \\\midrule
+%     thesis                                         & \ttfamily thesistype=bachelor & \ttfamily thesistype=dr, dr=rernat & \FeatureFalse & \FeatureFalse   \\\midrule
+%     marginpar                                      & \FeatureFalse                 & \FeatureFalse                      & \FeatureTrue  & \FeatureFalse   \\\midrule
+%     Affidavit\newline
+%     \rlap{(\enquote{Selbstständigkeitserklärung})} & \FeatureTrue                  & \FeatureTrue                       & \FeatureFalse & \FeatureFalse   \\\midrule
+%     abstract                                       & \FeatureFalse                 & \FeatureTrue                       & \FeatureTrue  & \FeatureFalse   \\\midrule
+%     custommargins                                  & \FeatureTrue                  & \FeatureTrue                       & \FeatureFalse & \FeatureFalse   \\
+%     \bottomrule
+%   \end{tabularx}
 % \end{table}
 % The class is loaded using
 % \begin{Syntax}
@@ -290,7 +290,7 @@ reversemp
 % Controlls the the marginpar. The default setting is auto.
 % This means that the marginpar column runs across the fifth column of the layout grid \cite{TUDaGuideline}.
 %^^A\marginpar{Marginpar example}
-%  Above this, the option also accepts boolean values. False would set width of the column to 0.
+% Above this, the option also accepts boolean values. False would set width of the column to 0.
 % The mechanism itself is not deactivated.
 %
 % The font inside the marginpars are controlled using the komafont mechanism \cite{scrguide-en} using the \code{marginpar} element.
@@ -358,7 +358,7 @@ reversemp
 % The \KOMAScript{} option \code{titlepage}\cite{scrguide-en} is supported to switch between separate title pages and a title head.
 % Due to the implementation, \code{titlepage=true} is treated identically to \code{titlepage=firstiscover}.
 %
-%  \DescribeMacro{\titlehead}\DescribeMacro{\title}\DescribeMacro{\subtitle}\DescribeMacro{\subject}\DescribeMacro{\author}\DescribeMacro{\and}\DescribeMacro{\thanks}\DescribeMacro{\date}\DescribeMacro{\publishers}
+% \DescribeMacro{\titlehead}\DescribeMacro{\title}\DescribeMacro{\subtitle}\DescribeMacro{\subject}\DescribeMacro{\author}\DescribeMacro{\and}\DescribeMacro{\thanks}\DescribeMacro{\date}\DescribeMacro{\publishers}
 % These macros are used to set the title data.
 % If not mentioned differently all need one mandatory argument which contains the data.
 % They are used as with standard \LaTeX{} but there were a few added to support the additional features of the title page design.
@@ -433,12 +433,12 @@ reversemp
 % \DescribeKeyOption{logo=head/body}{body}
 % The position of the logo can be switched. This is done via the class option \option{logo};
 % \begin{description}
-% \item[logo=head]
-% The logo is placed in the header directly next to the title, which is reduced in width.
-% The background of the title is colored in the color of the identity bar.
-% This setting also will move the boxes below the logo to the page head.
+%   \item[logo=head]
+%         The logo is placed in the header directly next to the title, which is reduced in width.
+%         The background of the title is colored in the color of the identity bar.
+%         This setting also will move the boxes below the logo to the page head.
 %
-% \item[logo=body] The logo including the info boxes is placed in the body of the front page.
+%   \item[logo=body] The logo including the info boxes is placed in the body of the front page.
 % \end{description}
 %
 % \DescribeKeyOption{colorback=\meta{Boolean}/title/head/body}{true}
@@ -447,9 +447,9 @@ reversemp
 %
 % The other values will enfable the colored area but allow to switch between positions.
 % \begin{description}
-% \item[colorback=title] Only the title background (without subtitle) is colored.
-% \item[colorback=head] Background of the total title block inlcuding subtitles is colored.
-% \item[colorback=body] Only the background of the area used for the \cs{titlegraphic} is colored.
+%   \item[colorback=title] Only the title background (without subtitle) is colored.
+%   \item[colorback=head] Background of the total title block inlcuding subtitles is colored.
+%   \item[colorback=body] Only the background of the area used for the \cs{titlegraphic} is colored.
 % \end{description}
 %
 % \subsection{Extra title material for theses}
@@ -465,11 +465,11 @@ reversemp
 %
 % \begin{example}
 % \begin{abstract}
-% 	Abstract using the document main languge (here English)
+%   Abstract using the document main languge (here English)
 % \end{abstract}
 %
 % \begin{abstract}[german]
-% 	Weitere Zusammenfassung in einer anderen Sprache (hier Deutsch),
+%   Weitere Zusammenfassung in einer anderen Sprache (hier Deutsch),
 %   sofern benötigt.
 % \end{abstract}
 % \end{example}
@@ -498,9 +498,9 @@ reversemp
 % The template files which use PDF/A by default now include the settings for the pdfmanagement:
 % \begin{example}
 % \DocumentMetadata{
-% 	pdfstandard=a-2b,
-% 	pdfversion=1.7,
-% 	lang=en,% or de or …
+%   pdfstandard=a-2b,
+%   pdfversion=1.7,
+%   lang=en,% or de or …
 % }
 % \end{example}
 % This can also be used within other documents. More Information on this structure can be foud in the documentation of the pdfmangement-testphase \cite{pdfmanagement-testphase} as well as l3pdfmeta \cite{l3pdfmeta}.
@@ -571,10 +571,10 @@ reversemp
 %
 % \begin{example}
 % \documentclass[
-% 	english,
-% 	class=report,
-%	 thesis={type=master}
-% 	|[…]|
+% english,
+% class=report,
+% thesis={type=master}
+% |[…]|
 % ]{tudapub}
 % \end{example}
 %
@@ -583,15 +583,15 @@ reversemp
 % This is printed on the title page and also selects which data is mandatory.
 % Possible values are listed below including their impact. The items in parenthesis list the required data for that type.
 % \begin{description}
-% \item[sta] \enquote{Studienarbeit}: Student research project. (\cs{title}, \cs{author}, \cs{date})
-% \item[bachelor] \enquote{Bachelor thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
-% \item[master] \enquote{Master thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
-% \item[pp] \enquote{Project proposal}. (\cs{title}, \cs{author}, \cs{date}, \cs{department})
-% \item[dr] submitted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
-% \item[drfinal] accepted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{examdate}, \cs{department}, \cs{reviewer})
-%\end{description}
-%If a type is specified that was not listed the text is directly used as type.
-%In this case, there are no mandatory title fields except the title.
+%   \item[sta] \enquote{Studienarbeit}: Student research project. (\cs{title}, \cs{author}, \cs{date})
+%   \item[bachelor] \enquote{Bachelor thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
+%   \item[master] \enquote{Master thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
+%   \item[pp] \enquote{Project proposal}. (\cs{title}, \cs{author}, \cs{date}, \cs{department})
+%   \item[dr] submitted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
+%   \item[drfinal] accepted Doctoral thesis (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{examdate}, \cs{department}, \cs{reviewer})
+% \end{description}
+% If a type is specified that was not listed the text is directly used as type.
+% In this case, there are no mandatory title fields except the title.
 %
 % \DescribeKeyOption{dr=rernat/rerpol/ing/phil}{initially unset}
 % Loads one of the predefined texts for the title page.
@@ -613,19 +613,19 @@ reversemp
 % The following shorthands are predefined:
 %
 % \begin{tabular}{@{}l@{${}\to{}$}l@{}}
-%	arch & Architecture \\
-%	bauing & Civil and environmental engineering \\
-%	bio & Biology \\
-%	chem & Chemistry \\
-%	etit & Electrical Engineering and Information Technology \\
-%	gugw & History and Social Sciences \\
-%	humanw & Human Sciences \\
-%	inf & Computer Science \\
-%	mb & Mechanical Engineering \\
-%	matgeo & Materials and Earth Sciences \\
-%	math & Mathematics \\
-%	phys & Physics \\
-%	wi & Law and Economics
+%   arch & Architecture \\
+%   bauing & Civil and environmental engineering               \\
+%   bio    & Biology                                           \\
+%   chem   & Chemistry                                         \\
+%   etit   & Electrical Engineering and Information Technology \\
+%   gugw   & History and Social Sciences                       \\
+%   humanw & Human Sciences                                    \\
+%   inf    & Computer Science                                  \\
+%   mb     & Mechanical Engineering                            \\
+%   matgeo & Materials and Earth Sciences                      \\
+%   math   & Mathematics                                       \\
+%   phys   & Physics                                           \\
+%   wi     & Law and Economics
 % \end{tabular}
 %
 % In addition to the departments, there are also \enquote{fields or study}.
@@ -634,11 +634,11 @@ reversemp
 % The study areas have the following shorthands:
 %
 % \begin{tabular}{@{}l@{${}\to{}$}l@{}}
-% ce&Computational Engineering\\
-% ese&Energy Science and Engineering\\
-% ist&Information Systems Engineering\\
-% mech&Mechanics\\
-% metro&Mechatronics
+%   ce & Computational Engineering \\
+%   ese   & Energy Science and Engineering  \\
+%   ist   & Information Systems Engineering \\
+%   mech  & Mechanics                       \\
+%   metro & Mechatronics
 % \end{tabular}
 %
 % If anything other than one of these shorthands is found, the provided text is used directly and a corresponding warning is issued.
@@ -651,11 +651,11 @@ reversemp
 % Therefore the option \option{instbox} can be deactived.
 %
 % \DescribeKeyOption{ignore-missing-data=\meta{Boolean}}{false}
-%  This option is a switch that makes it possible to disable the error message about title data that has not been transferred.
+% This option is a switch that makes it possible to disable the error message about title data that has not been transferred.
 % In this case, only a warning is created if the specified data does not match the requirements.
 %
 % \DescribeMacro{\publishers}
-%  Is used here for the location and is preset with \enquote{Darmstadt} or \enquote{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
+% Is used here for the location and is preset with \enquote{Darmstadt} or \enquote{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
 %
 % \DescribeMacro{\subject}
 % Will be placed below the \cs{subtitle} as for the normal title page, but will hold all the additional information which can be provided using the additional data fields.
@@ -717,11 +717,11 @@ reversemp
 % \DescribeMacro{\tuprints}\label{page:tuprints}  Publication via TUprints requires this setting.
 % The data should be provided by the TUprints submission process.
 % \begin{example}
-%     \tuprints{
-%         printid=12345,
-%         urn=123456,
-%         year=2022
-%     }
+% \tuprints{
+%   printid=12345,
+%   urn=123456,
+%   year=2022
+% }
 % \end{example}
 %
 % \DescribeKeyOption{printid=\meta{TUprints print ID}}{\meta{initially unset}}*
@@ -736,18 +736,18 @@ reversemp
 % From version 3.08 there are predefined values for \option{license} simplify customization. These are as follows:
 %
 % \parbox[t]{.5\linewidth}{%
-% \codefamily
-% \href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0} \textnormal{default since version 4.0}\par
-% \href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
-% \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
-% \href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
+%   \codefamily
+%   \href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0} \textnormal{default since version 4.0}\par
+%   \href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
+%   \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
+%   \href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
 % }%
 % \parbox[t]{.5\linewidth}{
-% \codefamily
-% \href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
-% \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
-% \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (From version 3.36)}\par
-% \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-en}\par
+%   \codefamily
+%   \href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
+%   \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
+%   \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (From version 3.36)}\par
+%   \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-en}\par
 % }
 %
 % The introduction of this option was part of the preparation for adapting the standard license.
@@ -776,10 +776,10 @@ reversemp
 % The extent to which these options may be used must be clarified by the user before submission.
 % TUDa-CI cannot make a reliable statement on this.
 % \begin{example}
-%  \affidavit[
-%    signature=Signature name,
-%    signature-image={\includegraphics[width=\width]{signatureimage}}
-%  ]
+% \affidavit[
+%   signature=Signature name,
+%   signature-image={\includegraphics[width=\width]{signatureimage}}
+% ]
 % \end{example}
 % A vertical shift of the signature image is not implemented directly, but is easily possible by using the \LaTeX macro \cs{raisebox}\marg{shift}\marg{content}.
 %
@@ -787,7 +787,7 @@ reversemp
 % In order to handle the structure and any necessary language switching, there is an environment:
 % \begin{Syntax}
 % \begin{affidavit*}[|\meta{Babel language option}]|{|\meta{heading}|}
-% 	\meta{Text}
+%   \meta{Text}
 % \end{affidavit*}
 % \end{Syntax}
 % This version deliberately does not have a signature line, as the developers do not consider this version to be legally binding.
@@ -830,41 +830,41 @@ reversemp
 % This is why the custommargins class option exists.
 %
 % \begin{description}
-% \item[custommargins=false]
-% Default setting of \cls{tudapub}.
-% The margins correspond to the specifications of the Corporate Design Guidelines\cite{TUDaGuideline}.
-% The setting is made using \pkg{geometry}.
-% Customizations are overwritten by executing \cs{maketitle}.
-% To allow personal adjustments one of the other settings is required.
+%   \item[custommargins=false]
+%         Default setting of \cls{tudapub}.
+%         The margins correspond to the specifications of the Corporate Design Guidelines\cite{TUDaGuideline}.
+%         The setting is made using \pkg{geometry}.
+%         Customizations are overwritten by executing \cs{maketitle}.
+%         To allow personal adjustments one of the other settings is required.
 %
-% \item[custommargins=true] The settings of the Corporate Design Guidelines are not activated.
-% pkg{geometry} is not loaded.
-% This mode corresponds to the default setting of \KOMAScript.
-% The margins are not explicitly defined, but calculated on the basis of the typearea package \cite[see][]{scrguide-en}.
+%   \item[custommargins=true] The settings of the Corporate Design Guidelines are not activated.
+%         pkg{geometry} is not loaded.
+%         This mode corresponds to the default setting of \KOMAScript.
+%         The margins are not explicitly defined, but calculated on the basis of the typearea package \cite[see][]{scrguide-en}.
 %
-% \item[custommargins=geometry]
-% This variant was created based on user requests.
-% It allows to use \cls{tudapub} with support for manual adjustments.
-% \pkg{geometry} is loaded and preconfigured as with \option{custommargins=false}.
-% However, it is possible to make minor adjustments by using the \cs{geometry} command.
-% The settings that apply at the start of the document are saved and restored after the title pages.
+%   \item[custommargins=geometry]
+%         This variant was created based on user requests.
+%         It allows to use \cls{tudapub} with support for manual adjustments.
+%         \pkg{geometry} is loaded and preconfigured as with \option{custommargins=false}.
+%         However, it is possible to make minor adjustments by using the \cs{geometry} command.
+%         The settings that apply at the start of the document are saved and restored after the title pages.
 %
-% Please note that the settings use the preset type area as a starting point (with or without a margin column, depending on the option).
-% It is possible to reset all options before adding your own:
-% \begin{Syntax}
-% \geometry{
-% reset,
-% |\meta{Adjustments starting from geometry's defaults}|
-% }
-% \end{Syntax}
-% This applies in particular to the options \code{includehead}, \code{includefoot} and \code{includemp}.
+%         Please note that the settings use the preset type area as a starting point (with or without a margin column, depending on the option).
+%         It is possible to reset all options before adding your own:
+%         \begin{Syntax}
+%         \geometry{
+%           reset,
+%           |\meta{Adjustments starting from geometry's defaults}|
+%         }
+%         \end{Syntax}
+%         This applies in particular to the options \code{includehead}, \code{includefoot} and \code{includemp}.
 % \end{description}
 %
 % \minisec{Remark on the headers/footers}
 % If the option \option{marginpar=true} remains set, the header and footer protrude beyond the margin column.
 % For aesthetic reasons, it is therefore recommended in this case to limit the header and footer to the text area with marginpar=false.
 %
-%The standard layout of the column titles is also not very advantageous, as the column titles can be locally larger than the actual headline. (\option{headline=automark})
+% The standard layout of the column titles is also not very advantageous, as the column titles can be locally larger than the actual headline. (\option{headline=automark})
 %
 % For this reason, \cls{tudapub} provides a simpler page style, which considerably simplifies use with living column titles.
 % The structure is realized using \pkg{scrlayer-scrpage} and can be adapted according to the \KOMAScript documentation \cite{scrguide-en}.
@@ -912,9 +912,9 @@ reversemp
 % For most of the possible modifications \KOMAScript offers its own solutions, which often makes supplementary packages superfluous.
 % Examples of typical modifications that are also permitted as part of the corporate design:
 % \begin{itemize}
-% \item Change paragraphs to use a skip instead of an indent of the first line (option \option{parskip})
-% \item Element numbering with or without end dot (option \option{numbers=enddot/noenddot})
-% \item Caption positioning, alignment and spacing (The macros \cs{captionabove}, \cs{captionbelow}, \cs{captionof} and the \option{captions} option)
+%   \item Change paragraphs to use a skip instead of an indent of the first line (option \option{parskip})
+%   \item Element numbering with or without end dot (option \option{numbers=enddot/noenddot})
+%   \item Caption positioning, alignment and spacing (The macros \cs{captionabove}, \cs{captionbelow}, \cs{captionof} and the \option{captions} option)
 % \end{itemize}
 %
 % \section{Known issues and incompatibilities}
