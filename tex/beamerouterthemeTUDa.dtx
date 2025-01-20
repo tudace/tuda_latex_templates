@@ -126,11 +126,12 @@
 	logo .bool_gset:N = \g_ptxcd_headlinelogo_bool,
 	logo .default:n =true,
 	logo .initial:n =true,
-	colorframetitle .code:n =
-%<main>    \msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
+%<main>	colorframetitle .code:n = msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
 %<*2008>
-		\use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool
-		\cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:,
+  colorframetitle .choices:nn = {true, false} {
+    \use:c {bool_gset_ \l_keys_choice_tl :N} \g__ptxcd_colorframetitle_bool
+    \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:
+  },
 	colorframetitle .default:n = true,
 %</2008>
 	centerframetitle

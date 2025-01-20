@@ -115,8 +115,34 @@
 % \fi
 %    \begin{macrocode}
 \tl_new:N \g__ptxcd_design_tl
+%    \end{macrocode}
+% Because the option passing accross beamer themes is quite annoying and we want to limit the choice of the design to \file{beamerthemeTUDa.sty} and \cls{tudabeamer} the options will be defined to pass to both theme variants.
+% The theme in the end will either do something or send a warning message.
+% \changes{v3.42-dev}{2025-01-20}{Refactor all beamer options to fix passing issues.}
+%   \begin{macrocode}
+\cs_new:Nn \_@@_beamer_declare_pass_options:nn {
+	\keys_define:nn {ptxcd/beamer} {
+		#1 .code:n = \clist_map_inline:nn {#2}{
+			\PassOptionsToPackage{#1=##1}{beamer####1themeTUDa2008}
+			\PassOptionsToPackage{#1=##1}{beamer####1themeTUDa}
+		},
+		#1 .default:n = true,
+	}
+}
+
+\_@@_beamer_declare_pass_options:nn {centerframetitle} {outer}
+\_@@_beamer_declare_pass_options:nn {headsepline} {outer}
+\_@@_beamer_declare_pass_options:nn {logo} {outer}
+\_@@_beamer_declare_pass_options:nn {colortitle} {color}
+\_@@_beamer_declare_pass_options:nn {colorbacktitle} {color}
+\_@@_beamer_declare_pass_options:nn {colorback} {color}
+\_@@_beamer_declare_pass_options:nn {colorframetitle} {outer, color}
+% \iffalse
 %<main>}
+% \fi
+
 \keys_define:nn {ptxcd/beamer} {
+		accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
 %    \end{macrocode}
 %</main|class>
 %<*options>
@@ -149,14 +175,13 @@
       \tl_gset:Nn  \g__ptxcd_design_tl {2008}
     },
   design / default .code:n = {
-%<class>		\tl_gset:Nn  \g__ptxcd_design_tl {default}
-%<main>		\tl_gset:Nn  \g__ptxcd_design_tl {2023}
-    },
+    \tl_gset:Nn  \g__ptxcd_design_tl {default}
+   },
   design .initial:n = default,
   design2023 .meta:n = {design=2023},
   design2008 .meta:n = {design=2008},
   design .usage:n = load,
-%<gobble>}
+%<main>}
 %    \end{macrocode}
 %</!(2023|2008)>
 %
@@ -372,32 +397,14 @@
   It~will~be~ignored.
 }
 %    \end{macrocode}
+% \iffalse
 %</2023>
 %</package>
 %<*options>
+% \fi
 %    \begin{macrocode}
 %<2008>\ExplSyntaxOn
-\keys_define:nn {ptxcd/beamer} {
-  accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
-%<2008>    centerframetitle .code:n = \PassOptionsToPackage{centerframetitle=#1}{beamerouterthemeTUDa2008},
-  colortitle .code:n =
-%<2008>    \PassOptionsToPackage{colortitle=#1}{beamercolorthemeTUDa2008},
-%<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colortitle},
-  colorbacktitle .code:n =
-%<2008>    \PassOptionsToPackage{colorbacktitle=#1}{beamercolorthemeTUDa2008},
-%<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorbacktitle},
-  colorframetitle .code:n =
-%<2008>    \PassOptionsToPackage{colorframetitle=#1}{beamerouterthemeTUDa2008}\PassOptionsToPackage{colorframetitle=#1}{beamercolorthemeTUDa2008},
-%<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
-  colorback .code:n =
-%<2008>    \PassOptionsToPackage{colorback=#1}{beamercolorthemeTUDa2008},
-%<2023>    \msg_warning:nnn {tudabeamer} {option-removed} {colorback},
-%<2008>    headsepline .code:n = \PassOptionsToPackage{headsepline=#1}{beamerouterthemeTUDa2008},
-  logo .code:n = \PassOptionsToPackage{logo=#1}
-%<2008>    {beamerouterthemeTUDa2008}
-%<2023>    {beamerouterthemeTUDa}
-}
-\ProcessKeyOptions[ptxcd/beamer]
+%<2008|2023>\ProcessKeyOptions[ptxcd/beamer]
 %</options>
 %<*package>
 \mode<presentation>

@@ -119,7 +119,10 @@
 	colortitle .default:n = true,
 	colortitle .initial:n = true,
 	colorbacktitle .meta:n = {colortitle=#1},
-	colorframetitle .code:n = \use:c {bool_gset_#1:N} \g__ptxcd_colorframetitle_bool \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:,
+  colorframetitle .choices:nn = {true, false} {
+    \use:c {bool_gset_ \l_keys_choice_tl :N} \g__ptxcd_colorframetitle_bool
+    \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:
+  },
 	colorframetitle .default:n = true,
 	colorback .meta:n = {colorframetitle=#1}
 }
