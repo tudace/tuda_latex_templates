@@ -1027,8 +1027,8 @@
 \keys_define:nn {ptxcd/pub} {
 %    \end{macrocode}
 % \iffalse
-%</class>%^^A
-%<*options|body>%^^A
+%</class>
+%<*options|body>
 %<*!beamer>%^^A logo file and accept missing logos
 % \fi
 %    \begin{macrocode}
@@ -1053,8 +1053,13 @@
   department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
   department / mecheng .code:n = {
       \str_gset:Nn \g_ptxcd_department_str {mecheng}
+%    \end{macrocode}
+% \iffalse
 %<*tudapub|print|letter>
-      \keys_set:ne {
+% \fi
+%    \begin{macrocode}
+      \exp_args:Ne \keys_set:ne {
+
 %<!sciposter>        ptxcd / \c__ptxcd_base_str
 %<sciposter>        ptxcd / poster
       }{
@@ -1063,23 +1068,40 @@
         departmentlogofile=tuda_maschinenbau_logo,
 %<exercise>        color=Primary1,
 %<sciposter>        titlesepline=false
+%    \end{macrocode}
+% \iffalse
 %<*letter>
+% \fi
+%    \begin{macrocode}
         headrule=false,
         logo=false,
         textwidth=narrow,
+%    \end{macrocode}
+% \iffalse
 %</letter>
+% \fi
+%    \begin{macrocode}
       }
+%    \end{macrocode}
+% \iffalse
 %</tudapub|print|letter>
-%<letter>      \PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
 %<*tudabeamer>
+% \fi
+%    \begin{macrocode}
       \keys_set:nn {ptxcd/beamer} {
         design=2008,
         colorframetitle=false,
         centerframetitle=true,
         headsepline=false,
       }
+%    \end{macrocode}
+% \iffalse
 %</tudabeamer>
+% \fi
+%    \begin{macrocode}
+%<letter>      \PassOptionsToPackage{identbar=Primary1,accent=Primary2}{tudacolors}
     },
+
   department .initial:n = default,
   department / unknown .code:n = {
       \str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
@@ -1127,9 +1149,7 @@
 %    \end{macrocode}
 % \iffalse
 %</class|poster>
-% \fi
-% color options
-% \iffalse
+%% color options
 %<*class>
 % \fi
 %    \begin{macrocode}
@@ -1145,10 +1165,7 @@
 %    \end{macrocode}
 % \iffalse
 %</class>
-% \fi
-% color options
-% *coloroptions>
-% \iffalse
+%% color options
 %<*class|print>
 % \fi
 %    \begin{macrocode}
@@ -1297,11 +1314,21 @@
 %<!(sciposter|poster)>      \exp_args:Nx \PassOptionsToPackage{paper=\l_keys_choice_tl}{typearea}
       \exp_args:Nx \PassOptionsToPackage{\l_keys_choice_tl paper}{geometry}
   },
+%    \end{macrocode}
+% \iffalse
 %<*sciposter>
+% \fi
+%    \begin{macrocode}
   paper / landscape .code:n = \PassOptionsToPackage{landscape}{geometry},
+
   paper / portrait .code:n = \PassOptionsToPackage{portrait}{geometry},
+%    \end{macrocode}
+% \iffalse
 %</sciposter>
+% \fi
+%    \begin{macrocode}
   paper .initial:n =
+
 %<!(sciposter|poster)>  a4,
 %<sciposter|poster>  a0,
 %    \end{macrocode}
@@ -1326,18 +1353,24 @@
   title / large .code:n = \bool_gset_false:N \g_ptxcd_smalltitle_bool,
   title / small  .code:n = \bool_gset_true:N \g_ptxcd_smalltitle_bool,
   title .initial:n = default,
+%    \end{macrocode}
+% \iffalse
 %</class|exercise|sciposter|poster>
 %<*class>
+% \fi
+%    \begin{macrocode}
   BCORtitlepage .bool_gset:N = \g_ptxcd_BCOR_titlepage_bool,
+
   BCORtitlepage .initial:n = false,
   BCORtitlepage .default:n = true,
 %</class>
 }
 %    \end{macrocode}
 % Allow to add options via l3build |typesetcmds|.
+% Be aware that in this case also the group has to be expanded.
 %    \begin{macrocode}
 \cs_if_exist:NT \TUDaDefaultBuildOptions {
-  \exp_args:Ne \keys_set:no { ptxcd /
+  \exp_args:Ne \keys_set:ne { ptxcd /
 %<!(beamer-outer|sciposter)>    \c__ptxcd_base_str
 %<beamer-outer>    beamer/outer
 %<sciposter>    poster

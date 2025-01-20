@@ -145,9 +145,14 @@
 \keys_define:nn {ptxcd/leaflet} {
   sponsor .choices:nn = {title,lastfoot,manual}{\tl_gset_eq:NN \g_ptxcd_sponsor_pos_tl \l_keys_choice_tl},
   sponsor .initial:n = title,
+%    \end{macrocode}
+% \iffalse
 %</initialization>
 %<*body>
+% \fi
+%    \begin{macrocode}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{leaflet}}
+
 \ProcessKeyOptions[ptxcd/leaflet]
 \ProcessOptions\relax
 \bool_if:NT \g_ptxcd_colorbacksubtitle_bool {

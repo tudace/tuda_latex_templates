@@ -36,7 +36,7 @@
 %<package|class>\NeedsTeXFormat{LaTeX2e}[2022/06/01]
 %<class>\ProvidesClass{tudabeamer}
 %<*class|driver>
-    [2024/07/31 4.0 Beamer wrapper class for TUDa-CI – Corporate Design Templates for TU Darmstadt]
+[2024/07/31 4.0 Beamer wrapper class for TUDa-CI – Corporate Design Templates for TU Darmstadt]
 %</class|driver>
 %<main>\ProvidesExplPackage{beamerthemeTUDa}{2024-07-02}{3.41}{Beamer theme using the Corporate Design of TU Darmstadt}
 %<2023>\ProvidesExplPackage{beamerthemeTUDa2023}{2024-07-02}{3.41}{Beamer theme using the Corporate Design of TU Darmstadt Design of 2023}
@@ -114,39 +114,41 @@
 %<*main|class>
 % \fi
 %    \begin{macrocode}
-\tl_new:N \g__ptxcd_design_tl
+  \tl_new:N \g__ptxcd_design_tl
 %    \end{macrocode}
 % Because the option passing accross beamer themes is quite annoying and we want to limit the choice of the design to \file{beamerthemeTUDa.sty} and \cls{tudabeamer} the options will be defined to pass to both theme variants.
 % The theme in the end will either do something or send a warning message.
 % \changes{v3.42-dev}{2025-01-20}{Refactor all beamer options to fix passing issues.}
-%   \begin{macrocode}
-\cs_new:Nn \_@@_beamer_declare_pass_options:nn {
-	\keys_define:nn {ptxcd/beamer} {
-		#1 .code:n = \clist_map_inline:nn {#2}{
-			\PassOptionsToPackage{#1=##1}{beamer####1themeTUDa2008}
-			\PassOptionsToPackage{#1=##1}{beamer####1themeTUDa}
-		},
-		#1 .default:n = true,
-	}
-}
+%    \begin{macrocode}
+  \cs_new:Nn \_@@_beamer_declare_pass_options:nn {
+    \keys_define:nn {ptxcd/beamer} {
+      #1 .code:n = \clist_map_inline:nn {#2}{
+        \PassOptionsToPackage{#1=##1}{beamer####1themeTUDa2008}
+        \PassOptionsToPackage{#1=##1}{beamer####1themeTUDa}
+      },
+      #1 .default:n = true,
+    }
+  }
 
-\_@@_beamer_declare_pass_options:nn {centerframetitle} {outer}
-\_@@_beamer_declare_pass_options:nn {headsepline} {outer}
-\_@@_beamer_declare_pass_options:nn {logo} {outer}
-\_@@_beamer_declare_pass_options:nn {colortitle} {color}
-\_@@_beamer_declare_pass_options:nn {colorbacktitle} {color}
-\_@@_beamer_declare_pass_options:nn {colorback} {color}
-\_@@_beamer_declare_pass_options:nn {colorframetitle} {outer, color}
+  \_@@_beamer_declare_pass_options:nn {centerframetitle} {outer}
+  \_@@_beamer_declare_pass_options:nn {headsepline} {outer}
+  \_@@_beamer_declare_pass_options:nn {logo} {outer}
+  \_@@_beamer_declare_pass_options:nn {colortitle} {color}
+  \_@@_beamer_declare_pass_options:nn {colorbacktitle} {color}
+  \_@@_beamer_declare_pass_options:nn {colorback} {color}
+  \_@@_beamer_declare_pass_options:nn {colorframetitle} {outer, color}
 % \iffalse
 %<main>}
 % \fi
 
 \keys_define:nn {ptxcd/beamer} {
-		accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
+  accentcolor .code:n = \PassOptionsToPackage{accentcolor=#1}{tudacolors},
 %    \end{macrocode}
+% \iffalse
 %</main|class>
 %<*options>
 %<*class>
+% \fi
 %    \begin{macrocode}
   color .code:n = {
     \tl_if_in:nnTF {#1} {=} {
@@ -163,8 +165,10 @@
   },
   tudacolors .code:n = \PassOptionsToPackage{#1}{tudacolors},
 %    \end{macrocode}
+% \iffalse
 %</class>
 %<*!(2023|2008)>
+% \fi
 %    \begin{macrocode}
   design .choice:,
   design / 2023 .code:n = {
@@ -183,7 +187,9 @@
   design .usage:n = load,
 %<main>}
 %    \end{macrocode}
+% \iffalse
 %</!(2023|2008)>
+% \fi
 %
 %
 % \iffalse
@@ -275,7 +281,7 @@
       \let\thanks=\@gobble%
       \beamer@setupshort{#1}%
       \beamer@insertshort{\beamer@shortdepartment}%
-   }%
+  }%
 }
 %    \end{macrocode}
 %   end of \department command
@@ -390,7 +396,9 @@
 % \fi
 % \subsection{Design specific options}
 % The design for 2023 removed a lot of options as the accentcolor is no longer used within the frames.
+% \iffalse
 %<*2023>
+% \fi
 %    \begin{macrocode}
 \msg_new:nnn {tudabeamer} {option-removed} {
   The~design~you~selected~doesn't~support~the~option~`#1`.\\

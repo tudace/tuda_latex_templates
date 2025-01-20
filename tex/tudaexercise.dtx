@@ -427,9 +427,14 @@
   }
 }
 \RequirePackage{tudafonts}
+%    \end{macrocode}
+% \iffalse
 %</center>
 %<*body>
+% \fi
+%    \begin{macrocode}
 \dim_new:N \g_ptxcd_headheight_dim
+
 \dim_gset:Nn \g_ptxcd_headheight_dim {\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}
       %
       \bool_if:NTF  \g_ptxcd_geometry_bool {

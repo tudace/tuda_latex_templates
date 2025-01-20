@@ -133,17 +133,35 @@
     \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:
   },
 	colorframetitle .default:n = true,
+%    \end{macrocode}
+% \iffalse
 %</2008>
+% \fi
+%    \begin{macrocode}
 	centerframetitle
+
 %<main>		 .code:n = \msg_warning:nnn {tudabeamer} {option-removed},
+%    \end{macrocode}
+% \iffalse
 %<*2008>
+% \fi
+%    \begin{macrocode}
 		.bool_gset:N = \g_ptxcd_centerframetitle_bool,
 	centerframetitle .initial:n = false,
 	centerframetitle .default:n = true,
+%    \end{macrocode}
+% \iffalse
 %</2008>
+% \fi
+%    \begin{macrocode}
 	framebgcolor
+
 %<main>		.code:n = \msg_warning:nnn {tudabeamer} {option-removed} {framebgcolor},
+%    \end{macrocode}
+% \iffalse
 %<*2008>
+% \fi
+%    \begin{macrocode}
 		.choice:,
 	framebgcolor / reset .code:n =
 		\__ptxcd_reset_framebgcolor:
@@ -151,24 +169,39 @@
 	framebgcolor / unknown .code:n = {
 		\__ptxcd_set_framebgcolor:n {#1}
 	},
+%    \end{macrocode}
+% \iffalse
 %</2008>
+% \fi
+%    \begin{macrocode}
 	singleframebgcolor .code:n =
+
 %<main>		\msg_warning:nnn {tudabeamer} {option-removed} {singleframebgcolor},
 %<*2008>
 		\cs_gset_eq:Nc \__ptxcd_save_background_canvas: {beamer@thcbg@normal~text}
 		\keys_set:nn {ptxcd/beamer/outer} {
 			framebgcolor = #1
 		},
+%    \end{macrocode}
+% \iffalse
 %</2008>
+% \fi
+%    \begin{macrocode}
 	headsepline
+
 %<main>		.code:n = \msg_warning:nnn {tudabeamer} {option-removed} {headsepline},
 %<*2008>
 		.bool_gset:N = \g_ptxcd_headsepline_bool,
 	headsepline .initial:n = true,
 	headsepline .default:n = true,
+%    \end{macrocode}
+% \iffalse
 %</2008>
 %<*main>
+% \fi
+%    \begin{macrocode}
 	extendedspace .bool_gset:N = \g__ptxcd_extended_space_bool,
+
 	headrule .bool_gset:N = \g__ptxcd_headrule_bool,
 	uppercase-frametitle .bool_gset:N = \g__ptxcd_uppercase_frametitle_bool,
 	uppercase-frametitle .default:n = true,
@@ -183,7 +216,9 @@
 %    \begin{macrocode}
 %<gobble>}
 %    \end{macrocode}
+% \iffalse
 %<*main>
+% \fi
 % \begin{key}{beamerframe}{uppercase}
 %    \begin{macrocode}
 \define@key{beamerframe}{uppercase}{
@@ -192,10 +227,14 @@
 	}
 }
 %    \end{macrocode}
+% \iffalse
 %</main>
+% \fi
 % \end{key}
 % \begin{key}{beamerframe}{bgcolor}
+% \iffalse
 %<*2008>
+% \fi
 %    \begin{macrocode}
 \define@key{beamerframe}{bgcolor}{
 	\keys_set:nn {ptxcd/beamer/outer} {
@@ -223,16 +262,28 @@
 	}
 }
 %    \end{macrocode}
+% \iffalse
 %</2008>
+% \fi
 %    \begin{macrocode}
 \ProcessKeyOptions[ptxcd/beamer/outer]
 \mode<presentation>
 \RequirePackage{graphicx}
+%    \end{macrocode}
+% \iffalse
 %<*2008>
+% \fi
+%    \begin{macrocode}
 \bool_if:NT \g__ptxcd_colorframetitle_bool
+
 	{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
+%    \end{macrocode}
+% \iffalse
 %</2008>
+% \fi
+%    \begin{macrocode}
 \setbeamersize{
+
 	text~margin~left=\dim_eval:n {
 %<main>	\paperwidth/34
 %<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
@@ -272,7 +323,9 @@
 }
 %    \end{macrocode}
 % \end{macro}
+% \iffalse
 %<*main>
+% \fi
 %    \begin{macrocode}
 \defbeamertemplate*{footline}{TUDa2023}{
 	\begin{beamercolorbox}[leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin]{footline}
@@ -383,7 +436,9 @@
 \mode
 <all>
 %    \end{macrocode}
+% \iffalse
 %</main>
+% \fi
 %</body>
 %</package>
 % \fi
