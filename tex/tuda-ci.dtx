@@ -1026,22 +1026,28 @@ reversemp
 
 \keys_define:nn {ptxcd/pub} {
 %    \end{macrocode}
+% \iffalse
 %</class>%^^A
 %<*options|body>%^^A
 %<*!beamer>%^^A logo file and accept missing logos
+% \fi
 %    \begin{macrocode}
   logofile .tl_gset:N = \g_ptxcd_logofile_tl,
   logofile .initial:n = tuda_logo,
-% \end{macrocode}
+%    \end{macrocode}
+% \iffalse
 %</!beamer>%^^A Logo
+% \fi
 % \changes{v3.42-dev}{2025-01-10}{Added accept-missing-logos option for public testing workflows.}
-% \begin{macrocode}
+%    \begin{macrocode}
   accept-missing-logos .bool_gset:N = \g_ptxcd_logo_workaround_bool,
   accept-missing-logos .initial:n = false,
   accept-missing-logos .usage:n = load,
   accept-missing-logos .default:n = true,
 %    \end{macrocode}
+% \iffalse
 %<*beamer|class|print>
+% \fi
 %    \begin{macrocode}
   department .choice:,
   department / default .code:n = \str_gset:Nn \g_ptxcd_department_str {default},
@@ -1088,9 +1094,11 @@ reversemp
   % predefined department configs
     mecheng .meta:n = {department=mecheng},
 %    \end{macrocode}
+% \iffalse
 %</beamer|class|print>
 %%^^A Logo pdfa / pdfx
 %<*beamer|class|letter|sciposter>
+% \fi
 %    \begin{macrocode}
       pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
       pdfa .initial:n =
@@ -1099,8 +1107,10 @@ reversemp
       pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
       pdfx .initial:n = true,
 %    \end{macrocode}
+% \iffalse
 %</beamer|class|letter|sciposter>
 %<*class|poster>
+% \fi
 %    \begin{macrocode}
   logo .choice:,
   logo / head .code:n = {
@@ -1116,9 +1126,13 @@ reversemp
 %<class> logo .initial:n = {body},
 %<poster> logo .initial:n = {head},
 %    \end{macrocode}
+% \iffalse
 %</class|poster>
+% \fi
 % color options
+% \iffalse
 %<*class>
+% \fi
 %    \begin{macrocode}
   %twoside -> geometry + class
   class .choice:,
@@ -1130,25 +1144,33 @@ reversemp
   class/scrbook .code:n  = \tl_gset:Nn \g_ptxcd_pub_class_tl {scrbook},
   class .initial:n = scrartcl,
 %    \end{macrocode}
+% \iffalse
 %</class>
+% \fi
 % color options
 %*coloroptions>
+% \iffalse
 %<*class|print>
+% \fi
 %    \begin{macrocode}
   color .meta:n = {accentcolor=#1},
   accentcolor .code:n = {\PassOptionsToPackage{accentcolor=#1}{tudacolors}},
   textaccentcolor .code:n = {\PassOptionsToPackage{textaccentcolor=#1}{tudacolors}},
   identbarcolor .code:n = {\PassOptionsToPackage{identbarcolor=#1}{tudacolors}},
 %    \end{macrocode}
+% \iffalse
 %</class|print>
 %<*class|(print&!letter)>
+% \fi
 %    \begin{macrocode}
   colorback .bool_gset:N = \g_ptxcd_colorback_bool,
   colorback .default:n = true,
   colorback .initial:n = true,
 %    \end{macrocode}
+% \iffalse
 %</class|(print&!letter)>
 %<*class|leaflet>
+% \fi
 %    \begin{macrocode}
   colorbacktitle .bool_gset:N = \g_ptxcd_colorbacktitle_bool,
   colorbacktitle .initial:n = false,
@@ -1170,8 +1192,10 @@ reversemp
   \bool_gset_true:N \g_ptxcd_colorbacksubtitle_bool,
 %<tudapub>  colortitleback .code:n =  \msg_error:nnx {tudapub} {compatibility-only} {\l_keys_key_tl},
 %    \end{macrocode}
+% \iffalse
 %</class|leaflet>
 %<*class|poster>
+% \fi
 %    \begin{macrocode}
   marginpar
 %<!poster>    .tl_gset:N = \g_ptxcd_marginpar_tl,
@@ -1181,7 +1205,9 @@ reversemp
 %<!poster>  marginpar .initial:n = auto,
 %<poster>  marginpar .initial:n = false,
 %    \end{macrocode}
+% \iffalse
 %</class|poster>
+% \fi
 % color options
 %*coloroptions>
 %<*class|(print&!(leaflet|letter|sciposter|poster))>
@@ -1211,7 +1237,9 @@ reversemp
 %<!exercise>{9pt},
 %<exercise>{10pt},
 %    \end{macrocode}
+% \iffalse
 %</class|(print&!(leaflet|letter|sciposter|poster))>
+% \fi
 % color options
 %*coloroptions>
 %<*class>
@@ -1236,9 +1264,11 @@ reversemp
   twocolumn .default:n = true,
   twocolumn .initial:n = false,
 %    \end{macrocode}
+% \iffalse
 %</class>
 %
 %<*class|exercise>
+% \fi
 %    \begin{macrocode}
   BCOR .code:n = \PassOptionsToPackage{bindingoffset=#1}{geometry},
   bindingoffset .meta:n = {BCOR=#1},
@@ -1246,16 +1276,19 @@ reversemp
         \use:n {\prop_item:Nn \g_ptxcd_clsopts_prop {captions}}, #1}
     },
 %    \end{macrocode}
+% \iffalse
 %</class|exercise>
 %
 %<*class>
+% \fi
 %    \begin{macrocode}
   abstract .code:n = \prop_gput:Nnn \g_ptxcd_unknown_clsopts_prop {abstract} {#1},
   abstract .initial:n =true,
 %    \end{macrocode}
+% \iffalse
 %</class>
-
 %<*class|exercise|sciposter|poster>
+% \fi
 %    \begin{macrocode}
   paper .choices:nn = {
 %<sciposter>    a0,a1,a2,a3
@@ -1276,9 +1309,10 @@ reversemp
 %<!(sciposter|poster)>       a4,
 %<sciposter|poster>       a0,
 %    \end{macrocode}
+% \iffalse
 %</class|exercise|sciposter|poster>
-
 %<*class>
+% \fi
 %    \begin{macrocode}
   IMRAD .bool_gset:N = \g_ptxcd_IMRAD_bool,
   IMRAD .initial:n = true,
@@ -1286,9 +1320,10 @@ reversemp
   instbox .code:n = {\tl_gput_right:Nn \g_ptxcd_thesis_options_tl {,instbox=#1}},
   noinstbox .code:n = {\tl_gput_right:Nn \g_ptxcd_thesis_options_tl {,noinstbox=#1}},
 %    \end{macrocode}
+% \iffalse
 %</class>
-
 %<*class|exercise|sciposter|poster>
+% \fi
 %    \begin{macrocode}
   title .choice:,
   title / default .meta:n = {title=large},
@@ -1315,7 +1350,9 @@ reversemp
 	}
 }
 %    \end{macrocode}
+% \iffalse
 %<*!beamer>
+% \fi
 % Define a macro to insert the logo workaround to only need this definition once.
 %    \begin{macrocode}
 \cs_new:Nn \__ptxcd_insert_logo: {
@@ -1330,9 +1367,11 @@ reversemp
 		{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}
 }
 %    \end{macrocode}
+% \iffalse
 %</!beamer>
 %</options|body>
 %<*class>
+% \fi
 %    \begin{macrocode}
 %%special option handling grouped values
 %    \begin{macrocode}
@@ -1508,8 +1547,10 @@ reversemp
 \bool_new:N \g_ptxcd_marginpar_bool
 \dim_new:N \g_ptxcd_marginpar_dim
 %    \end{macrocode}
+% \iffalse
 %</class>
 %<*class|margin>
+% \fi
 %    \begin{macrocode}
 \dim_new:N \g_ptxcd_innerMargin_dim
 \dim_new:N \g_ptxcd_outerMargin_dim
@@ -1553,8 +1594,10 @@ reversemp
 \dim_new:N \g_ptxcd_columnSep_dim
 \dim_gset:Nn \g_ptxcd_columnSep_dim {10pt}
 %    \end{macrocode}
+% \iffalse
 %</class|margin>
 %<*class>
+% \fi
 % \begin{macro}{\coverpageleftmargin}
 %coverpage
 %    \begin{macrocode}
