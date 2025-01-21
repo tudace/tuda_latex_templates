@@ -136,7 +136,7 @@
 %<*class&initialization>
 % \fi
 %    \begin{macrocode}
-\bool_new:N \g_ptxcd_logo_inhead_bool
+\bool_new:N \g_@@_logo_head_bool
 \dim_new:N \g_ptxcd_margin_dim
 \int_new:N \g_ptxcd_paper_int
 \int_new:N \g_ptxcd_postertype_int
@@ -399,7 +399,7 @@
           \dim_max:nn {0pt} {1.5\c_ptxcd_logoheight_dim - \height}
         }}
       {
-        \begin{minipage}[b]{\bool_if:NT \g_ptxcd_logo_inhead_bool {.75}\linewidth}
+        \begin{minipage}[b]{\bool_if:NT \g_@@_logo_head_bool {.75}\linewidth}
           \leavevmode\par\nointerlineskip
           \bool_if:NF \g_ptxcd_indenttext_bool {\begin{addmargin}{\g_ptxcd_titleindent_dim }}
               \usekomafont{title}
@@ -453,7 +453,7 @@
   \ModifyLayer[
     height=\g_ptxcd_titleback_dim
   ]{TUDa.poster.background}
-  \bool_if:NF \g_ptxcd_logo_inhead_bool {
+  \bool_if:NF \g_@@_logo_head_bool {
     \ModifyLayer[
       addvoffset=
       \bool_if:NF \g_ptxcd_colorsubtitle_bool {\box_dp:N \g_ptxcd_title_box}+\g_ptxcd_titleback_dim+\c_ptxcd_smallrule_dim
@@ -461,7 +461,7 @@
   }
   \leavevmode\box_use:N \g_ptxcd_title_box\par
   \dim_set:Nn \g_ptxcd_titlegraphic_max_height_dim {\textheight-\pagetotal}
-  \bool_if:NTF \g_ptxcd_logo_inhead_bool {
+  \bool_if:NTF \g_@@_logo_head_bool {
     \dim_compare:nT {\box_ht:N \g_ptxcd_title_info_box+ \box_dp:N \g_ptxcd_title_info_box  > \box_ht:N \g_ptxcd_title_box}
     {\msg_warning:nn{tudaposter} {infobox-too-high}}
   } {

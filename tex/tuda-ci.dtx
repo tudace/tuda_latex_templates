@@ -1135,15 +1135,15 @@
 %    \begin{macrocode}
   logo .choice:,
   logo / head .code:n = {
-      \bool_gset_true:N \g__ptxcd_LogoInHead_bool
+      \bool_gset_true:N \g_@@_logo_head_bool
 %<class>      \bool_gset_true:N \g_ptxcd_colorbacktitle_bool
     },
   logo / body .code:n = {
-      \bool_gset_false:N \g__ptxcd_LogoInHead_bool
+      \bool_gset_false:N \g_@@_logo_head_bool
 %<class>      \bool_gset_false:N \g_ptxcd_colorbacktitle_bool
     },
   logo / top .meta:n = {logo=head},
-  logo / bottom .code:n = {\bool_gset_false:N \g__ptxcd_LogoInHead_bool},
+  logo / bottom .code:n = {\bool_gset_false:N \g_@@_logo_head_bool},
 %<class>  logo .initial:n = {body},
 %<poster>  logo .initial:n = {head},
 %    \end{macrocode}
@@ -2023,7 +2023,7 @@
 	\nointerlineskip
 	\ptxcd_setup_title_box:
 
-	\bool_if:NT \g__ptxcd_LogoInHead_bool {
+	\bool_if:NT \g_@@_logo_head_bool {
 		\dim_compare:nT {\box_ht:N \g_ptxcd_title_info_box+ \box_dp:N \g_ptxcd_title_info_box  > \box_ht:N \g_ptxcd_title_box}
   {\msg_warning:nn{tudapub} {infobox-too-high}}
   \makebox[\linewidth][r]{\smash{
@@ -2127,7 +2127,7 @@
               \leavevmode\ignorespaces
               \g_ptxcd_titleimage_code_tl
             }}}}
-      \bool_if:NF \g__ptxcd_LogoInHead_bool {
+      \bool_if:NF \g_@@_logo_head_bool {
         \put(\dim_to_decimal_in_unit:nn {\layerwidth-\__ptxcd_logowidth:
         } {\unitlength},
         \dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_ptxcd_title_info_box - .5\c_ptxcd_logoheight_dim} {\unitlength}){
@@ -2412,7 +2412,7 @@
         \ptxcd_setup_sponsor_box:
         \hbox_gset:Nn \g_ptxcd_title_box {
           \parbox[t]{\linewidth}{
-            \begin{minipage}[b]{\bool_if:NT \g__ptxcd_LogoInHead_bool {.75}\linewidth}
+            \begin{minipage}[b]{\bool_if:NT \g_@@_logo_head_bool {.75}\linewidth}
               \bool_lazy_and:nnT {\g_ptxcd_colorback_bool} {\g_ptxcd_colorbacktitle_bool} {\color{textonaccentcolor}}
               \tl_if_empty:NF \@titlehead {
                 \begin{addmargin}{3mm}
@@ -3279,7 +3279,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
     \ptxcd_setup_sponsor_box:
     \hbox_gset:Nn \g_ptxcd_title_box {
       \parbox[t]{\linewidth}{
-        \begin{minipage}[b]{\bool_if:NT \g__ptxcd_LogoInHead_bool {.75}\linewidth}
+        \begin{minipage}[b]{\bool_if:NT \g_@@_logo_head_bool {.75}\linewidth}
           \bool_lazy_and:nnT {\g_ptxcd_colorback_bool} {\g_ptxcd_colorbacktitle_bool} {\color{textonaccentcolor}}
           \tl_if_empty:NF \@titlehead {
             \begin{addmargin}{3mm}
