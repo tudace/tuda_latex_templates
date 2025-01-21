@@ -133,7 +133,7 @@
 %<gobble>}
 %    \end{macrocode}
 % \iffalse
-%<*body>
+%<*packages>
 % \fi
 %    \begin{macrocode}
 % \begin{documentation}
@@ -198,6 +198,13 @@
 } {
   \geometry{top=30mm}
 }
+%    \end{macrocode}
+% \iffalse
+%</packages>
+%<*pdfx>
+% \fi
+% \changes{v3.42-dev}{2025-01-21}{Unify pdfx/pdfa mechanism structure over all document types}
+%    \begin{macrocode}
 \if_bool:N \g_ptxcd_pdfx_bool
   \PassOptionsToPackage{a-2b}{pdfx}
 %    \end{macrocode}
@@ -218,6 +225,13 @@
   \PassOptionsToPackage{hidelinks, unicode}{hyperref}
   \RequirePackage{hyperref}
 \fi:
+%    \end{macrocode}
+% \iffalse
+%</pdfx>
+%<*body>
+% \fi
+% \changes{v3.42-dev}{2025-01-21}{Unify pdfx/pdfa mechanism structure over all document types}
+%    \begin{macrocode}
 \RequirePackage[paper=a4]{tudarules}% might load pgfcore, so it has to be loaded after pdfx
 \setplength{firstheadhpos}{\c_ptxcd_HeadMargin_dim}
 \setplength{firstheadvpos}{\c_ptxcd_HeadMargin_dim}

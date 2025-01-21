@@ -1497,7 +1497,13 @@
 \RequirePackage{tudacolors}
 \RequirePackage[draft=false]{scrlayer-scrpage}
 \RequirePackage{graphicx}
-
+%    \end{macrocode}
+% \iffalse
+%</class>
+%<*class|pdfx>
+% \fi
+% \changes{v3.42-dev}{2025-01-21}{Unify pdfx/pdfa mechanism structure over all document types}
+%    \begin{macrocode}
 \bool_if:NTF \g_ptxcd_pdfx_bool {
 %% only apply the hack if pdfx is older than the working version
   \PassOptionsToPackage{a-2b}{pdfx}
@@ -1543,6 +1549,12 @@
   \PassOptionsToPackage{hidelinks, unicode}{hyperref}
   \RequirePackage{hyperref}
 }
+%    \end{macrocode}
+% \iffalse
+%</class|pdfx>
+%<*class>
+% \fi
+%    \begin{macrocode}
 
 \RequirePackage{bookmark}
 \RequirePackage{tudarules}

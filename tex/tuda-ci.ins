@@ -86,7 +86,7 @@ Please use the issue tracker for feedback!
 		\from{tudabeamer.dtx}{class,body}
 	}
 	%tudapub
-	\file{tudapub.cls}{\from{tuda-ci.dtx}{class,tudapub,options}}
+	\file{tudapub.cls}{\from{tuda-ci.dtx}{class,tudapub,pdfa,options}}
 }
 
 \generate{%
@@ -107,6 +107,8 @@ Please use the issue tracker for feedback!
 \generate{\file{tudaletter.cls}{%
 		\from{tudaletter.dtx}{class,initialization}%
 		\from{tuda-ci.dtx}{options,letter,print,process-options,pdfa}%
+		\from{tudaletter.dtx}{class,packages}%
+		\from{tuda-ci.dtx}{pdfx}%
 		\from{tudaletter.dtx}{class,body}%
 	}%
 }
