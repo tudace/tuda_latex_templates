@@ -1,4 +1,4 @@
-%% This is file `DEMO-TUDaPhD-de.tex' version 3.37 (2024-04-21)
+%% This is file `DEMO-TUDaPhD-de.tex' version 3.41 (2024-07-02)
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -34,11 +34,12 @@
 % PDF/A über pdfmanagement und nicht über pdfx
 \DocumentMetadata{
 	pdfstandard=a-2b,
+	lang=de,
 	pdfversion=1.7,% 2.0 geht auch, aber die meisten Validierungsprogramme unterstützen das  noch nicht.
 }
 
 \documentclass[
-	german,% Hauptsprache als globale Option, früher war ngerman notwendig
+	german,% Hauptsprache als globale Option, früher war german notwendig
 	ruledheaders=chapter,% Ebene bis zu der die Überschriften mit Linien abgetrennt werden, vgl. DEMO-TUDaPub
 	class=book,% Basisdokumentenklasse. Wählt die korrespondierende KOMA-Script Klasse
 	thesis={% Dokumententyp PhD Thesis, für kleinere Abschlussarbeiten, siehe DEMO-TUDaThesis-de.tex
@@ -57,7 +58,7 @@
 %%%%%%%%%%%%%%%%%%%
 % Spracheinstellungen
 %%%%%%%%%%%%%%%%%%%
-\usepackage[english, main=ngerman]{babel}
+\usepackage[english, main=german]{babel}
 \usepackage[autostyle]{csquotes}% Sprachabhängig Anführungszeichen mit \enquote
 
 % Falls mit pdflatex kompiliert wird, wird microtype automatisch geladen, in diesem Fall muss diese Zeile entfernt werden, und falls weiter Optionen hinzugefügt werden sollen, muss dies über
@@ -69,7 +70,7 @@
 % Literaturverzeichnis
 %%%%%%%%%%%%%%%%%%%
 \usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography}% Dateiname der .bib-datei
+\addbibresource{DEMO-TUDaBibliography.bib}% Dateiname der .bib-datei
 
 %%%%%%%%%%%%%%%%%%%
 % Paketvorschläge Tabellen
@@ -173,16 +174,16 @@ TUDa-CI verwendet hierfür das babel-Paket.
 
 Dies wird jedoch nicht automatisch geladen, da hierfür die Konfiguration der Sprachen bekannt sein müsste. Die Demo-Dateien für Abschlussarbeiten (\file{DEMO-TUDaThesis.tex}/""\file{DEMO-TUDaPhD.tex}) laden hierfür die Konfiguration:
 \begin{verbatim}
-    \usepackage[english, main=ngerman]{babel}
+    \usepackage[english, main=german]{babel}
 \end{verbatim}
 Diese ist für ein Dokument mit Deutsch als Hauptsprache und Englischen Elementen.
 Die Hauptsprache wird als Wert der Option \verb+main=+ übergeben.
-Das Laden von \verb+ngerman+ wird in den Fällen, in denen es von TUDa-CI benötigt wird, automatisch ausgelöst.
+Das Laden von \verb+german+ wird in den Fällen, in denen es von TUDa-CI benötigt wird, automatisch ausgelöst.
 Für eine bessere Übersichtlichkeit ist es dennoch hilfreich es dort aufzuführen.
 
 Falls die Hauptsprache nicht Deutsch ist, wäre daher die folgende Konfiguration sinnvoll:
 \begin{verbatim}
-    \usepackage[ngerman, main=<Hauptsprache>]{babel}
+    \usepackage[german, main=<Hauptsprache>]{babel}
 \end{verbatim}
 
 \section{Übergabe der Titeldaten}
@@ -202,36 +203,36 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	\item[studentID] Matrikelnummer. Nach den Vorgaben des Templates ist diese Angabe immer optional.
 	\item[birthplace] Geburtsort. Angabe ist bei Dissertationen notwendig.
 	\item[reviewer] Gutachter. Mehrere Gutachter werden, wie Autoren durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
-	      \minisec{Änderung des Bezeichners}
-	      Die Änderung des Bezeichners ist über ein optionales Argument möglich:
-\begin{verbatim}
+		\minisec{Änderung des Bezeichners}
+		Die Änderung des Bezeichners ist über ein optionales Argument möglich:
+		\begin{verbatim}
         \reviewer[Ersatzbezeichner]{Name1 \and Name2}
 \end{verbatim}
-	      Um die numerische Benennung abzuändern ist es zusätzlich möglich statt dem Ersatzbezeichner eine Kommaliste zu übergeben:
-\begin{verbatim}
+		Um die numerische Benennung abzuändern ist es zusätzlich möglich statt dem Ersatzbezeichner eine Kommaliste zu übergeben:
+		\begin{verbatim}
         \reviewer*[Bezeichner1, Bezeichner2]{Name1 \and Name2}
 \end{verbatim}
-	      In diesem Fall entfällt die Nummerierung vor dem Bezeichner. Soll z.\,B. den Formulierungen der Promotionsordnung entsprochen werden, gilt:
-\begin{verbatim}
+		In diesem Fall entfällt die Nummerierung vor dem Bezeichner. Soll z.\,B. den Formulierungen der Promotionsordnung entsprochen werden, gilt:
+		\begin{verbatim}
         \reviewer[Erstreferent\_in,Koreferent\_in]{Name1 \and Name2}
 \end{verbatim}
-	      Für die Erstellung Fachbereichsspezifischer Templates existiert hierfür auch ein Makro, dass ohne den Aufruf von \verb+\reviewer+ Änderungen zulässt.
-\begin{verbatim}
+		Für die Erstellung Fachbereichsspezifischer Templates existiert hierfür auch ein Makro, dass ohne den Aufruf von \verb+\reviewer+ Änderungen zulässt.
+		\begin{verbatim}
         \setupReviewName{Ersatzwort für „Gutachten“}
 \end{verbatim}
-	      Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+, eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
+		Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+, eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
 
-	      Ab Version 3.26 werden die Gutachter nicht mehr auf der Titelrückseite genannt. Dies wird über die \verb+thesis+ Option \verb+reviewer-on-uppertitleback+ gesteuert. Voreingestellt ist der Wert \verb+false+.
+		Ab Version 3.26 werden die Gutachter nicht mehr auf der Titelrückseite genannt. Dies wird über die \verb+thesis+ Option \verb+reviewer-on-uppertitleback+ gesteuert. Voreingestellt ist der Wert \verb+false+.
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
 	\item[department] Fach-/Studienbereich, allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
 
-	      Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
+		Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
 
-\begin{verbatim}
+		\begin{verbatim}
         \department[Ersatztext]{Kürzel/Bezeichnung}
 \end{verbatim}
-	      Zusätzlich gibt es ab Version 2.01 auch die Möglichkeit den gesamten Text \enquote{im Fachbereich <Bereichsbezeichnung>}, sowie die Angabe in der Infobox auf der Titelseite zu ersetzen. Dies geschieht über die gesternte Variante:
-\begin{verbatim}
+		Zusätzlich gibt es ab Version 2.01 auch die Möglichkeit den gesamten Text \enquote{im Fachbereich <Bereichsbezeichnung>}, sowie die Angabe in der Infobox auf der Titelseite zu ersetzen. Dies geschieht über die gesternte Variante:
+		\begin{verbatim}
         \department*[Text für die Box]{Text zwischen Typ und Autor}
 \end{verbatim}
 	\item[group] Arbeitsgruppe.
@@ -240,42 +241,42 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	\item[date] Beliebiges Datum. Wird über \verb|datename| bezeichnet.
 	\item[publishers] Wird hier für die Ortsangabe verwendet und ist mit \enquote{Darmstadt}, bzw. \enquote{Darmstadt, Technische Universität Darmstadt} (bei Dissertationen) vorbelegt.
 	\item[tuprints] \label{page:tuprints}Übergabe der Daten, sofern das Dokument über TUprints Veröffentlicht werden soll.
-\begin{verbatim}
+		\begin{verbatim}
         \tuprints{
             urn=12345,
             printid=123456,
             year=2022
         }
 \end{verbatim}
-	      Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
+		Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
 
-	      \minisec{Lizenzangabe}
-	      Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license=<Text>| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
+		\minisec{Lizenzangabe}
+		Ab Version 2.07 ist es zudem möglich einen eigenen Lizenztext über den Schlüssel \verb|license=<Text>| zu übergeben. Dieser ersetzt dann die voreingestellte Lizenzangabe.
 
-	      Es existieren (seit v3.08) vorgefertigte Werte für die Option \verb|license|, um eine einfachere Anpassung zu ermöglichen. Diese lauten:
+		Es existieren (seit v3.08) vorgefertigte Werte für die Option \verb|license|, um eine einfachere Anpassung zu ermöglichen. Diese lauten:
 
-	      \parbox[t]{.5\linewidth}{%
-		      \ttfamily
-		      \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-de} \textnormal{(noch aktuelle Voreinstellung)}\par
-		      \href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0}\par
-		      \href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
-		      \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
-	      }%
-	      \parbox[t]{.5\linewidth}{
-		      \ttfamily
-		      \href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
-		      \href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
-		      \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
-		      \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (Ab Version 3.36)}
-	      }
+		\parbox[t]{.5\linewidth}{%
+			\ttfamily
+			\href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-de} \textnormal{(noch aktuelle Voreinstellung)}\par
+			\href{https://creativecommons.org/licenses/by/4.0/}{cc-by-4.0}\par
+			\href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
+			\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
+		}%
+		\parbox[t]{.5\linewidth}{
+			\ttfamily
+			\href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
+			\href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
+			\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
+			\href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (Ab Version 3.36)}
+		}
 
-	      Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, welche durch die Universitätsbibliothek angepasst wurde.
-	      Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
+		Dies ist Bestandteil der Vorbereitung zur Anpassung der Standardlizenz, welche durch die Universitätsbibliothek angepasst wurde.
+		Die entsprechende Diskussion findet sich unter \url{https://github.com/tudace/tuda_latex_templates/issues/251} und eine Anpassung der Voreinstellung bei TUDa-CI ist für Version 4.0 vorgesehen.
 
-	      Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet die ULB der TUDa unter https://www.ulb.tu-darmstadt.de/dpub  oder  das CC-Projekt sebst über seinen Lizenzfinder unter \url{http://creativecommons.org/choose/}.
-	      Die TU Darmstadt empfiehlt in Ihrer Publikationsrichtlinie und Open-Access-Policy die Nutzung der offenen CC BY 4.0 Lizenz.
+		Unterstützung bei der Wahl einer passenden Creative Commons Lizenz bietet die ULB der TUDa unter https://www.ulb.tu-darmstadt.de/dpub  oder  das CC-Projekt sebst über seinen Lizenzfinder unter \url{http://creativecommons.org/choose/}.
+		Die TU Darmstadt empfiehlt in Ihrer Publikationsrichtlinie und Open-Access-Policy die Nutzung der offenen CC BY 4.0 Lizenz.
 
-	      Falls ein von den oben gelisteten Schlüsseln abweichender Wert gesetzt wird, wird ebendieser direkt an der Stelle des Lizenztextes verwendet. Sofern der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
+		Falls ein von den oben gelisteten Schlüsseln abweichender Wert gesetzt wird, wird ebendieser direkt an der Stelle des Lizenztextes verwendet. Sofern der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
 	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
@@ -327,16 +328,16 @@ Daher existiert die Klassenoption \code{custommargins}, die für dieses Dokument
 	\item[custommargins=false] Standardeinstellung von \cls{tudapub}. Die Ränder entsprechen den Vorgaben des Corporate Design Guidelines. Die Einstellung wird durch \pck{geometry} durchgeführt. Eigene Anpassungen werden durch das Ausführen von \code{\textbackslash{}maketitle} überschrieben.
 	\item[custommargins=true] Die Einstellungen des Corporate Design Guidelines werden nicht aktiviert. \pck{geometry} wird nicht geladen. Dieser Modus entspricht der Standardeinstellung von \KOMAScript{}. Dadurch werden die Ränder nicht fest definiert, sondern auf Basis des \pck{typearea}-Paketes berechnet \cite[vgl.][]{scrguide}.
 	\item[custommargins=geometry]  Diese Variante wurde auf Wunsch zur Verfügung gestellt, allerdings wird darauf hingewiesen, dass manuelle Randeinstellungen oft nicht zu einem harmonischen Satzspiegel führt.
-	      \pck{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
+		\pck{geometry} wird, wie bei \code{false} geladen und vorkonfiguriert. Es ist allerdings möglich kleinere Anpassung durch die Verwendung des Makros \code{\textbackslash{}geometry} zu setzen. Die Einstellungen, die zu Beginn des Dokuments gelten werden gespeichert und nach der Titelseite wiederhergestellt.
 
-	      Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
-\begin{verbatim}
+		Hierbei ist zu beachten, dass die Einstellungen als Ausgangspunkt den Voreingestellten Satzspiegel nutzen (je nach Option mit Randnotizspalte oder ohne). Es ist möglich diese Optionen vor den eigenen mit zurückzusetzen:
+		\begin{verbatim}
     \geometry{
        reset,
        <Eigene Anpassungen>
     }
 \end{verbatim}
-	      Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
+		Die gilt insbesondere für die Optionen \code{includehead}, \code{includefoot} und \code{includemp}.
 \end{description}
 
 \minisec{Hinweis zu den Kopf-/Fußzeilen}
@@ -365,46 +366,46 @@ thesis={type=dr,dr=rernat}
 Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 \begin{description}
 	\item[type=<Wert>] Auswahl des Typus. Dieser wird auf die Titelseite gesetzt und wählt zudem aus welche Daten für die Titelseite zwingend übergeben werden müssen.
-	      Es stehen die folgenden Werte zur Verfügung (die Werte in Klammern sind die notwendigen Titeldaten):
-	      \begin{itemize}
-		      \item \code{sta}: Studienarbeit (title, author, date)
-		      \item \code{diplom}: Diplomarbeit (title, author, submissiondate, reviewer, department)
-		      \item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
-		      \item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
-		      \item \code{pp}: Project-Proposal  (title, author, date, department)
-		      \item \code{dr}: vorgelegte Dissertation (title, author, submissiondate , birthplace, department, reviewer)
-		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate,examdate, birthplace, department, reviewer)
-	      \end{itemize}
-	      Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
+		Es stehen die folgenden Werte zur Verfügung (die Werte in Klammern sind die notwendigen Titeldaten):
+		\begin{itemize}
+			\item \code{sta}: Studienarbeit (title, author, date)
+			\item \code{diplom}: Diplomarbeit (title, author, submissiondate, reviewer, department)
+			\item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
+			\item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
+			\item \code{pp}: Project-Proposal  (title, author, date, department)
+			\item \code{dr}: vorgelegte Dissertation (title, author, submissiondate , birthplace, department, reviewer)
+			\item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate,examdate, birthplace, department, reviewer)
+		\end{itemize}
+		Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
 	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{rerpol}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
-	      \begin{quote}
-		      Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
-	      \end{quote}
-	      Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden.
-\begin{verbatim}
+		\begin{quote}
+			Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)
+		\end{quote}
+		Sofern keiner dieser Werte dem angestrebten Titel entspricht, kann ein Text direkt übergeben werden.
+		\begin{verbatim}
     \drtext{Zur Erlangung des Grades \ldots}
 \end{verbatim}
 	\item[department=<Kürzel>] Die Fachbereiche sind fest als Textbausteine in Deutscher sowie Englischer Sprache hinterlegt. Diese Option ermöglicht die Auswahl als Dokumentenklassenoption. Aus Kompatibilitätsgründen kann jedoch auch das Makro \code{department}-Makro hierfür genutzt werden. Zur Verfügung stehen:\par
-	      \begin{tabular}{@{}l@{${}\to{}$}l@{}}
-		      arch  & Architektur\\
-		      bauing& Bau- und Umweltingenieurwissenschaften\\
-		      bio   &Biologie\\
-		      chem  &Chemie\\
-		      etit  &Elektrotechnik und Informationstechnik\\
-		      gugw  &Gesellschafts- und Geschichtswissenschaften\\
-		      humanw&Humanwissenschaften\\
-		      inf   &Informatik\\
-		      mb    &Maschinenbau\\
-		      matgeo&Material- und Geowissenschaften\\
-		      math  &Mathematik\\
-		      phys  &Physik\\
-		      wi    &Rechts- und Wirtschaftswissenschaften
-	      \end{tabular}
+		\begin{tabular}{@{}l@{${}\to{}$}l@{}}
+			arch   & Architektur                                 \\
+			bauing & Bau- und Umweltingenieurwissenschaften      \\
+			bio    & Biologie                                    \\
+			chem   & Chemie                                      \\
+			etit   & Elektrotechnik und Informationstechnik      \\
+			gugw   & Gesellschafts- und Geschichtswissenschaften \\
+			humanw & Humanwissenschaften                         \\
+			inf    & Informatik                                  \\
+			mb     & Maschinenbau                                \\
+			matgeo & Material- und Geowissenschaften             \\
+			math   & Mathematik                                  \\
+			phys   & Physik                                      \\
+			wi     & Rechts- und Wirtschaftswissenschaften
+		\end{tabular}
 
-	      Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
-	      Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
+		Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
+		Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
 
-	      Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Falls diese automatische Erstellung nicht gewünscht ist, kann dies über die Option \code{instbox=false} deaktiviert werden.
+		Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Falls diese automatische Erstellung nicht gewünscht ist, kann dies über die Option \code{instbox=false} deaktiviert werden.
 	\item[ignore-missing-data] Diese Option ist ein Schalter, der es ermöglicht die Fehlermeldung über nicht übergebene Titeldaten auszuschalten. In diesem Fall wird lediglich eine Warnung erzeugt, falls die angegeben Daten nicht mit den Anforderungen übereinstimmen.
 \end{description}
 

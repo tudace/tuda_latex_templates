@@ -406,4 +406,3 @@ completely different task), then clauses 6b and 6d shall not apply.
    to comprise the Work and, in such a case, the licensee would be
    entitled to make reasonable conjectures as to which files comprise
    the Work.
-

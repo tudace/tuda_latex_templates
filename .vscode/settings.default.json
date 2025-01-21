@@ -1,0 +1,25 @@
+{
+	"latex-workshop.latexindent.args": [
+		"-c",
+		"%DIR%/",
+		"%TMPFILE%",
+		"-l=%WORKSPACE_FOLDER%/.latexindent.yaml",
+		"-y=defaultIndent: '%INDENT%'"
+	],
+	"latex-workshop.latex.verbatimEnvs": [
+		"verbatim",
+		"lstlisting",
+		"minted",
+		"codeBlock"
+	],
+	"files.associations": {
+		"*.sty": "latex-expl3",
+		"*.cls": "latex-expl3",
+		"*.clo": "latex-expl3",
+		"*.def": "latex",
+		"*.aux": "latex",
+		"*.toc": "latex",
+		"*.pygstyle": "latex",
+		"*.pygtex": "latex"
+	}
+}

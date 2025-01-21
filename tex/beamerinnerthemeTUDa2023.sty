@@ -1,4 +1,4 @@
-%% This is file `beamerinnerthemeTUDa2023.sty' version 3.37 (2024-04-21),
+%% This is file `beamerinnerthemeTUDa2023.sty' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -42,10 +42,10 @@
 }
 
 \defbeamertemplate*{titlegraphic}{TUDa2023}{{
-			\def\width{\l__ptxcd_titlegraphic_wd_dim}
-			\def\height{\l__ptxcd_titlegraphic_ht_dim}
-			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
-		}}
+		\def\width{\l__ptxcd_titlegraphic_wd_dim}
+		\def\height{\l__ptxcd_titlegraphic_ht_dim}
+		\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
+	}}
 
 \def\ps@titlegraphic@titlepage{%
 	\setbeamertemplate{background}{\usebeamertemplate{titlegraphic}}
@@ -190,34 +190,34 @@
 % See the file LICENSE.md for more details.
 \ExplSyntaxOn
 \cs_new:Nn \__ptxcd_toc_check: {
-\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int}  = {3} {
-% if all subsections/subsubsections are hidden we can have two columns
-\str_if_eq:eeTF	{
-\beamer@toc@css
-\beamer@toc@oss
-\beamer@toc@ooss
-\beamer@toc@csss
-\beamer@toc@osss
-\beamer@toc@oosss
-\beamer@toc@ooosss
-}{
-\prg_replicate:nn {7} {hide}
-}{
-% if all subsections/subsubsections are hidden standard twocolumn layout will be choosen
-\int_set:Nn \g__ptxcd_beamer_toc_col_int {2}
-} {
-% check if there are subsections/subsubsections
-\int_gzero:N \g_tmpa_int
-{\makeatletter%%
-	\let\babel@toc\use_none:nn
-	\let\beamer@sectionintoc \use_none:nnnnn
-	\def\beamer@subsectionintoc##1##2##3##4##5##6{\int_gset:Nn  \g_tmpa_int {1}\endinput}
-	\def\beamer@subsubsectionintoc##1##2##3##4##5##6##7{\int_gset:Nn  \g_tmpa_int  {1}\endinput}
-	\@input{\jobname.toc}%
-}
-\int_compare:nNnT {\g_tmpa_int} = {1} {\int_set:Nn \g__ptxcd_beamer_toc_col_int {1}}
-}
-}
+	\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int}  = {3} {
+		% if all subsections/subsubsections are hidden we can have two columns
+		\str_if_eq:eeTF	{
+			\beamer@toc@css
+			\beamer@toc@oss
+			\beamer@toc@ooss
+			\beamer@toc@csss
+			\beamer@toc@osss
+			\beamer@toc@oosss
+			\beamer@toc@ooosss
+		}{
+			\prg_replicate:nn {7} {hide}
+		}{
+			% if all subsections/subsubsections are hidden standard twocolumn layout will be choosen
+			\int_set:Nn \g__ptxcd_beamer_toc_col_int {2}
+		} {
+			% check if there are subsections/subsubsections
+			\int_gzero:N \g_tmpa_int
+			{\makeatletter%%
+				\let\babel@toc\use_none:nn
+				\let\beamer@sectionintoc \use_none:nnnnn
+				\def\beamer@subsectionintoc##1##2##3##4##5##6{\int_gset:Nn  \g_tmpa_int {1}\endinput}
+				\def\beamer@subsubsectionintoc##1##2##3##4##5##6##7{\int_gset:Nn  \g_tmpa_int  {1}\endinput}
+				\@input{\jobname.toc}%
+			}
+			\int_compare:nNnT {\g_tmpa_int} = {1} {\int_set:Nn \g__ptxcd_beamer_toc_col_int {1}}
+		}
+	}
 }
 
 \def\beamer@twocoltableofcontents[#1]{%
@@ -239,17 +239,17 @@
 		\setkeys{beamertoc}{#1}%
 		\UseName{__ptxcd_toc_check:}
 		\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
-				\setlength{\columnsep}{5ex}%
-				\raggedcolumns
-				\begin{multicols}{2}
-					}
-					{\makeatletter%
-					\pause[0]%
-					\@input{\jobname.toc}%
-					}%
-					\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
-				\end{multicols}%
-			}
+			\setlength{\columnsep}{5ex}%
+			\raggedcolumns
+			\begin{multicols}{2}
+				}
+				{\makeatletter%
+				\pause[0]%
+				\@input{\jobname.toc}%
+				}%
+				\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
+			\end{multicols}%
+		}
 	\end{beamercolorbox}%
 	\vspace*{.68\baselineskip}%}
 }
@@ -320,4 +320,3 @@
 \mode<all>
 
 \endinput
-

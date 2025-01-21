@@ -1,0 +1,32 @@
+fileExtensionPreference:
+  .tex: 1
+  .sty: 2
+  .cls: 3
+  .bib: 4
+  .cfg: 5
+
+defaultIndent: "\t"
+
+indentRules:
+  chapter: "\t"
+  section: "\t"
+  item: "\t"
+
+noAdditionalIndentGlobal:
+  environments: 0
+  commands: 1
+  optionalArguments: 0
+  mandatoryArguments: 0
+  ifElseFi: 0
+  items: 0
+  keyEqualsValuesBracesBrackets: 1
+  namedGroupingBracesBrackets: 1
+  UnNamedGroupingBracesBrackets: 1
+  specialBeginEnd: 0
+  afterHeading: 0
+  filecontents: 0
+
+fineTuning:
+  namedGroupingBracesBrackets:
+    name: "[0-9\\.a-zA-Z@\\*><~\\=\\-]+?"
+    follow: "\\h|\\R|\\{|\\[|\\$|\\)|\\("

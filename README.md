@@ -2,7 +2,7 @@
 
  Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
- tuda-ci v3.37 (2024-04-21)
+ tuda-ci v3.41 (2024-07-02)
 
 ***************************************************************************
 
@@ -358,3 +358,13 @@ leaflets 				| DEMO-TUDaLeaflet.tex							| tudaleaflet.cls
   * 3.37 (2024-04-21)
     - refactoring the bundle
     -  small layout adjustments and bugfixes
+  * 3.38 (2024-05-07)
+   - update PhD affidavit
+   * 3.39 (2024-06-27)
+    - update all templates to no longer use pdfx by default due to the pdfx bug
+    - fix letter last page reference
+   * 3.40 (2024-07-01)
+    - implement workaround for the pdfx package bug. Thanks to Ulrike Fischer for the hint!
+    - fix `ìn_department` strings for theses
+   * 3.41 (2024-07-01)
+    - change package loading order to support updated version of pdfx

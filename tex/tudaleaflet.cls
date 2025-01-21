@@ -1,4 +1,4 @@
-%% This is file `tudaleaflet.cls' version 3.37 (2024-04-21),
+%% This is file `tudaleaflet.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,8 +25,8 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.37}
-\def\filedate{2024-04-21}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplPackage{tudaleaflet}{\filedate}{\fileversion}{Leaflets using the Corporate Design of TU Darmstadt}
@@ -88,7 +88,7 @@
 \RequirePackage{scrextend}
 \RequirePackage{scrlayer}
 \PassOptionsToPackage{cmyk}{tudacolors}
-\usepackage[paper=leaflet]{tudarules}
+\RequirePackage[paper=leaflet]{tudarules}
 
 
 \setlength{\headheight}{1cm}%to add headline
@@ -117,29 +117,29 @@
 % Title specific additions to pagestyle
 
 \DeclareNewLayer[textarea,mode=picture,
-addheight=\headheight-\box_dp:N \ptxcd_headrule_box+\dp\strutbox,
-contents={
-	\bool_if:NT \g_ptxcd_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}
-	\tl_if_empty:NTF \g_ptxcd_titleimage_code_tl
-	{\bool_if:NT \g_ptxcd_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}}
-	{\putUL{\color{identbarcolor}\raisebox{-\height}{\parbox[t]{\textwidth}{
-					\let\width\layerwidth
-					\let\height\layerheight
-					\g_ptxcd_titleimage_code_tl
-	}}}}
-	\put(\dim_to_decimal_in_unit:nn {\layerwidth-\__ptxcd_logowidth:
-	} {\unitlength},
-	\dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_ptxcd_title_info_box - .5\c_ptxcd_logoheight_dim} {\unitlength}){
-		\rlap{\box_use:N \g_ptxcd_title_info_box}
+	addheight=\headheight-\box_dp:N \ptxcd_headrule_box+\dp\strutbox,
+	contents={
+		\bool_if:NT \g_ptxcd_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}
+		\tl_if_empty:NTF \g_ptxcd_titleimage_code_tl
+		{\bool_if:NT \g_ptxcd_colorback_bool {\putLL{\color{identbarcolor}\rule{\layerwidth}{\layerheight}}}}
+		{\putUL{\color{identbarcolor}\raisebox{-\height}{\parbox[t]{\textwidth}{
+						\let\width\layerwidth
+						\let\height\layerheight
+						\g_ptxcd_titleimage_code_tl
+					}}}}
+		\put(\dim_to_decimal_in_unit:nn {\layerwidth-\__ptxcd_logowidth:
+		} {\unitlength},
+		\dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_ptxcd_title_info_box - .5\c_ptxcd_logoheight_dim} {\unitlength}){
+			\rlap{\box_use:N \g_ptxcd_title_info_box}
+		}
 	}
-}
 ]{title.TUDa.image}
 
 \DeclareNewLayer[textarea,background,mode=picture,
 	contents={
-	\bool_if:NT \g_ptxcd_colorbacktitle_bool {
-		\color{identbarcolor}\rule{\layerwidth}{\layerheight}
-	}
+		\bool_if:NT \g_ptxcd_colorbacktitle_bool {
+			\color{identbarcolor}\rule{\layerwidth}{\layerheight}
+		}
 	}
 ]{title.TUDa.background}
 
@@ -181,10 +181,10 @@ contents={
 			\addvspace{.1\c_ptxcd_logoheight_dim}
 			\ifx\@sponsors\@empty
 			\else
-			\@sponsors\par
+				\@sponsors\par
 			\fi
 			\par\nointerlineskip\addvspace{\dim_eval:n {.1\c_ptxcd_logoheight_dim-\c_ptxcd_rulesep_dim}}
-%			\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+			%			\rule{\linewidth}{\g_ptxcd_titlerule_dim}
 		}
 	}
 	\begin{titlepage}
@@ -237,13 +237,13 @@ contents={
 		\par
 		\vfill\null
 		\if@twoside
-		\@tempswatrue
-		\expandafter\ifnum \@nameuse{scr@v@3.12}>\scr@compatibility\relax
-		\else
-		\ifx\@uppertitleback\@empty\ifx\@lowertitleback\@empty
-		\@tempswafalse
-		\fi\fi
-		\fi
+			\@tempswatrue
+			\expandafter\ifnum \@nameuse{scr@v@3.12}>\scr@compatibility\relax
+			\else
+				\ifx\@uppertitleback\@empty\ifx\@lowertitleback\@empty
+						\@tempswafalse
+					\fi\fi
+			\fi
 		\fi
 	\end{titlepage}
 	\setcounter{footnote}{0}%
@@ -256,7 +256,7 @@ contents={
 	\dim_compare:nT  {\box_ht:N \g_ptxcd_title_box < \l_tmpa_dim} {
 		\skip_set:Nn \g_ptxcd_title_fill_skip {\dim_eval:n {\l_tmpa_dim -  \box_ht:N \g_ptxcd_title_box}}
 	}
-	
+
 	\dim_set:Nn \l_tmpa_dim {
 		+\box_ht:N \g_ptxcd_title_box
 		+.5\c_ptxcd_logoheight_dim
@@ -264,32 +264,32 @@ contents={
 		+\g_ptxcd_title_fill_skip
 	}
 	\ModifyLayer[
-	addvoffset=\l_tmpa_dim,
-	addheight= -\l_tmpa_dim
+		addvoffset=\l_tmpa_dim,
+		addheight= -\l_tmpa_dim
 	]{title.TUDa.image}
 	\DeclareNewLayer[clone=TUDa.flyer.footline,
-	mode=picture,
-	align=bl,
-	height=\box_ht:N  \g_ptxcd_sponsor_box + \box_dp:N  \g_ptxcd_sponsor_box,
-	addvoffset=-\dp\strutbox,
-	contents=\raisebox{\depth}{\box_use:N \g_ptxcd_sponsor_box}
+		mode=picture,
+		align=bl,
+		height=\box_ht:N  \g_ptxcd_sponsor_box + \box_dp:N  \g_ptxcd_sponsor_box,
+		addvoffset=-\dp\strutbox,
+		contents=\raisebox{\depth}{\box_use:N \g_ptxcd_sponsor_box}
 	]
 	{title.TUDa.sponsor}
 	\exp_args:Nx \tl_if_eq:nnT {\g_ptxcd_sponsor_pos_tl} {title} {
 		\AddLayersToPageStyle{title.TUDa}{title.TUDa.sponsor}
 		\ModifyLayer[
-		addheight=-\box_ht:N  \g_ptxcd_sponsor_box -\box_dp:N  \g_ptxcd_sponsor_box-\dp\strutbox
+			addheight=-\box_ht:N  \g_ptxcd_sponsor_box -\box_dp:N  \g_ptxcd_sponsor_box-\dp\strutbox
 		]{title.TUDa.image}
 	}
 	\ModifyLayer[
-	addvoffset={-\dim_eval:n {\headheight -\box_ht:N \ptxcd_headrule_box-\box_dp:N \ptxcd_headrule_box }},
-	height={
-		\bool_if:NT \g_ptxcd_colorbacksubtitle_bool {\box_dp:N \g_ptxcd_title_box}
-		+\box_ht:N \g_ptxcd_title_box+\g_ptxcd_title_fill_skip+.5\c_ptxcd_logoheight_dim+
-		\headheight -\box_ht:N \ptxcd_headrule_box-\box_dp:N \ptxcd_headrule_box
-	}
+		addvoffset={-\dim_eval:n {\headheight -\box_ht:N \ptxcd_headrule_box-\box_dp:N \ptxcd_headrule_box }},
+		height={
+			\bool_if:NT \g_ptxcd_colorbacksubtitle_bool {\box_dp:N \g_ptxcd_title_box}
+			+\box_ht:N \g_ptxcd_title_box+\g_ptxcd_title_fill_skip+.5\c_ptxcd_logoheight_dim+
+			\headheight -\box_ht:N \ptxcd_headrule_box-\box_dp:N \ptxcd_headrule_box
+		}
 	]{title.TUDa.background}
-	
+
 	\AddLayersToPageStyle{title.TUDa}{title.TUDa.background}
 	\thispagestyle{title.TUDa}
 	\nointerlineskip
@@ -323,9 +323,9 @@ contents={
 \newkomafont{subsubsection}{}
 
 \renewcommand\section{\@startsection{section}{1}{\z@}%
-	{-3.5ex \@plus -.75ex}%
-	{1ex}%
-	{\usekomafont{disposition}\usekomafont{section}\sectfont}}
+		{-3.5ex \@plus -.75ex}%
+		{1ex}%
+		{\usekomafont{disposition}\usekomafont{section}\sectfont}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
 	{-2.5ex plus -.5ex}%
 	{1\p@}%
@@ -386,7 +386,7 @@ contents={
 				\usekomafont{institution}
 				\raggedright%
 				#1
-	}}}
+			}}}
 }
 
 \cs_new:Nn \ptxcd_make_title_logo_box:n {
@@ -431,17 +431,17 @@ contents={
 
 \str_case:Vn \g_ptxcd_sponsor_pos_tl {
 	{lastfoot}{
-	\AtEndDocument{
-		\par\vspace*{\fill}
-		\leavevmode\raisebox{\dimexpr\depth-\baselineskip}[0pt][0pt]{
-			\box_use:N \g_ptxcd_sponsor_box
+		\AtEndDocument{
+			\par\vspace*{\fill}
+			\leavevmode\raisebox{\dimexpr\depth-\baselineskip}[0pt][0pt]{
+				\box_use:N \g_ptxcd_sponsor_box
+			}
 		}
-	}
 	}
 	{manual} {
 		\renewcommand*{\insertSponsors}{\par\vfill\leavevmode\box_use:N \g_ptxcd_sponsor_box\par\nobreak\nointerlineskip\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+		}
 	}
-}
 }
 
 \file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}

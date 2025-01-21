@@ -1,4 +1,4 @@
-%% This is file `tuda-a5paper.clo' version 3.37 (2024-04-21),
+%% This is file `tuda-a5paper.clo' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,16 +25,18 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.37}
-\def\filedate{2024-04-21}
-\ProvidesExplFile{tuda-a5paper.clo}{\filedate}{\fileversion}{tuda-ci~size~adjustments~for~a5paper}
+\ProvidesExplFile{tuda-a5paper.clo}{2024-07-01}{3.40}{tuda-ci~size~adjustments~for~a5paper}
 \cs_set:Nn \ptxcd_setup_title_sizes: {
-  \cs_set:Nn \ptxcd_title_fontsize: {{22pt}{28pt}}
-  \cs_set:Nn \ptxcd_titleinfo_fontsize: {{10pt}{11.5pt}}
-  \cs_set:Nn \ptxcd_titlethanks_fontsize: {{10pt}{11.5pt}}
+	\cs_set:Nn \ptxcd_title_fontsize: {{22pt}{28pt}}
+	\cs_set:Nn \ptxcd_titleinfo_fontsize: {{10pt}{11.5pt}}
+	\cs_set:Nn \ptxcd_titlethanks_fontsize: {{10pt}{11.5pt}}
 }
 \cs_set:Nn \ptxcd_setup_base_sizes: {
-  \tl_if_empty:NT \g_ptxcd_fontsize_tl {\tl_gset:Nn \g_ptxcd_fontsize_tl {10pt}}
-  \dim_gset:Nn \g_ptxcd_margin_dim {12mm}
+	\tl_if_empty:NT \g_ptxcd_fontsize_tl {
+		\tl_gset:Nn \g_ptxcd_fontsize_tl {10pt}
+	}
+	\dim_gset:Nn \g_ptxcd_margin_dim {12mm}
 }
 \endinput
+%%
+%% End of file `tuda-a5paper.clo'.

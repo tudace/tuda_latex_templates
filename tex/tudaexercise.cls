@@ -1,4 +1,4 @@
-%% This is file `tudaexercise.cls' version 3.37 (2024-04-21),
+%% This is file `tudaexercise.cls' version 3.41 (2024-07-02),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -25,19 +25,19 @@
 %%
 %% ============================================================================
 %%
-\def\fileversion{3.37}
-\def\filedate{2024-04-21}
+\def\fileversion{3.41}
+\def\filedate{2024-07-02}
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesExplClass{tudaexercise}
-	{\filedate}{\fileversion}{Exercise sheets and exams using TU Darmstadt's Corporate Desing (TUDa-CI)}
+{\filedate}{\fileversion}{Exercise sheets and exams using TU Darmstadt's Corporate Desing (TUDa-CI)}
 
 \msg_new:nnnn {tudaexercise} {outdated-koma-script} {
-  Your~KOMA-Script~is~outdated.\\
-  To~use~the~feature~'#1'~you~will~be~required~to~update.
+	Your~KOMA-Script~is~outdated.\\
+	To~use~the~feature~'#1'~you~will~be~required~to~update.
 } {
-  Please~do~not~use~this~feature~or~update~your~TeX~distribution.\\
-  The~feature~requires~KOMA-Script~v#2~or~newer.
+	Please~do~not~use~this~feature~or~update~your~TeX~distribution.\\
+	The~feature~requires~KOMA-Script~v#2~or~newer.
 }
 
 \str_const:Nn \c__ptxcd_base_str {exercise}
@@ -145,7 +145,7 @@
 	BCOR .code:n = \PassOptionsToPackage{bindingoffset=#1}{geometry},
 	bindingoffset .meta:n = {BCOR=#1},
 	captions .code:n = {\prop_gput:Nnx \g_ptxcd_clsopts_prop {captions} {
-		\use:n {\prop_item:Nn \g_ptxcd_clsopts_prop {captions}}, #1}
+			\use:n {\prop_item:Nn \g_ptxcd_clsopts_prop {captions}}, #1}
 	},
 	titlepage .code:n = {\msg_warning:nnn {tudapub} {titlepage-option-disabled} {#1}},
 	paper .choices:nn = {a0,a1,a2,a3,a4,a5,a6}{
@@ -190,7 +190,7 @@
 	departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
 	departmentlogofile .initial:n =,
 	match-task-subtask-syntax .bool_gset:N = \g_ptxcd_match_task_subtask_bool,
-	match-task-subtask-syntax .initial:n = false, 
+	match-task-subtask-syntax .initial:n = false,
 	match-task-subtask-syntax .default:n = true,
 	solution .code:n = {
 		\bool_set_eq:Nc \l_ptxcd_ex_solution_bool {c_#1_bool}
@@ -204,25 +204,25 @@
 	points / auto .code:n = \bool_set_true:N \l__ptxcd_points_auto_bool\bool_gset_true:N \g__ptxcd_points_bool,
 	points .initial:n = false,
 	subtask .choice:,
-	subtask / ruled .code:n = 
-		\bool_gset_true:N \g__ptxcd_ruled_subtask_bool
-		\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
+	subtask / ruled .code:n =
+	\bool_gset_true:N \g__ptxcd_ruled_subtask_bool
+	\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
 	subtask / runin .code:n =
-		\bool_gset_false:N \g__ptxcd_ruled_subtask_bool
-		\bool_gset_true:N  \g__ptxcd_runin_subtask_bool,
+	\bool_gset_false:N \g__ptxcd_ruled_subtask_bool
+	\bool_gset_true:N  \g__ptxcd_runin_subtask_bool,
 	subtask / plain .code:n =
-		\bool_gset_false:N \g__ptxcd_ruled_subtask_bool
-		\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
+	\bool_gset_false:N \g__ptxcd_ruled_subtask_bool
+	\bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
 }
 
 \ProcessKeyOptions[ptxcd/exercise]
 
 \prop_map_inline:Nn \g_ptxcd_clsopts_prop {
 	\tl_if_empty:nTF {#2}
-		{\PassOptionsToClass  {#1} {scrartcl}}
-		{
+	{\PassOptionsToClass  {#1} {scrartcl}}
+	{
 		\clist_map_inline:nn {#2} {\PassOptionsToClass  {#1=##1} {scrartcl}}
-		}
+	}
 }
 
 \RequirePackage{environ}
@@ -235,15 +235,15 @@
 \keys_define:nn {ptxcd/task}{
 	points .choice:,
 	points / auto .code:n =
-		\bool_set_true:N \l__ptxcd_points_auto_bool,
+	\bool_set_true:N \l__ptxcd_points_auto_bool,
 	points / unknown .code:n = \fp_set:Nn \l_ptxcd_ex_task_points_fp {#1}
-		\bool_set_false:N \l__ptxcd_points_auto_bool,
+	\bool_set_false:N \l__ptxcd_points_auto_bool,
 	credit .code:n = \tl_set:Nn \l_ptxcd_ex_task_credit_tl {#1}
-		\bool_set_false:N \l__ptxcd_points_auto_bool,
+	\bool_set_false:N \l__ptxcd_points_auto_bool,
 	solution .meta:nn ={ptxcd/exercise}{solution=#1},
 }
 
-\fp_new:N \l_ptxcd_ex_subtask_points_fp 
+\fp_new:N \l_ptxcd_ex_subtask_points_fp
 \keys_define:nn {ptxcd/subtask} {
 	credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
 	credit .initial:n =,
@@ -257,9 +257,9 @@
 \keys_define:nn {ptxcd/exercise/headline} {
 	headline .code:n = {
 		\if@twoside
-		\keys_set:nn  {ptxcd/exercise/headline} {odd=#1,even=#1}
+			\keys_set:nn  {ptxcd/exercise/headline} {odd=#1,even=#1}
 		\else
-		\keys_set:nn {ptxcd/exercise/headline} {oneside=#1}
+			\keys_set:nn {ptxcd/exercise/headline} {oneside=#1}
 		\fi
 	},
 }
@@ -285,15 +285,15 @@
 
 %Load tudasize clo file if available
 \file_if_exist:nT {tudasize\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}.clo}
-	{\providecommand*{\@fontsizefilebase}{tudasize}}
+{\providecommand*{\@fontsizefilebase}{tudasize}}
 
 \LoadClass{scrartcl}
 
 \bool_if:NT \g__ptxcd_points_bool {
-  \cs_if_exist:NF \AddtoDoHook{
-    \msg_error:nnnn  {tudaexercise} {outdated-koma-script} {points=true/auto} {3.27}
-    \keys_set:nn {ptxcd/exercise} {points=false}
-    }
+	\cs_if_exist:NF \AddtoDoHook{
+		\msg_error:nnnn  {tudaexercise} {outdated-koma-script} {points=true/auto} {3.27}
+		\keys_set:nn {ptxcd/exercise} {points=false}
+	}
 }
 
 \RequirePackage{tudarules}
@@ -304,40 +304,40 @@
 
 \prop_map_inline:Nn \g_ptxcd_unknown_clsopts_prop {
 	\cs_if_exist:cT {KV@KOMA.scrartcl.cls@#1} {
-	\tl_if_empty:nTF {#2}
+		\tl_if_empty:nTF {#2}
 		{\KOMAoptions{#1}}
 		{\KOMAoption{#1}{#2}
+		}
 	}
-}
 }
 
 \renewcommand*\sectionlinesformat[4]{%
-\parbox{\linewidth}{
-	\bool_if:cT {g__ptxcd_ruled_#1_bool} {
-	\rule[5\g_ptxcd_titlerule_dim]{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
-	}
-	\@hangfrom{%
-		\hskip #2#3}{
-		\tl_if_eq:nnT {#1} {task} {
-			\exp_args:No \tl_if_empty:nF {#4}
-				{:~}	
-			\bool_if:NT \l__ptxcd_points_auto_bool {
-				\exp_args:NNx \prop_get:NnN \g__ptxcd_loaded_points_prop {\thetask} \l_ptxcd_tmp_tl
-				\quark_if_no_value:NF \l_ptxcd_tmp_tl {
-					\fp_set:Nn \l_ptxcd_ex_task_points_fp {\l_ptxcd_tmp_tl}
+	\parbox{\linewidth}{
+		\bool_if:cT {g__ptxcd_ruled_#1_bool} {
+			\rule[5\g_ptxcd_titlerule_dim]{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
+		}
+		\@hangfrom{%
+			\hskip #2#3}{
+			\tl_if_eq:nnT {#1} {task} {
+				\exp_args:No \tl_if_empty:nF {#4}
+				{:~}
+				\bool_if:NT \l__ptxcd_points_auto_bool {
+					\exp_args:NNx \prop_get:NnN \g__ptxcd_loaded_points_prop {\thetask} \l_ptxcd_tmp_tl
+					\quark_if_no_value:NF \l_ptxcd_tmp_tl {
+						\fp_set:Nn \l_ptxcd_ex_task_points_fp {\l_ptxcd_tmp_tl}
+					}
 				}
 			}
-		}
-		#4
-		\tl_if_in:nnT {#1} {task} {
-			\tl_if_empty:cTF{l_ptxcd_ex_#1_credit_tl}
+			#4
+			\tl_if_in:nnT {#1} {task} {
+				\tl_if_empty:cTF{l_ptxcd_ex_#1_credit_tl}
 				{\pointformat{\fp_to_decimal:c {l_ptxcd_ex_#1_points_fp}}}
 				{\creditformat{\tl_use:c {l_ptxcd_ex_#1_credit_tl}}}
-		}
-		\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
+			}
+			\rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
 		\skip_vertical:n {\ptxcd_titlerule_sep: -\dp\strutbox}
-	\bool_if:cT {g__ptxcd_ruled_#1_bool} {\smash{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}}
-}}
+		\bool_if:cT {g__ptxcd_ruled_#1_bool} {\smash{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}}
+	}}
 
 
 \RequirePackage{tudafonts}
@@ -348,39 +348,39 @@
 \dim_new:N \g_ptxcd_topMargin_dim
 
 
-	%a3,a4
-	\int_compare:nTF {4<=\g_ptxcd_paper_int<=5}
+%a3,a4
+\int_compare:nTF {4<=\g_ptxcd_paper_int<=5}
+{
+	\dim_gset:Nn \g_ptxcd_bottomMargin_dim {20mm}
+	\dim_gset:Nn \g_ptxcd_outerMargin_dim {15mm}
+	\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
+	\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
+}{
+	%a0, a1, a2
+	\int_compare:nT {1<=\g_ptxcd_paper_int<=3}
 	{
-		\dim_gset:Nn \g_ptxcd_bottomMargin_dim {20mm}
-		\dim_gset:Nn \g_ptxcd_outerMargin_dim {15mm}
+		\dim_gset:Nn \g_ptxcd_bottomMargin_dim {35mm}
+		\dim_gset:Nn \g_ptxcd_outerMargin_dim {30mm}
 		\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
 		\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-	}{
-	%a0, a1, a2
-		\int_compare:nT {1<=\g_ptxcd_paper_int<=3}
-		{
-			\dim_gset:Nn \g_ptxcd_bottomMargin_dim {35mm}
-			\dim_gset:Nn \g_ptxcd_outerMargin_dim {30mm}
-			\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
-			\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-		}
-		%a5
-		\int_compare:nT {\g_ptxcd_paper_int<=6}
-		{
-			\dim_gset:Nn \g_ptxcd_bottomMargin_dim {16mm}
-			\dim_gset:Nn \g_ptxcd_outerMargin_dim {12mm}
-			\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
-			\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-		}
-		%a6
-		\int_compare:nT {\g_ptxcd_paper_int<=7}
-		{
-			\dim_gset:Nn \g_ptxcd_bottomMargin_dim {15mm}
-			\dim_gset:Nn \g_ptxcd_outerMargin_dim {10mm}
-			\dim_gset_eq:NN	 \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
-			\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
-		}
 	}
+	%a5
+	\int_compare:nT {\g_ptxcd_paper_int<=6}
+	{
+		\dim_gset:Nn \g_ptxcd_bottomMargin_dim {16mm}
+		\dim_gset:Nn \g_ptxcd_outerMargin_dim {12mm}
+		\dim_gset_eq:NN \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
+		\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
+	}
+	%a6
+	\int_compare:nT {\g_ptxcd_paper_int<=7}
+	{
+		\dim_gset:Nn \g_ptxcd_bottomMargin_dim {15mm}
+		\dim_gset:Nn \g_ptxcd_outerMargin_dim {10mm}
+		\dim_gset_eq:NN	 \g_ptxcd_innerMargin_dim \g_ptxcd_outerMargin_dim
+		\dim_gset_eq:NN \g_ptxcd_topMargin_dim \g_ptxcd_outerMargin_dim
+	}
+}
 
 \dim_new:N \g_ptxcd_columnSep_dim
 \dim_gset:Nn \g_ptxcd_columnSep_dim {10pt}
@@ -429,13 +429,13 @@
 \box_new:N \g_ptxcd_ex_headline_oneside_box
 
 \cs_new:Nn \ptxcd_preamble_ConfigureHeadline:n {
-  \tl_if_empty:nF {#1} {\keys_set:nn {ptxcd/exercise/headline} {#1}}
+	\tl_if_empty:nF {#1} {\keys_set:nn {ptxcd/exercise/headline} {#1}}
 }
 
 \cs_new:Nn \ptxcd_ConfigureHeadline:n {
-  \ptxcd_preamble_ConfigureHeadline:n {#1}
-  \ptxcd_update_headline_boxes:
-  \ptxcd_ex_adjust_headheight:
+	\ptxcd_preamble_ConfigureHeadline:n {#1}
+	\ptxcd_update_headline_boxes:
+	\ptxcd_ex_adjust_headheight:
 }
 
 \let\ConfigureHeadline\ptxcd_preamble_ConfigureHeadline:n
@@ -444,59 +444,59 @@
 
 \bool_if:NT \g_ptxcd_ex_compatibility_bool {
 	\cs_new:Npn \ptxcd_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_ptxcd_ex_headline_oneside_tl {#1} }
-	
+
 	\NewEnviron{examheader}{
-	  \tl_gset:No \g_ptxcd_ex_headline_oneside_tl {\BODY}
-	  \tl_gset:No \g_ptxcd_ex_headline_odd_tl {\BODY}
-	  \tl_gset:No \g_ptxcd_ex_headline_even_tl {\BODY}
-	  \ptxcd_ConfigureHeadline:n {}
+		\tl_gset:No \g_ptxcd_ex_headline_oneside_tl {\BODY}
+		\tl_gset:No \g_ptxcd_ex_headline_odd_tl {\BODY}
+		\tl_gset:No \g_ptxcd_ex_headline_even_tl {\BODY}
+		\ptxcd_ConfigureHeadline:n {}
 	}
-	
-	  \newcommand*{\examheaderdefault}{\par\StudentName\StudentID}
+
+	\newcommand*{\examheaderdefault}{\par\StudentName\StudentID}
 }
 
 
 \cs_new:Nn \ptxcd_update_headline_boxes: {
-  \clist_map_inline:nn {even, odd, oneside}
-  {
-    \tl_if_empty:cF {g_ptxcd_ex_headline_##1_tl} {
-      \vbox_gset:cn {g_ptxcd_ex_headline_##1_box} {
-          \begin{minipage}[b]{\textwidth}
-          \usekomafont{pagehead}
-         \raggedright
-          \leavevmode\rule{\z@}{\dimexpr\ht\strutbox+\c_ptxcd_rulesep_dim}
-          \ignorespaces
-          \use:c {g_ptxcd_ex_headline_##1_tl}\ignorespaces\strut
-          \par\vspace{\z@}
-        \end{minipage}
-      }
-    }
-  }
+	\clist_map_inline:nn {even, odd, oneside}
+	{
+		\tl_if_empty:cF {g_ptxcd_ex_headline_##1_tl} {
+			\vbox_gset:cn {g_ptxcd_ex_headline_##1_box} {
+				\begin{minipage}[b]{\textwidth}
+					\usekomafont{pagehead}
+					\raggedright
+					\leavevmode\rule{\z@}{\dimexpr\ht\strutbox+\c_ptxcd_rulesep_dim}
+					\ignorespaces
+					\use:c {g_ptxcd_ex_headline_##1_tl}\ignorespaces\strut
+					\par\vspace{\z@}
+				\end{minipage}
+			}
+		}
+	}
 }
 
 
 \cs_new:Nn \ptxcd_ex_adjust_headheight: {
 	\if@twoside
-	\dim_set:Nn \l_tmpa_dim {
-		\dim_max:nn
+		\dim_set:Nn \l_tmpa_dim {
+			\dim_max:nn
 			{\box_ht:N \g_ptxcd_ex_headline_odd_box+\box_dp:N \g_ptxcd_ex_headline_odd_box}
 			{\box_ht:N \g_ptxcd_ex_headline_even_box+\box_dp:N \g_ptxcd_ex_headline_even_box}
-	}
+		}
 	\else
-	\dim_set:Nn \l_tmpa_dim {
-		\box_ht:N \g_ptxcd_ex_headline_oneside_box
-		+ \box_dp:N \g_ptxcd_ex_headline_oneside_box
-	}
+		\dim_set:Nn \l_tmpa_dim {
+			\box_ht:N \g_ptxcd_ex_headline_oneside_box
+			+ \box_dp:N \g_ptxcd_ex_headline_oneside_box
+		}
 	\fi
 	\dim_compare:nT {\l_tmpa_dim > \z@}
 	{
 		\dim_add:Nn \l_tmpa_dim {\box_dp:N \ptxcd_headrule_box +\c_ptxcd_rulesep_dim}
 		\KOMAoptions{headinclude, headheight=\l_tmpa_dim,headsepline = .5\c_ptxcd_smallrule_dim}
 		\if@twoside
-		\cehead{\box_use:c {g_ptxcd_ex_headline_even_box}}
-		\cohead{\box_use:c {g_ptxcd_ex_headline_odd_box}}
+			\cehead{\box_use:c {g_ptxcd_ex_headline_even_box}}
+			\cohead{\box_use:c {g_ptxcd_ex_headline_odd_box}}
 		\else
-		\chead{\box_use:c {g_ptxcd_ex_headline_oneside_box}}
+			\chead{\box_use:c {g_ptxcd_ex_headline_oneside_box}}
 		\fi
 		\global\setlength{\headheight}{\l_tmpa_dim}
 	}
@@ -504,28 +504,28 @@
 
 \newpairofpagestyles{TUDa.exercise}{
 	\KOMAoptions{plainfootsepline,headtopline,plainheadtopline}
-		\KOMAoptions {
-			headwidth=text,
-			footwidth=text
-			}
+	\KOMAoptions {
+		headwidth=text,
+		footwidth=text
+	}
 	\setkomafont{pagehead}{}
 	\box_if_exist:NF \ptxcd_headrule_box {
 		\ptxcd_makeheadrule[color=identbarcolor, width=\sls@headwidth]{ptxcd_headrule}
 	}
-\ModifyLayer[
-	background,
-	height=\box_dp:N \ptxcd_headrule_box,
-	align=tl,
-	voffset=\g_ptxcd_topMargin_dim,
-	contents=\raisebox{\depth}{\box_use:N \ptxcd_headrule_box},
-		]{plain.TUDa.exercise.head.above.line}
 	\ModifyLayer[
-	background,
-	height=\box_dp:N \ptxcd_headrule_box,
-	align=tl,
-	voffset=\g_ptxcd_topMargin_dim,
-	contents=\raisebox{\depth}{\box_use:N \ptxcd_headrule_box},
-		]{TUDa.exercise.head.above.line}
+		background,
+		height=\box_dp:N \ptxcd_headrule_box,
+		align=tl,
+		voffset=\g_ptxcd_topMargin_dim,
+		contents=\raisebox{\depth}{\box_use:N \ptxcd_headrule_box},
+	]{plain.TUDa.exercise.head.above.line}
+	\ModifyLayer[
+		background,
+		height=\box_dp:N \ptxcd_headrule_box,
+		align=tl,
+		voffset=\g_ptxcd_topMargin_dim,
+		contents=\raisebox{\depth}{\box_use:N \ptxcd_headrule_box},
+	]{TUDa.exercise.head.above.line}
 	\ofoot[\pagemark]{\pagemark}
 	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.exercise.foot.even}
 	\ModifyLayer[addvoffset=\c_ptxcd_rulesep_dim]{TUDa.exercise.foot.odd}
@@ -566,9 +566,9 @@
 
 \cs_new:Nn \ptxcd_define_captionFallback:Nn {
 	\providecommand*#1{
-	\msg_warning:nnxxx{tudapub} {unknown-language}
+		\msg_warning:nnxxx{tudapub} {unknown-language}
 		{\languagename} {\exp_not:N #1} {#2}
-	\def#1{#2}
+		\def#1{#2}
 	}
 }
 
@@ -587,125 +587,125 @@
 
 \renewcommand*{\@author}{
 	\seq_use:Nnnn \g_ptxcd_author_seq {~\authorandname{}~} {,~} {~\&~}
-      }
+}
 
 \tl_new:N \g_ptxcd_shorttitle_tl
 
 \RenewDocumentCommand{\title}{om}{
-  \IfNoValueTF{#1}{
-    \tl_gset:Nn  \g_ptxcd_shorttitle_tl {#2}
-  }{
-    \tl_gset:Nn \g_ptxcd_shorttitle_tl {#1}
-  }
-  \def\@title{#2}
+	\IfNoValueTF{#1}{
+		\tl_gset:Nn  \g_ptxcd_shorttitle_tl {#2}
+	}{
+		\tl_gset:Nn \g_ptxcd_shorttitle_tl {#1}
+	}
+	\def\@title{#2}
 }
 
 % Define \subsubtitle for compatibility
-  \newcommand*{\subsubtitle}[1]{
-    \def\@subsubtitle{#1}
-  }
-  \subsubtitle{}
+\newcommand*{\subsubtitle}[1]{
+	\def\@subsubtitle{#1}
+}
+\subsubtitle{}
 
 
 \newcommand*{\ptxcd_title@footnote}[2][1]{
-\textsuperscript{\@fnsymbol{#1}}#2
+	\textsuperscript{\@fnsymbol{#1}}#2
 }
 
 
 \renewcommand*{\@maketitle}{%
-  \global\@topnum=\z@
-  \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
-  \vspace*{-\dim_eval:n {
-      \headheight
-	-\c_ptxcd_largerule_dim -\c_ptxcd_rulesep_dim
-      +\headsep
-      +\ht\strutbox
-      +\p@
-    }}
-  \par
-  \nointerlineskip
-  \begingroup
-  \setlength{\fboxsep}{\z@}
-  \bool_if:NT \g_ptxcd_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\linewidth}{
-	\rule{0pt}{\bool_if:NTF \g_ptxcd_smalltitle_bool {.25} {.5}\c_ptxcd_logoheight_dim}
-	\par\nointerlineskip
-      \raisebox{-\height}{%
-        \begin{minipage}[t]{\dimexpr\linewidth-\__ptxcd_logowidth:-1ex}
-          \bool_if:NT \g_ptxcd_colorback_bool  {\begin{addmargin}{3mm}}
-            \raggedright
-            \bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
-            \tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
-            \leavevmode\usekomafont{title}%
-            {\usekomafont{title}\bool_if:NTF \g_ptxcd_smalltitle_bool {\LARGE} {\huge} {\@title\par}}%
-            \vskip 1em
-            \bool_if:NF \g_ptxcd_ex_compatibility_bool
-	            {
-					{\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
-					\gdef\@subtitle{}
-					\vskip .5em
-				}
-			{
-              \xdef\@author {\@author}
-              \ifx\@author\@empty\else\usekomafont{author}\@author\par\fi
+	\global\@topnum=\z@
+	\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+	\vspace*{-\dim_eval:n {
+			\headheight
+			-\c_ptxcd_largerule_dim -\c_ptxcd_rulesep_dim
+			+\headsep
+			+\ht\strutbox
+			+\p@
+		}}
+	\par
+	\nointerlineskip
+	\begingroup
+	\setlength{\fboxsep}{\z@}
+	\bool_if:NT \g_ptxcd_colorback_bool {\colorbox{accentcolor}}{\parbox[t]{\linewidth}{
+			\rule{0pt}{\bool_if:NTF \g_ptxcd_smalltitle_bool {.25} {.5}\c_ptxcd_logoheight_dim}
+			\par\nointerlineskip
+			\raisebox{-\height}{%
+				\begin{minipage}[t]{\dimexpr\linewidth-\__ptxcd_logowidth:-1ex}
+					\bool_if:NT \g_ptxcd_colorback_bool  {\begin{addmargin}{3mm}}
+							\raggedright
+							\bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
+							\tl_if_empty:NF \@titlehead {\usekomafont{titlehead}{\@titlehead\par}}
+							\leavevmode\usekomafont{title}%
+							{\usekomafont{title}\bool_if:NTF \g_ptxcd_smalltitle_bool {\LARGE} {\huge} {\@title\par}}%
+							\vskip 1em
+							\bool_if:NF \g_ptxcd_ex_compatibility_bool
+							{
+								{\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
+								\gdef\@subtitle{}
+								\vskip .5em
+							}
+							{
+								\xdef\@author {\@author}
+								\ifx\@author\@empty\else\usekomafont{author}\@author\par\fi
+							}
+							\vskip .5em
+							\bool_if:NTF \g_ptxcd_colorback_bool {\end{addmargin}} {\par}
+				\end{minipage}}
+			\tl_if_empty:NF \g_ptxcd_logofile_tl {
+				\hfill\raisebox{\dim_eval:n {
+						\bool_if:NTF \g_ptxcd_colorback_bool
+						{-\height}
+						{-.9\c_ptxcd_logoheight_dim}
+					}}
+				[0pt]
+				[\dim_eval:n {
+						\bool_if:NTF \g_ptxcd_smalltitle_bool
+						{\bool_if:NTF \g_ptxcd_colorback_bool {1.15}{1}}
+						{\bool_if:NTF \g_ptxcd_colorback_bool {1.5}{1.3}
+						}\c_ptxcd_logoheight_dim}]
+				{\makebox[\__ptxcd_logowidth:][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}}
 			}
-            \vskip .5em
-          \bool_if:NTF \g_ptxcd_colorback_bool {\end{addmargin}} {\par}
-        \end{minipage}}
-		\tl_if_empty:NF \g_ptxcd_logofile_tl {
-		\hfill\raisebox{\dim_eval:n {
-				\bool_if:NTF \g_ptxcd_colorback_bool
-				{-\height}
-				{-.9\c_ptxcd_logoheight_dim}
-			}}
-			[0pt]
-			[\dim_eval:n {
-			\bool_if:NTF \g_ptxcd_smalltitle_bool
-				{\bool_if:NTF \g_ptxcd_colorback_bool {1.15}{1}}
-				{\bool_if:NTF \g_ptxcd_colorback_bool {1.5}{1.3}
-			}\c_ptxcd_logoheight_dim}]
-		{\makebox[\__ptxcd_logowidth:][l]{\includegraphics[height=\c_ptxcd_logoheight_dim]{\g_ptxcd_logofile_tl}}}
-		}
-      \par\medskip
-    }}
-  \par
-  \nointerlineskip
-  \rule{\linewidth}{\g_ptxcd_titlerule_dim}
-    % subtitle fields if not compat
-  \exp_args:Nf \tl_if_empty:nF {\g_ptxcd_ex_sheetnum_tl\@date\g_ptxcd_ex_term_tl\use:c {@subsubtitle}\@subtitle}{
-    \par\nointerlineskip
-    \bool_if:NT \g_ptxcd_colorback_bool {\colorbox{accentcolor}}{
-      \parbox{\linewidth}{
-        \begin{minipage}{\linewidth}
-			\bool_if:NT \g_ptxcd_colorback_bool {
-				\color{textonaccentcolor}
-				\begin{addmargin}{3mm}
-			}
-            \null\par
-            \def\ptxcd_nextsep{}
-            \clist_map_inline:nn {@subtitle, @subsubtitle, g_ptxcd_ex_term_tl, @date} {
-              \tl_if_empty:cF {##1} {\ptxcd_nextsep\use:c {##1}\def\ptxcd_nextsep{\\}}
-            }
-            \tl_if_empty:NF \g_ptxcd_ex_sheetnum_tl {\ptxcd_nextsep\sheetname\sheetsep\g_ptxcd_ex_sheetnum_tl}
-          \bool_if:NT \g_ptxcd_colorback_bool {\end{addmargin}}
-        \end{minipage}
-        \vspace*{\dp\strutbox}
-      }}\par\nointerlineskip
-    \rule{\linewidth}{\g_ptxcd_titlerule_dim}
-  }
-  \par
-  \bool_if:NT  \g_ptxcd_headontitle_bool {
-    \if@twoside
-    \box_use:N \g_ptxcd_ex_headline_odd_box
-    \else
-    \box_use:N \g_ptxcd_ex_headline_oneside_box
-    \fi
-    \par
-    \rule{\linewidth}{\g_ptxcd_titlerule_dim}
-    \par
-  }
-  \endgroup
-  \vskip 2em
-  \ConfigureHeadline{}
+			\par\medskip
+		}}
+	\par
+	\nointerlineskip
+	\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+	% subtitle fields if not compat
+	\exp_args:Nf \tl_if_empty:nF {\g_ptxcd_ex_sheetnum_tl\@date\g_ptxcd_ex_term_tl\use:c {@subsubtitle}\@subtitle}{
+		\par\nointerlineskip
+		\bool_if:NT \g_ptxcd_colorback_bool {\colorbox{accentcolor}}{
+			\parbox{\linewidth}{
+				\begin{minipage}{\linewidth}
+					\bool_if:NT \g_ptxcd_colorback_bool {
+						\color{textonaccentcolor}
+						\begin{addmargin}{3mm}
+							}
+							\null\par
+							\def\ptxcd_nextsep{}
+							\clist_map_inline:nn {@subtitle, @subsubtitle, g_ptxcd_ex_term_tl, @date} {
+								\tl_if_empty:cF {##1} {\ptxcd_nextsep\use:c {##1}\def\ptxcd_nextsep{\\}}
+							}
+							\tl_if_empty:NF \g_ptxcd_ex_sheetnum_tl {\ptxcd_nextsep\sheetname\sheetsep\g_ptxcd_ex_sheetnum_tl}
+							\bool_if:NT \g_ptxcd_colorback_bool {\end{addmargin}}
+				\end{minipage}
+				\vspace*{\dp\strutbox}
+			}}\par\nointerlineskip
+		\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+	}
+	\par
+	\bool_if:NT  \g_ptxcd_headontitle_bool {
+		\if@twoside
+			\box_use:N \g_ptxcd_ex_headline_odd_box
+		\else
+			\box_use:N \g_ptxcd_ex_headline_oneside_box
+		\fi
+		\par
+		\rule{\linewidth}{\g_ptxcd_titlerule_dim}
+		\par
+	}
+	\endgroup
+	\vskip 2em
+	\ConfigureHeadline{}
 }%
 
 \setkomafont{subtitle}{\bfseries}
@@ -756,14 +756,14 @@
 \providecommand{\creditformatsum}[1]{\creditformat{#1}}
 \newcommand*{\pointformat}[1]{
 	\fp_compare:nF {#1 = 0} {
-		\bool_if:NTF \l__ptxcd_points_auto_bool 
-			\creditformatsum
-			\creditformat
+		\bool_if:NTF \l__ptxcd_points_auto_bool
+		\creditformatsum
+		\creditformat
 		{
 			\fp_to_decimal:n {#1}\space
 			\fp_compare:nTF {#1=1}
-				\PointName
-				\PointsName
+			\PointName
+			\PointsName
 		}
 	}
 }
@@ -774,10 +774,10 @@
 \providecaptionname{english, american, british}{\PointsName}{Points}
 
 %Has to be initialized after captionnames have been defined
- \AtBeginDocument{
-  \ptxcd_update_headline_boxes:
-  \ptxcd_ex_adjust_headheight:
-  \global\let\ConfigureHeadline\ptxcd_ConfigureHeadline:n
+\AtBeginDocument{
+	\ptxcd_update_headline_boxes:
+	\ptxcd_ex_adjust_headheight:
+	\global\let\ConfigureHeadline\ptxcd_ConfigureHeadline:n
 }
 
 %task environment
@@ -805,17 +805,17 @@
 	\IfNoValueF{#1}{\keys_set:nn {ptxcd/task}{#1}}
 	\@task{#2}
 	\bool_if:NF \l__ptxcd_points_auto_bool {
-          \cs_if_exist_use:NF \prop_gput:Nxx
-          {\exp_args:NNx \prop_gput:Nnx}
-          \g__ptxcd_points_collector_prop
+		\cs_if_exist_use:NF \prop_gput:Nxx
+		{\exp_args:NNx \prop_gput:Nnx}
+		\g__ptxcd_points_collector_prop
 		{\thetask} {\fp_to_decimal:N \l_ptxcd_ex_task_points_fp}
 	}
 }{
-  \bool_if:NT \l__ptxcd_points_auto_bool {
-    \cs_if_exist_use:NF \prop_gput:Nxx
-          {\exp_args:NNx \prop_gput:Nnx}
-            \g__ptxcd_points_collector_prop
-			{\thetask} {\fp_to_decimal:N \g__ptxcd_ex_collected_points_fp}
+	\bool_if:NT \l__ptxcd_points_auto_bool {
+		\cs_if_exist_use:NF \prop_gput:Nxx
+		{\exp_args:NNx \prop_gput:Nnx}
+		\g__ptxcd_points_collector_prop
+		{\thetask} {\fp_to_decimal:N \g__ptxcd_ex_collected_points_fp}
 		\fp_gzero:N \g__ptxcd_ex_collected_points_fp
 	}
 }
@@ -857,10 +857,10 @@
 	}{
 		\@subtask{\l_ptxcd_ex_title_tl}
 	}
-   \cs_if_exist_use:NF \prop_gput:Nxx
-      {\exp_args:NNx \prop_gput:Nnx}
-       \g__ptxcd_subtask_points_collector_prop
-	   {\thetask\thesubtask} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp }
+	\cs_if_exist_use:NF \prop_gput:Nxx
+	{\exp_args:NNx \prop_gput:Nnx}
+	\g__ptxcd_subtask_points_collector_prop
+	{\thetask\thesubtask} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp }
 	\bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
 	\tl_gset_eq:NN \g_tmpa_tl \@currentlabel
 	\endgroup
@@ -893,25 +893,25 @@
 \setkomafont{@solution}{\normalfont}
 
 \cs_new:Nn \ptxcd_ex_solutionheader: {
-  \@solution*{\solutionname\solutionsep}
-  \if@newlist\global\@newlistfalse\fi
+	\@solution*{\solutionname\solutionsep}
+	\if@newlist\global\@newlistfalse\fi
 }
 
 \box_new:N \g_ptxcd_NumberForm_box
 \hbox_gset:Nn \g_ptxcd_NumberForm_box {
-  \rule{\fboxrule}{1ex}
-  \rule{1em}{\fboxrule}
-  \rule{\fboxrule}{1ex}
-  \,
+	\rule{\fboxrule}{1ex}
+	\rule{1em}{\fboxrule}
+	\rule{\fboxrule}{1ex}
+	\,
 }
 
 \newcommand*\ptxcd_StudentID[1][7]{
-  \StudentIDname\StudentIDsep\prg_replicate:nn {#1} {\box_use:N \g_ptxcd_NumberForm_box}
+	\StudentIDname\StudentIDsep\prg_replicate:nn {#1} {\box_use:N \g_ptxcd_NumberForm_box}
 }
 \let\StudentID\ptxcd_StudentID
 
 \newcommand*\ptxcd_StudentName{
-  \StudentNamename\StudentNamesep\hrulefill\qquad
+	\StudentNamename\StudentNamesep\hrulefill\qquad
 }
 \let\StudentName\ptxcd_StudentName
 
@@ -920,12 +920,12 @@
 % Compatibility Features
 
 \bool_if:NT \g_ptxcd_ex_compatibility_bool {
-  \cs_set_eq:NN \c@subsection \c@task
-  \cs_set_eq:NN \subsection \task
-  \cs_set_eq:NN \c@subsubsection \c@subtask
-  \cs_set_eq:NN \subsubsection \subtask
-  \cs_set_eq:NN \thetask \thesubsection
-  \cs_set_eq:NN \thesubtask \thesubsection
+	\cs_set_eq:NN \c@subsection \c@task
+	\cs_set_eq:NN \subsection \task
+	\cs_set_eq:NN \c@subsubsection \c@subtask
+	\cs_set_eq:NN \subsubsection \subtask
+	\cs_set_eq:NN \thetask \thesubsection
+	\cs_set_eq:NN \thesubtask \thesubsection
 }
 
 \file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
@@ -934,17 +934,17 @@
 
 % Point referencing
 \cs_if_exist:NTF \AddtoDoHook {
-  \AddtoDoHook{heading/preinit/subtask}{
-    \bool_if:NT \g__ptxcd_points_bool {
-      \fp_gadd:Nn \g__ptxcd_ex_collected_points_fp {\l_ptxcd_ex_subtask_points_fp}
-    }
-  }
+	\AddtoDoHook{heading/preinit/subtask}{
+		\bool_if:NT \g__ptxcd_points_bool {
+			\fp_gadd:Nn \g__ptxcd_ex_collected_points_fp {\l_ptxcd_ex_subtask_points_fp}
+		}
+	}
 
-  \AddtoDoHook{heading/preinit/task}{
-    \fp_gzero:N \g__ptxcd_ex_collected_points_fp
-  }
+	\AddtoDoHook{heading/preinit/task}{
+		\fp_gzero:N \g__ptxcd_ex_collected_points_fp
+	}
 } {
-  \msg_warning:nnnn  {tudaexercise} {outdated-koma-script} {point~references} {3.27}
+	\msg_warning:nnnn  {tudaexercise} {outdated-koma-script} {point~references} {3.27}
 }
 
 
@@ -961,7 +961,7 @@
 
 \msg_new:nnn {tudaexercise} {point-referencing-disabled} {
 	You~try~to~use~#1.\\
-	This~function~is~only~available~with~points=true~or~points=auto.\\	
+	This~function~is~only~available~with~points=true~or~points=auto.\\
 	Please~activate~referencing~to~use~it.
 }
 
@@ -987,11 +987,11 @@
 			\exp_not:N \ptxcd@LoadPoints[\thetask][\fp_use:N \l_tmpa_fp]{\l_tmpa_tl}
 		}
 	}
-	
+
 	\cs_new:Nn \__ptxcd_getPoints:n {
-			\prop_if_in:NnTF \g__ptxcd_loaded_points_prop {#1}
-				{\prop_item:Nn \g__ptxcd_loaded_points_prop {#1}}
-				{\nfss@text{\reset@font\bfseries??}}
+		\prop_if_in:NnTF \g__ptxcd_loaded_points_prop {#1}
+		{\prop_item:Nn \g__ptxcd_loaded_points_prop {#1}}
+		{\nfss@text{\reset@font\bfseries??}}
 	}
 	\cs_generate_variant:Nn \__ptxcd_getPoints:n {x}
 
@@ -1015,48 +1015,48 @@
 		\fp_use:N \g__ptxcd_points_total_fp
 	}
 
-        \NewDocumentCommand{\mapPoints}{sO{1}m}{
-	\cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
-	\prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
-	 \msg_warning:nn {tudaexercise} {empty-point-mapping}
- 	 \__ptxcd_map_points_helper:nn {?task?} {?points?}
-	}{
-	\int_gset:Nn \g_ptxcd_tmp_int {\value{task}}
-	\setcounter{task}{#2}
-	\tl_gclear:N \g_ptxcd_tmp_tl
-	\bool_gset_true:N \g_tmpa_bool 
-	\bool_while_do:Nn \g_tmpa_bool 
-	{
-			\exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
+	\NewDocumentCommand{\mapPoints}{sO{1}m}{
+		\cs_gset_nopar:Nn \__ptxcd_map_points_helper:nn {#3}
+		\prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
+			\msg_warning:nn {tudaexercise} {empty-point-mapping}
+			\__ptxcd_map_points_helper:nn {?task?} {?points?}
+		}{
+			\int_gset:Nn \g_ptxcd_tmp_int {\value{task}}
+			\setcounter{task}{#2}
+			\tl_gclear:N \g_ptxcd_tmp_tl
+			\bool_gset_true:N \g_tmpa_bool
+			\bool_while_do:Nn \g_tmpa_bool
 			{
-				\fp_compare:nF {\l_tmpa_tl = 0}
+				\exp_args:NNx \prop_get:NnNTF \g__ptxcd_loaded_points_prop {\thetask} \l_tmpa_tl
 				{
-					\tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
-					\tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
+					\fp_compare:nF {\l_tmpa_tl = 0}
+					{
+						\tl_gput_right:Nn \g_ptxcd_tmp_tl {\__ptxcd_map_points_helper:nn}
+						\tl_gput_right:Nx \g_ptxcd_tmp_tl {{\thetask} {\l_tmpa_tl}}
+					}
 				}
+				{\bool_gset_false:N \g_tmpa_bool}
+				\stepcounter{task}
+			}
+			\setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
+			\g_ptxcd_tmp_tl
 		}
-		{\bool_gset_false:N \g_tmpa_bool}
-		\stepcounter{task}
 	}
-	\setcounter{task}{\int_use:N \g_ptxcd_tmp_int}
-	\g_ptxcd_tmp_tl 
-	}
-        }
 
 } {
 	\newcommand{\getPoints}[1]{
-			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPoints}
+		\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPoints}
 	}
 	\newcommand{\refPoints}[1]{
-			\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\refPoints}
+		\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\refPoints}
 	}
 	\newcommand{\getPointsTotal}[1]{
 		\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\getPointsTotal}
 	}
 
-        \NewDocumentCommand{\mapPoints}{som} {
-          \msg_error:nnn {tudaexercise} {point-referencing-disabled} {\mapPoints}
-        }
+	\NewDocumentCommand{\mapPoints}{som} {
+		\msg_error:nnn {tudaexercise} {point-referencing-disabled} {\mapPoints}
+	}
 }
 
 \cs_new:Nn \__ptxcd_map_points_helper:nn {#1-#2}
