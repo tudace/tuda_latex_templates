@@ -1411,7 +1411,22 @@
 
 \Module@Process@SpecialOptions[ptxcd/pub]
 
-\ProcessKeyOptions[ptxcd/pub]
+%    \end{macrocode}
+% Wrapper around the old implementation of pdfx + support for pdfmanagement.
+% \iffalse
+%</class>
+%<*class|process-options>
+% \fi
+%    \begin{macrocode}
+
+\ProcessKeyOptions[ptxcd/\c__ptxcd_base_str]
+%    \end{macrocode}
+% Wrapper around the old implementation of pdfx + support for pdfmanagement.
+% \iffalse
+%</class|process-options>
+%<*class|pdfa>
+% \fi
+%    \begin{macrocode}
 
 \bool_if:NF \g_ptxcd_pdfa_bool {\bool_gset_false:N \g_ptxcd_pdfx_bool}
 
@@ -1442,6 +1457,13 @@
     \msg_info:nn {tudapub} {colors-to-rgb}
   }
 }
+
+%    \end{macrocode}
+% \iffalse
+%</class|pdfa>
+%<*class>
+% \fi
+%    \begin{macrocode}
 
 \exp_args:Nx \tl_if_eq:nnT {\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}} {9pt}
 {
@@ -1522,6 +1544,7 @@
   \RequirePackage{hyperref}
 }
 
+\RequirePackage{bookmark}
 \RequirePackage{tudarules}
 \RequirePackage{trimclip}
 \RequirePackage{bookmark}
@@ -2186,147 +2209,151 @@
 \DeclareNewPageStyleByLayers{title.TUDa}{title.TUDa.background,title.TUDa.rule,title.TUDa.image}
 %    \end{macrocode}
 % Logos
+%</class>
+%<*class|xmpdata>
 %    \begin{macrocode}
 \if_bool:N \g_ptxcd_pdfx_bool
-% %hyperref
-\hypersetup{hidelinks, unicode}
-\iow_new:N \ptxcd_xmpdata_stream
-\tl_new:N \g_ptxcd_xmp_title_tl
-\tl_new:N \g_ptxcd_xmp_author_tl
+  \iow_new:N \ptxcd_xmpdata_stream
+  \tl_new:N \g_ptxcd_xmp_title_tl
+  \tl_new:N \g_ptxcd_xmp_author_tl
 
-\cs_if_exist:NF \prop_gput_if_new:Nnx {
-  \cs_generate_variant:Nn \prop_gput_if_new:Nnn {Nnx}
-}
+  \cs_if_exist:NF \prop_gput_if_new:Nnx {
+    \cs_generate_variant:Nn \prop_gput_if_new:Nnn {Nnx}
+  }
 
-\cs_if_exist:NF \tl_to_str:V {\cs_generate_variant:Nn \tl_to_str:N {V}}
+  \cs_if_exist:NF \tl_to_str:V {\cs_generate_variant:Nn \tl_to_str:N {V}}
 
-\cs_new:Nn \ptxcd_pass_TitleData: {
-\iow_open:Nn \ptxcd_xmpdata_stream {\jobname.xmpdata}
-\begingroup
-\def\newline{}
-\def\\{}
-\let\thanks\use_none:n
-\cs_set:Npn \and {\exp_not:n {\exp_not:N \sep}}
-\use:c {Hy@pdfstringtrue}
-\tl_gset:Nf \g_ptxcd_xmp_title_tl {\@title}
-\prop_gput_if_new:Nnx \g_ptxcd_MetaData_prop {Title} {\tl_to_str:V \g_ptxcd_xmp_title_tl}
-\prop_if_in:NnF \g_ptxcd_MetaData_prop {Author} {
-  \tl_gset:Nx \g_ptxcd_xmp_author_tl {\seq_use:Nn \g_ptxcd_author_seq {\exp_not:N \sep}}
-  \tl_gset:Nx \g_ptxcd_xmp_author_tl {\g_ptxcd_xmp_author_tl}
-  \prop_gput:Nnx \g_ptxcd_MetaData_prop {Author} {\tl_to_str:V \g_ptxcd_xmp_author_tl}
-}
-\prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {Publisher}{TU~Darmstadt}
-\prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {Creator}{LaTeX~using~TUDa-CI}
-\use:c {pdfx@localcommands}%should be held inside group
-\prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
-\endgroup
-\iow_close:N \ptxcd_xmpdata_stream
-\let\ptxcd_pass_TitleData:\relax
-}
-\cs_new:Nn \ptxcd_write_xmp_line:nn {
-  \begingroup
-  \cs_set:Npn \sep {\exp_not:N \sep}
-  \cs_if_exist:cTF {#1}{
-    \iow_now:Nx \ptxcd_xmpdata_stream {
-      \c_backslash_str #1 {\exp_not:n {#2}}
+  \cs_new:Nn \ptxcd_pass_TitleData: {
+    \iow_open:Nn \ptxcd_xmpdata_stream {\jobname.xmpdata}
+    \begingroup
+      \def\newline{}
+      \def\\{}
+      \let\thanks\use_none:n
+      \cs_set:Npn \and {\exp_not:n {\exp_not:N \sep}}
+      \use:c {Hy@pdfstringtrue}
+%    \end{macrocode}
+% \cls{tudaletter} did not support the title mechanism, but as it does by loading scrartcl this shouldn't be an issue to keep this section for it.
+%    \begin{macrocode}
+      \tl_gset:Nf \g_ptxcd_xmp_title_tl {\@title}
+      \prop_gput_if_new:Nnx \g_ptxcd_MetaData_prop {Title} {\tl_to_str:V \g_ptxcd_xmp_title_tl}
+      \prop_if_in:NnF \g_ptxcd_MetaData_prop {Author} {
+        \tl_gset:Nx \g_ptxcd_xmp_author_tl {\seq_use:Nn \g_ptxcd_author_seq {\exp_not:N \sep}}
+        \tl_gset:Nx \g_ptxcd_xmp_author_tl {\g_ptxcd_xmp_author_tl}
+        \prop_gput:Nnx \g_ptxcd_MetaData_prop {Author} {\tl_to_str:V \g_ptxcd_xmp_author_tl}
+      }
+      \prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {Publisher}{TU~Darmstadt}
+      \prop_gput_if_new:Nnn \g_ptxcd_MetaData_prop {Creator}{LaTeX~using~TUDa-CI}
+      \use:c {pdfx@localcommands}%should be held inside group
+      \prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
+    \endgroup
+    \iow_close:N \ptxcd_xmpdata_stream
+    \let\ptxcd_pass_TitleData:\relax
+  }
+  \cs_new:Nn \ptxcd_write_xmp_line:nn {
+    \begingroup
+    \cs_set:Npn \sep {\exp_not:N \sep}
+    \cs_if_exist:cTF {#1}{
+      \iow_now:Nx \ptxcd_xmpdata_stream {
+        \c_backslash_str #1 {\exp_not:n {#2}}
+      }
+    }{
+      \msg_error:nnn{tudapub} {unknown-metadata} {#1}
     }
-  }{
-    \msg_error:nnn{tudapub} {unknown-metadata} {#1}
+    \endgroup
   }
-  \endgroup
-}
 
-\prop_new:N \g_ptxcd_MetaData_prop
+  \prop_new:N \g_ptxcd_MetaData_prop
 
-\newcommand*{\Metadata}[1]{
-  \keyval_parse:NNn  \use_none:n \ptxcd_set_metadata_prop:nn
-  {#1}
-}
-
-\cs_set:Nn \ptxcd_set_metadata_prop:nn {
-% Fallback test for older kernels doesn't support mixed case eintries
-  \cs_if_exist:NTF \text_titlecase_first:n {
-    \exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\text_titlecase_first:n {#1}} {#2}
-  } {
-    \exp_args:NNx \prop_gput:Nnn \g_ptxcd_MetaData_prop {
-      \str_uppercase:f {\tl_head:n {#1}}
-      \str_lowercase:f {\tl_tail:n {#1}}
-    } {#2}
+  \newcommand*{\Metadata}[1]{
+    \keyval_parse:NNn  \use_none:n \ptxcd_set_metadata_prop:nn
+    {#1}
   }
-}
 
-\msg_new:nnnn{tudapub} {unknown-metadata} {
-  You~ used~ the~ #1~ metadata~ entry.\\
-  I~ don't~ know~ how~ to~ handle~ that.\\
-  It~ will~ be~ ignored.
-} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
+  \cs_set:Nn \ptxcd_set_metadata_prop:nn {
+  % Fallback test for older kernels doesn't support mixed case eintries
+    \cs_if_exist:NTF \text_titlecase_first:n {
+      \exp_args:NNf \prop_gput:Nnn \g_ptxcd_MetaData_prop {\text_titlecase_first:n {#1}} {#2}
+    } {
+      \exp_args:NNx \prop_gput:Nnn \g_ptxcd_MetaData_prop {
+        \str_uppercase:f {\tl_head:n {#1}}
+        \str_lowercase:f {\tl_tail:n {#1}}
+      } {#2}
+    }
+  }
+%    \end{macrocode}
+% %TODO use base_str?
+%    \begin{macrocode}
+  \msg_new:nnnn{tudapub} {unknown-metadata} {
+    You~ used~ the~ #1~ metadata~ entry.\\
+    I~ don't~ know~ how~ to~ handle~ that.\\
+    It~ will~ be~ ignored.
+  } {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
 \else:
-\PassOptionsToPackage{hidelinks, unicode}{hyperref}
-\RequirePackage{hyperref}
-\hypersetup{pdfcreator=LaTeX~using~TUDa-CI}
-
-\msg_new:nnnn {tudapub} {metadata-to-hypersetup} {
-  You~don't~use~pdfx.~
-  Here~the~\string\Metadata\~command~only~exists~for~compatibility~reasons.\\
-  I~will~pass~the~data~to~ḩypersetup.
-}{
-  If~possible~please~use~hyperref's~\strung\hypersetup~command~for~the~metadata~directly.\\
-  See~hyperref~documentation~for~details~on~usage.
-}
-
-\newcommand*{\Metadata}[1]{
-  \tl_set:Nn \l_tmpa_tl {#1}
-  \tl_replace_all:Nnn \l_tmpa_tl {\sep} {;~}% pdfx-Syntax compatibility
-  \clist_map_inline:Nn \l_tmpa_tl {
-    \exp_args:Nx \hypersetup{pdf\tl_trim_spaces:n {##1}}
+  \hypersetup{pdfcreator=LaTeX~using~TUDa-CI}
+  \msg_new:nnnn {tudapub} {metadata-to-hypersetup} {
+    You~don't~use~pdfx.~
+    Here~the~\string\Metadata\~command~only~exists~for~compatibility~reasons.\\
+    I~will~pass~the~data~to~ḩypersetup.
+  }{
+    If~possible~please~use~hyperref's~\strung\hypersetup~command~for~the~metadata~directly.\\
+    See~hyperref~documentation~for~details~on~usage.
   }
-  \msg_warning:nn {tudapub} {metadata-to-hypersetup}
-}
 
-\cs_new:Nn \ptxcd_pass_TitleData: {
+    \newcommand*{\Metadata}[1]{
+      \tl_set:Nn \l_tmpa_tl {#1}
+      \tl_replace_all:Nnn \l_tmpa_tl {\sep} {;~}% pdfx-Syntax compatibility
+      \clist_map_inline:Nn \l_tmpa_tl {
+        \exp_args:Nx \hypersetup{pdf\tl_trim_spaces:n {##1}}
+      }
+      \msg_warning:nn {tudapub} {metadata-to-hypersetup}
+    }
+    \cs_new:Nn \ptxcd_pass_TitleData: {
 %    \end{macrocode}
 % check if pdfmanagement is active
 %    \begin{macrocode}
-\prop_if_exist:NTF \g__pdfmanagement_documentproperties_prop {
-  \prop_set_eq:NN \l_tmpa_prop \g__pdfmanagement_documentproperties_prop
-} {
-  \prop_set_eq:NN \l_tmpa_prop   \g__hyp_documentproperties_prop
-}
+      \prop_if_exist:NTF \g__pdfmanagement_documentproperties_prop {
+        \prop_set_eq:NN \l_tmpa_prop \g__pdfmanagement_documentproperties_prop
+      } {
+        \prop_set_eq:NN \l_tmpa_prop   \g__hyp_documentproperties_prop
+      }
 %    \end{macrocode}
 % title
 %    \begin{macrocode}
-\prop_if_in:NnF \l_tmpa_prop {hyperref/pdftitle} {
-\begingroup
-\def\newline{}
-\def\\{}
-\let\thanks\use_none:n
-\tl_gset:Nf \g_tmpa_tl {\@title}
-\endgroup
-\hypersetup{pdftitle={\tl_to_str:V \g_tmpa_tl}}
-}
-%    \end{macrocode}
-% author
+      \prop_if_in:NnF \l_tmpa_prop {hyperref/pdftitle} {
+      \begingroup
+        \def\newline{}
+        \def\\{}
+        \let\thanks\use_none:n
+        \tl_gset:Nf \g_tmpa_tl {\@title}
+      \endgroup
+      \hypersetup{pdftitle={\tl_to_str:V \g_tmpa_tl}}
+        \endgroup
+        \hypersetup{pdftitle={\tl_to_str:V \g_tmpa_tl}}
+      }
 %    \begin{macrocode}
-\prop_if_in:NnF \l_tmpa_prop {hyperref/pdfauthor} {
-\begingroup
-\def\newline{}
-\def\\{}
-\let\thanks\use_none:n
-\tl_gset:Nx \g_tmpa_tl {\seq_use:Nn \g_ptxcd_author_seq {\exp_not:N \and}}
-\tl_gset:Nx \g_tmpa_tl  {\g_tmpa_tl }
-\endgroup
-\hypersetup{pdfauthor=\g_tmpa_tl}
-}
-}
-
-\bool_if:NF \g_ptxcd_pdfa_bool {
-  \msg_new:nnn{tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
-  \msg_info:nn{tudapub} {no-pdfa}
-}
+      \prop_if_in:NnF \l_tmpa_prop {hyperref/pdfauthor} {
+        \begingroup
+          \def\newline{}
+          \def\\{}
+          \let\thanks\use_none:n
+          \tl_gset:Nx \g_tmpa_tl {\seq_use:Nn \g_ptxcd_author_seq {\exp_not:N \and}}
+          \tl_gset:Nx \g_tmpa_tl  {\g_tmpa_tl }
+        \endgroup
+        \hypersetup{pdfauthor=\g_tmpa_tl}
+      }
+        \hypersetup{pdfauthor=\g_tmpa_tl}
+      }
+    }
+    \msg_new:nnn{tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
+    \msg_info:nn{tudapub} {no-pdfa}
+  }
 \fi:
-
-\RequirePackage{bookmark}
-
+%    \end{macrocode}
+% \iffalse
+%</class|xmpdata>
+%<*class>
+% \fi
+%    \begin{macrocode}
 \box_new:N  \g_ptxcd_sponsor_box
 \seq_new:N \g_ptxcd_sponsors_seq
 %    \end{macrocode}
