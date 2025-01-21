@@ -2353,12 +2353,11 @@
         \endgroup
         \hypersetup{pdfauthor=\g_tmpa_tl}
       }
-        \hypersetup{pdfauthor=\g_tmpa_tl}
-      }
     }
-    \msg_new:nnn{tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
-    \msg_info:nn{tudapub} {no-pdfa}
-  }
+    \bool_if:NF \g_ptxcd_pdfa_bool {
+      \msg_new:nnn{tudapub} {no-pdfa}{The~ tuda\c__ptxcd_base_str\space class~ will~ not~ create~ PDF/A.}
+      \msg_info:nn{tudapub} {no-pdfa}
+    }
 \fi:
 %    \end{macrocode}
 % \iffalse
