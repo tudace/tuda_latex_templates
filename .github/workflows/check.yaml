@@ -11,6 +11,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      SKIP: l3build-tag
     steps:
     - name: Set up Git repository
       uses: actions/checkout@v4
