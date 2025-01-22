@@ -152,7 +152,7 @@
   titlesepline .initial:n = true,
 %</class&initialization>
 %<gobble>}
-%<*class&body>
+%<*class&packages>
 \ProcessKeyOptions[ptxcd/poster]
 \dim_new:N \g_ptxcd_margin_dim
 \bool_if:NTF \g_ptxcd_smalltitle_bool {
@@ -172,33 +172,19 @@
   {\PassOptionsToClass{#1}{scrartcl}}
   {\clist_map_inline:nn {#2} {\PassOptionsToClass{#1=##1}{scrartcl}}}
 }
-\bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
 \ExplSyntaxOff
 \PassOptionsToPackage{DIV=10}{typearea}
 \LoadClass[parskip=full-]{scrartcl}
+\ExplSyntaxOn
+%    \end{macrocode}
+% \iffalse
+%</class&packages>
+%<*class&body>
+% \fi
+%    \begin{macrocode}
+\ExplSyntaxOff
 \RequirePackage{tudafonts}
 \RequirePackage{tudacolors}
-
-\ExplSyntaxOn
-\if_bool:N \g_ptxcd_pdfa_bool
-  \PassOptionsToPackage{a-2b}{pdfx}
-  \IfFormatAtLeastTF{2020/10/01}{}{\endinput}
-  %    \end{macrocode}
-  % Workaround posted by David Carlisle on tex.stackexchange
-  % Thanks to Ulrike Fischer for mentioning it in #472
-  %    \begin{macrocode}
-  \let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
-  \chardef\currentgrouplevel0
-  \ExplSyntaxOff
-  \RequirePackage{pdfx}
-  \ExplSyntaxOn
-  \let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-  \cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
-%    \end{macrocode}
-% end of the workaround
-%    \begin{macrocode}
-\fi:
-\ExplSyntaxOff
 \RequirePackage[margin=0pt]{geometry}
 \RequirePackage{tcolorbox}
 \tcbuselibrary{poster}
@@ -342,109 +328,7 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \end{implementation}
-%
-% %%%%%%%%%%%%%%%%%%
-% Begin of PDF/A mode
-% %%%%%%%%%%%%%%%%%%
-% PDFA
-%    \begin{macrocode}
-\if_bool:N \g_ptxcd_pdfa_bool
-%    \end{macrocode}
-% %hyperref
-%    \begin{macrocode}
-\hypersetup{hidelinks, unicode, hyperfootnotes=false}
-\iow_new:N \ptxcd_xmpdata_stream
-\iow_open:Nn \ptxcd_xmpdata_stream {\jobname.xmpdata}
-\tl_new:N \g_ptxcd_xmp_title
-\tl_new:N \g_ptxcd_xmp_author
-\cs_new:Nn \ptxcd_pass_TitleData: {
-  \begingroup
-    \def\newline{}
-    \def\\{}
-    \cs_set_eq:NN \thanks \use_none:n
-    \cs_set_eq:NN \inst \use_none:n
-    \cs_set:Npn \and {\sep}
-    \bool_if:NTF \g_ptxcd_pass_TitleData_bool {
-      \tl_gset:Nx \g_ptxcd_xmp_title {\@title}
-      \seq_clear:N \l_tmpa_seq
-      \seq_map_inline:Nn \g_ptxcd_author_seq {
-        \seq_put_right:Nx \l_tmpa_seq {##1}
-      }
-      \tl_gset:Nx \g_ptxcd_xmp_author {\seq_use:Nn \l_tmpa_seq {\sep}}
-      \iow_now:Nx \ptxcd_xmpdata_stream
-      {
-        \exp_not:N \Title{\tl_to_str:V \g_ptxcd_xmp_title}
-        ^^J
-        \exp_not:N \Author{\tl_to_str:V \g_ptxcd_xmp_author}
-        ^^J
-        \exp_not:N \Creator{LaTeX~ using~ the~ TUDa-CI~ Bundle}
-      }
-    }{
-      \begingroup
-      \use:c {pdfx@localcommands}
-      \prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
-      \endgroup
-    }
-  \endgroup
-}
-\cs_new:Nn \ptxcd_write_xmp_line:nn {
-  %Fallback test for older kernels
-  \cs_if_exist:NTF \str_uppercase:f {
-    \tl_set:Nx \l_tmpa_tl {
-      \str_uppercase:f {\tl_head:n {#1}}
-      \str_lowercase:f { \tl_tail:n {#1}}
-    }
-  } {
-    %may be removed in some time
-    \tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
-  }
-  \cs_if_exist:cTF {\l_tmpa_tl}{
-    \iow_now:Nx \ptxcd_xmpdata_stream {
-      \c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
-    }
-  }{
-    \msg_error:nnn{tudapub} {unknown-metadata} {#1}
-  }
-}
-\bool_new:N \g_ptxcd_pass_TitleData_bool
-\bool_gset_true:N  \g_ptxcd_pass_TitleData_bool
-\prop_new:N \g_ptxcd_MetaData_prop
-%    \end{macrocode}
-% \begin{documentation}
-% \DescribeMacro{\Metadata}
-%
-% \end{documentation}
-% \begin{implementation}
-% \begin{macro}{\Metadata}
-%    \begin{macrocode}
-\newcommand*{\Metadata}[1]{
-  \bool_gset_false:N \g_ptxcd_pass_TitleData_bool
-  \prop_gset_from_keyval:Nn \g_ptxcd_MetaData_prop {#1}
-}
-%    \end{macrocode}
-% \end{macro}
-% \end{implementation}
-%
-%    \begin{macrocode}
-\msg_new:nnnn{tudapub} {unknown-metadata} {
-  You~ used~ the~ #1~ metadata~ entry.\\
-  I~ don't~ know~ how~ to~ handle~ that.\\
-  It~ will~ be~ ignored.
-} {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
-\else:
-\msg_new:nnn{tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
-\msg_info:nn{tudapub} {no-pdfa}
-%    \end{macrocode}
-% %hyperref
-%    \begin{macrocode}
-\RequirePackage[hidelinks, unicode,hyperfootnotes=false]{hyperref}
-\fi:
-%    \end{macrocode}
-% %%%%%%%%%%%%%%%%%%
-% End of PDF/A mode
-% %%%%%%%%%%%%%%%%%%
-%
+% \end{implementation}%
 % redefine \author to manage \and and \thanks
 %
 %    \begin{macrocode}
@@ -804,7 +688,7 @@ every~ box~ on~ layer~ 4/.style={reset,\g_ptxcd_boxstyle_tl -inner},
 
 %
 % \iffalse
-%</class|body>
+%</class&body>
 % \fi
 %
 % \Finale

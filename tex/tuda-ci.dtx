@@ -1119,12 +1119,19 @@
 %</beamer|class|print>
 % %^^A Logo pdfa / pdfx
 %<*beamer|class|letter|sciposter>
+%<*!beamer>
 % \fi
 %    \begin{macrocode}
   pdfa .bool_gset:N = \g_ptxcd_pdfa_bool,
   pdfa .initial:n =
-%<!(sciposter|beamer)>  true,
-%<sciposter|beamer>  false,
+%<!sciposter>  true,
+%<sciposter>  false,
+%</!beamer>
+%<*beamer>
+  pdfa .code:n = {
+    \msg_error:nn {tuda\c__ptxcd_base_str} {pdfa-option-removed}
+  },
+%</beamer>
   pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
   pdfx .initial:n = true,
 %    \end{macrocode}
@@ -1366,6 +1373,23 @@
 %</class>
 }
 %    \end{macrocode}
+% \iffalse
+%<*beamer>
+% \fi
+% \changes{v3.42-dev}{2025-01-22}{Remove pdfa option from tudabeamer.}
+% As beamer is loading hyperref with with options by default it's not really worth maintaining this option here.
+% Especially since beamer did not require this to be enabled by default.
+% A comment including the information on how to set up the PDF/A within beamer using the pdfmanagement has been added to the templates.
+%    \begin{macrocode}
+\msg_new:nnn {tuda\c__ptxcd_base_str} {pdfa-option-removed} {
+  The~option~"pdfa"~was~removed~for~this~document~class.\\
+  In~case~you~need~it,~please~use~the~mechanism~provided~by~the~pdfmanagement~instead.\\
+  See~TUDa-CI~documentation~for~details.
+}
+%    \end{macrocode}^^A End of options declarations
+% \iffalse
+%</beamer>
+% \fi
 % Allow to add options via l3build |typesetcmds|.
 % Be aware that in this case also the group has to be expanded.
 %    \begin{macrocode}
@@ -1504,6 +1528,7 @@
 % \fi
 % \changes{v3.42-dev}{2025-01-21}{Unify pdfx/pdfa mechanism structure over all document types}
 %    \begin{macrocode}
+\PassOptionsToPackage{hidelinks, unicode}{hyperref}
 \bool_if:NTF \g_ptxcd_pdfx_bool {
 %% only apply the hack if pdfx is older than the working version
   \PassOptionsToPackage{a-2b}{pdfx}
@@ -1518,35 +1543,30 @@
   \cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
 %% end of the workaround
 
-  \msg_new:nnn{tudapub} {prefer-lualatex} {
+  \msg_new:nnn{tuda-ci} {prefer-lualatex} {
     You~use~pdfa-mode~in~#1.\\
     This~can~lead~to~incompatiblities~especially~with~older~compiler~versions.\\
     You~should~prefer~using~lualatex.
   }
-  \msg_new:nnnn{tudapub} {outdated-package-pdfa} {
+  \msg_new:nnnn{tuda-ci} {outdated-package-pdfa} {
     Your~Version~of~the~#1-package~is~too~old~to~support~all~methods~required~by~tudapubs~pdfa-mode.\\
     Either~update~your~TeX-distribution~or~switch~to~pdfa=false.
   }{See~DEMO-tudapub~for~further~information.}
 
   \sys_if_engine_pdftex:T {
-    \msg_warning:nnn{tudapub} {prefer-lualatex} {PDFTeX}
+    \msg_warning:nnn{tuda-ci} {prefer-lualatex} {PDFTeX}
   }
 
   \sys_if_engine_xetex:T {
-    \msg_warning:nnn{tudapub} {prefer-lualatex} {XeTeX}
+    \msg_warning:nnn{tuda-ci} {prefer-lualatex} {XeTeX}
   }
 
   \@ifpackagelater{xmpincl}{2021/09/22}{
   }{
-    \msg_error:nn{tudapub}  {outdated-package-pdfa} {xmpincl}
+    \msg_error:nn{tuda-ci}  {outdated-package-pdfa} {xmpincl}
   }
 
-  \@ifpackagelater{pdfx}{2018/12/01}{
-  }{
-    \msg_error:nn{tudapub}  {outdated-package-pdfa} {pdfx}
-  }
 } {
-  \PassOptionsToPackage{hidelinks, unicode}{hyperref}
   \RequirePackage{hyperref}
 }
 %    \end{macrocode}
@@ -2269,7 +2289,7 @@
         \c_backslash_str #1 {\exp_not:n {#2}}
       }
     }{
-      \msg_error:nnn{tudapub} {unknown-metadata} {#1}
+      \msg_error:nnn{tuda-ci} {unknown-metadata} {#1}
     }
     \endgroup
   }

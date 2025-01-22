@@ -200,7 +200,13 @@
 % \fi
 %    \begin{macrocode}
 \ExplSyntaxOff
-\PassOptionsToPackage{pdfpagelabels=false,plainpages=false}{hyperref}
+\PassOptionsToPackage{
+  hidelinks,
+  unicode,
+  pdfpagelabels=false,
+  plainpages=false,
+  pdfcreator=LaTeX using the TUDa-CI Bundle,
+}{hyperref}
 \PassOptionsToClass{t}{beamer}
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{beamer}
@@ -219,38 +225,9 @@
   \msg_warning:nn {tudabeamer} {default-design-changed}
   \keys_set:nn {ptxcd/beamer} {design=2023}
 }
-\bool_if:NT  \g_ptxcd_pdfa_bool {\PassOptionsToPackage{RGB}{xcolor}}
-\bool_if:NT  \g_ptxcd_pdfa_bool {
-  \RequirePackage{scrlfile}
-  \PreventPackageFromLoading{hyperref}
-  \def\hypersetup#1{}
-}
 \ExplSyntaxOff
-%    \end{macrocode}
-% Load the latex-beamer class
-%    \begin{macrocode}
 \LoadClass{beamer}
 \ExplSyntaxOn
-\bool_if:NT \g_ptxcd_pdfa_bool {
-  \UnPreventPackageFromLoading{hyperref}
-  \PassOptionsToPackage{a-2b}{pdfx}
-%    \end{macrocode}
-% Workaround posted by David Carlisle on tex.stackexchange
-% Thanks to Ulrike Fischer for mentioning it in #472
-%    \begin{macrocode}
-  \let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
-  \chardef\currentgrouplevel0
-  \ExplSyntaxOff
-  \RequirePackage{pdfx}
-  \ExplSyntaxOn
-  \let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-  \cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
-%    \end{macrocode}
-% end of the workaround
-%    \begin{macrocode}
-}
-\hypersetup{hidelinks, unicode}
-%    \end{macrocode}
 %
 % \begin{macro}{\department}
 %   \department command
@@ -285,85 +262,8 @@
 }
 %    \end{macrocode}
 %   end of \department command
-%    \begin{macrocode}
-\if_bool:N \g_ptxcd_pdfa_bool
-  \iow_new:N \ptxcd_xmpdata_stream
-  \iow_open:Nn \ptxcd_xmpdata_stream {\jobname.xmpdata}
-  \tl_new:N \g_ptxcd_xmp_title
-  \tl_new:N \g_ptxcd_xmp_author
-  \cs_new:Nn \ptxcd_pass_TitleData: {
-  \begingroup
-    \def\newline{}
-    \def\\{}
-    \let\thanks\use_none:n
-    \cs_set:Npn \and {\exp_not:n {\exp_not:N \sep}}
-    \bool_if:NTF \g_ptxcd_pass_TitleData_bool {
-      \tl_gset:Nx \g_ptxcd_xmp_title {\insertshorttitle}
-      \tl_gset:Nx \g_ptxcd_xmp_author {\insertshortauthor}
-      \iow_now:Nx \ptxcd_xmpdata_stream
-      {
-        \exp_not:N \Title{\tl_to_str:V \g_ptxcd_xmp_title}
-        ^^J
-        \exp_not:N \Author{\tl_to_str:V \g_ptxcd_xmp_author}
-        ^^J
-        \exp_not:N \Creator{LaTeX~ using~ the~ TUDa-CI~ Bundle}
-      }
-    }{
-      \begingroup
-        \use:c {pdfx@localcommands}
-        \prop_if_in:NnF \g_ptxcd_MetaData_prop {Creator} {\prop_gput:Nnn \g_ptxcd_MetaData_prop {Creator} {LaTeX~ using~ the~ TUDa-CI~ Bundle}}
-        \prop_map_function:NN \g_ptxcd_MetaData_prop  \ptxcd_write_xmp_line:nn
-      \endgroup
-    }
-  \endgroup
-  }
-%    \end{macrocode}
+% \changes{v3.42-dev}{2025-01-22}{remove pdfa option}
 % \end{macro}
-%
-%    \begin{macrocode}
-  \cs_new:Nn \ptxcd_write_xmp_line:nn {
-    %Fallback test for older kernels
-    \cs_if_exist:NTF \str_uppercase:f {
-      \tl_set:Nx \l_tmpa_tl {
-        \str_uppercase:f {\tl_head:n {#1}}
-        \str_lowercase:f { \tl_tail:n {#1}}
-      }
-    } {
-      %may be removed in some time
-      \tl_set:Nx \l_tmpa_tl {\tl_mixed_case:n {#1}}
-    }
-    \cs_if_exist:cTF {\l_tmpa_tl}{
-      \iow_now:Nx \ptxcd_xmpdata_stream {
-        \c_backslash_str \l_tmpa_tl {\exp_not:n {#2}}
-      }
-    }{
-      \msg_error:nnn{tudapub} {unknown-metadata} {#1}
-    }
-    }
-  \bool_new:N \g_ptxcd_pass_TitleData_bool
-  \bool_gset_true:N  \g_ptxcd_pass_TitleData_bool
-  \prop_new:N \g_ptxcd_MetaData_prop
-%    \end{macrocode}
-%
-% \begin{macro}{\Metadata}
-%    \begin{macrocode}
-  \newcommand*{\Metadata}[1]{
-    \bool_gset_false:N \g_ptxcd_pass_TitleData_bool
-    \prop_gset_from_keyval:Nn \g_ptxcd_MetaData_prop {#1}
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-  \msg_new:nnnn{tudapub} {unknown-metadata} {
-    You~ used~ the~ #1~ metadata~ entry.\\
-    I~ don't~ know~ how~ to~ handle~ that.\\
-    It~ will~ be~ ignored.
-  } {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
-\else:
-  \msg_new:nnn{tudapub} {no-pdfa}{The~ tudapub~ class~ won't~ create~ PDF/A-mode.}
-  \msg_info:nn{tudapub} {no-pdfa}
-\fi:
 \str_if_empty:NF \g_ptxcd_department_str {}
 %    \end{macrocode}
 % Load the TUDa theme
