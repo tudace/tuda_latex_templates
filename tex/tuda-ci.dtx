@@ -19,7 +19,7 @@
 % The Current Maintainers of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
-% The development respository can be found at
+% The development repository can be found at
 % https://github.com/tudace/tuda_latex_templates
 % Please use the issue tracker for feedback!
 %
@@ -168,7 +168,7 @@
 %
 % \begin{abstract}
 %   The TUDa-CI-Bundle provides a possibility to use the Corporate Design of TU Darmstadt with \LaTeX.
-%   Therefore it contains documentclasses as well as some helper packages and config files together with some templates for user documentation.
+%   Therefore, it contains document classes as well as some helper packages and config files together with some templates for user documentation.
 %   Up to Version 4.00 the documentation was only included in the demo files.
 %   This document now sums up all features and includes references to other package documentations if required.
 % \end{abstract}
@@ -188,7 +188,7 @@
 %         \end{itemize}
 %   \item[Scientific Posters] based on the \pkg{tcolorbox} poster library, \cite{TUDaSciPoster}
 %   \item[Presentation Slides] beamer theme. This includes the old design of 2008 as well as the redesign of 2023,  \cite{TUDaBeamer}
-%   \item[Announcement Posters] for event or job annoucements, \cite{TUDaPoster}
+%   \item[Announcement Posters] for event or job announcements, \cite{TUDaPoster}
 %   \item[Leaflets]  \cite{TUDaLeaflet}
 %   \item[Exercise Sheets/Exams] \cite{TUDaExercise}
 %   \item[Letters] \cite{TUDaLetter}
@@ -196,17 +196,17 @@
 %
 % The document classes use internal auxiliary packages to simplify the usage and reduce the maintenance effort.
 % These are called by the elements they define:
-% \pkg{tudacolors}, \pkg{tudafonts}, \pkg{tudarules} as well as the pgfplots color schemes defined by \pkg{tuda-pgfplots}.
+% \pkg{tudacolors}, \pkg{tudafonts}, \pkg{tudarules} as well as the \pkg{pgfplots} color schemes defined by \pkg{tuda-pgfplots}.
 %
-% Additionally the setup is defined to support department specific configuration files.
+% Additionally, the setup is defined to support department specific configuration files.
 % Officially we currently only support the setup of the department of mechanical engineering, see \autoref{sec:mecheng}.
 % There may be unofficial custom setups within the departments.
 % Those are not officially supported.
 % In case you want to provide your own and add it to TUDa-CI, please have a look at \autoref{sec:department-config}.
 %
 % \chapter{Getting Started}
-% The TUDa-CI bundle is available via CTAN\cite{ctan} and therefore no manual installation should be required.
-% Additionally the HRZ provides an on-premise Overleaf instance which also contains a release including all necessary files.
+% The TUDa-CI bundle is available via CTAN\cite{ctan-tuda-ci} and therefore no manual installation should be required.
+% For TUDa members the HRZ also provides an on-premise Overleaf instance which also contains a release including all necessary files.
 % In case you are a member of TU Darmstadt you can access the server via \url{https://sharelatex.tu-darmstadt.de/}.
 %
 % \section{Logo installation}
@@ -221,10 +221,10 @@
 % Inside this one the logo files have to be placed according to the TDS (\TeX{} Directory Structure), which means it has to be copied into
 % \path{texmf/tex/latex/tuda-ci-logos}.
 %
-% Alternativly there are scripts to be run inside a terminal to automatically detect the correct location.
+% Alternatively there are scripts to be run inside a terminal to automatically detect the correct location.
 % These can be found inside the \path{tools} directory of TUDa-CI's GitHub Repository (\citeurl{tuda-ci-github}).
 %
-% \chapter{tudapub – generic class for articles and theses}
+% \chapter{\cls{tudapub} – generic class for articles and theses}
 % \label{sec:tudapub}
 % The TUDa-CI bundle uses a generic document class to be more flexible with the layout adjustments.
 % The setup is based on \KOMAScript and this section is listing the features.
@@ -239,7 +239,8 @@
 %     This tabular gives an overview of the Features shown inside the tempaltes as well as the initial settings.
 %   }
 %   \label{tab:demo-options}
-%   \noindent\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}c>{\centering\arraybackslash}Xcc@{}}
+% 	\begin{addmargin}[\dimexpr-\marginparwidth-\marginparsep]{0pt}
+%   \begin{tabularx}{\linewidth}{@{}p{.25\linewidth}c>{\centering\arraybackslash}Xcc@{}}
 %     \toprule
 %     Option                                         & DEMO-TUDaThesis               & DEMO-TUDaPhD                       & DEMO-TUDapub  & DEMO-TUDaReport \\
 %     \midrule
@@ -258,6 +259,7 @@
 %     custommargins                                  & \FeatureTrue                  & \FeatureTrue                       & \FeatureFalse & \FeatureFalse   \\
 %     \bottomrule
 %   \end{tabularx}
+%  \end{addmargin}
 % \end{table}
 % The class is loaded using
 % \begin{Syntax}
@@ -270,7 +272,7 @@
 % \DescribeKeyOption{class=article/report/book}{article}
 % This option selects the base document class.
 % The values load the corresponding \KOMAScript class  \cite{scrguide-en}.
-% The article value thus loads scrartcl.
+% The article value thus loads \cls{scrartcl}.
 %
 % \KOMAScript is a collection of classes and packages for \LaTeX{} which, in addition to the typographical adaptations to the European area, also greatly extends the configuration options.
 % The documentation is also available in German \cite{scrguide-de}.
@@ -287,7 +289,7 @@
 % Details are described within \autoref{sec:margins}.
 %
 % \DescribeKeyOption{marginpar=true/false/auto}{auto}
-% Controlls the the marginpar. The default setting is auto.
+% Controlls the marginpar. The default setting is auto.
 % This means that the marginpar column runs across the fifth column of the layout grid \cite{TUDaGuideline}.
 %^^A\marginpar{Marginpar example}
 % Above this, the option also accepts boolean values. False would set width of the column to 0.
@@ -325,6 +327,7 @@
 % The \code{title} option prevents this by loading the font sizes set defined for the paper 1 size smaller (e.\,g. a5 font size if a4 paper is used).
 %
 % \DescribeKeyOption{type=publication/thesis/intern}{publication}
+% \label{option:type}%
 % Is used to load specific configuration for theses (\autoref{sec:thesis}) or internal documents (\autoref{sec:report}).
 %
 % \DescribeKeyOption{headline=true/false/automark}{false}
@@ -334,7 +337,7 @@
 % \code{automark} will also be passed to \pkg{scrlayer-scrpage} and switch to running headers.
 %
 % \DescribeKeyOption{logo=head/body}{body}
-% Sets the position of the logo on the titlepage, see \autoref{sec:title-options}.
+% Sets the position of the logo on the title page, see \autoref{sec:title-options}.
 %
 % \DescribeKeyOption{colorback=true/false/title/body/head}{true}
 % Change the color setup of the title page, see \autoref{sec:title-options}.
@@ -355,13 +358,13 @@
 % The title page is generated automatically by \cls{tudapub}.
 % The structure for this corresponds largely to the classic method using \cs{maketitle}.
 %
-% The \KOMAScript{} option \code{titlepage}\cite{scrguide-en} is supported to switch between separate title pages and a title head.
+% The \KOMAScript{} option \code{titlepage}\cite{scrguide-en} is supported to switch between separate title pages and an in-page title block.
 % Due to the implementation, \code{titlepage=true} is treated identically to \code{titlepage=firstiscover}.
 %
 % \DescribeMacro{\titlehead}\DescribeMacro{\title}\DescribeMacro{\subtitle}\DescribeMacro{\subject}\DescribeMacro{\author}\DescribeMacro{\and}\DescribeMacro{\thanks}\DescribeMacro{\date}\DescribeMacro{\publishers}
 % These macros are used to set the title data.
 % If not mentioned differently all need one mandatory argument which contains the data.
-% They are used as with standard \LaTeX{} but there were a few added to support the additional features of the title page design.
+% 	They are used as with standard \LaTeX{}, but there were a few added to support the additional features of the title page design.
 % \begin{Syntax}
 % \title{|\meta{title}|}
 % \author{|\meta{Author1}|\thanks{Affiliation of Author1} \and |\meta{Author2}|}
@@ -445,27 +448,27 @@
 % Similar to the logo position the color structure can be adjusted.
 % \option{colorback} toggles between the colored block on the title page and the white background.
 %
-% The other values will enfable the colored area but allow to switch between positions.
+% The other values will enable the colored area but allow switching between positions.
 % \begin{description}
 %   \item[colorback=title] Only the title background (without subtitle) is colored.
-%   \item[colorback=head] Background of the total title block inlcuding subtitles is colored.
+%   \item[colorback=head] Background of the total title block including subtitles is colored.
 %   \item[colorback=body] Only the background of the area used for the \cs{titlegraphic} is colored.
 % \end{description}
 %
 % \subsection{Extra title material for theses}
-% For \option{mode=thesis} the title page works a little bit different.
+% For \option{mode=thesis} the title page works a little different.
 % Here some data elements are used to provide an interface to be overwritten and are prefilled using additional data fields.
-% The fields only existing in theses mode are:  \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
+% The fields only existing in \option{thesis} mode are:  \cs{birthplace}, \cs{group}, \cs{examdate}, \cs{submissiondate}, \cs{tuprints}, \cs{urn} and \cs{reviewer}.
 % For more information on their use and other settings for theses have a look at \autoref{sec:theses}.
 %
 % \subsection{Abstract}
-% \cls{tudapub} extends the availability of the \environment{abstract} environment to scrbook.
-% Additionally it add's an optional argument to select the language.
+% \cls{tudapub} extends the availability of the \environment{abstract} environment to \cls{scrbook}.
+% Additionally, it adds an optional argument to select the language.
 % This should be used to use multiple abstracts of different languages within one document.
 %
 % \begin{example}
 % \begin{abstract}
-%   Abstract using the document main languge (here English)
+%   Abstract using the document main language (here English)
 % \end{abstract}
 %
 % \begin{abstract}[german]
@@ -482,8 +485,8 @@
 % The university library requires submissions to be compliant to the PDF/A standard.
 % \DescribeKeyOption{pdfa=\meta{Boolean}}{true}
 % The TUDaPub class supports the PDF/A 2b standard.
-% PDF/A mode is automatically activated within tudapub.
-% Depending on the document it's using an implementation via the \pkg{pdfx} package or the \LaTeX{} kernels own pdfmanagement.
+% PDF/A mode is automatically activated within \cls{tudapub}.
+% Depending on the document it's using an implementation via the \pkg{pdfx} package or the \LaTeX{} kernels own PDF management.
 %
 % \LaTeX{} is not validating the file in any way, it is just using compatible settings for all elements processed by the compiler.
 % As \LaTeX{} is not doing any processing on image files the user has to ensure the font settings match the requirements for PDF/A.
@@ -493,9 +496,9 @@
 % This is done using \option{pdfx} option.
 % This should only be toggled manually if the user is totally sure to understand the impact.
 %
-% \subsection{Creating PDF/A using the pdfmanagement}
+% \subsection{Creating PDF/A using the PDF management}
 % \label{sec:pdfmanagement}
-% The template files which use PDF/A by default now include the settings for the pdfmanagement:
+% The template files which use PDF/A by default now include the settings for the PDF management:
 % \begin{example}
 % \DocumentMetadata{
 %   pdfstandard=a-2b,
@@ -503,7 +506,7 @@
 %   lang=en,% or de or …
 % }
 % \end{example}
-% This can also be used within other documents. More Information on this structure can be foud in the documentation of the pdfmangement-testphase \cite{pdfmanagement-testphase} as well as l3pdfmeta \cite{l3pdfmeta}.
+% This can also be used within other documents. More Information on this structure can be found in the documentation of the \pkg{pdfmangement-testphase} \cite{pdfmanagement-testphase} as well as \pkg{l3pdfmeta} \cite{l3pdfmeta}.
 %
 % If this setting is used \cls{tudapub} will automatically disable the loading for \pkg{pdfx}.
 % \cls{tudapub} will automatically try to pass the title data to the metadata.
@@ -512,25 +515,25 @@
 %
 % \subsection{Creating PDF/A using the pdfx}
 % In older versions of this bundle we used \pkg{pdfx} to create PDF/A compliant output files.
-% If the \cs{DocumentMetadata} as shown before is not used, \cls{tudapub} will still try to use this mechanism.
-% The metadata setup for the xmp metadata is differently using this mechaism.
+% If the PDF management using \cs{DocumentMetadata} is not detected to be active, \cls{tudapub} will still try to use this mechanism.
+% The metadata setup for the XMP data then works completely different.
 %
 % The compiler is creating an additional \file{\cs{jobname}.xmpdata} file.
 % It is tried to insert the title data directly.  The title data is usually transferred directly.
 % However, this can lead to problems if there are macros used within title material.
-% For example, the subtitle for this document contains the \LaTeX{} macro but only text elements can be used.
+% For example, the subtitle for this document contains the \LaTeX{} macro, but only text elements can be used.
 % Similar to the link labels within the PDF bookmarks.
 %
-% \DescribeMacro{\Metadata}To avoid this issue, tudapub provides the macro \cs{Metadata}.
-% All variables that can be processed by pdfx can be set here according to the key=value structure.
+% \DescribeMacro{\Metadata}To avoid this issue, \cls{tudapub} provides the macro \cs{Metadata}.
+% All variables that can be processed by \pkg{pdfx} can be set here according to the key=value structure.
 % \begin{example}
 % \Metadata{
 %   author=Marei Peischl (peiTeX),
 %   title=LaTeX im Corporate Design der TU Darmstadt,
 % }
 % \end{example}
-% Please note that this macro only works if pdfa output is activated, and no pdfmanagement is used.
-% If this is not the case, tudapub issues a corresponding error message or warning.
+% Please note that this macro only works if PDF/A output is activated, and no PDF management is used.
+% If this is not the case, \cls{tudapub} issues a corresponding error message or warning.
 %
 % For a full list of the available metadata fields have a look at the \pkg{pdfx} documentation \cite{pdfx}.
 %
@@ -554,18 +557,18 @@
 % \subsection{Colors conversion and profile}
 % \label{sec:pdfa-color}
 % PDF/A can only use one color model within a document.
-% By default if no specific profile is selected TUDa-CI will convert the colors to RGB.
+% By default, if no specific profile is selected TUDa-CI will convert the colors to RGB.
 % However, as there is no clear conversion, CMYK elements should not be used in \option{pdfa=true} mode.
 %
 % This mode is not suitable for print output.
 % There will be a warning if the conversion is triggered.
-% To use CMYK colors with PDF/A it's necessary to use PDF/A via the pdfmanagement (\autoref{sec:pdfmanagement}) and select a specific color profile as described in \cite{l3pdfmeta}.
+% To use CMYK colors with PDF/A it's necessary to use PDF/A via the PDF management (\autoref{sec:pdfmanagement}) and select a specific color profile \cite[see][]{l3pdfmeta}.
 %
 % \section{(PhD) Theses – Special options and elements used in these templates}
 % \label{sec:theses}
 %
 % As mentioned before the these templates \file{DEMO-TUDaThesis} and \file{DEMO-TUDaPhD} are based on \cls{tudapub}.
-% Therefore they support all options as described before but provide some additional mechanisms.
+% Therefore, they support all options as described before but provide some additional mechanisms.
 % To load the thesis specific config the option \option{type=thesis} has to be used.
 % As there are additional thesis specific options it's also possible to use the \option{thesis} key directly and add the specific options within braces:
 %
@@ -578,10 +581,10 @@
 % ]{tudapub}
 % \end{example}
 %
-% \DescribeKeyOption{type=bachelor/pp/master/dr/drfinal/\meta{text}}{initially unset}*
+% \DescribeKeyOption{thesis/type=bachelor/pp/master/dr/drfinal/\meta{text}}{initially unset}*
 % Selection of the type.
 % This is printed on the title page and also selects which data is mandatory.
-% Possible values are listed below including their impact. The items in parenthesis list the required data for that type.
+% Possible values are listed below including their impact. The items in parentheses list the required data for that type.
 % \begin{description}
 %   \item[sta] \enquote{Studienarbeit}: Student research project. (\cs{title}, \cs{author}, \cs{date})
 %   \item[bachelor] \enquote{Bachelor thesis}. (\cs{title}, \cs{author}, \cs{submissiondate}, \cs{department}, \cs{reviewer})
@@ -597,7 +600,7 @@
 % Loads one of the predefined texts for the title page.
 %
 % For example, the value phil would use:
-% \enquote{Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)}
+% \foreignquote{german}{Zur Erlangung des Grades eines Doktor der Philosophie (Dr.\,phil.)}
 % Please be aware that the titlepage is enforced to use German.
 %
 % \DescribeMacro{\drtext}If none of these values correspond to the desired title, a text can be transferred directly.
@@ -643,26 +646,26 @@
 %
 % If anything other than one of these shorthands is found, the provided text is used directly and a corresponding warning is issued.
 %
-% \subsection{Thesis specific title page settings and customisation}
+% \subsection{Thesis specific title page settings and customization}
 % \label{sec:theses-title}
 % \DescribeKeyOption{instbox=\meta{Boolean}}{true}*
 % Selecting the department also creates a box on the title page below the logo.
-% I some cases this setting does not match the requiremerents.
-% Therefore the option \option{instbox} can be deactived.
+% In some cases this setting does not match the requirements.
+% Therefore, the option \option{instbox} can be deactivated.
 %
 % \DescribeKeyOption{ignore-missing-data=\meta{Boolean}}{false}
 % This option is a switch that makes it possible to disable the error message about title data that has not been transferred.
 % In this case, only a warning is created if the specified data does not match the requirements.
 %
 % \DescribeMacro{\publishers}
-% Is used here for the location and is preset with \enquote{Darmstadt} or \enquote{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
+% Is used here for the location and is preset with \foreignquote{german}{Darmstadt} or \foreignquote{german}{Darmstadt, Technische Universität Darmstadt} (for PhD theses).
 %
 % \DescribeMacro{\subject}
-% Will be placed below the \cs{subtitle} as for the normal title page, but will hold all the additional information which can be provided using the additional data fields.
+% Will be placed below the \cs{subtitle} as for the normal title page, but will hold all the additional information which can be provided using the  data fields described in this section.
 %
 % \DescribeMacro{\birthplace} Place of birth.
 % \DescribeMacro{\department}
-% Subject/field of study. It's prefered to set it via the class option.
+% Subject/field of study. It's preferred to set it via the class option.
 % However, the argument is processed in the same way.
 % This macro also provides the functionality of specifying entries that differ from the default entries.
 % Especially if a different text to the default \enquote{in the department of} and its variants is required.
@@ -679,7 +682,7 @@
 % \DescribeMacro{\institution}\DescribeMacro{\department}\DescribeMacro{\institute}\DescribeMacro{\group}
 % Will be added inside a title box as was described in \autoref{sec:title} below each other.
 %
-% \DescribeMacro{\reviewer} Gutachter. Mehrere Gutachter werden (wie Autoren) durch \verb+\and+ getrennt. Die Nummerierung läuft von links nach rechts.
+% \DescribeMacro{\reviewer} Reviewers.
 % Multiple reviewers are separated by \cs{and} as for authors.
 % The numbering runs from left to right.
 %
@@ -748,7 +751,7 @@
 %   \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
 %   \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (From version 3.36)}\par
 %   \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-en}\par
-% }
+% }\par
 %
 % The introduction of this option was part of the preparation for adapting the standard license.
 % The corresponding discussion can be found at \url{https://github.com/tudace/tuda_latex_templates/issues/251}.
@@ -763,7 +766,7 @@
 % \subsection{Affidavit}
 % \DescribeMacro{\affidavit}
 % The macro \cs{affidavit} creates a declaration of authorship with a signature line.
-% The name/signature could be set via optios or the Information provided with \cs{author} is used.
+% The name/signature could be set via options or the Information provided with \cs{author} is used.
 % In the demo documents, the affidavit is located directly after the title.
 %
 % From version 3.32, the distinction between an affidavit for digital or printed submissions, which has been supported since version 3.06, no longer applies.
@@ -802,24 +805,25 @@
 % \section{Further configuration options}
 %
 % \subsection{Select the color model}
-% Colors are subject to a different colorimetry depending on the medium on which they are output.
-% For use in documents, it is therefore important which output medium is to be used primarily.
-% Technically, this difference is reflected in color models.
+% Color vision depends on the way colors are presented.
+% For professional printing there usually is a color profile required by the printer to be used.
+% For use in documents, it is therefore important to know which output medium is to be used primarily.
+% Technically, this difference is reflected in color mixing models.
 % In accordance with the guidelines, TUDa-CI supports both a color model for print output (cmyk) and for screen display (RGB).
 % The implementation is done via the \pkg{xcolor} package, whereby the corresponding color values for both models are stored withing \pkg{tudacolors}.
 %
 % Normally, TUDa-CI automatically selects a suitable model.
-% The default setting of \option{pdfa=true} ensures a conversion to RGB (vgl.~\ref{sec:pdfa-color}).
+% The default setting of \option{pdfa=true} ensures a conversion to RGB (vgl.~\ref{sec:pdfa-color}) if no manual setting was found.
 %
-% If a specific color profile should be used, the xcolor options \option{cmyk} or \option{RGB} can be transmitted directly to tudapub.
-% They are passed on to the package and will be processed according to the xcolor documentation \cite{xcolor}.
+% If a specific color profile should be used, the \pkg{xcolor} options \option{cmyk} or \option{RGB} can be transmitted directly to \cls{tudapub}.
+% They are passed on to the package and will be processed according to the \pkg{xcolor} documentation \cite{xcolor}.
 %
 % \section{Customizations that deviate from the corporate design guidelines}
 %
 % \subsection{Font size}
-% \DescribeKeyOption{fontsize=\meta{Length}}{9pt}
+% \DescribeKeyOption{fontsize=\meta{length}}{9pt}
 % Contrary to the corporate design guidelines, \cls{tudapub} can also process other font sizes.
-% The fontsize option of \KOMAScript is supported (e.\,g. \option{fontsize=11pt}).
+% The \option{fontsize} option of \KOMAScript is supported (e.\,g. \option{fontsize=11pt}).
 % If no special font size configuration file is available for TUDa-CI, the file supplied with KOMA- Script is selected.
 % Examples of deviations for typographical reasons are also shown in the demo files for theses.
 %
@@ -827,12 +831,12 @@
 % \label{sec:margins}
 % \DescribeKeyOption{custommargins=true/false/geometry}{false}
 % According to the corporate design, the line lengths are too long from a typographical point of view.
-% This is why the custommargins class option exists.
+% This is why the \option{custommargins} class option exists.
 %
 % \begin{description}
 %   \item[custommargins=false]
 %         Default setting of \cls{tudapub}.
-%         The margins correspond to the specifications of the Corporate Design Guidelines\cite{TUDaGuideline}.
+%         The margins correspond to the specifications of the Corporate Design Guidelines \cite{TUDaGuideline}.
 %         The setting is made using \pkg{geometry}.
 %         Customizations are overwritten by executing \cs{maketitle}.
 %         To allow personal adjustments one of the other settings is required.
@@ -844,7 +848,7 @@
 %
 %   \item[custommargins=geometry]
 %         This variant was created based on user requests.
-%         It allows to use \cls{tudapub} with support for manual adjustments.
+%         It allows using \cls{tudapub} with support for manual adjustments.
 %         \pkg{geometry} is loaded and preconfigured as with \option{custommargins=false}.
 %         However, it is possible to make minor adjustments by using the \cs{geometry} command.
 %         The settings that apply at the start of the document are saved and restored after the title pages.
@@ -862,7 +866,7 @@
 %
 % \minisec{Remark on the headers/footers}
 % If the option \option{marginpar=true} remains set, the header and footer protrude beyond the margin column.
-% For aesthetic reasons, it is therefore recommended in this case to limit the header and footer to the text area with marginpar=false.
+% For aesthetic reasons, it is therefore recommended in this case to limit the header and footer to the text area with \option{marginpar=false}.
 %
 % The standard layout of the column titles is also not very advantageous, as the column titles can be locally larger than the actual headline. (\option{headline=automark})
 %
@@ -876,11 +880,11 @@
 % \DescribeKeyOption{BCOR=\meta{length}}{0pt}
 % \DescribeKeyOption{BCORtitlepage=\meta{Boolean}}{false}
 % If a binding correction (\option{BCOR=\meta{length}}) is used, this is not automatically inserted on the title page.
-% For this case, the \option{BCORtitlepage}option was added with version 3.0. If this is activated, the title page uses the value of the typearea option \option{BCOR} on the first page as an addition to the left margin.
+% For this case, the \option{BCORtitlepage} option was added with version 3.0. If this is activated, the title page uses the value of the \pkg{typearea} option \option{BCOR} on the first page as an addition to the left margin.
 %
 % \subsection{Frontmatter/Mainmatter/Backmatter}
-% The macros \cs{frontmatter}, \cs{mainmatter} and \cs{backmatter} are usually only available for the class scrbook.
-% On request, these macros have also been provided as a basis for scrartcl and scrreprt.
+% The macros \cs{frontmatter}, \cs{mainmatter} and \cs{backmatter} are usually only available for the class \cls{scrbook}.
+% On request, these macros have also been provided as a basis for \cls{scrartcl} and \cls{scrreprt}.
 % It is therefore possible to switch to Roman numerals for the opening credits.
 % Arabic numerals are then used from \cs{mainmatter}.
 %
@@ -896,7 +900,7 @@
 % In many cases, the \enquote{\TeX{} Font Catalogue} is helpful for selection and use: \url{https://tug.org/FontCatalogue/mathfonts.html}
 %
 % \subsubsection{\hologo{pdfLaTeX}}
-% Hier existiert eine Variante, die die Buchstaben der Basisschriftart \enquote{Charter} mit Mathematiksymbolen aus unterschiedlichen Zeichensätzen möglichst passend kombiniert.
+% For \hologo{pdfLaTeX} there is a solution which combines the letters of the default Text font (Charter) with math symbols of different fonts.
 %
 % \begin{example}
 % \usepackage[charter,expert]{mathdesign}
@@ -923,7 +927,7 @@
 % If the \pkg{pdfx} package is used together with \hologo{XeLaTeX} for the creation of PDF/A the support is limited.
 % There will be a corresponding warning.
 % With some \hologo{XeLaTeX} versions it's possible that there even may be errors.
-% \hologo{LuaLaTeX} should be prefered anyways, but in worst case switching to the pdfmanagement mechanism could also help.
+% \hologo{LuaLaTeX} should be preferred, but in the worst case switching to the \pkg{pdfmanagement} mechanism could also help.
 %
 % \subsection{DVI Output}
 % Due to the default setting for creating a PDF/A file, it is not possible to use TUDa-CI in standard settings to create a DVI file.
@@ -931,7 +935,7 @@
 %
 % \subsection{Possible option clash for microtype}
 % The \pkg{microtype} package is loaded automatically if \hologo{pdfLaTeX} is used, as the ligatures for small caps must be deactivated in the font to avoid problems (see \url{https://github.com/tudace/tuda_ latex_templates/issues/144}).
-% It is possible to pass further options to microtype before loading the document class:
+% It is possible to pass further options to \pkg{microtype} before loading the document class:
 % \begin{Syntax}
 % \PassOptionsToPackage{|\meta{microtype options}|}{microtype}
 % \documentclass{tudapub}
@@ -948,7 +952,7 @@
 % \section{Department of Mechanical Engineering}
 % \label{sec:mecheng}
 % The corresponding mode is activated via the option \option{department=mecheng}.
-% Coloring is adjusted automatically and additional layout elements like the \enquote{Zeitstrahl} are introduced.
+% Coloring is adjusted automatically and additional layout elements like the \foreignquote{german}{Zeitstrahl} are introduced.
 % The modifications exist for all document types provided by TUDa-CI.
 %
 % \DescribeMacro{\SetPaperID}
@@ -957,7 +961,7 @@
 % \begin{Syntax}
 % \SetPaperID{|\meta{Letter}|}{|\meta{ID}|}
 % \end{Syntax}
-% This also works without activating mecheng mode.
+% This also works without activating \option{mecheng} mode.
 % However, the option adds some additional parameters for customized distances.
 %
 % The mode also sets the options: \option{colorback=false} and \option{ruledheaders=section}.
@@ -970,7 +974,7 @@
 %
 % \subsubsection{Colors}
 % The department subdivides the colors described in the corporate design manual.
-% Therefore, if mecheng has been activated, the following color names also exist:
+% Therefore, if \option{department=mecheng} has been activated, the following color names also exist:
 %
 % \begin{example}
 % \colorlet{TUDa-Primary1}{TUDa-6b}
@@ -984,7 +988,7 @@
 % \colorlet{TUDa-Arrow}{TUDa-Primary2}
 % \end{example}
 %
-% \minisec{\enquote{Zeitstrahl} arrow}
+% \minisec{\foreignquote{german}{Zeitstrahl} arrow}
 % \DescribeMacro{\MechEngArrow}
 % The design element of the timeline can be created using the macro \cs{MechEngArrow\marg{length}}.
 % The color corresponds to the color \code{TUDaArrow}, which is pre-assigned with the second primary color (blue).
