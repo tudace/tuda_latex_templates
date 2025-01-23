@@ -29,12 +29,12 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tudacolors.dtx}[2024-07-02 v3.41 Color definition for TU Darmstadt's tuda-ci bundle]
+\ProvidesFile{tudacolors.dtx}[2025-01-23 v4.00 Color definition for TU Darmstadt's tuda-ci bundle]
 %</driver>
 %<*package>
 %<@@=ptxcd>
 \NeedsTeXFormat{LaTeX2e}[2020-10-01]
-\ProvidesExplPackage{tudacolors}{2024-07-02}{3.41}{Color definition for TU Darmstadt's tuda-ci bundle}
+\ProvidesExplPackage{tudacolors}{2025-01-23}{4.00}{Color definition for TU Darmstadt's tuda-ci bundle}
 %</package>
 %<*driver>
 \providecommand*{\TUDaDocDTXfiles}{tudacolors.dtx}
@@ -44,7 +44,7 @@
 % \chapter{\pkg{tudacolors} –– Color definitions}
 % \label{sec:color}
 % The \pkg{tudacolors} package provides the general color definitions necessary for the TUDa-CI Templates.
-% It defines the colors according to the design guideline \cite{guideline}.
+% It defines the colors according to the design guideline \cite{TUDaGuideline}.
 % The definitions are using the \pkg{xcolor} package \cite{xcolor}.
 % Additionally the \option{mecheng} specific colors (see \autoref{sec:mecheng-color}) but the additional colors used by the new \cls{tudabeamer} layout are provided directly in the color theme.
 % This is because right now these colors are only defined in RGB mode and should not be used in documents using CMYK colors.
@@ -142,7 +142,7 @@
 % \begin{documentation}
 % \DescribeKeyOption{text=preferblack/preferwhite}{preferwhite}*
 % The text placed on top a colored area, e.\,g. if the background of the title is set colored is either set to black or white.
-% There are some color combinations forbidded according to the design guideline \cite{guideline} and some colors are allowed to use black or white.
+% There are some color combinations forbidded according to the design guideline \cite{TUDaGuideline} and some colors are allowed to use black or white.
 % This option can be used to prefer either black or white for the title in case both variants are allowed.
 % It's not possible to enforce a forbidden setting using this option.
 % \end{documentation}
