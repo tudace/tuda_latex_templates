@@ -1191,8 +1191,10 @@
 %    \begin{macrocode}
 \NewDocumentEnvironment{subtask}{o}{
   \begingroup
-    \tl_if_in:nnT {#1} {=} {
+    \tl_if_in:nnTF {#1} {=} {
       \keys_set:nn {ptxcd/subtask} {#1}
+    } {
+  	  \keys_set:nn {ptxcd/subtask} {title={#1}}
     }
     \bool_if:NTF \l_ptxcd_ex_subtask_fallback_bool {
       \@subtask{\IfNoValueF{#1}{#1}}
