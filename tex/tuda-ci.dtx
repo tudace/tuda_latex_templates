@@ -46,21 +46,25 @@
   parskip=half-,
   textaccentcolor=black,
   class=report,
-  IMRAD=false
+  IMRAD=false,
+  accept-missing-logos=true,
 ]{tudapub}
 \let\tudamaketitle\maketitle% avoid issues due to catcode changes
+\newcommand*\file[1]{\texttt{#1}}
+% by default doc.sty would define this to be used as a wrapper for the index code reference numbers
+\newcommand*\code[1]{\texttt{#1}}
+\newcommand*\tbs{\textbackslash}
+\newcommand*\pkg[1]{\textsf{#1}}
+\newcommand*\cls[1]{\textsf{#1}}
+\usepackage[german,english]{babel}
 \usepackage{doc}
 \let\maketitle\tudamaketitle% restore
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{verbatim}% for \comment
 \usepackage{minted}
-\usepackage{csquotes}
+\usepackage[autostyle]{csquotes}
 \usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\providecommand\pkg{\textsf}
-\let\cls\textsf
 
 \usepackage{xspace}
 \AddToHook{cmd/KOMAScript/after}{\xspace}
@@ -72,7 +76,7 @@
 \ExplSyntaxOn
 \newcommand{\PrintDescribeKeyOption}[1]{\parbox[b]{\linewidth}{\raggedleft\MacroFont #1}\rlap{=}}
 
-\cs_new:Npn \__ptxctools_parse_key_option:w #1 #2  #3 #4 = #5  \q_stop {
+\cs_new:Npn \__ptxtools_parse_key_option:w #1 #2  #3 #4 = #5  \q_stop {
   \noindent{\let\PrintDescribeOption\PrintDescribeKeyOption\DescribeOption{#4}}\makebox[\linewidth]{
     \IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}
     \hfill
@@ -82,7 +86,7 @@
   }
 }
 
-\cs_new:Npn \__ptxctools_parse_key_option_item:w #1 #2  #3 #4 = #5  \q_stop {
+\cs_new:Npn \__ptxtools_parse_key_option_item:w #1 #2  #3 #4 = #5  \q_stop {
   \item[\let\MacroFont\codefamily\DescribeOption{#4=}\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}]
   \hfill
   \IfBooleanTF{#1}
@@ -91,12 +95,62 @@
 }
 
 \NewDocumentCommand{\DescribeKeyOption}{smms}{
-  \__ptxctools_parse_key_option:w  #1 {#3} #4 #2 \q_stop
+  \__ptxtools_parse_key_option:w  #1 {#3} #4 #2 \q_stop
 }
 
 \NewDocumentCommand{\KeyOptionItem}{smms}{
-  \__ptxctools_parse_key_option_item:w  #1 {#3} #4 #2 \q_stop
+  \__ptxtools_parse_key_option_item:w  #1 {#3} #4 #2 \q_stop
 }
+
+%%%%%%%%%
+%% Implementation matching the implementtion of documentation/implementation like in
+%% l3doc.dtx version of 2024-12-25
+%% Copyright (C) 1990-2024 The LaTeX Project
+%%%%%%%%%
+
+\bool_new:N \l__ptxtools_in_implementation_bool
+\bool_new:N \g__ptxtools_typeset_documentation_bool
+\bool_new:N \g__ptxtools_typeset_implementation_bool
+\bool_set_true:N \g__ptxtools_typeset_documentation_bool
+\bool_set_true:N \g__ptxtools_typeset_implementation_bool
+\NewDocumentCommand \EnableDocumentation { }
+  { \bool_gset_true:N \g__ptxtools_typeset_documentation_bool }
+\NewDocumentCommand \EnableImplementation { }
+  { \bool_gset_true:N \g__ptxtools_typeset_implementation_bool }
+\NewDocumentCommand \DisableDocumentation { }
+  { \bool_gset_false:N \g__ptxtools_typeset_documentation_bool }
+\NewDocumentCommand \DisableImplementation { }
+  { \bool_gset_false:N \g__ptxtools_typeset_implementation_bool }
+\NewDocumentEnvironment { documentation } { }
+  {
+    \bool_if:NTF \g__ptxtools_typeset_documentation_bool
+      { \bool_set_false:N \l__ptxtools_in_implementation_bool }
+      { \comment }
+  }
+  { \bool_if:NF \g__ptxtools_typeset_documentation_bool { \endcomment } }
+\NewDocumentEnvironment { implementation } { }
+  {
+    \bool_if:NTF \g__ptxtools_typeset_implementation_bool
+      { \bool_set_true:N \l__ptxtools_in_implementation_bool }
+      { \comment }
+  }
+  { \bool_if:NF \g__ptxtools_typeset_implementation_bool { \endcomment } }
+\let\saved_macrocode\macrocode
+\let\saved_endmacrocode\endmacrocode
+\def\macrocode{
+\bool_if:NTF \g__ptxtools_typeset_implementation_bool
+\saved_macrocode
+\comment
+}
+\def\endmacrocode{
+\bool_if:NTF \g__ptxtools_typeset_implementation_bool
+\saved_endmacrocode
+\endcomment
+}
+
+%%%%%%%%%
+%% end of the snippet adapted from l3doc.dtx
+%%%%%%%%%
 
 \usepackage{minted}
 \newminted[Syntax]{latex}{gobble=2, tabsize=4}
@@ -118,22 +172,23 @@
   reversemp
 }
 
+% Loader for dtx files so the preamble is only necessary once
+\NewDocumentCommand{\TUDaLoadDocDTX}{m}{
+  \exp_args:No \clist_map_inline:nn {#1} {\DocInput{##1}}
+}
+
 \ExplSyntaxOff
 \newcommand{\docmarginpar}[1]{\frame{#1}}
 
 \makeatother
 
 \providecommand*{\sarg}{\codefont{*}}
-\providecommand\marg[1]{%
+\providecommand*\marg[1]{%
   {\codefamily\char`\{}\meta{#1}{\codefamily\char`\}}}
-\providecommand\oarg[1]{%
+\providecommand*\oarg[1]{%
   {\codefamily[}\meta{#1}{\codefamily]}}
-\providecommand\parg[1]{%
+\providecommand*\parg[1]{%
   {\codefamily(}\meta{#1}{\codefamily)}}
-
-\IfFileExists{tuda_logo.pdf}{}{
-  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
-}
 
 \usepackage{biblatex}
 \addbibresource{DEMO-TUDaBibliography.bib}
@@ -144,15 +199,23 @@
 \newcommand*{\FeatureTrue}{\ding{52}}
 \newcommand*{\FeatureFalse}{\ding{56}}
 \EnableCrossrefs
-\OnlyDescription
+
 \CodelineIndex
 \RecordChanges
+
+\providecommand*{\TUDaDocDTXfiles}{tuda-ci.dtx,tudacolors.dtx}
+
 \begin{document}
-% \DisableImplementation
-\DocInput{tuda-ci.dtx}
+\OnlyDescription
+\DisableImplementation
+\TUDaLoadDocDTX{\TUDaDocDTXfiles}
 \PrintChanges
 \printbibliography
+% Restore \code to be a wrapper for index numbers
+\begingroup
+\renewcommand*\code[1]{#1}
 \PrintIndex
+\endgroup
 \end{document}
 %</driver>
 % \fi
@@ -359,7 +422,7 @@
 % The structure for this corresponds largely to the classic method using \cs{maketitle}.
 %
 % The \KOMAScript{} option \code{titlepage}\cite{scrguide-en} is supported to switch between separate title pages and an in-page title block.
-% Due to the implementation, \code{titlepage=true} is treated identically to \code{titlepage=firstiscover}.
+% Due to the implementation, \code{titlepage=true} is treated identically to \code{titlepage=\allowbreak firstiscover}.
 %
 % \DescribeMacro{\titlehead}\DescribeMacro{\title}\DescribeMacro{\subtitle}\DescribeMacro{\subject}\DescribeMacro{\author}\DescribeMacro{\and}\DescribeMacro{\thanks}\DescribeMacro{\date}\DescribeMacro{\publishers}
 % These macros are used to set the title data.
@@ -744,14 +807,14 @@
 %   \href{https://creativecommons.org/licenses/by-sa/4.0/}{cc-by-sa-4.0}\par
 %   \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{cc-by-nc-sa-4.0}\par
 %   \href{https://creativecommons.org/licenses/by-nc-/4.0/}{cc-by-nc-4.0}\par
-% }%
+% }%^^A
 % \parbox[t]{.5\linewidth}{
 %   \codefamily
 %   \href{https://creativecommons.org/licenses/by-nd/4.0/}{cc-by-nd-4.0}\par
 %   \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{cc-by-nc-nd-4.0}\par
 %   \href{https://rightsstatements.org/page/InC/1.0/}{inc-1.0}\textnormal{ (From version 3.36)}\par
 %   \href{https://creativecommons.org/licenses/by-nc-nd/2.0/}{cc-by-nc-nd-2.0-en}\par
-% }\par
+% }
 %
 % The introduction of this option was part of the preparation for adapting the standard license.
 % The corresponding discussion can be found at \url{https://github.com/tudace/tuda_latex_templates/issues/251}.
@@ -769,8 +832,18 @@
 % The name/signature could be set via options or the Information provided with \cs{author} is used.
 % In the demo documents, the affidavit is located directly after the title.
 %
+% \minisec{Disclaimer:}
+% The \cs{affidavit} command is using the current version (as of 2025-01-22) of the text provided at
+% {\small\url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp}}.
+%
+% According to the department II, the legally binding text can always be found there.
+% The docx file should be used, printed out, signed, scanned and then integrated.
+% The easiest way to do this is to use the pdfpages package.
+% Please ensure to check which regulations apply to your thesis before submission.
+% TUDa-CI can not ensure the text is up to date or matches your submission type.
+%
 % From version 3.32, the distinction between an affidavit for digital or printed submissions, which has been supported since version 3.06, no longer applies.
-% For compatibility reasons, the options are still understood, but both now have the same effect. The text comes from \url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp} (as of 2023-06-19).
+% For compatibility reasons, the options are still available, but have the same effect.
 % It is imperative that students check whether the text corresponds to the required version before submitting a thesis.
 %
 % PhD theses use a different text here; the affidavit option \option{affidavit=dr} is used internally to differentiate between them.
@@ -2317,16 +2390,16 @@
     }
   }
 %    \end{macrocode}
-% %TODO use base_str?
+% %TODO use base\_str?
 %    \begin{macrocode}
-  \msg_new:nnnn{tudapub} {unknown-metadata} {
+  \msg_new:nnnn{tuda-ci} {unknown-metadata} {
     You~ used~ the~ #1~ metadata~ entry.\\
     I~ don't~ know~ how~ to~ handle~ that.\\
     It~ will~ be~ ignored.
   } {See~ TUDa-CI~ or~ pdfx~ documentation~ for~ details.}
 \else:
   \hypersetup{pdfcreator=LaTeX~using~TUDa-CI}
-  \msg_new:nnnn {tudapub} {metadata-to-hypersetup} {
+  \msg_new:nnnn {tuda-ci} {metadata-to-hypersetup} {
     You~don't~use~pdfx.~
     Here~the~\string\Metadata\~command~only~exists~for~compatibility~reasons.\\
     I~will~pass~the~data~to~ḩypersetup.
@@ -2341,7 +2414,7 @@
       \clist_map_inline:Nn \l_tmpa_tl {
         \exp_args:Nx \hypersetup{pdf\tl_trim_spaces:n {##1}}
       }
-      \msg_warning:nn {tudapub} {metadata-to-hypersetup}
+      \msg_warning:nn {tuda-ci} {metadata-to-hypersetup}
     }
     \cs_new:Nn \ptxcd_pass_TitleData: {
 %    \end{macrocode}
@@ -2377,8 +2450,8 @@
       }
     }
     \bool_if:NF \g_ptxcd_pdfa_bool {
-      \msg_new:nnn{tudapub} {no-pdfa}{The~ tuda\c__ptxcd_base_str\space class~ will~ not~ create~ PDF/A.}
-      \msg_info:nn{tudapub} {no-pdfa}
+      \msg_new:nnn{tuda-ci} {no-pdfa}{The~ tuda\c__ptxcd_base_str\space class~ will~ not~ create~ PDF/A.}
+      \msg_info:nn{tuda-ci} {no-pdfa}
     }
 \fi:
 %    \end{macrocode}

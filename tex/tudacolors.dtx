@@ -37,241 +37,30 @@
 \ProvidesExplPackage{tudacolors}{2024-07-02}{3.41}{Color definition for TU Darmstadt's tuda-ci bundle}
 %</package>
 %<*driver>
-\documentclass[
-
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\providecommand\pkg{\textsf}
-\let\cls\textsf
-
-\usepackage{xspace}
-\AddToHook{cmd/KOMAScript/after}{\xspace}
-
-\providecommand*{\codefamily}{\ttfamily}
-\DeclareTextFontCommand{\codefont}{\codefamily}
-\ProvideDocElement[idxtype = option, idxgroup = options]{Option}{optionenv}
-\makeatletter
-\ExplSyntaxOn
-\newcommand{\PrintDescribeKeyOption}[1]{\parbox[b]{\linewidth}{\raggedleft\MacroFont #1}\rlap{=}}
-
-\cs_new:Npn \__ptxctools_parse_key_option:w #1 #2  #3 #4 = #5  \q_stop {
-	\noindent{\let\PrintDescribeOption\PrintDescribeKeyOption\DescribeOption{#4}}\makebox[\linewidth]{
-	\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}
-	\hfill
-		\IfBooleanTF{#1}
-			{#2}
-			{(default:~\codefont{\detokenize{#2}})}
-	}
-}
-
-\cs_new:Npn \__ptxctools_parse_key_option_item:w #1 #2  #3 #4 = #5  \q_stop {
-	\item[\let\MacroFont\codefamily\DescribeOption{#4=}\IfBooleanTF{#3}{\textsf{#5}}{\textsf{(#5)}}]
-	\hfill
-		\IfBooleanTF{#1}
-			{#2}
-			{(default:~\codefont{#2})}\newline
-}
-
-\NewDocumentCommand{\DescribeKeyOption}{smms}{
-	\__ptxctools_parse_key_option:w  #1 {#3} #4 #2 \q_stop
-}
-
-\NewDocumentCommand{\KeyOptionItem}{smms}{
-	\__ptxctools_parse_key_option_item:w  #1 {#3} #4 #2 \q_stop
-}
-
-% run minted with pygments or not
-\sys_if_shell_unrestricted:TF {
-	\usepackage{minted}
-	\newenvironment{Syntax}{
-	  \VerbatimEnvironment
-	  \begin{VerbatimOut}[gobble=1, tabsize=4]{minted.doc.out}}
-	  {\end{VerbatimOut}
-	  \inputminted[autogobble, escapeinside=||,tabsize=4]{latex}{minted.doc.out}
-	}
-	\newenvironment{example}{
-	 \VerbatimEnvironment
-	 \begin{VerbatimOut}[gobble=1, tabsize=4]{minted.doc.out}}
-	 {\end{VerbatimOut}
-	 \inputminted[autogobble, escapeinside=||,tabsize=4]{latex}{minted.doc.out}
-	}
-} {
-	\usepackage[draft]{minted}
-	\newcommand \InputEscapedVerbatim [1] {
-		\ior_open:Nn \g_ptxcd_ior   {#1}
-		\par\smallskip
-		\begin{samepage}
-			\setlength{\parindent}{\c_zero_dim}
-			\ttfamily
-			\bool_set_true:N \l_tmpa_bool
-			\ior_str_map_variable:NNn \g_ptxcd_ior \l_tmpa_tl {
-			\regex_replace_all:NnN \c_ptxtools_escape_verb_regex {\c{ptxtools_escape_verb:w}\1\c{q_ptxtools_stop}} \l_tmpa_tl
-			\bool_if:NTF \l_tmpa_bool
-				{\bool_set_false:N \l_tmpa_bool}
-				{\newline}
-			\strut\tl_use:N \l_tmpa_tl
-			}
-		\end{samepage}
-		\par\smallskip
-		\ior_close:N  \g_ptxcd_ior
-	}
-
-	\ior_new:N \g_ptxcd_ior
-	\cs_new:Npn \ptxtools_escape_verb:w #1 \q_ptxtools_stop {
-		\tl_rescan:nn {\cctab_select:N \c_document_cctab} {#1}
-	}
-	\regex_const:Nn \c_ptxtools_escape_verb_regex {\|(.+?)\|}
-	% Based on the definition from minted.sty to be able to support escapeinside if pygments cannot be used.
-	% Original Version taken from
-	% minted.dtx  – Copyright 2013--2022 Geoffrey M. Poore –  Copyright 2010--2011 Konrad Rudolph
-	\newenvironment{Syntax}
-	  {\VerbatimEnvironment%
-	    \let\FVB@VerbatimOut\minted@FVB@VerbatimOut%
-	    \let\FVE@VerbatimOut\minted@FVE@VerbatimOut%
-	    \minted@configlang{latex}%
-	    \setminted{gobble=2}
-	    \minted@fvset
-	    \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
-	  {\end{VerbatimOut}%
-	      \minted@langlinenoson
-		\InputEscapedVerbatim{\minted@jobname.pyg}
-	    \minted@langlinenosoff}
-		\newenvironment{example}
-			{\VerbatimEnvironment%
-			\let\FVB@VerbatimOut\minted@FVB@VerbatimOut%
-			\let\FVE@VerbatimOut\minted@FVE@VerbatimOut%
-			\minted@configlang{latex}%
-			\setminted{gobble=2}
-			\minted@fvset
-			\begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
-			{\end{VerbatimOut}%
-			\minted@langlinenoson
-			\InputEscapedVerbatim{\minted@jobname.pyg}
-			\minted@langlinenosoff}
-}
-\setminted{escapeinside=||}
-
-\bool_new:N \l__codedoc_in_implementation_bool
-\bool_new:N \g__codedoc_typeset_documentation_bool
-\bool_new:N \g__codedoc_typeset_implementation_bool
-\bool_set_true:N \g__codedoc_typeset_documentation_bool
-\bool_set_true:N \g__codedoc_typeset_implementation_bool
-\NewDocumentCommand \EnableDocumentation { }
-  { \bool_gset_true:N \g__codedoc_typeset_documentation_bool }
-\NewDocumentCommand \EnableImplementation { }
-  { \bool_gset_true:N \g__codedoc_typeset_implementation_bool }
-\NewDocumentCommand \DisableDocumentation { }
-  { \bool_gset_false:N \g__codedoc_typeset_documentation_bool }
-\NewDocumentCommand \DisableImplementation { }
-  { \bool_gset_false:N \g__codedoc_typeset_implementation_bool }
-\NewDocumentEnvironment { documentation } { }
-  {
-    \bool_if:NTF \g__codedoc_typeset_documentation_bool
-      { \bool_set_false:N \l__codedoc_in_implementation_bool }
-      { \comment }
-  }
-  { \bool_if:NF \g__codedoc_typeset_documentation_bool { \endcomment } }
-\NewDocumentEnvironment { implementation } { }
-  {
-    \bool_if:NTF \g__codedoc_typeset_implementation_bool
-      { \bool_set_true:N \l__codedoc_in_implementation_bool }
-      { \comment }
-  }
-  { \bool_if:NF \g__codedoc_typeset_implementation_bool { \endcomment } }
-\let\saved_macrocode\macrocode
-\let\saved_endmacrocode\endmacrocode
-\def\macrocode{
-\bool_if:NTF \g__codedoc_typeset_implementation_bool
-\saved_macrocode
-\comment
-}
-\def\endmacrocode{
-\bool_if:NTF \g__codedoc_typeset_implementation_bool
-\saved_endmacrocode
-\endcomment
-}
-
-\geometry{
-top=\g_ptxcd_topMargin_dim,
-inner=\g_ptxcd_innerMargin_dim,
-outer=\dim_eval:n {\g_ptxcd_outerMargin_dim},
-bottom=\g_ptxcd_bottomMargin_dim,
-columnsep= \g_ptxcd_columnSep_dim,
-includehead,
-includefoot,
-includemp,
-nomarginpar,
-includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim,
-headheight=\g_ptxcd_headheight_dim,
-reversemp
-}
-
-
-
-\ExplSyntaxOff
-\newcommand{\docmarginpar}[1]{\frame{#1}}
-
-\makeatother
-
-\providecommand*{\sarg}{\codefont{*}}
-\providecommand\marg[1]{%
-  {\codefamily\char`\{}\meta{#1}{\codefamily\char`\}}}
-\providecommand\oarg[1]{%
-  {\codefamily[}\meta{#1}{\codefamily]}}
-\providecommand\parg[1]{%
-  {\codefamily(}\meta{#1}{\codefamily)}}
-
-\usepackage{minted}
-
-\IfFileExists{tuda_logo.pdf}{}{
-  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
-}
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\hypersetup{hidelinks}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\CodelineIndex
-\RecordChanges
-\usepackage{verbatim,underscore}
-\begin{document}
-\changes{4.0}{2024/07/31}{Converted to DTX file}
-\DoNotIndex{\newcommand,\newenvironment}
-\GetFileInfo{tudacolors.dtx}
-\title{The \textsf{tudacolors} package}
-\author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
-\date{\fileversion~from \filedate}
-\maketitle
-\DisableImplementation
-\EnableDocumentation
-\DocInput{tudacolors.dtx}
-\MaybeStop{}
-\EnableImplementation
-\DisableDocumentation
-\DocInput{tudacolors.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+\providecommand*{\TUDaDocDTXfiles}{tudacolors.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
+% \chapter{\pkg{tudacolors} –– Color definitions}
+% \label{sec:color}
+% The \pkg{tudacolors} package provides the general color definitions necessary for the TUDa-CI Templates.
+% It defines the colors according to the design guideline \cite{guideline}.
+% The definitions are using the \pkg{xcolor} package \cite{xcolor}.
+% Additionally the \option{mecheng} specific colors (see \autoref{sec:mecheng-color}) but the additional colors used by the new \cls{tudabeamer} layout are provided directly in the color theme.
+% This is because right now these colors are only defined in RGB mode and should not be used in documents using CMYK colors.
 %
+% The colors can be used like within standard \LaTeX.
+% The predefined TUDa-CI specific colors are:
+%
+% \begin{multicols}{4}
+% \raggedright
+% \renewcommand*{\definecolor}[3]{\makebox[5em]{#1}\textcolor{#1}{\rule{1cm}{\ht\strutbox}}\par}
+% \input{tudacolors.def}
+% \end{multicols}
+%
+% \pkg{tudacolors} provides package options to allow color selection or the color mode.
+% Since \pkg{tudacolors} is usually not loaded directly but indirectly using one of the TUDa-CI document classes, the options can be added as class options, as described in \autoref{sec:options}.
+% They will be passed to the package.
 % \begin{implementation}
 % \section{Implementation}
 %
@@ -286,9 +75,19 @@ reversemp
 \keys_define:nn {ptxcd/colors} {
 %    \end{macrocode}
 % \end{implementation}
+%
 % \begin{documentation}
-% \DescribeKeyOption{accent=\meta{color}}{0b}\DescribeOption{accentcolor=}
+% \DescribeKeyOption{accentcolor=\meta{Color}}{0b}*
+% \DescribeOption{accent=}
+%
+% Highlight color used for all highlight elements by default.
+% The options below will reference this color as  default setting meta{accentcolor}.
+% Depending on the documentclass it might be used for the so-called \enquote{identbar} as well as highlighted test elements, e.\,g. within letters if \option{premium} is enabled.
+%
+% |accent| is an alias.
+% We recommend using |accentcolor| to simplify recognizing the purpose of that option.
 % \end{documentation}
+%
 % \begin{implementation}
 % \begin{optionenv}{accent=}
 %    \begin{macrocode}
@@ -298,9 +97,12 @@ reversemp
 %    \end{macrocode}
 % \end{optionenv}^^A accent
 % \end{implementation}
+%
 % \begin{documentation}
-% \DescribeKeyOption{textaccent=\meta{color}}{\g_ptxcd_color_accent_tl}
+% \DescribeKeyOption{textaccent=\meta{color}}{\meta{accentcolor}}*
+% The accent color for highlighted text. Usage depends on the document class.
 % \end{documentation}
+%
 % \begin{implementation}
 % \begin{optionenv}{textaccent=\meta{color}}
 %    \begin{macrocode}
@@ -310,9 +112,12 @@ reversemp
 %    \end{macrocode}
 % \end{optionenv}^^A textaccent
 % \end{implementation}
+%
 % \begin{documentation}
-% \DescribeKeyOption{identbar=\meta{color}}{\g_ptxcd_color_accent_tl}
+% \DescribeKeyOption{identbar=\meta{color}}{\meta{accentcolor}}*
+% Color of the colored bar on the top of the page or slides using the 2008 layout.
 % \end{documentation}
+%
 % \begin{implementation}
 % \begin{optionenv}{identbar=\meta{color}}
 %    \begin{macrocode}
@@ -333,9 +138,15 @@ reversemp
   },
 %    \end{macrocode}
 % \end{implementation}
+%
 % \begin{documentation}
-% \DescribeKeyOption{text=preferblack/preferwhite}{preferwhite}
+% \DescribeKeyOption{text=preferblack/preferwhite}{preferwhite}*
+% The text placed on top a colored area, e.\,g. if the background of the title is set colored is either set to black or white.
+% There are some color combinations forbidded according to the design guideline \cite{guideline} and some colors are allowed to use black or white.
+% This option can be used to prefer either black or white for the title in case both variants are allowed.
+% It's not possible to enforce a forbidden setting using this option.
 % \end{documentation}
+%
 % \begin{implementation}
 % \begin{optionenv}{text}
 %    \begin{macrocode}
@@ -347,9 +158,14 @@ reversemp
 	text/white .meta:n = {text=preferwhite},
 %    \end{macrocode}
 % \end{optionenv}^^A text
+% \end{implementation}
 % \begin{documentation}
-% \DescribeKeyOption{colormode=cmyk/RGB}{Depends on document type}
+% \DescribeKeyOption*{colormode=cmyk/RGB}{Depends on document type}*
+% The colormode can be selected to overwrite the default setting.
+% Please be aware, that there is a difference in casing and \code{RGB} has to be used uppercase and \code{cmyk} lowercase.
+% The reason for this is that internally uppercase and lowercase model names slightly differ because of rounding.
 % \end{documentation}
+% \begin{implementation}
 % \begin{optionenv}{cmyk, RGB}
 %    \begin{macrocode}
 	cmyk .code:n = \PassOptionsToPackage{cmyk}{xcolor},
@@ -358,7 +174,7 @@ reversemp
 % \end{optionenv}
 % \end{implementation}
 % \begin{documentation}
-% \DescribeKeyOption{department=default/mecheng/\meta{department}}{default}
+% \DescribeKeyOption{department=default/mecheng/\meta{department}}{default}*
 % Within \pkg{tudacolors} it's only checked if the department was set to \option{mecheng}. In that case the additional color configuration will be enbled (\autoref{sec:mecheng}).
 % \end{documentation}
 % \begin{implementation}
