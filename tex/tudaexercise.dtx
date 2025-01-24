@@ -228,7 +228,7 @@
 %    \end{macrocode}
 % \end{environment}
 % \end{implementation}
-% \changes{v3.42-dev}{2025-01-18}{Remove obsolete use of environ}
+% \changes{v4.00}{2025-01-24}{Remove obsolete use of environ}
 %    \begin{macrocode}
 \cs_new:Nn \ptxcd_setup_solution: {
   \bool_if:NTF \l_ptxcd_ex_solution_bool {
@@ -259,7 +259,7 @@
   The~KOMA-Script~option~titlepage~is~forced~to~"false".
 }
 %    \end{macrocode}
-% \changes{v3.42-dev}{2025-01-18}{add bookmarksnumbered option and enable by default}
+% \changes{v4.00}{2025-01-24}{add bookmarksnumbered option and enable by default}
 % The options have to be passed before the package options to allow being changed by the user.
 %    \begin{macrocode}
 \PassOptionsToPackage{pdfusetitle,bookmarksnumbered=true}{hyperref}
@@ -1083,7 +1083,7 @@
   \fp_gzero:N \g__ptxcd_ex_collected_points_fp
 }
 %    \end{macrocode}
-% \changes{v3.42-dev}{2025-01-18}{Write task properties diractly per task/subtask}
+% \changes{v4.00}{2025-01-24}{Write task properties diractly per task/subtask}
 %    \begin{macrocode}
 \cs_new:Nn \_@@_save_task_properties:nnnn {
     \iow_now:Ne \@auxout {
@@ -1382,7 +1382,7 @@
 %    \end{macrocode}
 % \DescribeMacro{\getTaskProperty}\oarg{Task Number}{title/credit/points}
 % Suggested in PR \# 316 \url{https://github.com/tudace/tuda_latex_templates/pull/316}
-% \changes{v3.42-dev}{2025-01-18}{Add Interface to access task title}
+% \changes{v4.00}{2025-01-24}{Add Interface to access task title}
 %    \begin{macrocode}
 \NewDocumentCommand{\getTaskProperty}{O{\@currenttasklabel}m}{
     \exp_args:Ne \tl_show:n {#1-#2}
@@ -1396,7 +1396,7 @@
     \mapTasks[skip-zero-points=true,\IfBooleanF{#1}{subtask=false},start-task=#2]{#3}{#3}
   }
 %    \end{macrocode}
-% \changes{v3.42-dev}{2025-01-18}{Add mapping Mechanismus including subtasks based on Pull-request 316}
+% \changes{v4.00}{2025-01-24}{Add mapping Mechanismus including subtasks based on Pull-request 316}
 % \begin{Syntax}
 % \_@@_point_mapping_aux:nnn \marg{task/subtask} \marg{start value} \marg{action to do before continuing the loop}
 % \end{Syntax}
@@ -1425,7 +1425,7 @@
   \setcounter{#1}{\use:c {_@@_cached_#1_counter:}}
 }
 %    \end{macrocode}
-% \changes{v3.42-dev}{2025-01-18}{Add generic mechanism to iterate over tasks}
+% \changes{v4.00}{2025-01-24}{Add generic mechanism to iterate over tasks}
 %    \begin{macrocode}
 \keys_define:nn {ptxcd/task-mapping} {
   task .bool_set:N = \l_@@_task_bool,

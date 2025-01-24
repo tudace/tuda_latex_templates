@@ -38,9 +38,9 @@
 %<*class|driver>
 [2024/07/31 4.0 Beamer wrapper class for TUDa-CI – Corporate Design Templates for TU Darmstadt]
 %</class|driver>
-%<main>\ProvidesExplPackage{beamerthemeTUDa}{2025-01-23}{4.00}{Beamer theme using the Corporate Design of TU Darmstadt}
-%<2023>\ProvidesExplPackage{beamerthemeTUDa2023}{2025-01-23}{4.00}{Beamer theme using the Corporate Design of TU Darmstadt Design of 2023}
-%<2008>\ProvidesPackage{beamerthemeTUDa2008}[2025-01-23 v4.00 beamer theme using the Corporate Design of TU Darmstadt Design of 2008]
+%<main>\ProvidesExplPackage{beamerthemeTUDa}{2025-01-24}{4.00}{Beamer theme using the Corporate Design of TU Darmstadt}
+%<2023>\ProvidesExplPackage{beamerthemeTUDa2023}{2025-01-24}{4.00}{Beamer theme using the Corporate Design of TU Darmstadt Design of 2023}
+%<2008>\ProvidesPackage{beamerthemeTUDa2008}[2025-01-24 v4.00 beamer theme using the Corporate Design of TU Darmstadt Design of 2008]
 %</initialize>
 %<*driver>
 \documentclass[
@@ -118,7 +118,7 @@
 %    \end{macrocode}
 % Because the option passing accross beamer themes is quite annoying and we want to limit the choice of the design to \file{beamerthemeTUDa.sty} and \cls{tudabeamer} the options will be defined to pass to both theme variants.
 % The theme in the end will either do something or send a warning message.
-% \changes{v3.42-dev}{2025-01-20}{Refactor all beamer options to fix passing issues.}
+% \changes{v4.00}{2025-01-24}{Refactor all beamer options to fix passing issues.}
 %    \begin{macrocode}
   \cs_new:Nn \_@@_beamer_declare_pass_options:nn {
     \keys_define:nn {ptxcd/beamer} {
@@ -262,7 +262,7 @@
 }
 %    \end{macrocode}
 %   end of \department command
-% \changes{v3.42-dev}{2025-01-22}{remove pdfa option}
+% \changes{v4.00}{2025-01-24}{remove pdfa option}
 % \end{macro}
 \str_if_empty:NF \g_ptxcd_department_str {}
 %    \end{macrocode}

@@ -43,8 +43,8 @@ if not options["target"] == "tag" then
 	excludefiles={table.unpack(excludefiles),"build.lua","config-*.lua"}
 end
 
-packageversion = "3.42-dev"
-packagedate = "2025-01-07"
+packageversion = "4.00"
+packagedate = "2025-01-24"
 
 tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "*.tex", "*.lco", "*.def", "*.bib", "*.lua", "*.ins", "*.dtx"}
 
@@ -60,9 +60,14 @@ function update_tag(file,content,tagname,tagdate)
 	local versionpattern = "%d+.%d+%-?%w*"
 	local datepattern = "%d%d%d%d%-%d%d%-%d%d"
 	local tag_only_changes = false
+	local old_tagpattern =""
 	local tagname = tagname or packageversion
 	if tagname=="dev" or string.match(tagname, "%-dev$")then
 		tagname, tag_only_changes=get_dev_tag(packageversion)
+	else
+		old_tagpattern=string.gsub(packageversion,"%.","%%.")
+		old_tagpattern=string.gsub(old_tagpattern,"%-","%%-")
+
 	end
 	-- Copyright (C) 2018–2025 by uploadconfig["author"]>
 	-- maybe change to -- instead of –
@@ -77,6 +82,9 @@ function update_tag(file,content,tagname,tagdate)
 	-- don't tag fileversion to not change all dates
 	if tag_only_changes then
 		return content
+	end
+	if string.match(old_tagpattern, "-dev$")  then
+			content = string.gsub(content,"\\changes{v"..old_tagpattern.."}{"..datepattern, "\\changes{v"..tagname.."}{"..tagdate)
 	end
 	content = string.gsub(content,
 		"(tuda%-ci v)"..versionpattern.."%s%("..datepattern.."%)",

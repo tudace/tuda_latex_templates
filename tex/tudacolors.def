@@ -1,6 +1,6 @@
 %% \iffalse meta-comment^^A necessary for use with \input in documentation
 %%
-%% This is file `tudacolors.def' version 4.00 (2025-01-23),
+%% This is file `tudacolors.def' version 4.00 (2025-01-24),
 %% it is part of
 %% TUDa-CI -- Corporate Design for TU Darmstadt
 %% ----------------------------------------------------------------------------
@@ -29,8 +29,7 @@
 %%
 %\fi
 
-\ProvidesFile{tudacolors.def}
-[2025-01-07 3.42-dev Color definitions for tuda-ci]
+\ProvidesFile{tudacolors.def}[2025-01-24 v4.00 Color definitions for tuda-ci]
 
 \definecolor{TUDa-0d}{cmyk/RGB/HTML}{0,0,0,.8/83,83,83/535353}
 \definecolor{TUDa-0c}{cmyk/RGB/HTML}{0,0,0,.6/137,137,137/898989}
