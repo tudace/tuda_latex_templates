@@ -1,0 +1,394 @@
+%% This is file `DEMO-TUDaExercise.tex' version 4.00 (2025-01-24),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%% Copyright (C) 2018--2025 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The current maintainer of this work is
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%
+%% The development repository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% If you need a compiled version of this document, have a look at
+%% http://mirror.ctan.org/macros/latex/contrib/tuda-ci/doc
+%% or at the documentation directory of this package (if installed)
+%% <path to your LaTeX distribution>/doc/latex/tuda-ci
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+%% In case you need PDF/A
+% \DocumentMetadata{
+% pdfstandard=a-2b,
+% pdfversion=1.7,% 2.0 is possible as well, but PDF/A-2b requires < 2.0
+% lang=en,
+%}
+
+\documentclass[
+	english,% Main language as global option
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+	points=true, to activate referencing task properties
+%	accept-missing-logoes=true,% No error in case logo files are not available
+%	logofile=example-image,% In case logo should be replaced
+]{tudaexercise}
+
+%%%%%%%%%%%%%%%%%%%
+% Language setup
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}% \enquote, to simplify use of quotation marks
+
+%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%
+\usepackage{biblatex}
+\addbibresource{DEMO-TUDaBibliography.bib}% File name of BibTeX database
+
+%%%%%%%%%%%%%%%%%%%
+% Document specific setup for demonstration, generally not needed!
+%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}% Improved horizontal rules for use in tables
+\renewcommand*{\creditformatsum}[1]{\creditformat{Total: #1}}
+
+\ConfigureHeadline{
+	headline={title-name-id}
+}
+
+\newcommand*{\file}[1]{\texttt{#1}}
+\newcommand*{\code}[1]{\texttt{#1}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cls}[1]{\textsf{#1}}
+\newcommand*{\option}[1]{\texttt{#1}}
+\newcommand*{\environment}[1]{\texttt{#1}}
+\let\tbs\textbackslash
+%%%%%%%%%%%%%%%%%%%
+% End of demo specific setup
+%%%%%%%%%%%%%%%%%%%
+
+\title[TUDaExercise]{Tasksheet to practice use of TUDaExercise class}
+\author{Marei Peischl}
+\term{Spring 2042}
+\sheetnumber{5}
+
+\begin{document}
+
+\maketitle
+
+\begin{task}{Title}
+	TUDaExercise does not support the \code{titlepage} option.
+	To save space the setting is enforced to \code{titlepage=false}.
+	The title material supports some additional commands, a full example is shown below:
+
+\begin{verbatim}
+\title[Short title to be used in running headers]{Title}
+\subtitle{Subtitle}
+\author{Author/Professor}
+\term{Term}
+\date{Date}
+\sheetnumber{Sheetnumber}
+\end{verbatim}
+
+	All fields but the title may be kept empty.
+	In case no sheetnumber is used the tasks will be numbered starting at 1.
+\end{task}
+
+\begin{task}{Coloring}
+	The coloring uses the same mechanisms as the other classes of the TUDa-CI bundle. The options \option{color},
+	\option{accentcolor}, \option{textaccentcolor}, \option{identbarcolor} work as usual \cite[see][]{tuda-ci}. It is also possible to
+	deactivate the colored title block.
+	The option \option{colorback=false} makes it possible to set the toner-saving variant for
+	versions for printing
+\end{task}
+
+\begin{task}{Create a task}
+
+	Tasks are defined in \cls{tudaexercise} using the \environment{task} environment. The required argument is used as a title. It may remain empty.
+
+\begin{verbatim}
+  \begin{task}[<options>]{title}
+    Text describing the task
+  \end{task}
+\end{verbatim}
+
+	Cross-references between the tasks are possible as usual (\code{\tbs{}label} and \code{\tbs{}ref}).
+
+\end{task}
+
+
+\begin{task}{Subtasks}
+	\begin{subtask}[title={Basic structure}]
+		\cls{tudaexercise} provides the \code{subtask} environment to subdivide tasks into subtasks.
+		Currently inly one level is supported.
+		For further subdivision, it is also possible to divide the document into sections using \code{\tbs{}section}.
+
+\begin{verbatim}
+\begin{subtask}[title={title},points=5]
+
+\end{subtask}
+\end{verbatim}
+
+		In contrast to tasks, subtasks do not require a heading.
+		Therefore, the syntax for the transfer differs from that of the task environment. However, there is a variant to avoid this distinction, see task \ref{task-subtask-syntax}.
+	\end{subtask}
+
+	\begin{subtask}[title={Layout modification of the headings}]
+		From version 3.13, \cls{tudaexercise} also supports switching the layout of subtask headings.
+		There are three option values for the document class:
+		subtask=ruled
+		subtask=plain
+		subtask=runin If very small tasks are set, the break after the title can be prevented . In this case, the user is responsible
+		for ensuring that any necessary visual separation between the title and task text takes place, e.g. by
+		highlighting the title text
+		Ab Version 3.13 unterstützt \cls{tudaexercise} zusätzlich eine Umschaltung bezüglich des Layouts der Subtask-Überschriften. Es existieren drei Optionswerte für die Dokumentenklasse:
+		\begin{description}
+			\item[subtask=ruled] Default setting, the headings are separated from the body text by lines (As shown in this document).
+			\item[subtask=plain] No rules around the headings
+			\item[subtask=runin] If very small tasks are set, the break after the title can be prevented . In this case, the user is responsible
+			      for ensuring that any necessary visual separation between the title and task text takes place, e.g. by highlighting the title text.
+		\end{description}
+	\end{subtask}
+\end{task}
+
+
+\begin{task}{Headline customization}
+	The mechanism for the headers has been adapted so that its content can be freely selected.
+
+\begin{verbatim}
+\ConfigureHeadline{
+headline={content of the headline}
+}
+\end{verbatim}
+
+	There is now a distinction between left and right pages (in case \option{twoside=true}).
+\begin{verbatim}
+\ConfigureHeadline{
+even={content of the header for left pages},
+odd={content of the header for right pages},
+oneside={content of the header in single-page mode}
+}
+\end{verbatim}
+
+	Settings that affect the same pages overwrite each other.
+
+	\begin{subtask}[title={Custom content for headlines}]
+		The content can be any \LaTeX{} code which will be placed within a box as wide as the text.
+		Content will be typeset left aligned.
+		It is possible to place graphics or tables within this box.
+
+		There are some ready-made elements for the headers that can be placed in the header.
+\begin{verbatim}
+\ShortTitle
+\StudentID
+\StudentName
+\end{verbatim}
+	\end{subtask}
+
+	\begin{subtask}[title={Predefined header options}]
+		In addition, the \option{headline} option acceps some pre-defined values which will place the entries entries according to the self-explanatory naming scheme:
+		\option{title-name-id}, \option{title-name}, \option{title}, \option{name-id}, \option{name}
+	\end{subtask}
+
+	\begin{subtask}[title={Enable the header for the title page}]
+		As the header may be used to specify student data, it is possible to use the class option \option{headontitle}. This will enable the header for the title page.
+	\end{subtask}
+\end{task}
+
+\begin{task}[solution=true]{Solutions}
+	\cls{tudaexercise} has a mechanism for managing solution proposals within the files.
+	The \environment{solution} environment exists for this purpose.
+	To enable the output of solutions it's possible to use the class option (global)
+
+\begin{verbatim}
+\documentclass[...,
+   solution=true,
+]{tudaexercise}
+\end{verbatim}
+	or configure it locally for individual tasks:
+
+\begin{verbatim}
+\begin{task}[solution=true]{Heading}
+Task description
+   \begin{solution}
+   Solution
+   \end{solution}
+\end{task}
+\end{verbatim}
+
+	The default setting is solution=false.
+
+	\begin{solution}
+		This is an example for a solution block.
+	\end{solution}
+
+	There also exists a \environment{solution*} environment. Which behaves the same way, but does not automatically add a title to the block.
+\end{task}
+
+\begin{task}{Query the \option{solution} setting}
+
+	As of version 3.04, it is also possible to query the solution setting using the following structures:
+
+\begin{verbatim}
+\IfSolutionT{<if solution=true>}
+\IfSolutionF{<if solution=false>}
+\IfSolutionTF{<if solution=true>}{<if solution=false>}
+\end{verbatim}
+	In the current setting (solution=false), the above block generates the following output:
+
+	\IfSolutionT{<if solution=true>}
+	\IfSolutionF{<if solution=false>}
+	\IfSolutionTF{<if solution=true>}{<if solution=false>}
+
+\end{task}
+
+\begin{task}[credit=10]{Points}
+	Points can be specified using the \option{credit} key.
+
+	using the macro \creditformat option key.
+	The value is placed after the task title within parentheses.
+	This is internally done using the \code{\tbs{}creditformat} command which can be redefined to archieve different formats.
+
+	Alternatively, there is the \option{points} key which, in addition to the specification, also adds the text \code{\tbs{}PointName} or
+	\code{\tbs{PointsName}} depending on whether the value equals 1. The points key therefore only accepts numerical
+	values (from version 3.13 floating point numbers are supported).
+	The decimal separator here is a period.
+	Correction to a comma is possible by redefining \code{\tbs{}pointformat}.
+
+	\begin{subtask}[points=1,title={Example for the using \option{points}}]
+		As older versions of TUDaExercise did not allow option processing for subtask, an additional mechanism is
+		included here.
+		If both a title and specific information are required, the title key is also included here.
+		A check is made to see whether the argument contains an equals sign; if this is the case, it is assumed that options are passed according to the key=value structure.
+	\end{subtask}
+\end{task}
+
+\begin{task}[points=auto]{Automatisms for grading tables}
+	\label{task:refPoints}
+
+	At version 3.13 \cls{tudaexercise} received the functionality for automatic grading tables and references to the point data.
+
+	\begin{subtask}[points=3,title={Activate references}]
+		\cls{tudaexercise} has generally deactivated this functionality, but it can be activated via the class option \option{points=true} be switched on.
+
+		The referencing mechanism works in a similar way to the object references in \LaTeX.
+		This makes it necessary to compile the document twice.
+		If \cls{tudaexercise} detects different values between begin and end of the compilation process, a corresponding warning is generated.
+
+		Two macros are available for the reference.
+		One works by calling up the task number, the other via labels:
+
+		\verb+\getPoints{+\thetask\verb+}+\\
+		\verb+\refPoints{task:refPoints}% requires the \label{task:refPoints}, see source code+
+
+		In this case, both macros return the same value: \refPoints{task:refPoints}.
+		As {\tbs{}refPoints} works independently of hte structure of the task numbers, this variant is generally preferable.
+		In addition to references to individual tasks, \verb+\getPointsTotal+ returns the total of all tasks of the last compilation.
+	\end{subtask}
+
+	\begin{subtask}[points=2,title={Summation among subtasks}]
+		The new mechanism also allows automatic calculation of the total points of all subtasks within a task.
+		To enable this mechanism the option \option{points=auto} has to be set.
+		If it's set as a class option, it will be activated for all tasks.
+		If the class option points=auto is set, this is automatically activated for all tasks.
+
+		However, the automatic value can be overwritten by manually entering a value, e.\,g. if a task does not onldy consist of subtasks.
+
+		There is currently no automatic check that the sum of the subtasks matches the total.
+
+		There is another internal variant of the macro \code{\tbs{}creditformat} to allow a distinction between summed values
+		and manually set values.
+
+\begin{verbatim}
+\newcommand*{\creditformatsum}[1]{\creditformat{#1}}
+\end{verbatim}
+
+		By default it is the same but could be overwritten like the following example:
+
+\begin{verbatim}
+\renewcommand*{\creditformatsum}[1]{\creditformat{Total: #1}}
+\end{verbatim}
+	\end{subtask}
+
+	\begin{subtask}[points=3,title={Automatic grading tables}]
+		\cls{tudaexercise} also provides a list of all points with the option of referencing the task values.
+		As the structure of a grading table varies greatly depending on personal preferences, the macro is designed in a very
+		abstract way.
+
+\begin{verbatim}
+\mapPoints{<code to be executed for each task>}
+\end{verbatim}
+
+		\code{\tbs{}mapPoints} iterates over all tasks and allows any code elements as arguments.
+		Within the code, \code{\#1} (Task Number) and \code{\#2} (associated point value) can be used.
+		Tasks with a value of zero are skipped by default.
+
+		For example:
+\begin{verbatim}
+\begin{tabular}{@{}lr@{}}
+  \toprule
+  \mapPoints{Task #1&#2 Points\\}
+  \midrule
+  Total&\getPointsTotal{} Points\\
+  \bottomrule
+\end{tabular}
+\end{verbatim}
+		creates the following output:\\
+		\begin{tabular}{@{}lr@{}}
+			\toprule
+			\mapPoints{Task #1&#2 Points\\}
+			\midrule
+			Total&\getPointsTotal{} Points\\
+			\bottomrule
+		\end{tabular}
+
+	\end{subtask}
+
+	\begin{subtask}[points=5,title={Detailed grading tables including subtasks}]
+		With version 4.00 there is also the option using \verb+\mapPoints*+.
+		This variant also iterates over subtasks.
+		In addition, the mechanism has been expanded to include a more general variant.
+		This can be used to interact with all tasks.
+		The documentation will be extended!
+	\end{subtask}
+\end{task}
+
+\begin{task*}{Uniform syntax for task/subtask}
+	\label{task-subtask-syntax}
+	By default, TUDaExercise distinguishes between task and subtask. This is due to the fact that subtask does
+	not require a title to be specified.
+
+	The need for a uniform syntax was expressed (see \url{https://github.com/tudace/tuda_latex_templates/issues/189}).
+
+	\begin{subtask*}{Starred variants of the task/subtaks environments}
+		The task* and subtask* variants implemented with version 3.0 make this possible:
+
+\begin{verbatim}
+\begin{task*}{Task heading}
+\begin{subtask*}{subtask heading}
+Description
+  \end{subtask*}
+\end{task*}
+\end{verbatim}
+	\end{subtask*}
+
+	\begin{subtask*}{Swapping both variants}
+		The class option \code{match-task-subtask-syntax} allows subtask and subtask* to be swapped. The task* and task environments are identical anyway.
+	\end{subtask*}
+\end{task*}
+
+
+\end{document}
+%% End of file `DEMO-TUDaExercise.tex'.
