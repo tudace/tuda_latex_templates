@@ -1841,7 +1841,6 @@
 %    \end{macrocode}
 % \iffalse
 %</class>
-%<*class|(geometry&exercise)>
 % \fi
 % Geometry margin configuration
 % Has to be loaded here due to headwidth options for pagestyles.
@@ -1912,8 +1911,8 @@
 %<*class>
 % \fi
 %    \begin{macrocode}
-  \KOMAoptions{headinclude,footinclude,headwidth=text,footwidth=text}
 	\let\ptxcd_disable_marginpar:\relax
+	\def\ptxcd_restore_typearea:{
 %    \end{macrocode}
 % \iffalse
 %</class>
@@ -1925,7 +1924,7 @@
 %<*class>
 % \fi
 %    \begin{macrocode}
-		\bool_if:NTF \g_ptxcd_marginpar_bool {
+    \bool_if:NTF \g_ptxcd_marginpar_bool {
       \KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}
     } {
 %    \end{macrocode}
@@ -1940,9 +1939,9 @@
 % \fi
 %    \begin{macrocode}
     }
-		\bool_if:NT \g_ptxcd_headline_bool {\KOMAoptions{headheight=\g_ptxcd_headheight_dim}}
-		\recalctypearea
-	}
+    \bool_if:NT \g_ptxcd_headline_bool {\KOMAoptions{headheight=\g_ptxcd_headheight_dim}}
+    \recalctypearea
+  }
 	\ptxcd_restore_typearea:
 %    \end{macrocode}
 % \iffalse
