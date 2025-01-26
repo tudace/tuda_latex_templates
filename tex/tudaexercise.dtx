@@ -351,20 +351,27 @@
   },
 }
 \clist_map_inline:nn {odd, even, oneside} {
-  \tl_new:c {g_ptxcd_ex_headline_#1_tl}
+  \tl_new:c {g_@@_headline_#1_tl}
+  \box_new:c {g_@@_headline_#1_box}
   \keys_define:nn {ptxcd/exercise/headline} {
     #1 .choice:,
-    #1 / title-name-id .code:n = \tl_gset:cn {g_ptxcd_ex_headline_#1_tl} {
-      \g_ptxcd_shorttitle_tl\par
-      \StudentName\StudentID},
-    #1 / title-name .code:n = \tl_gset:cn {g_ptxcd_ex_headline_#1_tl} {
-      \g_ptxcd_shorttitle_tl\par
-      \smallskip
-      \StudentName},
-    #1 / title .code:n = \tl_gset:cn {g_ptxcd_ex_headline_#1_tl} {\g_ptxcd_shorttitle_tl},
-    #1 / name-id .code:n = \tl_gset:cn {g_ptxcd_ex_headline_#1_tl} {\StudentName\StudentID},
-    #1 / name .code:n = \tl_gset:cn {g_ptxcd_ex_headline_#1_tl} {\StudentName},
-    #1 / unknown .code:n = \tl_gset:cn {g_ptxcd_ex_headline_#1_tl} {##1}
+    #1 / title-name-id .meta:n = {
+      #1 = {
+        \g_ptxcd_shorttitle_tl\par
+        \StudentName\StudentID
+      }
+    },
+    #1 / title-name .meta:n = {
+      #1 = {
+        \g_ptxcd_shorttitle_tl\par
+        \smallskip
+        \StudentName
+      }
+    },
+    #1 / title .meta:n = {#1 = {\g_ptxcd_shorttitle_tl}},
+    #1 / name-id .meta:n = {#1 = {\StudentName\StudentID}},
+    #1 / name .meta:n = {#1 = {\StudentName}},
+    #1 / unknown .code:n = \tl_gset:cn {g_@@_headline_#1_tl} {##1}
     }
 }
 %    \end{macrocode}
@@ -493,9 +500,6 @@
 \setkomafont{pagenumber}{}
 \addtokomafont{captionlabel}{\sffamily}
 \addtokomafont{caption}{\sffamily}
-\box_new:N \g_ptxcd_ex_headline_odd_box
-\box_new:N \g_ptxcd_ex_headline_even_box
-\box_new:N \g_ptxcd_ex_headline_oneside_box
 \cs_new:Nn \ptxcd_preamble_ConfigureHeadline:n {
   \tl_if_empty:nF {#1} {\keys_set:nn {ptxcd/exercise/headline} {#1}}
 }
@@ -506,11 +510,11 @@
 }
 \let\ConfigureHeadline\ptxcd_preamble_ConfigureHeadline:n
 \bool_if:NT \g_ptxcd_ex_compatibility_bool {
-  \cs_new:Npn \ptxcd_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_ptxcd_ex_headline_oneside_tl {#1} }
-  \NewEnviron{examheader}{
-    \tl_gset:No \g_ptxcd_ex_headline_oneside_tl {\BODY}
-    \tl_gset:No \g_ptxcd_ex_headline_odd_tl {\BODY}
-    \tl_gset:No \g_ptxcd_ex_headline_even_tl {\BODY}
+  \cs_new:Npn \ptxcd_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_@@_headline_oneside_tl {#1} }
+  \NewDocumentEnvironment{examheader}{+b}{}{
+    \tl_gset:Nn \g_@@_headline_oneside_tl {#1}
+    \tl_gset:Nn \g_@@_headline_odd_tl {#1}
+    \tl_gset:Nn \g_@@_headline_even_tl {#1}
     \ptxcd_ConfigureHeadline:n {}
   }
   \newcommand*{\examheaderdefault}{\par\StudentName\StudentID}
@@ -518,14 +522,14 @@
 \cs_new:Nn \ptxcd_update_headline_boxes: {
   \clist_map_inline:nn {even, odd, oneside}
   {
-    \tl_if_empty:cF {g_ptxcd_ex_headline_##1_tl} {
-      \vbox_gset:cn {g_ptxcd_ex_headline_##1_box} {
+    \tl_if_empty:cF {g_@@_headline_##1_tl} {
+      \vbox_gset:cn {g_@@_headline_##1_box} {
         \begin{minipage}[b]{\textwidth}
           \usekomafont{pagehead}
           \raggedright
           \leavevmode\rule{\z@}{\dimexpr\ht\strutbox+\c_ptxcd_rulesep_dim}
           \ignorespaces
-          \use:c {g_ptxcd_ex_headline_##1_tl}\ignorespaces\strut
+          \use:c {g_@@_headline_##1_tl}\ignorespaces\strut
           \par\vspace{\z@}
         \end{minipage}
       }
@@ -536,13 +540,13 @@
   \if@twoside
     \dim_set:Nn \l_tmpa_dim {
       \dim_max:nn
-      {\box_ht:N \g_ptxcd_ex_headline_odd_box+\box_dp:N \g_ptxcd_ex_headline_odd_box}
-      {\box_ht:N \g_ptxcd_ex_headline_even_box+\box_dp:N \g_ptxcd_ex_headline_even_box}
+      {\box_ht:N \g_@@_headline_odd_box+\box_dp:N \g_@@_headline_odd_box}
+      {\box_ht:N \g_@@_headline_even_box+\box_dp:N \g_@@_headline_even_box}
     }
   \else
     \dim_set:Nn \l_tmpa_dim {
-      \box_ht:N \g_ptxcd_ex_headline_oneside_box
-      + \box_dp:N \g_ptxcd_ex_headline_oneside_box
+      \box_ht:N \g_@@_headline_oneside_box
+      + \box_dp:N \g_@@_headline_oneside_box
     }
   \fi
   \dim_compare:nT {\l_tmpa_dim > \z@}
@@ -550,10 +554,10 @@
     \dim_add:Nn \l_tmpa_dim {\box_dp:N \ptxcd_headrule_box +\c_ptxcd_rulesep_dim}
     \KOMAoptions{headinclude, headheight=\l_tmpa_dim,headsepline = .5\c_ptxcd_smallrule_dim}
     \if@twoside
-      \cehead{\box_use:c {g_ptxcd_ex_headline_even_box}}
-      \cohead{\box_use:c {g_ptxcd_ex_headline_odd_box}}
+      \cehead{\box_use:c {g_@@_headline_even_box}}
+      \cohead{\box_use:c {g_@@_headline_odd_box}}
     \else
-      \chead{\box_use:c {g_ptxcd_ex_headline_oneside_box}}
+      \chead{\box_use:c {g_@@_headline_oneside_box}}
     \fi
     \global\setlength{\headheight}{\l_tmpa_dim}
   }
@@ -788,9 +792,9 @@
 \par
 \bool_if:NT  \g_ptxcd_headontitle_bool {
   \if@twoside
-    \box_use:N \g_ptxcd_ex_headline_odd_box
+    \box_use:N \g_@@_headline_odd_box
   \else
-    \box_use:N \g_ptxcd_ex_headline_oneside_box
+    \box_use:N \g_@@_headline_oneside_box
   \fi
   \par
   \rule{\linewidth}{\g_ptxcd_titlerule_dim}
