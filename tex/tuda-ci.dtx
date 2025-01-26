@@ -838,6 +838,11 @@
 % The name/signature could be set via options or the Information provided with \cs{author} is used.
 % In the demo documents, the affidavit is located directly after the title.
 %
+% \DescribeKeyOption{hide-architecture-note=\meta{Boolean}}{false}*
+% The class option \option{hide-architecture-note} allows to disable the note specifically tagetting theses of the architecture department. 
+% For compatibility reasons it's false by default. So the note will be printed. 
+% It's also possible to set this directly as an affidavit option if it's not a PhD theses.
+%
 % \minisec{Disclaimer:}
 % The \cs{affidavit} command is using the current version (as of 2025-01-22) of the text provided at
 % {\small\url{https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp}}.
@@ -3552,10 +3557,10 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
   \keys_define:nn {ptxcd/thesis} {
     affidavit .choices:nn = {digital,print}{\tl_gset_eq:NN  \g_@@_affidavit_version_tl \l_keys_choice_tl},
     affidavit / default .meta:n = {affidavit=digital},
+    affidavit / hide-architecture-note  .meta:n = {hide-architecture-note},
     affidavit .initial:n = default,
   }
 }
-
 \NewDocumentCommand{\affidavit}{so}{%
   \IfNoValueF {#2} {%
     \tl_if_in:nnTF {#2} {=}
