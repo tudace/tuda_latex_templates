@@ -16,7 +16,7 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainers of this work are
+%% The Current Maintainer of this work is
 %%   Marei Peischl <tuda-ci@peitex.de>
 %%
 %% The development repository can be found at
@@ -55,7 +55,7 @@ version 2008/05/04 or later.
 
 This work has the LPPL maintenance status `maintained'.
 
-The Current Maintainers of this work are
+The Current Maintainer of this work is
   Marei Peischl <tuda-ci@peitex.de>
 
 The development repository can be found at
@@ -189,7 +189,7 @@ version 2008/05/04 or later.
 
 This work has the LPPL maintenance status `maintained'.
 
-The Current Maintainers of this work are
+The Current Maintainer of this work is
   Marei Peischl <tuda-ci@peitex.de>
 
 The development repository can be found at
@@ -212,26 +212,26 @@ Please use the issue tracker for feedback!
 
 % redefine module replacement to allow custom replacements for paper size
 \str_new:N \l_ptxcd__tmpa_str
-\str_new:N \l__ptxcd_customize_ins_str
-\cs_set_eq:NN \__ptxcd_customize_ins_prepareActiveModule:n \prepareActiveModule
+\str_new:N \l_@@_customize_ins_str
+\cs_set_eq:NN \_@@_customize_ins_prepareActiveModule:n \prepareActiveModule
 \cs_set:Npn \prepareActiveModule#1{
-	\__ptxcd_customize_ins_prepareActiveModule:n {#1}%
+	\_@@_customize_ins_prepareActiveModule:n {#1}%
 	\tl_put_left:Nn \replaceModuleInLine{
 		\str_set:NV  \l_ptxcd__tmpa_str \inLine
-		\exp_args:NNxx \str_replace_all:Nnn \l_ptxcd__tmpa_str  {\tl_to_str:V \l__ptxcd_customize_ins_str} {\use:c {\l__ptxcd_customize_ins_str}}
+		\exp_args:NNxx \str_replace_all:Nnn \l_ptxcd__tmpa_str  {\tl_to_str:V \l_@@_customize_ins_str} {\use:c {\l_@@_customize_ins_str}}
 		\tl_set_rescan:NnV \inLine {} \l_ptxcd__tmpa_str
 		\int_gzero:N  \g_ptxcd_count_int
 	}
 }
 
 
-\str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
+\str_set:Nx \l_@@_customize_ins_str {\string\@@tudasizepaper@@\space}
 
 \cs_set:Npn \generateTUDaPaperFiles #1 {
-	\str_set:Nx \l__ptxcd_customize_ins_str {\string\@@tudasizepaper@@\space}
+	\str_set:Nx \l_@@_customize_ins_str {\string\@@tudasizepaper@@\space}
 	\clist_map_inline:nn {#1} {
 		\generate{
-			\tl_set:cn {\str_use:N \l__ptxcd_customize_ins_str} {##1}
+			\tl_set:cn {\str_use:N \l_@@_customize_ins_str} {##1}
 			\file{tuda-##1paper.clo}{\from{tudasize.dtx}{##1,tudasize}}
 		}
 	}

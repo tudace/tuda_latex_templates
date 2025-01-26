@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -27,60 +27,27 @@
 %
 % \fi
 %
-% \iffalse
+% \iffalse% no documentation on this
+% \iffalse^^A Preparation for real docstrip documentation
 %<*driver>
-\ProvidesFile{tudaexercise.dtx}
+\ProvidesFile{tudaexercise.dtx}[2025-01-26 v4.00 Exercise sheets and exams using TU Darmstadt's Corporate Desing (TUDa-CI)]
+\typeout{***********************************************************}
+\typeout{No documentation included in this file! Please see tuda-ci.pdf for more information and DEMO-TUDaExercise.tex/.pdf for an example of use.}
+\typeout{***********************************************************}
+\stop
 %</driver>
-%<class&initialization>
 %<*class&initialization>
 %<@@=ptxcd>
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesExplClass{tudaexercise}
-	{2024-07-02}{3.41}{Exercise sheets and exams using TU Darmstadt's Corporate Desing (TUDa-CI)}
+\ProvidesExplClass{tudaexercise}{2025-01-26}{4.00}{Exercise sheets and exams using TU Darmstadt's Corporate Desing (TUDa-CI)}
 %</class&initialization>
-%
-%<*driver>
-\documentclass[
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-
-\IfFileExists{tuda_logo.pdf}{}{
-  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
-}
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\OnlyDescription
-\CodelineIndex
-\RecordChanges
-\begin{document}
-\DocInput{tudaexercise.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+%<*driver>^^A Preparation for real docstrip documentation
+\providecommand*{\TUDaDocDTXfiles}{tudaexercise.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
 %
-% \changes{<+version+>}{<+date+>}{Converted to DTX file}
+% \changes{v4.00}{2025-01-26}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 %
@@ -180,32 +147,32 @@
   Please~do~not~use~this~feature~or~update~your~TeX~distribution.\\
   The~feature~requires~KOMA-Script~v#2~or~newer.
 }
-\str_const:Nn \c__ptxcd_base_str {exercise}
+\str_const:Nn \c_@@_base_str {exercise}
 \prop_new:N \g_ptxcd_clsopts_prop
 \prop_new:N \g_ptxcd_unknown_clsopts_prop
 \prop_gput:Nnn \g_ptxcd_clsopts_prop {captions} {nooneline}
 \prop_gput:Nnn \g_ptxcd_clsopts_prop {parskip} {half-}
-\prop_new:N \g__ptxcd_points_collector_prop
-\prop_new:N \g__ptxcd_subtask_points_collector_prop
-\prop_new:N \g__ptxcd_property_collector_prop
-\bool_new:N \l__ptxcd_points_auto_bool
-\bool_new:N \g__ptxcd_points_bool
-\prop_new:N \g__ptxcd_loaded_points_prop
-\fp_new:N \g__ptxcd_points_total_fp
+\prop_new:N \g_@@_points_collector_prop
+\prop_new:N \g_@@_subtask_points_collector_prop
+\prop_new:N \g_@@_property_collector_prop
+\bool_new:N \l_@@_points_auto_bool
+\bool_new:N \g_@@_points_bool
+\prop_new:N \g_@@_loaded_points_prop
+\fp_new:N \g_@@_points_total_fp
 \int_new:N \g_ptxcd_paper_int
 \bool_new:N \g_ptxcd_geometry_bool
 \bool_new:N \g_ptxcd_custommargins_bool
-\bool_new:N \l_ptxcd_ex_solution_bool
+\bool_new:N \l_@@_solution_bool
 \bool_new:N \g_ptxcd_smalltitle_bool
 \str_new:N \g_ptxcd_department_str
 \tl_new:N \g_ptxcd_tmp_tl
 \int_new:N \g_ptxcd_tmp_int
 \tl_new:N \l_ptxcd_tmp_tl
 \clist_map_inline:nn {section,subsection,subsubsection,task,subtask,@solution} {
-  \bool_new:c	{g__ptxcd_ruled_#1_bool}
-  \bool_gset_true:c {g__ptxcd_ruled_#1_bool}
+  \bool_new:c	{g_@@_ruled_#1_bool}
+  \bool_gset_true:c {g_@@_ruled_#1_bool}
 }
-\bool_new:N \g__ptxcd_runin_subtask_bool
+\bool_new:N \g_@@_runin_subtask_bool
 %    \end{macrocode}
 % \begin{documentation}
 % \DescribeEnv{solution}
@@ -230,9 +197,9 @@
 % \end{implementation}
 % \changes{v4.00}{2025-01-26}{Remove obsolete use of environ}
 %    \begin{macrocode}
-\cs_new:Nn \ptxcd_setup_solution: {
-  \bool_if:NTF \l_ptxcd_ex_solution_bool {
-    \def\solution{\ptxcd_ex_solutionheader:}
+\cs_new:Nn \_@@_setup_solution: {
+  \bool_if:NTF \l_@@_solution_bool {
+    \def\solution{\_@@_solutionheader:}
     \def\endsolution{}
     \expandafter\def\csname solution*\endcsname{\ignorespaces}
     \expandafter\let\csname endsolution*\endcsname\endsolution
@@ -241,15 +208,15 @@
     \RenewDocumentEnvironment{solution*}{+b}{}{}
   }
 }
-\ptxcd_setup_solution:
-\prg_new_conditional:Nnn \__ptxcd_if_solution: {T,F,TF} {
-  \bool_if:NTF \l_ptxcd_ex_solution_bool
+\_@@_setup_solution:
+\prg_new_conditional:Nnn \_@@_if_solution: {T,F,TF} {
+  \bool_if:NTF \l_@@_solution_bool
     {\prg_return_true:}
     {\prg_return_false:}
 }
-\let\IfSolutionT \__ptxcd_if_solution:T
-\let\IfSolutionF \__ptxcd_if_solution:F
-\let\IfSolutionTF \__ptxcd_if_solution:TF
+\let\IfSolutionT \_@@_if_solution:T
+\let\IfSolutionF \_@@_if_solution:F
+\let\IfSolutionTF \_@@_if_solution:TF
 %    \end{macrocode}
 % Message Declaration for option processing
 %    \begin{macrocode}
@@ -268,11 +235,11 @@
 %
 %    \begin{macrocode}
   bookmarksnumbered  .code:n = \PassOptionsToPackage{bookmarksnumbered=#1}{hyperref},
-  compat .bool_gset:N = \g_ptxcd_ex_compatibility_bool,
+  compat .bool_gset:N = \g_@@_compatibility_bool,
   compat .initial:n = false,
   compatilibity .meta:n = {compat=#1},
   compatibility .default:n = true,
-  credit .tl_set:N = \l_ptxcd_ex_credit_tl,
+  credit .tl_set:N = \l_@@_credit_tl,
   credit .initial:n =,
   headontitle .bool_gset:N = \g_ptxcd_headontitle_bool,
   headontitle .initial:n = false,
@@ -282,26 +249,26 @@
   match-task-subtask-syntax .initial:n = false,
   match-task-subtask-syntax .default:n = true,
   solution .code:n = {
-      \bool_set_eq:Nc \l_ptxcd_ex_solution_bool {c_#1_bool}
-      \ptxcd_setup_solution:
+      \bool_set_eq:Nc \l_@@_solution_bool {c_#1_bool}
+      \_@@_setup_solution:
     },
   solution .default:n = true,
   unknown .code:n = {\prop_gput:NVn \g_ptxcd_unknown_clsopts_prop \l_keys_key_tl {#1}},
   points .choice:,
-  points / true .code:n = \bool_set_false:N \l__ptxcd_points_auto_bool\bool_gset_true:N \g__ptxcd_points_bool,
-  points /false .code:n =  \bool_set_false:N \l__ptxcd_points_auto_bool\bool_gset_false:N \g__ptxcd_points_bool,
-  points / auto .code:n = \bool_set_true:N \l__ptxcd_points_auto_bool\bool_gset_true:N \g__ptxcd_points_bool,
+  points / true .code:n = \bool_set_false:N \l_@@_points_auto_bool\bool_gset_true:N \g_@@_points_bool,
+  points /false .code:n =  \bool_set_false:N \l_@@_points_auto_bool\bool_gset_false:N \g_@@_points_bool,
+  points / auto .code:n = \bool_set_true:N \l_@@_points_auto_bool\bool_gset_true:N \g_@@_points_bool,
   points .initial:n = false,
   subtask .choice:,
   subtask / ruled .code:n =
-  \bool_gset_true:N \g__ptxcd_ruled_subtask_bool
-  \bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
+  \bool_gset_true:N \g_@@_ruled_subtask_bool
+  \bool_gset_false:N  \g_@@_runin_subtask_bool,
   subtask / runin .code:n =
-  \bool_gset_false:N \g__ptxcd_ruled_subtask_bool
-  \bool_gset_true:N  \g__ptxcd_runin_subtask_bool,
+  \bool_gset_false:N \g_@@_ruled_subtask_bool
+  \bool_gset_true:N  \g_@@_runin_subtask_bool,
   subtask / plain .code:n =
-  \bool_gset_false:N \g__ptxcd_ruled_subtask_bool
-  \bool_gset_false:N  \g__ptxcd_runin_subtask_bool,
+  \bool_gset_false:N \g_@@_ruled_subtask_bool
+  \bool_gset_false:N  \g_@@_runin_subtask_bool,
 %</initialization>
 %   ^AA}
 %<*center>
@@ -313,32 +280,32 @@
       \clist_map_inline:nn {#2} {\PassOptionsToClass  {#1=##1} {scrartcl}}
     }
 }
-  \bool_new:N \l_ptxcd_ex_subtask_fallback_bool
-  \fp_new:N \l_ptxcd_ex_task_points_fp
-  \fp_new:N \g__ptxcd_ex_collected_points_fp
-  \tl_new:N \l_ptxcd_ex_task_credit_tl
+  \bool_new:N \l_@@_subtask_fallback_bool
+  \fp_new:N \l_@@_task_points_fp
+  \fp_new:N \g_@@_ex_collected_points_fp
+  \tl_new:N \l_@@_task_credit_tl
   \keys_define:nn {ptxcd/task}{
     points .choice:,
     points / auto .code:n =
-    \bool_set_true:N \l__ptxcd_points_auto_bool,
-    points / unknown .code:n = \fp_set:Nn \l_ptxcd_ex_task_points_fp {#1}
-    \bool_set_false:N \l__ptxcd_points_auto_bool,
-    credit .code:n = \tl_set:Nn \l_ptxcd_ex_task_credit_tl {#1}
-    \bool_set_false:N \l__ptxcd_points_auto_bool,
+    \bool_set_true:N \l_@@_points_auto_bool,
+    points / unknown .code:n = \fp_set:Nn \l_@@_task_points_fp  {#1}
+    \bool_set_false:N \l_@@_points_auto_bool,
+    credit .code:n = \tl_set:Nn \l_@@_task_credit_tl {#1}
+    \bool_set_false:N \l_@@_points_auto_bool,
     solution .meta:nn ={ptxcd/exercise}{solution=#1},
   }
-\fp_new:N \l_ptxcd_ex_subtask_points_fp
+\fp_new:N \l_@@_subtask_points_fp
 \keys_define:nn {ptxcd/subtask} {
-  credit .tl_set:N = \l_ptxcd_ex_subtask_credit_tl,
+  credit .tl_set:N = \l_@@_subtask_credit_tl,
   credit .initial:n =,
-  points .code:n = \fp_set:Nn \l_ptxcd_ex_subtask_points_fp {#1}
-    \bool_set_false:N \l__ptxcd_points_auto_bool,
-  title .tl_set:N = \l_ptxcd_ex_title_tl,
+  points .code:n = \fp_set:Nn \l_@@_subtask_points_fp {#1}
+    \bool_set_false:N \l_@@_points_auto_bool,
+  title .tl_set:N = \l_@@_title_tl,
   title .initial:n =,
   unknown .code:n = {
-    \bool_set_true:N \l_ptxcd_ex_subtask_fallback_bool
-    \tl_clear:N \l_ptxcd_ex_subtask_credit_tl
-    \fp_zero:N \l_ptxcd_ex_subtask_points_fp
+    \bool_set_true:N \l_@@_subtask_fallback_bool
+    \tl_clear:N \l_@@_subtask_credit_tl
+    \fp_zero:N \l_@@_subtask_points_fp
   },
 }
 \keys_define:nn {ptxcd/exercise/headline} {
@@ -380,7 +347,7 @@
 \file_if_exist:nT {tudasize\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}.clo}
 {\providecommand*{\@fontsizefilebase}{tudasize}}
 \LoadClass{scrartcl}
-\bool_if:NT \g__ptxcd_points_bool {
+\bool_if:NT \g_@@_points_bool {
   \cs_if_exist:NF \AddtoDoHook{
     \msg_error:nnnn  {tudaexercise} {outdated-koma-script} {points=true/auto} {3.27}
     \keys_set:nn {ptxcd/exercise} {points=false}
@@ -406,7 +373,7 @@
 %    \begin{macrocode}
 \renewcommand*\sectionlinesformat[4]{%
   \parbox{\linewidth}{
-    \bool_if:cT {g__ptxcd_ruled_#1_bool} {
+    \bool_if:cT {g_@@_ruled_#1_bool} {
       \rule[5\g_ptxcd_titlerule_dim]{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
     }
     \@hangfrom{%
@@ -414,22 +381,22 @@
       \tl_if_eq:nnT {#1} {task} {
         \exp_args:No \tl_if_empty:nF {#4}
         {:~}
-        \bool_if:NT \l__ptxcd_points_auto_bool {
-          \exp_args:NNx \prop_get:NnN \g__ptxcd_loaded_points_prop {\thetask} \l_ptxcd_tmp_tl
+        \bool_if:NT \l_@@_points_auto_bool {
+          \exp_args:NNx \prop_get:NnN \g_@@_loaded_points_prop {\thetask} \l_ptxcd_tmp_tl
           \quark_if_no_value:NF \l_ptxcd_tmp_tl {
-            \fp_set:Nn \l_ptxcd_ex_task_points_fp {\l_ptxcd_tmp_tl}
+            \fp_set:Nn \l_@@_task_points_fp  {\l_ptxcd_tmp_tl}
           }
         }
       }
       #4
       \tl_if_in:nnT {#1} {task} {
-        \tl_if_empty:cTF{l_ptxcd_ex_#1_credit_tl}
-        {\pointformat{\fp_to_decimal:c {l_ptxcd_ex_#1_points_fp}}}
-        {\creditformat{\tl_use:c {l_ptxcd_ex_#1_credit_tl}}}
+        \tl_if_empty:cTF{l_@@_#1_credit_tl}
+        {\pointformat{\fp_to_decimal:c {l_@@_#1_points_fp}}}
+        {\creditformat{\tl_use:c {l_@@_#1_credit_tl}}}
       }
       \rule[-\dp\strutbox]{0pt}{\dp\strutbox}\par}\nointerlineskip
     \skip_vertical:n {\ptxcd_titlerule_sep: -\dp\strutbox}
-    \bool_if:cT {g__ptxcd_ruled_#1_bool}
+    \bool_if:cT {g_@@_ruled_#1_bool}
       {\smash{\rule{\linewidth}{\g_ptxcd_titlerule_dim}}}
   }
 }
@@ -457,6 +424,7 @@
 % \begin{documentation}
 % \DescribeMacro{\institution}
 %
+%^^A TODO Rename and deprecate variable names
 % \end{documentation}
 % \begin{implementation}
 % \begin{macro}{\institution}
@@ -500,17 +468,17 @@
 \setkomafont{pagenumber}{}
 \addtokomafont{captionlabel}{\sffamily}
 \addtokomafont{caption}{\sffamily}
-\cs_new:Nn \ptxcd_preamble_ConfigureHeadline:n {
+\cs_new:Nn \_@@_preamble_ConfigureHeadline:n {
   \tl_if_empty:nF {#1} {\keys_set:nn {ptxcd/exercise/headline} {#1}}
 }
 \cs_new:Nn \ptxcd_ConfigureHeadline:n {
-  \ptxcd_preamble_ConfigureHeadline:n {#1}
+  \_@@_preamble_ConfigureHeadline:n {#1}
   \ptxcd_update_headline_boxes:
-  \ptxcd_ex_adjust_headheight:
+  \_@@_adjust_headheight:
 }
-\let\ConfigureHeadline\ptxcd_preamble_ConfigureHeadline:n
-\bool_if:NT \g_ptxcd_ex_compatibility_bool {
-  \cs_new:Npn \ptxcd_ex_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_@@_headline_oneside_tl {#1} }
+\NewDocumentCommand{\ConfigureHeadline}{m}{\_@@_preamble_ConfigureHeadline:n {#1}}
+\bool_if:NT \g_@@_compatibility_bool {
+  \cs_new:Npn \_@@_env_to_tl_aux:w #1 \q_stop { \tl_gset:Nn     \g_@@_headline_oneside_tl {#1} }
   \NewDocumentEnvironment{examheader}{+b}{}{
     \tl_gset:Nn \g_@@_headline_oneside_tl {#1}
     \tl_gset:Nn \g_@@_headline_odd_tl {#1}
@@ -536,7 +504,7 @@
     }
   }
 }
-\cs_new:Nn \ptxcd_ex_adjust_headheight: {
+\cs_new:Nn \_@@_adjust_headheight: {
   \if@twoside
     \dim_set:Nn \l_tmpa_dim {
       \dim_max:nn
@@ -725,7 +693,7 @@
     \rule{0pt}{\bool_if:NTF \g_ptxcd_smalltitle_bool {.25} {.5}\c_ptxcd_logoheight_dim}
     \par\nointerlineskip
     \raisebox{-\height}{%
-      \begin{minipage}[t]{\dimexpr\linewidth-\__ptxcd_logowidth:-1ex}
+      \begin{minipage}[t]{\dimexpr\linewidth-\_@@_logowidth:-1ex}
         \bool_if:NT \g_ptxcd_colorback_bool  {\begin{addmargin}{3mm}}
             \raggedright
             \bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
@@ -733,7 +701,7 @@
             \leavevmode\usekomafont{title}%
             {\usekomafont{title}\bool_if:NTF \g_ptxcd_smalltitle_bool {\LARGE} {\huge} {\@title\par}}%
             \vskip 1em
-            \bool_if:NF \g_ptxcd_ex_compatibility_bool
+            \bool_if:NF \g_@@_compatibility_bool
             {
               {\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
               \gdef\@subtitle{}
@@ -758,7 +726,7 @@
           {\bool_if:NTF \g_ptxcd_colorback_bool {1.15}{1}}
           {\bool_if:NTF \g_ptxcd_colorback_bool {1.5}{1.3}
           }\c_ptxcd_logoheight_dim}]
-      {\makebox[\__ptxcd_logowidth:][l]{\__ptxcd_insert_logo:}}
+      {\makebox[\_@@_logowidth:][l]{\_@@_insert_logo:}}
     }
     \par\medskip
   }}
@@ -978,7 +946,7 @@
 %    \begin{macrocode}
 \newcommand*{\pointformat}[1]{
   \fp_compare:nF {#1 = 0} {
-    \bool_if:NTF \l__ptxcd_points_auto_bool
+    \bool_if:NTF \l_@@_points_auto_bool
     \creditformatsum
     \creditformat
     {
@@ -1017,7 +985,7 @@
 %    \begin{macrocode}
 \AtBeginDocument{
   \ptxcd_update_headline_boxes:
-  \ptxcd_ex_adjust_headheight:
+  \_@@_adjust_headheight:
   \global\let\ConfigureHeadline\ptxcd_ConfigureHeadline:n
 }
 %    \end{macrocode}
@@ -1078,13 +1046,13 @@
   \edef\@currenttasklabel{\tasklabel}
 }{
   \_@@_save_task_properties:nnnn {} {\thetask} {#2} {
-    \bool_if:NTF \l__ptxcd_points_auto_bool {
-      \fp_to_decimal:N \g__ptxcd_ex_collected_points_fp
+    \bool_if:NTF \l_@@_points_auto_bool {
+      \fp_to_decimal:N \g_@@_ex_collected_points_fp
     }{
-      \fp_to_decimal:N \l_ptxcd_ex_task_points_fp
+      \fp_to_decimal:N \l_@@_task_points_fp
     }
   }
-  \fp_gzero:N \g__ptxcd_ex_collected_points_fp
+  \fp_gzero:N \g_@@_ex_collected_points_fp
 }
 %    \end{macrocode}
 % \changes{v4.00}{2025-01-26}{Write task properties diractly per task/subtask}
@@ -1092,11 +1060,11 @@
 \cs_new:Nn \_@@_save_task_properties:nnnn {
     \iow_now:Ne \@auxout {
             \exp_not:N \ptxcd@TaskProperties {#1} {#2} {
-                \tl_if_empty:cF  {l_ptxcd_ex_#1credit_tl} {credit=\tl_to_str:v  {l_ptxcd_#1credit_tl},}
+                \tl_if_empty:cF  {l_@@_#1credit_tl} {credit=\tl_to_str:v  {l_ptxcd_#1credit_tl},}
                 \tl_if_blank:nF {#3} {title=\tl_to_str:n {#3},}
             } {#4}
      }
-     \prop_gput:cee {g__ptxcd_#1points_collector_prop}
+     \prop_gput:cee {g_@@_#1points_collector_prop}
         {#2} {#4}
 }
 \cs_generate_variant:Nn \_@@_save_task_properties:nnnn {nnon}
@@ -1111,10 +1079,10 @@
     \tocbasic@addxcontentsline{#1}{#2}{#3}{#4}
     \iow_now:Ne \@auxout {
         \exp_not:N \ptxcd@TaskProperties {\the\c@task} {\the\c@subtask} {\tl_to_str:n {#2}} {
-            \bool_if:NTF \l__ptxcd_points_auto_bool {
-                \fp_to_decimal:N \l_ptxcd_ex_task_points_fp
+            \bool_if:NTF \l_@@_points_auto_bool {
+                \fp_to_decimal:N \l_@@_task_points_fp
             }{
-                \fp_to_decimal:N \g__ptxcd_ex_collected_points_fp
+                \fp_to_decimal:N \g_@@_ex_collected_points_fp
             }
         }
     }
@@ -1123,14 +1091,14 @@
 
 %\ptxcd@TaskProperties {}{5.10}{Einheitliche Syntax für Task/Subtask}{0}
 \newcommand*\ptxcd@TaskProperties [4]{
-    \prop_gput:cnn {g__ptxcd_#1points_collector_prop}
+    \prop_gput:cnn {g_@@_#1points_collector_prop}
         {#2} {#4}
     \clist_map_inline:nn {#3} {
-        \prop_gput_from_keyval:Nn \g__ptxcd_property_collector_prop {
+        \prop_gput_from_keyval:Nn \g_@@_property_collector_prop {
             #2-##1
         }
     }
-    \prop_gput:Nnn \g__ptxcd_property_collector_prop {#2-points} {#4}
+    \prop_gput:Nnn \g_@@_property_collector_prop {#2-points} {#4}
 }
 %    \end{macrocode}
 % \end{environment}
@@ -1153,7 +1121,7 @@
   tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
   counterwithin=task,%
 ]{subtask}
-\bool_if:NT \g__ptxcd_runin_subtask_bool {
+\bool_if:NT \g_@@_runin_subtask_bool {
   \RedeclareSectionCommand[runin=true]{subtask}
 }
 %    \end{macrocode}
@@ -1200,15 +1168,15 @@
     } {
   	  \keys_set:nn {ptxcd/subtask} {title={#1}}
     }
-    \bool_if:NTF \l_ptxcd_ex_subtask_fallback_bool {
+    \bool_if:NTF \l_@@_subtask_fallback_bool {
       \@subtask{\IfNoValueF{#1}{#1}}
     }{
-      \@subtask{\l_ptxcd_ex_title_tl}
+      \@subtask{\l_@@_title_tl}
     }
   \edef\@currenttasklabel{\subtasklabel}
     \_@@_save_task_properties:nnon {subtask_} {\@currenttasklabel}
-      {\l_ptxcd_ex_title_tl} {\fp_to_decimal:N  \l_ptxcd_ex_subtask_points_fp}
-    \bool_if:NT  \g__ptxcd_runin_subtask_bool \strut
+      {\l_@@_title_tl} {\fp_to_decimal:N  \l_@@_subtask_points_fp}
+    \bool_if:NT  \g_@@_runin_subtask_bool \strut
     \tl_gset_eq:NN \g_tmpa_tl \@currentlabel
   \endgroup
   \edef\@currentcounter{subtask}
@@ -1245,7 +1213,7 @@
       tocnumwidth=\cs_if_exist_use:NF \scr@tso@subsubsection@numwidth {2.3em},%
     ]{@solution}
     \setkomafont{@solution}{\normalfont}
-    \cs_new:Nn \ptxcd_ex_solutionheader: {
+    \cs_new:Nn \_@@_solutionheader: {
       \@solution*{\solutionname\solutionsep}
       \if@newlist\global\@newlistfalse\fi
     }
@@ -1300,7 +1268,7 @@
 % Compatibility Features
 %
 %    \begin{macrocode}
-\bool_if:NT \g_ptxcd_ex_compatibility_bool {
+\bool_if:NT \g_@@_compatibility_bool {
   \cs_set_eq:NN \c@subsection \c@task
   \cs_set_eq:NN \subsection \task
   \cs_set_eq:NN \c@subsubsection \c@subtask
@@ -1308,19 +1276,19 @@
   \cs_set_eq:NN \thetask \thesubsection
   \cs_set_eq:NN \thesubtask \thesubsection
 }
-\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
+\file_if_exist_input:n {\g_@@_config_prefix_tl\g_ptxcd_department_str.cfg}
 \ptxcd_makeheadrule[color=identbarcolor, width=\textwidth]{ptxcd_headrule}
 %    \end{macrocode}
 % Point referencing
 %    \begin{macrocode}
 \cs_if_exist:NTF \AddtoDoHook {
   \AddtoDoHook{heading/preinit/subtask}{
-    \bool_if:NT \g__ptxcd_points_bool {
-      \fp_gadd:Nn \g__ptxcd_ex_collected_points_fp {\l_ptxcd_ex_subtask_points_fp}
+    \bool_if:NT \g_@@_points_bool {
+      \fp_gadd:Nn \g_@@_ex_collected_points_fp {\l_@@_subtask_points_fp}
     }
   }
   \AddtoDoHook{heading/preinit/task}{
-    \fp_gzero:N \g__ptxcd_ex_collected_points_fp
+    \fp_gzero:N \g_@@_ex_collected_points_fp
   }
 } {
   \msg_warning:nnnn  {tudaexercise} {outdated-koma-script} {point~references} {3.27}
@@ -1338,19 +1306,19 @@
   This~function~is~only~available~with~points=true~or~points=auto.\\
   Please~activate~referencing~to~use~it.
 }
-\bool_if:NTF \g__ptxcd_points_bool {
+\bool_if:NTF \g_@@_points_bool {
   \BeforeClosingMainAux{
     \tl_clear:N \l_tmpa_tl
     \tl_clear:N \l_tmpb_tl
     \fp_zero:N \l_tmpa_fp
-    \prop_map_inline:Nn  \g__ptxcd_points_collector_prop {
+    \prop_map_inline:Nn  \g_@@_points_collector_prop {
       \tl_put_right:Nn \l_tmpa_tl {#1=#2,}
       \fp_add:Nn \l_tmpa_fp {#2}
     }
-    \prop_map_inline:Nn  \g__ptxcd_subtask_points_collector_prop {
+    \prop_map_inline:Nn  \g_@@_subtask_points_collector_prop {
       \tl_put_right:Nn \l_tmpa_tl {#1=#2,}
     }
-    \prop_map_inline:Nn \g__ptxcd_loaded_points_prop {
+    \prop_map_inline:Nn \g_@@_loaded_points_prop {
       \tl_put_right:Nn \l_tmpb_tl {#1=#2,}
     }
     \tl_if_eq:NNF \l_tmpa_tl \l_tmpb_tl {
@@ -1360,13 +1328,13 @@
       \exp_not:N \ptxcd@LoadPoints[\the\c@task][\fp_use:N \l_tmpa_fp]{\l_tmpa_tl}
     }
   }
-  \cs_new:Nn \__ptxcd_getPoints:n {
-    \prop_if_in:NnTF \g__ptxcd_loaded_points_prop {#1}
-    {\prop_item:Nn \g__ptxcd_loaded_points_prop {#1}}
+  \cs_new:Nn \_@@_getPoints:n {
+    \prop_if_in:NnTF \g_@@_loaded_points_prop {#1}
+    {\prop_item:Nn \g_@@_loaded_points_prop {#1}}
     {\nfss@text{\reset@font\bfseries??}}
   }
-  \cs_generate_variant:Nn \__ptxcd_getPoints:n {x}
-  \newcommand{\getPoints}[1]{\__ptxcd_getPoints:x {#1}}
+  \cs_generate_variant:Nn \_@@_getPoints:n {x}
+  \newcommand{\getPoints}[1]{\_@@_getPoints:x {#1}}
   \newcommand{\refPoints}[1]{
     \edef\x{#1}
     \cs_if_exist:cTF {r@\x} {
@@ -1381,7 +1349,7 @@
     }
   }
   \newcommand{\getPointsTotal}{
-    \fp_use:N \g__ptxcd_points_total_fp
+    \fp_use:N \g_@@_points_total_fp
   }
 %    \end{macrocode}
 % \DescribeMacro{\getTaskProperty}\oarg{Task Number}{title/credit/points}
@@ -1390,9 +1358,9 @@
 %    \begin{macrocode}
 \NewDocumentCommand{\getTaskProperty}{O{\@currenttasklabel}m}{
     \exp_args:Ne \tl_show:n {#1-#2}
-    \prop_show:N \g__ptxcd_property_collector_prop
-    \prop_if_in:NnTF \g__ptxcd_property_collector_prop {#1-#2}
-        {\prop_item:Nn \g__ptxcd_property_collector_prop {#1-#2}}
+    \prop_show:N \g_@@_property_collector_prop
+    \prop_if_in:NnTF \g_@@_property_collector_prop {#1-#2}
+        {\prop_item:Nn \g_@@_property_collector_prop {#1-#2}}
         {{\nfss@text{\reset@font\bfseries??}}}
 }
 
@@ -1410,7 +1378,7 @@
   \cs_set:ce {_@@_cached_#1_counter:} {\int_eval:n {\value{#1}}}
   \setcounter{#1}{#2}
 	\bool_while_do:cn  {l_@@_#1_bool} {
-          \prop_get:NeNTF \g__ptxcd_loaded_points_prop {\use:c {#1label}} \l_tmpa_tl {
+          \prop_get:NeNTF \g_@@_loaded_points_prop {\use:c {#1label}} \l_tmpa_tl {
 %    \end{macrocode}
 % mechanism to skip item if it doesn't have points
 %    \begin{macrocode}
@@ -1452,7 +1420,7 @@
     \cs_gset:Nn \_@@_map_points_task:nn {#2}
     \cs_gset:Nn \_@@_map_points_subtask:nn {#3}
 
-  \prop_if_empty:NTF \g__ptxcd_loaded_points_prop {
+  \prop_if_empty:NTF \g_@@_loaded_points_prop {
     \msg_warning:nn {tudaexercise} {empty-point-mapping}
     \tl_set:Nn \l_ptxcd_tmp_tl {\_@@_map_points_task:nn {?task?} {?points?}}
   } {
@@ -1502,10 +1470,10 @@
 \int_new:N \g_@@_max_task_int
 \NewDocumentCommand{\ptxcd@LoadPoints}{oO{0}m}{
     \IfNoValueF{#1}{\int_gset:Nn \g_@@_max_task_int {#1}}
-      \prop_gset_from_keyval:Nn \g__ptxcd_loaded_points_prop {
+      \prop_gset_from_keyval:Nn \g_@@_loaded_points_prop {
       #3
     }
-  \fp_gset:Nn \g__ptxcd_points_total_fp {#2}
+  \fp_gset:Nn \g_@@_points_total_fp {#2}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1519,6 +1487,6 @@
 % \iffalse
 %</body>
 % \fi
-%
 % \Finale
+% \fi^^A No documentation on this
 \endinput

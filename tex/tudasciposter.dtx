@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -27,70 +27,31 @@
 %
 % \fi
 %
-% \iffalse
+% \iffalse% no documentation on this
+% \iffalse^^A Preparation for real docstrip documentation
 %<*driver>
 \ProvidesFile{tudasciposter.dtx}
+  [2025-01-26 v4.00 Scientific Poster Layout for TUDa-CI]
+\typeout{***********************************************************}
+\typeout{No documentation included in this file! Please see tuda-ci.pdf for more information and DEMO-TUDaSciPoster.tex/.pdf for an example of use.}
+\typeout{***********************************************************}
+\stop
 %</driver>
 %<@@=ptxcd>
 %<*class&initialization>
-\NeedsTeXFormat{LaTeX2e}[2020/01/01]
+\NeedsTeXFormat{LaTeX2e}[2022/06/01]
 \ProvidesExplClass{tudasciposter}{2025-01-26}{4.00}{Scientific Poster Layout for TU Darmstadt}
 %</class&initialization>
 %
-%<*driver>
-\documentclass[
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-
-\IfFileExists{tuda_logo.pdf}{}{
-  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
-}
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\OnlyDescription
-\CodelineIndex
-\RecordChanges
-\begin{document}
-\DocInput{tudasciposter.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+%<*driver>^^A Preparation for real docstrip documentation
+\providecommand*{\TUDaDocDTXfiles}{tudasciposter.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
 %
-% \changes{<+version+>}{<+date+>}{Converted to DTX file}
+% \changes{v4.00}{2025-01-26}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
-%
-% \GetFileInfo{tudasciposter.dtx}
-% \title{The \textsf{tudasciposter} package}
-% \author{<+author+>\thanks{Email: \href{mailto:<+email+>}{<+email+>}}}
-% \date{\fileversion~from \filedate}
-%
-% \maketitle
-%
-%
-% \DescribeMacro{\familydefault}
 %
 %
 % \DescribeMacro{\title}
@@ -132,7 +93,7 @@
 \tl_new:N \g_ptxcd_boxstyle_tl
 \int_new:N \g_ptxcd_paper_int
 \str_new:N \g_ptxcd_department_str
-\str_const:Nn \c__ptxcd_base_str {sciposter}
+\str_const:Nn \c_@@_base_str {sciposter}
 \keys_define:nn {ptxcd/poster} {
   titletext .code:n = {\PassOptionsToPackage{text =#1}{tudacolors}},
   footer .bool_gset:N = \g_ptxcd_poster_foot_bool,
@@ -437,9 +398,9 @@
 \newlength{\contentwidth}
 \setlength{\contentwidth}{\dimexpr\paperwidth-2\g_ptxcd_margin_dim\relax}
 \newlength{\contentheight}
-\cs_new:Nn \__ptxcd_logo_code:n {
-  \node[anchor=north~east,inner~sep=0pt,minimum~width=\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}](#1) at ([xshift=\__ptxcd_logosep:,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
-    \__ptxcd_insert_logo:
+\cs_new:Nn \_@@_logo_code:n {
+  \node[anchor=north~east,inner~sep=0pt,minimum~width=\dim_eval:n {\_@@_logowidth: + \_@@_logosep:}](#1) at ([xshift=\_@@_logosep:,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~east){
+    \_@@_insert_logo:
   };
 }
 \tcbposterset{
@@ -473,18 +434,18 @@
           \bool_if:NTF \g_ptxcd_colorback_bool
           \fill \path [identbarcolor]
           (identbar.south~east)rectangle([yshift=-\g_ptxcd_titleblock_dim]identbar.south~west) coordinate(bottomlefttitleblock);
-          \__ptxcd_logo_code:n {TUDalogo}
-          \node[inner~sep=0pt,text~width=\__ptxcd_logowidth:,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_ptxcd_rulesep_dim]TUDalogo.south~west){\box_use:N \g_ptxcd_titlegraphic_box};
+          \_@@_logo_code:n {TUDalogo}
+          \node[inner~sep=0pt,text~width=\_@@_logowidth:,align=right,anchor=north~west,](titlegraphic) at ([yshift=-\c_ptxcd_rulesep_dim]TUDalogo.south~west){\box_use:N \g_ptxcd_titlegraphic_box};
           \node[anchor=north~west,inner~sep=0pt,]  (title) at ([
             xshift=\g_ptxcd_titleindent_dim,yshift=-.5\c_ptxcd_logoheight_dim]identbar.south~west) {\box_use:N \g_ptxcd_title_box};
           \bool_if:NT \g_ptxcd_titlesepline_bool
           {\draw[line~ width=.5\c_ptxcd_smallrule_dim](bottomlefttitleblock)--++(\contentwidth,0);}
           \node[anchor=north~west, inner~xsep=0pt, inner~ ysep=\c_ptxcd_rulesep_dim] (author) at ([xshift=\g_ptxcd_titleindent_dim]bottomlefttitleblock) {\box_use:N \g_ptxcd_author_box};
           \draw[line~ width=.5\c_ptxcd_smallrule_dim](author.south-|identbar.west)--++(\contentwidth,0);
-          \bool_if:NT \g_ptxcd_poster_foot_bool {\__ptxcd_typeset_footer:}
+          \bool_if:NT \g_ptxcd_poster_foot_bool {\_@@_typeset_footer:}
         }}
 }
-\cs_new:Nn \__ptxcd_typeset_footer: {
+\cs_new:Nn \_@@_typeset_footer: {
   \coordinate(lastpos) at (bottomright);
   \tl_if_empty:NF \g_ptxcd_poster_qrcode_tl
   {
@@ -545,7 +506,7 @@
 \colorlet{innerblockbodyfgcolor}{black}
 \dim_new:N \g_ptxcd_titleblock_dim
 \dim_new:N \g_ptxcd_titleindent_dim
-\cs_new:Nn \__ptxcd_inst:n {\textsuperscript{#1}}
+\cs_new:Nn \_@@_inst:n {\textsuperscript{#1}}
 \cs_new:Nn \ptxcd_poster_setup_title_box: {
   \hbox_gset:Nn \g_ptxcd_title_box {
     \parbox{.65\paperwidth}{
@@ -556,7 +517,7 @@
   \hbox_gset:Nn \g_ptxcd_author_box {
     \parbox{\dimexpr\contentwidth-6\c_ptxcd_rulesep_dim\relax}{
       \ptxcd_def_footnotelabel:
-      \cs_set_eq:NN \inst\__ptxcd_inst:n
+      \cs_set_eq:NN \inst\_@@_inst:n
       {\usekomafont{author}\@author\\}
       \tl_gset:No \g_ptxcd_thanks_tl {\@thanks}
       \@institute
@@ -564,7 +525,7 @@
   }
   \tl_if_empty:NF \@titlegraphic {
     \hbox_gset:Nn \g_ptxcd_titlegraphic_box {
-      \parbox{\__ptxcd_logowidth:}{
+      \parbox{\_@@_logowidth:}{
         \raggedleft
         \@titlegraphic
       }
@@ -677,7 +638,7 @@ every~ box~ on~ layer~ 4/.style={reset,\g_ptxcd_boxstyle_tl -inner},
 % Adjust caption indent
 %    \begin{macrocode}
 \setcapindent{1em}
-\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
+\file_if_exist_input:n {\g_@@_config_prefix_tl\g_ptxcd_department_str.cfg}
 \hook_use:n {ptxcd/init-colors}
 \ptxcd_makeheadrule[
   width=\paperwidth-2\g_ptxcd_margin_dim,
@@ -692,4 +653,5 @@ every~ box~ on~ layer~ 4/.style={reset,\g_ptxcd_boxstyle_tl -inner},
 % \fi
 %
 % \Finale
+% \fi^^A No documentation on this
 \endinput

@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -27,10 +27,15 @@
 %
 % \fi
 %
-% \iffalse
+% \iffalse% no documentation on this
+% \iffalse^^A Preparation for real docstrip documentation
 %<*driver>
 \ProvidesFile{beamerinnerthemeTUDa.dtx}
-    [2024/08/01 4.0 Inner~beamer~theme~of~tuda-ci]
+    [2025-01-26 v4.00 Inner~beamer~theme~of~tuda-ci]
+\typeout{***********************************************************}
+\typeout{No documentation included in this file! Please see tuda-ci.pdf for more information and DEMO-TUDaBeamer.tex/.pdf for an example of use.}
+\typeout{***********************************************************}
+\stop
 %</driver>
 %<*package>
 %<@@=ptxcd>
@@ -39,62 +44,13 @@
 %<2023>\ProvidesExplPackage{beamerinnerthemeTUDa2023}{2025-01-26}{4.00}{Inner~beamer~theme~of~tuda-ci,~Design~of~2023}
 %<2008>\ProvidesExplPackage{beamerinnerthemeTUDa2008}{2025-01-26}{4.00}{Inner~beamer~theme~of~tuda-ci, compatibility for design of 2008}
 %</package>
-%<*driver>
-\documentclass[
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-
-\IfFileExists{tuda_logo.pdf}{}{
-  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
-}
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\OnlyDescription
-\CodelineIndex
-\RecordChanges
-\begin{document}
-\DocInput{beamerinnerthemeTUDa.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+%<*driver>^^A Preparation for real docstrip documentation
+\providecommand*{\TUDaDocDTXfiles}{beamerinnerthemeTUDa.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
 %
-% \changes{4.0}{2024/08/01}{Converted to DTX file}
-%
-% \DoNotIndex{\newcommand,\newenvironment}
-%
-% \GetFileInfo{beamerinnerthemeTUDa.dtx}
-% \title{The \textsf{beamerinnerthemeTUDa} package}
-% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
-% \date{\fileversion~from \filedate}
-%
-% \maketitle
-%
-%
-% \DescribeKey{\beamertoc}{\columns}
-%
-
+% \changes{v4.00}{2025-01-26}{Converted to DTX file}
 %
 % \MaybeStop{}
 %
@@ -105,17 +61,17 @@
 %<*main>
 % \fi
 %    \begin{macrocode}
-\int_new:N \g__ptxcd_beamer_toc_col_int
-\tl_if_exist:NF \g__ptxcd_design_tl {
-	\tl_new:N \g__ptxcd_design_tl
+\int_new:N \g_@@_beamer_toc_col_int
+\tl_if_exist:NF \g_@@_design_tl {
+	\tl_new:N \g_@@_design_tl
 	\keys_define:nn {ptxcd/beamer} {
 		design .choice:,
 		design / 2023 .code:n = {
-			\tl_gset:Nn  \g__ptxcd_design_tl {2023}
+			\tl_gset:Nn  \g_@@_design_tl {2023}
 			\PassOptionsToClass{aspectratio=169}{beamer}
 		},
 		design / 2008 .code:n = {
-			\tl_gset:Nn  \g__ptxcd_design_tl {2008}
+			\tl_gset:Nn  \g_@@_design_tl {2008}
 		},
 		design .initial:n = 2023,
 		design .usage:n = load,
@@ -129,7 +85,7 @@
 	author-on-title .default:n = true,
 	authorontitle .meta:n = {author-on-title=#1},
 	toc-columns .choices:nn =  {one,two,auto} {
-		\int_gset_eq:NN \g__ptxcd_beamer_toc_col_int  \l_keys_choice_int
+		\int_gset_eq:NN \g_@@_beamer_toc_col_int  \l_keys_choice_int
 	},
 	toc-columns / 1 .meta:n = {toc-columns=one},
 	toc-columns / 2 .meta:n = {toc-columns=two},
@@ -140,48 +96,48 @@
 \ExplSyntaxOff
 \RequirePackage{trimclip}
 \ExplSyntaxOn
-\box_new:N \l__ptxcd_titlegraphic_box
-\box_new:N \l__ptxcd_titlehead_box
-\dim_new:N \l__ptxcd_titlegraphic_ht_dim
-\dim_new:N \l__ptxcd_titlegraphic_wd_dim
-\box_if_exist:NF \g__ptxcd_logo_box {
-	\dim_new:N \g__ptxcd_beamer_logosep_dim
-	\dim_new:N \l__ptxcd_beamer_extraindent_dim
-	\dim_new:N \g__ptxcd_beamer_sep_dim
-	\box_new:N \g__ptxcd_logo_box
+\box_new:N \l_@@_titlegraphic_box
+\box_new:N \l_@@_titlehead_box
+\dim_new:N \l_@@_titlegraphic_ht_dim
+\dim_new:N \l_@@_titlegraphic_wd_dim
+\box_if_exist:NF \g_@@_logo_box {
+	\dim_new:N \g_@@_beamer_logosep_dim
+	\dim_new:N \l_@@_beamer_extraindent_dim
+	\dim_new:N \g_@@_beamer_sep_dim
+	\box_new:N \g_@@_logo_box
 }
-\cs_set:Nn \__ptxcd_block_colorsep: {.75ex}
+\cs_set:Nn \_@@_block_colorsep: {.75ex}
 \RenewDocumentCommand{\titlegraphic}{sm}{
 	\IfBooleanTF{#1}{
 		\def\inserttitlegraphic{
-			\hbox_set:Nn \l__ptxcd_titlegraphic_box {\raisebox{\depth}{#2}}
-			\box_resize_to_wd:Nn \l__ptxcd_titlegraphic_box {\width}
-			\dim_compare:nTF {\box_ht:N \l__ptxcd_titlegraphic_box - \height> \c_zero_dim}
+			\hbox_set:Nn \l_@@_titlegraphic_box {\raisebox{\depth}{#2}}
+			\box_resize_to_wd:Nn \l_@@_titlegraphic_box {\width}
+			\dim_compare:nTF {\box_ht:N \l_@@_titlegraphic_box - \height> \c_zero_dim}
 			{
-				\dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l__ptxcd_titlegraphic_box - .5\height}
-				\clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l__ptxcd_titlegraphic_box}
+				\dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l_@@_titlegraphic_box - .5\height}
+				\clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l_@@_titlegraphic_box}
 			}{
-				\box_resize_to_ht:Nn \l__ptxcd_titlegraphic_box {\height}
-				\dim_set:Nn \l_tmpa_dim {(\box_wd:N \l__ptxcd_titlegraphic_box - \width) / 2}
-				\clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l__ptxcd_titlegraphic_box}
+				\box_resize_to_ht:Nn \l_@@_titlegraphic_box {\height}
+				\dim_set:Nn \l_tmpa_dim {(\box_wd:N \l_@@_titlegraphic_box - \width) / 2}
+				\clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l_@@_titlegraphic_box}
 			}
 		}
 	}{
 		\def\inserttitlegraphic{#2}
 	}
 }
-\useinnertheme{TUDa\g__ptxcd_design_tl}
+\useinnertheme{TUDa\g_@@_design_tl}
 %    \end{macrocode}
 % Blocks
 %    \begin{macrocode}
 \defbeamertemplate*{block~begin}{TUDa}{
 	\par\vskip\medskipamount%
-	\begin{beamercolorbox}[wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,sep=.5pt,
-		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
+	\begin{beamercolorbox}[wd=\dimexpr\linewidth+2\l_@@_beamer_extraindent_dim,sep=.5pt,
+		leftskip=\dim_eval:n {\dim_compare:nTF {\l_@@_beamer_extraindent_dim>\c_zero_dim} {\l_@@_beamer_extraindent_dim-\beamer@colbox@sep} {\_@@_block_colorsep:}},
 	]{block~title}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,
+	\begin{beamercolorbox}[colsep*=\_@@_block_colorsep:,
 		 wd=\dimexpr\linewidth-1pt-1.5ex\relax]{block~title}
 		\usebeamerfont*{block title}\insertblocktitle%
 	\end{beamercolorbox}%
@@ -190,49 +146,49 @@
 	{\ifbeamercolorempty[bg]{block~body}{}{\par\nointerlineskip\vskip-0.5pt}}%
 	\leavevmode
 	\fi
-	\begin{beamercolorbox}[colsep*=\__ptxcd_block_colorsep:,vmode, wd=\dimexpr\linewidth-1.5ex-1pt\relax]{block~body}%
+	\begin{beamercolorbox}[colsep*=\_@@_block_colorsep:,vmode, wd=\dimexpr\linewidth-1.5ex-1pt\relax]{block~body}%
 		\usebeamerfont{block~body}%
-		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-\__ptxcd_block_colorsep:}\vbox{}%
+		\ifbeamercolorempty[bg]{block~body}{\vskip-.25ex}{\vskip-\_@@_block_colorsep:}\vbox{}%
 }
 \defbeamertemplate*{block~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 \defbeamertemplate*{block~alerted~begin}{TUDa}{
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
-		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
+		wd=\dimexpr\linewidth+2\l_@@_beamer_extraindent_dim,
 		sep=1.5pt,
-		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
+		leftskip=\dim_eval:n {\dim_compare:nTF {\l_@@_beamer_extraindent_dim>\c_zero_dim} {\l_@@_beamer_extraindent_dim-\beamer@colbox@sep} {\_@@_block_colorsep:}},
 	]{block~frame~alerted}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~alerted}
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\_@@_block_colorsep:]{block~title~alerted}
 		\usebeamerfont*{block~title~alerted}\insertblocktitle%
 	\end{beamercolorbox}%
 	\vskip1.5pt\par\nointerlineskip
 	\fi
 	\leavevmode
 	\usebeamerfont{block~body~alerted}%
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~alerted}%
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\_@@_block_colorsep:]{block~body~alerted}%
 }
 \defbeamertemplate*{block~alerted~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
 \defbeamertemplate*{block~example~begin}{TUDa}{
 	\par\vskip\medskipamount%
 	\begin{beamercolorbox}[
-		wd=\dimexpr\linewidth+2\l__ptxcd_beamer_extraindent_dim,
+		wd=\dimexpr\linewidth+2\l_@@_beamer_extraindent_dim,
 		sep=1.5pt,
-		leftskip=\dim_eval:n {\dim_compare:nTF {\l__ptxcd_beamer_extraindent_dim>\c_zero_dim} {\l__ptxcd_beamer_extraindent_dim-\beamer@colbox@sep} {\__ptxcd_block_colorsep:}},
+		leftskip=\dim_eval:n {\dim_compare:nTF {\l_@@_beamer_extraindent_dim>\c_zero_dim} {\l_@@_beamer_extraindent_dim-\beamer@colbox@sep} {\_@@_block_colorsep:}},
 		]{block~frame~example}
 	\ifx\insertblocktitle\@empty
 	\else
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~title~example}
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\_@@_block_colorsep:]{block~title~example}
 		\usebeamerfont*{block~title~example}\insertblocktitle%
 	\end{beamercolorbox}%
 \vskip1.5pt\par\nointerlineskip
 	\fi
 	\leavevmode
 	\usebeamerfont{block~body~example}%
-	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\__ptxcd_block_colorsep:]{block~body~example}%
+	\begin{beamercolorbox}[wd=\dim_eval:n {\linewidth-1.5ex-3pt},colsep*=\_@@_block_colorsep:]{block~body~example}%
 }
 \defbeamertemplate*{block~example~end}{TUDa}
 	{\end{beamercolorbox}\end{beamercolorbox}\vskip\smallskipamount}
@@ -248,12 +204,12 @@
 \RequirePackage{multicol}
 \ExplSyntaxOn
 \AddToHook{begindocument}[ptxcd-titlegraphic]{
-	\dim_set:Nn \l__ptxcd_titlegraphic_ht_dim {\paperheight}
-	\dim_set:Nn \l__ptxcd_titlegraphic_wd_dim {\paperwidth}
+	\dim_set:Nn \l_@@_titlegraphic_ht_dim {\paperheight}
+	\dim_set:Nn \l_@@_titlegraphic_wd_dim {\paperwidth}
 }
 \defbeamertemplate*{titlegraphic}{TUDa2023}{{
-			\def\width{\l__ptxcd_titlegraphic_wd_dim}
-			\def\height{\l__ptxcd_titlegraphic_ht_dim}
+			\def\width{\l_@@_titlegraphic_wd_dim}
+			\def\height{\l_@@_titlegraphic_ht_dim}
 			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
 		}}
 %    \end{macrocode}
@@ -323,39 +279,39 @@
 %    \end{macrocode}
 % partner/sub logo
 %    \begin{macrocode}
-\box_new:N  \g__ptxcd_partnerlogo_box
-\dim_new:N \l__ptxcd_partnerlogo_ht_dim
-\dim_gset:Nn \l__ptxcd_partnerlogo_ht_dim {.6\c_ptxcd_logoheight_dim}
-\dim_new:N \l__ptxcd_partnerlogo_wd_dim
-\dim_gset:Nn \l__ptxcd_partnerlogo_wd_dim {1.6\c_ptxcd_logoheight_dim}
-\box_new:N  \g__ptxcd_sublogo_box
-\dim_new:N \l__ptxcd_sublogo_wd_dim
-\dim_gset:Nn \l__ptxcd_sublogo_wd_dim {2.2\c_ptxcd_logoheight_dim}
-\dim_new:N \l__ptxcd_sublogo_ht_dim
-\dim_gset:Nn  \l__ptxcd_sublogo_ht_dim {.6\c_ptxcd_logoheight_dim}
-\cs_new:Nn \__ptxcd_setup_logo_box:nnn {
+\box_new:N  \g_@@_partnerlogo_box
+\dim_new:N \l_@@_partnerlogo_ht_dim
+\dim_gset:Nn \l_@@_partnerlogo_ht_dim {.6\c_ptxcd_logoheight_dim}
+\dim_new:N \l_@@_partnerlogo_wd_dim
+\dim_gset:Nn \l_@@_partnerlogo_wd_dim {1.6\c_ptxcd_logoheight_dim}
+\box_new:N  \g_@@_sublogo_box
+\dim_new:N \l_@@_sublogo_wd_dim
+\dim_gset:Nn \l_@@_sublogo_wd_dim {2.2\c_ptxcd_logoheight_dim}
+\dim_new:N \l_@@_sublogo_ht_dim
+\dim_gset:Nn  \l_@@_sublogo_ht_dim {.6\c_ptxcd_logoheight_dim}
+\cs_new:Nn \_@@_setup_logo_box:nnn {
 	\begingroup
-	\def\width{\use:c {l__ptxcd_#2_wd_dim}}
-	\def\height{\use:c {l__ptxcd_#2_ht_dim}}
+	\def\width{\use:c {l_@@_#2_wd_dim}}
+	\def\height{\use:c {l_@@_#2_ht_dim}}
 	\IfBooleanTF{#1}{
-		\hbox_gset:cn {g__ptxcd_#2_box} {#3}
-		\box_gautosize_to_wd_and_ht_plus_dp:cnn  {g__ptxcd_#2_box} {\width} {\height}
+		\hbox_gset:cn {g_@@_#2_box} {#3}
+		\box_gautosize_to_wd_and_ht_plus_dp:cnn  {g_@@_#2_box} {\width} {\height}
 	} {
-		\hbox_gset:cn {g__ptxcd_#2_box} {
+		\hbox_gset:cn {g_@@_#2_box} {
 			#3
 		}
 	}
 	\endgroup
 }
 \NewDocumentCommand{\partnerlogo}{sm}{
-	\__ptxcd_setup_logo_box:nnn {#1} {partnerlogo} {#2}
+	\_@@_setup_logo_box:nnn {#1} {partnerlogo} {#2}
 }
 \NewDocumentCommand{\sublogo}{sms}{
-	\__ptxcd_setup_logo_box:nnn {#1} {sublogo} {#2}
+	\_@@_setup_logo_box:nnn {#1} {sublogo} {#2}
 	\IfBooleanT{#3}{
-		\hbox_gset:Nn \g__ptxcd_sublogo_box {
-			\hbox_unpack_drop:N \g__ptxcd_sublogo_box
-			\hskip.6\l__ptxcd_sublogo_ht_dim
+		\hbox_gset:Nn \g_@@_sublogo_box {
+			\hbox_unpack_drop:N \g_@@_sublogo_box
+			\hskip.6\l_@@_sublogo_ht_dim
 		}
 	}
 }
@@ -402,8 +358,8 @@
 % See the file LICENSE.md for more details.
 %    \begin{macrocode}
 \ExplSyntaxOn
-\cs_new:Nn \__ptxcd_toc_check: {
-\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int}  = {3} {
+\cs_new:Nn \_@@_toc_check: {
+\int_compare:nNnT {\g_@@_beamer_toc_col_int}  = {3} {
 %    \end{macrocode}
 % if all subsections/subsubsections are hidden we can have two columns
 %    \begin{macrocode}
@@ -421,7 +377,7 @@
 %    \end{macrocode}
 % if all subsections/subsubsections are hidden standard twocolumn layout will be choosen
 %    \begin{macrocode}
-\int_set:Nn \g__ptxcd_beamer_toc_col_int {2}
+\int_set:Nn \g_@@_beamer_toc_col_int {2}
 } {
 %    \end{macrocode}
 % check if there are subsections/subsubsections
@@ -434,7 +390,7 @@
 	\def\beamer@subsubsectionintoc##1##2##3##4##5##6##7{\int_gset:Nn  \g_tmpa_int  {1}\endinput}
 	\@input{\jobname.toc}%
 }
-\int_compare:nNnT {\g_tmpa_int} = {1} {\int_set:Nn \g__ptxcd_beamer_toc_col_int {1}}
+\int_compare:nNnT {\g_tmpa_int} = {1} {\int_set:Nn \g_@@_beamer_toc_col_int {1}}
 }
 }
 }
@@ -459,8 +415,8 @@
 		\def\beamer@tocsections{<*>}%
 		\setkeys{beamertoc}{firstsection=1}%
 		\setkeys{beamertoc}{#1}%
-		\UseName{__ptxcd_toc_check:}
-		\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
+		\UseName{_@@_toc_check:}
+		\int_compare:nNnT {\g_@@_beamer_toc_col_int} > {1} {
 				\setlength{\columnsep}{5ex}%
 				\raggedcolumns
 				\begin{multicols}{2}
@@ -469,7 +425,7 @@
 					\pause[0]%
 					\@input{\jobname.toc}%
 					}%
-					\int_compare:nNnT {\g__ptxcd_beamer_toc_col_int} > {1} {
+					\int_compare:nNnT {\g_@@_beamer_toc_col_int} > {1} {
 				\end{multicols}%
 			}
 	\end{beamercolorbox}%
@@ -515,21 +471,21 @@
 %    \end{macrocode}
 % (sub-)section in toc: default
 %    \begin{macrocode}
-\cs_new:Nn \__ptxcd_toc_sub_level_entry_numbered:n {
+\cs_new:Nn \_@@_toc_sub_level_entry_numbered:n {
 	\exp_args:Nc \tl_if_blank:nF {inserttoc#1subsectionnumber}
 	{\hphantom{0}\llap{\use:c {inserttoc#1subsectionnumber}}\hspace{.5em}}
 }
-\cs_new:Nn \__ptxcd_toc_sub_level_entry_itemize:n {
+\cs_new:Nn \_@@_toc_sub_level_entry_itemize:n {
 	\strut
 	\usebeamertemplate{itemize~#1item}\hspace{.5em}
 }
 \defbeamertemplate*{subsection~in~toc}{TUDa}[1][false]{\leavevmode
 	\leftskip=12.4mm
-	\use:c {__ptxcd_toc_sub_level_entry_#1:n} {}
+	\use:c {_@@_toc_sub_level_entry_#1:n} {}
 	\inserttocsubsection\par}
 \defbeamertemplate*{subsubsection~in~toc}{TUDa}[1][false]{\leavevmode
 	\leftskip=\dimexpr12.4mm+.5em\relax
-	\use:c {__ptxcd_toc_sub_level_entry_#1:n} {sub}
+	\use:c {_@@_toc_sub_level_entry_#1:n} {sub}
 	\inserttocsubsubsection\par}
 \defbeamertemplate*{toc~section~number}{TUDa}{
 	\hphantom{00}\llap{\inserttocsectionnumber}\hspace{.5em}
@@ -555,24 +511,24 @@
 \defbeamertemplate*{title~ page}{TUDa}[1][]{
 	\nointerlineskip
 	\vspace{\dim_eval:n {-\c_ptxcd_largerule_dim}}
-	\hbox_set:Nn \l__ptxcd_titlehead_box {
-		\parbox{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim}{%
+	\hbox_set:Nn \l_@@_titlehead_box {
+		\parbox{\dimexpr\paperwidth-2\g_@@_beamer_sep_dim}{%
 			\begin{beamercolorbox}[
 					wd=\linewidth,
-					sep=\g__ptxcd_beamer_logosep_dim,
+					sep=\g_@@_beamer_logosep_dim,
 				]{title}
 				\raggedright
 				\usebeamerfont{title}
 				\skip_horizontal:n {1ex}
-				\strut\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-2ex\relax}{
+				\strut\parbox[t]{\dimexpr\linewidth- \box_wd:N \g_@@_logo_box-2ex\relax}{
 					\inserttitle
 					\par
 				}
-				\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\box_use:N \g__ptxcd_logo_box}
+				\hspace{\fill}\raisebox{\dimexpr-\height+\ht\strutbox\relax}{\box_use:N \g_@@_logo_box}
 				\ifx\insertsubtitle\@empty
 				\else
 					\par\vspace{\c_ptxcd_largerule_dim}
-					\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \box_wd:N \g__ptxcd_logo_box-2ex\relax}{
+					\skip_horizontal:n {1ex}\parbox[t]{\dimexpr\linewidth- \box_wd:N \g_@@_logo_box-2ex\relax}{
 						\usebeamerfont{subtitle}\insertsubtitle
 					}
 				\fi
@@ -580,7 +536,7 @@
 			\bool_if:NT \g_ptxcd_authorontitle_bool {
 				\par\nointerlineskip
 				\begin{beamercolorbox}[
-						wd=\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
+						wd=\dimexpr\paperwidth-2\g_@@_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
 				\end{beamercolorbox}
 				\par\nointerlineskip
 				\begin{beamercolorbox}[
@@ -589,7 +545,7 @@
 					]{title}
 					\raggedright
 					\skip_horizontal:n {1ex}
-					\parbox[t]{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim-2ex\relax}{
+					\parbox[t]{\dimexpr\paperwidth-2\g_@@_beamer_sep_dim-2ex\relax}{
 						\ifx\insertauthor\@empty
 						\else
 							\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
@@ -603,15 +559,15 @@
 			}
 		}
 	}
-	\box_use:N \l__ptxcd_titlehead_box
+	\box_use:N \l_@@_titlehead_box
 	\nointerlineskip\begin{beamercolorbox}[
-			wd=\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
+			wd=\dimexpr\paperwidth-2\g_@@_beamer_sep_dim,ht=\c_ptxcd_smallrule_dim,dp=\z@]{smallrule}
 	\end{beamercolorbox}
-	\dim_set:Nn \l__ptxcd_titlegraphic_ht_dim {\textheight-\box_ht:N\l__ptxcd_titlehead_box-\box_dp:N \l__ptxcd_titlehead_box
+	\dim_set:Nn \l_@@_titlegraphic_ht_dim {\textheight-\box_ht:N\l_@@_titlehead_box-\box_dp:N \l_@@_titlehead_box
 		+\c_ptxcd_largerule_dim-.5\c_ptxcd_rulesep_dim-\c_ptxcd_smallrule_dim}
-	\let\height\l__ptxcd_titlegraphic_ht_dim
-	\dim_set:Nn \l__ptxcd_titlegraphic_wd_dim{\dimexpr\paperwidth-2\g__ptxcd_beamer_sep_dim}
-	\let\width\l__ptxcd_titlegraphic_wd_dim
+	\let\height\l_@@_titlegraphic_ht_dim
+	\dim_set:Nn \l_@@_titlegraphic_wd_dim{\dimexpr\paperwidth-2\g_@@_beamer_sep_dim}
+	\let\width\l_@@_titlegraphic_wd_dim
 	\nointerlineskip
 	\begin{beamercolorbox}[wd=\width,center]{titlegraphic}
 		\raisebox{-\c_ptxcd_largerule_dim}[\dim_eval:n {\height-\c_ptxcd_largerule_dim}][0pt]{\inserttitlegraphic}
@@ -639,4 +595,5 @@
 % \fi
 %
 % \Finale
+% \fi^^A No documentation on this
 \endinput

@@ -20,7 +20,7 @@ sourcefiledir="tex"
 sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 docfiledir="examples"
-typesetfiles={"*.tex"}
+typesetfiles={"*.tex","tuda-ci.dtx"}
 typesetcmds="\\def\\TUDaDefaultBuildOptions{accept-missing-logos}"
 
 textfiles= {"README.md"}
@@ -57,7 +57,7 @@ function get_dev_tag (oldtag)
 end
 
 --[[
-  # Tagging configuration 
+  # Tagging configuration
 ]]
 
 function update_tag(file, content, tagname, tagdate)
@@ -117,7 +117,7 @@ function update_tag(file, content, tagname, tagdate)
 		content = string.gsub(content, "(packagedate%s*=%s*\")" .. datepattern,
 							"%1" .. tagdate)
 	else
-		content = string.gsub(content, "(\\Provides%a-{[^\n]-}%[)" ..
+		content = string.gsub(content, "(\\Provides%a+{[^\n]+}\n?%s-%[)" ..
 								datepattern .. "%s-v" .. versionpattern,
 							"%1" .. tagdate .. " v" .. tagname)
 		content = string.gsub(content,
@@ -134,7 +134,7 @@ function update_tag(file, content, tagname, tagdate)
 end
 
 --[[
-  # Upload configuration 
+  # Upload configuration
 ]]
 
 github_base_url = "https://github.com/tudace/TUDa_LaTeX_templates"

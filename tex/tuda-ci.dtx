@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -220,7 +220,7 @@
 %</driver>
 % \fi
 %
-% \changes{3.90}{2024-02-01}{Converted to DTX file}
+% \changes{v3.90}{2024-02-01}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 % \GetFileInfo{tuda-ci.dtx}
@@ -1088,7 +1088,7 @@
 \RequirePackage{URspecialopts}
 \Define@specialopt@Module[ptxcd/pub]
 
-\str_const:Nn \c__ptxcd_base_str {pub}
+\str_const:Nn \c_@@_base_str {pub}
 \tl_new:N \g_ptxcd_pub_class_tl
 \tl_new:N \g_ptxcd_thesis_options_tl
 
@@ -1144,7 +1144,7 @@
 %    \begin{macrocode}
       \exp_args:Ne \keys_set:ne {
 
-%<!sciposter>        ptxcd / \c__ptxcd_base_str
+%<!sciposter>        ptxcd / \c_@@_base_str
 %<sciposter>        ptxcd / poster
       }{
 %<!letter>        colorback=false,
@@ -1191,7 +1191,7 @@
       \str_gset:Nx \g_ptxcd_department_str {\l_keys_value_tl}
     },
 %
-  departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
+  departmentconfigprefix .tl_gset:N = \g_@@_config_prefix_tl,
   departmentconfigprefix .initial:n = tuda,
 %
   departmentlogofile .tl_gset:N = \g_ptxcd_departmentlogo_tl,
@@ -1213,7 +1213,7 @@
 %</!beamer>
 %<*beamer>
   pdfa .code:n = {
-    \msg_error:nn {tuda\c__ptxcd_base_str} {pdfa-option-removed}
+    \msg_error:nn {tuda\c_@@_base_str} {pdfa-option-removed}
   },
 %</beamer>
   pdfx .bool_gset:N = \g_ptxcd_pdfx_bool,
@@ -1465,7 +1465,7 @@
 % Especially since beamer did not require this to be enabled by default.
 % A comment including the information on how to set up the PDF/A within beamer using the pdfmanagement has been added to the templates.
 %    \begin{macrocode}
-\msg_new:nnn {tuda\c__ptxcd_base_str} {pdfa-option-removed} {
+\msg_new:nnn {tuda\c_@@_base_str} {pdfa-option-removed} {
   The~option~"pdfa"~was~removed~for~this~document~class.\\
   In~case~you~need~it,~please~use~the~mechanism~provided~by~the~pdfmanagement~instead.\\
   See~TUDa-CI~documentation~for~details.
@@ -1479,7 +1479,7 @@
 %    \begin{macrocode}
 \cs_if_exist:NT \TUDaDefaultBuildOptions {
   \exp_args:Ne \keys_set:ne { ptxcd /
-%<!(beamer-outer|sciposter)>    \c__ptxcd_base_str
+%<!(beamer-outer|sciposter)>    \c_@@_base_str
 %<beamer-outer>    beamer/outer
 %<sciposter>    poster
   } {
@@ -1492,7 +1492,7 @@
 % \fi
 % Define a macro to insert the logo workaround to only need this definition once.
 %    \begin{macrocode}
-\cs_new:Nn \__ptxcd_insert_logo: {
+\cs_new:Nn \_@@_insert_logo: {
   \bool_if:NTF \g_ptxcd_logo_workaround_bool {
     \file_if_exist:nTF {\g_ptxcd_logofile_tl.pdf}
     \use_ii:nn
@@ -1527,7 +1527,7 @@
 % \fi
 %    \begin{macrocode}
 
-\ProcessKeyOptions[ptxcd/\c__ptxcd_base_str]
+\ProcessKeyOptions[ptxcd/\c_@@_base_str]
 %    \end{macrocode}
 % Wrapper around the old implementation of pdfx + support for pdfmanagement.
 % \iffalse
@@ -1599,7 +1599,7 @@
 \LoadClass{\g_ptxcd_pub_class_tl}
 
 %    \end{macrocode}
-% \changes{3.41}{2024-07-02}{Change package order to be more strict about the loading time of pdfx to avoid conflicts.}
+% \changes{v3.41}{2024-07-02}{Change package order to be more strict about the loading time of pdfx to avoid conflicts.}
 %    \begin{macrocode}
 \RequirePackage{tudafonts}
 \RequirePackage{tudacolors}
@@ -1618,13 +1618,13 @@
   \PassOptionsToPackage{a-2b}{pdfx}
 %% Workaround posted by David Carlisle on tex.stackexchange
 %% Thanks to Ulrike Fischer for mentioning it in #472
-  \let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+  \let \_@@_grouplevel_before_pdfx: \currentgrouplevel
   \chardef\currentgrouplevel0
   \ExplSyntaxOff
   \RequirePackage{pdfx}
   \ExplSyntaxOn
-  \let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-  \cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+  \let \currentgrouplevel \_@@_grouplevel_before_pdfx:
+  \cs_undefine:N \_@@_grouplevel_before_pdfx:
 %% end of the workaround
 
   \msg_new:nnn{tuda-ci} {prefer-lualatex} {
@@ -2043,20 +2043,20 @@
 % \end{macro}
 %
 %    \begin{macrocode}
-\box_new:N \l__ptxcd_titlegraphic_box
+\box_new:N \l_@@_titlegraphic_box
 \NewDocumentCommand{\titlegraphic}{sm}{
 	\IfBooleanTF{#1}{
 		\tl_gset:Nn  \g_ptxcd_titleimage_code_tl  {
-			\hbox_set:Nn \l__ptxcd_titlegraphic_box {\raisebox{\depth}{#2}}
-			\box_resize_to_wd:Nn \l__ptxcd_titlegraphic_box {\width}
-			\dim_compare:nTF {\box_ht:N \l__ptxcd_titlegraphic_box -\height> \c_zero_dim}
+			\hbox_set:Nn \l_@@_titlegraphic_box {\raisebox{\depth}{#2}}
+			\box_resize_to_wd:Nn \l_@@_titlegraphic_box {\width}
+			\dim_compare:nTF {\box_ht:N \l_@@_titlegraphic_box -\height> \c_zero_dim}
 {
-  \dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l__ptxcd_titlegraphic_box - .5\height}
-  \clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l__ptxcd_titlegraphic_box}
+  \dim_set:Nn \l_tmpa_dim {.5\box_ht:N \l_@@_titlegraphic_box - .5\height}
+  \clipbox{0pt~\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}}{\box_use:N \l_@@_titlegraphic_box}
 }{
-  \box_resize_to_ht:Nn \l__ptxcd_titlegraphic_box {\height}
-  \dim_set:Nn \l_tmpa_dim {(\box_wd:N \l__ptxcd_titlegraphic_box - \width) / 2}
-  \clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l__ptxcd_titlegraphic_box}
+  \box_resize_to_ht:Nn \l_@@_titlegraphic_box {\height}
+  \dim_set:Nn \l_tmpa_dim {(\box_wd:N \l_@@_titlegraphic_box - \width) / 2}
+  \clipbox{\dim_eval:n{\l_tmpa_dim}~0pt~\dim_eval:n{\l_tmpa_dim}~0pt}{\box_use:N \l_@@_titlegraphic_box}
 }
 }
 }{
@@ -2167,7 +2167,7 @@
   {\msg_warning:nn{tudapub} {infobox-too-high}}
   \makebox[\linewidth][r]{\smash{
       \raisebox{-\height}{
-        \makebox[\__ptxcd_logowidth:][l]{
+        \makebox[\_@@_logowidth:][l]{
           \box_use:N \g_ptxcd_title_info_box
         }}
     }}
@@ -2197,8 +2197,8 @@
 \cs_new:Nn \ptxcd_make_title_info_box:n {
   \setlength{\fboxsep}{1.5mm}%
   \colorbox{InfoBox}{
-    \makebox[\dim_eval:n {\__ptxcd_logowidth:-\fboxsep}][r]{
-      \parbox{\dim_eval:n {\__ptxcd_logowidth:+\fboxsep-\__ptxcd_logosep:}}{
+    \makebox[\dim_eval:n {\_@@_logowidth:-\fboxsep}][r]{
+      \parbox{\dim_eval:n {\_@@_logowidth:+\fboxsep-\_@@_logosep:}}{
         \expandafter \fontsize\ptxcd_titlethanks_fontsize:\selectfont\usekomafont{institution}%
         \raggedright%
         #1
@@ -2207,11 +2207,11 @@
 
 \cs_new:Nn \ptxcd_make_title_logo_box:n {
   \setlength{\fboxsep}{\z@}%
-  \parbox{\__ptxcd_logowidth:}{
+  \parbox{\_@@_logowidth:}{
     \colorbox{InfoBox}{
       \rlap{
-        \makebox[\dim_eval:n {\__ptxcd_logowidth: + \__ptxcd_logosep:}][r]{
-          \colorbox{InfoBox}{#1\hspace{\__ptxcd_logosep:}}
+        \makebox[\dim_eval:n {\_@@_logowidth: + \_@@_logosep:}][r]{
+          \colorbox{InfoBox}{#1\hspace{\_@@_logosep:}}
         }
       }
     }
@@ -2248,7 +2248,7 @@
 %    \end{macrocode}
 % \changes{v4.00}{2025-01-26}{Added accept-missing-logos option for public testing workflows.}
 %    \begin{macrocode}
-\addTitleBoxLogo*{\makebox[\linewidth][l]{\__ptxcd_insert_logo:}}
+\addTitleBoxLogo*{\makebox[\linewidth][l]{\_@@_insert_logo:}}
 
 \DeclareNewLayer[textarea,background,mode=picture,
   contents={
@@ -2267,7 +2267,7 @@
               \g_ptxcd_titleimage_code_tl
             }}}}
       \bool_if:NF \g_@@_logo_head_bool {
-        \put(\dim_to_decimal_in_unit:nn {\layerwidth-\__ptxcd_logowidth:
+        \put(\dim_to_decimal_in_unit:nn {\layerwidth-\_@@_logowidth:
         } {\unitlength},
         \dim_to_decimal_in_unit:nn {\layerheight-\box_ht:N \g_ptxcd_title_info_box - .5\c_ptxcd_logoheight_dim} {\unitlength}){
           \rlap{\box_use:N \g_ptxcd_title_info_box}
@@ -2295,7 +2295,7 @@
 \cs_new:Nn \ptxcd_setup_title_box: {
   \hbox_gset:Nn \g_ptxcd_title_info_box
   {
-    \parbox{\dim_eval:n {\__ptxcd_logowidth:+\__ptxcd_logosep:}}{
+    \parbox{\dim_eval:n {\_@@_logowidth:+\_@@_logosep:}}{
       \seq_use:Nn \g_ptxcd_title_info_seq  {\par\nointerlineskip\vspace{\dim_eval:n {\c_ptxcd_largerule_dim+\c_ptxcd_rulesep_dim}}}
     }
   }
@@ -2304,7 +2304,7 @@
 \cs_new:Nn \ptxcd_setup_sponsor_box: {
   \bool_if:nF {\seq_if_empty_p:N \g_ptxcd_sponsors_seq &&  \tl_if_empty_p:N \@sponsors} {
     \hbox_gset:Nn \g_ptxcd_sponsor_box {
-      \edef\height{\noexpand\dimexpr\dim_eval:n {\__ptxcd_logosep: + .5\c_ptxcd_logoheight_dim}}
+      \edef\height{\noexpand\dimexpr\dim_eval:n {\_@@_logosep: + .5\c_ptxcd_logoheight_dim}}
       \parbox[t]{\textwidth}{
         \rule{\linewidth}{\g_ptxcd_titlerule_dim}\par\nointerlineskip
         \addvspace{\c_ptxcd_rulesep_dim}
@@ -2457,7 +2457,7 @@
       }
     }
     \bool_if:NF \g_ptxcd_pdfa_bool {
-      \msg_new:nnn{tuda-ci} {no-pdfa}{The~ tuda\c__ptxcd_base_str\space class~ will~ not~ create~ PDF/A.}
+      \msg_new:nnn{tuda-ci} {no-pdfa}{The~ tuda\c_@@_base_str\space class~ will~ not~ create~ PDF/A.}
       \msg_info:nn{tuda-ci} {no-pdfa}
     }
 \fi:
@@ -2752,7 +2752,7 @@
   {\parbox[t]{\g_ptxcd_headwidth_dim}{
       \rule{\z@}{.5\c_ptxcd_logoheight_dim}\par\nointerlineskip
       \raisebox{-\height}{%
-        \begin{minipage}[t]{\dim_eval:n {\linewidth-\__ptxcd_logowidth:-1ex}}
+        \begin{minipage}[t]{\dim_eval:n {\linewidth-\_@@_logowidth:-1ex}}
           \bool_if:NT \g_ptxcd_colorbacktitle_bool  {\begin{addmargin}{.5\c_ptxcd_largerule_dim}}
               \raggedright
               \bool_if:NT \g_ptxcd_colorback_bool {\color{textonaccentcolor}}
@@ -2777,11 +2777,11 @@
       \hfill
       \raisebox{-\height}{
         \ptxcd_setup_title_box:
-        \makebox[\__ptxcd_logowidth:][l]{
+        \makebox[\_@@_logowidth:][l]{
           \box_use:N \g_ptxcd_title_info_box
         }
       }
-      \dim_compare:nNnTF {\box_ht:N \g_ptxcd_title_info_box + \box_ht:N \g_ptxcd_title_info_box} > {(\__ptxcd_logowidth:)/2}
+      \dim_compare:nNnTF {\box_ht:N \g_ptxcd_title_info_box + \box_ht:N \g_ptxcd_title_info_box} > {(\_@@_logowidth:)/2}
         {\vspace{\c_ptxcd_largerule_dim}}
         {\vspace{.5\c_ptxcd_logoheight_dim}}
       \par
@@ -2949,7 +2949,7 @@
   \let\Iftocfeature\iftocfeature
 }
 
-\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
+\file_if_exist_input:n {\g_@@_config_prefix_tl\g_ptxcd_department_str.cfg}
 %    \end{macrocode}
 
 %
@@ -3031,7 +3031,7 @@
 \newcommand*\ptxcd_box_department {\cs_if_exist_use:NF \departmentfullname {\ptxcd_department:}}
 \newcommand*\ptxcd_in_department {}
 \newcommand*{\ptxcd_thesisStatus}{}
-\tl_new:N \g__ptxcd_affidavit_version_tl
+\tl_new:N \g_@@_affidavit_version_tl
 \def\@ThesisTypeArticle{die}
 
 \keys_define:nn {ptxcd/thesis} {
@@ -3064,9 +3064,9 @@
   noinstbox .bool_gset:N = \g_ptxcd_manual_info_box_bool,
   instbox .bool_gset_inverse:N = \g_ptxcd_manual_info_box_bool,
   instbox .initial:n = true,
-  reviewer-on-uppertitleback .bool_gset:N = \g__ptxcd_reviewer_on_uppertitleback_bool,
+  reviewer-on-uppertitleback .bool_gset:N = \g_@@_reviewer_on_uppertitleback_bool,
   reviewer-on-uppertitleback .initial:n = false,
-  hide-architecture-note .bool_gset_inverse:N = \g__ptxcd_architecture_note_bool,
+  hide-architecture-note .bool_gset_inverse:N = \g_@@_architecture_note_bool,
   hide-architecture-note .initial:n = false,
   hide-architecture-note .default:n = true,
 }
@@ -3173,7 +3173,7 @@
     \seq_map_inline:Nn \g_ptxcd_reviewer_seq
     {
       \int_incr:N \l_tmpb_int
-      \cs_if_exist_use:cF {__ptxcd_reviewname_\int_use:N \l_tmpb_int :}
+      \cs_if_exist_use:cF {_@@_reviewname_\int_use:N \l_tmpb_int :}
       {\int_to_arabic:n {\l_tmpb_int}.~\text_titlecase:n{\ptxcd_reviewname}}
       :~\exp_not:n {##1}\\
     }
@@ -3219,9 +3219,9 @@
   year .tl_gset:N = \g_ptxcd_thesis_publication_year_tl,
   year .initial:n = ,
   license .choices:nn = {cc-by-4.0,cc-by-sa-4.0,cc-by-nc-sa-4.0,cc-by-nc-4.0,cc-by-nd-4.0,cc-by-nc-nd-4.0} {
-      \tl_gset:Nx \g_ptxcd_license_info_tl {\exp_not:N \g__ptxcd_cc_license:n {\l_keys_choice_tl} \exp_not:N \iflanguage{\exp_not:N \bbl@main@language}{}{\exp_not:n {\par\smallskip\otherlanguage{\bbl@main@language}}{\exp_not:N \g__ptxcd_cc_license:n {\l_keys_choice_tl}}}}
+      \tl_gset:Nx \g_ptxcd_license_info_tl {\exp_not:N \g_@@_cc_license:n {\l_keys_choice_tl} \exp_not:N \iflanguage{\exp_not:N \bbl@main@language}{}{\exp_not:n {\par\smallskip\otherlanguage{\bbl@main@language}}{\exp_not:N \g_@@_cc_license:n {\l_keys_choice_tl}}}}
     },
-  license / cc-by-nc-nd-2.0-de .code:n = \tl_gset:Nn  \g_ptxcd_license_info_tl {\use:c {g__ptxcd_cc-by-nc-nd-2.0-de:}},
+  license / cc-by-nc-nd-2.0-de .code:n = \tl_gset:Nn  \g_ptxcd_license_info_tl {\use:c {g_@@_cc-by-nc-nd-2.0-de:}},
   license / inc-1.0-de  .code:n = \tl_gset:Nn \g_ptxcd_license_info_tl {
     Die~Veröffentlichung~ist~urheberrechtlich~geschützt\newline
     \url{https://rightsstatements.org/page/InC/1.0/}
@@ -3249,38 +3249,38 @@ tuda-ci~will~adapt~this~change~in~the~next~major~update.~\\
 Please~choose~your~license~manually~to~avoid~unintended~changes.
 } {Use~either~the~old~default~value~license=cc-by-nc-nd-2.0-de or~license=cc-by-4.0~or~license={<custom~text>}~with~\string\tuprints.}
 
-\cs_new:cn {g__ptxcd_cc-by-nc-nd-2.0-de:} {
+\cs_new:cn {g_@@_cc-by-nc-nd-2.0-de:} {
   Die~Veröffentlichung~steht~unter~folgender~Creative~Commons~Lizenz:\\
   Namensnennung~--~Keine~kommerzielle~Nutzung~--~Keine~Bearbeitung~ 2.0~Deutschland\\
   \url{https://creativecommons.org/licenses/by-nc-nd/2.0/de/}
 }
 
-\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_by:}{Namensnennung}
-\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_nc:}{Nicht~kommerziell}
-\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_sa:}{Weitergabe~unter~gleichen~Bedingungen}
-\defcaptionname{ngerman, german}{\g__ptxcd_cc_attr_nd:}{Keine~Bearbeitungen}
+\defcaptionname{ngerman, german}{\g_@@_cc_attr_by:}{Namensnennung}
+\defcaptionname{ngerman, german}{\g_@@_cc_attr_nc:}{Nicht~kommerziell}
+\defcaptionname{ngerman, german}{\g_@@_cc_attr_sa:}{Weitergabe~unter~gleichen~Bedingungen}
+\defcaptionname{ngerman, german}{\g_@@_cc_attr_nd:}{Keine~Bearbeitungen}
 
-\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_by:}{Attribution}
-\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_nc:}{NonCommercial}
-\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_sa:}{ShareAlike}
-\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_attr_nd:}{NoDerivatives}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_attr_by:}{Attribution}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_attr_nc:}{NonCommercial}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_attr_sa:}{ShareAlike}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_attr_nd:}{NoDerivatives}
 
-\defcaptionname{ngerman,german}{\g__ptxcd_cc_intro:}{Die~Veröffentlichung~steht~unter~folgender~Creative~Commons~Lizenz:}
-\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_intro:}{This~work~is~licensed~under~a~Creative~Commons~License:}
+\defcaptionname{ngerman,german}{\g_@@_cc_intro:}{Die~Veröffentlichung~steht~unter~folgender~Creative~Commons~Lizenz:}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_intro:}{This~work~is~licensed~under~a~Creative~Commons~License:}
 
-\defcaptionname{ngerman,german}{\g__ptxcd_cc_sep:}{~--~}
-\defcaptionname{english, USenglish, american, UKenglish, british}{\g__ptxcd_cc_sep:}{--}
+\defcaptionname{ngerman,german}{\g_@@_cc_sep:}{~--~}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_sep:}{--}
 
-\cs_new:Nn \g__ptxcd_cc_license:n {
+\cs_new:Nn \g_@@_cc_license:n {
   \group_begin:
-  \g__ptxcd_cc_intro:\\
+  \g_@@_cc_intro:\\
   \seq_set_split:Nnn \l_tmpa_seq {-} {#1}
   \bool_set_false:N \l_tmpa_bool
   \seq_remove_all:Nn \l_tmpa_seq {cc}
   \seq_pop_right:NN \l_tmpa_seq \l_tmpa_tl
   \seq_map_inline:Nn \l_tmpa_seq {
-    \bool_if:NTF \l_tmpa_bool {\g__ptxcd_cc_sep:} {\bool_set_true:N \l_tmpa_bool}
-    \use:c {g__ptxcd_cc_attr_##1:}
+    \bool_if:NTF \l_tmpa_bool {\g_@@_cc_sep:} {\bool_set_true:N \l_tmpa_bool}
+    \use:c {g_@@_cc_attr_##1:}
   }~\l_tmpa_tl{}~International\\
   \url{https://creativecommons.org/licenses/\seq_use:Nn \l_tmpa_seq {-}/\l_tmpa_tl/}
   \group_end:
@@ -3323,7 +3323,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
 % ignore birthplace on english subject
   \let\ptxcd_birthplace\@empty
   \@subject
-  \bool_if:NT \g__ptxcd_reviewer_on_uppertitleback_bool
+  \bool_if:NT \g_@@_reviewer_on_uppertitleback_bool
   \ptxcd_thesis_print_reviewer:
   \exp_args:Nx \tl_if_empty:nF {\@date\ptxcd_submissiondate}{
     \par\vspace*{\baselineskip}
@@ -3544,13 +3544,13 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
 
 \bool_if:NTF \g_ptxcd_dr_bool {
   \keys_define:nn {ptxcd/thesis} {
-    affidavit .choices:nn = {dr}{\tl_gset_eq:NN  \g__ptxcd_affidavit_version_tl \l_keys_choice_tl},
+    affidavit .choices:nn = {dr}{\tl_gset_eq:NN  \g_@@_affidavit_version_tl \l_keys_choice_tl},
     affidavit / default .meta:n = {affidavit=dr},
     affidavit .initial:n = dr,
   }
 } {
   \keys_define:nn {ptxcd/thesis} {
-    affidavit .choices:nn = {digital,print}{\tl_gset_eq:NN  \g__ptxcd_affidavit_version_tl \l_keys_choice_tl},
+    affidavit .choices:nn = {digital,print}{\tl_gset_eq:NN  \g_@@_affidavit_version_tl \l_keys_choice_tl},
     affidavit / default .meta:n = {affidavit=digital},
     affidavit .initial:n = default,
   }
@@ -3565,9 +3565,9 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
   \clearpage
   \begin{otherlanguage}{german}
     \bool_if:NTF \g_ptxcd_dr_bool {
-      \g__ptxcd_affidavit_dr_tl
+      \g_@@_affidavit_dr_tl
     } {
-      \tl_use:c {g__ptxcd_affidavit_\g__ptxcd_affidavit_version_tl _tl}
+      \tl_use:c {g_@@_affidavit_\g_@@_affidavit_version_tl _tl}
     }
     \par
     \bigskip
@@ -3578,7 +3578,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
 
 \ExplSyntaxOff
 
-\expandafter\def\csname g__ptxcd_affidavit_dr_tl\endcsname {%
+\expandafter\def\csname g_@@_affidavit_dr_tl\endcsname {%
   \section*{Erklärungen laut Promotionsordnung}
   \subsection*{\S\,8 Abs. 1 lit. d PromO}
   Ich versichere hiermit, dass zu einem vorherigen Zeitpunkt noch keine Promotion versucht wurde. In diesem Fall sind nähere Angaben über Zeitpunkt, Hochschule, Dissertationsthema und Ergebnis dieses Versuchs mitzuteilen.
@@ -3591,7 +3591,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
 }
 
 %% Quelle: https://www.tu-darmstadt.de/studieren/studierende_tu/studienorganisation_und_tucan/hilfe_und_faq/artikel_details_de_en_37824.de.jsp
-\expandafter\def\csname g__ptxcd_affidavit_digital_tl\endcsname {%
+\expandafter\def\csname g_@@_affidavit_digital_tl\endcsname {%
   \subsection*{Erklärung zur Abschlussarbeit gemäß \S\,22~Abs.~7~APB TU~Darmstadt}
   \begin{sloppypar}%
     Hiermit erkläre ich, \@author, dass ich die vorliegende Arbeit gemäß \S\,22~Abs.~7~APB der TU Darmstadt selbstständig, ohne Hilfe Dritter und nur mit den angegebenen Quellen und Hilfsmitteln angefertigt habe.
@@ -3601,7 +3601,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
   Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.
   \par
   Mir ist bekannt, dass im Falle eines Plagiats (\S\,38~Abs.~2 ~APB) ein Täuschungsversuch vorliegt, der dazu führt, dass die Arbeit mit 5,0 bewertet und damit ein Prüfungsversuch verbraucht wird. Abschlussarbeiten dürfen nur einmal wiederholt werden.
-  \csname bool_if:cT\endcsname {g__ptxcd_architecture_note_bool} {%
+  \csname bool_if:cT\endcsname {g_@@_architecture_note_bool} {%
     \par
     Bei einer Thesis des Fachbereichs Architektur entspricht die eingereichte elektronische Fassung dem vorgestellten Modell und den vorgelegten Plänen.
   }
@@ -3609,7 +3609,7 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
 
 \ExplSyntaxOn
 
-\cs_set_eq:NN \g__ptxcd_affidavit_print_tl \g__ptxcd_affidavit_digital_tl
+\cs_set_eq:NN \g_@@_affidavit_print_tl \g_@@_affidavit_digital_tl
 
 \NewDocumentEnvironment{affidavit*}{om}{
   \IfNoValueF {#1} {\begin{otherlanguage}{#1}}
@@ -3687,14 +3687,14 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
   \IfBooleanTF {#1} {
     \clist_map_inline:nn {#3} {
       \int_incr:N \l_tmpb_int
-      \cs_set:cn {__ptxcd_reviewname_\int_use:N \l_tmpb_int :} {##1}
+      \cs_set:cn {_@@_reviewname_\int_use:N \l_tmpb_int :} {##1}
     }
   } {
     \IfNoValueTF {#2} {
       \cs_set:Npn \ptxcd_reviewname  {#3}
     } {
       \ifnum #2 > 0
-        \cs_set:cn {__ptxcd_reviewname_#2:}
+        \cs_set:cn {_@@_reviewname_#2:}
         {#3}
       \fi
     }

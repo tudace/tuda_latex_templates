@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -29,7 +29,8 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tudacolors.dtx}[2025-01-26 v4.00 Color definition for TU Darmstadt's tuda-ci bundle]
+\ProvidesFile{tudacolors.dtx}
+  [2025-01-26 v4.00 Color definition for TU Darmstadt's tuda-ci bundle]
 %</driver>
 %<*package>
 %<@@=ptxcd>
@@ -201,7 +202,7 @@
 % \end{implementation}
 % \begin{implementation}
 %    \begin{macrocode}
-	departmentconfigprefix .tl_gset:N = \g__ptxcd_config_prefix_tl,
+	departmentconfigprefix .tl_gset:N = \g_@@_config_prefix_tl,
 	mecheng .meta:n = {department=mecheng},
 }
 \ProcessKeyOptions[ptxcd/colors]
@@ -263,7 +264,7 @@
     \colorlet{textaccentcolor}{\g_ptxcd_color_textaccent_tl}
   }
 }
-\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str-colors.def}
+\file_if_exist_input:n {\g_@@_config_prefix_tl\g_ptxcd_department_str-colors.def}
 \hook_use:n {ptxcd/init-colors}
 \colorlet{InfoBox}{white}
 %    \end{macrocode}

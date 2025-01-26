@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -27,54 +27,27 @@
 %
 % \fi
 %
-% \iffalse
+% \iffalse% no documentation on this
+% \iffalse^^A Preparation for real docstrip documentation
 %<*driver>
-\ProvidesFile{tudaletter.dtx}
+\ProvidesFile{tudaletter.dtx}[2025-01-26 v4.00 Letters for TUDa-CI, Corporate Design of TU Darmstadt]
+\typeout{***********************************************************}
+\typeout{No documentation included in this file! Please see tuda-ci.pdf for more information and DEMO-TUDaLetter.tex/.pdf for an example of use.}
+\typeout{***********************************************************}
+\stop
 %</driver>
 %<*class&initialization>
 %<@@=ptxcd>
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
 \ProvidesExplClass{tudaletter}{2025-01-26}{4.00}{Letters for TUDa-CI, Corporate Design of TU Darmstadt}
 %</class&initialization>
-%
-%<*driver>
-\documentclass[
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\OnlyDescription
-\CodelineIndex
-\RecordChanges
-\begin{document}
-\DocInput{tudaletter.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+%<*driver>^^A Preparation for real docstrip documentation
+\providecommand*{\TUDaDocDTXfiles}{tudaletter.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
 %
-% \changes{<+version+>}{<+date+>}{Converted to DTX file}
+% \changes{v4.00}{2025-01-26}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 %
@@ -109,24 +82,24 @@
 %
 %
 %    \begin{macrocode}
-\str_const:Nn \c__ptxcd_base_str {letter}
+\str_const:Nn \c_@@_base_str {letter}
 \str_new:N  \g_ptxcd_department_str
-\bool_new:N \g__ptxcd_adjust_textwidth_bool
+\bool_new:N \g_@@_adjust_textwidth_bool
 \keys_define:nn {ptxcd/letter} {
-  logo .bool_gset:N = \g__ptxcd_letter_logo_bool,
+  logo .bool_gset:N = \g_@@_letter_logo_bool,
   logo .default:n = true,
   logo .initial:n = true,
-  premium .bool_gset:N = \g__ptxcd_letter_premium_bool,
+  premium .bool_gset:N = \g_@@_letter_premium_bool,
   premium .default:n = true,
-  firstpagenumber .bool_gset:N = \g__ptxcd_firstpagenumber_bool,
+  firstpagenumber .bool_gset:N = \g_@@_firstpagenumber_bool,
   firstpagenumber .initial:n = true,
-  raggedright .bool_gset:N = \g__ptxcd_letter_raggedright_bool,
-  headrule .bool_gset:N = \g__ptxcd_letter_headrule_bool,
+  raggedright .bool_gset:N = \g_@@_letter_raggedright_bool,
+  headrule .bool_gset:N = \g_@@_letter_headrule_bool,
   headrule .initial:n = true,
   headrule .default:n = true,
   textwidth .choice:,
-  textwidth / wide .code:n = \bool_gset_true:N \g__ptxcd_adjust_textwidth_bool,
-  textwidth / narrow .code:n = \bool_gset_false:N  \g__ptxcd_adjust_textwidth_bool,
+  textwidth / wide .code:n = \bool_gset_true:N \g_@@_adjust_textwidth_bool,
+  textwidth / narrow .code:n = \bool_gset_false:N  \g_@@_adjust_textwidth_bool,
   textwidth .initial:n = wide,
 %</initialization>
 %<gobble>}
@@ -159,7 +132,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{afterpage}
 \RequirePackage{ragged2e}
-\bool_if:NTF \g__ptxcd_letter_premium_bool {
+\bool_if:NTF \g_@@_letter_premium_bool {
   \cs_new:Nn \ptxcd_premiumcolor: {accentcolor}
   \cs_new:Nn \ptxcd_use_premiumcolor: {\color{accentcolor}}
   \cs_set:Nn \ptxcd_use_premiumcolor_text: {\color{textaccentcolor}}
@@ -174,12 +147,12 @@
 %    \begin{macrocode}
 \dim_const:Nn \c_ptxcd_HeadMargin_dim {12.5mm}
 \dim_const:Nn \c_ptxcd_LeftMargin_dim {24.0mm}
-\dim_const:Nn \c__ptxcd_firstpage_extraindent_dim {-\paperwidth+120mm +\c_ptxcd_LeftMargin_dim  +\c_ptxcd_HeadMargin_dim}
-\bool_if:NTF \g__ptxcd_adjust_textwidth_bool
+\dim_const:Nn \c_@@_firstpage_extraindent_dim {-\paperwidth+120mm +\c_ptxcd_LeftMargin_dim  +\c_ptxcd_HeadMargin_dim}
+\bool_if:NTF \g_@@_adjust_textwidth_bool
   {
     \dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim}
   }{
-    \dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim-\c__ptxcd_firstpage_extraindent_dim}
+    \dim_const:Nn \c_ptxcd_RightMargin_dim  {\c_ptxcd_HeadMargin_dim-\c_@@_firstpage_extraindent_dim}
   }
 \dim_const:Nn \c_ptxcd_BottomMargin_dim {20mm}
 \dim_const:Nn \c_ptxcd_Linewidth_dim {\paperwidth-\c_ptxcd_LeftMargin_dim-\c_ptxcd_RightMargin_dim}
@@ -192,7 +165,7 @@
   footskip=7mm,
 }
 \dim_const:Nn \c_ptxcd_textwidth_dim {\textwidth}
-\bool_if:NTF \g__ptxcd_letter_logo_bool {
+\bool_if:NTF \g_@@_letter_logo_bool {
   \geometry{top=64mm}
 } {
   \geometry{top=30mm}
@@ -210,13 +183,13 @@
 % Workaround posted by David Carlisle on tex.stackexchange
 % Thanks to Ulrike Fischer for mentioning it in #472
 %    \begin{macrocode}
-  \let \__ptxcd_grouplevel_before_pdfx: \currentgrouplevel
+  \let \_@@_grouplevel_before_pdfx: \currentgrouplevel
   \chardef\currentgrouplevel0
   \ExplSyntaxOff
   \RequirePackage{pdfx}
   \ExplSyntaxOn
-  \let \currentgrouplevel \__ptxcd_grouplevel_before_pdfx:
-  \cs_undefine:N \__ptxcd_grouplevel_before_pdfx:
+  \let \currentgrouplevel \_@@_grouplevel_before_pdfx:
+  \cs_undefine:N \_@@_grouplevel_before_pdfx:
 %    \end{macrocode}
 % end of the workaround
 %    \begin{macrocode}
@@ -251,7 +224,7 @@
 \setplength{subjectbeforevskip}{0pt}
 \setplength{locwidth}{\dimexpr\paperwidth-154,5mm -\c_ptxcd_HeadMargin_dim\relax}
 \setplength{locheight}{\dimexpr\paperheight-\useplength{locvpos}-\c_ptxcd_BottomMargin_dim\relax}
-\bool_if:NTF \g__ptxcd_letter_headrule_bool {
+\bool_if:NTF \g_@@_letter_headrule_bool {
   \ptxcd_makeheadrule[width=\useplength{firstheadwidth},color=identbarcolor]{ptxcd_LetterheadRule}
 } {
   \box_new:N \ptxcd_LetterheadRule_box
@@ -265,7 +238,7 @@
     \smash{\ptxcd_LetterheadRule}
     \par
     \vspace{.5\c_ptxcd_logoheight_dim}
-    \makebox[\__ptxcd_logowidth:][l]{\__ptxcd_insert_logo:}
+    \makebox[\_@@_logowidth:][l]{\_@@_insert_logo:}
   }
 }
 \box_gset_dp:Nn \g_TUDaLetter_firsthead_box {\c_zero_dim}
@@ -327,7 +300,7 @@
     \vspace{2\baselineskip}
   \fi
   \Ifkomavarempty*{date}{}{\usekomavar*{date}\\\usekomavar{date}}
-  \seq_use:Nn  \g__ptxcd_reffields_seq {}
+  \seq_use:Nn  \g_@@_reffields_seq {}
   \Ifkomavarempty{frombank}{}{\vfill%
     \Ifkomavarempty*{frombank}{Bankverbindung}{\usekomavar*{frombank}}\\\usekomavar{frombank}
   }
@@ -351,11 +324,11 @@
     \@tempswatrue
   }%
 }
-\seq_new:N  \g__ptxcd_reffields_seq
+\seq_new:N  \g_@@_reffields_seq
 \newlength{\TUD@page@free}
 \newcounter{TUD@page@free@lines}
-\dim_new:N \g__ptxcd_page_free_dim
-\int_new:N \g__ptxcd_free_lines_int
+\dim_new:N \g_@@_page_free_dim
+\int_new:N \g_@@_free_lines_int
 %    \end{macrocode}
 % \begin{documentation}
 % \DescribeMacro{\opening}
@@ -367,7 +340,7 @@
 \renewcommand{\opening}[1]{%
   \widowpenalty=100
   \@PapersizeWarning
-  \seq_gclear:N \g__ptxcd_reffields_seq
+  \seq_gclear:N \g_@@_reffields_seq
   \renewcommand*{\@set@reffield}[1]{
     \typeout{Field: ##1}%
     \str_if_eq:nnT {##1}{datemarkerfield}{%
@@ -376,7 +349,7 @@
       \setkomavar{date}{}%
     }
     \Ifkomavarempty{##1}{}{%
-      \seq_gput_right:Nn \g__ptxcd_reffields_seq {%
+      \seq_gput_right:Nn \g_@@_reffields_seq {%
         \ptxcd_set_reffield:n {##1}
       }%
     }%
@@ -402,7 +375,7 @@
   \@afterheading%
   \@nobreaktrue
   \@afterindentfalse
-  \bool_if:NT \g__ptxcd_adjust_textwidth_bool {
+  \bool_if:NT \g_@@_adjust_textwidth_bool {
     \everypar{%
       \if@nobreak
         \@nobreakfalse\clubpenalty\@M
@@ -413,21 +386,21 @@
         \clubpenalty\@clubpenalty
       \fi
       \ifnum\thepage=1%
-        \dim_gset:Nn \g__ptxcd_page_free_dim {-\pagegoal + \pagetotal}
-        \dim_compare:nTF {-\g__ptxcd_page_free_dim>2\baselineskip}
+        \dim_gset:Nn \g_@@_page_free_dim {-\pagegoal + \pagetotal}
+        \dim_compare:nTF {-\g_@@_page_free_dim>2\baselineskip}
         {
-          \int_gset:Nn \g__ptxcd_free_lines_int {\fp_eval:n {ceil(\g__ptxcd_page_free_dim/\baselineskip)}}
-          \int_compare:nT {\g__ptxcd_free_lines_int<0} {
-            \hangafter=\g__ptxcd_free_lines_int\hangindent=\c__ptxcd_firstpage_extraindent_dim%
+          \int_gset:Nn \g_@@_free_lines_int {\fp_eval:n {ceil(\g_@@_page_free_dim/\baselineskip)}}
+          \int_compare:nT {\g_@@_free_lines_int<0} {
+            \hangafter=\g_@@_free_lines_int\hangindent=\c_@@_firstpage_extraindent_dim%
           }
         } {
           \dim_compare:nT {-\TUD@page@free>\baselineskip} {
-            \hangafter=-2\hangindent=\c__ptxcd_firstpage_extraindent_dim%
+            \hangafter=-2\hangindent=\c_@@_firstpage_extraindent_dim%
           }
         }
       \fi%
     }%
-    \global\setlength{\linewidth}{\dim_eval:n {\c_ptxcd_Linewidth_dim + \c__ptxcd_firstpage_extraindent_dim}}
+    \global\setlength{\linewidth}{\dim_eval:n {\c_ptxcd_Linewidth_dim + \c_@@_firstpage_extraindent_dim}}
     \afterpage{
       \global\setlength{\linewidth}{\c_ptxcd_Linewidth_dim}
       \widowpenalty=10000
@@ -448,7 +421,7 @@
 \cs_new:Nn \ptxcd_letterpagemark: {
   %get lastpage for this letter if not already done
   \int_compare:nNnTF {\value{page}} = {1} {
-      \bool_if:NTF \g__ptxcd_firstpagenumber_bool
+      \bool_if:NTF \g_@@_firstpagenumber_bool
       {\bool_set_true:N \l_tmpa_bool}
       {\bool_set_false:N \l_tmpa_bool}
     }
@@ -481,8 +454,8 @@
   \fi
 }
 \cs_set_eq:NN \letterpagemark \ptxcd_letterpagemark:
-\bool_if:NT \g__ptxcd_letter_headrule_bool {
-  \bool_if:NTF \g__ptxcd_letter_logo_bool {
+\bool_if:NT \g_@@_letter_headrule_bool {
+  \bool_if:NTF \g_@@_letter_logo_bool {
     \setkomavar{nexthead}{\raisebox{\topskip}{\box_use:N \g_TUDaLetter_firsthead_box}}
   }{
     \setkomavar{nexthead}{\raisebox{\depth}{\ptxcd_LetterheadRule}}
@@ -543,14 +516,14 @@
 %    \begin{macrocode}
 \let\raggedsignature\raggedright
 \newkomavar{fromfunction}
-\bool_if:NT \g__ptxcd_letter_raggedright_bool {\AtBeginLetter{\RaggedRight}}
+\bool_if:NT \g_@@_letter_raggedright_bool {\AtBeginLetter{\RaggedRight}}
 %    \end{macrocode}
 % backwards compatibility for KOMA-Script
 %    \begin{macrocode}
 \cs_if_exist:NF \Ifkomavarempty{
   \let\Ifkomavarempty\ifkomavarempty
 }
-\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
+\file_if_exist_input:n {\g_@@_config_prefix_tl\g_ptxcd_department_str.cfg}
 %    \end{macrocode}
 
 %
@@ -559,4 +532,5 @@
 %</class>
 % \fi
 % \Finale
+% \fi^^A No documentation on this
 \endinput

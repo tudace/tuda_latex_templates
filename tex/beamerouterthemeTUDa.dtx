@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -27,10 +27,15 @@
 %
 % \fi
 %
-% \iffalse
+% \iffalse% no documentation on this
+% \iffalse^^A Preparation for real docstrip documentation
 %<*driver>
 \ProvidesFile{beamerouterthemeTUDa.dtx}
-    [2024/08/01 4.0 Outer~beamer~theme~of~tuda-ci]
+  [2025-01-26 v4.00 Outer~beamer~theme~of~tuda-ci]
+\typeout{***********************************************************}
+\typeout{No documentation included in this file! Please see tuda-ci.pdf for more information and DEMO-TUDaBeamer.tex/.pdf for an example of use.}
+\typeout{***********************************************************}
+\stop
 %</driver>
 %<*initialize&package>
 %<@@=ptxcd>
@@ -38,58 +43,16 @@
 %<!2008>\ProvidesExplPackage{beamerouterthemeTUDa}{2025-01-26}{4.00}{Outer~beamer~theme~of~tuda-ci~design~of~2023}
 %<2008>\ProvidesExplPackage{beamerouterthemeTUDa2008}{2025-01-26}{4.00}{Outer~beamer~theme~of~tuda-ci, compatibility for design of 2008}
 %</initialize&package>
-%<*driver>
-\documentclass[
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-
-\IfFileExists{tuda_logo.pdf}{}{
-  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
-}
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\OnlyDescription
-\CodelineIndex
-\RecordChanges
-\begin{document}
-\DocInput{beamerouterthemeTUDa.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+%
+%<*driver>^^A Preparation for real docstrip documentation
+\providecommand*{\TUDaDocDTXfiles}{beamerouterthemeTUDa.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
 %
-% \changes{4.0}{2024/08/01}{Converted to DTX file}
+% \changes{v4.00}{2025-01-26}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
-%
-% \GetFileInfo{beamerouterthemeTUDa.dtx}
-% \title{The \textsf{beamerouterthemeTUDa} package}
-% \author{Marei Peischl\thanks{Email: \href{mailto:tuda-ci@peitex.de}{tuda-ci@peitex.de}}}
-% \date{\fileversion~from \filedate}
-%
-% \maketitle
-%
 %
 % \DescribeKey{\beamerframe}{\bgcolor}
 %
@@ -101,7 +64,6 @@
 %
 %
 % \DescribeKey{\beamerframe}{\bgcolor}
-%
 
 %
 % \MaybeStop{}
@@ -116,12 +78,12 @@
 \PassOptionsToPackage{paper=slide}{tudarules}
 \RequirePackage{tudarules}
 \bool_if_exist:NF \l_ptxcd_tmpa_bool {\bool_new:N \l_ptxcd_tmpa_bool}
-\dim_new:N \l__ptxcd_beamer_extraindent_dim
-\dim_new:N {\g__ptxcd_beamer_sep_dim}
-\dim_gset:Nn \g__ptxcd_beamer_sep_dim {.3\c_ptxcd_logoheight_dim}
-\dim_new:N \g__ptxcd_beamer_logosep_dim
-\dim_gset:Nn \g__ptxcd_beamer_logosep_dim{2mm}
-\cs_if_exist:NF \g__ptxcd_colorframetitle_bool {\bool_new:N \g__ptxcd_colorframetitle_bool}
+\dim_new:N \l_@@_beamer_extraindent_dim
+\dim_new:N {\g_@@_beamer_sep_dim}
+\dim_gset:Nn \g_@@_beamer_sep_dim {.3\c_ptxcd_logoheight_dim}
+\dim_new:N \g_@@_beamer_logosep_dim
+\dim_gset:Nn \g_@@_beamer_logosep_dim{2mm}
+\cs_if_exist:NF \g_@@_colorframetitle_bool {\bool_new:N \g_@@_colorframetitle_bool}
 \keys_define:nn {ptxcd/beamer/outer} {
 	logo .bool_gset:N = \g_ptxcd_headlinelogo_bool,
 	logo .default:n =true,
@@ -129,8 +91,8 @@
 %<main>	colorframetitle .code:n = msg_warning:nnn {tudabeamer} {option-removed} {colorframetitle},
 %<*2008>
   colorframetitle .choices:nn = {true, false} {
-    \use:c {bool_gset_ \l_keys_choice_tl :N} \g__ptxcd_colorframetitle_bool
-    \cs_if_exist_use:N  \__ptxcd_setup_frametitle_color:
+    \use:c {bool_gset_ \l_keys_choice_tl :N} \g_@@_colorframetitle_bool
+    \cs_if_exist_use:N  \_@@_setup_frametitle_color:
   },
 	colorframetitle .default:n = true,
 %    \end{macrocode}
@@ -164,10 +126,10 @@
 %    \begin{macrocode}
 		.choice:,
 	framebgcolor / reset .code:n =
-		\__ptxcd_reset_framebgcolor:
+		\_@@_reset_framebgcolor:
 	,
 	framebgcolor / unknown .code:n = {
-		\__ptxcd_set_framebgcolor:n {#1}
+		\_@@_set_framebgcolor:n {#1}
 	},
 %    \end{macrocode}
 % \iffalse
@@ -178,7 +140,7 @@
 
 %<main>		\msg_warning:nnn {tudabeamer} {option-removed} {singleframebgcolor},
 %<*2008>
-		\cs_gset_eq:Nc \__ptxcd_save_background_canvas: {beamer@thcbg@normal~text}
+		\cs_gset_eq:Nc \_@@_save_background_canvas: {beamer@thcbg@normal~text}
 		\keys_set:nn {ptxcd/beamer/outer} {
 			framebgcolor = #1
 		},
@@ -200,10 +162,10 @@
 %<*main>
 % \fi
 %    \begin{macrocode}
-	extendedspace .bool_gset:N = \g__ptxcd_extended_space_bool,
+	extendedspace .bool_gset:N = \g_@@_extended_space_bool,
 
-	headrule .bool_gset:N = \g__ptxcd_headrule_bool,
-	uppercase-frametitle .bool_gset:N = \g__ptxcd_uppercase_frametitle_bool,
+	headrule .bool_gset:N = \g_@@_headrule_bool,
+	uppercase-frametitle .bool_gset:N = \g_@@_uppercase_frametitle_bool,
 	uppercase-frametitle .default:n = true,
 	uppercase-frametitle .initial:n = true,
 %</main>
@@ -245,20 +207,20 @@
 % \end{key}
 %
 %    \begin{macrocode}
-\cs_new:Nn \__ptxcd_reset_framebgcolor: {
-	\cs_gset_eq:cN {beamer@thcbg@normal~text} \__ptxcd_save_background_canvas:
-	\cs_undefine:N \__ptxcd_save_background_canvas:
+\cs_new:Nn \_@@_reset_framebgcolor: {
+	\cs_gset_eq:cN {beamer@thcbg@normal~text} \_@@_save_background_canvas:
+	\cs_undefine:N \_@@_save_background_canvas:
 }
 
-\cs_new:Nn \__ptxcd_set_framebgcolor:n {
+\cs_new:Nn \_@@_set_framebgcolor:n {
 		\cs_if_exist:cTF {\string\color@#1}
 		{\setbeamercolor{normal~text}{bg=#1}}
 		{\setbeamercolor{normal~text}{bg=TUDa-#1}}
 }
 
 \BeforeBeginEnvironment{frame}{
-	\cs_if_exist:NT \__ptxcd_save_background_canvas: {
-	\__ptxcd_reset_framebgcolor:
+	\cs_if_exist:NT \_@@_save_background_canvas: {
+	\_@@_reset_framebgcolor:
 	}
 }
 %    \end{macrocode}
@@ -274,9 +236,9 @@
 %<*2008>
 % \fi
 %    \begin{macrocode}
-\bool_if:NT \g__ptxcd_colorframetitle_bool
+\bool_if:NT \g_@@_colorframetitle_bool
 
-	{\dim_set:Nn \l__ptxcd_beamer_extraindent_dim {\g__ptxcd_beamer_logosep_dim}}
+	{\dim_set:Nn \l_@@_beamer_extraindent_dim {\g_@@_beamer_logosep_dim}}
 %    \end{macrocode}
 % \iffalse
 %</2008>
@@ -286,23 +248,23 @@
 
 	text~margin~left=\dim_eval:n {
 %<main>	\paperwidth/34
-%<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
+%<2008>	\g_@@_beamer_sep_dim+\l_@@_beamer_extraindent_dim
 },
 	text~margin~right=\dim_eval:n {
 %<main>	\paperwidth/38
-%<2008>	\g__ptxcd_beamer_sep_dim+\l__ptxcd_beamer_extraindent_dim
+%<2008>	\g_@@_beamer_sep_dim+\l_@@_beamer_extraindent_dim
 	}
 }
-\cs_new:Nn \__ptxcd_beamer_linewidth: {\dim_eval:n {\paperwidth-\beamer@leftmargin-\beamer@rightmargin}}
+\cs_new:Nn \_@@_beamer_linewidth: {\dim_eval:n {\paperwidth-\beamer@leftmargin-\beamer@rightmargin}}
 %    \end{macrocode}
 %Logo
 %
 %    \begin{macrocode}
-\box_new:N \g__ptxcd_logo_box
-\hbox_gset:Nn \g__ptxcd_logo_box {%
+\box_new:N \g_@@_logo_box
+\hbox_gset:Nn \g_@@_logo_box {%
 %<main>	\raisebox{\dim_eval:n {-\height+.33\c_ptxcd_logoheight_dim}}
-%<2008>  \makebox[\__ptxcd_logowidth:][l]
-    {\__ptxcd_insert_logo:}%
+%<2008>  \makebox[\_@@_logowidth:][l]
+    {\_@@_insert_logo:}%
 }
 % \begin{macro}{\logo}
 %    \begin{macrocode}
@@ -351,14 +313,14 @@
 }
 \setbeamertemplate{footline~sep}{\space\smash{\rule[-.5\dp\strutbox]{.25pt}{\ht\strutbox}}\space}
 \defbeamertemplate*{headline}{TUDa2023}{
-	\bool_if:NT \g__ptxcd_headrule_bool {
+	\bool_if:NT \g_@@_headrule_bool {
 		\cs_if_exist:NF \ptxcd_beamer_headrule {
 			\ptxcd_makeheadrule[color=identbarcolor,width=\paperwidth]{ptxcd_beamer_headrule}
 		}
 		\ptxcd_beamer_headrule\par\nointerlineskip
 	}
-	\bool_if:NTF \g__ptxcd_extended_space_bool {
-		\bool_if:NTF \g__ptxcd_headrule_bool {
+	\bool_if:NTF \g_@@_extended_space_bool {
+		\bool_if:NTF \g_@@_headrule_bool {
 			\skip_vertical:n {\dim_eval:n {+\paperheight/38}}
 			\strut
 		} {
@@ -371,18 +333,18 @@
 	\hspace*{\fill}
 	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
 	%partnerlogo
-	\bool_if:NT \g__ptxcd_extended_space_bool \smash {
+	\bool_if:NT \g_@@_extended_space_bool \smash {
 		\raisebox{\dimexpr-\height+\ht\strutbox}{
-			\box_use:N \g__ptxcd_partnerlogo_box
+			\box_use:N \g_@@_partnerlogo_box
 		}
 	}
 	\skip_horizontal:n {\dimexpr\paperheight/38}
 	%logo
-	\bool_if:NTF \g__ptxcd_headrule_bool {
-		\raisebox{2mm}[0pt][0pt]{\setlength{\fboxsep}{\z@}\colorbox{white}{\rule{\z@}{\dim_eval:n {\box_ht:N \g__ptxcd_logo_box+\box_ht:N \ptxcd_beamer_headrule_box + \box_dp:N \ptxcd_beamer_headrule_box+1pt}}\box_use:N \g__ptxcd_logo_box}}
+	\bool_if:NTF \g_@@_headrule_bool {
+		\raisebox{2mm}[0pt][0pt]{\setlength{\fboxsep}{\z@}\colorbox{white}{\rule{\z@}{\dim_eval:n {\box_ht:N \g_@@_logo_box+\box_ht:N \ptxcd_beamer_headrule_box + \box_dp:N \ptxcd_beamer_headrule_box+1pt}}\box_use:N \g_@@_logo_box}}
 			\hspace*{10pt}
 	} {
-		\bool_if:NT \g__ptxcd_extended_space_bool \smash {\box_use:N \g__ptxcd_logo_box}
+		\bool_if:NT \g_@@_extended_space_bool \smash {\box_use:N \g_@@_logo_box}
 		\hspace*{.7pt}
 	}
 	}
@@ -404,20 +366,20 @@
 \defbeamertemplate*{sidebar~right}{TUDa2023}{
 	\bool_if:NT \g_ptxcd_headlinelogo_bool  {
 		\vspace{\c_ptxcd_logoheight_dim}
-		\llap{\box_use:N \g__ptxcd_sublogo_box}
+		\llap{\box_use:N \g_@@_sublogo_box}
 	}
 }
 \defbeamertemplate*{frametitle}{TUDa2023}[1][left]{%
 	\nointerlineskip%
-	\bool_if:NF \g__ptxcd_extended_space_bool
+	\bool_if:NF \g_@@_extended_space_bool
 		{\vskip.55ex}
 	\begin{beamercolorbox}[
-		wd=\dim_eval:n {\bool_if:NT \g__ptxcd_extended_space_bool {-\box_wd:N \g__ptxcd_logo_box } \box_if_empty:NF \g__ptxcd_sublogo_box {-\box_wd:N \g__ptxcd_sublogo_box - 1em}+ \textwidth},
+		wd=\dim_eval:n {\bool_if:NT \g_@@_extended_space_bool {-\box_wd:N \g_@@_logo_box } \box_if_empty:NF \g_@@_sublogo_box {-\box_wd:N \g_@@_sublogo_box - 1em}+ \textwidth},
 		]{frametitle}
 	    \usebeamerfont{frametitle}%
 	    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
 	    \vphantom{Ü}
-	    \bool_if:NT \g__ptxcd_uppercase_frametitle_bool \text_uppercase:n {\insertframetitle}\strut
+	    \bool_if:NT \g_@@_uppercase_frametitle_bool \text_uppercase:n {\insertframetitle}\strut
 	    \par%
 	    {%
 	      \ifx\insertframesubtitle\@empty%
@@ -438,10 +400,10 @@
 %    \end{macrocode}
 % \iffalse
 %</main>
-% \fi
 %</body>
 %</package>
 % \fi
 %
 % \Finale
+% \fi^^A No documentation on this
 \endinput

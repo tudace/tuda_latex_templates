@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -27,63 +27,33 @@
 %
 % \fi
 %
-% \iffalse
+% \iffalse% no documentation on this
+% \iffalse^^A Preparation for real docstrip documentation
 %<*driver>
-\ProvidesFile{tudabeamer.dtx}
+\ProvidesFile{tudabeamer.dtx}[2025-01-26 v4.00 Beamer slides using the corporate design of TU Darmstadt]
+\typeout{***********************************************************}
+\typeout{No documentation included in this file! Please see tuda-ci.pdf for more information and DEMO-TUDaBeamer.tex/.pdf for an example of use.}
+\typeout{***********************************************************}
+\stop
 %</driver>
 %<*initialize>
 %<@@=ptxcd>
 %<package|class>\NeedsTeXFormat{LaTeX2e}[2022/06/01]
 %<class>\ProvidesClass{tudabeamer}
-%<*class|driver>
-[2024/07/31 4.0 Beamer wrapper class for TUDa-CI – Corporate Design Templates for TU Darmstadt]
-%</class|driver>
+%<*class>
+  [2025-01-26 v4.00 Beamer wrapper class for TUDa-CI – Corporate Design Templates for TU Darmstadt]
+%</class>
 %<main>\ProvidesExplPackage{beamerthemeTUDa}{2025-01-26}{4.00}{Beamer theme using the Corporate Design of TU Darmstadt}
 %<2023>\ProvidesExplPackage{beamerthemeTUDa2023}{2025-01-26}{4.00}{Beamer theme using the Corporate Design of TU Darmstadt Design of 2023}
 %<2008>\ProvidesPackage{beamerthemeTUDa2008}[2025-01-26 v4.00 beamer theme using the Corporate Design of TU Darmstadt Design of 2008]
 %</initialize>
-%<*driver>
-\documentclass[
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-
-\IfFileExists{tuda_logo.pdf}{}{
-  \UseName{keys_set:nn} {ptcd/pub} {logofile=example-image}
-}
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\OnlyDescription
-\CodelineIndex
-\RecordChanges
-\begin{document}
-\DocInput{tudabeamer.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+%<*driver>^^A Preparation for real docstrip documentation
+\providecommand*{\TUDaDocDTXfiles}{tudabeamer.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
 %
-% \changes{4.0}{2024/07/31}{Converted to DTX file}
+% \changes{v4.00}{2025-01-26}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 %
@@ -106,15 +76,15 @@
 \PassOptionsToClass{10pt}{beamer}
 \ExplSyntaxOn
 \str_new:N \g_ptxcd_department_str
-\str_const:Nn \c__ptxcd_base_str {beamer}
+\str_const:Nn \c_@@_base_str {beamer}
 %    \end{macrocode}
 % \iffalse
 %</class>
-%<main>\tl_if_exist:NF \g__ptxcd_design_tl {
+%<main>\tl_if_exist:NF \g_@@_design_tl {
 %<*main|class>
 % \fi
 %    \begin{macrocode}
-  \tl_new:N \g__ptxcd_design_tl
+  \tl_new:N \g_@@_design_tl
 %    \end{macrocode}
 % Because the option passing accross beamer themes is quite annoying and we want to limit the choice of the design to \file{beamerthemeTUDa.sty} and \cls{tudabeamer} the options will be defined to pass to both theme variants.
 % The theme in the end will either do something or send a warning message.
@@ -172,14 +142,14 @@
 %    \begin{macrocode}
   design .choice:,
   design / 2023 .code:n = {
-      \tl_gset:Nn  \g__ptxcd_design_tl {2023}
+      \tl_gset:Nn  \g_@@_design_tl {2023}
       \PassOptionsToClass{aspectratio=169}{beamer}
     },
   design / 2008 .code:n = {
-      \tl_gset:Nn  \g__ptxcd_design_tl {2008}
+      \tl_gset:Nn  \g_@@_design_tl {2008}
     },
   design / default .code:n = {
-    \tl_gset:Nn  \g__ptxcd_design_tl {default}
+    \tl_gset:Nn  \g_@@_design_tl {default}
    },
   design .initial:n = default,
   design2023 .meta:n = {design=2023},
@@ -216,7 +186,7 @@
 %<*class>
 \ProcessOptions*
 \ExplSyntaxOn
-\tl_if_eq:NnT \g__ptxcd_design_tl  {default} {
+\tl_if_eq:NnT \g_@@_design_tl  {default} {
   \msg_new:nnn {tudabeamer} {default-design-changed} {
     With~version~4.0~tudabeamer~switched~to~the~new~corporate~design~layout.\\
     In~case~this~is~not~intended,~it's~possible~switch~back~using~`design=2008`~option.\\
@@ -268,10 +238,10 @@
 %    \end{macrocode}
 % Load the TUDa theme
 %    \begin{macrocode}
-\usetheme{TUDa\g__ptxcd_design_tl}%
+\usetheme{TUDa\g_@@_design_tl}%
 \let\accentfont\normalfont%
-\file_if_exist:nTF {\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
-  {\RequirePackage{\g__ptxcd_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
+\file_if_exist:nTF {\g_@@_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str.sty}
+  {\RequirePackage{\g_@@_config_prefix_tl beamerthemeTUDa-\g_ptxcd_department_str}}
   {
     \file_if_exist:nT {beamerthemeTUDa-\g_ptxcd_department_str.sty}
       {\RequirePackage{beamerthemeTUDa-\g_ptxcd_department_str}}
@@ -289,7 +259,7 @@
 %<*main>
 % \fi
 %    \begin{macrocode}
-\RequirePackageWithOptions{beamerthemeTUDa\g__ptxcd_design_tl}
+\RequirePackageWithOptions{beamerthemeTUDa\g_@@_design_tl}
 %    \end{macrocode}
 % \iffalse
 %</main>
@@ -353,4 +323,5 @@
 %</body>
 % \fi
 % \Finale
+% \fi^^A No documentation on this
 \endinput

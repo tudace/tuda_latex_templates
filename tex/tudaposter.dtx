@@ -16,7 +16,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainers of this work is
+% The Current Maintainer of this work is
 %   Marei Peischl <tuda-ci@peitex.de>
 %
 % The development repository can be found at
@@ -27,9 +27,14 @@
 %
 % \fi
 %
-% \iffalse
+% \iffalse% no documentation on this
+% \iffalse^^A Preparation for real docstrip documentation
 %<*driver>
-\ProvidesFile{tudaposter.dtx}
+\ProvidesFile{tudaposter.dtx}[2025-01-26 v4.00 Announcement poster Layouts for the Corporate Design of TU Darmstadt]
+\typeout{***********************************************************}
+\typeout{No documentation included in this file! Please see tuda-ci.pdf for more information and DEMO-TUDaPoster.tex/.pdf for an example of use.}
+\typeout{***********************************************************}
+\stop
 %</driver>
 %<*class&initialization>
 %<@@=ptxcd>
@@ -37,44 +42,13 @@
 \ProvidesExplPackage{tudaposter}{2025-01-26}{4.00}{Announcement poster Layouts for the Corporate Design of TU Darmstadt}
 %</class&initialization>
 %
-%<*driver>
-\documentclass[
-  pdfa=false,
-  class=report,
-  titlepage=true,
-]{tudapub}
-\let\tudamaketitle\maketitle% avoid issues due to catcode changes
-\usepackage{doc}
-\let\maketitle\tudamaketitle% restore
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{csquotes}
-\usepackage{hologo}
-\let\file\texttt
-\let\code\texttt
-\let\tbs\textbackslash
-\let\pck\textsf
-\let\cls\textsf
-
-\usepackage{biblatex}
-\addbibresource{DEMO-TUDaBibliography.bib}
-
-\usepackage{pifont}% Zapf-Dingbats Symbols
-\newcommand*{\FeatureTrue}{\ding{52}}
-\newcommand*{\FeatureFalse}{\ding{56}}
-\EnableCrossrefs
-\OnlyDescription
-\CodelineIndex
-\RecordChanges
-\begin{document}
-\DocInput{tudaposter.dtx}
-\PrintChanges
-\PrintIndex
-\end{document}
+%<*driver>^^A Preparation for real docstrip documentation
+\providecommand*{\TUDaDocDTXfiles}{tudaposter.dtx}
+\input{tuda-ci.dtx}
 %</driver>
 % \fi
 %
-% \changes{<+version+>}{<+date+>}{Converted to DTX file}
+% \changes{v4.00}{2025-01-26}{Converted to DTX file}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 %
@@ -141,7 +115,7 @@
 \int_new:N \g_ptxcd_paper_int
 \int_new:N \g_ptxcd_postertype_int
 \str_new:N \g_ptxcd_department_str
-\str_const:Nn \c__ptxcd_base_str {poster}
+\str_const:Nn \c_@@_base_str {poster}
 \keys_define:nn {ptxcd/poster} {
   footer .bool_gset:N = \g_ptxcd_poster_foot_bool,
   footer .default:n = true,
@@ -264,7 +238,7 @@
     +\g_ptxcd_margin_dim}
 }
 \bool_if:NTF \g_ptxcd_marginpar_bool {
-  \dim_gset:Nn \g_ptxcd_marginpar_dim {\__ptxcd_logowidth:}
+  \dim_gset:Nn \g_ptxcd_marginpar_dim {\_@@_logowidth:}
   \geometry{
     includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim,
     right = \dim_eval:n {
@@ -343,7 +317,7 @@
   foreground,
   align=tr,
   hoffset=\paperwidth-\g_ptxcd_margin_dim,
-  width=\__ptxcd_logowidth:,
+  width=\_@@_logowidth:,
   height=.5\textheight,
   contents={\box_use:N \g_ptxcd_title_info_box}
 ]{TUDa.poster.logo}
@@ -504,7 +478,7 @@
 
 \box_new:N \g_ptxcd_titlegraphic_box
 \seq_new:N \g_ptxcd_title_info_seq
-\seq_gput_right:Nn \g_ptxcd_title_info_seq {\rlap{\__ptxcd_insert_logo:}}
+\seq_gput_right:Nn \g_ptxcd_title_info_seq {\rlap{\_@@_insert_logo:}}
 \box_new:N \g_ptxcd_title_info_box
 \box_new:N \g_ptxcd_title_box
 \cs_new:Nn \ptxcd_make_title_info_box:n {
@@ -518,11 +492,11 @@
 }
 \cs_new:Nn \ptxcd_make_title_logo_box:n {
   \setlength{\fboxsep}{\z@}%
-  \parbox{\__ptxcd_logowidth:}{
+  \parbox{\_@@_logowidth:}{
     \colorbox{InfoBox}{
       \rlap{
         \makebox[\dim_eval:n {\_ptxcd_logowidth: + \_ptxcd_logowsep:}][r]{
-          \colorbox{InfoBox}{#1\hspace{\__ptxcd_logosep:}}
+          \colorbox{InfoBox}{#1\hspace{\_@@_logosep:}}
         }
       }
     }
@@ -574,7 +548,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \ptxcd_Setup_Title_box: {
   \hbox_gset:Nn \g_ptxcd_title_info_box
-  {\parbox{\__ptxcd_logowidth:}{
+  {\parbox{\_@@_logowidth:}{
       \seq_use:Nn \g_ptxcd_title_info_seq  {\par\nointerlineskip\skip_vertical:n
         {
           \box_ht:N \ptxcd_headrule_box + \box_dp:N \ptxcd_headrule_box
@@ -768,7 +742,7 @@
 % \end{implementation}
 %
 %    \begin{macrocode}
-\file_if_exist_input:n {\g__ptxcd_config_prefix_tl\g_ptxcd_department_str.cfg}
+\file_if_exist_input:n {\g_@@_config_prefix_tl\g_ptxcd_department_str.cfg}
 \endinput
 %    \end{macrocode}
 
@@ -778,4 +752,5 @@
 % \fi
 %
 % \Finale
+% \fi^^A No documentation on this
 \endinput
