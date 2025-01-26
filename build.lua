@@ -20,7 +20,7 @@ sourcefiledir="tex"
 sourcefiles={"*.dtx", "*.ins","*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 installfiles={"*.sty", "*.cls", "*.cfg", "*.clo", "*.def"}
 docfiledir="examples"
-typesetfiles={"*.tex","tuda-ci.dtx"}
+typesetfiles={"DEMO*.tex","tuda-ci.dtx"}
 typesetcmds="\\def\\TUDaDefaultBuildOptions{accept-missing-logos}"
 
 textfiles= {"README.md"}
@@ -31,14 +31,14 @@ typesetexe="lualatex"
 typesetopts=""
 unpackexe="pdflatex"
 
-demofiles = {"examples-de/*.tex", "examples/*.tex"}
+demofiles = {"examples/DEMO*.tex","DEMO*.tex"}
 supportdir="examples"
 
 typesetsuppfiles={ "*.bib", "*.lco"}
 typesetdemofiles = demofiles
 
 -- allow to tag the build.lua file by only excluding it for other targets
-excludefiles={"example/*","*/Examples-*.tex","Examples-*","*~"}
+excludefiles={"*/Example-*.tex","Examples-*","*~"}
 if not options["target"] == "tag" then
 	excludefiles={table.unpack(excludefiles),"build.lua","config-*.lua"}
 end
@@ -134,8 +134,14 @@ function update_tag(file, content, tagname, tagdate)
 end
 
 --[[
-  # Upload configuration
+  # CTAN/Upload configuration
 ]]
+
+ctanexcludefiles={"DEMO*-de.tex"}
+if options["target"] == "ctan" then
+  excludefiles={table.unpack(excludefiles),table.unpack(ctanexcludefiles)}
+end
+
 
 github_base_url = "https://github.com/tudace/TUDa_LaTeX_templates"
 ctanpkg = module
@@ -161,4 +167,3 @@ uploadconfig = {
 	},
 	note_file = "ctan.note"
 }
-
