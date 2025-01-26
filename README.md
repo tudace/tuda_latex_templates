@@ -2,7 +2,7 @@
 
 Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2025
 
-tuda-ci v4.00 (2025-01-24)
+tuda-ci v4.00 (2025-01-26)
 
 ***************************************************************************
 
@@ -78,6 +78,8 @@ Für Nicht-Mitglieder ist eine Möglichkeit zur Platzierung eines Ersatzlogos do
 
 ## Enthaltene Templatedateien
 
+Eine vollständige Liste aller Dateien, die zu diesem Projekt gehören kann findet sich in `MANIFEST.md`.
+
 | Dokumententyp                         | Templatedatei(en)                                                              | Dokumentenklasse                          |
 | ------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------- |
 | Interne Berichte (minimales template) | DEMO-TUDaReport.tex                                                            | tudapub.cls mit tudasize9pt.clo           |
@@ -135,6 +137,8 @@ If you are not a member of TU Darmstadt the example files include information on
 
 ## Included templates and document types
 
+A full list of all files of this Project including the additional example files can be found in `MANIFEST.md`.
+
 | document type                         | name of template file                                                 | used documentclass and config             |
 | ------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------- |
 | minimal Template for internal reports | DEMO-TUDaReport.tex                                                   | tudapub.cls                               |
@@ -150,9 +154,9 @@ If you are not a member of TU Darmstadt the example files include information on
 
 # Version History (latest versions)
 
-Older version information can be found in (`VersionHistory.md` in the Repository)[https://github.com/tudace/tuda_latex_templates/blob/main/VersionHistory.md].
+Older version information can be found in (`CHANGELOG.md` in the Repository)[https://github.com/tudace/tuda_latex_templates/blob/main/CHANGELOG.md].
 
-- v4.00 (2025-01-23)
+- v4.00 (2025-01-26)
   - complete refactoring including the addition of English template files and bugfixes
   - option to ignore missing logos
   - feature enhancements for tudaexercise

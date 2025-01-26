@@ -29,13 +29,13 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tuda-ci.dtx}[2025-01-24 v4.00 The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
+\ProvidesFile{tuda-ci.dtx}[2025-01-26 v4.00 The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
 %</driver>
 %<*package|class>
 %<@@=ptxcd>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
-%<tudapub>\ProvidesExplClass{tudapub}{2025-01-24}{4.00}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
-%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-01-24}{4.00}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
+%<tudapub>\ProvidesExplClass{tudapub}{2025-01-26}{4.00}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
+%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-01-26}{4.00}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
 %</package|class>
 %<*driver>
 \PassOptionsToPackage{hyperindex=false}{hyperref}
@@ -1122,7 +1122,7 @@
 % \iffalse
 %</!beamer>%^^A Logo
 % \fi
-% \changes{v4.00}{2025-01-24}{Added accept-missing-logos option for public testing workflows.}
+% \changes{v4.00}{2025-01-26}{Added accept-missing-logos option for public testing workflows.}
 %    \begin{macrocode}
   accept-missing-logos .bool_gset:N = \g_ptxcd_logo_workaround_bool,
   accept-missing-logos .initial:n = false,
@@ -1460,7 +1460,7 @@
 % \iffalse
 %<*beamer>
 % \fi
-% \changes{v4.00}{2025-01-24}{Remove pdfa option from tudabeamer.}
+% \changes{v4.00}{2025-01-26}{Remove pdfa option from tudabeamer.}
 % As beamer is loading hyperref with with options by default it's not really worth maintaining this option here.
 % Especially since beamer did not require this to be enabled by default.
 % A comment including the information on how to set up the PDF/A within beamer using the pdfmanagement has been added to the templates.
@@ -1610,7 +1610,7 @@
 %</class>
 %<*class|pdfx>
 % \fi
-% \changes{v4.00}{2025-01-24}{Unify pdfx/pdfa mechanism structure over all document types}
+% \changes{v4.00}{2025-01-26}{Unify pdfx/pdfa mechanism structure over all document types}
 %    \begin{macrocode}
 \PassOptionsToPackage{hidelinks, unicode}{hyperref}
 \bool_if:NTF \g_ptxcd_pdfx_bool {
@@ -2246,7 +2246,7 @@
   }
 }
 %    \end{macrocode}
-% \changes{v4.00}{2025-01-24}{Added accept-missing-logos option for public testing workflows.}
+% \changes{v4.00}{2025-01-26}{Added accept-missing-logos option for public testing workflows.}
 %    \begin{macrocode}
 \addTitleBoxLogo*{\makebox[\linewidth][l]{\__ptxcd_insert_logo:}}
 

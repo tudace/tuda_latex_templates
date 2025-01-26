@@ -2,7 +2,7 @@ $out_dir='../demo-out/';
 
 ensure_path('TEXINPUTS','../tex/');
 ensure_path('BIBINPUTS', $out_dir);
-@default_files=("example/*.tex");
+@default_files=("examples/*.tex");
 
 $pdf_mode = 4; #lualatex
 $MSWin_back_slash = 0;
