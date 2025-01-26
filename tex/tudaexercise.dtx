@@ -1399,6 +1399,10 @@
 }
 
 \NewDocumentCommand{\mapTasks}{O{}+m+m}{
+  \cs_gset:Ne \_@@_restore_task_counters: {
+    \exp_not:N \setcounter{task}{\the\value{task}}
+    \exp_not:N \setcounter{subtask}{\the\value{subtask}}
+  }
   \group_begin:
     \keys_set:ne {ptxcd/task-mapping} {
       task = true,
@@ -1427,8 +1431,14 @@
     \tl_build_end:N \l_ptxcd_tmp_tl
   }
   \cs_gset_eq:NN \g_ptxcd_tmp_tl \l_ptxcd_tmp_tl
+  \exp_last_unbraced:No
   \group_end:
-	\g_ptxcd_tmp_tl
+  \g_ptxcd_tmp_tl
+%    \end{macrocode}
+% check if between tabular rows to use \noalign
+%    \begin{macrocode}
+  \ifhmode\else\ifvoid\@arstrutbox\else\noalign\fi\fi
+    {\_@@_restore_task_counters:}
  }
 } {
   \newcommand{\getPoints}[1]{
