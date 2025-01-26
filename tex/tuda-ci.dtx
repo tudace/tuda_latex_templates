@@ -1600,7 +1600,10 @@
 %    \begin{macrocode}
 \file_if_exist:nT {tudasize\prop_item:Nn \g_ptxcd_clsopts_prop {fontsize}.clo}
 {\providecommand*{\@fontsizefilebase}{tudasize}}
-
+%    \end{macrocode}
+% Disable typearea warnings if geometry is used for the margins.
+%    \begin{macrocode}
+\bool_if:NT \g_ptxcd_geometry_bool {\PassOptionsToPackage{typeareawarninfolimit=-1}{typearea}}
 \LoadClass{\g_ptxcd_pub_class_tl}
 
 %    \end{macrocode}
@@ -1818,22 +1821,31 @@
 	\dim_gset:Nn \g_ptxcd_marginpar_dim {\g_ptxcd_marginpar_tl}
 }
 
-\dim_new:N \g_ptxcd_headheight_dim
-\bool_if:NTF \g_ptxcd_headline_bool
-	{\dim_gset:Nn \g_ptxcd_headheight_dim {20pt +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
-	{\dim_gset:Nn \g_ptxcd_headheight_dim {1.25\baselineskip +\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}}
 \dim_new:N \g_ptxcd_headwidth_dim
-
-
-%%%%%Anfang Randeinstellungen Geometry
-
-%Has to be loaded here due to headwidth options
+%    \end{macrocode}
+% \iffalse
+%</class>
+%<*class|(geometry&exercise)>
+% \fi
 %    \begin{macrocode}
-\AddToHook{begindocument}[tudapub:BCOR-titlepage]{
-	\bool_if:NT  \g_ptxcd_BCOR_titlepage_bool
-		{\xdef\coverpageleftmargin{\the\dimexpr\coverpageleftmargin+\the\ta@bcor}}
-}
-
+\dim_new:N \g_ptxcd_headheight_dim
+\dim_gset:Nn \g_ptxcd_headheight_dim {\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}
+%    \end{macrocode}
+% \iffalse
+%<*class>
+% \fi
+%    \begin{macrocode}
+\bool_if:NTF \g_ptxcd_headline_bool
+	{\dim_gadd:Nn \g_ptxcd_headheight_dim {20pt}}
+	{\dim_gadd:Nn \g_ptxcd_headheight_dim {1.25\baselineskip}}
+%    \end{macrocode}
+% \iffalse
+%</class>
+%<*class|(geometry&exercise)>
+% \fi
+% Geometry margin configuration
+% Has to be loaded here due to headwidth options for pagestyles.
+%    \begin{macrocode}
 \bool_if:NTF  \g_ptxcd_geometry_bool {
 	\RequirePackage{geometry}
 	\geometry{
@@ -1844,10 +1856,15 @@
 		columnsep= \g_ptxcd_columnSep_dim,
 		includehead,
 		includefoot,
-		includemp,
-		nomarginpar,
+%<class>		includemp,
+%<class>		nomarginpar,
 		headheight=\g_ptxcd_headheight_dim
 	}
+%    \end{macrocode}
+% \iffalse
+%<*class>
+% \fi
+%    \begin{macrocode}
 	\savegeometry{TUDa-nomarginpar}
 	\geometry{includemp, marginpar=\g_ptxcd_marginpar_dim, marginparsep=\g_ptxcd_columnSep_dim}
 	\KOMAoptions{mpinclude}
@@ -1884,22 +1901,68 @@
 			{\KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}}
 			{\KOMAoptions{headwidth=text,footwidth=text}}
 	}
-
+%    \end{macrocode}
+% \iffalse
+%</class>
+% \fi
+%    \begin{macrocode}
 }{
+%    \end{macrocode}
+% \iffalse
+%<*class>
+% \fi
+%    \begin{macrocode}
+  \KOMAoptions{headinclude,footinclude,headwidth=text,footwidth=text}
 	\let\ptxcd_disable_marginpar:\relax
-	\def\ptxcd_restore_typearea:{
+%    \end{macrocode}
+% \iffalse
+%</class>
+% \fi
+%    \begin{macrocode}
 		\KOMAoptions{headinclude, footinclude}
-		\bool_if:NTF \g_ptxcd_marginpar_bool {\KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}}
-		{\KOMAoptions{headwidth=text,footwidth=text}}
+%    \end{macrocode}
+% \iffalse
+%<*class>
+% \fi
+%    \begin{macrocode}
+		\bool_if:NTF \g_ptxcd_marginpar_bool {
+      \KOMAoptions{headwidth=textwithmarginpar,footwidth=textwithmarginpar}
+    } {
+%    \end{macrocode}
+% \iffalse
+%</class>
+% \fi
+%    \begin{macrocode}
+      \KOMAoptions{headwidth=text,footwidth=text}
+%    \end{macrocode}
+% \iffalse
+%<*class>
+% \fi
+%    \begin{macrocode}
+    }
 		\bool_if:NT \g_ptxcd_headline_bool {\KOMAoptions{headheight=\g_ptxcd_headheight_dim}}
 		\recalctypearea
 	}
 	\ptxcd_restore_typearea:
+%    \end{macrocode}
+% \iffalse
+%</class>
+% \fi
+%    \begin{macrocode}
 }
 %    \end{macrocode}
-%%%%%%%%
-%Ende Randeinstellungen klassisch
+% \iffalse
+%</class|(geometry&exercise)>
+%<*class>
+% \fi
+%    \begin{macrocode}
+\AddToHook{begindocument}[tudapub:BCOR-titlepage]{
+	\bool_if:NT  \g_ptxcd_BCOR_titlepage_bool
+		{\xdef\coverpageleftmargin{\the\dimexpr\coverpageleftmargin+\the\ta@bcor}}
+}
+%    \end{macrocode}
 %
+% End of margin setup
 %
 % \begin{macro}{\institution}
 %    \begin{macrocode}

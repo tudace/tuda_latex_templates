@@ -406,18 +406,6 @@
 %</center>
 %<*body>
 % \fi
-%    \begin{macrocode}
-\dim_new:N \g_ptxcd_headheight_dim
-
-\dim_gset:Nn \g_ptxcd_headheight_dim {\c_ptxcd_largerule_dim +\c_ptxcd_rulesep_dim +\c_ptxcd_smallrule_dim}
-      %
-      \bool_if:NTF  \g_ptxcd_geometry_bool {
-        \RequirePackage[top=\g_ptxcd_topMargin_dim, inner=\g_ptxcd_innerMargin_dim, outer=\dim_eval:n {\g_ptxcd_outerMargin_dim}, bottom=\g_ptxcd_bottomMargin_dim, columnsep= \g_ptxcd_columnSep_dim, includehead, includefoot, headheight=\g_ptxcd_headheight_dim
-        ]{geometry}
-      }{
-        \KOMAoptions{headinclude, footinclude, headwidth=text,footwidth=text}
-      }
-%    \end{macrocode}
 % \end{macro}
 % \end{implementation}
 %
