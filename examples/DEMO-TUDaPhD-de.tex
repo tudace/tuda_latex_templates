@@ -161,6 +161,12 @@ Die Datei \file{DEMO-TUDaPhD.tex} ist ein Template für Dissertationen im Stil d
 Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
 
 
+Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen.
+In diesem Dokument werden überwiegend die speziell auf Dissertationen ausgelegten Funktionen beschrieben.
+Weitere Konfigurationsmöglichkeiten finden sich in der allgemeinen TUDa-CI Dokumentation \cite{tuda-ci}.
+
+Es wird empfohlen die Datei mit Lua\LaTeX{} zu kompilieren. Es sollte bei Problemen auf jeden Fall geprüft und wenn möglich auf Lua\LaTeX{} umgestellt werden.
+
 \chapter{Verwendung}
 Die Klasse kann wie für Dokumentenklassen üblich eingebunden werden
 \begin{verbatim}
@@ -200,7 +206,7 @@ Die Daten werden analog zur klassischen Titeleierzeugung mit \verb+\maketitle+ �
 \end{verbatim}
 Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss.
 
-Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaPub-Dokumentation \cite{tudapub} geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos.
+Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDa-CI-Dokumentation \cite{tuda-ci}  geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos.
 
 \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
 	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
@@ -235,11 +241,11 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	      Dieses Makro verfügt jedoch zusätzlich über die Möglichkeit abweichende Einträge gegenüber den Vorgaben anzugeben. Insbesondere wenn eine gesonderte Formulierung gegenüber der voreingestellten \enquote{im Fachbereich} und ihren Varianten notwendig ist. Hierfür liefert \code{\textbackslash{}department} ein optionales Argument:
 
 \begin{verbatim}
-        \department[Ersatztext]{Kürzel/Bezeichnung}
+    \department[Ersatztext]{Kürzel/Bezeichnung}
 \end{verbatim}
 	      Zusätzlich gibt es ab Version 2.01 auch die Möglichkeit den gesamten Text \enquote{im Fachbereich <Bereichsbezeichnung>}, sowie die Angabe in der Infobox auf der Titelseite zu ersetzen. Dies geschieht über die gesternte Variante:
 \begin{verbatim}
-        \department*[Text für die Box]{Text zwischen Typ und Autor}
+    \department*[Text für die Box]{Text zwischen Typ und Autor}
 \end{verbatim}
 	\item[group] Arbeitsgruppe.
 	\item[submissiondate] Datum der Einreichung
@@ -248,11 +254,11 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	\item[publishers] Wird hier für die Ortsangabe verwendet und ist mit \enquote{Darmstadt}, bzw. \enquote{Darmstadt, Technische Universität Darmstadt} (bei Dissertationen) vorbelegt.
 	\item[tuprints] \label{page:tuprints}Übergabe der Daten, sofern das Dokument über TUprints Veröffentlicht werden soll.
 \begin{verbatim}
-        \tuprints{
-            urn=12345,
-            printid=123456,
-            year=2022
-        }
+    \tuprints{
+        printid=12345,
+        urn=123456,
+        year=2022
+    }
 \end{verbatim}
 	      Falls das Argument kein Gleichheitszeichen erkennt, wird der Wert als \code{printid} gesetzt und keine URN angegeben.
 
@@ -285,12 +291,12 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	      Die TU Darmstadt empfiehlt in Ihrer Publikationsrichtlinie und Open-Access-Policy die Nutzung der offenen CC BY 4.0 Lizenz.
 
 	      Falls ein von den oben gelisteten Schlüsseln abweichender Wert gesetzt wird, wird ebendieser direkt an der Stelle des Lizenztextes verwendet. Sofern der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
-	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}.
+	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tuda-ci}.
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
 \end{description}
 
-\section{Weitere Macros}
+\section{Weitere Makros}
 Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
 In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
 
@@ -384,8 +390,8 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 		      \item \code{bachelor}: Bachelorarbeit (title, author, submissiondate, department, reviewer)
 		      \item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
 		      \item \code{pp}: Project-Proposal  (title, author, date, department)
-		      \item \code{dr}: vorgelegte Dissertation (title, author, submissiondate , department, reviewer)
-		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate,examdate, department, reviewer)
+		      \item \code{dr}: vorgelegte Dissertation (title, author, submissiondate, department, reviewer)
+		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate, examdate, department, reviewer)
 	      \end{itemize}
 	      Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
 	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{rerpol}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
@@ -413,7 +419,7 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 		      wi    &Rechts- und Wirtschaftswissenschaften
 	      \end{tabular}
 
-	      Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche, siehe DEMO-TUDaThesis.
+	      Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind, auch Studienbereiche, siehe auch \file{DEMO-TUDaThesis-de.tex}.
 	      Falls etwas anderes als eines dieser Kürzel übergeben wird, wird der Text direkt verwendet und eine entsprechende Warnung ausgegeben.
 
 	      Die Auswahl der Fachrichtung erzeugt zusätzlich eine Box auf der Titelseite unterhalb des Logos. Falls diese automatische Erstellung nicht gewünscht ist, kann dies über die Option \code{instbox=false} deaktiviert werden.

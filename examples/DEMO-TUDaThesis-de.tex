@@ -143,37 +143,11 @@ Die Datei \file{DEMO-TUDaThesis.tex} ist ein grundlegendes Template für Abschlu
 Sie ist Teil des TUDa-CI-Bundle und wurde in Teilen durch das tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
 
 
-Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen. In diesem Dokument werden überwiegend die speziell auf Abschlussarbeiten ausgelegten Möglichkeiten beschrieben. Weitere Konfigurationsmöglichkeiten finden sich in der Datei \file{DEMO-TUDaPub.pdf} \cite{tudapub}.
+Sie verwendet die Dokumentenklasse \file{tudapub.cls}, allerdings mit erweiterten Einstellungen.
+In diesem Dokument werden überwiegend die speziell auf Abschlussarbeiten ausgelegten Funktionen beschrieben.
+Weitere Konfigurationsmöglichkeiten finden sich in der allgemeinen TUDa-CI Dokumentation \cite{tuda-ci}.
 
-Es ist voreingestellt, dass eine PDF/A-Datei erzeugt wird. Die beste Kompatibilität hierfür bietet Lua\LaTeX. Bei anderen Compilern kann dies entsprechend der Angaben in DEMO-TUDaPub zu Problemen führen. In diesem Fall sollte entweder der Compiler gewechselt oder \code{pdfa=false} aktiviert werden.
-
-Für weitere Hinweise kann ein Blick in die zur Dokumentenklasse gehörigen Dokumentation (DEMO-TUDaPub.pdf) hilfreich sein. Sie wird zusammen mit den Quelldateien verteilt.
-
-\minisec{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}
-Zwar basieren alle drei DEMO-Dateien auf der Klasse \code{tudapub}, allerdings sind die Basiseinstelungen dem Dokumententyp angepasst.
-Für Erläuterungen zu den TUDaPub spezifischen Optionen, sei auf die Datei DEMO-TUDaPub verwiesen.
-Da die Basisklasse für beide identisch ist, kann jede Option abgeändert werden. Die Folgende Liste zeigt lediglich die gezeigten Features bei Standardeinstellungen.
-
-\noindent
-\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}*3{>{\centering\arraybackslash}X}@{}}
-	\toprule
-	Option&DEMO-TUDaThesis&DEMO-TUDaPhD&DEMO-TUDapub\\
-	\midrule
-	twoside&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-	parskip&\FeatureTrue&\FeatureFalse&\FeatureTrue\\\midrule
-	Kolophon&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-	Widmung&\FeatureFalse&\FeatureTrue&\FeatureFalse\\\midrule
-	Schriftgröße&11pt&11pt&9pt\\\midrule
-	ruledheaders&section&chapter&all\\\midrule
-	Basisklasse&scrreprt&scrbook&scrartcl\\\midrule
-	thesis&\ttfamily type=bachelor&\ttfamily type=dr, dr=rernat
-	&\FeatureFalse\\\midrule
-	marginpar&\FeatureFalse&\FeatureFalse&\FeatureTrue\\\midrule
-	Affidavit\newline\rlap{(Selbstständigkeitserklärung)}&\FeatureTrue&\FeatureTrue&\FeatureFalse\\\midrule
-	abstract&\FeatureFalse&\FeatureTrue&\FeatureTrue\\\midrule
-	custommargins&\FeatureTrue&\FeatureTrue&\FeatureFalse\\
-	\bottomrule
-\end{tabularx}
+Es wird empfohlen die Datei mit Lua\LaTeX{} zu kompilieren. Es sollte bei Problemen auf jeden Fall geprüft und wenn möglich auf Lua\LaTeX{} umgestellt werden.
 
 \chapter{Verwendung}
 Die Klasse kann wie für Dokumentenklassen üblich eingebunden werden
@@ -214,7 +188,7 @@ Die Daten werden analog zur klassischen Titeleierzeugung mit \verb+\maketitle+ �
 \end{verbatim}
 Es ist zu beachten, dass für die Erzeugung der Titelseite nach Übergabe aller Daten \verb+\maketitle+ aufgerufen werden muss.
 
-Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaPub-Dokumentation \cite{tudapub} geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos.
+Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDa-CI-Dokumentation \cite{tuda-ci}  geschilderten Optionen. Dort finden sich auch Hinweise zur Platzierung von Sponsorenlogos.
 
 \begin{description}\setkomafont{descriptionlabel}{\ttfamily\textbackslash}
 	\item[title] Titel, wird in sehr großer Schrift im obersten Block der Titelseite platziert. Die Schriftgröße ist aufgrund der Häufigkeit für lange Titel kleiner gewählt als für andere Publikationen.
@@ -242,6 +216,7 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 \end{verbatim}
 	      Setzt die ersten beiden Bezeichner. Alternativ ist es auch möglich Positionen einzeln zu benennen \verb+\setupReviewName[1]{Erstferent}+, eine Übergabe als Komma-Liste ist als \verb+\setupReviewName*{Bezeicher1,Bezeicher2}+ möglich.
 
+	      Ab Version 3.26 werden die Gutachter nicht mehr auf der Titelrückseite genannt. Dies wird über die \verb+thesis+ Option \verb+reviewer-on-uppertitleback+ gesteuert. Voreingestellt ist der Wert \verb+false+.
 	\item[institution] Einrichtung. Dieser Eintrag, wie auch die beiden folgenden, werden unterhalb des Logos auf der Titelseite platziert.
 	\item[department] Fach-/Studienbereich, allerdings ist die oben genannte Option zu bevorzugen. Die Verarbeitung des Arguments erfolgt jedoch analog.
 
@@ -298,12 +273,12 @@ Falls eine Layoutanpassung der Titelseite notwendig ist, gelten die in der TUDaP
 	      Die TU Darmstadt empfiehlt in Ihrer Publikationsrichtlinie und Open-Access-Policy die Nutzung der offenen CC BY 4.0 Lizenz.
 
 	      Falls ein von den oben gelisteten Schlüsseln abweichender Wert gesetzt wird, wird ebendieser direkt an der Stelle des Lizenztextes verwendet. Sofern der Text Gleichheitszeichen oder Kommata enthält ist eine Gruppierung notwendig.
-	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tudapub}.
+	\item[titlegraphic] Hier kann Code übergeben werden, der den farbigen Block im unteren Teil der Titelseite ersetzt. Details sind in der allgemeinen TUDaPub-Dokumentation beschrieben \cite{tuda-ci}.
 	\item[titleintro] Ab Version 2.03 kann zusätzlich über diesen Hook ein beliebiger Text direkt nach dem Untertitel und vor den automatischen Daten ergänzt werden.
 	\item[titleaddendum] Wie \code{\tbs{}titleintro} jedoch als letztes Element des Blocks.
 \end{description}
 
-\section{Weitere Macros}
+\section{Weitere Makros}
 Das Makro \verb+\affidavit+ erzeugt eine Selbstständigkeitserklärung mit Unterschriftenzeile. Hier wird der oben übergebene Name/Signatur eingefügt.
 In diesem Dokument findet sich das Affidavit direkt nach der Titelei.
 
@@ -398,7 +373,7 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 		      \item \code{master}: Masterarbeit (title, author, submissiondate, department, reviewer)
 		      \item \code{pp}: Project-Proposal  (title, author, date, department)
 		      \item \code{dr}: vorgelegte Dissertation (title, author, submissiondate, department, reviewer)
-		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate ,examdate, department, reviewer)
+		      \item \code{drfinal}: genehmigte Dissertation (title, author, submissiondate, examdate, department, reviewer)
 	      \end{itemize}
 	      Wird ein Typus angegeben, der nicht erkannt wird, so wird der Text direkt übergeben. Notwendige Titelfelder über den Titel hinaus gibt es in diesem Fall nicht.
 	\item[dr=<Kürzel>] Lädt einen der vordefinierten Texte für die Titelseite. Als Werte stehen bislang \code{rernat}, \code{rerpol}, \code{ing} und \code{phil} zur Verfügung. Zum Beispiel lädt der Wert \code{phil}:
@@ -426,7 +401,7 @@ Im folgenden findet sich die Bedeutung der einzelnen Optionen:
 		      wi    &Rechts- und Wirtschaftswissenschaften
 	      \end{tabular}
 
-	      Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind auch Studienbereiche.
+	      Neben den Fachbereichen existieren für Abschlussarbeiten, die keine Dissertationen sind, auch Studienbereiche.
 	      Falls das Kürzel nicht als Fachbereich hinterlegt ist, wird automatisch auf die Studienbereiche geprüft. Die Studienbereiche haben die folgenden Kürzel:
 
 	      \begin{tabular}{@{}l@{${}\to{}$}l@{}}
