@@ -30,6 +30,7 @@ graphics-cfg
 graphics-def
 grfext# only Beamer Letter Report
 hycolor# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
+hypdoc# tuda-ci.dtx
 hyperref# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
 hyphen-english
 hyphen-german
@@ -47,12 +48,13 @@ l3backend
 l3build# binary
 l3kernel
 l3packages
-latex-bin# binary
 latex
+latex-bin# binary
 latex-fonts
 latex-lab# only Letter PhD Pub Thesis
 latexconfig
 leaflet# only Leaflet
+lineno# tuda-ci.dtx
 lm
 logreq# only Exercise Leaflet PhD Pub SciPoster Thesis
 ltxcmds# only Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
@@ -81,6 +83,7 @@ translator# only Beamer
 trimspaces# only Exercise SciPoster
 tuda-ci
 uniquecounter# only Beamer Exercise Report SciPoster
+upquote# tuda-ci.dtx
 urcls# only PhD Pub Report Thesis
 url# only Announcement Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
 xcharter
