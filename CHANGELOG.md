@@ -1,5 +1,7 @@
  # Version History (full)
 
+ * v4.01 (2025-02-11)
+   - bugfix in tudaexercise #501
  * v4.00 (2025-01-23)
    - complete refactoring including the addition of English template files and bugfixes
    - option to ignore missing logos

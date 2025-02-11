@@ -2,7 +2,7 @@
 
 Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2025
 
-tuda-ci v4.01-dev (2025-02-11)
+tuda-ci v4.01 (2025-02-11)
 
 ***************************************************************************
 
@@ -156,6 +156,7 @@ A full list of all files of this Project including the additional example files 
 
 Older version information can be found in (`CHANGELOG.md` in the Repository)[https://github.com/tudace/tuda_latex_templates/blob/main/CHANGELOG.md].
 
+- v4.01 (2025-02-11) bugfix in tudaexercise #501
 - v4.00 (2025-01-26)
   - complete refactoring including the addition of English template files and bugfixes
   - option to ignore missing logos
