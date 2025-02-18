@@ -61,7 +61,7 @@ Auf Windows-Systemen muss man vermutlich bei kpsewhich die Endung `.exe` mit ang
 l3build uninstall --texmfhome $(kpsewhich.exe --var-value TEXMFLOCAL)
 l3build install --texmfhome $(kpsewhich.exe --var-value TEXMFLOCAL)
 mktexlsr
-``
+```
 
 # TU Darmstadt Logo installation
 
@@ -100,4 +100,4 @@ On Windows based systems one might need to restructure these commands to run in 
 l3build uninstall --texmfhome $(kpsewhich.exe --var-value TEXMFLOCAL)
 l3build install --texmfhome $(kpsewhich.exe --var-value TEXMFLOCAL)
 texhash
-``
+```
