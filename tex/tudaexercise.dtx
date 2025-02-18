@@ -1049,7 +1049,7 @@
     \iow_now:Ne \@auxout {
             \exp_not:N \ptxcd@TaskProperties {#1} {#2} {
                 \tl_if_empty:cF  {l_@@_#1credit_tl} {credit=\tl_to_str:v  {l_ptxcd_#1credit_tl},}
-                \tl_if_blank:nF {#3} {title=\tl_to_str:n {#3},}
+                \tl_if_blank:nF {#3} {title={\tl_to_str:n {#3}},}
             } {#4}
      }
      \prop_gput:cee {g_@@_#1points_collector_prop}
