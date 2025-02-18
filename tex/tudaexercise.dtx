@@ -1033,7 +1033,7 @@
   \@task{#2}
   \edef\@currenttasklabel{\tasklabel}
 }{
-  \_@@_save_task_properties:nnnn {} {\thetask} {#2} {
+  \_@@_save_task_properties:nnnn {} {\thetask} {\exp_not:n {#2}} {
     \bool_if:NTF \l_@@_points_auto_bool {
       \fp_to_decimal:N \g_@@_ex_collected_points_fp
     }{
@@ -1163,7 +1163,7 @@
     }
   \edef\@currenttasklabel{\subtasklabel}
     \_@@_save_task_properties:nnon {subtask_} {\@currenttasklabel}
-      {\l_@@_title_tl} {\fp_to_decimal:N  \l_@@_subtask_points_fp}
+      {\exp_not:N \l_@@_title_tl} {\fp_to_decimal:N  \l_@@_subtask_points_fp}
     \bool_if:NT  \g_@@_runin_subtask_bool \strut
     \tl_gset_eq:NN \g_tmpa_tl \@currentlabel
   \endgroup
