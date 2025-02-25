@@ -29,13 +29,13 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tuda-ci.dtx}[2025-02-18 v4.02-dev The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
+\ProvidesFile{tuda-ci.dtx}[2025-02-25 v4.02 The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
 %</driver>
 %<*package|class>
 %<@@=ptxcd>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
-%<tudapub>\ProvidesExplClass{tudapub}{2025-02-18}{4.02-dev}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
-%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-02-18}{4.02-dev}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
+%<tudapub>\ProvidesExplClass{tudapub}{2025-02-25}{4.02}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
+%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-02-25}{4.02}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
 %</package|class>
 %<*driver>
 \PassOptionsToPackage{hyperindex=false}{hyperref}
@@ -3285,7 +3285,7 @@
   printid .tl_gset:N = \g_ptxcd_thesis_tuprints_tl,
   printid .initial:V = \c_empty_tl,
 %    \end{macrocode}
-% \changes{v4.02-dev}{2025-02-25}{Add initial setting for doi to use printid.}
+% \changes{v4.02}{2025-02-25}{Add initial setting for doi to use printid.}
 %    \begin{macrocode}
   doi .tl_gset:N = \g_ptxcd_thesis_doi_tl,
   doi .initial:n = 10.26083/tuprints-\prg_replicate:nn {8 - \tl_count:N \g_ptxcd_thesis_tuprints_tl} {0}\g_ptxcd_thesis_tuprints_tl,

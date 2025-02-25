@@ -1,5 +1,8 @@
  # Version History (full)
 
+ * v4.02 (2025-02-25)
+   - use tuprints DOI by default
+   - bugfix in tudaexercise #503
  * v4.01 (2025-02-11)
    - bugfix in tudaexercise #501
  * v4.00 (2025-01-23)

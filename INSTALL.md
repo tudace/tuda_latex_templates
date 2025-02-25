@@ -2,7 +2,7 @@
 
 Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
-tuda-ci v4.02-dev (2025-02-18)
+tuda-ci v4.02 (2025-02-25)
 
 If you only create demo files, have a look at DEMO.md.
 
