@@ -3282,7 +3282,11 @@
   urn .initial:V = \c_empty_tl,
   printid .tl_gset:N = \g_ptxcd_thesis_tuprints_tl,
   printid .initial:V = \c_empty_tl,
+%    \end{macrocode}
+% \changes{v4.02-dev}{2025-02-25}{Add initial setting for doi to use printid.}
+%    \begin{macrocode}
   doi .tl_gset:N = \g_ptxcd_thesis_doi_tl,
+  doi .initial:n = 10.26083/tuprints-\prg_replicate:nn {8 - \tl_count:N \g_ptxcd_thesis_tuprints_tl} {0}\g_ptxcd_thesis_tuprints_tl,
   year .tl_gset:N = \g_ptxcd_thesis_publication_year_tl,
   year .initial:n = ,
   license .choices:nn = {cc-by-4.0,cc-by-sa-4.0,cc-by-nc-sa-4.0,cc-by-nc-4.0,cc-by-nd-4.0,cc-by-nc-nd-4.0} {
@@ -3362,7 +3366,6 @@ Please~choose~your~license~manually~to~avoid~unintended~changes.
     \selectlanguage{german}
     Bitte~zitieren~Sie~dieses~Dokument~als:
     \tl_if_empty:NF \g_ptxcd_thesis_urn_tl {\\URN:~urn:nbn:de:tuda-tuprints-\g_ptxcd_thesis_urn_tl}\\
-    URL:~\url{https://tuprints.ulb.tu-darmstadt.de/\g_ptxcd_thesis_tuprints_tl}\\
     \tl_if_empty:NF \g_ptxcd_thesis_doi_tl {DOI:~\url{https://doi.org/\g_ptxcd_thesis_doi_tl}\\}
     \tl_if_empty:NF \g_ptxcd_thesis_publication_year_tl {Jahr~der~Veröffentlichung~auf~TUprints:~\g_ptxcd_thesis_publication_year_tl}
     \par\vspace{\baselineskip}
