@@ -29,13 +29,13 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tuda-ci.dtx}[2025-02-25 v4.02 The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
+\ProvidesFile{tuda-ci.dtx}[2025-03-03 v4.03-dev The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
 %</driver>
 %<*package|class>
 %<@@=ptxcd>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
-%<tudapub>\ProvidesExplClass{tudapub}{2025-02-25}{4.02}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
-%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-02-25}{4.02}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
+%<tudapub>\ProvidesExplClass{tudapub}{2025-03-03}{4.03-dev}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
+%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-03-03}{4.03-dev}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
 %</package|class>
 %<*driver>
 \PassOptionsToPackage{hyperindex=false}{hyperref}
@@ -800,7 +800,7 @@
 % \DescribeKeyOption{urn=\meta{TUprints URN}}{\meta{initially unset}}*
 % If the argument does not contain an equals sign, the value is set as \option{printid} and no \option{urn} is specified.
 %
-% \option{printid} is the ID number of the TUprints entry and will be used automatically to create a hyperlink to the corresponding DOI (e.\,g.  DOI:~\url{https://doi.org/\UseName{g_ptxcd_thesis_doi_tl}}).
+% \option{printid} is the ID number of the TUprints entry and will be used automatically to create a hyperlink to the corresponding DOI. %%^^A\issue 505
 % The URN is – in addition to the DOI – a permanently unique resource identifier for the document.
 % In TUprints, the number corresponds to the \option{printid} with the addition of a check digit.
 % Both dates can be found in the details of the TUprints entry.
@@ -3285,7 +3285,7 @@
   printid .tl_gset:N = \g_ptxcd_thesis_tuprints_tl,
   printid .initial:V = \c_empty_tl,
 %    \end{macrocode}
-% \changes{v4.02}{2025-02-25}{Add initial setting for doi to use printid.}
+% \changes{v4.02}{2025-03-03}{Add initial setting for doi to use printid.}
 %    \begin{macrocode}
   doi .tl_gset:N = \g_ptxcd_thesis_doi_tl,
   doi .initial:n = 10.26083/tuprints-\prg_replicate:nn {8 - \tl_count:N \g_ptxcd_thesis_tuprints_tl} {0}\g_ptxcd_thesis_tuprints_tl,

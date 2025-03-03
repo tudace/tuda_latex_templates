@@ -43,8 +43,8 @@ if not options["target"] == "tag" then
 	excludefiles={table.unpack(excludefiles),"build.lua","config-*.lua"}
 end
 
-packageversion = "4.02"
-packagedate = "2025-02-25"
+packageversion = "4.03-dev"
+packagedate = "2025-03-03"
 
 tagfiles = {"*.sty", "*.cls", "*.cfg", "*.md", "*.clo", "*.tex", "*.lco", "*.def", "*.bib", "*.lua", "*.ins", "*.dtx"}
 
@@ -129,6 +129,9 @@ function update_tag(file, content, tagname, tagdate)
 							"\\changes{v" .. tagname .. "(%-dev)?}{" ..
 								datepattern,
 							"\\changes{v" .. tagname .. "}{" .. tagdate)
+		content = string.gsub(content,"(%%<%*[^\n]+\n%s+%[)"..
+								datepattern .. "%s-v" .. versionpattern,
+							"%1" .. tagdate .. " " .. tagname)
 	end
 	return content
 end
