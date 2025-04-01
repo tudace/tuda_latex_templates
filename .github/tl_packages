@@ -60,6 +60,7 @@ logreq# only Exercise Leaflet PhD Pub SciPoster Thesis
 ltxcmds# only Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
 microtype# only PhD Pub Thesis
 minted# tuda-ci.dtx
+mptopdf# adjustbox
 mwe# example-image for demo files
 pdfcol# only SciPoster
 pdfescape# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
