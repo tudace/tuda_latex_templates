@@ -23,7 +23,7 @@ jobs:
           package_file: .github/tl_packages
           cache_version: 0
       - name: Run l3build
-        run: l3build doc -q -H
+        run: l3build doc -q -H --show-log-on-error
       - name: Archive documentation
         uses: actions/upload-artifact@v4
         with:

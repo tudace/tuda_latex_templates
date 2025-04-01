@@ -58,6 +58,7 @@ lineno# tuda-ci.dtx
 lm
 logreq# only Exercise Leaflet PhD Pub SciPoster Thesis
 ltxcmds# only Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
+makeindex# tuda-ci.dtx
 microtype# only PhD Pub Thesis
 minted# tuda-ci.dtx
 mptopdf# adjustbox
