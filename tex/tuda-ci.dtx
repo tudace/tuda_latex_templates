@@ -1556,12 +1556,12 @@
     \pdfmeta_standard_get:nN  {outputintent_A} \l_tmpa_tl
     \quark_if_no_value:NF \l_tmpa_tl  {
       \bool_gset_false:N \g_ptxcd_pdfx_bool
-      \msg_new:nnn{tudapub} {prefer-lualatex} {
+      \msg_new:nnn{tudapub} {pdfmanagement-detected} {
         I~detected~usage~of~l3pdfmeta~(\DocumentMetadata)~to~create~PDF/A.\\
         tudapub~will~not~load~pdfx~to~avoid~conflicts.\\
         To~disable~this~message~use~pdfx=false.
       }
-      \msg_info:nn {tudapub} {prefer-lualatex}
+      \msg_info:nn {tudapub} {pdfmanagement-detected}
     }
     \prop_if_in:NnF \g__pdfmeta_outputintents_prop {GTS_PDFA1} {
       \use_iii:nnn
