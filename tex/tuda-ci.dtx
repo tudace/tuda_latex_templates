@@ -1659,9 +1659,10 @@
 	  The~pdfx~package~was~not~loaded.\\
 	  You~probably~used~\DocumentMetadata~but~did~not~select~PDF/A.\\
 	  I disable~pdfa~due~to~that~incompatiblity.
-      } {Select~the~using~the~pdfmanagement~to~enable~PDF/A~or~set~pdfa=false~to~disable~this~message.}
+      } {Select~the~standard~using~the~pdfmanagement~to~enable~PDF/A~or~set~pdfa=false~to~disable~this~message.}
       \msg_warning:nn {tuda-ci}{pdfx-not-loaded}
       \bool_gset_false:N \g_ptxcd_pdfx_bool
+      \bool_gset_false:N \g_ptxcd_pdfa_bool
   }
   \@ifpackageloaded{xmpincl}{
       \@ifpackagelater{xmpincl}{2021/09/22}{}{
