@@ -29,13 +29,13 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tuda-ci.dtx}[2025-03-03 v4.03-dev The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
+\ProvidesFile{tuda-ci.dtx}[2025-04-02 v4.03 The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
 %</driver>
 %<*package|class>
 %<@@=ptxcd>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
-%<tudapub>\ProvidesExplClass{tudapub}{2025-03-03}{4.03-dev}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
-%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-03-03}{4.03-dev}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
+%<tudapub>\ProvidesExplClass{tudapub}{2025-04-02}{4.03}{Publications using TU Darmstadt's Corporate Design (TUDa-CI)}
+%<tudathesis>\ProvidesExplFile{tudathesis.cfg}{2025-04-02}{4.03}{Special Features for publication type 'thesis' using TU Darmstadt's Corporate Design (tuda-ci)}
 %</package|class>
 %<*driver>
 \PassOptionsToPackage{hyperindex=false}{hyperref}
@@ -564,6 +564,8 @@
 % \cls{tudapub} will try to automatically select the best method.
 % This is done using \option{pdfx} option.
 % This should only be toggled manually if the user is totally sure to understand the impact.
+% Please be aware that the \option{pdfx} option is incompatible with any use of the \pkg{pdfmanagement}.
+% There will be an error message if this combination is active and \option{pdfx} as well as \option{pdfa} will be disabled.
 %
 % \subsection{Creating PDF/A using the PDF management}
 % \label{sec:pdfmanagement}
@@ -1660,7 +1662,7 @@
 	  You~probably~used~\DocumentMetadata~but~did~not~select~PDF/A.\\
 	  I disable~pdfa~due~to~that~incompatiblity.
       } {Select~the~standard~using~the~pdfmanagement~to~enable~PDF/A~or~set~pdfa=false~to~disable~this~message.}
-      \msg_warning:nn {tuda-ci}{pdfx-not-loaded}
+      \msg_error:nn {tuda-ci}{pdfx-not-loaded}
       \bool_gset_false:N \g_ptxcd_pdfx_bool
       \bool_gset_false:N \g_ptxcd_pdfa_bool
   }

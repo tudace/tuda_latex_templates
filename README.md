@@ -2,7 +2,7 @@
 
 Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2025
 
-tuda-ci v4.03-dev (2025-03-03)
+tuda-ci v4.03 (2025-04-02)
 
 ***************************************************************************
 
@@ -95,8 +95,8 @@ Eine vollständige Liste aller Dateien, die zu diesem Projekt gehören kann find
 
 Darüber hinaus existieren deutschsprachige Versionen der Template-Dateien im [GitHub Repository](https://github.com/tudace/tuda_latex_templates) sowie spezielle Anwendungsbeispiele:
 
-Kompatibilitätsmodus TUDexercise: (Examples-TUDexercise-compat.tex)[https://github.com/tudace/tuda_latex_templates/blob/master/exercises/Examples-TUDexercise-compat.tex]
-Farbskalen von tuda-pgfplots: (Examples-TUDa-pgfplots.tex)[https://github.com/tudace/tuda_latex_templates/blob/master/exercises/Examples-TUDa-pgfplots.tex]
+Kompatibilitätsmodus TUDexercise: (Examples-TUDexercise-compat.tex)[https://github.com/tudace/tuda_latex_templates/blob/main/examples/Examples-TUDexercise-compat.tex]
+Farbskalen von tuda-pgfplots: (Examples-TUDa-pgfplots.tex)[https://github.com/tudace/tuda_latex_templates/blob/main/examples/Examples-TUDa-pgfplots.tex]
 
 # Summary
 
@@ -156,8 +156,8 @@ A full list of all files of this Project including the additional example files 
 
 Older version information can be found in (`CHANGELOG.md` in the Repository)[https://github.com/tudace/tuda_latex_templates/blob/main/CHANGELOG.md].
 
-
- - v4.02 (2025-02-25)
+- v4.03 (2025-04-02) bugfix and improval of error handling for conflicts with pdfa=true
+- v4.02 (2025-02-25)
    - use tuprints DOI by default
    - bugfix in tudaexercise #503
 - v4.01 (2025-02-11) bugfix in tudaexercise #501
