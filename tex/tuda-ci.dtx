@@ -1623,7 +1623,7 @@
 % \changes{v4.00}{2025-01-26}{Unify pdfx/pdfa mechanism structure over all document types}
 %    \begin{macrocode}
 \PassOptionsToPackage{hidelinks, unicode}{hyperref}
-\bool_if:NTF \g_ptxcd_pdfx_bool {
+\bool_if:NT \g_ptxcd_pdfx_bool {
 %% only apply the hack if pdfx is older than the working version
   \PassOptionsToPackage{a-2b}{pdfx}
 %% Workaround posted by David Carlisle on tex.stackexchange
@@ -1654,13 +1654,22 @@
   \sys_if_engine_xetex:T {
     \msg_warning:nnn{tuda-ci} {prefer-lualatex} {XeTeX}
   }
-
-  \@ifpackagelater{xmpincl}{2021/09/22}{
-  }{
-    \msg_error:nn{tuda-ci}  {outdated-package-pdfa} {xmpincl}
+  \@ifpackageloaded{pdfx}{}{
+      \msg_new:nnnn {tuda-ci} {pdfx-not-loaded} {
+	  The~pdfx~package~was~not~loaded.\\
+	  You~probably~used~\DocumentMetadata~but~did~not~select~PDF/A.\\
+	  I disable~pdfa~due~to~that~incompatiblity.
+      } {Select~the~using~the~pdfmanagement~to~enable~PDF/A~or~set~pdfa=false~to~disable~this~message.}
+      \msg_warning:nn {tuda-ci}{pdfx-not-loaded}
+      \bool_gset_false:N \g_ptxcd_pdfx_bool
   }
-
-} {
+  \@ifpackageloaded{xmpincl}{
+      \@ifpackagelater{xmpincl}{2021/09/22}{}{
+	  \msg_error:nnn{tuda-ci}  {outdated-package-pdfa} {xmpincl}
+      }
+  }{}
+}
+\bool_if:NF \g_ptxcd_pdfx_bool {
   \RequirePackage{hyperref}
 }
 %    \end{macrocode}
