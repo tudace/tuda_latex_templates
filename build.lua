@@ -131,7 +131,7 @@ function update_tag(file, content, tagname, tagdate)
 							"\\changes{v" .. tagname .. "}{" .. tagdate)
 		content = string.gsub(content,"(%%<%*[^\n]+\n%s+%[)"..
 								datepattern .. "%s-v" .. versionpattern,
-							"%1" .. tagdate .. " " .. tagname)
+							"%1" .. tagdate .. " v" .. tagname)
 	end
 	return content
 end
