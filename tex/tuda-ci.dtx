@@ -157,6 +157,20 @@
 \newminted[example]{latex}{gobble=2, tabsize=4}
 \setminted{escapeinside=||}
 
+\usepackage[highlightmode=immediate]{minted}
+\newenvironment{examplecode}{%
+        \VerbatimEnvironment%
+        \fvset{gobble=0}%
+        \begin{VerbatimOut}[tabsize=3,gobble=1]{examplecode.out}%
+}{%
+        \end{VerbatimOut}%
+        \inputminted[autogobble, escapeinside=||]{latex}{examplecode.out}%
+}
+
+\usepackage{accsupp}
+\setminted{breaksymbol={\BeginAccSupp{method=escape,ActualText={}}\tiny\ensuremath{\hookrightarrow}\EndAccSupp{}},breaklines}
+
+
 \geometry{
   top=\g_ptxcd_topMargin_dim,
   inner=\g_ptxcd_innerMargin_dim,
@@ -175,7 +189,7 @@
 }
 
 % Loader for dtx files so the preamble is only necessary once
-\NewDocumentCommand{\TUDaLoadDocDTX}{m}{
+\NewDocumentCommand{\PtxtoolsLoadDocDTX}{m}{
   \exp_args:No \clist_map_inline:nn {#1} {\DocInput{##1}}
 }
 

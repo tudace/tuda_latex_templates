@@ -35,7 +35,7 @@ Falls es sich nicht um eine lokale Installation handelt, findet sich die Dokumen
 
 Darüber hinaus finden sich die kompilierten PDFs auf [CTAN](http://mirror.ctan.org/macros/latex/contrib/tuda-ci/doc) oder – falls das Paket installiert ist – im entsprechenden Doku-Verzeichnis (<Pfad zu Ihrer LaTeX-Installation>/doc/latex/tuda-ci).
 
-Die ULB bietet über das Team Infokompetenz LaTeX-Support und insbesondere Hilfe bei der Verwendung von TUDa-CI an. (https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp). Darüber hinaus findet auch die Sprechstunde wieder statt und bietet die Möglichkeit, individuelle Fragestellungen zu bearbeiten.
+Die ULB bietet über das Team [Team Forschungsnahe Dienste und Informationskompetenz](mailto:fordi@ulb.tu-darmstadt.de) LaTeX-Support und insbesondere auch Hilfe bei der Verwendung von TUDa-CI an. (https://www.ulb.tu-darmstadt.de/finden_nutzen/medien_nutzen/dokumente_erstellen/latex/index.de.jsp). Darüber hinaus findet auch die Sprechstunde wieder statt und bietet die Möglichkeit, individuelle Fragestellungen zu bearbeiten.
 Die Termine zu allen Lernformaten finden sich auf der [Website der ULB](https://www.ulb.tu-darmstadt.de/lernen_arbeiten/lehr_und_lernformate/textverarbeitung/textverarbeitung.de.jsp).
 
 ## Verwendungshinweis
