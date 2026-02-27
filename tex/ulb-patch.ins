@@ -1,0 +1,83 @@
+%% This is file `tuda-ci.ins' version 4.05 (2025-11-13),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%%  Copyright (C) 2018--2025 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%
+%% The development repository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%%
+%% ==========================================
+%%
+
+\input docstrip.tex
+\keepsilent
+
+\usedir{tex/latex/tuda-ci}
+
+\let\orig@ds@heading\ds@heading
+\let\ds@heading\@empty
+\declarepreamble\tudatop
+it is part of
+TUDa-CI -- Corporate Design for TU Darmstadt
+
+----------------------------------------------------------------------------
+
+  Copyright (C) 2018--2025 by Marei Peischl <marei@peitex.de>
+
+============================================================================
+\endpreamble
+\declarepreamble\tudabottom
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either version 1.3c
+of this license or (at your option) any later version.
+The latest version of this license is in
+http://www.latex-project.org/lppl.txt
+and version 1.3c or later is part of all distributions of LaTeX
+version 2008/05/04 or later.
+
+This work has the LPPL maintenance status `maintained'.
+
+The Current Maintainer of this work is
+  Marei Peischl <tuda-ci@peitex.de>
+
+The development repository can be found at
+https://github.com/tudace/tuda_latex_templates
+Please use the issue tracker for feedback!
+
+============================================================================
+
+\endpreamble
+\ExplSyntaxOn
+\tl_replace_once:Nnn \tudatop{\ReferenceLines} {^^J}
+\tl_replace_once:Nnn \tudabottom {\ReferenceLines} {^^J}
+\ExplSyntaxOff
+
+\let\ds@heading\orig@ds@heading
+\declarepreamble\tudadefault\tudatop\tudabottom
+\endpreamble
+
+\usepreamble\tudadefault
+
+\askforoverwritefalse
+\generate{
+	\file{tudathesis.cfg}{\from{tuda-ci.dtx}{cfg,tudathesis,ulb-patch}}
+}
+\endbatchfile
