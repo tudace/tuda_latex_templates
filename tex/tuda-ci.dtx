@@ -2546,16 +2546,15 @@
     \cs_new:Nn \ptxcd_pass_TitleData: {
 %    \end{macrocode}
 % check if pdfmanagement is active
+% \changes{version}{date}{Use GetDocumentProperties to check if Metadata has been set}
 %    \begin{macrocode}
-      \prop_if_exist:NTF \g__pdfmanagement_documentproperties_prop {
-        \prop_set_eq:NN \l_tmpa_prop \g__pdfmanagement_documentproperties_prop
-      } {
-        \prop_set_eq:NN \l_tmpa_prop   \g__hyp_documentproperties_prop
-      }
-%    \end{macrocode}
 % title
 %    \begin{macrocode}
-      \prop_if_in:NnF \l_tmpa_prop {hyperref/pdftitle} {
+      \@ifundefined{GetDocumentProperties}{
+        \use:n
+      }{
+	\tl_if_blank:nF {\GetDocumentProperties{hyperref/pdftitle}}
+      }{
       \begingroup
         \def\newline{}
         \def\\{}
@@ -2565,7 +2564,11 @@
       \hypersetup{pdftitle={\tl_to_str:V \g_tmpa_tl}}
       }
 %    \begin{macrocode}
-      \prop_if_in:NnF \l_tmpa_prop {hyperref/pdfauthor} {
+      \@ifundefined{GetDocumentProperties}{
+        \use:n
+      }{
+	\tl_if_blank:nF {\GetDocumentProperties{hyperref/pdfauthor}}
+      }{
         \begingroup
           \def\newline{}
           \def\\{}

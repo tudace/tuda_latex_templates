@@ -164,6 +164,7 @@ A full list of all files of this project including the additional example files 
 
 Older version information can be found in (`CHANGELOG.md` in the Repository)[https://github.com/tudace/tuda_latex_templates/blob/main/CHANGELOG.md].
 
+- v4.06 (2026-06-08) Bugfix: Fix incompatibility with new version of hyperref
 - v4.05 (2025-11-13) Bugfix: DOI no longer matches printid and add url field for TUprints
 - v4.04 (2025-11-04) change new prefixes to match the new TUprints
 - v4.03 (2025-04-02) bugfix and improval of error handling for conflicts with pdfa=true
