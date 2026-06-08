@@ -29,7 +29,7 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{tuda-ci.dtx}[2025-11-13 v4.05 The TUDa-CI Bundle – LaTeX using the Corporate Design of TU Darmstadt]
+\ProvidesFile{tuda-ci.dtx}[2025-11-13 v4.05 The TUDa-CI Bundle -- LaTeX using the Corporate Design of TU Darmstadt]
 %</driver>
 %<*package|class>
 %<@@=ptxcd>
@@ -3082,6 +3082,14 @@
 \bool_new:N \g_@@_dr_bool
 \clist_if_exist:NF \g_ptxcd_Required_title_data_clist {\clist_new:N \g_ptxcd_Required_title_data_clist}
 
+% Making regex pattern matching work with old and new LaTeX kernels
+\cs_new_protected:Npn \ptxcd_regex_match:nnTF #1#2#3#4
+  {
+    \cs_if_exist:NTF \regex_match:nnTF
+      { \regex_match:nnTF {#1} {#2} {#3} {#4} }
+      { \regex_if_match:nnTF {#1} {#2} {#3} {#4} }
+  }
+
 % Declare macros for department
 \cs_new:Nn \ptxcd_select_department:n {
   \str_case:nnTF {#1} {
@@ -3334,7 +3342,7 @@
 % \changes{v4.04}{2025-11-04}{Change prefixes for tuprints to match the new server infrastructure \issue{520}}
 %    \begin{macrocode}
 \tl_const:Nn \c_@@_doi_prefix_tl {
-	 doi.org/10.26083/tuda-
+	doi.org/10.26083/tuda-
 }
 \tl_const:Nn \c_@@_urn_prefix_tl {
 	nbn-resolving.de/urn:nbn:de:tuda-tuda-
@@ -3348,7 +3356,7 @@
 
 \cs_new:Nn \_@@_add_url_prefix:nn {
 	\tl_gclear:c {g_ptxcd_thesis_#1_tl}
-	\regex_if_match:nnTF {^https?://} {#2} {
+	\ptxcd_regex_match:nnTF {^https?://} {#2} {
 		\tl_gset:cn {g_ptxcd_thesis_#1_tl} {#2}
 	} {
 		\seq_set_split:Nne \l_tmpa_seq {/} {\tl_use:c {c_@@_#1_prefix_tl}}
@@ -3367,7 +3375,7 @@
 %    \end{macrocode}
 % Initilize variables for |\tuprints|.
 %    \begin{macrocode}
-\tl_new:N  \g_ptxcd_thesis_doi_tl
+\tl_new:N \g_ptxcd_thesis_doi_tl
 \tl_new:N \g_ptxcd_thesis_urn_tl
 \tl_new:N \g_ptxcd_thesis_url_tl
 \tl_gset:Ne \g_ptxcd_thesis_url_tl {\c_@@_link_prefix_tl\c_@@_url_prefix_tl\exp_not:N \g_ptxcd_thesis_tuprints_tl}
@@ -3408,8 +3416,8 @@
 }
 
 \cs_new:cn {g_@@_cc-by-nc-nd-2.0-de:} {
-  Die~Veröffentlichung~steht~unter~folgender~Creative~Commons~Lizenz:\\
-  Namensnennung~--~Keine~kommerzielle~Nutzung~--~Keine~Bearbeitung~ 2.0~Deutschland\\
+  Die~Veröffentlichung~steht~unter~folgender~\glqq{}Creative~Commons\grqq{}-Lizenz:\\
+  Namensnennung~--~Keine~kommerzielle~Nutzung~--~Keine~Bearbeitung~2.0~Deutschland\\
   \url{https://creativecommons.org/licenses/by-nc-nd/2.0/de/}
 }
 
@@ -3423,8 +3431,8 @@
 \defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_attr_sa:}{ShareAlike}
 \defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_attr_nd:}{NoDerivatives}
 
-\defcaptionname{ngerman,german}{\g_@@_cc_intro:}{Die~Veröffentlichung~steht~unter~folgender~Creative~Commons~Lizenz:}
-\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_intro:}{This~work~is~licensed~under~a~Creative~Commons~License:}
+\defcaptionname{ngerman,german}{\g_@@_cc_intro:}{Die~Veröffentlichung~steht~unter~folgender~\glqq{}Creative~Commons\grqq{}-Lizenz:}
+\defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_intro:}{This~work~is~licensed~under~the~following~Creative~Commons~license:}
 
 \defcaptionname{ngerman,german}{\g_@@_cc_sep:}{~--~}
 \defcaptionname{english, USenglish, american, UKenglish, british}{\g_@@_cc_sep:}{--}
@@ -3460,7 +3468,7 @@
     \tl_if_empty:NF \g_ptxcd_thesis_doi_tl {DOI:~\url{\g_ptxcd_thesis_doi_tl}\par}
     \tl_if_empty:NF \g_ptxcd_thesis_publication_year_tl {Jahr~der~Veröffentlichung~auf~TUprints:~\g_ptxcd_thesis_publication_year_tl}
     \par\vspace{\baselineskip}
-    Dieses~Dokument~wird~bereitgestellt~von~tuprints,\par
+    Dieses~Dokument~wird~bereitgestellt~von~TUprints,\par
     E-Publishing-Service~der~TU~Darmstadt\par
     \url{https://tuprints.ulb.tu-darmstadt.de}\par
     \url{tuprints@ulb.tu-darmstadt.de}\par\vskip\baselineskip
