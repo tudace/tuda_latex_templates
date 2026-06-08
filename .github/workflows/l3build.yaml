@@ -16,7 +16,7 @@ jobs:
     name: Documentation and Demo files
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install TeX Live
         uses: zauguin/install-texlive@v4
         with:
@@ -25,7 +25,7 @@ jobs:
       - name: Run l3build
         run: l3build doc -q -H --show-log-on-error
       - name: Archive documentation
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Documentation
           path: "*.pdf"
