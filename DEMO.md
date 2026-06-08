@@ -2,7 +2,7 @@
 
 Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
 
-tuda-ci v4.05 (2025-11-13)
+tuda-ci v4.06 (2026-06-08)
 
 [Link to the github repository](https://github.com/tudace/tuda_latex_templates)
 
