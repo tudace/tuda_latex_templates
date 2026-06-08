@@ -18,7 +18,7 @@ cm
 collectbox# only Beamer PhD Pub Report Thesis
 colorprofiles# only Letter PhD Pub Thesis
 csquotes
-environ# only Exercise SciPoster
+environ# only SciPoster
 epstopdf-pkg
 etex-pkg# only Leaflet
 etoolbox
@@ -29,12 +29,10 @@ graphics
 graphics-cfg
 graphics-def
 grfext# only Beamer Letter Report
+hologo# only Pub
 hycolor# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
 hypdoc# tuda-ci.dtx
 hyperref# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
-hyphen-english
-hyphen-german
-hologo# only Pub
 hyphen-english
 hyphen-german
 iftex
@@ -65,7 +63,7 @@ mptopdf# adjustbox
 mwe# example-image for demo files
 pdfcol# only SciPoster
 pdfescape# only Beamer Exercise Letter PhD Pub Report SciPoster Thesis
-pdfmanagement-testphase# only Letter PhD Pub Thesis
+pdfmanagement# only Letter PhD Pub Thesis
 pdftexcmds# only Beamer Exercise Leaflet Letter PhD Pub Report SciPoster Thesis
 pgf# only Announcement Beamer PhD Poster Pub Report SciPoster Thesis
 psnfss# only Leaflet PhD Thesis
@@ -83,7 +81,6 @@ tikzfill# only SciPoster
 tools# only Beamer Letter PhD Poster SciPoster Thesis
 translator# only Beamer
 trimspaces# only Exercise SciPoster
-tuda-ci
 uniquecounter# only Beamer Exercise Report SciPoster
 upquote# tuda-ci.dtx
 urcls# only PhD Pub Report Thesis
