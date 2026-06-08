@@ -156,7 +156,6 @@
 \newminted[example]{latex}{gobble=2, tabsize=4}
 \setminted{escapeinside=||}
 
-\usepackage[highlightmode=immediate]{minted}
 \newenvironment{examplecode}{%
         \VerbatimEnvironment%
         \fvset{gobble=0}%
@@ -223,7 +222,7 @@
 \begin{document}
 \OnlyDescription
 \DisableImplementation
-\TUDaLoadDocDTX{\TUDaDocDTXfiles}
+\PtxtoolsLoadDocDTX{\TUDaDocDTXfiles}
 \PrintChanges
 \printbibliography
 % Restore \code to be a wrapper for index numbers
