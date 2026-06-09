@@ -2,7 +2,7 @@
 
 --[[
 	Build script for the TUDa-CI project
-	Copyright (C) 2018–2025 Marei Peischl <tuda-ci@peitex.de>
+	Copyright (C) 2018–2026 Marei Peischl <tuda-ci@peitex.de>
 
 	This file is part of the build system of the tuda-ci bundle.
 
@@ -73,11 +73,12 @@ function update_tag(file, content, tagname, tagdate)
 		old_tagpattern = string.gsub(packageversion, "%.", "%%.")
 		old_tagpattern = string.gsub(old_tagpattern, "%-", "%%-")
 	end
-	-- Copyright (C) 2018–2025 by uploadconfig["author"]>
+	-- Copyright (C) 2018–2026 by uploadconfig["author"]>
 	-- maybe change to -- instead of –
 	content = string.gsub(content, "(Copyright %(C%) 20%d%d)%-*%d%d%d%d by " ..
 							uploadconfig["author"], "%1--" .. os.date("%Y") ..
 							" by " .. uploadconfig["author"])
+	content = string.gsub(content, "(%(C%)[^\n]+20%d%d)([%-–]+)%d%d%d%d", "%1%2" .. os.date("%Y"))
 	-- tagging \changes
 	if file ~= "build.lua" then
 		content = string.gsub(content, "\\changes{v?0*%.0*}{" .. datepattern,

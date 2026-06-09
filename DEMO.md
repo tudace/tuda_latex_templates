@@ -1,6 +1,6 @@
 # TUDa-CI – Demo creation process
 
-Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2024
+Copyright (C) Marei Peischl <marei@peitex.de>, 2018–2026
 
 tuda-ci v4.06 (2026-06-08)
 
