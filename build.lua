@@ -65,7 +65,10 @@ function update_tag(file, content, tagname, tagdate)
 	local datepattern = "%d%d%d%d%-%d%d%-%d%d"
 	local tag_only_changes = false
 	local old_tagpattern = ""
-	local tagname = tagname or packageversion
+	if not tagname then
+		tag_only_changes = true
+		tagname = packageversion
+	end
 	if tagname == "dev" or string.match(tagname, "%-dev$") then
 		tagname, tag_only_changes = get_dev_tag(packageversion)
 	else
