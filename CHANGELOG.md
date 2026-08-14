@@ -1,5 +1,15 @@
  # Version History (full)
 
+ * v4.07 (2026-08-14)
+   - Adjust URN resolver URL #534
+ * v4.06 (2026-06-08)
+   - Bugfix: Fix incompatibility with new version of hyperref
+ * v4.05 (2025-11-13)
+   - Bugfix: DOI no longer matches printid and add url field for TUprints
+ * v4.04 (2025-11-04)
+   - change new prefixes to match the new TUprints
+ * v4.03 (2025-04-02)
+   - bugfix and improval of error handling for conflicts with pdfa=true
  * v4.02 (2025-02-25)
    - use tuprints DOI by default
    - bugfix in tudaexercise #503
