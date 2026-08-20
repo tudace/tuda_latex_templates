@@ -1,5 +1,7 @@
  # Version History (full)
 
+ * v4.08 (2026-08-19)
+   - Adjust department casing on titlepages
  * v4.07 (2026-08-14)
    - Adjust URN resolver URL #534
  * v4.06 (2026-06-08)
